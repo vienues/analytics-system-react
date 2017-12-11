@@ -1,0 +1,10 @@
+{
+  "sourceMaps": "both",
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ]
+}
