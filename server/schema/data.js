@@ -1358,20 +1358,6 @@ export default [
     "maturityDate": "01-Mar-47"
   },
   {
-    "security": "Japan 8Y Yield (TPI)",
-    "yield": -0.03,
-    "change": 0,
-    "percentChange": "4.79%",
-    "WTDChg": "-42.46%",
-    "OneMonthChange": "209.43%",
-    "ThreeMonthChange": "114.38%",
-    "TwelveMonthChange": "-57.35%",
-    "modDur": "--",
-    "moodysRating": "A1",
-    "coupon": 0.4,
-    "maturityDate": "20-Sep-25"
-  },
-  {
     "security": "Japan 1Y Yield (TPI)",
     "yield": -0.2,
     "change": 0,

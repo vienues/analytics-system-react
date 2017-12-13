@@ -13,6 +13,9 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+# production
+/build
+
 # Jest Clutter
 __snapshots__
 
