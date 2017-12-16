@@ -1,14 +1,21 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import MainNavigation from './components/MainNavigation'
+import StockView from "./components/StockView"
 
-class App extends Component {
+
+const Root = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">GraphQl</h1>
-        </header>
-      </div>
+      <Root>
+        <MainNavigation/>
+        <StockView/>
+      </Root>
     );
   }
 }

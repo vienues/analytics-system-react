@@ -1,0 +1,42 @@
+schema {
+    query: Query
+}
+
+type News{
+    author: String!
+    title: String!
+    description: String!
+    url: String!
+    urlToImage: String!
+    publishedAt: String!
+}
+
+type Stock {
+    id: String!
+    name: String!
+    previousClose: Float!
+    latestPrice: Price!
+    daysRange: String!
+    fiftyTwoWeekRange: String!
+    avgVolume: Float!
+    marketCap: String!
+    beta: Float!
+    peRatio: Float!
+    eps: Float!
+    earningsDate: String!
+    relatedNews(count: Int = 10): [News!]!
+    historicalPrices(months: Int = 1): [Price!]!
+}
+
+type Price {
+    date: String!
+    open: Float!
+    low: Float!
+    high: Float!
+    close: Float!
+    volume: Int!
+}
+
+type Query {
+    stockInfo(id: String): Stock!
+}
