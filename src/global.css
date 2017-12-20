@@ -1,3 +1,21 @@
-body{
-  background-color: #f4f4f4;
+@import './variables.css';
+
+html {
+  font-size: 16px;
+}
+
+body {
+  color: var(--text-normal-color)
+}
+
+h3, h2 {
+  margin: 1rem 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.right-align {
+  text-align: right;
 }

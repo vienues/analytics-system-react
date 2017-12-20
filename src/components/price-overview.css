@@ -1,0 +1,11 @@
+@import '../variables.css';
+
+.price-overview{
+  & .instrument-name {
+    color: var(--brand-primary);
+  }
+
+  & .negative {
+    color: red;
+  }
+}

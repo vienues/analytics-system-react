@@ -1,23 +1,14 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import MainNavigation from './components/MainNavigation'
-import StockView from "./components/StockView"
+import AppHeader from './components/AppHeader'
+import StockView from './components/StockView'
 
-
-const Root = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`
-
-export class App extends Component {
+export default class App extends Component {
   render() {
     return (
-      <Root>
-        <MainNavigation/>
+      <div className='main-layout'>
+        <AppHeader/>
         <StockView/>
-      </Root>
+      </div>
     );
   }
 }
-
-export default App;

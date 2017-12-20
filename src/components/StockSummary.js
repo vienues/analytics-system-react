@@ -1,9 +1,9 @@
 import React from 'react'
 import gql from 'graphql-tag'
+import './stock-summary.css'
 
-const StockSummary = ({stockInfo}) => {
+const StockSummary = ({stockInfo, className}) => {
   const {
-    name,
     previousClose,
     daysRange,
     fiftyTwoWeekRange,
@@ -16,47 +16,44 @@ const StockSummary = ({stockInfo}) => {
   } = stockInfo;
 
   return (
-    <section>
-      <p>{name}</p>
-      <table className='pt-table pt-striped'>
-        <tbody>
+    <section className={className}>
+      <table className='summary-table'>
         <tr>
           <td>Previous close</td>
-          <td>{previousClose}</td>
+          <td className='right-align'>{previousClose}</td>
         </tr>
         <tr>
           <td>Days Range</td>
-          <td>{daysRange}</td>
+          <td className='right-align'>{daysRange}</td>
         </tr>
         <tr>
           <td>52 week Range</td>
-          <td>{fiftyTwoWeekRange}</td>
+          <td className='right-align'>{fiftyTwoWeekRange}</td>
         </tr>
         <tr>
           <td>Average volume</td>
-          <td>{avgVolume}</td>
+          <td className='right-align'>{avgVolume}</td>
         </tr>
         <tr>
           <td>Market Cap</td>
-          <td>{marketCap}</td>
+          <td className='right-align'>{marketCap}</td>
         </tr>
         <tr>
           <td>Beta</td>
-          <td>{beta}</td>
+          <td className='right-align'>{beta}</td>
         </tr>
         <tr>
           <td>PE Ratio</td>
-          <td>{peRatio}</td>
+          <td className='right-align'>{peRatio}</td>
         </tr>
         <tr>
           <td>EPS</td>
-          <td>{eps}</td>
+          <td className='right-align'>{eps}</td>
         </tr>
         <tr>
           <td>Earnings Date</td>
-          <td>{earningsDate}</td>
+          <td className='right-align'>{earningsDate}</td>
         </tr>
-        </tbody>
       </table>
     </section>
 
@@ -66,7 +63,6 @@ const StockSummary = ({stockInfo}) => {
 StockSummary.fragments = {
   stockInfo: gql`
       fragment StockSummary on Stock {
-          name
           previousClose
           daysRange
           fiftyTwoWeekRange

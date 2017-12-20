@@ -1,0 +1,32 @@
+@import '../variables.css';
+
+.news-item {
+  height: 5rem;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  border: var(--border-normal);
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  & .logo {
+    height: 4rem;
+    width: 4rem;
+    border: var(--border-normal);
+  }
+
+  & .title {
+    color: var(--brand-primary);
+    font-weight: bold;
+    display: block;
+  }
+
+  & div {
+    padding-left: 1rem;
+    height: 4rem;
+  }
+
+}

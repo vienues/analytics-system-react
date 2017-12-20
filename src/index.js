@@ -8,7 +8,7 @@ import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import registerServiceWorker from './registerServiceWorker';
 import 'normalize.css'
-import '@blueprintjs/core/dist/blueprint.css'
+import 'flexboxgrid'
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000/graphql' })
 const client = new ApolloClient({
@@ -16,7 +16,6 @@ const client = new ApolloClient({
   connectToDevTools: true,
   cache: new InMemoryCache()
 })
-
 
 ReactDOM.render(
   <ApolloProvider client={client}>
