@@ -1,26 +1,36 @@
 import express from 'express'
-import bodyParser from 'body-parser';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import bodyParser from 'body-parser'
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
+import { createServer } from 'http'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
 import schema from './schema'
-import cors from 'cors';
-
-let app = express();
-app.use(cors());
-
-app.use('/graphql', bodyParser.json(), graphqlExpress({schema}));
-
-app.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql',
-}));
+import { execute, subscribe } from 'graphql';
+import cors from 'cors'
 
 const PORT = 4000
+const server = express();
+server.use('*', cors({origin: `http://localhost:${PORT}`}));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+server.use('/graphql', bodyParser.json(), graphqlExpress({
+  schema
+}));
 
-app.listen(PORT, () => {
-  console.log(`GraphQL server running on port ${PORT}.`)
+server.use('/graphiql', graphiqlExpress({
+  endpointURL: '/graphql',
+  subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`
+}));
+
+// Wrap the Express server
+const ws = createServer(server);
+ws.listen(PORT, () => {
+  console.log(`Apollo Server is now running on http://localhost:${PORT}`);
+  // Set up the WebSocket for handling GraphQL subscriptions
+  new SubscriptionServer({
+    execute,
+    subscribe,
+    schema
+  }, {
+    server: ws,
+    path: '/subscriptions',
+  });
 });

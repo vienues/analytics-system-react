@@ -5,6 +5,8 @@ export const Loading = () => (
   <div>Loading</div>
 );
 export const displayLoadingState = branch(
-  (props) => props.data.loading,
+  (props) => {
+    return !props.data
+  },
   renderComponent(Loading),
 );

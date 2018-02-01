@@ -4,7 +4,7 @@ import './news.css'
 
 const NewsItem = ({title, publishedAt}) => (
   <article className='news-item'>
-    <img className='logo' src='/images/dummy.jpg'/>
+    <img alt='News' className='logo' src='/images/dummy.jpg'/>
     <div>
       <span className="title">{title}</span>
       <span className='published'>{publishedAt}</span>

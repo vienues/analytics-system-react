@@ -18,6 +18,7 @@ const StockSummary = ({stockInfo, className}) => {
   return (
     <section className={className}>
       <table className='summary-table'>
+        <tbody>
         <tr>
           <td>Previous close</td>
           <td className='right-align'>{previousClose}</td>
@@ -54,10 +55,12 @@ const StockSummary = ({stockInfo, className}) => {
           <td>Earnings Date</td>
           <td className='right-align'>{earningsDate}</td>
         </tr>
+        </tbody>
       </table>
     </section>
 
-  );
+  )
+    ;
 };
 
 StockSummary.fragments = {
