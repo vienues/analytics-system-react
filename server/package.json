@@ -1,5 +1,5 @@
 {
-  "name": "graphql",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -116,7 +116,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "server": "export NODE_ENV=development &&  export BABEL_DISABLE_CACHE=1 && nodemon index.js --exec babel-node"
+    "start": "export NODE_ENV=development &&  export BABEL_DISABLE_CACHE=1 && nodemon index.js --exec babel-node"
   },
   "license": "ISC"
 }

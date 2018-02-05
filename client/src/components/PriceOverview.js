@@ -1,5 +1,7 @@
 import React from 'react'
 import './price-overview.css'
+import gql from 'graphql-tag';
+import { graphql } from "react-apollo/index";
 
 const PriceOverview = ({name, id, className, price}) => (
   <div className={`${className} price-overview`}>
@@ -9,4 +11,13 @@ const PriceOverview = ({name, id, className, price}) => (
   </div>
 )
 
-export default PriceOverview
+const SUBSCRIPTION = gql`
+    subscription {
+        latestPrice(id: "123"){
+            open
+        }
+    }
+`;
+
+
+export default graphql(SUBSCRIPTION)(PriceOverview)

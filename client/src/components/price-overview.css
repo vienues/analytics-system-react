@@ -1,6 +1,6 @@
 @import '../variables.css';
 
-.price-overview{
+.price-overview {
   & .instrument-name {
     color: var(--brand-primary);
   }

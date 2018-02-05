@@ -1,0 +1,13 @@
+{
+  "sourceMaps": "both",
+  "plugins": [
+    "babel-plugin-inline-import"
+  ],
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ]
+}

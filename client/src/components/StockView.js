@@ -2,7 +2,7 @@ import React from 'react'
 import StockSummary from './StockSummary'
 import StockHistory from './StockHistory'
 import { compose } from 'recompose';
-import { graphql } from 'react-apollo/index';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { filter } from 'graphql-anywhere';
 import NewsFeed from './NewsFeed';
@@ -10,20 +10,6 @@ import './stock-view.css'
 import PriceOverview from './PriceOverview';
 
 class StockView extends React.Component {
-
-  componentWillMount() {
-    this.props.data.subscribeToMore({
-        document: SUBSCRIPTION,
-        updateQuery: (prev, {subscriptionData}) => {
-          if (!subscriptionData.data) {
-            return prev;
-          }
-          const stockInfo = {...prev.stockInfo, latestPrice: subscriptionData.data.latestPrice}
-          return Object.assign({}, prev, {stockInfo})
-        }
-      }
-    );
-  }
 
   render() {
     const {data: {loading, error}} = this.props;
@@ -40,7 +26,7 @@ class StockView extends React.Component {
       <section className='stock-view'>
         <div className='row'>
           <div className='col-md-3'>
-            <PriceOverview name={name} id={id} price={latestPrice.open}/>
+            <PriceOverview name={name} id={id}/>
             <StockSummary stockInfo={filter(StockSummary.fragments.stockInfo, this.props.data.stockInfo)}/>
           </div>
           <StockHistory className='col-md-5' prices={historicalPrices}/>
@@ -56,9 +42,6 @@ const STOCK_QUERY = gql`
         stockInfo {
             id
             name
-            latestPrice {
-                open
-            }
             historicalPrices {
                 date
                 close
@@ -69,14 +52,6 @@ const STOCK_QUERY = gql`
     }
     ${NewsFeed.fragments.news},
     ${StockSummary.fragments.stockInfo}
-`;
-
-const SUBSCRIPTION = gql`
-    subscription {
-        latestPrice(id: "123"){
-            open
-        }
-    }
 `;
 
 const graph = graphql(STOCK_QUERY)
