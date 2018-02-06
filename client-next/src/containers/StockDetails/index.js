@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { DateTime } from 'luxon'
-
 import * as BS from 'rebass'
 
 import { Edge, Bleed, Block, Container, Divider, Row, Column } from '../../styleguide'
@@ -11,7 +9,7 @@ class StockDetails extends Component {
   render() {
     const stock = this.props.data
     return (
-      <div>
+      <BS.Box mb={4}>
         <BS.Box bg={stock.summary.change < 0 ? 'red' : 'gray1'}>
           <Bleed py={4}>
             <BS.Heading my={1}>
@@ -45,7 +43,7 @@ class StockDetails extends Component {
         <Section title="Company">
           <CompanySummary company={stock.company} market={stock.market} />
         </Section>
-      </div>
+      </BS.Box>
     )
   }
 }
@@ -85,94 +83,42 @@ const NewsItem = props => (
 
 const StockSummary = props => (
   <div>
-    <Row>
-      <Column>
-        <BS.Label>Volume</BS.Label>
-      </Column>
-      <Column>{props.volume}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Average daily volume</BS.Label>
-      </Column>
-      <Column>{props.averageDailyVolume}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Previous close</BS.Label>
-      </Column>
-      <Column>{props.previousClose}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>52 week range</BS.Label>
-      </Column>
-      <Column>{props['52WeekRange']}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Market cap</BS.Label>
-      </Column>
-      <Column>{props.marketCap}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Beta</BS.Label>
-      </Column>
-      <Column>{props.beta}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>earningsPerShare</BS.Label>
-      </Column>
-      <Column>{props.earningsPerShare}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Latest EPS date</BS.Label>
-      </Column>
-      <Column>{props.earningsPerShareDate}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Dividend & yield</BS.Label>
-      </Column>
-      <Column>
-        {props.dividend} ({props.yield})
-      </Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>Ex-dividend date</BS.Label>
-      </Column>
-      <Column>{props.exdividendDate}</Column>
-    </Row>
-    <Row>
-      <Column>
-        <BS.Label>P/E ratio</BS.Label>
-      </Column>
-      <Column>{props.priceToEarningsRatio}</Column>
-    </Row>
+    <SummaryRow title="Volume">{props.volume}</SummaryRow>
+    <SummaryRow title="Average daily volume">{props.averageDailyVolume}</SummaryRow>
+    <SummaryRow title="Previous close">{props.previousClose}</SummaryRow>
+    <SummaryRow title="52 week range">{props['52WeekRange']}</SummaryRow>
+    <SummaryRow title="Market cap">{props.marketCap}</SummaryRow>
+    <SummaryRow title="Beta">{props.beta}</SummaryRow>
+    <SummaryRow title="Earnings per share">{props.earningsPerShare}</SummaryRow>
+    <SummaryRow title="Latest EPS date">{props.earningsPerShareDate}</SummaryRow>
+    <SummaryRow title="Dividend & yield">
+      {props.dividend} ({props.yield})
+    </SummaryRow>
+    <SummaryRow title="Ex-dividend date">{props.exdividendDate}</SummaryRow>
+
+    <SummaryRow title="P/E ratio">{props.priceToEarningsRatio}</SummaryRow>
   </div>
 )
 
 const CompanySummary = ({ company, market }) => (
   <BS.Measure>
-    {company.summary}
-    <CompanySummaryField title="Exchange">{market.name}</CompanySummaryField>
-    <CompanySummaryField title="Number of employees">{company.numberOfEmployees}</CompanySummaryField>
-    <CompanySummaryField title="Sector">{company.sector}</CompanySummaryField>
-    <CompanySummaryField title="Industry">{company.industry}</CompanySummaryField>
+    <BS.Box mb={2}>
+      {company.summary}
+    </BS.Box>
+    <SummaryRow title="Exchange">{market.name}</SummaryRow>
+    <SummaryRow title="Number of employees">{company.numberOfEmployees}</SummaryRow>
+    <SummaryRow title="Sector">{company.sector}</SummaryRow>
+    <SummaryRow title="Industry">{company.industry}</SummaryRow>
   </BS.Measure>
 )
 
-const CompanySummaryField = ({ title, children }) => (
-  <BS.Flex align="baseline" mt={2}>
+const SummaryRow = ({ title, children }) => (
+  <BS.Flex align="baseline" mt={1}>
     <Column>
-      <BS.Small bold>{title}</BS.Small>{' '}
+      <BS.Label>{title}</BS.Label>{' '}
     </Column>
     <Column>
-      <BS.Text>{children}</BS.Text>
+      <BS.Text bold>{children}</BS.Text>
     </Column>
   </BS.Flex>
 )
