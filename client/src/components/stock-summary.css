@@ -1,8 +1,0 @@
-.summary-table{
-  border-collapse: collapse;
-  width: 100%;
-  & tr {
-    line-height: 2;
-    border-bottom: 1px solid grey;
-  }
-}

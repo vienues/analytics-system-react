@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
-import AppHeader from './components/AppHeader'
-import StockView from './components/StockView'
+import { Provider as ResbassThemeProvider } from 'rebass'
 
-export default class App extends Component {
+import StockDetails from './containers/StockDetails'
+
+import { STOCK } from './containers/StockDetails/data'
+const THEME = { space: [0, 8, 16, 32, 48, 64, 128] }
+
+class App extends Component {
   render() {
     return (
-      <div className='main-layout'>
-        <AppHeader/>
-        <StockView/>
-      </div>
-    );
+      <ResbassThemeProvider theme={THEME}>
+        <StockDetails data={STOCK} />
+      </ResbassThemeProvider>
+    )
   }
 }
+
+export default App
