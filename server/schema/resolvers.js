@@ -1,59 +1,32 @@
-import news from './newsData'
-import prices from './priceData'
-import stock from './stockData'
-import { PubSub } from 'graphql-subscriptions';
+import fetch from 'node-fetch';
 
-const pubsub = new PubSub();
+const ENDPOINT = 'https://api.iextrading.com/1.0';
 
-const max = 66;
-const min = 62;
-
-const randomPrice = () => (Math.random() * (max - min) + min).toFixed(2)
-
-setInterval(() => {
-  pubsub.publish('latestPrice', {
-    latestPrice: {
-      "date": "2017-09-18",
-      "open": randomPrice(),
-      "high": randomPrice(),
-      "low": randomPrice(),
-      "close": randomPrice(),
-      "adjClose": randomPrice(),
-      "volume": 129148893
-    }
-  })
-}, 1000)
+async function fetchAndParse(url) {
+  const response = await fetch(url);
+  return await response.json()
+}
 
 export default {
   Query: {
-    stockInfo: (id) => stock,
-  },
-  Subscription: {
-    latestPrice: {
-      subscribe: () => {
-        return pubsub.asyncIterator('latestPrice')
-      }
-    }
+    async stockData(_, {symbol}) {
+      const response = fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`)
+      return (response.symbol = symbol, response);
+    },
+    symbols: async () => fetchAndParse(`${ENDPOINT}/ref-data/symbols`)
   },
   Stock: {
-    relatedNews(stock) {
-      return news
-    },
-    historicalPrices(stock) {
-      return prices
-    },
-    latestPrice(stock){
-      return {
-        "date": "2017-09-18",
-        "open": randomPrice(),
-        "high": randomPrice(),
-        "low": randomPrice(),
-        "close": randomPrice(),
-        "adjClose": randomPrice(),
-        "volume": 129148893
-      }
-    }
+    id: (stock) => stock.symbol,
+    relatedNews: async ({symbol}) => fetchAndParse(`${ENDPOINT}/stock/${symbol}/news/`),
+    peers: async ({symbol}) => fetchAndParse(`${ENDPOINT}/stock/${symbol}/peers/`),
+    price: async ({symbol}) => fetchAndParse(`${ENDPOINT}/stock/${symbol}/price/`),
+    quote: async ({symbol}) => fetchAndParse(`${ENDPOINT}/stock/${symbol}/quote/`),
   }
-};
+  ,
+  News: {
+    id: (article) => article.url
+  }
+}
+;
 
 

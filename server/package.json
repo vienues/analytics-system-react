@@ -81,6 +81,7 @@
     "mime-types": "^2.1.17",
     "ms": "^2.0.0",
     "negotiator": "^0.6.1",
+    "node-fetch": "^2.0.0",
     "npm": "^5.6.0",
     "object-assign": "4.1.1",
     "on-finished": "^2.3.0",

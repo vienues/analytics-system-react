@@ -1,47 +1,149 @@
-type News{
-    author: String!
-    title: String!
-    description: String!
-    url: String!
-    urlToImage: String!
-    publishedAt: String!
+type Symbol {
+    name: String!
+    type: String!
+    iexId: String!
 }
 
 type Stock {
     id: String!
-    name: String!
-    previousClose: Float!
-    latestPrice: Price!
-    daysRange: String!
-    fiftyTwoWeekRange: String!
-    avgVolume: Float!
-    marketCap: String!
+    companyName: String!
+    marketcap: Float!
     beta: Float!
-    peRatio: Float!
-    eps: Float!
-    earningsDate: String!
-    relatedNews(count: Int = 10): [News!]!
-    historicalPrices(months: Int = 1): [Price!]!
+    week52high: Float!
+    week52low: Float!
+    week52change: Float!
+    shortInterest: Float!
+    shortDate: String!
+    dividendRate: Float!
+    dividendYield: Float!
+    exDividendDate: String!
+    latestEPS: Float!
+    latestEPSDate: String!
+    sharesOutstanding: Float!
+    float: Float!
+    returnOnEquity: Float!
+    consensusEPS: Float!
+    numberOfEstimates: Float!
+    symbol: String!
+    EBITDA: Float!
+    revenue: Float!
+    grossProfit: Float!
+    cash: Float!
+    debt: Float!
+    ttmEPS: Float!
+    revenuePerShare: Float!
+    revenuePerEmployee: Float!
+    peRatioHigh: Float!
+    peRatioLow: Float!
+    EPSSurpriseDollar: String
+    EPSSurprisePercent: Float!
+    returnOnAssets: Float!
+    returnOnCapital: String
+    profitMargin: Float!
+    priceToSales: Float!
+    priceToBook: Float!
+    day200MovingAvg: Float!
+    day50MovingAvg: Float!
+    institutionPercent: Float!
+    insiderPercent: String
+    shortRatio: Float!
+    year5ChangePercent: Float!
+    year2ChangePercent: Float!
+    year1ChangePercent: Float!
+    ytdChangePercent: Float!
+    month6ChangePercent: Float!
+    month3ChangePercent: Float!
+    month1ChangePercent: Float!
+    day5ChangePercent: Float!
+    relatedNews(last: Int = 5): [News]!
+    peers: [String]!
+    price: Float!
+    companyInfo: Company!
+    quote:Quote!
 }
 
-type Price {
-    date: String!
-    open: Float!
-    low: Float!
-    high: Float!
+type Quote {
+    symbol: String!
+    companyName: String!
+    primaryExchange: String!
+    sector: String!
+    calculationPrice: String
+    open: Int!
+    openTime: Int
     close: Float!
+    closeTime: Int!
+    high: Float!
+    low: Float!
+    latestPrice: Float!
+    latestSource: String!
+    latestTime: String!
+    latestUpdate: Int!
+    latestVolume: Int!
+    iexRealtimePrice: Float!
+    iexRealtimeSize: Int!
+    iexLastUpdated: Int!
+    delayedPrice: Float!
+    delayedPriceTime: Int!
+    previousClose: Float!
+    change: Float!
+    changePercent: Float!
+    iexMarketPercent: Float!
+    iexVolume: Int!
+    avgTotalVolume: Int!
+    iexBidPrice: Float!
+    iexBidSize: Int!
+    iexAskPrice: Float!
+    iexAskSize: Int!
+    marketCap: Int!
+    peRatio: Float!
+    week52High: Float!
+    week52Low: Float!
+    ytdChange: Float!
+}
+
+type Company {
+    symbol: String!
+    companyName: String!
+    exchange: String!
+    industry: String!
+    website: String!
+    description: String!
+    CEO: String!
+    issueType: String!
+    sector: String!
+}
+
+type News {
+    id: String!
+    datetime: String!
+    headline: String!
+    source: String!
+    url: String!
+    summary: String!
+    related: String!
+}
+
+type PeerPrice {
+    symbol: String!
+    marketPercent: Float!
+    bidSize: Int!
+    bidPrice: Float!
+    askSize: Int!
+    askPrice: Float!
     volume: Int!
+    lastSalePrice: Float!
+    lastSaleSize: Int!
+    lastSaleTime: Int!
+    lastUpdated: Int!
+    sector: String!
+    securityType: String!
 }
 
 type Query {
-    stockInfo(id: String): Stock!
-}
-
-type Subscription {
-    latestPrice(id: String): Price
+    stockData(symbol: String): Stock!
+    symbols:[Symbol]!
 }
 
 schema {
     query: Query
-    subscription: Subscription
 }
