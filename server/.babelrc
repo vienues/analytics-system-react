@@ -4,7 +4,7 @@
     "babel-plugin-inline-import"
   ],
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
       "targets": {
         "node": "current"
       }
