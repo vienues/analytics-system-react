@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import * as BS from 'rebass'
-
-import { STOCK } from './containers/StockDetails/data'
+import { Provider as ResbassThemeProvider } from 'rebass'
 
 import StockDetails from './containers/StockDetails'
+
+import { STOCK } from './containers/StockDetails/data'
+const THEME = { space: [0, 8, 16, 32, 48, 64, 128] }
 
 class App extends Component {
   render() {
     return (
-      <BS.Provider theme={{ space: [0, 8, 16, 32, 48, 64, 128] }}>
-        <StockDetails data={STOCK}/>
-      </BS.Provider>
+      <ResbassThemeProvider theme={THEME}>
+        <StockDetails data={STOCK} />
+      </ResbassThemeProvider>
     )
   }
 }

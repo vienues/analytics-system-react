@@ -24,7 +24,7 @@ export const STOCK = {
   market: {
     name: "DVORAK Fun Times",
     closed: true,
-    previousCloseDate: new DateTime.local().toFormat('M/d at hh:mm a')
+    previousCloseDate: new DateTime.local().toFormat('M/d hh:mm a')
   },
   summary: {
     price: "12.50",
