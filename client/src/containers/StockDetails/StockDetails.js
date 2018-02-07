@@ -17,7 +17,7 @@ class StockDetails extends Component {
 
     return (
       <Box mb={4}>
-        <Box bg={stock.quote.change < 0 ? 'red' : 'gray1'}>
+        <Box bg="gray1">
           <Bleed py={4}>
             <Heading my={1}>
               {stock.name} ({stock.symbol})
