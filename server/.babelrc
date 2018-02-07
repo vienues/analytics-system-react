@@ -4,7 +4,8 @@
     "babel-plugin-inline-import"
   ],
   "presets": [
-    ["env", {
+    ["@babel/preset-env", {
+      "shippedProposals": true,
       "targets": {
         "node": "current"
       }

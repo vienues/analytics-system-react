@@ -1,3 +1,10 @@
+Removed but relevant packages
+
+iterall
+apollo-tracing
+apollo-utilities
+
+```
 {
   "sourceMaps": "both",
   "plugins": [
@@ -11,3 +18,4 @@
     }]
   ]
 }
+```
