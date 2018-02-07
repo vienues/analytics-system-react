@@ -1,3 +1,10 @@
+# Date in ISO 8601 format, i.e. YYYY-MM-DD
+scalar Date
+# Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ
+scalar DateTime
+# Hours and minutes in ISO 8601 format HH:mm
+scalar Time
+
 type Symbol {
   name: String!
   type: String!
@@ -5,7 +12,7 @@ type Symbol {
 }
 
 type Stock {
-  id: String!
+  id: ID!
   companyName: String!
   marketcap: Float!
   beta: Float!
@@ -63,27 +70,28 @@ type Stock {
 }
 
 type Quote {
+  id: ID!
   symbol: String!
   companyName: String!
   primaryExchange: String!
   sector: String!
   calculationPrice: String
-  open: Int!
-  openTime: Int
+  open: Float!
+  openTime: DateTime
   close: Float!
-  closeTime: Int!
+  closeTime: DateTime!
   high: Float!
   low: Float!
   latestPrice: Float!
   latestSource: String!
-  latestTime: String!
-  latestUpdate: Int!
+  latestTime: DateTime!
+  latestUpdate: DateTime!
   latestVolume: Int!
   iexRealtimePrice: Float!
   iexRealtimeSize: Int!
-  iexLastUpdated: Int!
+  iexLastUpdated: DateTime!
   delayedPrice: Float!
-  delayedPriceTime: Int!
+  delayedPriceTime: DateTime!
   previousClose: Float!
   change: Float!
   changePercent: Float!
@@ -94,7 +102,7 @@ type Quote {
   iexBidSize: Int!
   iexAskPrice: Float!
   iexAskSize: Int!
-  marketCap: Int!
+  marketCap: Float!
   peRatio: Float!
   week52High: Float!
   week52Low: Float!
@@ -102,6 +110,7 @@ type Quote {
 }
 
 type Company {
+  id: ID!
   symbol: String!
   companyName: String!
   exchange: String!
@@ -114,7 +123,7 @@ type Company {
 }
 
 type News {
-  id: String!
+  id: ID!
   datetime: String!
   headline: String!
   source: String!
@@ -124,6 +133,7 @@ type News {
 }
 
 type PeerPrice {
+  id: ID!
   symbol: String!
   marketPercent: Float!
   bidSize: Int!
@@ -133,7 +143,7 @@ type PeerPrice {
   volume: Int!
   lastSalePrice: Float!
   lastSaleSize: Int!
-  lastSaleTime: Int!
+  lastSaleTime: DateTime!
   lastUpdated: Int!
   sector: String!
   securityType: String!

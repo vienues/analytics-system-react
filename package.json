@@ -1,5 +1,5 @@
 {
-  "name": "graphql",
+  "name": "adaptive-graph-demo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,10 +13,12 @@
   "scripts": {
     "start": "npm run bootstrap && lerna run --parallel start",
     "bootstrap": "(if [ -z `which yarn` ]; then npm install; else yarn; fi;) && lerna bootstrap",
+    "clean": "(if [ -z `which yarn` ]; then npm install; else yarn; fi;) && lerna clean",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {}
 }
