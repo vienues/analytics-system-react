@@ -12,7 +12,7 @@ export default {
   ...date,
   Query: {
     async stockData(_, { symbol }) {
-      const response = fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`);
+      const response = await fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`);
       return (response.symbol = symbol), response;
     },
     symbols: () => fetchAndParse(`${ENDPOINT}/ref-data/symbols`),
