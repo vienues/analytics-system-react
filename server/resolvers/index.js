@@ -14,8 +14,8 @@ export default {
     async stock(_, { symbol }) {
       return {
         ...(await fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`)),
-        symbol
-      }
+        symbol,
+      };
     },
     symbols: () => fetchAndParse(`${ENDPOINT}/ref-data/symbols`),
   },

@@ -1,8 +1,8 @@
-import React from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import React from 'react';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-import StockDetails from './StockDetails'
+import StockDetails from './StockDetails';
 
 const getSymbolDetails = gql`
   query getSymbolDetails($id: String!) {
@@ -98,10 +98,10 @@ const getSymbolDetails = gql`
       }
     }
   }
-`
+`;
 
 export default graphql(getSymbolDetails, {
   options({ match }) {
-    return { variables: { id: match.params.symbol } }
+    return { variables: { id: match.params.symbol } };
   },
-})(StockDetails)
+})(StockDetails);

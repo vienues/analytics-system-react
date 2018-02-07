@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { Provider as ResbassProvider } from 'rebass';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import StockDetails from './containers/StockDetails';
 
@@ -16,7 +16,7 @@ class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact path="/stock/:symbol" component={StockDetails} />
-              <Redirect exact from="/" to="/stock/aapl"/>
+              <Redirect exact from="/" to="/stock/aapl" />
             </Switch>
           </BrowserRouter>
         </ResbassProvider>
