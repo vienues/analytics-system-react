@@ -1,19 +1,19 @@
-import fetch from 'node-fetch'
+import fetch from 'node-fetch';
 
-import date from './date'
+import date from './date';
 
-const ENDPOINT = 'https://api.iextrading.com/1.0'
+const ENDPOINT = 'https://api.iextrading.com/1.0';
 
 async function fetchAndParse(url) {
-  return (await fetch(url)).json()
+  return (await fetch(url)).json();
 }
 
 export default {
   ...date,
   Query: {
     async stockData(_, { symbol }) {
-      const response = fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`)
-      return (response.symbol = symbol), response
+      const response = fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`);
+      return (response.symbol = symbol), response;
     },
     symbols: () => fetchAndParse(`${ENDPOINT}/ref-data/symbols`),
   },
@@ -27,4 +27,4 @@ export default {
   News: {
     id: article => article.url,
   },
-}
+};

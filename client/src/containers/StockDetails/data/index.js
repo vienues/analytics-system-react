@@ -165,4 +165,4 @@ export const STOCK = {
   ],
 };
 
-export default STOCK
+export default STOCK;

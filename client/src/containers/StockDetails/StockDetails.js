@@ -1,19 +1,19 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import { Box, Heading, Flex, Lead, Small, Input, NavLink, Measure, Label, Text } from 'rebass'
+import { Box, Heading, Flex, Lead, Small, Input, NavLink, Measure, Label, Text } from 'rebass';
 
-import { Edge, Bleed, Divider, Column } from '../../styleguide'
+import { Edge, Bleed, Divider, Column } from '../../styleguide';
 
-import StockHistory from '../../components/StockHistory'
+import StockHistory from '../../components/StockHistory';
 
-import STOCK_MOCK from './data'
+import STOCK_MOCK from './data';
 
 class StockDetails extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(nextProps);
   }
   render() {
-    const stock = { ...STOCK_MOCK, ...this.props.data }
+    const stock = { ...STOCK_MOCK, ...this.props.data };
 
     return (
       <Box mb={4}>
@@ -44,14 +44,12 @@ class StockDetails extends Component {
         <Section title="Chart">
           <StockHistory data={stock.analytics.history.data} previousClose={stock.summary.previousClose} />
         </Section>
-        <Section title="News">
-          {stock.relatedNews.map((news, idx) => <NewsItem key={idx} {...news} />)}
-        </Section>
+        <Section title="News">{stock.relatedNews.map((news, idx) => <NewsItem key={idx} {...news} />)}</Section>
         <Section title="Company">
           <CompanySummary company={stock.company} market={stock.market} />
         </Section>
       </Box>
-    )
+    );
   }
 }
 
@@ -63,7 +61,7 @@ const RelatedStocks = ({ title = 'Related', stocks, ...props }) => (
     <Box p={1} />
     {stocks.map(peer => <NavLink key={peer.symbol}>{peer.symbol}</NavLink>)}
   </Flex>
-)
+);
 
 const Section = ({ title, children }) => (
   <Bleed my={3}>
@@ -73,7 +71,7 @@ const Section = ({ title, children }) => (
     </Heading>
     {children}
   </Bleed>
-)
+);
 
 const NewsItem = props => (
   <Box mb={3}>
@@ -86,7 +84,7 @@ const NewsItem = props => (
     <RelatedStocks stocks={props.stocks} mt={2} />
     <Divider color="gray2" borderWidth={2} />
   </Box>
-)
+);
 
 const StockSummary = props => (
   <div>
@@ -105,7 +103,7 @@ const StockSummary = props => (
 
     <SummaryRow title="P/E ratio">{props.priceToEarningsRatio}</SummaryRow>
   </div>
-)
+);
 
 const CompanySummary = ({ company, market }) => (
   <Measure>
@@ -115,7 +113,7 @@ const CompanySummary = ({ company, market }) => (
     <SummaryRow title="Sector">{company.sector}</SummaryRow>
     <SummaryRow title="Industry">{company.industry}</SummaryRow>
   </Measure>
-)
+);
 
 const SummaryRow = ({ title, children }) => (
   <Flex align="baseline" mt={1}>
@@ -126,5 +124,5 @@ const SummaryRow = ({ title, children }) => (
       <Text bold>{children}</Text>
     </Column>
   </Flex>
-)
-export default StockDetails
+);
+export default StockDetails;

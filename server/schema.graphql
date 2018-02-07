@@ -1,7 +1,9 @@
 # Date in ISO 8601 format, i.e. YYYY-MM-DD
 scalar Date
+
 # Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ
 scalar DateTime
+
 # Hours and minutes in ISO 8601 format HH:mm
 scalar Time
 
