@@ -1,7 +1,7 @@
 {
   "projects": {
     "Adaptive Graph": {
-      "schemaPath": "server/schema.graphql",
+      "schemaPath": "schema.graphql",
       "extensions": {
         "endpoints": {
           "dev": {

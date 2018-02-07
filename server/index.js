@@ -8,7 +8,7 @@ import { execute, subscribe } from 'graphql';
 import { makeExecutableSchema } from 'graphql-tools';
 
 import resolvers from './resolvers';
-import typeDefs from './schema.graphql';
+import typeDefs from '../schema.graphql';
 
 const PORT = 4000;
 const CLIENT_PORT = 3000;
