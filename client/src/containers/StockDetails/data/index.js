@@ -14,6 +14,7 @@ const stockFeed = rawStockFeed.map(datapoint => {
 export const STOCK = {
   name: 'The Stock Name',
   symbol: 'TSN',
+  quote: {},
   company: {
     summary:
       'The Stock Name enim commodo amet irure pariatur incididunt anim sit aute minim. Id nulla nostrud irure velit ex do nisi ipsum.',

@@ -152,7 +152,7 @@ type PeerPrice {
 }
 
 type Query {
-  stockData(symbol: String!): Stock!
+  stock(symbol: String!): Stock!
   symbols: [Symbol]!
 }
 

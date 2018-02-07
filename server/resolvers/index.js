@@ -11,9 +11,11 @@ async function fetchAndParse(url) {
 export default {
   ...date,
   Query: {
-    async stockData(_, { symbol }) {
-      const response = await fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`);
-      return (response.symbol = symbol), response;
+    async stock(_, { symbol }) {
+      return {
+        ...(await fetchAndParse(`${ENDPOINT}/stock/${symbol}/stats`)),
+        symbol
+      }
     },
     symbols: () => fetchAndParse(`${ENDPOINT}/ref-data/symbols`),
   },

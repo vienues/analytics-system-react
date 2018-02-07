@@ -10,23 +10,23 @@ import STOCK_MOCK from './data';
 
 class StockDetails extends Component {
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+    console.log(nextProps.data.stock);
   }
   render() {
-    const stock = { ...STOCK_MOCK, ...this.props.data };
+    const stock = { ...STOCK_MOCK, ...this.props.data.stock };
 
     return (
       <Box mb={4}>
-        <Box bg={stock.summary.change < 0 ? 'red' : 'gray1'}>
+        <Box bg={stock.quote.change < 0 ? 'red' : 'gray1'}>
           <Bleed py={4}>
             <Heading my={1}>
               {stock.name} ({stock.symbol})
             </Heading>
             <Flex align="baseline" my={1}>
-              <Heading f={6}>{stock.summary.price}</Heading>
+              <Heading f={6}>{stock.quote.latestPrice}</Heading>
               <Box p={1} />
-              <Lead color={stock.summary.change < 0 ? 'red' : 'green5'}>
-                {stock.summary.change} ({stock.summary.changePercent})
+              <Lead color={stock.quote.change < 0 ? 'red' : 'green5'}>
+                {stock.quote.change} ({stock.quote.changePercent})
               </Lead>
             </Flex>
             <Small my={1}>
