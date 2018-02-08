@@ -9,8 +9,9 @@ scalar Time
 
 type Symbol {
   name: String!
-  type: String!
-  iexId: String!
+  id: String!
+  volume: Float!
+  change: Float!
 }
 
 type Stock {
@@ -134,6 +135,13 @@ type News {
   related: String!
 }
 
+type Index {
+  id: String!
+  name: String!
+  change: String!
+  volume: Float!
+}
+
 type PeerPrice {
   id: ID!
   symbol: String!
@@ -156,6 +164,11 @@ type Query {
   symbols: [Symbol]!
 }
 
+type Subscription {
+  indices: [Index!]!
+}
+
 schema {
   query: Query
+  subscription: Subscription
 }
