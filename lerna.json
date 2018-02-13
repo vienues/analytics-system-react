@@ -1,7 +1,6 @@
 {
   "lerna": "2.8.0",
   "packages": [
-    "ui",
     "client",
     "server",
     "simulator"
