@@ -14,6 +14,14 @@ export const flatten = colorSets =>
     {},
   )
 
+export const offwhite = {
+  '': rgb(255, 255, 255)
+}
+
+export const offblack = {
+  '': rgb(0, 2, 5)
+}
+
 export const primary = {
   '': rgb(39, 87, 140),
   '100': rgb(39, 87, 140),
@@ -75,6 +83,8 @@ export const colors = flatten({
   good: green,
   alert: yellow,
   accent: blue,
+  offwhite,
+  offblack,
 })
 
 export const gradients = {

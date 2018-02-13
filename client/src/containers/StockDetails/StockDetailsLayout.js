@@ -71,7 +71,7 @@ const PageTitle = props => {
                   |
                 </Text>
               )}
-            {quote.changePercent != null ? quote.changePercent.toFixed(2) * 100 + '%': ''}
+            {quote.changePercent != null ? quote.changePercent.toFixed(2) * 100 + '%' : ''}
           </Text>
         </Flex>
       </Lead>
@@ -196,12 +196,13 @@ export const StockStats = props => {
     </Flex>
   )
 }
+
 const FieldRow = ({ label, children }) => {
   return (
     <Flex flex={1} column>
       <Flex flex={1} my={1}>
         <Box flex={1}>
-          <Text f={0} color="secondary">
+          <Text f={0} color="secondary30">
             {label}
           </Text>
         </Box>

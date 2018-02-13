@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import { Box, Heading, Flex, Lead, Small, Input, NavLink, Measure, Label, Text } from 'rebass';
+import { Border, Box, Heading, Flex, Lead, Small, Input, NavLink, Measure, Label, Text } from 'rebass';
 
-import { Edge, Bleed, Divider, Column } from '../../styleguide';
+import { Bleed, Divider } from '../../styleguide';
 
 import StockHistory from '../../components/StockHistory';
 
@@ -125,4 +125,8 @@ const SummaryRow = ({ title, children }) => (
     </Column>
   </Flex>
 );
+
+const Column = props => <Box flex={1 / 2} {...props} />;
+const Edge = props => <Border color="gray3" borderWidth={4} top {...props} />;
+
 export default StockDetails;
