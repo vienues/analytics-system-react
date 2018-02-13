@@ -8,7 +8,6 @@ import * as Ix from 'ix'
 import * as simulator from '../simulator'
 
 import date, { formatDate } from './date'
-import { RedisPubSub } from "graphql-redis-subscriptions/dist/index";
 
 const TICK = 'TICK'
 const PUBSUB = new PubSub()
@@ -99,10 +98,7 @@ export default {
         // return update;
       },
       subscribe: PUBSUB.asyncIterator(TICK),
-    },
-    indices: {
-      subscribe: () => Ix.AsyncIterable.from(gen()),
-    },
+    }
   },
 }
 

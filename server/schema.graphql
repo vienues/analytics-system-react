@@ -206,6 +206,18 @@ type ReferenceQuery {
   symbols: [Symbol]!
 }
 
+type MarketData {
+  id: String!
+  name: String!
+  lastUpdate: MarketUpdate
+}
+
+type MarketUpdate {
+  id: String!
+  change: String!
+  volume: String!
+}
+
 type Query {
   company(id: ID!): Company
   stock(id: ID!): Stock
@@ -214,7 +226,7 @@ type Query {
 
 type Subscription {
   symbols(ids: [ID]): [Symbol]
-  indices: [Index]
+  marketUpdates(symbols: [String!]!): MarketUpdate!
 }
 
 schema {

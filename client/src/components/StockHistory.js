@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { CHANNEL_NEXT } from 'styled-components/lib/models/ThemeProvider'
 
 
 import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
@@ -19,10 +18,6 @@ export default class StockHistory extends PureComponent {
   static defaultProps = {
     data: []
   }
-
-  static contextTypes = {
-    [CHANNEL_NEXT]: PropTypes.object.isRequired,
-  };
 
   render() {
     const previousClose = this.props.previousClose == null ? null : Number(this.props.previousClose);
