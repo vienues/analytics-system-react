@@ -2,9 +2,13 @@
   "name": "@adaptive-graph/simulator",
   "version": "1.0.0",
   "description": "Simulate price changes",
-  "main": "index.js",
+  "private": true,
+  "main": "build/index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
+    "build": "babel src --out-dir ./build",
+    "develop": "babel src --no-highlight-code --watch --out-dir ./build",
+    "run": "npm run develop",
+    "serve": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

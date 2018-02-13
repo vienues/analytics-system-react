@@ -16,7 +16,7 @@ class StockDetails extends Component {
     const stock = { ...STOCK_MOCK, ...this.props.data.stock };
 
     return (
-      <Box mb={4}>
+      <Box flex={1} mb={4}>
         <Box bg="gray1">
           <Bleed py={4}>
             <Heading my={1}>
