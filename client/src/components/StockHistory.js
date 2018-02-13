@@ -1,5 +1,8 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { CHANNEL_NEXT } from 'styled-components/lib/models/ThemeProvider'
+
 
 import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
 import { DateTime } from 'luxon';
@@ -13,6 +16,14 @@ const COLORS = {
 };
 
 export default class StockHistory extends PureComponent {
+  static defaultProps = {
+    data: []
+  }
+
+  static contextTypes = {
+    [CHANNEL_NEXT]: PropTypes.object.isRequired,
+  };
+
   render() {
     const previousClose = this.props.previousClose == null ? null : Number(this.props.previousClose);
     const sample = (this.props.data || [])[0] || {};
@@ -21,11 +32,11 @@ export default class StockHistory extends PureComponent {
     const high = _.min([previousClose, _.round(sample.high + sample.high * 0.02, 1)]);
 
     return (
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height="100%">
         <LineChart data={this.props.data} margin={{ left: -16, top: 0, right: 0, bottom: 0 }}>
           <CartesianGrid stroke={COLORS.grid} strokeDasharray="3 3" vertical={false} />
           <ReferenceLine y={previousClose} stroke={COLORS.previousClose} strokeDasharray="3 3" />
-          <Line
+          {/* <Line
             type="basisOpen"
             dataKey="low"
             strokeWidth={3}
@@ -40,7 +51,7 @@ export default class StockHistory extends PureComponent {
             stroke={COLORS.high}
             dot={false}
             isAnimationActive={false}
-          />
+          /> */}
           <Line
             type="basisOpen"
             dataKey="average"
@@ -50,11 +61,11 @@ export default class StockHistory extends PureComponent {
             isAnimationActive={false}
           />
           <XAxis
-            dataKey="datetime"
+            dataKey="label"
             interval={_.round(this.props.data.length / 4)}
             tick={{ fontSize: 12 }}
             tickSize={12}
-            tickFormatter={dt => DateTime.fromISO(dt).toLocaleString(DateTime.TIME_24_SIMPLE)}
+            // tickFormatter={dt => DateTime.fromISO(dt).toLocaleString(DateTime.TIME_24_SIMPLE)}
           />
           <YAxis
             type="number"

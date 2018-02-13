@@ -1,0 +1,11 @@
+{
+  "sourceMaps": "both",
+  "presets": [
+    ["@babel/preset-env", {
+      "shippedProposals": true,
+      "targets": {
+        "node": "current"
+      }
+    }]
+  ]
+}

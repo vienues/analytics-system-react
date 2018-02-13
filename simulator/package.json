@@ -1,0 +1,27 @@
+{
+  "name": "@adaptive-graph/simulator",
+  "version": "1.0.0",
+  "description": "Simulate price changes",
+  "private": true,
+  "main": "build/index.js",
+  "scripts": {
+    "build": "babel src --out-dir ./build",
+    "develop": "babel src --no-highlight-code --watch --out-dir ./build",
+    "run": "npm run develop",
+    "serve": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.5",
+    "ramda": "^0.25.0",
+    "rxjs": "^5.5.6"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.39",
+    "@babel/node": "^7.0.0-beta.39",
+    "@babel/preset-env": "^7.0.0-beta.39",
+    "nodemon": "^1.14.12"
+  }
+}

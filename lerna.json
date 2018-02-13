@@ -1,8 +1,10 @@
 {
   "lerna": "2.8.0",
   "packages": [
+    "ui",
+    "client",
     "server",
-    "client"
+    "simulator"
   ],
   "version": "0.0.0"
 }
