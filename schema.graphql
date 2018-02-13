@@ -70,6 +70,7 @@ type Stock {
   price: Float!
   companyInfo: Company!
   quote: Quote!
+  relatedMarkets: [Market!]!
 }
 
 type Quote {
@@ -83,8 +84,8 @@ type Quote {
   openTime: DateTime
   close: Float!
   closeTime: DateTime!
-  high: Float!
-  low: Float!
+  high: Float
+  low: Float
   latestPrice: Float!
   latestSource: String!
   latestTime: DateTime!
@@ -135,17 +136,15 @@ type News {
   related: String!
 }
 
-type Index {
+type Market {
   id: String!
   name: String!
-  change: String!
-  volume: Float!
 }
 
-type IndexUpdate {
+type MarketUpdate {
   id: String!
   change: String!
-  volume: Float!
+  volume: String!
 }
 
 type PeerPrice {
@@ -171,7 +170,7 @@ type Query {
 }
 
 type Subscription {
-  indexUpdates(symbols: [String!]!): IndexUpdate!
+  marketUpdates(symbols: [String!]!): MarketUpdate!
 }
 
 schema {

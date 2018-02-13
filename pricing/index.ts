@@ -20,13 +20,13 @@ function createPriceStream(symbol: string) {
 }
 
 const subscriptions = new Map();
-const SUBSCRIBE_TO_INDEX_UPDATES = 'SUBSCRIBE_TO_INDEX_UPDATES';
+const SUBSCRIBE_TO_INDEX_UPDATES = 'SUBSCRIBE_TO_MARKET_UPDATES';
 
 interface IHandlers {
   [channel: string]: (message: string) => void;
 }
 
-const createTopic = (symbol: string) => `INDEX_UPDATE.${symbol}`;
+const createTopic = (symbol: string) => `MARKET_UPDATE.${symbol}`;
 
 const handlers: IHandlers = {
   [SUBSCRIBE_TO_INDEX_UPDATES]: (message: string) => {
@@ -46,4 +46,4 @@ sub.on('message', (channel: string, message: string) => {
 });
 
 
-sub.subscribe('SUBSCRIBE_TO_INDEX_UPDATES');
+sub.subscribe('SUBSCRIBE_TO_MARKET_UPDATES');

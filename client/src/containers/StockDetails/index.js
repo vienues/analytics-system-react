@@ -57,45 +57,6 @@ const getSymbolDetails = gql`
       month3ChangePercent
       month1ChangePercent
       day5ChangePercent
-      quote {
-        # id
-        symbol
-        companyName
-        primaryExchange
-        sector
-        calculationPrice
-        open
-        openTime
-        close
-        closeTime
-        high
-        low
-        latestPrice
-        latestSource
-        latestTime
-        latestUpdate
-        latestVolume
-        iexRealtimePrice
-        iexRealtimeSize
-        iexLastUpdated
-        delayedPrice
-        delayedPriceTime
-        previousClose
-        change
-        changePercent
-        iexMarketPercent
-        iexVolume
-        avgTotalVolume
-        iexBidPrice
-        iexBidSize
-        iexAskPrice
-        iexAskSize
-        marketCap
-        peRatio
-        week52High
-        week52Low
-        ytdChange
-      }
     }
   }
 `;
