@@ -1,9 +1,10 @@
 import React from 'react';
 import * as Rebass from 'rebass';
 import styled, { css } from 'styled-components';
+import mapProps from '@evanrs/map-props';
 
 import { theme } from '../theme';
-import { Flex } from "rebass";
+import { Flex } from 'rebass';
 
 export const background = ['rgb(2, 35, 93)', `rgb(0, 24, 63)`, 'rgb(0, 7, 18)'];
 
@@ -19,8 +20,7 @@ export const RootBleed = styled(Flex)`
   width: 100%;
   max-width: 80rem;
   margin: 0 auto;
-`
-
+`;
 
 export const Special = styled.div`
   flex: 1 1 1;
@@ -39,35 +39,23 @@ export const Bleed = ({ children, full, ...props }) => (
 );
 
 export const textProps = css`
-  ${({ weight }) =>
-    weight
-      ? css`
-          font-weight: ${weight};
-        `
-      : ''}
-  ${({ italic }) =>
-    italic
-      ? css`
-          font-style: italic;
-        `
-      : ''}
-  ${({ caps }) =>
-    caps
-      ? css`
-          letter-spacing: 0.0625rem;
-        `
-      : ''}
-  ${({ inline }) =>
-    inline
-      ? css`
-          display: inline;
-        `
-      : ''}
+  ${mapProps({
+    weight: weight => css`
+      font-weight: ${weight};`,
+    italic: italic => css`
+      font-style: italic;`,
+    caps: css`
+      letter-spacing: 0.0625rem;`,
+    display: {
+      inline: css`
+        display: inline;`,
+    },
+  })};
 `;
 
 export const Text = styled(Rebass.Text).attrs({ is: 'div' })`
-  ${textProps}
-`
+  ${textProps};
+`;
 export const Heading = styled(Rebass.Heading)`
   ${textProps};
 `;

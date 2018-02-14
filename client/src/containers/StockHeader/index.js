@@ -12,7 +12,7 @@ const StockHeader = ({id, data: {stock}}) => {
       <Lead is="div" f={5} color="offwhite">
         <Flex>
           {company.name}
-          <Text inline={'true'} color="offwhite50" pl={2}>
+          <Text display="inline" color="offwhite50" pl={2}>
             ({id.toUpperCase()})
           </Text>
           <Heading color="secondary"/>
@@ -22,7 +22,7 @@ const StockHeader = ({id, data: {stock}}) => {
             {quote.change != null ? quote.change.toFixed(2) : ''}
             {quote.change != null &&
             quote.changePercent != null && (
-              <Text color="gray8" inline px={1}>
+              <Text color="gray8" display="inline" px={1}>
                 |
               </Text>
             )}
