@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
 
-import { colors } from '../styleguide/colors'
+import { colors } from '../styleguide/colors';
 
 import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
 
@@ -19,21 +19,21 @@ export default class StockHistory extends PureComponent {
   };
 
   render() {
-    let { previousClose, data } = this.props
+    let { previousClose, data } = this.props;
 
     if (typeof previousClose === 'string') {
-      previousClose = Number(previousClose)
+      previousClose = Number(previousClose);
     }
 
-    let { low } = _.minBy(data, 'low') || {}
-    let { high } = _.maxBy(data, 'high') || {}
+    let { low } = _.minBy(data, 'low') || {};
+    let { high } = _.maxBy(data, 'high') || {};
 
     if (previousClose) {
-      high = _.max([high, previousClose])
+      high = _.max([high, previousClose]);
     }
 
-    low -= low * 0.0005
-    high += high * 0.0005
+    low -= low * 0.0005;
+    high += high * 0.0005;
 
     return (
       <ResponsiveContainer width="100%" height="100%">
@@ -48,7 +48,13 @@ export default class StockHistory extends PureComponent {
             dot={false}
             isAnimationActive={false}
           />
-          <XAxis dataKey="label" interval={_.round(this.props.data.length / 4)} tick={{ fontSize: 10 }} tickSize={12}  stroke={colors.primary50a}/>
+          <XAxis
+            dataKey="label"
+            interval={_.round(this.props.data.length / 4)}
+            tick={{ fontSize: 10 }}
+            tickSize={12}
+            stroke={colors.primary50a}
+          />
           <YAxis
             type="number"
             allowDecimals
@@ -60,6 +66,6 @@ export default class StockHistory extends PureComponent {
           />
         </LineChart>
       </ResponsiveContainer>
-    )
+    );
   }
 }

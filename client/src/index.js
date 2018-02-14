@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import 'ress/dist/ress.min.css';
-import './assets/fonts/verta/typeface.css'
+import './assets/fonts/verta/typeface.css';
 import './index.css';
 
 import App from './App';

@@ -1,11 +1,11 @@
-import React  from 'react';
+import React from 'react';
 import * as moment from 'moment';
 import styled from 'styled-components';
 import { Box, Flex, Measure } from 'rebass';
 
-import { gradients, colors } from '../../styleguide/colors'
+import { gradients, colors } from '../../styleguide/colors';
 import { ViewportFlex, Root, Divider, BlockLink, Text, Heading, Lead, RootBleed } from '../../styleguide';
-import AppBar from '../../components/AppBar'
+import AppBar from '../../components/AppBar';
 
 import StockHistory from '../../components/StockHistory';
 import StockCompanyConnector from '../../connectors/StockCompany';
@@ -13,41 +13,40 @@ import StockNewsConnector from '../../connectors/StockNews';
 import StockTickerConnector from '../../connectors/StockTicker';
 import StockStatsConnector from '../../connectors/StockStats';
 import Markets from '../MarketList';
-import StockHeader from '../StockHeader'
+import StockHeader from '../StockHeader';
 
-export default ({id}) => (
+export default ({ id }) => (
   <Root column flex={1}>
-    <AppBar/>
+    <AppBar />
     <ViewportFlex>
-      <StockHeader id={id}/>
+      <StockHeader id={id} />
     </ViewportFlex>
     <ViewportFlex>
       <MainColumn py={3}>
-        <StockTickerConnector id={id} is={StockTickerChart}/>
+        <StockTickerConnector id={id} is={StockTickerChart} />
       </MainColumn>
-      <Box p={[1, 2]}/>
+      <Box p={[1, 2]} />
       <SidebarColumn>
         <ChartHeading>Latest News</ChartHeading>
-        <StockNewsConnector id={id} is={NewsSidebar}/>
+        <StockNewsConnector id={id} is={NewsSidebar} />
       </SidebarColumn>
     </ViewportFlex>
     <ViewportFlex>
       <MainColumn>
         <ChartHeading>Key Stats</ChartHeading>
-        <StockStatsConnector id={id} is={StockStats}/>
+        <StockStatsConnector id={id} is={StockStats} />
       </MainColumn>
-      <Box p={[1, 2]}/>
+      <Box p={[1, 2]} />
       <SidebarColumn>
         <ChartHeading>Company Overview</ChartHeading>
-        <StockCompanyConnector id={id} is={CompanySidebar}/>
+        <StockCompanyConnector id={id} is={CompanySidebar} />
       </SidebarColumn>
     </ViewportFlex>
     <Ribbon>
-      <Markets/>
+      <Markets />
     </Ribbon>
   </Root>
-)
-
+);
 
 const Ribbon = styled(ViewportFlex)`
   position: fixed;
@@ -61,25 +60,21 @@ const Ribbon = styled(ViewportFlex)`
   background-image: linear-gradient(180deg, ${gradients.secondary.join(', ')});
 
   color: ${colors.primary};
-`
+`;
 
-const Panel = styled(Box).attrs({ pt: 2 })`
+const Panel = styled(Box).attrs({ pt: 2 })``;
 
-`
-
-const MainColumn = styled(Panel).attrs({flex: 1, py: 2})`
+const MainColumn = styled(Panel).attrs({ flex: 1, py: 2 })`
   min-height: calc(40vh - calc(12rem / 2));
-`
+`;
 
-const SidebarColumn = styled(Panel).attrs({ width: [1, '20rem'] })`
+const SidebarColumn = styled(Panel).attrs({ width: [1, '20rem'] })``;
 
-`
-
-export const ChartHeading = ({children, mt, mb}) => [
+export const ChartHeading = ({ children, mt, mb }) => [
   <Heading key="heading" mt={mt} f={1} caps color="accent" bold>
     {children}
   </Heading>,
-  <Divider key="divider" my={1} mb={mb}/>,
+  <Divider key="divider" my={1} mb={mb} />,
 ];
 
 export const StockTickerChart = props => {
@@ -90,7 +85,7 @@ export const StockTickerChart = props => {
     return 'error loading data';
   }
 
-  return <StockHistory data={props.data.stock.chart} tenor="1m" select="average" label="label"/>;
+  return <StockHistory data={props.data.stock.chart} tenor="1m" select="average" label="label" />;
 };
 
 export const NewsSidebar = props => {
@@ -123,7 +118,7 @@ export const CompanySidebar = props => {
     return 'error loading data';
   }
 
-  const {company, peers} = props.data.stock;
+  const { company, peers } = props.data.stock;
 
   return (
     <Box flex={1}>
@@ -159,7 +154,7 @@ export const StockStats = props => {
     return 'error loading data';
   }
 
-  const {stats, quote} = props.data.stock;
+  const { stats, quote } = props.data.stock;
 
   return (
     <Flex flex={1} wrap={false}>
@@ -172,7 +167,7 @@ export const StockStats = props => {
         <FieldRow label="Market Cap">{stats.marketcap}</FieldRow>
         <FieldRow label="P/E Ratio">{stats.peRatioHigh}</FieldRow>
       </Flex>
-      <Box p={2}/>
+      <Box p={2} />
       <Flex w={[1, 1 / 2]} column>
         <FieldRow label="Open">{quote.open}</FieldRow>
         <FieldRow label="52 Week Range">
@@ -186,7 +181,7 @@ export const StockStats = props => {
   );
 };
 
-const FieldRow = ({label, children}) => {
+const FieldRow = ({ label, children }) => {
   return (
     <Flex flex={1} column>
       <Flex flex={1} my={1}>
@@ -201,7 +196,7 @@ const FieldRow = ({label, children}) => {
           </Text>
         </Box>
       </Flex>
-      <Divider color="gray9" borderWidth={1} my={0}/>
+      <Divider color="gray9" borderWidth={1} my={0} />
     </Flex>
   );
 };

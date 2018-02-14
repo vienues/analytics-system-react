@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { ApolloProvider } from 'react-apollo'
-import { ThemeProvider } from 'styled-components'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import StockDetails from './containers/StockDetails'
+import React, { Component } from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import StockDetails from './containers/StockDetails';
 
 import client from './client';
 import theme from './theme';
