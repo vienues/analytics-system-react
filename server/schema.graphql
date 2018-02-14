@@ -222,6 +222,7 @@ type Query {
   company(id: ID!): Company
   stock(id: ID!): Stock
   reference: ReferenceQuery
+  markets: [MarketData!]!
 }
 
 type Subscription {

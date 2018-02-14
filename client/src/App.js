@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { Provider as ResbassProvider } from 'rebass'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-
-import IEXClone from './containers/IEXClone'
 import StockDetails from './containers/StockDetails'
 
 import client from './client'
@@ -17,7 +15,6 @@ class App extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact path="/stock/:id" component={({ match }) => <StockDetails id={match.params.id} />} />
-              <Route exact path="/iex/:symbol" component={IEXClone} />
               <Redirect exact from="/" to="/stock/aapl" />
             </Switch>
           </BrowserRouter>

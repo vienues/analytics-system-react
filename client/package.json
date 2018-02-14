@@ -15,7 +15,6 @@
     "apollo-utilities": "^1.0.6",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.7.0",
-    "ix": "^2.3.4",
     "lodash": "^4.17.5",
     "luxon": "^0.4.0",
     "react": "^16.2.0",
@@ -27,7 +26,6 @@
     "recharts": "^1.0.0-beta.10",
     "recompose": "^0.26.0",
     "ress": "^1.2.2",
-    "rxjs": "^5.5.6",
     "styled-components": "^3.1.6",
     "subscriptions-transport-ws": "^0.9.5"
   },

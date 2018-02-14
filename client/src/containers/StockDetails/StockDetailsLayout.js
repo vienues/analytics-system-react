@@ -1,25 +1,22 @@
 import _ from 'lodash'
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
-import { DateTime, Duration } from 'luxon'
 import * as moment from 'moment'
 
 import styled from 'styled-components'
-import { Box, Flex, Small, Input, NavLink, Measure, Label } from 'rebass'
-
-import { Root, Special, Edge, Bleed, Divider, SectionHeading, BlockLink, Text, Heading, Lead } from '../../styleguide'
-
+import { Box, Flex, Measure } from 'rebass'
+import { Root, Edge, Divider, BlockLink, Text, Heading, Lead } from '../../styleguide'
 import StockHistory from '../../components/StockHistory'
-
 import StockCompanyConnector from '../../connectors/StockCompany'
 import StockNewsConnector from '../../connectors/StockNews'
 import StockTickerConnector from '../../connectors/StockTicker'
 import StockStatsConnector from '../../connectors/StockStats'
+import Markets from './MarketList/Markets'
 
-export default class Chart extends PureComponent {
+export default class Layout extends PureComponent {
   render() {
     return (
       <Root column flex={1}>
+        <Markets/>
         <PageTitle {...this.props} />
         <Flex>
           <MainColumn py={3}>
@@ -57,22 +54,22 @@ const PageTitle = props => {
       <Lead is="div" f={5} color="offwhite">
         <Flex>
           {company.name}{' '}
-          <Text inline color="secondary" pl={1}>
+          <Text inline={'true'} color="secondary" pl={1}>
             ({id.toUpperCase()})
           </Text>
           <Heading color="secondary" />
           <Box flex={1} />
           <Text pr={2}>{quote.latestPrice} </Text>
-          <Text color={quote.change < 0 ? 'red' : 'green7'}>
-            {quote.change != null ? quote.change.toFixed(2) : ''}
-            {quote.change != null &&
-              quote.changePercent != null && (
-                <Text color="gray8" inline px={1}>
-                  |
-                </Text>
-              )}
-            {quote.changePercent != null ? quote.changePercent.toFixed(2) * 100 + '%' : ''}
-          </Text>
+          {/*<Text color={quote.change < 0 ? 'red' : 'green7'}>*/}
+            {/*{quote.change != null ? quote.change.toFixed(2) : ''}*/}
+            {/*{quote.change != null &&*/}
+              {/*quote.changePercent != null && (*/}
+                {/*<Text color="gray8" inline px={1}>*/}
+                  {/*|*/}
+                {/*</Text>*/}
+              {/*)}*/}
+            {/*{quote.changePercent != null ? quote.changePercent.toFixed(2) * 100 + '%' : ''}*/}
+          {/*</Text>*/}
         </Flex>
       </Lead>
       <Divider my={1} />

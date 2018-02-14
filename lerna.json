@@ -3,7 +3,7 @@
   "packages": [
     "client",
     "server",
-    "simulator"
+    "pricing"
   ],
   "version": "0.0.0"
 }

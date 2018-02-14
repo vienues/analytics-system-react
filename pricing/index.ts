@@ -12,7 +12,7 @@ const max = 66;
 const min = 62;
 
 function createPriceStream(symbol: string) {
-  return Observable.interval(1000).map(_ => JSON.stringify({
+  return Observable.interval(3000).map(_ => JSON.stringify({
     change: randomPrice(),
     id: symbol,
     volume: randomPrice(),
