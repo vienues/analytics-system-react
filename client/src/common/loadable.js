@@ -10,6 +10,6 @@ export const renderWhileLoading = (propName = 'data') => {
 const renderForError = (propName = 'data') =>
   branch(props => props[propName] && props[propName].error, renderComponent(ErrorComponent));
 
-const ErrorComponent = props => <span>Something went wrong</span>;
+const ErrorComponent = props => <span>Something went wrong<span>{JSON.stringify(props.data.error)}</span></span>;
 
 export const loadable = compose(renderWhileLoading(), renderForError());

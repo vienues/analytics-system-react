@@ -1,6 +1,6 @@
 import wrapper from './marketDataQuery';
 import React from 'react';
-import { loadable } from '../../common/';
+import { loadable } from '../../common/'
 
 import { Flex, Small } from 'rebass'
 

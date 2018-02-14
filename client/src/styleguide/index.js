@@ -3,6 +3,7 @@ import * as Rebass from 'rebass';
 import styled, { css } from 'styled-components';
 
 import { theme } from '../theme';
+import { Flex } from "rebass";
 
 export const background = ['rgb(2, 35, 93)', `rgb(0, 24, 63)`, 'rgb(0, 7, 18)'];
 
@@ -13,6 +14,13 @@ export const Root = styled(Rebass.Flex)`
   background-image: linear-gradient(135deg, ${background[0]}, ${background[1]} 40%, ${background[2]} 120%);
   background-image: linear-gradient(135deg, ${theme.gradients.primary.join(', ')} 120%);
 `;
+
+export const RootBleed = styled(Flex)`
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+`
+
 
 export const Special = styled.div`
   flex: 1 1 1;
