@@ -71,7 +71,6 @@ export default {
   Subscription: {
     marketUpdates: {
       resolve: (payload, args, context, info) => {
-        console.log(payload);
         return payload;
       },
       subscribe: (_, args) => {
