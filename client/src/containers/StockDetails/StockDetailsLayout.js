@@ -1,18 +1,19 @@
-import _ from 'lodash'
-import React, { PureComponent } from 'react'
-import * as moment from 'moment'
+import _ from 'lodash';
+import React, { PureComponent } from 'react';
+import * as moment from 'moment';
+import styled from 'styled-components';
+import { Box, Flex, Measure } from 'rebass';
 
-import styled from 'styled-components'
-import { Box, Flex, Measure } from 'rebass'
-import { Root, Edge, Divider, BlockLink, Text, Heading, Lead } from '../../styleguide'
 import { gradients, colors } from '../../styleguide/colors'
+import { Root, Divider, BlockLink, Text, Heading, Lead } from '../../styleguide';
 
-import StockHistory from '../../components/StockHistory'
-import StockCompanyConnector from '../../connectors/StockCompany'
-import StockNewsConnector from '../../connectors/StockNews'
-import StockTickerConnector from '../../connectors/StockTicker'
-import StockStatsConnector from '../../connectors/StockStats'
-import Markets from './MarketList/Markets'
+import StockHistory from '../../components/StockHistory';
+import StockCompanyConnector from '../../connectors/StockCompany';
+import StockNewsConnector from '../../connectors/StockNews';
+import StockTickerConnector from '../../connectors/StockTicker';
+import StockStatsConnector from '../../connectors/StockStats';
+import Markets from '../MarketList';
+
 
 export default class Layout extends PureComponent {
   render() {
@@ -47,7 +48,7 @@ export default class Layout extends PureComponent {
           <Markets/>
         </Ribbon>
       </Root>
-    )
+    );
   }
 }
 
@@ -69,12 +70,12 @@ const RootBleed = styled(Flex)`
 `
 
 const PageTitle = props => {
-  let { id, data } = props
-  data = data || {}
+  let { id, data } = props;
+  data = data || {};
 
-  const company = _.get(data.stock, ['company']) || {}
-  const quote = _.get(data.stock, ['quote']) || {}
-  console.log(`{company, quote}`, { company, quote })
+  const company = _.get(data.stock, ['company']) || {};
+  const quote = _.get(data.stock, ['quote']) || {};
+  console.log(`{company, quote}`, { company, quote });
   return (
     <RootBleed column px={[2, 3]} pt={2}>
       <Lead is="div" f={5} color="offwhite">
@@ -107,32 +108,32 @@ const MainColumn = styled(Box).attrs({ flex: 1, py: 2, pl: [2, 3], pr: [1, 2] })
   min-height: calc(50vh - 4rem);
 `
 
-const SidebarColumn = props => <Box width={[1, '20rem']} py={2} pl={[1, 2]} pr={[2, 3]} {...props} />
+const SidebarColumn = props => <Box width={[1, '20rem']} py={2} pl={[1, 2]} pr={[2, 3]} {...props} />;
 
 export const ChartHeading = ({ children, mt, mb }) => [
   <Heading key="heading" mt={mt} f={1} caps color="accent" bold>
     {children}
   </Heading>,
   <Divider key="divider" my={1} mb={mb} />,
-]
+];
 
 export const StockTickerChart = props => {
   if (props.data.loading) {
-    return 'loading'
+    return 'loading';
   }
   if (props.data.stock == null) {
-    return 'error loading data'
+    return 'error loading data';
   }
 
-  return <StockHistory data={props.data.stock.chart} tenor="1m" select="average" label="label" />
-}
+  return <StockHistory data={props.data.stock.chart} tenor="1m" select="average" label="label" />;
+};
 
 export const NewsSidebar = props => {
   if (props.data.loading) {
-    return 'loading'
+    return 'loading';
   }
   if (props.data.stock == null) {
-    return 'error loading data'
+    return 'error loading data';
   }
 
   return (props.data.stock.news || []).map(newsItem => (
@@ -146,18 +147,18 @@ export const NewsSidebar = props => {
         </Text>
       </Measure>
     </Box>
-  ))
-}
+  ));
+};
 
 export const CompanySidebar = props => {
   if (props.data.loading) {
-    return 'loading'
+    return 'loading';
   }
   if (props.data.stock == null) {
-    return 'error loading data'
+    return 'error loading data';
   }
 
-  const { company, peers } = props.data.stock
+  const { company, peers } = props.data.stock;
 
   return (
     <Box flex={1}>
@@ -181,19 +182,19 @@ export const CompanySidebar = props => {
         ))}
       </Flex>
     </Box>
-  )
-}
+  );
+};
 
 export const StockStats = props => {
   if (props.data.loading) {
-    return 'loading'
+    return 'loading';
   }
   if (props.data.stock == null) {
-    console.log(props.data)
-    return 'error loading data'
+    console.log(props.data);
+    return 'error loading data';
   }
 
-  const { stats, quote } = props.data.stock
+  const { stats, quote } = props.data.stock;
 
   return (
     <Flex flex={1} wrap={false}>
@@ -217,8 +218,8 @@ export const StockStats = props => {
         <FieldRow label="Dividend & Yield">{stats.peRatioHigh}</FieldRow>
       </Flex>
     </Flex>
-  )
-}
+  );
+};
 
 const FieldRow = ({ label, children }) => {
   return (
@@ -237,5 +238,5 @@ const FieldRow = ({ label, children }) => {
       </Flex>
       <Divider color="gray9" borderWidth={1} my={0} />
     </Flex>
-  )
-}
+  );
+};

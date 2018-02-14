@@ -1,36 +1,38 @@
 import React from 'react';
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 
-export const StockCompanyConnector = graphql(gql`
-  query StockCompanyConnectorQuery($id: ID!){
-    stock(id: $id) {
-      id
-      company {
+export const StockCompanyConnector = graphql(
+  gql`
+    query StockCompanyConnectorQuery($id: ID!) {
+      stock(id: $id) {
         id
-        symbol
-        name
-        exchange
-        industry
-        website
-        description
-        CEO
-        issueType
-        sector
+        company {
+          id
+          symbol
+          name
+          exchange
+          industry
+          website
+          description
+          CEO
+          issueType
+          sector
+        }
+        peers
       }
-      peers
     }
-
-  }
-`, {
-  options: ({ id }) => ({
-    variables: { id }
-  })
-})(({ is: Component, ...props }) => <Component {...props} {...props.data}/>)
+  `,
+  {
+    options: ({ id }) => ({
+      variables: { id },
+    }),
+  },
+)(({ is: Component, ...props }) => <Component {...props} {...props.data} />);
 
 StockCompanyConnector.defaultProps = {
   is: 'div',
-  children: "This connector requires a custom rendering component"
-}
+  children: 'This connector requires a custom rendering component',
+};
 
-export default StockCompanyConnector
+export default StockCompanyConnector;

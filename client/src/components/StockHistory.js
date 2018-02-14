@@ -1,11 +1,9 @@
-import _ from 'lodash'
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import _ from 'lodash';
+import React, { PureComponent } from 'react';
 
 import { colors } from '../styleguide/colors'
 
-import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
-import { DateTime } from 'luxon'
+import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
 
 const COLORS = {
   grid: '#cfd3d6',
@@ -18,7 +16,7 @@ const COLORS = {
 export default class StockHistory extends PureComponent {
   static defaultProps = {
     data: [],
-  }
+  };
 
   render() {
     let { previousClose, data } = this.props

@@ -4,8 +4,8 @@ import { ThemeProvider } from 'styled-components'
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 import StockDetails from './containers/StockDetails'
 
-import client from './client'
-import theme from './theme'
+import client from './client';
+import theme from './theme';
 
 class App extends Component {
   render() {
@@ -20,8 +20,8 @@ class App extends Component {
           </BrowserRouter>
         </ThemeProvider>
       </ApolloProvider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

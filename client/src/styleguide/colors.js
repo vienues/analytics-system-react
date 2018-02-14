@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import palx from 'palx'
 
-const rgb = (r, g, b, a = 1) => `rgba(${r}, ${g}, ${b}, ${a})`
+const rgb = (r, g, b, a = 1) => `rgba(${r}, ${g}, ${b}, ${a})`;
 export const flatten = colorSets =>
   _.reduce(
     colorSets,
@@ -15,10 +15,10 @@ export const flatten = colorSets =>
         }
       })
 
-      return acc
+      return acc;
     },
     {},
-  )
+  );
 
 
 // Derived palette from accent color
@@ -72,35 +72,35 @@ export const secondary = {
   '70': rgb(223, 223, 223),
   '50': rgb(198, 198, 198),
   '30': rgb(174, 174, 174),
-}
+};
 
 export const red = {
   '100': rgb(233, 86, 86),
   '115': rgb(198, 73, 73),
   '70a': rgb(233, 86, 86, 0.7),
   '50a': rgb(233, 86, 86, 0.5),
-}
+};
 
 export const green = {
   '100': rgb(145, 228, 165),
   '115': rgb(123, 194, 140),
   '70a': rgb(145, 228, 165, 0.7),
   '50a': rgb(145, 228, 165, 0.5),
-}
+};
 
 export const yellow = {
   '100': rgb(255, 187, 94),
   '115': rgb(217, 159, 79),
   '70a': rgb(255, 187, 94, 0.7),
   '50a': rgb(255, 187, 94, 0.5),
-}
+};
 
 export const blue = {
   '100': rgb(0, 104, 255),
   '115': rgb(0, 88, 217),
   '70a': rgb(0, 104, 255, 0.7),
   '50a': rgb(0, 104, 255, 0.5),
-}
+};
 
 export const colors = flatten({
   transparent,
@@ -123,4 +123,4 @@ export const colors = flatten({
 export const gradients = {
   primary: [rgb(0, 46, 113), rgb(0, 2, 5)],
   secondary: [rgb(0, 38, 93), rgb(0, 32, 79)],
-}
+};

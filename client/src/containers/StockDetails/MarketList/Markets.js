@@ -2,15 +2,19 @@ import wrapper from './marketDataQuery'
 import React from 'react';
 import { loadable } from './renderWhileLoading'
 
+import { Flex, Box, Small } from 'rebass'
+
 const Markets = ({data: {markets}}) => {
-  return <div>
+  return <Flex align="center">
     {markets.map(({id, name, lastUpdate}) => (
-      <div key={id}>
-        <p>{name}</p>
-        <p>{lastUpdate ? lastUpdate.change : '-'}</p>
-      </div>
+      <Flex key={id} column px={2} justify="space-around" >
+        <Small caps>{name}</Small>
+        <Small>
+          {lastUpdate ? lastUpdate.change : '-'}
+        </Small>
+      </Flex>
     ))}
-  </div>
+  </Flex>
 };
 
 export default wrapper(loadable(Markets))

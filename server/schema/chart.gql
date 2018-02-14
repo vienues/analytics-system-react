@@ -6,7 +6,7 @@ type ChartDataPoint {
   low: Float
   average: Float
   volume: Flaot
-  notional: Flaot,
+  notional: Flaot
   numberOfTrades: Float
   changeOverTime: Float
   marktHigh: Float

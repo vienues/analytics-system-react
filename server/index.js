@@ -1,28 +1,28 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
-import { createServer } from 'http'
-import { SubscriptionServer } from 'subscriptions-transport-ws'
-import { execute, subscribe } from 'graphql'
-import { makeExecutableSchema } from 'graphql-tools'
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
+import { execute, subscribe } from 'graphql';
+import { makeExecutableSchema } from 'graphql-tools';
 
-import resolvers from './resolvers'
-import typeDefs from './schema.graphql'
-import * as iex from './connectors/iex'
+import resolvers from './resolvers';
+import typeDefs from './schema.graphql';
+import * as iex from './connectors/iex';
 
-const PORT = 4000
-const CLIENT_PORT = 3000
+const PORT = 4000;
+const CLIENT_PORT = 3000;
 
-const schema = makeExecutableSchema({ typeDefs, resolvers })
-const server = express()
+const schema = makeExecutableSchema({ typeDefs, resolvers });
+const server = express();
 
 server.use(
   '*',
   cors({
     origin: [`http://localhost:${PORT}`, `http://localhost:${CLIENT_PORT}`],
   }),
-)
+);
 
 server.use(
   '/graphql',
@@ -31,7 +31,7 @@ server.use(
     schema,
     context: { iex },
   }),
-)
+);
 
 server.use(
   '/graphiql',
@@ -39,13 +39,13 @@ server.use(
     endpointURL: '/graphql',
     subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`,
   }),
-)
+);
 
 // Wrap the Express server
-const ws = createServer(server)
+const ws = createServer(server);
 
 ws.listen(PORT, () => {
-  console.log(`Apollo Server is now running on http://localhost:${PORT}`)
+  console.log(`Apollo Server is now running on http://localhost:${PORT}`);
   // Set up the WebSocket for handling GraphQL subscriptions
   new SubscriptionServer(
     {
@@ -57,5 +57,5 @@ ws.listen(PORT, () => {
       server: ws,
       path: '/subscriptions',
     },
-  )
-})
+  );
+});
