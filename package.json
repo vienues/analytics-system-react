@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "eslint": "^4.17.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-react-app": "^2.1.0",
-    "eslint": "^4.17.0",
+    "husky": "^0.14.3",
     "lerna": "^2.8.0",
-    "prettier": "^1.10.2"
+    "prettier": "^1.10.2",
+    "pretty-quick": "^1.4.1"
   },
   "scripts": {
     "start": "npm run bootstrap && lerna run --parallel start",
@@ -16,7 +18,8 @@
     "clean": "(if [ -z `which yarn` ]; then npm install; else yarn; fi;) && lerna clean",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",
-    "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'"
+    "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'",
+    "precommit": "pretty-quick --staged"
   },
   "author": "",
   "license": "ISC",
