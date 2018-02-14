@@ -1,20 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box } from 'rebass'
+import { NavLink } from 'react-router-dom'
+import mapProps from '@evanrs/map-props'
 
 import logoSVGURL from '../assets/logo.svg'
-import { BlockLink } from '../styleguide'
 import { ViewportRowPadding, ViewportRowBody } from '../styleguide/ViewportRow'
+import { theme } from '../theme'
+import { textProps } from '../styleguide'
 
 const AppBar = (props) => (
   <ViewportRowPadding>
     <Body>
       <Logo/>
       <Box flex="1"/>
-
+      <Link to="/stock">
+        Quotes
+      </Link>
+      <Link to="/markets">
+        Markets
+      </Link>
+      <Link to="/watchlists">
+        Watchlists
+      </Link>
     </Body>
   </ViewportRowPadding>
 );
+
+
+const Link = styled(NavLink)`
+  ${textProps({ weight: "normal", caps: true })};
+
+  display: flex;
+  align-items: center;
+  color: ${theme.colors.white};
+  border-radius: 0.25rem;
+  min-height: 2rem;
+  padding: 0 0.5rem;
+
+  font-size: 1rem;
+  line-height: 1rem;
+
+  vertical-align: center;
+  margin-left: 1rem;
+
+  &.active {
+    background-color: ${theme.colors.accent50a}
+  }
+`
 
 const Body = styled(ViewportRowBody)`
   display: flex;

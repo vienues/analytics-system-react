@@ -6,7 +6,7 @@ import mapProps from '@evanrs/map-props';
 import { theme } from '../theme';
 import { Flex } from 'rebass';
 
-export { ViewportRow, ViewportFlex } from './ViewportRow'
+export { ViewportRow, ViewportFlex } from './ViewportRow';
 
 export const background = ['rgb(2, 35, 93)', `rgb(0, 24, 63)`, 'rgb(0, 7, 18)'];
 
@@ -34,20 +34,34 @@ export const Bleed = ({ children, full, ...props }) => (
   </Rebass.Container>
 );
 
-export const textProps = css`
-  ${mapProps({
-    weight: weight => css`
-      font-weight: ${weight};`,
-    italic: css`
-      font-style: italic;`,
-    caps: css`
-      letter-spacing: 0.0625rem;`,
-    display: {
-      inline: css`
-        display: inline;`,
-    },
-  })};
-`;
+export const textProps = mapProps({
+  weight: {
+    light: css`
+      font-weight: 200;
+    `,
+    regular: css`
+      font-weight: 300;
+    `,
+    bold: css`
+      font-weight: 600;
+    `,
+    default: weight => css`
+      font-weight: ${weight};
+    `,
+  },
+  italic: css`
+    font-style: italic;
+  `,
+  caps: css`
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+  `,
+  display: {
+    inline: css`
+      display: inline;
+    `,
+  },
+});
 
 export const Text = styled(Rebass.Text).attrs({ is: 'div' })`
   ${textProps};

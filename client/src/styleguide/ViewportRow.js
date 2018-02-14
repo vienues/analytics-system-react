@@ -6,7 +6,7 @@ import { Flex, Box } from 'rebass';
 import mapProps from '@evanrs/map-props';
 
 
-export const ViewportRowPadding = styled(Box).attrs({ padding: [1, 2, 3] })`
+export const ViewportRowPadding = styled(Box).attrs({ px: [1, 2, 3] })`
   min-width: 100vw;
   max-width: 100vw;
 `

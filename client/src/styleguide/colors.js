@@ -44,10 +44,9 @@ export const black = {
 
 export const offwhite = {
   '100': palette.gray[0],
-  '70': palette.gray[1],
-  '50': palette.gray[7],
-  // '50': rgb(190, 204, 220),
-  '30': palette.gray[3],
+  '70': palette.gray[2],
+  '50': palette.gray[6],
+  '30': palette.gray[8],
 }
 
 export const offblack = {

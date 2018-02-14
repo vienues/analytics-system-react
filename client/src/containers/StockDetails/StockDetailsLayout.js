@@ -49,7 +49,7 @@ export default ({id}) => (
 )
 
 
-const Ribbon = styled.div`
+const Ribbon = styled(ViewportFlex)`
   position: fixed;
   bottom: 0;
 
@@ -58,7 +58,7 @@ const Ribbon = styled.div`
 
   min-width: 100vw;
   min-height: 3rem;
-  background-image: linear-gradient(${gradients.secondary.join(', ')});
+  background-image: linear-gradient(180deg, ${gradients.secondary.join(', ')});
 
   color: ${colors.primary};
 `
