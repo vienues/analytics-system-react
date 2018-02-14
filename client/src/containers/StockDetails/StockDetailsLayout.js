@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import { Box, Flex, Measure } from 'rebass';
 
 import { gradients, colors } from '../../styleguide/colors'
-import { Root, Divider, BlockLink, Text, Heading, Lead, RootBleed } from '../../styleguide';
+import { ViewportFlex, Root, Divider, BlockLink, Text, Heading, Lead, RootBleed } from '../../styleguide';
+import AppBar from '../../components/AppBar'
 
 import StockHistory from '../../components/StockHistory';
 import StockCompanyConnector from '../../connectors/StockCompany';
@@ -16,28 +17,31 @@ import StockHeader from '../StockHeader'
 
 export default ({id}) => (
   <Root column flex={1}>
-    <RootBleed>
+    <AppBar/>
+    <ViewportFlex>
       <StockHeader id={id}/>
-    </RootBleed>
-    <RootBleed>
+    </ViewportFlex>
+    <ViewportFlex>
       <MainColumn py={3}>
         <StockTickerConnector id={id} is={StockTickerChart}/>
       </MainColumn>
+      <Box p={1}/>
       <SidebarColumn>
         <ChartHeading>Latest News</ChartHeading>
         <StockNewsConnector id={id} is={NewsSidebar}/>
       </SidebarColumn>
-    </RootBleed>
-    <RootBleed>
+    </ViewportFlex>
+    <ViewportFlex>
       <MainColumn>
         <ChartHeading>Key Stats</ChartHeading>
         <StockStatsConnector id={id} is={StockStats}/>
       </MainColumn>
+      <Box p={1}/>
       <SidebarColumn>
         <ChartHeading>Company Overview</ChartHeading>
         <StockCompanyConnector id={id} is={CompanySidebar}/>
       </SidebarColumn>
-    </RootBleed>
+    </ViewportFlex>
     <Ribbon>
       <Markets/>
     </Ribbon>
@@ -46,6 +50,9 @@ export default ({id}) => (
 
 
 const Ribbon = styled.div`
+  position: fixed;
+  bottom: 0;
+
   display: flex;
   align-items: center;
 
@@ -56,11 +63,16 @@ const Ribbon = styled.div`
   color: ${colors.primary};
 `
 
-const MainColumn = styled(Box).attrs({flex: 1, py: 2, pl: [2, 3], pr: [1, 2]})`
-  min-height: calc(50vh - 4rem);
+const Panel = styled(Box).attrs({ my: 2 })`
+
+`
+const MainColumn = styled(Panel).attrs({flex: 1, py: 2})`
+  min-height: calc(40vh - calc(4rem / 2));
 `
 
-const SidebarColumn = props => <Box width={[1, '20rem']} py={2} pl={[1, 2]} pr={[2, 3]} {...props} />;
+const SidebarColumn = styled(Panel).attrs({ width: [1, '20rem'] })`
+
+`
 
 export const ChartHeading = ({children, mt, mb}) => [
   <Heading key="heading" mt={mt} f={1} caps color="accent" bold>

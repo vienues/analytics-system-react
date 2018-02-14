@@ -1,14 +1,14 @@
-import { Divider, Text, Heading, Lead, RootBleed } from '../../styleguide';
-import { Box, Flex } from 'rebass';
 import React from 'react';
-import { loadable } from '../../common/';
-import wrapper from './stockHeaderQuery';
+import { Box, Flex } from 'rebass';
 
-const StockHeader = ({id, data: {stock}}) => {
-  const {company, quote} = stock;
+import connect from './stockHeaderQuery';
+import { Divider, Text, Heading, Lead, ViewportRow } from '../../styleguide';
+
+const StockHeader = ({id, data: {loading, stock}}) => {
+  const {company = {}, quote = {}} = stock || {};
 
   return (
-    <RootBleed column px={[2, 3]} pt={2}>
+    <Flex column w={1}>
       <Lead is="div" f={5} color="offwhite">
         <Flex>
           {company.name}
@@ -31,8 +31,8 @@ const StockHeader = ({id, data: {stock}}) => {
         </Flex>
       </Lead>
       <Divider my={1}/>
-    </RootBleed>
+    </Flex>
   )
 }
 
-export default wrapper(loadable(StockHeader));
+export default connect(StockHeader);

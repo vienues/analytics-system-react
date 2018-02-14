@@ -1,5 +1,5 @@
-import wrapper from './marketDataQuery';
 import React from 'react';
+import connect from './marketDataQuery';
 import { loadable } from '../../common/'
 
 import { Flex, Small } from 'rebass'
@@ -16,4 +16,4 @@ const Markets = ({data: {markets}}) => {
 };
 
 
-export default wrapper(loadable(Markets));
+export default connect(loadable(Markets));
