@@ -42,7 +42,7 @@ export const textProps = css`
   ${mapProps({
     weight: weight => css`
       font-weight: ${weight};`,
-    italic: italic => css`
+    italic: css`
       font-style: italic;`,
     caps: css`
       letter-spacing: 0.0625rem;`,
