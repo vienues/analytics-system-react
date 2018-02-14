@@ -1,0 +1,167 @@
+@font-face {
+  font-family: 'verta';
+  src: url('verta-extrathin.eot');
+  src: url('verta-extrathin.eot?#iefix') format('embedded-opentype'),
+    url('verta-extrathin.woff2') format('woff2'), url('verta-extrathin.woff') format('woff'),
+    url('verta-extrathin.ttf') format('truetype'), url('verta-extrathin.svg#verta-extrathin') format('svg');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-extrathinitalic.eot');
+  src: url('verta-extrathinitalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-extrathinitalic.woff2') format('woff2'), url('verta-extrathinitalic.woff') format('woff'),
+    url('verta-extrathinitalic.ttf') format('truetype'),
+    url('verta-extrathinitalic.svg#verta-extrathin-italic') format('svg');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-thin.eot');
+  src: url('verta-thin.eot?#iefix') format('embedded-opentype'), url('verta-thin.woff2') format('woff2'),
+    url('verta-thin.woff') format('woff'), url('verta-thin.ttf') format('truetype'),
+    url('verta-thin.svg#verta-thin') format('svg');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-thinitalic.eot');
+  src: url('verta-thinitalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-thinitalic.woff2') format('woff2'), url('verta-thinitalic.woff') format('woff'),
+    url('verta-thinitalic.ttf') format('truetype'),
+    url('verta-thinitalic.svg#verta-thin-italic') format('svg');
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-light.eot');
+  src: url('verta-light.eot?#iefix') format('embedded-opentype'), url('verta-light.woff2') format('woff2'),
+    url('verta-light.woff') format('woff'), url('verta-light.ttf') format('truetype'),
+    url('verta-light.svg#verta-light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-lightitalic.eot');
+  src: url('verta-lightitalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-lightitalic.woff2') format('woff2'), url('verta-lightitalic.woff') format('woff'),
+    url('verta-lightitalic.ttf') format('truetype'),
+    url('verta-lightitalic.svg#verta-light-italic') format('svg');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-regular.eot');
+  src: url('verta-regular.eot?#iefix') format('embedded-opentype'), url('verta-regular.woff2') format('woff2'),
+    url('verta-regular.woff') format('woff'), url('verta-regular.ttf') format('truetype'),
+    url('verta-regular.svg#verta-regular') format('svg');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-regularitalic.eot');
+  src: url('verta-regularitalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-regularitalic.woff2') format('woff2'), url('verta-regularitalic.woff') format('woff'),
+    url('verta-regularitalic.ttf') format('truetype'),
+    url('verta-regularitalic.svg#verta-regular-italic') format('svg');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-bold.eot');
+  src: url('verta-bold.eot?#iefix') format('embedded-opentype'), url('verta-bold.woff2') format('woff2'),
+    url('verta-bold.woff') format('woff'), url('verta-bold.ttf') format('truetype'),
+    url('verta-bold.svg#verta-bold') format('svg');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-bolditalic.eot');
+  src: url('verta-bolditalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-bolditalic.woff2') format('woff2'), url('verta-bolditalic.woff') format('woff'),
+    url('verta-bolditalic.ttf') format('truetype'),
+    url('verta-bolditalic.svg#verta-bold-italic') format('svg');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-semibold.eot');
+  src: url('verta-semibold.eot?#iefix') format('embedded-opentype'),
+    url('verta-semibold.woff2') format('woff2'), url('verta-semibold.woff') format('woff'),
+    url('verta-semibold.ttf') format('truetype'), url('verta-semibold.svg#verta-semibold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-semibolditalic.eot');
+  src: url('verta-semibolditalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-semibolditalic.woff2') format('woff2'), url('verta-semibolditalic.woff') format('woff'),
+    url('verta-semibolditalic.ttf') format('truetype'),
+    url('verta-semibolditalic.svg#verta-semibold-italic') format('svg');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-black.eot');
+  src: url('verta-black.eot?#iefix') format('embedded-opentype'), url('verta-black.woff2') format('woff2'),
+    url('verta-black.woff') format('woff'), url('verta-black.ttf') format('truetype'),
+    url('verta-black.svg#verta-black') format('svg');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-blackitalic.eot');
+  src: url('verta-blackitalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-blackitalic.woff2') format('woff2'), url('verta-blackitalic.woff') format('woff'),
+    url('verta-blackitalic.ttf') format('truetype'),
+    url('verta-blackitalic.svg#verta-black-italic') format('svg');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-extrabold.eot');
+  src: url('verta-extrabold.eot?#iefix') format('embedded-opentype'),
+    url('verta-extrabold.woff2') format('woff2'), url('verta-extrabold.woff') format('woff'),
+    url('verta-extrabold.ttf') format('truetype'), url('verta-extrabold.svg#verta-extrabold') format('svg');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'verta';
+  src: url('verta-extrabolditalic.eot');
+  src: url('verta-extrabolditalic.eot?#iefix') format('embedded-opentype'),
+    url('verta-extrabolditalic.woff2') format('woff2'), url('verta-extrabolditalic.woff') format('woff'),
+    url('verta-extrabolditalic.ttf') format('truetype'),
+    url('verta-extrabolditalic.svg#verta-extrabold-italic') format('svg');
+  font-weight: 800;
+  font-style: italic;
+}

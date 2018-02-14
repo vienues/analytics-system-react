@@ -1,7 +1,7 @@
 :root {
   font-size: 1rem;
   line-height: 1.5rem;
-  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'verta', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
@@ -24,8 +24,11 @@ body {
   align-items: stretch;
 }
 
-a, a:visited {
+a {
   text-decoration: none;
   color: inherit;
-  font-weight: normal;
+}
+
+a.visited {
+  text-decoration: none;
 }
