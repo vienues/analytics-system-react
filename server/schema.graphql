@@ -89,7 +89,7 @@ type Tick {
   low: Float
   average: Float
   volume: Float
-  notional: Float,
+  notional: Float
   numberOfTrades: Float
   changeOverTime: Float
   marktHigh: Float
@@ -195,7 +195,7 @@ type Earnings {
   consensusEPS: Float
   estimatedEPS: Float
   announceTime: String
-  numberOfEstimates: Int,
+  numberOfEstimates: Int
   EPSSurpriseDollar: Float
   EPSReportDate: Date
   fiscalPeriod: String

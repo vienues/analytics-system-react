@@ -1,8 +1,4 @@
-import _ from 'lodash';
-import palx from 'palx'
-import rebassTheme from 'rebass/dist/theme'
-
-import { gradients, colors, flatten } from './styleguide/colors'
+import { gradients, colors } from './styleguide/colors';
 
 export const theme = {
   space: [0, 8, 16, 32, 48, 64, 128],
@@ -12,7 +8,7 @@ export const theme = {
     // ...flatten(palx(colorguide.colors.accent)),
     ...colors,
   },
-  gradients
-}
+  gradients,
+};
 
-export default theme
+export default theme;

@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { ApolloProvider } from 'react-apollo'
-import { Provider as ResbassProvider } from 'rebass'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import StockDetails from './containers/StockDetails'
+import React, { Component } from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { Provider as ResbassProvider } from 'rebass';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import StockDetails from './containers/StockDetails';
 
-import client from './client'
-import theme from './theme'
+import client from './client';
+import theme from './theme';
 
 class App extends Component {
   render() {
@@ -20,8 +20,8 @@ class App extends Component {
           </BrowserRouter>
         </ResbassProvider>
       </ApolloProvider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

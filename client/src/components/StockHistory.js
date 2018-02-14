@@ -1,10 +1,7 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
-
 
 import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
-import { DateTime } from 'luxon';
 
 const COLORS = {
   grid: '#cfd3d6',
@@ -16,15 +13,14 @@ const COLORS = {
 
 export default class StockHistory extends PureComponent {
   static defaultProps = {
-    data: []
-  }
+    data: [],
+  };
 
   render() {
     const previousClose = this.props.previousClose == null ? null : Number(this.props.previousClose);
     const sample = (this.props.data || [])[0] || {};
 
     const low = _.min([previousClose, _.round(sample.low - sample.low * 0.02, 1)]);
-    const high = _.min([previousClose, _.round(sample.high + sample.high * 0.02, 1)]);
 
     return (
       <ResponsiveContainer width="100%" height="100%">
