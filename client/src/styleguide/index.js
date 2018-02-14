@@ -38,7 +38,7 @@ export const textProps = css`
   ${({ inline }) => inline ? css`display: inline;`: ''}
 `
 
-export const Text = styled(Rebass.Text)`
+export const Text = styled(Rebass.Text).attrs({ is: 'div' })`
   ${textProps}
 `
 export const Heading = styled(Rebass.Heading)`
@@ -50,4 +50,9 @@ export const Lead = styled(Rebass.Lead)`
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
   display: block;
+`
+
+export const Ribbon = styled.div`
+  min-width: 100vw;
+  min-height: 3rem;
 `

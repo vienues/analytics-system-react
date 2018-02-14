@@ -1,10 +1,11 @@
-import _ from 'lodash';
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import _ from 'lodash'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
+import { colors } from '../styleguide/colors'
 
-import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
-import { DateTime } from 'luxon';
+import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
+import { DateTime } from 'luxon'
 
 const COLORS = {
   grid: '#cfd3d6',
@@ -12,66 +13,55 @@ const COLORS = {
   high: '#79e4a6',
   average: 'rgba(200,200,220,0.85)',
   low: '#e16973',
-};
+}
 
 export default class StockHistory extends PureComponent {
   static defaultProps = {
-    data: []
+    data: [],
   }
 
   render() {
-    const previousClose = this.props.previousClose == null ? null : Number(this.props.previousClose);
-    const sample = (this.props.data || [])[0] || {};
+    let { previousClose, data } = this.props
 
-    const low = _.min([previousClose, _.round(sample.low - sample.low * 0.02, 1)]);
-    const high = _.min([previousClose, _.round(sample.high + sample.high * 0.02, 1)]);
+    if (typeof previousClose === 'string') {
+      previousClose = Number(previousClose)
+    }
+
+    let { low } = _.minBy(data, 'low') || {}
+    let { high } = _.maxBy(data, 'high') || {}
+
+    if (previousClose) {
+      high = _.max([high, previousClose])
+    }
+
+    low -= low * 0.0005
+    high += high * 0.0005
 
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={this.props.data} margin={{ left: -16, top: 0, right: 0, bottom: 0 }}>
-          <CartesianGrid stroke={COLORS.grid} strokeDasharray="3 3" vertical={false} />
-          <ReferenceLine y={previousClose} stroke={COLORS.previousClose} strokeDasharray="3 3" />
-          {/* <Line
-            type="basisOpen"
-            dataKey="low"
-            strokeWidth={3}
-            stroke={COLORS.low}
-            dot={false}
-            isAnimationActive={false}
-          />
-          <Line
-            type="basisOpen"
-            dataKey="high"
-            strokeWidth={3}
-            stroke={COLORS.high}
-            dot={false}
-            isAnimationActive={false}
-          /> */}
+        <LineChart data={this.props.data} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
+          <CartesianGrid stroke={colors.primary50a} />
+          <ReferenceLine y={previousClose} stroke={colors.accent} strokeDasharray="3 3" />
           <Line
             type="basisOpen"
             dataKey="average"
-            strokeWidth={5}
-            stroke={COLORS.average}
+            strokeWidth={2}
+            stroke={colors.good}
             dot={false}
             isAnimationActive={false}
           />
-          <XAxis
-            dataKey="label"
-            interval={_.round(this.props.data.length / 4)}
-            tick={{ fontSize: 12 }}
-            tickSize={12}
-            // tickFormatter={dt => DateTime.fromISO(dt).toLocaleString(DateTime.TIME_24_SIMPLE)}
-          />
+          <XAxis dataKey="label" interval={_.round(this.props.data.length / 4)} tick={{ fontSize: 10 }} tickSize={12}  stroke={colors.primary50a}/>
           <YAxis
             type="number"
             allowDecimals
-            domain={[low, previousClose]}
-            tick={{ fontSize: 12 }}
-            tickSize={12}
-            tickFormatter={x => x.toFixed(2)}
+            domain={[low, high]}
+            tick={{ fontSize: 10 }}
+            tickFormatter={x => (x < 100 ? x.toFixed(2) : x.toFixed(0))}
+            orientation="right"
+            stroke={colors.primary50a}
           />
         </LineChart>
       </ResponsiveContainer>
-    );
+    )
   }
 }

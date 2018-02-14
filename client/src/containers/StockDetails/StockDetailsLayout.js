@@ -5,6 +5,8 @@ import * as moment from 'moment'
 import styled from 'styled-components'
 import { Box, Flex, Measure } from 'rebass'
 import { Root, Edge, Divider, BlockLink, Text, Heading, Lead } from '../../styleguide'
+import { gradients, colors } from '../../styleguide/colors'
+
 import StockHistory from '../../components/StockHistory'
 import StockCompanyConnector from '../../connectors/StockCompany'
 import StockNewsConnector from '../../connectors/StockNews'
@@ -16,9 +18,13 @@ export default class Layout extends PureComponent {
   render() {
     return (
       <Root column flex={1}>
-        <Markets/>
-        <PageTitle {...this.props} />
-        <Flex>
+        {/* <RootBleed>
+          <Box pt={4}/>
+        </RootBleed> */}
+        <RootBleed>
+          <PageTitle {...this.props} />
+        </RootBleed>
+        <RootBleed>
           <MainColumn py={3}>
             <StockTickerConnector id={this.props.id} is={StockTickerChart} />
           </MainColumn>
@@ -26,8 +32,8 @@ export default class Layout extends PureComponent {
             <ChartHeading>Latest News</ChartHeading>
             <StockNewsConnector id={this.props.id} is={NewsSidebar} />
           </SidebarColumn>
-        </Flex>
-        <Flex>
+        </RootBleed>
+        <RootBleed>
           <MainColumn>
             <ChartHeading>Key Stats</ChartHeading>
             <StockStatsConnector id={this.props.id} is={StockStats} />
@@ -36,11 +42,31 @@ export default class Layout extends PureComponent {
             <ChartHeading>Company Overview</ChartHeading>
             <StockCompanyConnector id={this.props.id} is={CompanySidebar} />
           </SidebarColumn>
-        </Flex>
+        </RootBleed>
+        <Ribbon>
+          <Markets/>
+        </Ribbon>
       </Root>
     )
   }
 }
+
+const Ribbon = styled.div`
+  display: flex;
+  align-items: center;
+
+  min-width: 100vw;
+  min-height: 3rem;
+  background-image: linear-gradient(${gradients.secondary.join(', ')});
+
+  color: ${colors.primary};
+`
+
+const RootBleed = styled(Flex)`
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+`
 
 const PageTitle = props => {
   let { id, data } = props
@@ -50,35 +76,35 @@ const PageTitle = props => {
   const quote = _.get(data.stock, ['quote']) || {}
   console.log(`{company, quote}`, { company, quote })
   return (
-    <Flex column px={[2, 3]} pt={2}>
+    <RootBleed column px={[2, 3]} pt={2}>
       <Lead is="div" f={5} color="offwhite">
         <Flex>
           {company.name}{' '}
-          <Text inline={'true'} color="secondary" pl={1}>
+          <Text inline={'true'} color="offwhite50" pl={1}>
             ({id.toUpperCase()})
           </Text>
           <Heading color="secondary" />
           <Box flex={1} />
           <Text pr={2}>{quote.latestPrice} </Text>
-          {/*<Text color={quote.change < 0 ? 'red' : 'green7'}>*/}
-            {/*{quote.change != null ? quote.change.toFixed(2) : ''}*/}
-            {/*{quote.change != null &&*/}
-              {/*quote.changePercent != null && (*/}
-                {/*<Text color="gray8" inline px={1}>*/}
-                  {/*|*/}
-                {/*</Text>*/}
-              {/*)}*/}
-            {/*{quote.changePercent != null ? quote.changePercent.toFixed(2) * 100 + '%' : ''}*/}
-          {/*</Text>*/}
+          <Text is="div" color={quote.change < 0 ? 'red' : 'green7'}>
+            {quote.change != null ? quote.change.toFixed(2) : ''}
+            {quote.change != null &&
+              quote.changePercent != null && (
+                <Text color="gray8" inline px={1}>
+                  |
+                </Text>
+              )}
+            {quote.changePercent != null ? quote.changePercent.toFixed(2) * 100 + '%' : ''}
+          </Text>
         </Flex>
       </Lead>
       <Divider my={1} />
-    </Flex>
+    </RootBleed>
   )
 }
 
 const MainColumn = styled(Box).attrs({ flex: 1, py: 2, pl: [2, 3], pr: [1, 2] })`
-  min-height: 45vh;
+  min-height: calc(50vh - 4rem);
 `
 
 const SidebarColumn = props => <Box width={[1, '20rem']} py={2} pl={[1, 2]} pr={[2, 3]} {...props} />
@@ -110,12 +136,12 @@ export const NewsSidebar = props => {
   }
 
   return (props.data.stock.news || []).map(newsItem => (
-    <Box key={newsItem.id} is="a" flex={1} href={newsItem.url}>
+    <Box key={newsItem.id} is="a" target="_blank" href={newsItem.url} flex={1} >
       <Measure f={1} my={2}>
         <Lead f={1} color="offwhite">
           {newsItem.headline}
         </Lead>
-        <Text f={0} color="secondary">
+        <Text f={0} color="offwhite50">
           {moment(newsItem.datetime).fromNow()} - {newsItem.source}
         </Text>
       </Measure>
@@ -135,13 +161,13 @@ export const CompanySidebar = props => {
 
   return (
     <Box flex={1}>
-      <Lead f={3} my={2} color="secondary">
+      <Lead f={3} my={2} color="offwhite50">
         {company.name} ({company.symbol})
       </Lead>
       <Measure f={0} color="offwhite">
         {company.description}
       </Measure>
-      <BlockLink href={company.website} f={0} color="accent" my={2}>
+      <BlockLink target="_blank" href={company.website} f={0} color="accent" my={2}>
         <em>{company.website.replace(/https?:\/\//, '')}</em>
       </BlockLink>
       <Measure f={0} color="offwhite" my={1}>
@@ -199,7 +225,7 @@ const FieldRow = ({ label, children }) => {
     <Flex flex={1} column>
       <Flex flex={1} my={1}>
         <Box flex={1}>
-          <Text f={0} color="secondary30">
+          <Text f={0} color="offwhite50" weight={300}>
             {label}
           </Text>
         </Box>
