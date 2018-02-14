@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { injectGlobal } from 'styled-components'
 
 import 'ress/dist/ress.min.css';
 import './index.css';

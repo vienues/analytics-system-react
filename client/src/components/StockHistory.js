@@ -5,13 +5,13 @@ import { colors } from '../styleguide/colors'
 
 import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
 
-const COLORS = {
-  grid: '#cfd3d6',
-  previousClose: '#4a9eda',
-  high: '#79e4a6',
-  average: 'rgba(200,200,220,0.85)',
-  low: '#e16973',
-}
+// const COLORS = {
+//   grid: '#cfd3d6',
+//   previousClose: '#4a9eda',
+//   high: '#79e4a6',
+//   average: 'rgba(200,200,220,0.85)',
+//   low: '#e16973',
+// }
 
 export default class StockHistory extends PureComponent {
   static defaultProps = {

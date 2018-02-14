@@ -2,7 +2,7 @@ import wrapper from './marketDataQuery';
 import React from 'react';
 import { loadable } from '../../common/';
 
-import { Flex, Box, Small } from 'rebass'
+import { Flex, Small } from 'rebass'
 
 const Markets = ({data: {markets}}) => {
   return <Flex align="center">
