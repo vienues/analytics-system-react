@@ -32,3 +32,8 @@ a {
 a.visited {
   text-decoration: none;
 }
+
+svg {
+  display: inline-block;
+  overflow: visible;
+}

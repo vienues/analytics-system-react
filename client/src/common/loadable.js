@@ -1,10 +1,10 @@
 import { branch, renderComponent, compose } from 'recompose';
 import React from 'react';
 
-const Loading = props => <div>Loading</div>;
+const LoadingText = props => <div>Loading</div>;
 
-export const renderWhileLoading = (propName = 'data') => {
-  return branch(props => props[propName] && props[propName].loading, renderComponent(Loading));
+export const renderWhileLoading = ({ propName = 'data', loader = LoadingText } = {}) => {
+  return branch(props => props[propName] && props[propName].loading, renderComponent(loader));
 };
 
 const renderForError = (propName = 'data') =>

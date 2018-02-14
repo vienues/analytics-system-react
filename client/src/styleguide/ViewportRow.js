@@ -1,5 +1,4 @@
 import React from 'react';
-import * as Rebass from 'rebass';
 import styled, { css } from 'styled-components';
 import { Flex, Box } from 'rebass';
 
