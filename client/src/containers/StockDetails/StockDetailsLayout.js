@@ -25,7 +25,7 @@ export default ({id}) => (
       <MainColumn py={3}>
         <StockTickerConnector id={id} is={StockTickerChart}/>
       </MainColumn>
-      <Box p={1}/>
+      <Box p={[1, 2]}/>
       <SidebarColumn>
         <ChartHeading>Latest News</ChartHeading>
         <StockNewsConnector id={id} is={NewsSidebar}/>
@@ -36,7 +36,7 @@ export default ({id}) => (
         <ChartHeading>Key Stats</ChartHeading>
         <StockStatsConnector id={id} is={StockStats}/>
       </MainColumn>
-      <Box p={1}/>
+      <Box p={[1, 2]}/>
       <SidebarColumn>
         <ChartHeading>Company Overview</ChartHeading>
         <StockCompanyConnector id={id} is={CompanySidebar}/>
@@ -63,11 +63,12 @@ const Ribbon = styled.div`
   color: ${colors.primary};
 `
 
-const Panel = styled(Box).attrs({ my: 2 })`
+const Panel = styled(Box).attrs({ pt: 2 })`
 
 `
+
 const MainColumn = styled(Panel).attrs({flex: 1, py: 2})`
-  min-height: calc(40vh - calc(4rem / 2));
+  min-height: calc(40vh - calc(12rem / 2));
 `
 
 const SidebarColumn = styled(Panel).attrs({ width: [1, '20rem'] })`
