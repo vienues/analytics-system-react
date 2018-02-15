@@ -3,7 +3,7 @@ import { Box, Flex } from 'rebass';
 
 import { Divider, Text, Lead } from '../../styleguide';
 
-import QuickQuote from '../QuickQuote';
+import QuickQuote from './QuickQuote';
 
 export const StockHeader = ({ id, data: { loading, stock } }) => {
   const { company = {}, quote = {} } = stock || {};

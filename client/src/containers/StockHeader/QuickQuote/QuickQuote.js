@@ -4,7 +4,7 @@ import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
 
 import { Box } from 'rebass';
-import { colors, Text } from '../../styleguide';
+import { colors, Text } from '../../../styleguide/index';
 
 export const QuickQuote = ({ data: { stock: { quote = {} } = {} } = {} }) => {
   const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good'];
