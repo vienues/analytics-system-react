@@ -28,8 +28,6 @@ const subscribeMarket = gql`
 
 const connectSubscription = lifecycle({
   componentWillReceiveProps(nextProps) {
-    return;
-
     this.unsubscribe = nextProps.data.subscribeToMore({
       document: subscribeMarket,
       variables: {

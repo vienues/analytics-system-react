@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Box, Flex, Measure } from 'rebass';
 
 import { gradients, colors } from '../../styleguide/colors';
-import { ViewportFlex, Root, Divider, BlockLink, Text, Heading, Lead, RootBleed } from '../../styleguide';
+import { ViewportFlex, Root, Divider, BlockLink, Text, Heading, Lead } from '../../styleguide';
 import AppBar from '../../components/AppBar';
 
 import StockHistory from '../../components/StockHistory';
@@ -128,9 +128,7 @@ export const CompanySidebar = props => {
       <Measure f={0} color="offwhite">
         {company.description}
       </Measure>
-      <BlockLink target="_blank" href={company.website} f={0} color="accent" my={2}>
-        <em>{company.website.replace(/https?:\/\//, '')}</em>
-      </BlockLink>
+      <BlockLink target="_blank" href={company.website} f={0} color="accent" my={2} />
       <Measure f={0} color="offwhite" my={1}>
         Top Peers
       </Measure>

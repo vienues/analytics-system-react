@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Rebass from 'rebass';
 import styled, { css } from 'styled-components';
-import mapProps from '@evanrs/map-props';
+import mapProps from './map-props';
 
 import { theme } from '../theme';
 import { Flex } from 'rebass';

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box } from 'rebass';
 import { NavLink } from 'react-router-dom';
-import mapProps from '@evanrs/map-props';
 
 import logoSVGURL from '../assets/logo.svg';
 import { ViewportRowPadding, ViewportRowBody } from '../styleguide/ViewportRow';

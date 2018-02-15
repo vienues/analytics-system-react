@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import { lifecycle, compose } from 'recompose';
 import { graphql } from 'react-apollo';
 
 const getQuickQuote = gql`

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Flex } from 'rebass';
 
-import { Divider, Text, Heading, Lead, ViewportRow } from '../../styleguide';
+import { Divider, Text, Lead } from '../../styleguide';
 
 import QuickQuote from '../QuickQuote';
 

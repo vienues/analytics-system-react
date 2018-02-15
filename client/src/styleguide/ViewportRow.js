@@ -1,8 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Flex, Box } from 'rebass';
-
-import mapProps from '@evanrs/map-props';
 
 export const ViewportRowPadding = styled(Box).attrs({ px: [1, 2, 3] })`
   min-width: 100vw;

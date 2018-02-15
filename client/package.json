@@ -7,7 +7,6 @@
     "node": ">=8.9.0"
   },
   "dependencies": {
-    "@evanrs/map-props": "^1.0.0",
     "apollo-cache-inmemory": "^1.1.7",
     "apollo-client": "^2.2.2",
     "apollo-link": "^1.0.7",

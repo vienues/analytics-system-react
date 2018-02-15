@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
 
-import { Box, Flex, Small } from 'rebass';
+import { Box } from 'rebass';
 import { colors, Text } from '../../styleguide';
 
 export const QuickQuote = ({ data: { stock: { quote = {} } = {} } = {} }) => {
