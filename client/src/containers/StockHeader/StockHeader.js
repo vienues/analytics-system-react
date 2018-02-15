@@ -17,7 +17,7 @@ export const StockHeader = ({ id, data: { loading, stock } }) => {
             ({id.toUpperCase()})
           </Text>
           <Box flex={1} />
-          <QuickQuote id={id} />
+          {/*<QuickQuote id={id} />*/}
         </Flex>
       </Lead>
       <Divider my={1} />

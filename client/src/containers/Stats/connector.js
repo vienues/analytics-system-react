@@ -1,8 +1,7 @@
-import React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-export const StockStatsConnector = graphql(
+export const CompanyConnector = graphql(
   gql`
     query StockStatsConnectorQuery($id: ID!) {
       stock(id: $id) {
@@ -33,11 +32,6 @@ export const StockStatsConnector = graphql(
       variables: { id },
     }),
   },
-)(({ is: Component, ...props }) => <Component {...props} {...props.data} />);
+);
 
-StockStatsConnector.defaultProps = {
-  is: 'div',
-  children: 'This connector requires a custom rendering component',
-};
-
-export default StockStatsConnector;
+export default CompanyConnector;
