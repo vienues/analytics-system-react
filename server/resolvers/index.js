@@ -34,6 +34,14 @@ export default {
     },
   },
 
+  ReferenceQuery: {
+    symbols: (root, args, { iex }) => iex.fetch(`ref-data/symbols`),
+  },
+
+  ReferenceSymbol: {
+    id: ({ symbol }) => symbol,
+  },
+
   Query: {
     markets: () => {
       return [{ id: 'NASDAQ', name: 'NASDAQ' }, { id: 'S&P', name: 'S&P' }];
@@ -63,8 +71,10 @@ export default {
       };
     },
 
-    reference: {
-      symbols: (root, args, { iex }) => iex.fetch(`ref-data/symbols`),
+    reference: root => {
+      return {
+        symbols: {},
+      };
     },
   },
 
