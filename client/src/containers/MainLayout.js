@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { Box } from 'rebass';
 
 import { gradients, colors } from '../styleguide/colors';
-import { ViewportFlex, Root, Divider, Heading } from '../styleguide/index';
-import AppBar from '../components/AppBar';
+import { ViewportFlex, Divider, Heading } from '../styleguide/index';
+
+import AppLayout from './AppLayout';
 
 import Markets from './MarketList/index';
 import StockHeader from './StockHeader/index';
@@ -14,8 +15,7 @@ import Stats from './Stats/index';
 import History from './History/index';
 
 export default ({ id }) => (
-  <Root column flex={1}>
-    <AppBar />
+  <AppLayout>
     <ViewportFlex>
       <StockHeader id={id} />
     </ViewportFlex>
@@ -43,7 +43,7 @@ export default ({ id }) => (
     <Ribbon>
       <Markets />
     </Ribbon>
-  </Root>
+  </AppLayout>
 );
 
 const Ribbon = styled(ViewportFlex)`
