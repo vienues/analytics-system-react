@@ -10,28 +10,43 @@ export default class History extends PureComponent {
     data: [],
   };
 
+  state = {
+    chart: [],
+  };
+
+  componentDidMount() {
+    this.update(this.props.data.stock.chart);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.data.stock.chart !== nextProps.data.stock.chart) {
+      this.update(nextProps.data.stock.chart);
+    }
+  }
+
+  update(chart) {
+    chart = chart.filter(({ low, average, high }) => low > 0 || average > 0 || high > 0);
+
+    let { low } = _.minBy(chart, 'low') || {};
+    let { high } = _.maxBy(chart, 'high') || {};
+
+    this.setState({ chart, low, high });
+  }
+
   render() {
     let { previousClose } = this.props;
-
-    const data = this.props.data.stock.chart;
-
     if (typeof previousClose === 'string') {
       previousClose = Number(previousClose);
     }
 
-    let { low } = _.minBy(data, 'low') || {};
-    let { high } = _.maxBy(data, 'high') || {};
-
-    if (previousClose) {
-      high = _.max([high, previousClose]);
-    }
+    let { chart, low, high } = this.state;
 
     low -= low * 0.0005;
     high += high * 0.0005;
 
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={data} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
+        <LineChart data={chart} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
           <CartesianGrid stroke={colors.primary50a} />
           <ReferenceLine y={previousClose} stroke={colors.accent} strokeDasharray="3 3" />
           <Line
@@ -44,7 +59,7 @@ export default class History extends PureComponent {
           />
           <XAxis
             dataKey="label"
-            interval={_.round(data.length / 4)}
+            interval={_.round(chart.length / 12)}
             tick={{ fontSize: 10 }}
             tickSize={12}
             stroke={colors.primary50a}

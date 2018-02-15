@@ -48,7 +48,8 @@ const Body = styled(ViewportRowBody)`
   max-height: 6rem;
 `;
 
-const Logo = styled.div`
+const Logo = styled(NavLink).attrs({ to: '/' })`
+  display: block;
   min-height: 2rem;
   max-height: 2rem;
   min-width: 10rem;
