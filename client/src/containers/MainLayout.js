@@ -5,18 +5,21 @@ import { Box } from 'rebass';
 import { gradients, colors } from '../styleguide/colors';
 import { ViewportFlex, Divider, Heading } from '../styleguide/index';
 
-import Search from './Search';
-
+import AppLayout from './AppLayout';
 import Markets from './MarketList/index';
 import News from './News/index';
 import Company from './Company/index';
 import Stats from './Stats/index';
 import History from './History/index';
+import StockHeader from './StockHeader/index';
 
 export default ({ id }) => (
-  <Search>
+  <AppLayout>
     {id && (
       <Fragment>
+        <ViewportFlex>
+          <StockHeader id={id} />
+        </ViewportFlex>
         <ViewportFlex>
           <MainColumn py={3}>
             <History id={id} />
@@ -43,7 +46,7 @@ export default ({ id }) => (
         </Ribbon>
       </Fragment>
     )}
-  </Search>
+  </AppLayout>
 );
 
 const Ribbon = styled(ViewportFlex)`
