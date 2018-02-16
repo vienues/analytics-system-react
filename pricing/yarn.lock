@@ -464,9 +464,21 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
+"@types/decimal.js":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@types/decimal.js/-/decimal.js-7.4.0.tgz#0289c1903c31a4e9b94caa741916a9bc64d1c585"
+  dependencies:
+    decimal.js "*"
+
 "@types/events@*":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-1.1.0.tgz#93b1be91f63c184450385272c47b6496fd028e02"
+
+"@types/node-fetch":
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-1.6.7.tgz#521078e8f0c69a158e5022005aca92d2620f6d57"
+  dependencies:
+    "@types/node" "*"
 
 "@types/node@*", "@types/node@^9.4.2":
   version "9.4.5"
@@ -920,6 +932,10 @@ debug@^3.0.1, debug@^3.1.0:
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
+
+decimal.js, decimal.js@*:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-9.0.1.tgz#1cc8b228177da7ab6498c1cc06eb130a290e6e1e"
 
 decode-uri-component@^0.2.0:
   version "0.2.0"
@@ -1829,6 +1845,10 @@ nanomatch@^1.2.5:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+node-fetch:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.0.0.tgz#982bba43ecd4f2922a29cc186a6bbb0bb73fcba6"
 
 node-modules-regexp@^1.0.0:
   version "1.0.0"

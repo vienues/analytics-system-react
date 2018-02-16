@@ -5,8 +5,8 @@ import { Divider, Text, Lead } from '../../styleguide';
 
 import QuickQuote from './QuickQuote';
 
-export const StockHeader = ({ id, data: { loading, stock } }) => {
-  const { company = {}, quote = {} } = stock || {};
+export const StockHeader = ({ id, data: { stock } }) => {
+  const { company, quote } = stock || {};
 
   return (
     <Flex column w={1}>
@@ -17,7 +17,7 @@ export const StockHeader = ({ id, data: { loading, stock } }) => {
             ({id.toUpperCase()})
           </Text>
           <Box flex={1} />
-          {/*<QuickQuote id={id} />*/}
+          <QuickQuote id={id} quote={quote} />
         </Flex>
       </Lead>
       <Divider my={1} />

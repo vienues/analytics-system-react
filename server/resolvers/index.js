@@ -47,8 +47,9 @@ export default {
   },
 
   Query: {
-    markets: () => {
-      return [{ id: 'NASDAQ', name: 'NASDAQ' }, { id: 'S&P', name: 'S&P' }];
+    markets: async (_, __, { iex }) => {
+      const val = await iex.fetch(`stock/market/batch?symbols=spy,dia,iwm&types=quote`);
+      return Object.values(val).map(x => ({ ...x.quote, id: x.quote.symbol }));
     },
 
     stock: (root, { id }, { iex }) => {
@@ -86,7 +87,7 @@ export default {
   },
 
   Subscription: {
-    marketUpdates: {
+    getQuotes: {
       resolve: (payload, args, context, info) => {
         return payload;
       },

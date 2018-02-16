@@ -6,22 +6,20 @@ const getMarkets = gql`
   query getMarketData {
     markets {
       id
-      name
-      lastUpdate {
-        change
-        id
-        volume
-      }
+      change
+      changePercent
+      latestPrice
     }
   }
 `;
 
 const subscribeMarket = gql`
   subscription onMarketUpdate($markets: [String!]!) {
-    marketUpdates(symbols: $markets) {
+    getQuotes(symbols: $markets) {
       id
       change
-      volume
+      changePercent
+      latestPrice
     }
   }
 `;
@@ -35,8 +33,8 @@ const connectSubscription = lifecycle({
       },
       updateQuery: ({ markets }, { subscriptionData, variables }) => {
         const copy = [...markets];
-        const index = copy.findIndex(({ id }) => id === subscriptionData.data.marketUpdates.id);
-        const x = { ...copy[index], lastUpdate: subscriptionData.data.marketUpdates };
+        const index = copy.findIndex(({ id }) => id === subscriptionData.data.getQuotes.id);
+        const x = { ...copy[index] };
         copy.splice(index, 1, x);
         return { markets: copy };
       },

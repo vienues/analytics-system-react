@@ -1,4 +1,6 @@
-import connect from './stockHeaderQuery';
+import { loadable } from '../../common';
+import { compose } from 'recompose';
+import connect from './connector';
 import StockHeader from './StockHeader';
 
-export default connect(StockHeader);
+export default compose(connect, loadable)(StockHeader);

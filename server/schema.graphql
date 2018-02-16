@@ -100,7 +100,7 @@ type Tick {
 }
 
 type Quote {
-  id: ID!
+  id: ID
   symbol: String
   company: Company
   companyName: String
@@ -217,18 +217,6 @@ type TOP {
   securityType: String
 }
 
-type MarketData {
-  id: String!
-  name: String!
-  lastUpdate: MarketUpdate
-}
-
-type MarketUpdate {
-  id: String!
-  change: String!
-  volume: String!
-}
-
 type ReferenceQuery {
   symbols: [ReferenceSymbol!]!
 }
@@ -244,13 +232,13 @@ type Query {
   company(id: ID!): Company
   stock(id: ID!): Stock
   reference: ReferenceQuery
-  markets: [MarketData!]!
+  markets: [Quote!]!
   TOPS: [TOP!]!
 }
 
 type Subscription {
-  symbols(ids: [ID]): [Symbol]
-  marketUpdates(symbols: [String!]!): MarketUpdate!
+  symbols(ids: [ID]): [Symbol!]
+  getQuotes(symbols: [String!]!): Quote!
 }
 
 schema {
