@@ -33,6 +33,18 @@ const subscribeMarket = gql`
 
 const connectSubscription = lifecycle({
   componentWillReceiveProps(nextProps) {
+    if (!nextProps.data.loading) {
+      // Check for existing subscription
+      if (this.unsubscribe) {
+        // Check if props have changed and, if necessary, stop the subscription
+        if (this.props.data.stock.id !== nextProps.data.stock.id) {
+          console.log('unsubscribe');
+
+          this.unsubscribe();
+        }
+        return;
+      }
+    }
     this.unsubscribe = nextProps.data.subscribeToMore({
       document: subscribeMarket,
       variables: {
