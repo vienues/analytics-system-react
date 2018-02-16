@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex } from 'rebass';
-import { Text, Divider } from '../../styleguide';
+import { Divider } from '../../styleguide';
 
 import formatFields from './formatFields';
 
@@ -36,20 +36,14 @@ const StockStats = props => {
 
 const FieldRow = ({ label, children }) => {
   return (
-    <Flex flex={1} column>
-      <Flex flex={1} my={1}>
-        <Box flex={1}>
-          <Text f={0} color="offwhite50" weight={300}>
-            {label}
-          </Text>
-        </Box>
-        <Box>
-          <Text f={1} color="offwhite">
-            {children}
-          </Text>
-        </Box>
+    <Flex flex={1} wrap pt={1}>
+      <Flex flex={['1 100%', 'auto']} f={1} color="offwhite50">
+        {label}
       </Flex>
-      <Divider color="gray9" borderWidth={1} my={0} />
+      <Flex flex="0 50% 0" f={2} color="offwhite">
+        {children}
+      </Flex>
+      <Divider color="primary50a" borderWidth={1} my={1} />
     </Flex>
   );
 };

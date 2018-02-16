@@ -9,6 +9,7 @@ import multiStyle from './multiStyle';
 import spinnerStyle from './spinnerStyle';
 
 export default styled(AsyncSelect)`
+  flex: 1;
   background-color: transparent;
 
   ${componentStyle};
@@ -30,6 +31,7 @@ export default styled(AsyncSelect)`
     &-value,
     &-input {
       padding: 0.25rem 0.5rem;
+      padding-left: 0;
       height: 2.5rem;
       font-size: 2rem;
       line-height: 2rem;
