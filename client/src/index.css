@@ -1,7 +1,7 @@
 :root {
   font-size: 1rem;
   line-height: 1.5rem;
-  font-family: 'verta', 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 body {
@@ -12,6 +12,11 @@ body {
 
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+:root,
+body {
+  background-color: rgb(0, 29, 73);
 }
 
 #root,

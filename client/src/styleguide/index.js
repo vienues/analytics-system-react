@@ -10,13 +10,10 @@ export { colors } from './colors';
 
 export { ViewportRow, ViewportFlex } from './ViewportRow';
 
-export const background = ['rgb(2, 35, 93)', `rgb(0, 24, 63)`, 'rgb(0, 7, 18)'];
-
 export const Root = styled(Rebass.Flex)`
   flex: 1;
   color: ${theme.colors.primary50a};
   background-color: ${theme.gradients.primary[0]};
-  background-image: linear-gradient(135deg, ${background[0]}, ${background[1]} 40%, ${background[2]} 120%);
   background-image: linear-gradient(135deg, ${theme.gradients.primary.join(', ')} 120%);
 `;
 

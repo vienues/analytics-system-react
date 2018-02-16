@@ -7,16 +7,14 @@ scalar DateTime
 # Hours and minutes in ISO 8601 format HH:mm
 scalar Time
 
-type Symbol {
-  name: String
-  id: String
-  volume: Float
-  change: Float
-  price: Float
+interface Symbol {
+  id: ID!
+  symbol: String
 }
 
-type Stock {
+type Stock implements Symbol {
   id: ID!
+  symbol: String
   price: Float
   stats: StockStats
   peers: [String]
@@ -202,8 +200,21 @@ type Earnings {
   fiscalEndDate: Date
 }
 
-type ReferenceQuery {
-  symbols: [Symbol]!
+type TOP {
+  id: ID!
+  symbol: String
+  marketPercent: Float
+  bidSize: Float
+  bidPrice: Float
+  askSize: Float
+  askPrice: Float
+  volume: Float
+  lastSalePrice: Float
+  lastSaleSize: Float
+  lastSaleTime: Float
+  lastUpdated: Float
+  sector: String
+  securityType: String
 }
 
 type MarketData {
@@ -218,11 +229,23 @@ type MarketUpdate {
   volume: String!
 }
 
+type ReferenceQuery {
+  symbols: [ReferenceSymbol!]!
+}
+
+type ReferenceSymbol implements Symbol {
+  id: ID!
+  symbol: String
+  name: String
+  type: String
+}
+
 type Query {
   company(id: ID!): Company
   stock(id: ID!): Stock
   reference: ReferenceQuery
   markets: [MarketData!]!
+  TOPS: [TOP!]!
 }
 
 type Subscription {

@@ -2,6 +2,19 @@ import React from 'react';
 import styled from 'styled-components';
 import { Flex, Box } from 'rebass';
 
+export const ViewportRow = ({ className, ...props }) => (
+  <ViewportRowPadding className={className}>
+    <ViewportRowBody {...props} column />
+  </ViewportRowPadding>
+);
+
+export const ViewportFlex = ({ className, ...props }) => (
+  /* <ViewportRow {...props} is={Flex} />; */
+  <ViewportRow className={className}>
+    <ViewportRowBodyFlex {...props} />
+  </ViewportRow>
+);
+
 export const ViewportRowPadding = styled(Box).attrs({ px: [1, 2, 3] })`
   min-width: 100vw;
   max-width: 100vw;
@@ -13,15 +26,10 @@ export const ViewportRowBody = styled(Box)`
   margin: 0 auto;
 `;
 
-export const ViewportRow = ({ className, ...props }) => (
-  <ViewportRowPadding className={className}>
-    <ViewportRowBody {...props} />
-  </ViewportRowPadding>
-);
-
-export const ViewportFlex = props => <ViewportRow {...props} is={Flex} />;
-// export const ViewportFlex = styled(ViewportRow).attrs({ is: Flex })`
-//
-// `
+export const ViewportRowBodyFlex = styled(Flex)`
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+`;
 
 export default ViewportRow;
