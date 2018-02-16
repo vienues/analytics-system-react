@@ -34,6 +34,10 @@ export default {
     },
   },
 
+  TOP: {
+    id: ({ symbol }) => symbol,
+  },
+
   ReferenceQuery: {
     symbols: (root, args, { iex }) => iex.fetch(`ref-data/symbols`),
   },
@@ -46,6 +50,7 @@ export default {
     markets: () => {
       return [{ id: 'NASDAQ', name: 'NASDAQ' }, { id: 'S&P', name: 'S&P' }];
     },
+
     stock: (root, { id }, { iex }) => {
       id = id.toUpperCase();
 
@@ -70,6 +75,8 @@ export default {
         name: root.companyName,
       };
     },
+
+    TOPS: (root, args, { iex }) => iex.fetch('/tops'),
 
     reference: root => {
       return {

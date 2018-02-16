@@ -200,6 +200,23 @@ type Earnings {
   fiscalEndDate: Date
 }
 
+type TOP {
+  id: ID!
+  symbol: String
+  marketPercent: Float
+  bidSize: Float
+  bidPrice: Float
+  askSize: Float
+  askPrice: Float
+  volume: Float
+  lastSalePrice: Float
+  lastSaleSize: Float
+  lastSaleTime: Float
+  lastUpdated: Float
+  sector: String
+  securityType: String
+}
+
 type MarketData {
   id: String!
   name: String!
@@ -228,6 +245,7 @@ type Query {
   stock(id: ID!): Stock
   reference: ReferenceQuery
   markets: [MarketData!]!
+  TOPS: [TOP!]!
 }
 
 type Subscription {

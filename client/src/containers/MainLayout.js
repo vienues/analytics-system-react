@@ -1,49 +1,49 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Box } from 'rebass';
 
 import { gradients, colors } from '../styleguide/colors';
 import { ViewportFlex, Divider, Heading } from '../styleguide/index';
 
-import AppLayout from './AppLayout';
+import Search from './Search';
 
 import Markets from './MarketList/index';
-import StockHeader from './StockHeader/index';
 import News from './News/index';
 import Company from './Company/index';
 import Stats from './Stats/index';
 import History from './History/index';
 
 export default ({ id }) => (
-  <AppLayout>
-    <ViewportFlex>
-      <StockHeader id={id} />
-    </ViewportFlex>
-    <ViewportFlex>
-      <MainColumn py={3}>
-        <History id={id} />
-      </MainColumn>
-      <Box p={[1, 2]} />
-      <SidebarColumn>
-        <PanelHeading>Latest News</PanelHeading>
-        <News id={id} />
-      </SidebarColumn>
-    </ViewportFlex>
-    <ViewportFlex>
-      <MainColumn>
-        <PanelHeading>Key Stats</PanelHeading>
-        <Stats id={id} />
-      </MainColumn>
-      <Box p={[1, 2]} />
-      <SidebarColumn>
-        <PanelHeading>Company Overview</PanelHeading>
-        <Company id={id} />
-      </SidebarColumn>
-    </ViewportFlex>
-    <Ribbon>
-      <Markets />
-    </Ribbon>
-  </AppLayout>
+  <Search>
+    {id && (
+      <Fragment>
+        <ViewportFlex>
+          <MainColumn py={3}>
+            <History id={id} />
+          </MainColumn>
+          <Box p={[1, 2]} />
+          <SidebarColumn>
+            <PanelHeading>Latest News</PanelHeading>
+            <News id={id} />
+          </SidebarColumn>
+        </ViewportFlex>
+        <ViewportFlex>
+          <MainColumn>
+            <PanelHeading>Key Stats</PanelHeading>
+            <Stats id={id} />
+          </MainColumn>
+          <Box p={[1, 2]} />
+          <SidebarColumn>
+            <PanelHeading>Company Overview</PanelHeading>
+            <Company id={id} />
+          </SidebarColumn>
+        </ViewportFlex>
+        <Ribbon>
+          <Markets />
+        </Ribbon>
+      </Fragment>
+    )}
+  </Search>
 );
 
 const Ribbon = styled(ViewportFlex)`
