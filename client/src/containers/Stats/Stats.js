@@ -2,15 +2,19 @@ import React from 'react';
 import { Box, Flex } from 'rebass';
 import { Text, Divider } from '../../styleguide';
 
+import formatFields from './formatFields';
+
 const StockStats = props => {
-  const { stats, quote } = props.data.stock;
+  let { stats, quote } = props.data.stock;
+  quote = formatFields(quote);
+  stats = formatFields(stats);
 
   return (
     <Flex flex={1} wrap={false}>
       <Flex w={[1, 1 / 2]} column>
         <FieldRow label="Previous Close">{quote.previousClose}</FieldRow>
         <FieldRow label="Day Range">
-          {quote.low} - {quote.high}
+          $ {quote.low} - {quote.high}
         </FieldRow>
         <FieldRow label="Volume">{quote.latestVolume}</FieldRow>
         <FieldRow label="Market Cap">{stats.marketcap}</FieldRow>
@@ -20,11 +24,11 @@ const StockStats = props => {
       <Flex w={[1, 1 / 2]} column>
         <FieldRow label="Open">{quote.open}</FieldRow>
         <FieldRow label="52 Week Range">
-          {stats.week52low} - {stats.week52high}
+          $ {stats.week52low} - {stats.week52high}
         </FieldRow>
         <FieldRow label="Total Avg. Volume">{quote.avgTotalVolume}</FieldRow>
         <FieldRow label="Earnings Per Share">{stats.latestEPS}</FieldRow>
-        <FieldRow label="Dividend & Yield">{stats.peRatioHigh}</FieldRow>
+        <FieldRow label="Dividend Yield">{stats.dividendYield}</FieldRow>
       </Flex>
     </Flex>
   );
@@ -40,7 +44,7 @@ const FieldRow = ({ label, children }) => {
           </Text>
         </Box>
         <Box>
-          <Text f={0} color="offwhite">
+          <Text f={1} color="offwhite">
             {children}
           </Text>
         </Box>
