@@ -1,18 +1,39 @@
+import { compose } from 'recompose';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
 
-const getReferenceSymbols = gql`
-  query getReferenceSymbols {
-    reference {
-      symbols {
-        id
-        symbol
-        name
-        value: id
-        label: name
+export default compose(
+  graphql(
+    gql`
+      query stateQuery {
+        currentSymbol @client {
+          id
+          name
+        }
       }
-    }
-  }
-`;
-
-export default graphql(getReferenceSymbols);
+    `,
+    { name: 'stateQuery' },
+  ),
+  graphql(
+    gql`
+      mutation search($text: String!) {
+        updateSearch(text: $text) @client {
+          id
+          name
+        }
+      }
+    `,
+    { name: 'updateSearch' },
+  ),
+  graphql(
+    gql`
+      mutation setSymbol($symbol: ReferenceSymbol!) {
+        updateCurrentSymbol(symbol: $symbol) @client {
+          id
+          name
+        }
+      }
+    `,
+    { name: 'updateCurrentSymbol' },
+  ),
+);

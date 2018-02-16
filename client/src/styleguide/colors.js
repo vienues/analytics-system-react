@@ -103,6 +103,8 @@ export const blue = {
   '100': rgb(0, 104, 255),
   '70a': rgb(0, 104, 255, 0.7),
   '50a': rgb(0, 104, 255, 0.5),
+  '30a': rgb(0, 104, 255, 0.3),
+  '20a': rgb(0, 104, 255, 0.2),
 };
 
 export const colors = flatten({

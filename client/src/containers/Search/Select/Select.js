@@ -1,77 +1,47 @@
-import React, { Component, Fragment } from 'react';
-import styled, { css } from 'styled-components';
+import React, { PureComponent } from 'react';
+import styled from 'styled-components';
+import { Box } from 'rebass';
 
-import { Redirect } from 'react-router-dom';
+import AsyncSelectStyled from './AsyncSelectStyled';
 
-import createFilterOptions from 'react-select-fast-filter-options';
-import Select from 'react-select';
-import VirtualizedSelect from 'react-virtualized-select';
-
-import 'react-select/dist/react-select.css';
-import 'react-virtualized/styles.css';
-import 'react-virtualized-select/styles.css';
-
-export default class SearchSelect extends Component {
-  static filterOptions = createFilterOptions({
-    indexes: ['id', 'name'],
-    labelKey: 'id',
-    valueKey: 'name',
-  });
-
-  state = {
-    selectedOption: '',
-  };
-
-  handleChange = selectedOption => {
-    this.setState({ selectedOption });
-  };
-
+export default class SearchSelect extends PureComponent {
   render() {
-    const { symbols, ...props } = this.props;
-    const { selectedOption, selectedOption: { id } = {} } = this.state;
-    const value = selectedOption && selectedOption.value;
+    const { children, ...props } = this.props;
 
     return (
-      <Fragment>
-        <StyledVirtualizedSelect
-          // autofocus
-          key="id"
-          valueKey="id"
-          labelKey="name"
-          value={id}
-          onChange={this.handleChange}
-          // filterOptions={SearchSelect.filterOptions}
-          options={symbols}
-          {...props}
-        />
-        {selectedOption && <Redirect to={`/stock/${id}`} push />}
-      </Fragment>
+      <AsyncSelectStyled
+        autoFocus
+        autoBlur={false}
+        key="id"
+        valueKey="id"
+        labelKey="name"
+        placeholder="Enter a stock or symbol …"
+        searchPromptText=""
+        optionComponent={OptionDisplay}
+        // valueComponent={OptionDisplay}
+        {...props}
+      />
     );
   }
 }
 
-const StyledVirtualizedSelect = styled(VirtualizedSelect)`
-  background-color: transparent;
+export class OptionDisplay extends PureComponent {
+  render() {
+    const { option: value, ...props } = this.props;
 
-  .Select-control {
-    background-color: transparent;
-    border: none;
-    color: white;
-    height: 2rem;
+    return (
+      <OptionWrap {...props}>
+        <Box color="accent" pr={2} w="3.5rem">
+          {value.id.toUpperCase()}
+        </Box>
+        <Box flex="1">{value.name}</Box>
+      </OptionWrap>
+    );
   }
+}
 
-  &.Select {
-    &.is-focused,
-    &.has-value,
-    &.is-focused:not(.is-open) {
-      & .Select {
-        &-control {
-          background-color: transparent;
-          border: none;
-          color: white;
-          height: 2rem;
-        }
-      }
-    }
-  }
+const OptionWrap = styled.div`
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
 `;
