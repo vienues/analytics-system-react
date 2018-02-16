@@ -1,28 +1,49 @@
 import gql from 'graphql-tag';
-import { compose } from 'recompose';
+import { compose, lifecycle } from 'recompose';
 import { graphql } from 'react-apollo';
 
 const query = gql`
   query mainStockData($id: ID!) {
     stock(id: $id) {
       id
-      price
       company {
         id
         name
       }
       quote {
+        id
         change
         changePercent
-        previousClose
         latestPrice
-        latestUpdate
-        latestTime
-        latestSource
-        latestVolume
       }
     }
   }
 `;
 
-export default compose(graphql(query));
+const subscribeMarket = gql`
+  subscription($markets: [String!]!) {
+    getQuotes(symbols: $markets) {
+      id
+      change
+      changePercent
+      latestPrice
+    }
+  }
+`;
+
+const connectSubscription = lifecycle({
+  componentWillReceiveProps(nextProps) {
+    this.unsubscribe = nextProps.data.subscribeToMore({
+      document: subscribeMarket,
+      variables: {
+        markets: nextProps.data.stock.id,
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes };
+        return { ...prev, stock: stockCpy };
+      },
+    });
+  },
+});
+
+export default compose(graphql(query), connectSubscription);

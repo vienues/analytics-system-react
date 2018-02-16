@@ -17,6 +17,7 @@ export const CompanyConnector = graphql(
           dividendYield
         }
         quote {
+          id
           low
           high
           open

@@ -13,11 +13,12 @@ const sub = redis.createClient({ host: 'localhost', port: 6379 });
 const getQuoteUrl = (symbol: string) => `https://api.iextrading.com/1.0/stock/${symbol}/quote`;
 const requestQuote = (symbol: string) => fetch(getQuoteUrl(symbol)).then(x => x.json());
 
-const changeNumber = (num: number, postive: boolean) => {
+const changeNumber = (num: number, positive: boolean, negate: boolean = false) => {
   const parsed = new Decimal(num);
   const dp = parsed.decimalPlaces();
-  const altered = postive ? parsed.mul(new Decimal(1.1)) : parsed.dividedBy(new Decimal(1.1));
-  return altered.toDecimalPlaces(dp);
+  const altered = positive ? parsed.mul(new Decimal(1.1)) : parsed.dividedBy(new Decimal(1.1));
+  const rounded = altered.toDecimalPlaces(dp);
+  return negate ? rounded.negated() : rounded;
 };
 
 function createPriceStream(symbol: string) {
@@ -30,8 +31,8 @@ function createPriceStream(symbol: string) {
         scan(
           (acc: any, next) => ({
             ...acc,
-            change: changeNumber(acc.change, next),
-            changePercent: changeNumber(acc.changePercent, next),
+            change: changeNumber(acc.change, next, !next),
+            changePercent: changeNumber(acc.changePercent, next, !next),
             id: symbol,
             latestPrice: changeNumber(acc.latestPrice, next),
           }),

@@ -14,7 +14,7 @@ export default {
     peers: ({ id }, args, { iex }) => iex.fetch(`stock/${id}/peers`),
     previous: ({ id }, args, { iex }) => iex.fetch(`stock/${id}/previous`),
     price: ({ id }, args, { iex }) => iex.fetch(`stock/${id}/price`),
-    quote: ({ id }, args, { iex }) => iex.fetch(`stock/${id}/quote`),
+    quote: ({ id }, args, { iex }) => iex.fetch(`stock/${id}/quote`).then(x => ({ ...x, id: x.symbol })),
     stats: ({ id }, args, { iex }) => iex.fetch(`stock/${id}/stats`),
   },
 
@@ -63,6 +63,8 @@ export default {
 
     // Having to repeat the resolver is silly …
     company: async (root, { id }, { iex }) => {
+      console.log(id);
+
       try {
         root = await iex.fetch(`stock/${id}/company`);
       } catch (e) {
@@ -70,9 +72,9 @@ export default {
       }
 
       return {
+        ...root,
         id,
         symbol: id,
-        ...root,
         name: root.companyName,
       };
     },
