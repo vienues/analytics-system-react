@@ -31,6 +31,17 @@ const subscribeMarket = gql`
   }
 `;
 
+const connectQuery = graphql(query, {
+  // TODO remove this comment 👇
+  // IDEA whenever we can mimic documentation, lets do that
+  // while we could destructure
+  // skip: ({ id }) => !id,
+  // it occludes what and where the value comes from
+  // and for sake of familiarity it will play better to
+  // duplicate the docs ………… 🔥 after 📖
+  skip: ownProps => !ownProps.id,
+});
+
 const connectSubscription = lifecycle({
   componentWillReceiveProps(nextProps) {
     if (!nextProps.data.loading) {
@@ -56,6 +67,11 @@ const connectSubscription = lifecycle({
       },
     });
   },
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  },
 });
 
-export default compose(graphql(query), connectSubscription);
+export default compose(connectQuery, connectSubscription);

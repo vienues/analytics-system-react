@@ -1,16 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
 
-import { Box } from 'rebass';
-import { colors, Text } from '../../../styleguide/index';
+import { Flex, Box } from 'rebass';
+import { colors, Text } from '../../styleguide/index';
 
-export const QuickQuote = ({ quote = {} }) => {
+export const StockPrice = ({ data: { stock: { quote } } }) => {
   const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good'];
 
   return (
-    <Fragment>
+    <Flex flex="none" align="flex-start">
       <Currency>{quote.latestPrice}</Currency>
       <Box px={1} />
       <Text color={color}>
@@ -23,16 +23,22 @@ export const QuickQuote = ({ quote = {} }) => {
       </Text>
       <VerticalRule color={color} />
       <Percent color={color}>{quote.changePercent.toFixed(2) * 100}</Percent>
-    </Fragment>
+    </Flex>
   );
 };
 
 const SuperText = styled(Text)`
+  line-height: 1em;
+
   &:after,
   &:before {
     display: inline-block;
     vertical-align: super;
     font-size: 1rem;
+    line-height: 1;
+
+    height: 0;
+    max-height: 0;
   }
 `;
 
@@ -51,9 +57,9 @@ const Percent = styled(SuperText)`
 `;
 
 const VerticalRule = ({ color }) => (
-  <svg width="3" height="2rem" viewBox="0 0 3 32" xmlns="http://www.w3.org/2000/svg" style={{ margin: '.25rem .5rem' }}>
+  <svg width="20" height="32" viewBox="0 0 20 32" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M1,0 L1,32"
+      d="M9.25,0 L9.25,32"
       stroke={colors[color]}
       strokeWidth="1.5"
       fill="none"
@@ -64,4 +70,4 @@ const VerticalRule = ({ color }) => (
   </svg>
 );
 
-export default QuickQuote;
+export default StockPrice;

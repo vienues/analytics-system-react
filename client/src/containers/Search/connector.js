@@ -5,14 +5,31 @@ import { graphql } from 'react-apollo';
 export default compose(
   graphql(
     gql`
-      query stateQuery {
+      query searchQuery($id: ID!) {
+        stock(id: $id) {
+          id
+          company {
+            id
+            name
+            exchange
+          }
+        }
+      }
+    `,
+    {
+      skip: ownProps => !ownProps.id,
+    },
+  ),
+  graphql(
+    gql`
+      query storeQuery {
         currentSymbol @client {
           id
           name
         }
       }
     `,
-    { name: 'stateQuery' },
+    { name: 'store' },
   ),
   graphql(
     gql`

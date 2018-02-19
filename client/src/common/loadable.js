@@ -1,4 +1,4 @@
-import { branch, renderComponent, compose } from 'recompose';
+import { branch, renderComponent, renderNothing, compose } from 'recompose';
 import React from 'react';
 
 const LoadingText = props => <div>Loading</div>;
@@ -19,5 +19,7 @@ const ErrorComponent = props => {
     </span>
   );
 };
+
+export const maybe = ({ cond, render = renderNothing }) => branch(cond, render);
 
 export const loadable = compose(renderWhileLoading(), renderForError());

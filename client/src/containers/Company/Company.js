@@ -7,17 +7,19 @@ export const Company = props => {
 
   return (
     <Box flex={1}>
-      <Lead f={3} my={2} color="offwhite50">
+      <Lead mt={2} f={3} color="offwhite50">
         {company.name} ({company.symbol})
       </Lead>
-      <Measure f={0} color="offwhite">
+      <Measure mt={1} f={1} color="offwhite">
         {company.description}
       </Measure>
-      <BlockLink target="_blank" href={company.website} f={0} color="accent" my={2} />
-      <Measure f={0} color="offwhite" my={1}>
+      <BlockLink target="_blank" href={company.website} f={1} color="accent" mt={1}>
+        {company.website.split('://').slice(-1)[0]}
+      </BlockLink>
+      <Lead f={3} mt={2} color="offwhite50">
         Top Peers
-      </Measure>
-      <Flex>
+      </Lead>
+      <Flex mt={1} color="accent">
         {peers.map(symbol => (
           <BlockLink key={symbol} href={`/stock/${symbol}`} pr={1}>
             {symbol}

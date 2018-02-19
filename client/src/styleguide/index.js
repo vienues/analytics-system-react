@@ -1,4 +1,5 @@
 import React from 'react';
+import { withProps } from 'recompose';
 import * as Rebass from 'rebass';
 import styled, { css } from 'styled-components';
 import mapProps from './map-props';
@@ -6,7 +7,7 @@ import mapProps from './map-props';
 import { theme } from '../theme';
 import { Flex } from 'rebass';
 
-export { colors } from './colors';
+export { colors, gradients } from './colors';
 
 export { ViewportRow, ViewportFlex } from './ViewportRow';
 
@@ -23,7 +24,11 @@ export const RootBleed = styled(Flex)`
   margin: 0 auto;
 `;
 
-export const Divider = props => <Rebass.Border my={2} color="accent" borderWidth={2} top {...props} />;
+export const Divider = styled(Rebass.Border).attrs({ my: 2, color: 'accent', borderWidth: 2, top: true })`
+  flex: 1 100%;
+`;
+
+export const Gutter = withProps({ p: [1, 2] })(Rebass.Box);
 
 export const SectionHeading = props => <Rebass.Header f={2} caps {...props} />;
 
