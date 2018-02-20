@@ -54,7 +54,7 @@ export default class Search extends Component {
 
   filterOptions = options => options;
   loadOptions = async text => {
-    if (!text || text.length < 2) {
+    if (!text) {
       return [];
     }
 

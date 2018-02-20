@@ -1,5 +1,77 @@
 [
   {
+    "id": "AAPL",
+    "symbol": "AAPL",
+    "marketPercent": 0.04024,
+    "volume": 483407,
+    "__typename": "ReferenceSymbol",
+    "name": "Apple Inc."
+  },
+  {
+    "id": "GE",
+    "symbol": "GE",
+    "marketPercent": 0.01445,
+    "volume": 298127,
+    "__typename": "ReferenceSymbol",
+    "name": "General Electric Company"
+  },
+  {
+    "id": "MSFT",
+    "symbol": "MSFT",
+    "marketPercent": 0.03133,
+    "volume": 248010,
+    "__typename": "ReferenceSymbol",
+    "name": "Microsoft Corporation"
+  },
+  {
+    "id": "VZ",
+    "symbol": "VZ",
+    "marketPercent": 0.03305,
+    "volume": 235607,
+    "__typename": "ReferenceSymbol",
+    "name": "Verizon Communications Inc."
+  },
+  {
+    "id": "QCOM",
+    "symbol": "QCOM",
+    "marketPercent": 0.05188,
+    "volume": 641637,
+    "__typename": "ReferenceSymbol",
+    "name": "QUALCOMM Incorporated"
+  },
+  {
+    "id": "USO",
+    "symbol": "USO",
+    "marketPercent": 0.05022,
+    "volume": 333422,
+    "__typename": "ReferenceSymbol",
+    "name": "United States Oil Fund"
+  },
+  {
+    "id": "BAC",
+    "symbol": "BAC",
+    "marketPercent": 0.02057,
+    "volume": 452964,
+    "__typename": "ReferenceSymbol",
+    "name": "Bank of America Corporation"
+  },
+  {
+    "id": "X",
+    "symbol": "X",
+    "marketPercent": 0.01582,
+    "volume": 220366,
+    "__typename": "ReferenceSymbol",
+    "name": "United States Steel Corporation"
+  },
+  {
+    "id": "INTC",
+    "symbol": "INTC",
+    "marketPercent": 0.0175,
+    "volume": 145377,
+    "__typename": "ReferenceSymbol",
+    "name": "Intel Corporation"
+  },
+  {
     "id": "RAD",
     "symbol": "RAD",
     "marketPercent": 0.01516,
@@ -24,14 +96,6 @@
     "name": "iShares MSCI EAFE"
   },
   {
-    "id": "QCOM",
-    "symbol": "QCOM",
-    "marketPercent": 0.05188,
-    "volume": 641637,
-    "__typename": "ReferenceSymbol",
-    "name": "QUALCOMM Incorporated"
-  },
-  {
     "id": "ABBV",
     "symbol": "ABBV",
     "marketPercent": 0.20279,
@@ -48,14 +112,6 @@
     "name": "Walmart Inc."
   },
   {
-    "id": "AAPL",
-    "symbol": "AAPL",
-    "marketPercent": 0.04024,
-    "volume": 483407,
-    "__typename": "ReferenceSymbol",
-    "name": "Apple Inc."
-  },
-  {
     "id": "MDXG",
     "symbol": "MDXG",
     "marketPercent": 0.04752,
@@ -70,14 +126,6 @@
     "volume": 462213,
     "__typename": "ReferenceSymbol",
     "name": "AK Steel Holding Corporation"
-  },
-  {
-    "id": "BAC",
-    "symbol": "BAC",
-    "marketPercent": 0.02057,
-    "volume": 452964,
-    "__typename": "ReferenceSymbol",
-    "name": "Bank of America Corporation"
   },
   {
     "id": "EEM",
@@ -120,14 +168,6 @@
     "name": "Francesca's Holdings Corporation"
   },
   {
-    "id": "USO",
-    "symbol": "USO",
-    "marketPercent": 0.05022,
-    "volume": 333422,
-    "__typename": "ReferenceSymbol",
-    "name": "United States Oil Fund"
-  },
-  {
     "id": "SNAP",
     "symbol": "SNAP",
     "marketPercent": 0.01675,
@@ -144,44 +184,12 @@
     "name": "Restaurant Brands International Inc."
   },
   {
-    "id": "GE",
-    "symbol": "GE",
-    "marketPercent": 0.01445,
-    "volume": 298127,
-    "__typename": "ReferenceSymbol",
-    "name": "General Electric Company"
-  },
-  {
-    "id": "MSFT",
-    "symbol": "MSFT",
-    "marketPercent": 0.03133,
-    "volume": 248010,
-    "__typename": "ReferenceSymbol",
-    "name": "Microsoft Corporation"
-  },
-  {
     "id": "XLF",
     "symbol": "XLF",
     "marketPercent": 0.0107,
     "volume": 235659,
     "__typename": "ReferenceSymbol",
     "name": "SPDR Select Sector Fund - Financial"
-  },
-  {
-    "id": "VZ",
-    "symbol": "VZ",
-    "marketPercent": 0.03305,
-    "volume": 235607,
-    "__typename": "ReferenceSymbol",
-    "name": "Verizon Communications Inc."
-  },
-  {
-    "id": "X",
-    "symbol": "X",
-    "marketPercent": 0.01582,
-    "volume": 220366,
-    "__typename": "ReferenceSymbol",
-    "name": "United States Steel Corporation"
   },
   {
     "id": "GDX",
@@ -398,14 +406,6 @@
     "volume": 146018,
     "__typename": "ReferenceSymbol",
     "name": "Mosaic Company (The)"
-  },
-  {
-    "id": "INTC",
-    "symbol": "INTC",
-    "marketPercent": 0.0175,
-    "volume": 145377,
-    "__typename": "ReferenceSymbol",
-    "name": "Intel Corporation"
   },
   {
     "id": "MGM",
