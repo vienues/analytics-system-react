@@ -1,7 +1,7 @@
 import React from 'react';
 import connector from './connector';
 import { loadable } from '../../common/';
-
+import { formatQuotePercent, formatQuoteChange } from '../../common';
 import { Flex, Box, Small } from 'rebass';
 
 const Markets = ({ data: { markets } }) => {
@@ -13,7 +13,7 @@ const Markets = ({ data: { markets } }) => {
             {id}
           </Small>
           <Box p={1} />
-          {`${latestPrice}  ${change}|${changePercent}`}
+          {`${latestPrice}  ${formatQuoteChange(change)}|${formatQuotePercent(changePercent)}`}
         </Flex>
       ))}
     </Flex>

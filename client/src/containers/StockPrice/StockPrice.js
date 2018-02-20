@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
-
+import { formatQuotePercent, formatQuoteChange } from '../../common';
 import { Flex, Box } from 'rebass';
 import { colors, Text } from '../../styleguide/index';
 
@@ -19,10 +19,10 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
           viewBox="0 0 20 20"
           style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }}
         />
-        {quote.change.toFixed(2)}
+        {formatQuoteChange(quote.change)}
       </Text>
       <VerticalRule color={color} />
-      <Percent color={color}>{quote.changePercent.toFixed(3)}</Percent>
+      <Percent color={color}>{formatQuotePercent(quote.changePercent)}</Percent>
     </Flex>
   );
 };
