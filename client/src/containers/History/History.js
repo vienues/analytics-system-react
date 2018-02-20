@@ -42,7 +42,6 @@ export default class History extends PureComponent {
     let { chart, low, high } = this.state;
 
     low -= low * 0.0005;
-    const h1 = high;
     high += high * 0.0005;
 
     return (
