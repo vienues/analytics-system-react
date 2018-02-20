@@ -31,7 +31,6 @@ export default class Search extends Component {
 
   handleChange = async symbol => {
     const { currentSymbol } = this.props.store;
-    const { pendingSymbol } = this.state;
 
     if (!symbol && currentSymbol) {
       this.setState({ pendingSymbol: currentSymbol });

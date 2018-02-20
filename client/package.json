@@ -37,7 +37,8 @@
     "recompose": "^0.26.0",
     "ress": "^1.2.2",
     "styled-components": "^3.1.6",
-    "subscriptions-transport-ws": "^0.9.5"
+    "subscriptions-transport-ws": "^0.9.5",
+    "@adaptive-insights/data": "*"
   },
   "scripts": {
     "start": "react-scripts start",

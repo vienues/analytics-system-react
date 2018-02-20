@@ -1,10 +1,11 @@
 import * as R from 'ramda';
 import Fuse from 'fuse.js';
+import data from '@adaptive-insights/data';
 
 let indexes = [];
 let symbolIndex = [];
 
-export default {
+export const searchIndex = {
   create(corpus) {
     indexes = R.splitAt(1000, corpus).map(
       corpus =>
@@ -65,3 +66,7 @@ export default {
     )([...textMatches, ...symbolMatches]);
   },
 };
+
+searchIndex.create(data.referenceSymbols.slice(0, 1000));
+
+export default searchIndex;
