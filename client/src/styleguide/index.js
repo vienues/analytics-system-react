@@ -78,5 +78,6 @@ export const Lead = styled(Rebass.Lead)`
 `;
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
+  ${textProps};
   display: block;
 `;

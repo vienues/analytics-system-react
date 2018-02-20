@@ -2,6 +2,8 @@ import React from 'react';
 import { Box, Measure, Flex } from 'rebass';
 import { Lead, BlockLink } from '../../styleguide';
 
+const URL = /(https?\:\/\/)?(www\.)?/;
+
 export const Company = props => {
   const { company, peers } = props.data.stock;
 
@@ -13,8 +15,8 @@ export const Company = props => {
       <Measure mt={1} f={1} color="offwhite">
         {company.description}
       </Measure>
-      <BlockLink target="_blank" href={company.website} f={1} color="accent" mt={1}>
-        {company.website.split('://').slice(-1)[0]}
+      <BlockLink target="_blank" href={company.website} f={1} color="accent" mt={1} italic>
+        {company.website.replace(URL, '')}
       </BlockLink>
       <Lead f={3} mt={2} color="offwhite50">
         Top Peers
