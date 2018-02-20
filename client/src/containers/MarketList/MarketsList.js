@@ -1,23 +1,29 @@
 import React from 'react';
-import connector from './connector';
-import { loadable } from '../../common/';
 
-import { Flex, Box, Small } from 'rebass';
+import { Flex, Box } from 'rebass';
+import { Text, Small } from '../../styleguide';
+import Numeral from '../../components/Numeral';
 
 const Markets = ({ data: { markets } }) => {
   return (
     <Flex align="center">
       {markets.map(({ id, change, changePercent, latestPrice }) => (
-        <Flex key={id} pr={3} align="baseline">
-          <Small caps bold>
+        <Flex key={id} pr={2} align="baseline">
+          <Small caps bold color="white">
             {id}
           </Small>
-          <Box p={1} />
-          {`${latestPrice}  ${change}|${changePercent}`}
+          <Box pr={1} />
+          <Numeral>{latestPrice}</Numeral>
+          <Box pr={1} />
+          <Text color={change < 0 ? 'bad' : 'good'}>
+            <Numeral>{change}</Numeral>
+            {' | '}
+            <Numeral>{changePercent * 100}</Numeral>
+          </Text>
         </Flex>
       ))}
     </Flex>
   );
 };
 
-export default connector(loadable(Markets));
+export default Markets;

@@ -53,6 +53,10 @@ export const textProps = mapProps({
       font-weight: ${weight};
     `,
   },
+  lineHeight: lineHeight =>
+    css`
+      line-height: ${lineHeight};
+    `,
   caps: css`
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -76,6 +80,9 @@ export const Heading = styled(Rebass.Heading)`
   ${textProps};
 `;
 export const Lead = styled(Rebass.Lead)`
+  ${textProps};
+`;
+export const Small = styled(Rebass.Small)`
   ${textProps};
 `;
 

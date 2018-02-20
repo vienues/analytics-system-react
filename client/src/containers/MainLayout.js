@@ -2,9 +2,10 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
 import { Box } from 'rebass';
-import { ViewportFlex, Divider, Heading, Gutter, gradients } from '../styleguide';
+import { ViewportFlex, Divider, Heading, Gutter, gradients, Small } from '../styleguide';
 
 import Search from './Search';
+import RibbonLayout from './RibbonLayout';
 
 import AppLayout from './AppLayout';
 import Markets from './MarketList';
@@ -20,9 +21,7 @@ export default ({ id }) => (
       <StockPrice id={id} />
     </Search>
     {id ? <StockDetails id={id} /> : null}
-    <Ribbon>
-      <Markets />
-    </Ribbon>
+    <RibbonLayout />
   </AppLayout>
 );
 
@@ -46,18 +45,6 @@ const StockDetails = ({ id }) => (
     </SidebarColumn>
   </ViewportFlex>
 );
-
-const Ribbon = styled(ViewportFlex).attrs({ f: 1, color: 'primary50' })`
-  position: fixed;
-  bottom: 0;
-
-  display: flex;
-  align-items: center;
-
-  min-width: 100vw;
-  min-height: 3rem;
-  background-image: linear-gradient(180deg, ${gradients.secondary.join(', ')});
-`;
 
 const Panel = props => <Box pt={2} {...props} />;
 
