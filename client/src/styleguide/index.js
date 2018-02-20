@@ -53,9 +53,6 @@ export const textProps = mapProps({
       font-weight: ${weight};
     `,
   },
-  italic: css`
-    font-style: italic;
-  `,
   caps: css`
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -63,6 +60,11 @@ export const textProps = mapProps({
   display: {
     inline: css`
       display: inline;
+    `,
+  },
+  fontStyle: {
+    italic: css`
+      font-style: italic;
     `,
   },
 });
