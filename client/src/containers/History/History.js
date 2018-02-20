@@ -1,9 +1,9 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
-
+import { theme } from '../../theme';
 import { colors } from '../../styleguide/colors';
 
-import { Line, LineChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
+import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
 
 export default class History extends PureComponent {
   static defaultProps = {
@@ -42,18 +42,26 @@ export default class History extends PureComponent {
     let { chart, low, high } = this.state;
 
     low -= low * 0.0005;
+    const h1 = high;
     high += high * 0.0005;
 
     return (
       <ResponsiveContainer width="100%" height="100%">
-        <LineChart data={chart} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
+        <AreaChart data={chart} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
           <CartesianGrid stroke={colors.primary50a} />
           <ReferenceLine y={previousClose} stroke={colors.accent} strokeDasharray="3 3" />
-          <Line
+          <defs>
+            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <Area
             type="basisOpen"
             dataKey="average"
             strokeWidth={2}
-            stroke={colors.good}
+            stroke={theme.accent}
+            fill="url(#colorUv)"
             dot={false}
             isAnimationActive={false}
           />
@@ -73,7 +81,7 @@ export default class History extends PureComponent {
             orientation="right"
             stroke={colors.primary50a}
           />
-        </LineChart>
+        </AreaChart>
       </ResponsiveContainer>
     );
   }
