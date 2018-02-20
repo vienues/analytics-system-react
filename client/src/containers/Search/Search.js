@@ -4,25 +4,53 @@ import { Route, Redirect } from 'react-router-dom';
 import { Divider, ViewportFlex } from '../../styleguide';
 import SearchSelect from './Select';
 
-export default class SearchMediator extends Component {
+export default class Search extends Component {
   state = {
     pendingSymbol: false,
   };
 
   componentWillMount() {
-    // TODO update currentSymbol when null and no pending state
-  }
-
-  componentDidMount() {
+    // warm up cache
     this.props.updateSearch({ variables: { text: 'aa' } });
   }
 
+  async componentWillReceiveProps(nextProps) {
+    const { store: { currentSymbol }, data: { stock } } = nextProps;
+    const { pendingSymbol } = this.state;
+
+    if (currentSymbol == null && stock != null) {
+      const symbol = { ...stock.company, __typename: 'ReferenceSymbol' };
+
+      if (!pendingSymbol) {
+        this.setState({ pendingSymbol: symbol });
+        await this.props.updateCurrentSymbol({ variables: { symbol } });
+        this.setState({ pendingSymbol: false });
+      }
+    }
+  }
+
   handleChange = async symbol => {
-    if (symbol == null) {
-      this.setState({ pendingSymbol: this.props.store.currentSymbol });
+    const { currentSymbol } = this.props.store;
+    const { pendingSymbol } = this.state;
+
+    if (!symbol && currentSymbol) {
+      this.setState({ pendingSymbol: currentSymbol });
     }
 
     await this.props.updateCurrentSymbol({ variables: { symbol } });
+  };
+
+  handleBlur = async () => {
+    const { currentSymbol } = this.props.store;
+    const { pendingSymbol } = this.state;
+
+    if (pendingSymbol) {
+      this.setState({ pendingSymbol: false });
+
+      if (!currentSymbol) {
+        this.props.updateCurrentSymbol({ variables: { symbol: pendingSymbol } });
+      }
+    }
   };
 
   filterOptions = options => options;
@@ -48,6 +76,7 @@ export default class SearchMediator extends Component {
           filterOptions={this.filterOptions}
           onChange={this.handleChange}
           value={currentSymbol}
+          onBlur={this.handleBlur}
         />
         {children}
 

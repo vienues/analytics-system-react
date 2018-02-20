@@ -18,6 +18,9 @@ export default compose(
     `,
     {
       skip: ownProps => !ownProps.id,
+      options: ({ id }) => ({
+        variables: { id },
+      }),
     },
   ),
   graphql(
