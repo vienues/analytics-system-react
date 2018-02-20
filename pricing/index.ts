@@ -1,46 +1,24 @@
+import { createLogger } from 'bunyan';
+import fetch from 'node-fetch';
 import redis from 'redis';
 import 'rxjs/add/observable/fromPromise';
 import 'rxjs/add/observable/interval';
-import { map, mergeMap, scan } from 'rxjs/operators';
-
-import { Decimal } from 'decimal.js';
-import fetch from 'node-fetch';
 import { Observable } from 'rxjs/Observable';
+import { map, mergeMap, tap } from 'rxjs/operators';
 
-const pub = redis.createClient({ host: 'localhost', port: 6379 });
-const sub = redis.createClient({ host: 'localhost', port: 6379 });
-
+const host = 'localhost';
+const port = 6379;
+const pub = redis.createClient({ host, port });
+const sub = redis.createClient({ host, port });
 const getQuoteUrl = (symbol: string) => `https://api.iextrading.com/1.0/stock/${symbol}/quote`;
 const requestQuote = (symbol: string) => fetch(getQuoteUrl(symbol)).then(x => x.json());
-
-const changeNumber = (num: number, positive: boolean, negate: boolean = false) => {
-  const parsed = new Decimal(num);
-  const dp = parsed.decimalPlaces();
-  const altered = positive ? parsed.mul(new Decimal(1.1)) : parsed.dividedBy(new Decimal(1.1));
-  const rounded = altered.toDecimalPlaces(dp);
-  return negate ? rounded.negated() : rounded;
-};
+const log = createLogger({ name: 'PRICING-SERVER' });
 
 function createPriceStream(symbol: string) {
-  const source$ = Observable.fromPromise(requestQuote(symbol));
-
-  return source$.pipe(
-    mergeMap(quote =>
-      Observable.interval(3000).pipe(
-        scan((acc: boolean, next: number) => !acc, true),
-        scan(
-          (acc: any, next) => ({
-            ...acc,
-            change: changeNumber(acc.change, next, !next),
-            changePercent: changeNumber(acc.changePercent, next, !next),
-            id: symbol,
-            latestPrice: changeNumber(acc.latestPrice, next),
-          }),
-          quote,
-        ),
-      ),
-    ),
-    map(x => JSON.stringify(x)),
+  return Observable.interval(10000).pipe(
+    mergeMap(() => Observable.fromPromise(requestQuote(symbol))),
+    map(quote => ((quote.id = quote.symbol), quote)),
+    map(quote => JSON.stringify(quote)),
   );
 }
 
@@ -58,6 +36,7 @@ const handlers: IHandlers = {
     const symbols: string[] = JSON.parse(message);
 
     symbols.filter(symbol => !subscriptions.has(symbol)).forEach((symbol: string) => {
+      log.info('Subscribing to:', symbol);
       const subscription = createPriceStream(symbol).subscribe(price => pub.publish(createTopic(symbol), price));
       subscriptions.set(symbol, subscription);
     });

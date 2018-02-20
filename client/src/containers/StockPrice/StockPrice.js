@@ -22,7 +22,7 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
         {quote.change.toFixed(2)}
       </Text>
       <VerticalRule color={color} />
-      <Percent color={color}>{quote.changePercent.toFixed(2) * 100}</Percent>
+      <Percent color={color}>{quote.changePercent.toFixed(3)}</Percent>
     </Flex>
   );
 };

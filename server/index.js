@@ -10,9 +10,11 @@ import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 import typeDefs from './schema.graphql';
 import * as iex from './connectors/iex';
+import { createLogger } from 'bunyan';
 
 const PORT = 4000;
 const CLIENT_PORT = 3000;
+const log = createLogger({ name: 'GRAPHQL-SERVER' });
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 const server = express();
@@ -45,7 +47,7 @@ server.use(
 const ws = createServer(server);
 
 ws.listen(PORT, () => {
-  console.log(`Apollo Server is now running on http://localhost:${PORT}`);
+  log.info(`Apollo Server is now running on http://localhost:${PORT}`);
   // Set up the WebSocket for handling GraphQL subscriptions
   new SubscriptionServer(
     {
