@@ -7,10 +7,10 @@ import { Flex, Box, Small } from 'rebass';
 const Markets = ({ data: { markets } }) => {
   return (
     <Flex align="center">
-      {markets.map(({ id, change, changePercent, latestPrice }) => (
+      {markets.map(({ id, change, changePercent, latestPrice, companyName }) => (
         <Flex key={id} pr={3} align="baseline">
           <Small caps bold>
-            {id}
+            {companyName}
           </Small>
           <Box p={1} />
           {`${latestPrice}  ${formatQuoteChange(change)}|${formatQuotePercent(changePercent)}`}

@@ -6,6 +6,7 @@ const getMarkets = gql`
   query getMarketData {
     markets {
       id
+      companyName
       change
       changePercent
       latestPrice
@@ -17,7 +18,6 @@ const subscribeMarket = gql`
   subscription onMarketUpdate($markets: [String!]!) {
     getQuotes(symbols: $markets) {
       id
-      change
       changePercent
       latestPrice
     }
