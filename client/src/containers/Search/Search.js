@@ -15,7 +15,7 @@ export default class Search extends Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    const { store: { currentSymbol }, data: { stock } } = nextProps;
+    const { store: { currentSymbol }, data: { stock } = {} } = nextProps;
     const { pendingSymbol } = this.state;
 
     if (currentSymbol == null && stock != null) {
@@ -29,17 +29,17 @@ export default class Search extends Component {
     }
   }
 
-  handleChange = async symbol => {
+  handleChange = symbol => {
     const { currentSymbol } = this.props.store;
 
     if (!symbol && currentSymbol) {
       this.setState({ pendingSymbol: currentSymbol });
     }
 
-    await this.props.updateCurrentSymbol({ variables: { symbol } });
+    this.props.updateCurrentSymbol({ variables: { symbol } });
   };
 
-  handleBlur = async () => {
+  handleBlur = () => {
     const { currentSymbol } = this.props.store;
     const { pendingSymbol } = this.state;
 
