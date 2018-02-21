@@ -1,4 +1,3 @@
-import NewsSidebar from 'containers/News/News';
 import gql from 'graphql-tag';
 import React, { Fragment } from 'react';
 import { Box, Measure, Flex } from 'rebass';
