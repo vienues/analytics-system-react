@@ -2,6 +2,7 @@ import * as moment from 'moment/moment';
 import React from 'react';
 import { Box, Measure } from 'rebass';
 import { Text, Lead } from '../../styleguide';
+import gql from 'graphql-tag';
 
 const NewsSidebar = props => {
   return (props.data.stock.news || []).map(newsItem => (
@@ -17,5 +18,19 @@ const NewsSidebar = props => {
     </Box>
   ));
 };
+
+NewsSidebar.fragment = gql`
+  fragment News on Stock {
+    news(last: 5) {
+      id
+      datetime
+      headline
+      source
+      url
+      summary
+      related
+    }
+  }
+`;
 
 export default NewsSidebar;

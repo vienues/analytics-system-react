@@ -1,22 +1,16 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+import News from './News';
 
 export const StockNewsConnector = graphql(
   gql`
     query StockNewsConnectorQuery($id: ID!) {
       stock(id: $id) {
         id
-        news(last: 5) {
-          id
-          datetime
-          headline
-          source
-          url
-          summary
-          related
-        }
+        ...News
       }
     }
+    ${News.fragment}
   `,
   {
     options: ({ id }) => ({

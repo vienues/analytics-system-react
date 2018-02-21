@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { ViewportFlex, gradients, Small } from '../styleguide/index';
+import { ViewportFlex, gradients, Small } from 'styleguide';
 
 const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: true })`
   position: fixed;

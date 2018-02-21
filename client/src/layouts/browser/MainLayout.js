@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { Panel, PanelHeading } from '../../components/index';
+import { Panel, PanelHeading } from 'components';
 
-import { ViewportFlex, Divider, Gutter } from '../../styleguide/index';
+import { ViewportFlex, Divider, Gutter } from 'styleguide';
 
 import Search from '../../containers/Search/index';
-import { Ribbon } from '../../components/';
+import { Ribbon } from '../../components/index';
 
 import AppLayout from './AppLayout';
 import News from '../../containers/News/index';

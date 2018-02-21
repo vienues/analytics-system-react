@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Divider, Heading } from '../styleguide/index';
+import { Divider, Heading } from 'styleguide';
 import { Box } from 'rebass';
 
 export const Panel = props => <Box pt={2} {...props} />;
