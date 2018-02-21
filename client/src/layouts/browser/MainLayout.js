@@ -5,7 +5,7 @@ import { Panel, PanelHeading } from '../../components/index';
 import { ViewportFlex, Divider, Gutter } from '../../styleguide/index';
 
 import Search from '../../containers/Search/index';
-import Ribbon from '../Ribbon';
+import { Ribbon } from '../../components/';
 
 import AppLayout from './AppLayout';
 import News from '../../containers/News/index';
