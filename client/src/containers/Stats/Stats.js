@@ -1,4 +1,3 @@
-import Company from 'containers/Company/Company';
 import gql from 'graphql-tag';
 import React from 'react';
 import { Box, Flex } from 'rebass';
