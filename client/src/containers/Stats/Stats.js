@@ -1,3 +1,5 @@
+import Company from 'containers/Company/Company';
+import gql from 'graphql-tag';
 import React from 'react';
 import { Box, Flex } from 'rebass';
 import { Divider } from '../../styleguide';
@@ -47,5 +49,29 @@ const FieldRow = ({ label, children }) => {
     </Flex>
   );
 };
+
+StockStats.fragment = gql`
+  fragment Stats on Stock {
+    stats {
+      marketcap
+      peRatioLow
+      peRatioHigh
+      week52low
+      week52high
+      latestEPS
+      dividendRate
+      dividendYield
+    }
+    quote {
+      id
+      low
+      high
+      open
+      previousClose
+      latestVolume
+      avgTotalVolume
+    }
+  }
+`;
 
 export default StockStats;

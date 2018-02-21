@@ -1,3 +1,5 @@
+import NewsSidebar from 'containers/News/News';
+import gql from 'graphql-tag';
 import React, { Fragment } from 'react';
 import { Box, Measure, Flex } from 'rebass';
 import { Lead, BlockLink } from '../../styleguide';
@@ -35,4 +37,23 @@ export const Company = props => {
     </Box>
   );
 };
+
+Company.fragment = gql`
+  fragment Company on Stock {
+    company {
+      id
+      symbol
+      name
+      exchange
+      industry
+      website
+      description
+      CEO
+      issueType
+      sector
+    }
+    peers
+  }
+`;
+
 export default Company;

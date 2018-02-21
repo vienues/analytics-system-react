@@ -1,3 +1,5 @@
+import Company from 'containers/Company/Company';
+import gql from 'graphql-tag';
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { theme } from '../../theme';
@@ -5,7 +7,7 @@ import { colors } from '../../styleguide/colors';
 
 import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
 
-export default class History extends PureComponent {
+class History extends PureComponent {
   static defaultProps = {
     data: [],
   };
@@ -85,3 +87,17 @@ export default class History extends PureComponent {
     );
   }
 }
+
+History.fragment = gql`
+  fragment History on Stock {
+    chart {
+      label
+      datetime
+      average
+      low
+      high
+    }
+  }
+`;
+
+export default History;

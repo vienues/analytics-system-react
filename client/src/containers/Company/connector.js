@@ -1,32 +1,22 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
-export const CompanyConnector = graphql(
-  gql`
-    query StockCompanyConnectorQuery($id: ID!) {
-      stock(id: $id) {
-        id
-        company {
+export const CompanyConnector = fragment =>
+  graphql(
+    gql`
+      query StockCompanyConnectorQuery($id: ID!) {
+        stock(id: $id) {
           id
-          symbol
-          name
-          exchange
-          industry
-          website
-          description
-          CEO
-          issueType
-          sector
+          ...Company
         }
-        peers
       }
-    }
-  `,
-  {
-    options: ({ id }) => ({
-      variables: { id },
-    }),
-  },
-);
+      ${fragment}
+    `,
+    {
+      options: ({ id }) => ({
+        variables: { id },
+      }),
+    },
+  );
 
 export default CompanyConnector;
