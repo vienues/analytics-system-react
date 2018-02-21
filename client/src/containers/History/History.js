@@ -1,4 +1,3 @@
-import Company from 'containers/Company/Company';
 import gql from 'graphql-tag';
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
