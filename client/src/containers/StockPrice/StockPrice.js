@@ -2,18 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
-import numeral from 'numeral';
+import Numeral from '../../components/Numeral';
 
 import { Flex, Box } from 'rebass';
 import { colors, Text } from '../../styleguide/index';
-import { formatQuotePercent, formatQuoteChange } from '../../common';
 
 export const StockPrice = ({ data: { stock: { quote } } }) => {
   const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good'];
-
+  const { latestPrice, change, changePercent } = quote;
   return (
     <Flex flex="none" align="flex-start" color="primary30">
-      <Currency>{formatQuoteChange(quote.latestPrice)}</Currency>
+      <Currency>{latestPrice}</Currency>
       <Box px={1} />
       <Text color={color}>
         <Icon
@@ -21,10 +20,13 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
           viewBox="0 0 20 20"
           style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }}
         />
-        {numeral(quote.change).format('0,0[.]00')}
+        <Numeral>{change}</Numeral>
       </Text>
       <VerticalRule color={color} />
-      <Percent color={color}>{formatQuotePercent(quote.changePercent)}</Percent>
+      <Percent color={color}>
+        {' '}
+        <Numeral>{changePercent * 100}</Numeral>
+      </Percent>
     </Flex>
   );
 };

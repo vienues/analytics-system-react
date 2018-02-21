@@ -53,9 +53,10 @@ export const textProps = mapProps({
       font-weight: ${weight};
     `,
   },
-  italic: css`
-    font-style: italic;
-  `,
+  lineHeight: lineHeight =>
+    css`
+      line-height: ${lineHeight};
+    `,
   caps: css`
     text-transform: uppercase;
     letter-spacing: 0.0625rem;
@@ -63,6 +64,11 @@ export const textProps = mapProps({
   display: {
     inline: css`
       display: inline;
+    `,
+  },
+  fontStyle: {
+    italic: css`
+      font-style: italic;
     `,
   },
 });
@@ -76,7 +82,11 @@ export const Heading = styled(Rebass.Heading)`
 export const Lead = styled(Rebass.Lead)`
   ${textProps};
 `;
+export const Small = styled(Rebass.Small)`
+  ${textProps};
+`;
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
+  ${textProps};
   display: block;
 `;
