@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Box } from 'rebass';
 import { NavLink } from 'react-router-dom';
 
-import logoSVGURL from '../assets/logo.svg';
-import { ViewportRowPadding, ViewportRowBody } from '../styleguide/ViewportRow';
-import { theme } from '../theme';
-import { textProps } from '../styleguide';
+import logoSVGURL from '../../assets/logo.svg';
+import { ViewportRowPadding, ViewportRowBody } from '../../styleguide/ViewportRow';
+import { theme } from '../../theme';
+import { textProps } from '../../styleguide/index';
 
 const AppBar = props => (
   <ViewportRowPadding>

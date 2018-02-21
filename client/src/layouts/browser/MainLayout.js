@@ -1,18 +1,19 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
+import { Panel, PanelHeading } from '../../components/index';
 
-import { Box } from 'rebass';
-import { ViewportFlex, Divider, Heading, Gutter } from '../styleguide';
+import { ViewportFlex, Divider, Gutter } from '../../styleguide/index';
 
-import Search from './Search';
-import RibbonLayout from './RibbonLayout';
+import Search from '../../containers/Search/index';
+import Ribbon from '../Ribbon';
 
 import AppLayout from './AppLayout';
-import News from './News';
-import Company from './Company';
-import Stats from './Stats';
-import History from './History';
-import StockPrice from './StockPrice';
+import News from '../../containers/News/index';
+import Company from '../../containers/Company/index';
+import MarketList from '../../containers/MarketList/index';
+import Stats from '../../containers/Stats/index';
+import History from '../../containers/History/index';
+import StockPrice from '../../containers/StockPrice/index';
 
 export default ({ id }) => (
   <AppLayout>
@@ -20,7 +21,9 @@ export default ({ id }) => (
       <StockPrice id={id} />
     </Search>
     {id ? <StockDetails id={id} /> : null}
-    <RibbonLayout />
+    <Ribbon>
+      <MarketList />
+    </Ribbon>
   </AppLayout>
 );
 
@@ -45,8 +48,6 @@ const StockDetails = ({ id }) => (
   </ViewportFlex>
 );
 
-const Panel = props => <Box pt={2} {...props} />;
-
 const MainColumn = styled(Panel).attrs({ flex: ['1 100%', '1 100%', 1], py: 2 })`
   min-height: calc(40vh - calc(12rem / 2));
 `;
@@ -57,10 +58,3 @@ const SidebarColumn = props => (
     <Panel width={[1, '20rem']} {...props} />
   </Fragment>
 );
-
-export const PanelHeading = ({ children, mt, mb }) => [
-  <Heading key="heading" mt={mt} f={1} caps color="accent" bold>
-    {children}
-  </Heading>,
-  <Divider key="divider" my={1} mb={mb} />,
-];

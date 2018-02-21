@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Markets from './MarketList';
-
-import { ViewportFlex, gradients, Small } from '../styleguide';
+import { ViewportFlex, gradients, Small } from '../styleguide/index';
 
 const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: true })`
   position: fixed;
@@ -26,6 +24,6 @@ export default props => (
     <Small flex="1 100%" f={0}>
       US Markets
     </Small>
-    <Markets />
+    {props.children}
   </Ribbon>
 );
