@@ -1,5 +1,5 @@
 {
   "lerna": "2.8.0",
-  "packages": ["client", "server", "pricing", "data"],
+  "packages": ["client", "server", "data"],
   "version": "0.0.0"
 }

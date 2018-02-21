@@ -421,7 +421,7 @@
     invariant "^2.2.2"
     semver "^5.3.0"
 
-"@babel/register@7.0.0-beta.40":
+"@babel/register", "@babel/register@7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/register/-/register-7.0.0-beta.40.tgz#40df0bdbb2fe74a7c7b09af3d59b71c8cd53c4da"
   dependencies:

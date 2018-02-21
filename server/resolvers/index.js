@@ -1,9 +1,10 @@
-import { RedisPubSub } from 'graphql-redis-subscriptions';
 import date, { formatDate } from './date';
 import { createLogger } from 'bunyan';
+import { pubsub } from '../pubsub';
+import pricing from '../pricing';
 
-const pubSub = new RedisPubSub();
 const log = createLogger({ name: 'GRAPHQL-SERVER' });
+pricing(pubsub);
 
 export default {
   ...date,
@@ -92,13 +93,11 @@ export default {
 
   Subscription: {
     getQuotes: {
-      resolve: (payload, args, context, info) => {
-        return payload;
-      },
+      resolve: (payload, args, context, info) => payload,
       subscribe: (_, args) => {
         log.info(`Subscribing to ${args.symbols}`);
-        pubSub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols);
-        return pubSub.asyncIterator(args.symbols.map(symbol => `MARKET_UPDATE.${symbol}`));
+        pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols);
+        return pubsub.asyncIterator(args.symbols.map(symbol => `MARKET_UPDATE.${symbol}`));
       },
     },
   },

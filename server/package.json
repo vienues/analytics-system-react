@@ -13,6 +13,7 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@babel/register": "^7.0.0-beta.40",
     "apollo-server-express": "^1.3.2",
     "body-parser": "^1.18.2",
     "bunyan": "^1.8.12",
