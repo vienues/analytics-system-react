@@ -4,4 +4,4 @@ import { compose } from 'recompose';
 import connect from './connector';
 import News from './News';
 
-export default compose(connect, loadable)(News);
+export default compose(connect(News.fragment), loadable)(News);
