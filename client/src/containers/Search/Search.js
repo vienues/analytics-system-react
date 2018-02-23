@@ -1,55 +1,29 @@
 import React, { Component } from 'react';
-import { Route, Redirect } from 'react-router-dom';
 
 import { Divider, ViewportFlex } from '../../styleguide';
 import SearchSelect from './Select';
 
 export default class Search extends Component {
   state = {
-    pendingSymbol: false,
+    currentSymbol: null,
   };
 
-  componentWillMount() {
-    // warm up cache
-    this.props.updateSearch({ variables: { text: 'aa' } });
-  }
-
-  async componentWillReceiveProps(nextProps) {
-    const { store: { currentSymbol }, data: { stock } = {} } = nextProps;
-    const { pendingSymbol } = this.state;
-
+  componentWillReceiveProps(nextProps) {
+    //
+    const { data: { stock } = {} } = nextProps;
+    const currentSymbol = this.state.currentSymbol;
     if (currentSymbol == null && stock != null) {
       const symbol = { ...stock.company, __typename: 'ReferenceSymbol' };
-
-      if (!pendingSymbol) {
-        this.setState({ pendingSymbol: symbol });
-        await this.props.updateCurrentSymbol({ variables: { symbol } });
-        this.setState({ pendingSymbol: false });
-      }
+      this.setState({ currentSymbol: symbol });
     }
   }
 
   handleChange = symbol => {
-    const { currentSymbol } = this.props.store;
-
-    if (!symbol && currentSymbol) {
-      this.setState({ pendingSymbol: currentSymbol });
-    }
-
-    this.props.updateCurrentSymbol({ variables: { symbol } });
-  };
-
-  handleBlur = () => {
-    const { currentSymbol } = this.props.store;
-    const { pendingSymbol } = this.state;
-
-    if (pendingSymbol) {
-      this.setState({ pendingSymbol: false });
-
-      if (!currentSymbol) {
-        this.props.updateCurrentSymbol({ variables: { symbol: pendingSymbol } });
+    this.setState({ currentSymbol: symbol }, () => {
+      if (this.state.currentSymbol) {
+        this.props.onSymbolChanged(this.state.currentSymbol.id);
       }
-    }
+    });
   };
 
   filterOptions = options => options;
@@ -66,7 +40,7 @@ export default class Search extends Component {
   };
 
   render() {
-    const { children, store: { currentSymbol } } = this.props;
+    const { children } = this.props;
 
     return (
       <ViewportFlex wrap f={5} align="center">
@@ -74,25 +48,10 @@ export default class Search extends Component {
           loadOptions={this.loadOptions}
           filterOptions={this.filterOptions}
           onChange={this.handleChange}
-          value={currentSymbol}
-          onBlur={this.handleBlur}
+          value={this.state.currentSymbol}
         />
         {children}
-
         <Divider my={1} />
-        {
-          <Route
-            path={`/stock/:id`}
-            children={props => {
-              const { params = {} } = props.match || {};
-              if (currentSymbol && currentSymbol.id !== params.id) {
-                return <Redirect to={`/stock/${currentSymbol.id}`} />;
-              }
-
-              return null;
-            }}
-          />
-        }
       </ViewportFlex>
     );
   }

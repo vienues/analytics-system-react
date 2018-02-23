@@ -17,7 +17,7 @@ import StockPrice from '../../containers/StockPrice/index';
 
 export default ({ id }) => (
   <AppLayout>
-    <Search id={id}>
+    <Search url={/stock/} id={id}>
       <StockPrice id={id} />
     </Search>
     {id ? <StockDetails id={id} /> : null}

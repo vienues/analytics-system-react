@@ -10,7 +10,7 @@ const requestQuote = symbol => fetch(getQuoteUrl(symbol)).then(x => x.json());
 const log = createLogger({ name: 'PRICING-SERVER' });
 
 function createPriceStream(symbol) {
-  return Observable.interval(10000).pipe(
+  return Observable.interval(1000000).pipe(
     mergeMap(() => Observable.fromPromise(requestQuote(symbol))),
     map(quote => ((quote.id = quote.symbol), quote)),
   );

@@ -8,6 +8,7 @@ import News from './containers/News';
 import History from './containers/History';
 import Stats from './containers/Stats';
 import Company from './containers/Company';
+import Search from './containers/Search';
 import theme from './theme';
 
 import MainLayout from './layouts/browser/MainLayout';
@@ -32,6 +33,11 @@ class App extends Component {
               <Route exact path="/history/:id" component={createDesktopRoute('History', History)} />
               <Route exact path="/stats/:id" component={createDesktopRoute('Stats', Stats)} />
               <Route exact path="/company/:id" component={createDesktopRoute('Company', Company)} />
+              <Route
+                exact
+                path="/search/:id"
+                component={({ match }) => <Search id={match.params.id} url={/search/} />}
+              />
               <Redirect exact from="/" to="/stock/aapl" />
             </Switch>
           </BrowserRouter>

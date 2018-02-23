@@ -13,8 +13,9 @@
       url: url,
       uuid: Math.random(1000).toString(),
       name: "Application Name",
+      frame: false,
       mainWindowOptions: {
-        defaultHeight: 600,
+        defaultHeight: 200,
         defaultWidth: 800,
         defaultTop: 300,
         defaultLeft: 300,
@@ -32,26 +33,11 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     //OpenFin is ready
-    fin.desktop.main(() => {
-      let flip = true
-
-      setInterval(() => {
-        const symbol = flip ? 'VOD' : 'AAPL';
-
-        console.log(`SYMBOL.CHANGE:${symbol}`);
-
-        fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {data: {selection: {id: symbol, symbol, __typename:'Selection'}}})
-
-        flip = !flip;
-      }, 5000)
-
-      //Update the status Indicator.
-      console.log('hit')
-    });
 
     document.querySelector('#openCompanyApp')
       .addEventListener('click', () => {
         openApp('http://localhost:3000/company/VOD');
+        openApp('http://localhost:3000/search/VOD');
       });
   });
 </script>
