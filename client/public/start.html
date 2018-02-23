@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="root"></ul>
+<script>
+
+  function openApp(url) {
+    var app = new fin.desktop.Application({
+      url: url,
+      uuid: Math.random(1000).toString(),
+      name: "Application Name",
+      mainWindowOptions: {
+        defaultHeight: 600,
+        defaultWidth: 800,
+        defaultTop: 300,
+        defaultLeft: 300,
+        autoShow: true
+      }
+    }, function () {
+      console.log("Application successfully created");
+      app.run();
+    }, function (error) {
+      console.log("Error creating application:", error);
+    });
+
+    return app;
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    //OpenFin is ready
+    fin.desktop.main(() => {
+      let flip = true
+
+      setInterval(() => {
+        const symbol = flip ? 'VOD' : 'AAPL';
+
+        console.log(`SYMBOL.CHANGE:${symbol}`);
+
+        fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {data: {selection: {id: symbol, symbol, __typename:'Selection'}}})
+
+        flip = !flip;
+      }, 5000)
+
+      //Update the status Indicator.
+      console.log('hit')
+    });
+
+    document.querySelector('#openCompanyApp')
+      .addEventListener('click', () => {
+        openApp('http://localhost:3000/company/VOD');
+      });
+  });
+</script>
+
+<button id="openCompanyApp">open company app</button>
+
+</body>
+</html>

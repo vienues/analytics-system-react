@@ -95,7 +95,6 @@ export default {
     getQuotes: {
       resolve: (payload, args, context, info) => payload,
       subscribe: (_, args) => {
-        log.info(`Subscribing to ${args.symbols}`);
         pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols);
         return pubsub.asyncIterator(args.symbols.map(symbol => `MARKET_UPDATE.${symbol}`));
       },

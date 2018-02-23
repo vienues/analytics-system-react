@@ -14,8 +14,8 @@
   },
   "scripts": {
     "start": "npm run bootstrap && lerna run --parallel start",
-    "bootstrap": "(if [ -z `which yarn` ]; then npm install; else yarn; fi;) && lerna bootstrap",
-    "clean": "(if [ -z `which yarn` ]; then npm install; else yarn; fi;) && lerna clean --yes",
+    "bootstrap": "lerna bootstrap",
+    "clean": "yarn && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'",

@@ -36,6 +36,7 @@
     "recharts": "^1.0.0-beta.10",
     "recompose": "^0.26.0",
     "ress": "^1.2.2",
+    "rxjs": "^5.5.6",
     "styled-components": "^3.1.6",
     "subscriptions-transport-ws": "^0.9.5",
     "@adaptive-insights/data": "*"
