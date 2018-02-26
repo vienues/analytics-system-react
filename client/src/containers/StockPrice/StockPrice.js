@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from 'styled-components';
-import ArrowDownward from 'material-ui-icons/ArrowDownward';
-import ArrowUpward from 'material-ui-icons/ArrowUpward';
-import Numeral from '../../components/Numeral';
+import React from 'react'
+import styled from 'styled-components'
+import ArrowDownward from 'material-ui-icons/ArrowDownward'
+import ArrowUpward from 'material-ui-icons/ArrowUpward'
+import Numeral from '../../components/Numeral'
 
-import { Flex, Box } from 'rebass';
-import { colors, Text } from '../../styleguide/index';
+import { Flex, Box } from 'rebass'
+import { colors, Text } from '../../styleguide/index'
 
 export const StockPrice = ({ data: { stock: { quote } } }) => {
-  const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good'];
-  const { latestPrice, change, changePercent } = quote;
+  const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
+  const { latestPrice, change, changePercent } = quote
   return (
     <Flex data-x={'ssss'} flex="none" align="flex-start" color="primary30">
       <Currency>{latestPrice}</Currency>
@@ -28,8 +28,8 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
         <Numeral>{changePercent * 100}</Numeral>
       </Percent>
     </Flex>
-  );
-};
+  )
+}
 
 const SuperText = styled(Text)`
   line-height: 1em;
@@ -44,21 +44,21 @@ const SuperText = styled(Text)`
     height: 0;
     max-height: 0;
   }
-`;
+`
 
 const Currency = styled(SuperText)`
   &:before {
     content: '$';
     padding-right: 0.25rem;
   }
-`;
+`
 
 const Percent = styled(SuperText)`
   &:after {
     content: '%';
     padding-left: 0.125rem;
   }
-`;
+`
 
 const VerticalRule = ({ color }) => (
   <svg width="20" height="32" viewBox="0 0 20 32" xmlns="http://www.w3.org/2000/svg">
@@ -72,6 +72,6 @@ const VerticalRule = ({ color }) => (
       strokeLinecap="square"
     />
   </svg>
-);
+)
 
-export default StockPrice;
+export default StockPrice

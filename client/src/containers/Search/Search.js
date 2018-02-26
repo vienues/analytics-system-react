@@ -1,41 +1,41 @@
-import React, { Component } from 'react';
-import SearchSelect from './Select';
+import React, { Component } from 'react'
+import SearchSelect from './Select'
 
 export default class Search extends Component {
   state = {
     currentSymbol: null,
-  };
+  }
 
   componentWillReceiveProps(nextProps) {
     //
-    const { data: { stock } = {} } = nextProps;
-    const currentSymbol = this.state.currentSymbol;
+    const { data: { stock } = {} } = nextProps
+    const currentSymbol = this.state.currentSymbol
     if (currentSymbol == null && stock != null) {
-      const symbol = { ...stock.company };
-      this.setState({ currentSymbol: symbol });
+      const symbol = { ...stock.company }
+      this.setState({ currentSymbol: symbol })
     }
   }
 
   handleChange = symbol => {
     this.setState({ currentSymbol: symbol }, () => {
       if (this.state.currentSymbol) {
-        this.props.onSymbolChanged(this.state.currentSymbol.id);
+        this.props.onSymbolChanged(this.state.currentSymbol.id)
       }
-    });
-  };
+    })
+  }
 
-  filterOptions = options => options;
+  filterOptions = options => options
   loadOptions = async text => {
     if (!text) {
-      return [];
+      return []
     }
 
-    const results = await this.props.updateSearch({ variables: { text } });
+    const results = await this.props.updateSearch({ variables: { text } })
 
     return {
       options: results.data.updateSearch,
-    };
-  };
+    }
+  }
 
   render() {
     return (
@@ -46,6 +46,6 @@ export default class Search extends Component {
         value={this.state.currentSymbol}
         onBlur={this.handleBlur}
       />
-    );
+    )
   }
 }

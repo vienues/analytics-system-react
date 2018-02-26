@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 export const StockNewsConnector = fragment =>
   graphql(
@@ -17,6 +17,6 @@ export const StockNewsConnector = fragment =>
         variables: { id },
       }),
     },
-  );
+  )
 
-export default StockNewsConnector;
+export default StockNewsConnector

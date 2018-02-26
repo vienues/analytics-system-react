@@ -1,7 +1,7 @@
 /**
  * copied from react-select
  */
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
 export default css`
 /* */
@@ -116,4 +116,4 @@ export default css`
 		}
 	}
 }
-`;
+`

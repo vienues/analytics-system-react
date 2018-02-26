@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import styled from 'styled-components';
-import { Box } from 'rebass';
+import React, { PureComponent } from 'react'
+import styled from 'styled-components'
+import { Box } from 'rebass'
 
-import AsyncSelectStyled from './AsyncSelectStyled';
+import AsyncSelectStyled from './AsyncSelectStyled'
 
 export default class SearchSelect extends PureComponent {
   render() {
-    const { ...props } = this.props;
+    const { ...props } = this.props
 
     return (
       <AsyncSelectStyled
@@ -21,19 +21,19 @@ export default class SearchSelect extends PureComponent {
         // valueComponent={OptionDisplay}
         {...props}
       />
-    );
+    )
   }
 }
 
 export class OptionDisplay extends PureComponent {
   handleMouseDown = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.props.onSelect(this.props.option, event);
-  };
+    event.preventDefault()
+    event.stopPropagation()
+    this.props.onSelect(this.props.option, event)
+  }
 
   render() {
-    const { option: value, ...props } = this.props;
+    const { option: value, ...props } = this.props
 
     return (
       <OptionWrap {...props} onMouseDown={this.handleMouseDown}>
@@ -42,7 +42,7 @@ export class OptionDisplay extends PureComponent {
         </Box>
         <Box flex="1">{value.name}</Box>
       </OptionWrap>
-    );
+    )
   }
 }
 
@@ -50,4 +50,4 @@ const OptionWrap = styled.div`
   flex: 1;
   display: flex;
   flex-flow: row nowrap;
-`;
+`

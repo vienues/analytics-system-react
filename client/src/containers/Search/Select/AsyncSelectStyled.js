@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import { Async as AsyncSelect } from 'react-select';
+import styled from 'styled-components'
+import { Async as AsyncSelect } from 'react-select'
 
-import { colors } from '../../../styleguide/colors';
+import { colors } from '../../../styleguide/colors'
 
-import componentStyle from './componentStyle';
-import menuStyle from './menuStyle';
-import multiStyle from './multiStyle';
-import spinnerStyle from './spinnerStyle';
+import componentStyle from './componentStyle'
+import menuStyle from './menuStyle'
+import multiStyle from './multiStyle'
+import spinnerStyle from './spinnerStyle'
 
 export default styled(AsyncSelect)`
   flex: 1;
@@ -94,4 +94,4 @@ export default styled(AsyncSelect)`
       display: none;
     }
   }
-`;
+`

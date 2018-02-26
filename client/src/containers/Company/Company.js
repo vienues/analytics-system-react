@@ -1,12 +1,12 @@
-import gql from 'graphql-tag';
-import React, { Fragment } from 'react';
-import { Box, Measure, Flex } from 'rebass';
-import { Lead, BlockLink } from '../../styleguide';
+import gql from 'graphql-tag'
+import React, { Fragment } from 'react'
+import { Box, Measure, Flex } from 'rebass'
+import { Lead, BlockLink } from '../../styleguide'
 
-const URL = /(https?\/\/)?(www\.)?/;
+const URL = /(https?\/\/)?(www\.)?/
 
 export const Company = props => {
-  const { company, peers } = props.data.stock;
+  const { company, peers } = props.data.stock
 
   return (
     <Box flex={1}>
@@ -34,8 +34,8 @@ export const Company = props => {
         </Fragment>
       )}
     </Box>
-  );
-};
+  )
+}
 
 Company.fragment = gql`
   fragment Company on Stock {
@@ -53,6 +53,6 @@ Company.fragment = gql`
     }
     peers
   }
-`;
+`
 
-export default Company;
+export default Company

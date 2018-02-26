@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { Async as AsyncSelect } from 'react-select';
+import styled, { css } from 'styled-components'
+import { Async as AsyncSelect } from 'react-select'
 
 const AsyncSelectOverStyled = styled(AsyncSelect)`
   background-color: transparent;
@@ -25,6 +25,6 @@ const AsyncSelectOverStyled = styled(AsyncSelect)`
       }
     }
   }
-`;
+`
 
-export default AsyncSelectOverStyled;
+export default AsyncSelectOverStyled

@@ -1,5 +1,5 @@
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 export const CompanyConnector = fragment =>
   graphql(
@@ -17,6 +17,6 @@ export const CompanyConnector = fragment =>
         variables: { id },
       }),
     },
-  );
+  )
 
-export default CompanyConnector;
+export default CompanyConnector

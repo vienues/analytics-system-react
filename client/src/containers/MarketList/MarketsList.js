@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
-import { Flex, Box } from 'rebass';
-import { Text, Small } from '../../styleguide';
-import Numeral from '../../components/Numeral';
+import { Flex, Box } from 'rebass'
+import { Text, Small } from '../../styleguide'
+import Numeral from '../../components/Numeral'
 
 const Markets = ({ data: { markets } }) => {
   return (
@@ -23,7 +23,7 @@ const Markets = ({ data: { markets } }) => {
         </Flex>
       ))}
     </Flex>
-  );
-};
+  )
+}
 
-export default Markets;
+export default Markets

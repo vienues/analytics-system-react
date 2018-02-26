@@ -1,14 +1,14 @@
-import * as R from 'ramda';
-import numeral from 'numeral';
+import * as R from 'ramda'
+import numeral from 'numeral'
 
 const formats = {
   number: '0,0[.]00',
   integer: '0,0',
   approximate: '(0.00 a)',
   dollars: '$ 0,0[.]00',
-};
+}
 
-const format = format => number => numeral(number).format(formats[format] || format);
+const format = format => number => numeral(number).format(formats[format] || format)
 
 const formatFields = R.evolve({
   // quote
@@ -25,6 +25,6 @@ const formatFields = R.evolve({
   week52high: format('number'),
   latestEPS: format('number'),
   dividendYield: format('number'),
-});
+})
 
-export default formatFields;
+export default formatFields

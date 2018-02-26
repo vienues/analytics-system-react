@@ -1,6 +1,6 @@
-import { loadable } from '../../common/';
+import { loadable } from '../../common/'
 
-import connect from './connector';
-import MarketList from './MarketsList';
+import connect from './connector'
+import MarketList from './MarketsList'
 
-export default connect(loadable(MarketList));
+export default connect(loadable(MarketList))

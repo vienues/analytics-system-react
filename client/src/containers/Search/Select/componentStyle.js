@@ -1,18 +1,18 @@
 /**
  * copied from react-select
  */
-import { css } from 'styled-components';
+import { css } from 'styled-components'
 
-import { colors } from '../../../styleguide/colors';
+import { colors } from '../../../styleguide/colors'
 
-const backgroundColor = colors.transparent;
-const inputBgFocus = colors.transparent;
+const backgroundColor = colors.transparent
+const inputBgFocus = colors.transparent
 
-const internalInputHeight = css`2.5rem`;
+const internalInputHeight = css`2.5rem`
 
-const arrowColor = colors.good;
-const arrowWidth = '0.25rem';
-const clearWidth = '1rem';
+const arrowColor = colors.good
+const arrowWidth = '0.25rem'
+const clearWidth = '1rem'
 
 export default css`
 
@@ -333,4 +333,4 @@ export default css`
   from { opacity: 0; }
   to { opacity: 1; }
 }
-`;
+`

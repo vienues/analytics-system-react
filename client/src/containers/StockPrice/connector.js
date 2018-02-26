@@ -1,6 +1,6 @@
-import gql from 'graphql-tag';
-import { compose, lifecycle } from 'recompose';
-import { graphql } from 'react-apollo';
+import gql from 'graphql-tag'
+import { compose, lifecycle } from 'recompose'
+import { graphql } from 'react-apollo'
 
 const query = gql`
   query mainStockData($id: ID!) {
@@ -18,7 +18,7 @@ const query = gql`
       }
     }
   }
-`;
+`
 
 const subscribeMarket = gql`
   subscription($markets: [String!]!) {
@@ -29,7 +29,7 @@ const subscribeMarket = gql`
       latestPrice
     }
   }
-`;
+`
 
 const connectQuery = graphql(query, {
   // TODO remove this comment 👇
@@ -40,7 +40,7 @@ const connectQuery = graphql(query, {
   // and for sake of familiarity it will play better to
   // duplicate the docs ………… 🔥 after 📖
   skip: ownProps => !ownProps.id,
-});
+})
 
 const connectSubscription = lifecycle({
   componentWillReceiveProps(nextProps) {
@@ -49,11 +49,11 @@ const connectSubscription = lifecycle({
       if (this.unsubscribe) {
         // Check if props have changed and, if necessary, stop the subscription
         if (this.props.data.stock.id !== nextProps.data.stock.id) {
-          console.log('unsubscribe');
+          console.log('unsubscribe')
 
-          this.unsubscribe();
+          this.unsubscribe()
         }
-        return;
+        return
       }
     }
     this.unsubscribe = nextProps.data.subscribeToMore({
@@ -62,16 +62,16 @@ const connectSubscription = lifecycle({
         markets: nextProps.data.stock.id,
       },
       updateQuery: (prev, { subscriptionData }) => {
-        const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes };
-        return { ...prev, stock: stockCpy };
+        const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes }
+        return { ...prev, stock: stockCpy }
       },
-    });
+    })
   },
   componentWillUnmount() {
     if (this.unsubscribe) {
-      this.unsubscribe();
+      this.unsubscribe()
     }
   },
-});
+})
 
-export default compose(connectQuery, connectSubscription);
+export default compose(connectQuery, connectSubscription)

@@ -1,3 +1,3 @@
-import { PubSub } from 'graphql-subscriptions';
+import { PubSub } from 'graphql-subscriptions'
 
-export const pubsub = new PubSub();
+export const pubsub = new PubSub()

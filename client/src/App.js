@@ -1,24 +1,24 @@
-import React, { Component } from 'react';
-import { ApolloProvider } from 'react-apollo';
-import { ThemeProvider } from 'styled-components';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import React, { Component } from 'react'
+import { ApolloProvider } from 'react-apollo'
+import { ThemeProvider } from 'styled-components'
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
-import apolloClient from './apollo/client';
-import News from './containers/News';
-import History from './containers/History';
-import Stats from './containers/Stats';
-import Company from './containers/Company';
-import theme from './theme';
+import apolloClient from './apollo/client'
+import News from './containers/News'
+import History from './containers/History'
+import Stats from './containers/Stats'
+import Company from './containers/Company'
+import theme from './theme'
 
-import MainLayout from './layouts/browser/MainLayout';
-import DesktopPanel from './layouts/desktop/DesktopPanel';
-import MainToolBar from './layouts/desktop/MainToolBar';
+import MainLayout from './layouts/browser/MainLayout'
+import DesktopPanel from './layouts/desktop/DesktopPanel'
+import MainToolBar from './layouts/desktop/MainToolBar'
 
 const createDesktopRoute = (heading, Component) => ({ match }) => (
   <DesktopPanel heading={heading} component={News}>
     <Component id={match.params.id} />
   </DesktopPanel>
-);
+)
 
 class App extends Component {
   render() {
@@ -40,8 +40,8 @@ class App extends Component {
           </BrowserRouter>
         </ThemeProvider>
       </ApolloProvider>
-    );
+    )
   }
 }
 
-export default App;
+export default App

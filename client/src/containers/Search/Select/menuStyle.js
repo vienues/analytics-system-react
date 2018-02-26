@@ -1,8 +1,8 @@
 /**
  * copied from react-select
  */
-import { css } from 'styled-components';
-import { colors } from '../../../styleguide/colors';
+import { css } from 'styled-components'
+import { colors } from '../../../styleguide/colors'
 
 export default css`
   /* */
@@ -80,4 +80,4 @@ export default css`
     display: block;
     padding: @select-padding-vertical @select-padding-horizontal;
   }
-`;
+`

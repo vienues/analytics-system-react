@@ -1,1 +1,1 @@
-export { renderWhileLoading, maybe, loadable } from './loadable';
+export { renderWhileLoading, maybe, loadable } from './loadable'

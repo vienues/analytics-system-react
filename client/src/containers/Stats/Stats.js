@@ -1,14 +1,14 @@
-import gql from 'graphql-tag';
-import React from 'react';
-import { Box, Flex } from 'rebass';
-import { Divider } from '../../styleguide';
+import gql from 'graphql-tag'
+import React from 'react'
+import { Box, Flex } from 'rebass'
+import { Divider } from '../../styleguide'
 
-import formatFields from './formatFields';
+import formatFields from './formatFields'
 
 const StockStats = props => {
-  let { stats, quote } = props.data.stock;
-  quote = formatFields(quote);
-  stats = formatFields(stats);
+  let { stats, quote } = props.data.stock
+  quote = formatFields(quote)
+  stats = formatFields(stats)
 
   return (
     <Flex flex={1} wrap={true}>
@@ -31,8 +31,8 @@ const StockStats = props => {
         <FieldRow label="Dividend Yield">{stats.dividendYield}</FieldRow>
       </Box>
     </Flex>
-  );
-};
+  )
+}
 
 const FieldRow = ({ label, children }) => {
   return (
@@ -43,8 +43,8 @@ const FieldRow = ({ label, children }) => {
       <Box color="offwhite">{children}</Box>
       <Divider color="primary50a" borderWidth={1} my={1} />
     </Flex>
-  );
-};
+  )
+}
 
 StockStats.fragment = gql`
   fragment Stats on Stock {
@@ -68,6 +68,6 @@ StockStats.fragment = gql`
       avgTotalVolume
     }
   }
-`;
+`
 
-export default StockStats;
+export default StockStats

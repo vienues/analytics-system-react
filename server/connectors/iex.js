@@ -1,11 +1,11 @@
-import { join } from 'path';
-import __fetch from 'node-fetch';
+import { join } from 'path'
+import __fetch from 'node-fetch'
 
-const ENDPOINT = 'https://api.iextrading.com/1.0';
+const ENDPOINT = 'https://api.iextrading.com/1.0'
 
 export async function fetch(path, options) {
-  path = join('/', ...(Array.isArray(path) ? path : [path]));
-  let response;
+  path = join('/', ...(Array.isArray(path) ? path : [path]))
+  let response
 
   try {
     response = await __fetch(`${ENDPOINT}${path}`, {
@@ -15,14 +15,14 @@ export async function fetch(path, options) {
       headers: {
         Accept: 'application/json',
       },
-    });
+    })
   } catch (e) {
-    console.log('IEX request error', e);
+    console.log('IEX request error', e)
   }
 
   try {
-    return await response.json();
+    return await response.json()
   } catch (e) {
-    console.log('IEX connector error', e);
+    console.log('IEX connector error', e)
   }
 }

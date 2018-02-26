@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import { ViewportFlex, gradients, Small } from 'styleguide';
+import { ViewportFlex, gradients, Small } from 'styleguide'
 
 const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: true })`
   position: fixed;
@@ -17,7 +17,7 @@ const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: tr
   min-width: 100vw;
   min-height: 3rem;
   background-image: linear-gradient(180deg, ${gradients.secondary.join(', ')});
-`;
+`
 
 export default props => (
   <Ribbon>
@@ -26,4 +26,4 @@ export default props => (
     </Small>
     {props.children}
   </Ribbon>
-);
+)

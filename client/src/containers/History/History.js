@@ -1,49 +1,49 @@
-import gql from 'graphql-tag';
-import _ from 'lodash';
-import React, { PureComponent } from 'react';
-import { theme } from '../../theme';
-import { colors } from '../../styleguide/colors';
+import gql from 'graphql-tag'
+import _ from 'lodash'
+import React, { PureComponent } from 'react'
+import { theme } from '../../theme'
+import { colors } from '../../styleguide/colors'
 
-import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts';
+import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
 
 class History extends PureComponent {
   static defaultProps = {
     data: [],
-  };
+  }
 
   state = {
     chart: [],
-  };
+  }
 
   componentDidMount() {
-    this.update(this.props.data.stock.chart);
+    this.update(this.props.data.stock.chart)
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.data.stock.chart !== nextProps.data.stock.chart) {
-      this.update(nextProps.data.stock.chart);
+      this.update(nextProps.data.stock.chart)
     }
   }
 
   update(chart) {
-    chart = chart.filter(({ low, average, high }) => low > 0 || average > 0 || high > 0);
+    chart = chart.filter(({ low, average, high }) => low > 0 || average > 0 || high > 0)
 
-    let { low } = _.minBy(chart, 'low') || {};
-    let { high } = _.maxBy(chart, 'high') || {};
+    let { low } = _.minBy(chart, 'low') || {}
+    let { high } = _.maxBy(chart, 'high') || {}
 
-    this.setState({ chart, low, high });
+    this.setState({ chart, low, high })
   }
 
   render() {
-    let { previousClose } = this.props;
+    let { previousClose } = this.props
     if (typeof previousClose === 'string') {
-      previousClose = Number(previousClose);
+      previousClose = Number(previousClose)
     }
 
-    let { chart, low, high } = this.state;
+    let { chart, low, high } = this.state
 
-    low -= low * 0.0005;
-    high += high * 0.0005;
+    low -= low * 0.0005
+    high += high * 0.0005
 
     return (
       <ResponsiveContainer width="100%" height="100%">
@@ -83,7 +83,7 @@ class History extends PureComponent {
           />
         </AreaChart>
       </ResponsiveContainer>
-    );
+    )
   }
 }
 
@@ -97,6 +97,6 @@ History.fragment = gql`
       high
     }
   }
-`;
+`
 
-export default History;
+export default History

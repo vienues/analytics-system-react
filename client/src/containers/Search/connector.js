@@ -1,7 +1,7 @@
-import { compose, withProps } from 'recompose';
-import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
-import { withRouter } from 'react-router-dom';
+import { compose, withProps } from 'recompose'
+import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import { withRouter } from 'react-router-dom'
 
 export default compose(
   graphql(
@@ -39,7 +39,7 @@ export default compose(
   withProps(props => {
     return {
       onSymbolChanged: id => {
-        props.history.push(`${props.url}${id}`);
+        props.history.push(`${props.url}${id}`)
         if (window.fin) {
           window.fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
             data: {
@@ -49,9 +49,9 @@ export default compose(
                 __typename: 'Selection',
               },
             },
-          });
+          })
         }
       },
-    };
+    }
   }),
-);
+)

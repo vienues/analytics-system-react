@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Box } from 'rebass';
-import { NavLink } from 'react-router-dom';
+import React from 'react'
+import styled from 'styled-components'
+import { Box } from 'rebass'
+import { NavLink } from 'react-router-dom'
 
-import logoSVGURL from '../../assets/logo.svg';
-import { ViewportRowPadding, ViewportRowBody, textProps } from 'styleguide';
-import { theme } from '../../theme';
+import logoSVGURL from '../../assets/logo.svg'
+import { ViewportRowPadding, ViewportRowBody, textProps } from 'styleguide'
+import { theme } from '../../theme'
 
 const AppBar = () => (
   <ViewportRowPadding>
@@ -17,7 +17,7 @@ const AppBar = () => (
       <Link to="/watchlists">Watchlists</Link>
     </Body>
   </ViewportRowPadding>
-);
+)
 
 const Link = styled(NavLink)`
   ${textProps({ weight: 'normal', caps: true })};
@@ -38,14 +38,14 @@ const Link = styled(NavLink)`
   &.active {
     background-color: ${theme.colors.accent50a};
   }
-`;
+`
 
 const Body = styled(ViewportRowBody)`
   display: flex;
   align-items: center;
   min-height: 6rem;
   max-height: 6rem;
-`;
+`
 
 const Logo = styled(NavLink).attrs({ to: '/' })`
   display: block;
@@ -55,6 +55,6 @@ const Logo = styled(NavLink).attrs({ to: '/' })`
   background-size: contain;
   background-position: center left;
   background-image: url(${logoSVGURL});
-`;
+`
 
-export default AppBar;
+export default AppBar

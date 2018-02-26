@@ -1,13 +1,13 @@
-import _ from 'lodash';
-import warning from 'warning';
+import _ from 'lodash'
+import warning from 'warning'
 
 // Map component props to css values
 export const mapProps = map => {
   if (_.isFunction(map)) {
-    map = map();
+    map = map()
   }
 
-  map = _.map(map, (mapValue, prop) => onProp(prop, mapValue));
+  map = _.map(map, (mapValue, prop) => onProp(prop, mapValue))
 
   return props => {
     // inception much?
@@ -15,52 +15,52 @@ export const mapProps = map => {
       props = {
         ...props,
         ...(_.isFunction(props.mapProps) ? props.mapProps(props) : props.mapProps),
-      };
+      }
     }
 
     return map.reduce((acc, select) => {
-      const value = select(props);
+      const value = select(props)
       if (value != null) {
-        acc.push(value);
+        acc.push(value)
       }
-      return acc;
-    }, []);
-  };
-};
+      return acc
+    }, [])
+  }
+}
 
 // Map a single component prop to a css value (the bread and butter of mapProps)
 export const onProp = (prop, mapValue) => {
-  const { selectPropValue, selectThemeValue } = createSelectors(prop, mapValue);
+  const { selectPropValue, selectThemeValue } = createSelectors(prop, mapValue)
 
   return props => {
     if (selectPropValue(props) != null) {
-      return selectThemeValue(props);
+      return selectThemeValue(props)
     }
-  };
-};
+  }
+}
 
 // Map default css for True or null component props
 export const mapDefaultProps = map => {
   if (_.isFunction(map)) {
-    map = map();
+    map = map()
   }
 
-  map = _.map(map, (mapValue, prop) => defaultProp(prop, mapValue));
+  map = _.map(map, (mapValue, prop) => defaultProp(prop, mapValue))
 
-  return props => map.map(select => select(props));
-};
+  return props => map.map(select => select(props))
+}
 
 // Return default css for True or null prop
 export const defaultProp = (prop, mapValue) => {
-  const { selectPropValue, selectThemeValue } = createSelectors(prop, mapValue);
+  const { selectPropValue, selectThemeValue } = createSelectors(prop, mapValue)
 
   return props => {
-    const propValue = selectPropValue(props);
+    const propValue = selectPropValue(props)
     if (propValue == null || propValue === true || _.isString(propValue) || _.isNumber(propValue)) {
-      return selectThemeValue(props);
+      return selectThemeValue(props)
     }
-  };
-};
+  }
+}
 
 // Select css given by
 //  - mapValue[props[prop]]
@@ -68,22 +68,22 @@ export const defaultProp = (prop, mapValue) => {
 //  - mapValue
 //  - props[prop]
 const createSelectors = (prop, mapValue) => {
-  const propPath = _.toPath(prop);
+  const propPath = _.toPath(prop)
 
-  const fn = _.isFunction(mapValue) && mapValue;
-  const obj = _.isPlainObject(mapValue) && mapValue;
+  const fn = _.isFunction(mapValue) && mapValue
+  const obj = _.isPlainObject(mapValue) && mapValue
 
   const selectPropValue = props => {
     if (propPath.length === 1) {
-      return props[propPath[0]];
+      return props[propPath[0]]
     }
     for (let i = 0, val = props; i < propPath.length; i++) {
-      val = val != null ? val[propPath[i]] : val;
+      val = val != null ? val[propPath[i]] : val
     }
-  };
+  }
 
   const selectThemeValue = props => {
-    let propValue = selectPropValue(props);
+    let propValue = selectPropValue(props)
 
     /**
      * The propValue may be True or False
@@ -93,7 +93,7 @@ const createSelectors = (prop, mapValue) => {
      />
      */
     if (propValue === false) {
-      return null;
+      return null
     }
 
     /**
@@ -105,7 +105,7 @@ const createSelectors = (prop, mapValue) => {
             })
      */
     if (fn) {
-      return fn(propValue, prop, props);
+      return fn(propValue, prop, props)
     }
 
     /**
@@ -121,16 +121,16 @@ const createSelectors = (prop, mapValue) => {
      */
     if (obj) {
       if (_.isFunction(propValue)) {
-        propValue = propValue(props, prop, mapValue);
+        propValue = propValue(props, prop, mapValue)
       }
 
-      const { [propValue]: mapped, default: defaulted } = mapValue;
+      const { [propValue]: mapped, default: defaulted } = mapValue
 
       return (
         (propValue !== 'default' && mapped) ||
         (defaulted && (_.isFunction(defaulted) ? defaulted(propValue, prop, props) : defaulted)) ||
         warning(false, `"${prop}" does not have "${propValue}" ${JSON.stringify(mapValue, null, 4)}`)
-      );
+      )
     }
 
     /**
@@ -143,7 +143,7 @@ const createSelectors = (prop, mapValue) => {
             })
      */
     if (mapValue !== true) {
-      return mapValue;
+      return mapValue
     }
 
     /**
@@ -155,13 +155,13 @@ const createSelectors = (prop, mapValue) => {
                 `}
      />
      */
-    return propValue;
-  };
+    return propValue
+  }
 
   return {
     selectPropValue,
     selectThemeValue,
-  };
-};
+  }
+}
 
-export default mapProps;
+export default mapProps

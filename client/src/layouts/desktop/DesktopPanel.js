@@ -1,7 +1,7 @@
-import React from 'react';
-import { Panel, PanelHeading } from '../../components/index';
+import React from 'react'
+import { Panel, PanelHeading } from '../../components/index'
 
-import { Root } from '../../styleguide/index';
+import { Root } from '../../styleguide/index'
 
 export default ({ heading, children }) => (
   <Root column flex={1} px={2}>
@@ -10,4 +10,4 @@ export default ({ heading, children }) => (
       {children}
     </Panel>
   </Root>
-);
+)

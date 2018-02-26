@@ -1,10 +1,10 @@
-import date, { formatDate } from './date';
-import { createLogger } from 'bunyan';
-import { pubsub } from '../pubsub';
-import pricing from '../pricing';
+import date, { formatDate } from './date'
+import { createLogger } from 'bunyan'
+import { pubsub } from '../pubsub'
+import pricing from '../pricing'
 
-const log = createLogger({ name: 'GRAPHQL-SERVER' });
-pricing(pubsub);
+const log = createLogger({ name: 'GRAPHQL-SERVER' })
+pricing(pubsub)
 
 export default {
   ...date,
@@ -33,7 +33,7 @@ export default {
 
   Tick: {
     datetime: ({ date, minute }) => {
-      return `${formatDate(date) || ''}${minute ? `T${minute}` : ''}`;
+      return `${formatDate(date) || ''}${minute ? `T${minute}` : ''}`
     },
   },
 
@@ -51,27 +51,27 @@ export default {
 
   Query: {
     markets: async (_, __, { iex }) => {
-      const val = await iex.fetch(`stock/market/batch?symbols=spy,dia,iwm&types=quote`);
-      return Object.values(val).map(x => ({ ...x.quote, id: x.quote.symbol }));
+      const val = await iex.fetch(`stock/market/batch?symbols=spy,dia,iwm&types=quote`)
+      return Object.values(val).map(x => ({ ...x.quote, id: x.quote.symbol }))
     },
 
     stock: (root, { id }, { iex }) => {
-      id = id.toUpperCase();
+      id = id.toUpperCase()
 
       return {
         id,
         symbol: id,
-      };
+      }
     },
 
     // Having to repeat the resolver is silly …
     company: async (root, { id }, { iex }) => {
-      console.log(id);
+      console.log(id)
 
       try {
-        root = await iex.fetch(`stock/${id}/company`);
+        root = await iex.fetch(`stock/${id}/company`)
       } catch (e) {
-        console.log(e);
+        console.log(e)
       }
 
       return {
@@ -79,7 +79,7 @@ export default {
         id,
         symbol: id,
         name: root.companyName,
-      };
+      }
     },
 
     TOPS: (root, args, { iex }) => iex.fetch('/tops'),
@@ -87,7 +87,7 @@ export default {
     reference: root => {
       return {
         symbols: {},
-      };
+      }
     },
   },
 
@@ -95,9 +95,9 @@ export default {
     getQuotes: {
       resolve: (payload, args, context, info) => payload,
       subscribe: (_, args) => {
-        pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols);
-        return pubsub.asyncIterator(args.symbols.map(symbol => `MARKET_UPDATE.${symbol}`));
+        pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols)
+        return pubsub.asyncIterator(args.symbols.map(symbol => `MARKET_UPDATE.${symbol}`))
       },
     },
   },
-};
+}
