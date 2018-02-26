@@ -1,4 +1,3 @@
-import DesktopLayout from 'layouts/desktop/DesktopLayout';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { ThemeProvider } from 'styled-components';
@@ -30,7 +29,6 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={MainLayout} />
               <Route exact path="/stock/:id" component={({ match }) => <MainLayout id={match.params.id} />} />
-              <Route exact path="/desktop/:id" component={({ match }) => <DesktopLayout id={match.params.id} />} />
               <Route exact path="/news/:id" component={createDesktopRoute('Recent News', News)} />
               <Route exact path="/history/:id" component={createDesktopRoute('History', History)} />
               <Route exact path="/stats/:id" component={createDesktopRoute('Stats', Stats)} />

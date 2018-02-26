@@ -11,8 +11,8 @@ const StockStats = props => {
   stats = formatFields(stats);
 
   return (
-    <Flex flex={1} wrap={false}>
-      <Flex w={[1, 1 / 2]} column>
+    <Flex flex={1} wrap={true}>
+      <Box w={[1, 1 / 2]}>
         <FieldRow label="Previous Close">{quote.previousClose}</FieldRow>
         <FieldRow label="Day Range">
           $ {quote.low} - {quote.high}
@@ -20,9 +20,8 @@ const StockStats = props => {
         <FieldRow label="Volume">{quote.latestVolume}</FieldRow>
         <FieldRow label="Market Cap">{stats.marketcap}</FieldRow>
         <FieldRow label="P/E Ratio">{stats.peRatioHigh}</FieldRow>
-      </Flex>
-      <Box p={2} />
-      <Flex w={[1, 1 / 2]} column>
+      </Box>
+      <Box w={[1, 1 / 2]} column px={[0, 2]}>
         <FieldRow label="Open">{quote.open}</FieldRow>
         <FieldRow label="52 Week Range">
           $ {stats.week52low} - {stats.week52high}
@@ -30,7 +29,7 @@ const StockStats = props => {
         <FieldRow label="Total Avg. Volume">{quote.avgTotalVolume}</FieldRow>
         <FieldRow label="Earnings Per Share">{stats.latestEPS}</FieldRow>
         <FieldRow label="Dividend Yield">{stats.dividendYield}</FieldRow>
-      </Flex>
+      </Box>
     </Flex>
   );
 };
@@ -38,12 +37,10 @@ const StockStats = props => {
 const FieldRow = ({ label, children }) => {
   return (
     <Flex flex={1} wrap pt={1}>
-      <Flex flex={['1 100%', 'auto']} f={1} color="offwhite50">
+      <Flex flex={['auto']} f={1} color="offwhite50">
         {label}
       </Flex>
-      <Flex flex="0 50% 0" f={2} color="offwhite">
-        {children}
-      </Flex>
+      <Box color="offwhite">{children}</Box>
       <Divider color="primary50a" borderWidth={1} my={1} />
     </Flex>
   );

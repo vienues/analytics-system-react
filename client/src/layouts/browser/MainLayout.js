@@ -17,9 +17,12 @@ import AppBar from './AppBar';
 export default ({ id }) => (
   <Root column flex={1}>
     <AppBar />
-    <Search url={/stock/} id={id}>
+    <ViewportFlex wrap f={5} align="center">
+      <Search url={/stock/} id={id} />
       <StockPrice id={id} />
-    </Search>
+      <Divider my={1} />
+    </ViewportFlex>
+
     {id ? <StockDetails id={id} /> : null}
     <Ribbon>
       <MarketList />

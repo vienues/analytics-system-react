@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-
-import { Divider, ViewportFlex } from '../../styleguide';
 import SearchSelect from './Select';
 
 export default class Search extends Component {
@@ -40,19 +38,13 @@ export default class Search extends Component {
   };
 
   render() {
-    const { children } = this.props;
-
     return (
-      <ViewportFlex wrap f={5} align="center">
-        <SearchSelect
-          loadOptions={this.loadOptions}
-          filterOptions={this.filterOptions}
-          onChange={this.handleChange}
-          value={this.state.currentSymbol}
-        />
-        {children}
-        <Divider my={1} />
-      </ViewportFlex>
+      <SearchSelect
+        loadOptions={this.loadOptions}
+        filterOptions={this.filterOptions}
+        onChange={this.handleChange}
+        value={this.state.currentSymbol}
+      />
     );
   }
 }
