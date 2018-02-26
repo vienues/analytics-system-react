@@ -20,7 +20,8 @@
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'",
     "precommit": "pretty-quick --staged",
-    "postmerge": "npm run clean && lerna bootstrap"
+    "postmerge": "npm run clean && lerna bootstrap",
+    "openfin": "openfin --launch --config ./client/public/app.json"
   },
   "author": "",
   "license": "ISC",

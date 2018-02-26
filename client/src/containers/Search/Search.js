@@ -11,7 +11,7 @@ export default class Search extends Component {
     const { data: { stock } = {} } = nextProps;
     const currentSymbol = this.state.currentSymbol;
     if (currentSymbol == null && stock != null) {
-      const symbol = { ...stock.company, __typename: 'ReferenceSymbol' };
+      const symbol = { ...stock.company };
       this.setState({ currentSymbol: symbol });
     }
   }
@@ -44,6 +44,7 @@ export default class Search extends Component {
         filterOptions={this.filterOptions}
         onChange={this.handleChange}
         value={this.state.currentSymbol}
+        onBlur={this.handleBlur}
       />
     );
   }

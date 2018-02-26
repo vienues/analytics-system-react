@@ -9,7 +9,7 @@ import { Flex } from 'rebass';
 
 export { colors, gradients } from './colors';
 
-export { ViewportRow, ViewportFlex } from './ViewportRow';
+export { ViewportRow, ViewportFlex, ViewportRowPadding, ViewportRowBody } from './ViewportRow';
 
 export const Root = styled(Rebass.Flex)`
   flex: 1;

@@ -9,7 +9,6 @@ export const ViewportRow = ({ className, ...props }) => (
 );
 
 export const ViewportFlex = ({ className, ...props }) => (
-  /* <ViewportRow {...props} is={Flex} />; */
   <ViewportRow className={className}>
     <ViewportRowBodyFlex {...props} />
   </ViewportRow>

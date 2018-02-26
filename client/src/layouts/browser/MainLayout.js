@@ -2,16 +2,15 @@ import { Panel, PanelHeading } from 'components';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 
-import { Divider, Gutter, ViewportFlex } from 'styleguide';
-import { Ribbon } from '../../components/index';
-import Company from '../../containers/Company/index';
-import History from '../../containers/History/index';
-import MarketList from '../../containers/MarketList/index';
-import News from '../../containers/News/index';
-import Search from '../../containers/Search/index';
-import Stats from '../../containers/Stats/index';
-import StockPrice from '../../containers/StockPrice/index';
-import { Root } from '../../styleguide/index';
+import { Divider, Gutter, Root, ViewportFlex } from 'styleguide';
+import { Ribbon } from '../../components';
+import Company from '../../containers/Company';
+import History from '../../containers/History';
+import MarketList from '../../containers/MarketList';
+import News from '../../containers/News';
+import Search from '../../containers/Search';
+import Stats from '../../containers/Stats';
+import StockPrice from '../../containers/StockPrice';
 import AppBar from './AppBar';
 
 export default ({ id }) => (

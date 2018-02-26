@@ -6,7 +6,7 @@ import AsyncSelectStyled from './AsyncSelectStyled';
 
 export default class SearchSelect extends PureComponent {
   render() {
-    const { children, ...props } = this.props;
+    const { ...props } = this.props;
 
     return (
       <AsyncSelectStyled
@@ -26,11 +26,17 @@ export default class SearchSelect extends PureComponent {
 }
 
 export class OptionDisplay extends PureComponent {
+  handleMouseDown = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    this.props.onSelect(this.props.option, event);
+  };
+
   render() {
     const { option: value, ...props } = this.props;
 
     return (
-      <OptionWrap {...props}>
+      <OptionWrap {...props} onMouseDown={this.handleMouseDown}>
         <Box color="accent" pr={2} w="3.5rem">
           {value.id.toUpperCase()}
         </Box>
