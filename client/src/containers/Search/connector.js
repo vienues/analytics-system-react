@@ -1,6 +1,7 @@
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
+import { withRouter } from 'react-router-dom';
 
 export default compose(
   graphql(
@@ -25,17 +26,6 @@ export default compose(
   ),
   graphql(
     gql`
-      query storeQuery {
-        currentSymbol @client {
-          id
-          name
-        }
-      }
-    `,
-    { name: 'store' },
-  ),
-  graphql(
-    gql`
       mutation search($text: String!) {
         updateSearch(text: $text) @client {
           id
@@ -45,15 +35,23 @@ export default compose(
     `,
     { name: 'updateSearch' },
   ),
-  graphql(
-    gql`
-      mutation setSymbol($symbol: ReferenceSymbol!) {
-        updateCurrentSymbol(symbol: $symbol) @client {
-          id
-          name
+  withRouter,
+  withProps(props => {
+    return {
+      onSymbolChanged: id => {
+        props.history.push(`${props.url}${id}`);
+        if (window.fin) {
+          window.fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
+            data: {
+              selection: {
+                id,
+                symbol: id,
+                __typename: 'Selection',
+              },
+            },
+          });
         }
-      }
-    `,
-    { name: 'updateCurrentSymbol' },
-  ),
+      },
+    };
+  }),
 );

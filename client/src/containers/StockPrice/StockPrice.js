@@ -11,7 +11,7 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
   const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good'];
   const { latestPrice, change, changePercent } = quote;
   return (
-    <Flex flex="none" align="flex-start" color="primary30">
+    <Flex data-x={'ssss'} flex="none" align="flex-start" color="primary30">
       <Currency>{latestPrice}</Currency>
       <Box px={1} />
       <Text color={color}>

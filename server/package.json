@@ -7,8 +7,7 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start":
-      "export BABEL_CACHE_PATH=../babel-cache.json && export BABEL_DISABLE_CACHE=1 && nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
+    "start": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "ISC",
