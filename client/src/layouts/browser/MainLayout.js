@@ -1,22 +1,22 @@
+import { Panel, PanelHeading } from 'components';
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { Panel, PanelHeading } from 'components';
 
-import { ViewportFlex, Divider, Gutter } from 'styleguide';
-
-import Search from '../../containers/Search/index';
+import { Divider, Gutter, ViewportFlex } from 'styleguide';
 import { Ribbon } from '../../components/index';
-
-import AppLayout from './AppLayout';
-import News from '../../containers/News/index';
 import Company from '../../containers/Company/index';
-import MarketList from '../../containers/MarketList/index';
-import Stats from '../../containers/Stats/index';
 import History from '../../containers/History/index';
+import MarketList from '../../containers/MarketList/index';
+import News from '../../containers/News/index';
+import Search from '../../containers/Search/index';
+import Stats from '../../containers/Stats/index';
 import StockPrice from '../../containers/StockPrice/index';
+import { Root } from '../../styleguide/index';
+import AppBar from './AppBar';
 
 export default ({ id }) => (
-  <AppLayout>
+  <Root column flex={1}>
+    <AppBar />
     <Search url={/stock/} id={id}>
       <StockPrice id={id} />
     </Search>
@@ -24,7 +24,7 @@ export default ({ id }) => (
     <Ribbon>
       <MarketList />
     </Ribbon>
-  </AppLayout>
+  </Root>
 );
 
 const StockDetails = ({ id }) => (
