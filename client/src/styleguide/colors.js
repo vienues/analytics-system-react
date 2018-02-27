@@ -107,12 +107,17 @@ export const blue = {
   '20a': rgb(0, 104, 255, 0.2),
 }
 
+export const teal = {
+  '100': rgb(39, 87, 140),
+}
+
 export const colors = flatten({
   transparent,
   white,
   black,
   offwhite,
   offblack,
+  subtleblue: teal,
   primary,
   secondary,
   red,

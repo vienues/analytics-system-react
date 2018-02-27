@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import _ from 'lodash'
 import React, { PureComponent } from 'react'
-import { theme } from '../../theme'
 import { colors } from '../../styleguide/colors'
+import { withTheme } from 'styled-components'
 
 import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
 
@@ -60,7 +60,7 @@ class History extends PureComponent {
             type="basisOpen"
             dataKey="average"
             strokeWidth={2}
-            stroke={theme.accent}
+            stroke={this.props.theme.accent}
             fill="url(#colorUv)"
             dot={false}
             isAnimationActive={false}
@@ -99,4 +99,4 @@ History.fragment = gql`
   }
 `
 
-export default History
+export default withTheme(History)

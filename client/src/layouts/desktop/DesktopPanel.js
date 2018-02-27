@@ -1,13 +1,24 @@
 import React from 'react'
-import { Panel, PanelHeading } from '../../components/index'
+import { Box } from 'rebass'
+import { Background } from 'styleguide'
+import styled from 'styled-components'
 
-import { Root } from '../../styleguide/index'
+const PanelHeader = styled(Box)`
+  width: 100%;
+  flex: 1;
+  background-color: ${props => props.theme.colors.teal};
+  border-radius: 4px;
+  height: 25px;
+`
 
+const Panel = styled(Box)`
+  height: 100%;
+  width: 100%;
+  flex: 1;
+`
 export default ({ heading, children }) => (
-  <Root column flex={1} px={2}>
-    <Panel>
-      <PanelHeading>{heading}</PanelHeading>
-      {children}
-    </Panel>
-  </Root>
+  <Background column w={1}>
+    <PanelHeader>{heading}</PanelHeader>
+    <Box px={2}>{children}</Box>
+  </Background>
 )

@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom'
 
 import logoSVGURL from '../../assets/logo.svg'
 import { ViewportRowPadding, ViewportRowBody, textProps } from 'styleguide'
-import { theme } from '../../theme'
 
 const AppBar = () => (
   <ViewportRowPadding>
@@ -24,7 +23,7 @@ const Link = styled(NavLink)`
 
   display: flex;
   align-items: center;
-  color: ${theme.colors.white};
+  color: ${props => props.theme.colors.white};
   border-radius: 0.25rem;
   min-height: 2rem;
   padding: 0 0.5rem;
@@ -36,7 +35,7 @@ const Link = styled(NavLink)`
   margin-left: 1rem;
 
   &.active {
-    background-color: ${theme.colors.accent50a};
+    background-color: ${props => props.theme.colors.accent50a};
   }
 `
 

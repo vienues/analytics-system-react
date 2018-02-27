@@ -4,24 +4,20 @@ import * as Rebass from 'rebass'
 import styled, { css } from 'styled-components'
 import mapProps from './map-props'
 
-import { theme } from '../theme'
-import { Flex } from 'rebass'
-
 export { colors, gradients } from './colors'
 
 export { ViewportRow, ViewportFlex, ViewportRowPadding, ViewportRowBody } from './ViewportRow'
 
-export const Root = styled(Rebass.Flex)`
-  flex: 1;
-  color: ${theme.colors.primary50a};
-  background-color: ${theme.gradients.primary[0]};
-  background-image: linear-gradient(135deg, ${theme.gradients.primary.join(', ')} 120%);
+export const Background = styled(Rebass.Box)`
+  color: ${props => props.theme.colors.primary50a};
+  background-color: ${props => props.theme.gradients.primary[0]};
+  background-image: linear-gradient(135deg, ${props => props.theme.gradients.primary.join(', ')} 120%);
 `
 
-export const RootBleed = styled(Flex)`
+export const Root = Background.withComponent(Rebass.Flex).extend`
+  height: 100%;
   width: 100%;
-  max-width: 80rem;
-  margin: 0 auto;
+  display: flex;
 `
 
 export const Divider = styled(Rebass.Border).attrs({ my: 2, color: 'accent', borderWidth: 2, top: true })`
@@ -29,14 +25,6 @@ export const Divider = styled(Rebass.Border).attrs({ my: 2, color: 'accent', bor
 `
 
 export const Gutter = withProps({ p: [1, 2] })(Rebass.Box)
-
-export const SectionHeading = props => <Rebass.Header f={2} caps {...props} />
-
-export const Bleed = ({ children, full, ...props }) => (
-  <Rebass.Container px={[2, 3]} {...props}>
-    <Rebass.Container maxWidth="4" p={0} px={0} children={children} />;
-  </Rebass.Container>
-)
 
 export const textProps = mapProps({
   weight: {
