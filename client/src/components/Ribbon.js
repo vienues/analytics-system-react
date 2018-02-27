@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { ViewportFlex, gradients, Small } from 'styleguide'
+import { ViewportFlex, gradients, Small, colors } from 'styleguide';
 
 const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: true })`
   position: fixed;
@@ -21,8 +21,8 @@ const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: tr
 
 export default props => (
   <Ribbon>
-    <Small flex="1 100%" f={0}>
-      US Markets
+    <Small flex="1 100%" f={0} color={colors.white}>
+      US MARKET
     </Small>
     {props.children}
   </Ribbon>
