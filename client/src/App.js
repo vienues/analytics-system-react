@@ -12,10 +12,10 @@ import theme from './theme'
 
 import MainLayout from './layouts/browser/MainLayout'
 import DesktopPanel from './layouts/desktop/DesktopPanel'
-import MainToolBar from './layouts/desktop/MainToolBar'
+import Search from './containers/Search'
 
 const createDesktopRoute = (heading, Component) => ({ match }) => (
-  <DesktopPanel heading={heading}>
+  <DesktopPanel id={match.params.id} heading={heading}>
     <Component id={match.params.id} />
   </DesktopPanel>
 )
@@ -33,8 +33,15 @@ class App extends Component {
               <Route exact path="/history/:id" component={createDesktopRoute('History', History)} />
               <Route exact path="/stats/:id" component={createDesktopRoute('Stats', Stats)} />
               <Route exact path="/company/:id" component={createDesktopRoute('Company', Company)} />
-
-              <Route exact path="/search/:id" component={({ match }) => <MainToolBar id={match.params.id} />} />
+              <Route
+                exact
+                path="/search/:id"
+                component={({ match }) => (
+                  <DesktopPanel id={match.params.id} heading={'Search'}>
+                    <Search id={match.params.id} url={/search/} />
+                  </DesktopPanel>
+                )}
+              />
               <Redirect exact from="/" to="/stock/aapl" />
             </Switch>
           </BrowserRouter>

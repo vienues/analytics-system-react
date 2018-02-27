@@ -1,13 +1,12 @@
 import React from 'react'
 import { Flex, Button, Box } from 'rebass'
 import { withHandlers } from 'recompose'
-import { Root } from 'styleguide'
+import { Root, Text } from 'styleguide'
 import styled from 'styled-components'
 import logoSVG from '../../assets/logo.svg'
 import { CloseIcon, MinimizeIcon } from '../../assets/icons'
 
 const PanelHeader = styled(Flex)`
-  width: 100%;
   align-items: center;
   background-color: ${props => props.theme.colors.teal};
   border-radius: 4px 4px 0 0;
@@ -37,10 +36,11 @@ const PanelButton = styled(Button)`
   padding: 0 0.2rem;
 `
 
-const DesktopPanel = ({ heading, children, close, minimize }) => (
+const DesktopPanel = ({ heading, children, close, minimize, id }) => (
   <Root column w={1} id={'bg'}>
     <PanelHeader>
       <Logo />
+      <Text color="offwhite">{`${heading} - ${id}`}</Text>
       <Flex>
         <PanelButton onClick={minimize}>
           <MinimizeIcon width={'1rem'} height={'1rem'} />
