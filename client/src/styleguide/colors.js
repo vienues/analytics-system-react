@@ -117,7 +117,7 @@ export const colors = flatten({
   black,
   offwhite,
   offblack,
-  subtleblue: teal,
+  teal,
   primary,
   secondary,
   red,

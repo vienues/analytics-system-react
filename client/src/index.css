@@ -4,6 +4,9 @@
   font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
+html {
+  overflow: auto;
+}
 body {
   display: flex;
 

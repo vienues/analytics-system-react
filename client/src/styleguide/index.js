@@ -1,4 +1,3 @@
-import React from 'react'
 import { withProps } from 'recompose'
 import * as Rebass from 'rebass'
 import styled, { css } from 'styled-components'

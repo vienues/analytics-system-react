@@ -46,7 +46,7 @@ class History extends PureComponent {
     high += high * 0.0005
 
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="99%" height="99%" minHeight={200}>
         <AreaChart data={chart} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
           <CartesianGrid stroke={colors.primary50a} />
           <ReferenceLine y={previousClose} stroke={colors.accent} strokeDasharray="3 3" />

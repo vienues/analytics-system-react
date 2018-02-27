@@ -19,6 +19,8 @@
         defaultWidth: 800,
         defaultTop: 300,
         defaultLeft: 300,
+        transparent: true,
+        frame: false,
         autoShow: true
       }
     }, function () {
@@ -37,6 +39,9 @@
     document.querySelector('#openCompanyApp')
       .addEventListener('click', () => {
         openApp('http://localhost:3000/company/VOD');
+        openApp('http://localhost:3000/stats/VOD');
+        openApp('http://localhost:3000/history/VOD');
+        openApp('http://localhost:3000/news/VOD');
         openApp('http://localhost:3000/search/VOD');
       });
   });

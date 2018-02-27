@@ -15,7 +15,7 @@ import DesktopPanel from './layouts/desktop/DesktopPanel'
 import MainToolBar from './layouts/desktop/MainToolBar'
 
 const createDesktopRoute = (heading, Component) => ({ match }) => (
-  <DesktopPanel heading={heading} component={News}>
+  <DesktopPanel heading={heading}>
     <Component id={match.params.id} />
   </DesktopPanel>
 )
