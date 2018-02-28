@@ -1,17 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import { Flex, Box } from 'rebass';
-import { Text, Small, colors } from '../../styleguide';
-import Numeral from '../../components/Numeral';
-import ArrowUpward from 'material-ui-icons/ArrowUpward';
-import ArrowDownward from 'material-ui-icons/ArrowDownward';
+import { Flex, Box } from 'rebass'
+import { Text, Small, colors } from '../../styleguide'
+import Numeral from '../../components/Numeral'
+import ArrowUpward from 'material-ui-icons/ArrowUpward'
+import ArrowDownward from 'material-ui-icons/ArrowDownward'
 
 const Markets = ({ data: { markets } }) => {
   return (
     <Flex align="center">
       {markets.map(({ id, change, changePercent, latestPrice }) => {
-        const [Icon, color] = change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good'];
+        const [Icon, color] = change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
         return (
           <Flex key={id} pr={2} align="baseline">
             <Small caps bold color="white">
@@ -34,7 +34,7 @@ const Markets = ({ data: { markets } }) => {
               <Numeral>{changePercent * 100}</Numeral>
             </Percent>
           </Flex>
-        );
+        )
       })}
     </Flex>
   )
@@ -53,7 +53,7 @@ const SuperText = styled(Small)`
     height: 0;
     max-height: 0;
   }
-`;
+`
 
 const Currency = styled(SuperText)`
   &:before {
@@ -61,7 +61,7 @@ const Currency = styled(SuperText)`
     font-size: 0.5rem;
     padding-right: 0.25rem;
   }
-`;
+`
 
 const Percent = styled(SuperText)`
   &:after {
@@ -69,7 +69,7 @@ const Percent = styled(SuperText)`
     font-size: 0.5rem;
     padding-left: 0.125rem;
   }
-`;
+`
 
 const VerticalRule = ({ color }) => (
   <svg width="8" height="12" viewBox="0 0 8 20" xmlns="http://www.w3.org/2000/svg">
@@ -83,6 +83,6 @@ const VerticalRule = ({ color }) => (
       strokeLinecap="square"
     />
   </svg>
-);
+)
 
-export default Markets;
+export default Markets
