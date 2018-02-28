@@ -18,7 +18,7 @@ const Markets = ({ data: { markets } }) => {
               {id}
             </Small>
             <Box pr={1} />
-            <Currency color={colors.white}>{latestPrice}</Currency>
+            <Currency>{latestPrice}</Currency>
             <Box pr={1} />
             <Text color={color}>
               <Icon
