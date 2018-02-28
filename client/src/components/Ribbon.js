@@ -22,7 +22,7 @@ const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: tr
 export default props => (
   <Ribbon>
     <Small flex="1 100%" f={0}>
-      US Markets
+      US MARKET
     </Small>
     {props.children}
   </Ribbon>

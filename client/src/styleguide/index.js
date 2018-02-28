@@ -70,7 +70,7 @@ export const Lead = styled(Rebass.Lead)`
   ${textProps};
 `
 export const Small = styled(Rebass.Small)`
-  ${textProps};
+  color: ${props => props.theme.colors.white} ${textProps};
 `
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
