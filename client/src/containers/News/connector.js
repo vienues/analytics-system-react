@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 export const StockNewsConnector = fragment =>
   graphql(
     gql`
-      query StockNewsConnectorQuery($id: ID!) {
+      query NewsQuery($id: ID!) {
         stock(id: $id) {
           id
           ...News

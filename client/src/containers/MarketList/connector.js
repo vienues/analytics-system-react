@@ -3,7 +3,7 @@ import { lifecycle, compose } from 'recompose'
 import { graphql } from 'react-apollo'
 
 const getMarkets = gql`
-  query getMarketData {
+  query QuoteQuery {
     markets {
       id
       companyName
@@ -15,7 +15,7 @@ const getMarkets = gql`
 `
 
 const subscribeMarket = gql`
-  subscription onMarketUpdate($markets: [String!]!) {
+  subscription onQuoteQuery($markets: [String!]!) {
     getQuotes(symbols: $markets) {
       id
       changePercent

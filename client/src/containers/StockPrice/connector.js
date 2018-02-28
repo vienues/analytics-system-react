@@ -3,7 +3,7 @@ import { compose, lifecycle } from 'recompose'
 import { graphql } from 'react-apollo'
 
 const query = gql`
-  query mainStockData($id: ID!) {
+  query StockPriceQuery($id: ID!) {
     stock(id: $id) {
       id
       company {

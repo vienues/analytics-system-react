@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 const CompanyConnector = fragment =>
   graphql(
     gql`
-      query StockCompanyConnectorQuery($id: ID!) {
+      query CompanyQuery($id: ID!) {
         stock(id: $id) {
           id
           ...Company
