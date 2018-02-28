@@ -1,16 +1,37 @@
 import { ApolloLink } from 'apollo-link/lib/index'
-import { Observable } from 'rxjs/Rx'
 import { hasDirectives } from 'apollo-utilities'
+import { getMainDefinition } from 'apollo-utilities/lib/index'
 import { Observable } from 'rxjs'
 
-export const openfinLink = new ApolloLink((operation, forward) => {
-  const isOpenfin = hasDirectives(['openfin'], operation.query)
-  if (!isOpenfin) return forward(operation)
-
-  console.log('sub to bus')
+const createSubscription = () => {
   return Observable.create(observer => {
     window.fin.desktop.InterApplicationBus.subscribe('*', null, 'SYMBOL.CHANGE', message => {
       observer.next(message)
     })
   })
+}
+
+const createQuery = () => {
+  const id = 'VOD'
+  return Observable.fromPromise(
+    Promise.resolve({
+      data: {
+        selection: {
+          id,
+          symbol: id,
+          __typename: 'Selection',
+        },
+      },
+    }),
+  )
+}
+
+export const openfinLink = new ApolloLink((operation, forward) => {
+  const isOpenfin = hasDirectives(['openfin'], operation.query)
+  if (!isOpenfin) return forward(operation)
+
+  const op = getMainDefinition(operation.query)
+  const isSubscription = op.kind === 'OperationDefinition' && op.operation === 'subscription'
+
+  return isSubscription ? createSubscription() : createQuery()
 })

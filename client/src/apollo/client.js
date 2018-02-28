@@ -5,6 +5,7 @@ import { HttpLink } from 'apollo-link-http'
 import { withClientState } from 'apollo-link-state'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import { openfinLink } from 'apollo/openfinLink'
 import clientState from './clientState'
 
 const PORT = 4000
@@ -28,6 +29,10 @@ const links = [
     new HttpLink({ uri: `http://localhost:${PORT}/graphql` }),
   ),
 ]
+
+if (window.fin) {
+  links.unshift(openfinLink)
+}
 
 const client = new ApolloClient({
   cache,

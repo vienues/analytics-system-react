@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-export const CompanyConnector = fragment =>
+const CompanyConnector = fragment =>
   graphql(
     gql`
       query StockCompanyConnectorQuery($id: ID!) {

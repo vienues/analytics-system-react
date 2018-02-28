@@ -1,3 +1,4 @@
+import { selectionConnector } from 'openfin'
 import React, { Component } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { ThemeProvider } from 'styled-components'
@@ -14,11 +15,16 @@ import MainLayout from './layouts/browser/MainLayout'
 import DesktopPanel from './layouts/desktop/DesktopPanel'
 import Search from './containers/Search'
 
-const createDesktopRoute = (heading, Component) => ({ match }) => (
-  <DesktopPanel id={match.params.id} heading={heading}>
-    <Component id={match.params.id} />
-  </DesktopPanel>
-)
+const createDesktopRoute = (heading, comp) => {
+  const Component = selectionConnector(comp)
+  return () => {
+    return (
+      <DesktopPanel heading={heading}>
+        <Component />
+      </DesktopPanel>
+    )
+  }
+}
 
 class App extends Component {
   render() {
@@ -29,10 +35,10 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={MainLayout} />
               <Route exact path="/stock/:id" component={({ match }) => <MainLayout id={match.params.id} />} />
-              <Route exact path="/news/:id" component={createDesktopRoute('Recent News', News)} />
-              <Route exact path="/history/:id" component={createDesktopRoute('History', History)} />
-              <Route exact path="/stats/:id" component={createDesktopRoute('Stats', Stats)} />
-              <Route exact path="/company/:id" component={createDesktopRoute('Company', Company)} />
+              <Route exact path="/news/:id?" component={createDesktopRoute('Recent News', News)} />
+              <Route exact path="/history/:id?" component={createDesktopRoute('History', History)} />
+              <Route exact path="/stats/:id?" component={createDesktopRoute('Stats', Stats)} />
+              <Route exact path="/company/:id?" component={createDesktopRoute('Company', Company)} />
               <Route
                 exact
                 path="/search/:id"

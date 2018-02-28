@@ -8,21 +8,25 @@
 <ul id="root"></ul>
 <script>
 
-  function openApp(url) {
+  function openApp(route, options) {
+    const defOptions = {
+      defaultHeight: 200,
+      defaultWidth: 200,
+      defaultTop: 10,
+      defaultLeft: 300,
+      transparent: true,
+      frame: false,
+      autoShow: true
+    }
+
+    const merged = Object.assign(defOptions, options)
+
     var app = new fin.desktop.Application({
-      url: url,
+      url: `http://localhost:3000/${route}/`,
       uuid: Math.random(1000).toString(),
       name: "Application Name",
       frame: false,
-      mainWindowOptions: {
-        defaultHeight: 200,
-        defaultWidth: 800,
-        defaultTop: 300,
-        defaultLeft: 300,
-        transparent: true,
-        frame: false,
-        autoShow: true
-      }
+      mainWindowOptions: merged
     }, function () {
       console.log("Application successfully created");
       app.run();
@@ -36,13 +40,45 @@
   document.addEventListener('DOMContentLoaded', () => {
     //OpenFin is ready
 
+    const marginLeft = 30;
+    const marginTop = 30;
+
+    const col1 = 600;
+    const row1 = 500;
+
     document.querySelector('#openCompanyApp')
       .addEventListener('click', () => {
-        openApp('http://localhost:3000/company/VOD');
-        openApp('http://localhost:3000/stats/VOD');
-        openApp('http://localhost:3000/history/VOD');
-        openApp('http://localhost:3000/news/VOD');
-        openApp('http://localhost:3000/search/VOD');
+        openApp('search/vod', {
+          defaultHeight: 150,
+          defaultWidth: 530,
+          defaultTop: marginTop,
+          defaultLeft: marginLeft
+        });
+        openApp('company', {
+          defaultHeight: 280,
+          defaultWidth: 440,
+          defaultTop: 200,
+          defaultLeft: marginLeft
+        });
+        openApp('history', {
+          defaultHeight: 280,
+          defaultWidth: 500,
+          defaultTop: row1,
+          defaultLeft: marginLeft
+        });
+
+        openApp('news', {
+          defaultHeight: 280,
+          defaultWidth: 440,
+          defaultTop: marginTop,
+          defaultLeft: col1
+        });
+        openApp('stats', {
+          defaultHeight: 550,
+          defaultWidth: 400,
+          defaultTop: row1 -150,
+          defaultLeft: col1
+        });
       });
   });
 </script>

@@ -40,7 +40,7 @@ const DesktopPanel = ({ heading, children, close, minimize, id }) => (
   <Root column w={1} id={'bg'}>
     <PanelHeader>
       <Logo />
-      <Text color="offwhite">{`${heading} - ${id}`}</Text>
+      <Text color="offwhite">{`${heading}`}</Text>
       <Flex>
         <PanelButton onClick={minimize}>
           <MinimizeIcon width={'1rem'} height={'1rem'} />
