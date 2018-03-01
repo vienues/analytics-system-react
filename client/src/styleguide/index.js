@@ -65,12 +65,6 @@ export const textProps = mapProps({
   },
 })
 
-const hoverStyle = color => `  
-  &:hover {
-    color: #${color}
-  }
-`
-
 export const Text = styled(Rebass.Text).attrs({ is: 'div' })`
   ${textProps};
 `
@@ -79,14 +73,24 @@ export const Heading = styled(Rebass.Heading)`
 `
 export const Lead = styled(Rebass.Lead)`
   ${textProps};
-  ${props => props.hover && hoverStyle(props.hover)};
 `
 export const Small = styled(Rebass.Small)`
-  color: ${props => props.theme.colors.white} ${textProps};
+  ${textProps};
+  color: ${props => props.theme.colors.white};
 `
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
   ${textProps};
-  ${props => props.hover && hoverStyle(props.hover)};
   display: block;
+`
+
+export const HyperLinkedLead = Small.extend`
+  &:hover {
+    color: ${props => props.theme.colors.gold};
+  }
+`
+export const HyperLinkedBlockLink = BlockLink.extend`
+  &:hover {
+    color: ${props => props.theme.colors.gold};
+  }
 `

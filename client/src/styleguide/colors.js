@@ -107,6 +107,10 @@ export const blue = {
   '20a': rgb(127, 179, 255, 0.2),
 }
 
+export const gold = {
+  '100': rgb(224, 190, 134),
+}
+
 export const teal = {
   '100': rgb(39, 87, 140),
 }
@@ -117,6 +121,7 @@ export const colors = flatten({
   black,
   offwhite,
   offblack,
+  gold,
   teal,
   primary,
   secondary,

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import React, { Fragment } from 'react'
 import { Box, Measure, Flex } from 'rebass'
-import { Lead, BlockLink } from '../../styleguide'
+import { Lead, HyperLinkedBlockLink } from '../../styleguide'
 
 const URL = /(https?\/\/)?(www\.)?/
 
@@ -16,17 +16,9 @@ export const Company = props => {
       <Measure mt={1} f={1} color="offwhite">
         {company.description}
       </Measure>
-      <BlockLink
-        target="_blank"
-        href={company.website}
-        f={1}
-        color="offwhite50"
-        mt={1}
-        fontStyle="italic"
-        hover={'e0be86'}
-      >
+      <HyperLinkedBlockLink target="_blank" href={company.website} f={1} color="offwhite50" mt={1} fontStyle="italic">
         {company.website.replace(URL, '')}
-      </BlockLink>
+      </HyperLinkedBlockLink>
       {peers.length > 0 && (
         <Fragment>
           <Lead f={3} mt={2} color="offwhite50">
@@ -34,9 +26,9 @@ export const Company = props => {
           </Lead>
           <Flex mt={1} color="accent">
             {peers.map(symbol => (
-              <BlockLink key={symbol} href={`/stock/${symbol}`} pr={1} hover={'e0be86'}>
+              <HyperLinkedBlockLink key={symbol} href={`/stock/${symbol}`} pr={1}>
                 {symbol}
-              </BlockLink>
+              </HyperLinkedBlockLink>
             ))}
           </Flex>
         </Fragment>
