@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import React, { Fragment } from 'react'
 import { Box, Measure, Flex } from 'rebass'
-import { Lead, BlockLink } from '../../styleguide'
+import { PanelHeading } from '../../components'
+import { Lead, BlockLink, Gutter } from '../../styleguide'
 
 const URL = /(http(s)?:\/\/)?/
 
@@ -23,10 +24,9 @@ export const Company = props => {
       </Measure>
       {peers.length > 0 && (
         <Fragment>
-          <Lead f={3} mt={2} color="offwhite50">
-            Top Peers
-          </Lead>
-          <Flex mt={1} color="accent">
+          <Gutter />
+          <PanelHeading>Top Peers</PanelHeading>
+          <Flex mt={1} color="offwhite50">
             {peers.map(symbol => (
               <BlockLink key={symbol} href={`/stock/${symbol}`} pr={1}>
                 {symbol}
