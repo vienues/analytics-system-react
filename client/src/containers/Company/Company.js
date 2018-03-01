@@ -11,16 +11,14 @@ export const Company = props => {
 
   return (
     <Box flex={1}>
-      <Lead mt={2} f={3} color="offwhite">
+      <Lead mt={2} f={3}>
         {company.name} ({company.symbol})
       </Lead>
       <BlockLink target="_blank" href={company.website} f={1} color="offwhite50" mt={1} fontStyle="italic">
         {company.website.replace(URL, '')}
       </BlockLink>
       <Measure mt={1} f={1} color="offwhite">
-        <Lead f={1} color="offwhite">
-          {company.description}
-        </Lead>
+        <Lead f={1}>{company.description}</Lead>
       </Measure>
       {peers.length > 0 && (
         <Fragment>
