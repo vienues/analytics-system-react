@@ -19,7 +19,12 @@ export const Root = Background.withComponent(Rebass.Flex).extend`
   display: flex;
 `
 
-export const Divider = styled(Rebass.Border).attrs({ my: 2, color: 'accent', borderWidth: 2, top: true })`
+export const Divider = styled(Rebass.Border).attrs({
+  my: 2,
+  color: props => props.color || 'accent',
+  borderWidth: 2,
+  top: true,
+})`
   flex: 1 100%;
 `
 

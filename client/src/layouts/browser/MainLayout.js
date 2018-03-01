@@ -19,7 +19,7 @@ export default ({ id }) => (
     <ViewportFlex wrap f={5} align="center">
       <Search url={/stock/} id={id} />
       <StockPrice id={id} />
-      <Divider my={1} />
+      <Divider my={1} color={'offwhite50'} />
     </ViewportFlex>
 
     {id ? <StockDetails id={id} /> : null}
