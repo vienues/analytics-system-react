@@ -13,12 +13,12 @@ export const Company = props => {
       <Lead mt={2} f={3} color="offwhite50">
         {company.name} ({company.symbol})
       </Lead>
-      <Measure mt={1} f={1} color="offwhite">
-        {company.description}
-      </Measure>
       <BlockLink target="_blank" href={company.website} f={1} color="accent" mt={1} fontStyle="italic">
         {company.website.replace(URL, '')}
       </BlockLink>
+      <Measure mt={1} f={1} color="offwhite">
+        {company.description}
+      </Measure>
       {peers.length > 0 && (
         <Fragment>
           <Lead f={3} mt={2} color="offwhite50">
