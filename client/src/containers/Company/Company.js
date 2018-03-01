@@ -17,7 +17,9 @@ export const Company = props => {
         {company.website.replace(URL, '')}
       </BlockLink>
       <Measure mt={1} f={1} color="offwhite">
-        {company.description}
+        <Lead f={1} color="offwhite">
+          {company.description}
+        </Lead>
       </Measure>
       {peers.length > 0 && (
         <Fragment>
