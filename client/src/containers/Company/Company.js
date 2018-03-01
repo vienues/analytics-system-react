@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { Box, Measure, Flex } from 'rebass'
 import { Lead, BlockLink } from '../../styleguide'
 
-const URL = /(https?\/\/)?(www\.)?/
+const URL = /(http(s)?:\/\/)?/
 
 export const Company = props => {
   const { company, peers } = props.data.stock
