@@ -99,7 +99,7 @@ export const yellow = {
 }
 
 export const blue = {
-  '115': rgb(0, 88, 217), // How do you get this value?
+  '115': rgb(0, 88, 217),
   '100': rgb(127, 179, 255),
   '30a': rgb(127, 179, 255, 0.3),
   '50a': rgb(127, 179, 255, 0.5),
