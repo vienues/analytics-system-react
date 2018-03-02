@@ -19,7 +19,12 @@ export const Root = Background.withComponent(Rebass.Flex).extend`
   display: flex;
 `
 
-export const Divider = styled(Rebass.Border).attrs({ my: 2, color: 'accent', borderWidth: 2, top: true })`
+export const Divider = styled(Rebass.Border).attrs({
+  my: 2,
+  color: props => (props.alt ? 'offwhite50' : 'accent'),
+  borderWidth: 2,
+  top: true,
+})`
   flex: 1 100%;
 `
 
@@ -78,4 +83,15 @@ export const Small = styled(Rebass.Small)`
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
   ${textProps};
   display: block;
+`
+
+export const HyperLinkedLead = Small.extend`
+  &:hover {
+    color: ${props => props.theme.colors.gold};
+  }
+`
+export const HyperLinkedBlockLink = BlockLink.extend`
+  &:hover {
+    color: ${props => props.theme.colors.gold};
+  }
 `
