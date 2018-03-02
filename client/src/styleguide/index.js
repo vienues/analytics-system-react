@@ -68,9 +68,11 @@ export const Heading = styled(Rebass.Heading)`
 `
 export const Lead = styled(Rebass.Lead)`
   ${textProps};
+  color: ${props => props.theme.colors.offwhite};
 `
 export const Small = styled(Rebass.Small)`
-  color: ${props => props.theme.colors.white} ${textProps};
+  ${textProps};
+  color: ${props => props.theme.colors.white};
 `
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
