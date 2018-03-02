@@ -8,7 +8,7 @@ const NewsSidebar = props => {
   return (props.data.stock.news || []).map(newsItem => (
     <Box key={newsItem.id} is="a" target="_blank" href={newsItem.url} flex={1}>
       <Measure f={1} my={2}>
-        <HyperLinkedLead f={1} color="offwhite">
+        <HyperLinkedLead f={1}>
           {newsItem.headline}
         </HyperLinkedLead>
         <Text f={0} color="offwhite50">

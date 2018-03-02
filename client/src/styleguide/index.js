@@ -73,6 +73,7 @@ export const Heading = styled(Rebass.Heading)`
 `
 export const Lead = styled(Rebass.Lead)`
   ${textProps};
+  color: ${props => props.theme.colors.offwhite};
 `
 export const Small = styled(Rebass.Small)`
   ${textProps};
