@@ -9,7 +9,7 @@ import { makeExecutableSchema } from 'graphql-tools'
 
 import resolvers from './resolvers'
 import typeDefs from './schema.graphql'
-import * as iex from './connectors/iex'
+import * as iex from './connectors/faker'
 import { createLogger } from 'bunyan'
 
 const PORT = 4000
