@@ -1,17 +1,20 @@
 import dns from 'dns'
+import * as real from './iex'
+import * as fake from './faker'
 
-export default async function(endpoint) {
-  let promise = new Promise(resolve => {
-    dns.lookup(endpoint, err => {
-      if (err && err.code === 'ENOTFOUND') {
-        resolve(false)
-      } else {
-        resolve(true)
-      }
-    })
+function checkConnection(endpoint, callback) {
+  dns.lookup(endpoint, err => {
+    if (err && err.code === 'ENOTFOUND') {
+      callback(false)
+    } else {
+      callback(true)
+    }
   })
-
-  let result = await promise
-
-  return result
 }
+
+let connector = real
+let callback = result => (connector = result ? real : fake)
+
+checkConnection('https://api.iextrading.com/1.0', callback)
+
+export default connector
