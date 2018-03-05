@@ -9,13 +9,16 @@ import { makeExecutableSchema } from 'graphql-tools'
 
 import resolvers from './resolvers'
 import typeDefs from './schema.graphql'
-import * as iex from './connectors/faker'
+import checkConnection from './connectors'
+import * as real from './connectors/iex'
+import * as fake from './connectors/faker'
 import { createLogger } from 'bunyan'
 
 const PORT = 4000
 const CLIENT_PORT = 3000
 const log = createLogger({ name: 'GRAPHQL-SERVER' })
 
+const iex = checkConnection('api.iextrading.com') ? real : fake
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 const server = express()
 
