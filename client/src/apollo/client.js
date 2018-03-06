@@ -2,18 +2,15 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { from, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
-import { withClientState } from 'apollo-link-state'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 import { openfinLink } from 'apollo/openfinLink'
-import clientState from './clientState'
 
 const PORT = 4000
 
 const cache = new InMemoryCache()
 
 const links = [
-  withClientState({ cache, ...clientState }),
   split(
     // split based on operation type
     ({ query }) => {

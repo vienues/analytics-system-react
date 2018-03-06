@@ -2,8 +2,7 @@
  * copied from react-select
  */
 import { css } from 'styled-components'
-
-import { colors } from '../../../styleguide/colors'
+import { colors } from 'styleguide'
 
 const backgroundColor = colors.transparent
 const inputBgFocus = colors.transparent

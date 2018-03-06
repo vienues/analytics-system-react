@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _ from 'lodash'
 import React, { PureComponent } from 'react'
-import { colors } from '../../styleguide/colors'
+import { colors } from 'styleguide'
 import { withTheme } from 'styled-components'
 
 import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'

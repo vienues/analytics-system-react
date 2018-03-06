@@ -1,9 +1,9 @@
 import { withProps } from 'recompose'
 import * as Rebass from 'rebass'
 import styled, { css } from 'styled-components'
-import mapProps from './map-props'
+import { mapProps } from './mapProps'
 
-export { colors, gradients } from './colors'
+export { colors, gradients } from '@adaptive-insights/common'
 
 export { ViewportRow, ViewportFlex, ViewportRowPadding, ViewportRowBody } from './ViewportRow'
 

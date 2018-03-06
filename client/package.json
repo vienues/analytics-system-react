@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "@adaptive-insights/client",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -7,6 +7,8 @@
     "node": ">=8.9.0"
   },
   "dependencies": {
+    "@adaptive-insights/common": "*",
+    "add": "^2.0.6",
     "apollo-cache-inmemory": "^1.1.7",
     "apollo-client": "^2.2.2",
     "apollo-link": "^1.0.7",
@@ -14,6 +16,7 @@
     "apollo-link-state": "^0.4.0",
     "apollo-link-ws": "^1.0.4",
     "apollo-utilities": "^1.0.6",
+    "d3-shape": "^1.2.0",
     "fuse.js": "^3.2.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.7.0",
@@ -27,6 +30,8 @@
     "react": "^16.2.0",
     "react-apollo": "^2.0.4",
     "react-dom": "^16.2.0",
+    "react-native-svg": "^6.2.2",
+    "react-native-svg-charts": "^4.0.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.0",
     "react-select": "^1.2.1",
@@ -39,13 +44,14 @@
     "rxjs": "^5.5.6",
     "styled-components": "^3.1.6",
     "subscriptions-transport-ws": "^0.9.5",
-    "@adaptive-insights/data": "*"
+    "victory-native": "^0.17.1",
+    "warning": "^3.0.0",
+    "yarn": "^1.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  },
-  "devDependencies": {}
+  }
 }

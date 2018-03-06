@@ -2,7 +2,7 @@
  * copied from react-select
  */
 import { css } from 'styled-components'
-import { colors } from '../../../styleguide/colors'
+import { colors } from 'styleguide'
 
 export default css`
   /* */

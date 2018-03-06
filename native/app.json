@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "adaptive-insights",
+    "description": "This project is really great.",
+    "slug": "adaptive-insights",
+    "privacy": "public",
+    "sdkVersion": "25.0.0",
+    "platforms": ["ios", "android"],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/icon.png",
+    "splash": {
+      "image": "./src/assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#001e4c"
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

@@ -228,7 +228,13 @@ type ReferenceSymbol implements Symbol {
   type: String
 }
 
+type SearchResult {
+  id: String!
+  name: String!
+}
+
 type Query {
+  search(text: String): [SearchResult!]!
   company(id: ID!): Company
   stock(id: ID!): Stock
   reference: ReferenceQuery

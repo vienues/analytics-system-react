@@ -1,5 +1,5 @@
 import { theme as rebassTheme } from 'rebass'
-import { gradients, colors } from './styleguide/colors'
+import { gradients, colors } from 'styleguide'
 
 export const theme = {
   ...rebassTheme,

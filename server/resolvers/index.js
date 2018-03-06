@@ -2,6 +2,7 @@ import date, { formatDate } from './date'
 import { createLogger } from 'bunyan'
 import { pubsub } from '../pubsub'
 import pricing from '../pricing'
+import search from './searchIndex'
 
 const log = createLogger({ name: 'GRAPHQL-SERVER' })
 pricing(pubsub)
@@ -50,6 +51,7 @@ export default {
   },
 
   Query: {
+    search: (root, { text }) => search(text),
     markets: async (_, __, { iex }) => {
       const val = await iex.fetch(`stock/market/batch?symbols=spy,dia,iwm&types=quote`)
       return Object.values(val).map(x => ({ ...x.quote, id: x.quote.symbol }))

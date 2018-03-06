@@ -7,7 +7,6 @@ export default class Search extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //
     const { data: { stock } = {} } = nextProps
     const currentSymbol = this.state.currentSymbol
     if (currentSymbol == null && stock != null) {
@@ -24,24 +23,15 @@ export default class Search extends Component {
     })
   }
 
-  filterOptions = options => options
-  loadOptions = async text => {
-    if (!text) {
-      return []
-    }
-
-    const results = await this.props.updateSearch({ variables: { text } })
-
-    return {
-      options: results.data.updateSearch,
-    }
+  onTextChange = text => {
+    this.props.search.refetch({ text })
   }
 
   render() {
     return (
       <SearchSelect
-        loadOptions={this.loadOptions}
-        filterOptions={this.filterOptions}
+        onInputChange={this.onTextChange.bind(this)}
+        options={this.props.search.search}
         onChange={this.handleChange}
         value={this.state.currentSymbol}
         onBlur={this.handleBlur}

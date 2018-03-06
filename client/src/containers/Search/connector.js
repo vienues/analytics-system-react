@@ -26,14 +26,21 @@ export default compose(
   ),
   graphql(
     gql`
-      mutation search($text: String!) {
-        updateSearch(text: $text) @client {
+      query search($text: String!) {
+        search(text: $text) {
           id
           name
         }
       }
     `,
-    { name: 'updateSearch' },
+    {
+      name: 'search',
+      options: {
+        variables: {
+          text: '',
+        },
+      },
+    },
   ),
   withRouter,
   withProps(props => {
