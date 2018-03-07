@@ -1,29 +1,24 @@
-import * as iex from './iex'
+import companyData from '../data/companies.json'
 import marketData from '../data/marketList.json'
 import mockData from '../data/stockData.json'
 
-export function fetch(path, options) {
-  let query = path
-    .split('/')
-    .slice(2)
-    .join('_')
+export function fetch(path) {
+  let result
+  let terms = path.split('/')
 
-  switch (query) {
-    case 'batch?symbols=spy,dia,iwm&types=quote':
-      return new Promise(resolve => resolve(marketData))
-    case 'company':
-      return new Promise(resolve => resolve(mockData.company))
-    case 'quote':
-      return new Promise(resolve => resolve(mockData.quote))
-    case 'stats':
-      return new Promise(resolve => resolve(mockData.stats))
-    case 'peers':
-      return new Promise(resolve => resolve(mockData.peers))
-    case 'chart_1d':
-      return new Promise(resolve => resolve(mockData.chart_1d))
-    case 'news_last_5':
-      return new Promise(resolve => resolve(mockData.news_last_5))
-    default:
-      return iex.fetch(path, options)
+  if (path.match(/stock\/market/)) {
+    result = marketData
+  } else if (path.match(/stock\/(\w+)/)) {
+    let [, symbol, term] = terms
+    result = (companyData[symbol] && companyData[symbol][term]) || mockData[term]
+  } else {
+    let [term] = terms
+    result = mockData[term]
   }
+
+  if (result === undefined || result === null) {
+    throw new Error(`Unable to fetch data at this endpoint: ${path}`)
+  }
+
+  return Promise.resolve(result)
 }
