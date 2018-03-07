@@ -1,0 +1,197 @@
+{
+  "AAPL": {
+    "company": {
+      "symbol": "AAPL",
+      "companyName": "Apple Inc.",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Computer Hardware",
+      "website": "http://www.apple.com",
+      "description":
+        "Apple Inc is designs, manufactures and markets mobile communication and media devices and personal computers, and sells a variety of related software, services, accessories, networking solutions and third-party digital content and applications.",
+      "CEO": "Timothy D. Cook",
+      "issueType": "cs",
+      "sector": "Technology"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-06T17:48:07-05:00",
+        "headline": "Why Bonds May Have More Fun, And Defensive Stocks, Too",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7587708211572373",
+        "summary":
+          "     Introduction - t  he best and the brightest fear bonds     Yet I think the widespread consensus could be wrong.   Here are two prominent examples of today's groupthink from last week:      Alan Greenspan: We are in a bond market bubble     Tudor Jones Stands With Dalio, Gross in Calling Bond…",
+        "related":
+          "AAPL,AZN,BMY,Computer Hardware,CON31167138,DHI,ETFC,GLD,ISRG,ITB,LLY,MDC,MSFT,Mutual Funds,NASDAQ01,NVO,OTCBULLB,RHHBY,SHY,SPY,Computing and Information Technology,TEVA,TLT,TOL,XLU"
+      },
+      {
+        "datetime": "2018-03-06T16:26:45-05:00",
+        "headline": "Qualcomm: Thank You, CFIUS",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8857254355282579",
+        "summary":
+          "     Rethink Technology business briefs for March 6, 2018.    The CFIUS letter makes clear that security concerns are not theater     Broadcom CEO Hock Tan, source:  Broadcom .    Broadcom ( AVGO ) has  characterized  the delay in the Qualcomm ( QCOM ) shareholder meeting as      …",
+        "related":
+          "AAPL,AVGO,BoD/SH,Computer Hardware,CON31167138,Investment Opinion,NASDAQ01,NXPI,QCOM,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-06T14:43:53-05:00",
+        "headline": "My 30 Stock Portfolio",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/4944407521846678",
+        "summary":
+          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
+        "related":
+          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
+      },
+      {
+        "datetime": "2018-03-06T09:41:00-05:00",
+        "headline": "Microsoft's laptop gains an edge over Apple MacBook for business users",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7343138238620831",
+        "summary": "No summary available.",
+        "related": "AAPL,MSFT"
+      },
+      {
+        "datetime": "2018-03-06T09:22:00-05:00",
+        "headline": "Your first trade for Tuesday, March 6",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/6412546040029220",
+        "summary": "No summary available.",
+        "related": "AAPL,C,MCD,SQ"
+      }
+    ],
+    "peers": ["MSFT", "NOK", "IBM", "HPQ", "GOOGL", "BB", "XLK"]
+  },
+  "GOOG": {
+    "company": {
+      "symbol": "GOOG",
+      "companyName": "Alphabet Inc.",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Online Media",
+      "website": "https://www.abc.xyz",
+      "description":
+        "Alphabet Inc is a provider of internet content products and portals. Its suite of brands includes Search, Android, YouTube, Apps, Maps & Ads.",
+      "CEO": "Larry Page",
+      "issueType": "cs",
+      "sector": "Technology"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-06T14:43:53-05:00",
+        "headline": "My 30 Stock Portfolio",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/4944407521846678",
+        "summary":
+          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
+        "related":
+          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
+      },
+      {
+        "datetime": "2018-03-06T08:21:17-05:00",
+        "headline": "Will Whitney Tilson's Kids Go To College?",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/8519517118863349",
+        "summary":
+          "   Value investor and finance whiz  Whitney Tilson  came out swinging March 1st, declaring that short selling is too difficult and dangerous, that he has learned his bearish lessons. He also announced he had recently purchased a perma-bull stake in  Berkshire Hathaway (BRK.A) (BRK.B), Howard Hugh…",
+        "related":
+          "AMZN,BRK.A,BRK.B,FB,GOOG,GOOGL,HHC,INT31168144,NASDAQ01,ONL31168,QQQ,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-06T07:43:37-05:00",
+        "headline": "The Hardest Question",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/5973900204496566",
+        "summary":
+          "   The \"Flitcraft parable\" is the part of Dashiell Hammett's  The Maltese Falcon  which was left out of the great Humphrey Bogart movie. It also happens to be what makes Hammett, once a private eye himself, more than just a crime writer.   The story of Flitcraft is one of the great dramatizations…",
+        "related":
+          "AAPL,BAC,BRK.A,BRK.B,Computer Hardware,CON31167138,GE,GOOG,JPM,MSFT,NASDAQ01,Computing and Information Technology,TSLA,WMT"
+      },
+      {
+        "datetime": "2018-03-06T07:34:34-05:00",
+        "headline": "The Bear Case On Tariffs Is Not Strong - Cramer's Mad Money (3/5/18)",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/8118228562568407",
+        "summary":
+          "         Stocks discussed on the in-depth session of Jim Cramer's Mad Money TV Program, Monday, March 5.    When Trump announced tariffs on steel and aluminum, Cramer discovered that money flows from where it's scared to where it's safe. \"We saw this happen late Friday afternoon. It occurred agai…",
+        "related":
+          "AMZN,CAG,DPZ,FB,GOOG,INT31168144,International Trade,NASDAQ01,NFLX,NUE,ONL31168,Computing and Information Technology,TSE,TSN"
+      },
+      {
+        "datetime": "2018-03-06T06:00:00-05:00",
+        "headline": "Retiree, Are You Smarter Than A Kindergartner?",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/8345117172438295",
+        "summary":
+          "   Some financial analysts believe that retirement stocks do not exist. This belief is based on the simple idea that total returns can only be positive, negative, or flat. From that perspective, any stock that will go up is a good stock and any stock that will go down is a bad stock. The simplici…",
+        "related":
+          "AAPL,AGNC,AMGN,AVB,Computer Hardware,CON31167138,COST,CSCO,CTL,DIS,EQR,GILD,GM,GMM.U:CA,GOOG,HD,INTC,JNJ,KO,KR,LLY,MCD,NASDAQ01,NKE,O,PEP,RAS,SKT,SPG,T,Computing and Information Technology,TGT,TSXTSX01,UNH,VZ,WBA,WHLR,WMT"
+      }
+    ],
+    "peers": ["MSFT", "AKAM", "ADBE", "AAPL", "EBAY", "BIDU", "IAC", "YNDX", "FB", "BCOR", "XLK"]
+  },
+  "MSFT": {
+    "company": {
+      "symbol": "MSFT",
+      "companyName": "Microsoft Corporation",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Application Software",
+      "website": "http://www.microsoft.com",
+      "description":
+        "Microsoft Corp is a technology company. It develop, license, and support a wide range of software products and services. Its business is organized into three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.",
+      "CEO": "Satya Nadella",
+      "issueType": "cs",
+      "sector": "Technology"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-06T17:48:07-05:00",
+        "headline": "Why Bonds May Have More Fun, And Defensive Stocks, Too",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7587708211572373",
+        "summary":
+          "     Introduction - t  he best and the brightest fear bonds     Yet I think the widespread consensus could be wrong.   Here are two prominent examples of today's groupthink from last week:      Alan Greenspan: We are in a bond market bubble     Tudor Jones Stands With Dalio, Gross in Calling Bond…",
+        "related":
+          "AAPL,AZN,BMY,Computer Hardware,CON31167138,DHI,ETFC,GLD,ISRG,ITB,LLY,MDC,MSFT,Mutual Funds,NASDAQ01,NVO,OTCBULLB,RHHBY,SHY,SPY,Computing and Information Technology,TEVA,TLT,TOL,XLU"
+      },
+      {
+        "datetime": "2018-03-06T14:43:53-05:00",
+        "headline": "My 30 Stock Portfolio",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/4944407521846678",
+        "summary":
+          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
+        "related":
+          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
+      },
+      {
+        "datetime": "2018-03-06T09:42:00-05:00",
+        "headline": "Microsoft signs solar power agreement in India",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/4595906062528685",
+        "summary":
+          "      Microsoft (NASDAQ: MSFT )  signs an agreement  to purchase 3MW of solar-powered electricity from Atria Power in India.   More news on: Microsoft Corporation, Tech stocks news, Stocks on the move,     Read more …     ",
+        "related":
+          "Alternate Energy,APPSOFTW,Commodities,INDIA001,Market and Economy,MSFT,NASDAQ01,SOF31165134,Computing and Information Technology,WOMPOLIX"
+      },
+      {
+        "datetime": "2018-03-06T09:41:00-05:00",
+        "headline": "Microsoft's laptop gains an edge over Apple MacBook for business users",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7343138238620831",
+        "summary": "No summary available.",
+        "related": "AAPL,MSFT"
+      },
+      {
+        "datetime": "2018-03-06T07:43:37-05:00",
+        "headline": "The Hardest Question",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/5973900204496566",
+        "summary":
+          "   The \"Flitcraft parable\" is the part of Dashiell Hammett's  The Maltese Falcon  which was left out of the great Humphrey Bogart movie. It also happens to be what makes Hammett, once a private eye himself, more than just a crime writer.   The story of Flitcraft is one of the great dramatizations…",
+        "related":
+          "AAPL,BAC,BRK.A,BRK.B,Computer Hardware,CON31167138,GE,GOOG,JPM,MSFT,NASDAQ01,Computing and Information Technology,TSLA,WMT"
+      }
+    ],
+    "peers": ["XLK"]
+  }
+}

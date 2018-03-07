@@ -9,13 +9,14 @@ import { makeExecutableSchema } from 'graphql-tools'
 
 import resolvers from './resolvers'
 import typeDefs from './schema.graphql'
-import * as iex from './connectors/iex'
+import getDataSource from './connectors'
 import { createLogger } from 'bunyan'
 
 const PORT = 4000
 const CLIENT_PORT = 3000
 const log = createLogger({ name: 'GRAPHQL-SERVER' })
 
+const iex = getDataSource(process.env.OFFLINE)
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 const server = express()
 
