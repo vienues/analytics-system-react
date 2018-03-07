@@ -6,7 +6,7 @@ import { map, mergeMap } from 'rxjs/operators'
 import getDataSource from './connectors'
 
 const log = createLogger({ name: 'PRICING-SERVER' })
-const iex = getDataSource(process.env.OFFLINE)
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 const getQuoteUrl = symbol => `stock/${symbol}/quote`
 const requestQuote = symbol => iex.fetch(getQuoteUrl(symbol))
