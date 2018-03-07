@@ -10,7 +10,8 @@ export function fetch(path) {
     result = marketData
   } else if (path.match(/stock\/(\w+)/)) {
     let [, symbol, term] = terms
-    result = (companyData[symbol] && companyData[symbol][term]) || mockData[term]
+    let something = companyData[symbol] || Object.values(companyData)[0]
+    result = (something && something[term]) || mockData[term]
   } else {
     let [term] = terms
     result = mockData[term]
