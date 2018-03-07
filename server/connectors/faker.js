@@ -1,6 +1,6 @@
 import * as iex from './iex'
-import marketData from './marketList.json'
-import mockData from './stockData.json'
+import marketData from '../data/marketList.json'
+import mockData from '../data/stockData.json'
 
 export function fetch(path, options) {
   let query = path
