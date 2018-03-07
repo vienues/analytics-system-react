@@ -9,7 +9,7 @@
   "scripts": {
     "start": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-data": "node ./builder.js aapl goog msft"
+    "generate-mock-data": "node ./builder.js aapl goog msft"
   },
   "license": "ISC",
   "dependencies": {

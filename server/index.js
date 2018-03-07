@@ -16,7 +16,7 @@ const PORT = 4000
 const CLIENT_PORT = 3000
 const log = createLogger({ name: 'GRAPHQL-SERVER' })
 
-const iex = getDataSource(process.env.OFFLINE)
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 const schema = makeExecutableSchema({ typeDefs, resolvers })
 const server = express()
 

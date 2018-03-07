@@ -1,6 +1,6 @@
-import companyData from '../data/companies.json'
-import marketData from '../data/marketList.json'
-import mockData from '../data/stockData.json'
+import marketData from '../mockData/marketListData.json'
+import companyData from '../mockData/companyData.json'
+import mockData from '../mockData/stockData.json'
 
 export function fetch(path) {
   let result
