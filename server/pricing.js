@@ -1,13 +1,15 @@
 import { createLogger } from 'bunyan'
-import fetch from 'node-fetch'
 import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/observable/interval'
 import { Observable } from 'rxjs/Observable'
 import { map, mergeMap } from 'rxjs/operators'
+import getDataSource from './connectors'
 
-const getQuoteUrl = symbol => `https://api.iextrading.com/1.0/stock/${symbol}/quote`
-const requestQuote = symbol => fetch(getQuoteUrl(symbol)).then(x => x.json())
 const log = createLogger({ name: 'PRICING-SERVER' })
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
+
+const getQuoteUrl = symbol => `stock/${symbol}/quote`
+const requestQuote = symbol => iex.fetch(getQuoteUrl(symbol))
 
 function createPriceStream(symbol) {
   return Observable.interval(300000).pipe(

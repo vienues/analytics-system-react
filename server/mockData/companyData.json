@@ -1,0 +1,196 @@
+{
+  "AAPL": {
+    "company": {
+      "symbol": "AAPL",
+      "companyName": "Apple Inc.",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Computer Hardware",
+      "website": "http://www.apple.com",
+      "description":
+        "Apple Inc is designs, manufactures and markets mobile communication and media devices and personal computers, and sells a variety of related software, services, accessories, networking solutions and third-party digital content and applications.",
+      "CEO": "Timothy D. Cook",
+      "issueType": "cs",
+      "sector": "Technology"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-07T09:03:19-05:00",
+        "headline": "Apple's New SwiftNIO Might Be A Hint Of Bigger Cloud Ambitions To Come!",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/4688891435123363",
+        "summary":
+          "   A few days ago at the  try! Swift Conference  Apple ( AAPL ) software engineer Norman Maurer introduced  SwiftNIO , a new high performance network for networked server and client applications. In this article we are going to discuss this new technology  and then wildly speculate about what thi…",
+        "related":
+          "AAPL,AMZN,Computer Software,GOOG,GOOGL,INT31168144,MSFT,NASDAQ01,ONL31168,Software,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-07T08:02:57-05:00",
+        "headline": "By The Numbers: Quality Stocks For A Cheap Price",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7397121648838905",
+        "summary":
+          "   The numbers alone don't really tell you everything you need to know to make an investment decision, it's important to understand the business behind those numbers in order to build a complete investment thesis. That acknowledged, quantitative systems can be enormously valuable tools to identif…",
+        "related":
+          "AAPL,ABBV,ADS,ALK,AMAT,AMG,AZO,BIIB,CBS,CELG,CFG,CMA,Computer Hardware,CON31167138,DFS,DIS,DISCA,ETFC,FCX,FFIV,HBAN,HOG,KEY,KLAC,LOW,LRCX,LUV,MPC,MTB,MU,NASDAQ01,NFX,NSC,ORLY,PFE,PFG,PRU,RCL,RF,SIG,SNA,SPY,STI,STT,STX,SWKS,SYF,Computing and Information Technology,TMK,TWX,UNP,URI,WYNN,XEC"
+      },
+      {
+        "datetime": "2018-03-07T06:25:00-05:00",
+        "headline": "Taiwan Semiconductor Manufacturing Company Is A Pure Play - Mark Hibben's Idea Of The Month",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/6928016009509232",
+        "summary":
+          "    See Mark's recent article on Taiwan Semiconductor Manufacturing Company (TSM)      Read more …    ",
+        "related":
+          "AAPL,Computer,Electronics,INTC,MANUFACT,Manufacturing and Engineering,NASDAQ01,NVDA,OTCBULLB,SEM31169,SEM31169147,SSNLF,TAIWAN01,Computing and Information Technology,TSM"
+      },
+      {
+        "datetime": "2018-03-07T04:00:00-05:00",
+        "headline": "Amazon is backing Ecobee, a smart thermostat company, just days after buying Ring",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8726360307805303",
+        "summary": "No summary available.",
+        "related": "AAPL,AMZN,GOOGL"
+      },
+      {
+        "datetime": "2018-03-06T17:48:07-05:00",
+        "headline": "Why Bonds May Have More Fun, And Defensive Stocks, Too",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7587708211572373",
+        "summary":
+          "     Introduction - t  he best and the brightest fear bonds     Yet I think the widespread consensus could be wrong.   Here are two prominent examples of today's groupthink from last week:      Alan Greenspan: We are in a bond market bubble     Tudor Jones Stands With Dalio, Gross in Calling Bond…",
+        "related":
+          "AAPL,AZN,BMY,Computer Hardware,CON31167138,DHI,ETFC,GLD,ISRG,ITB,LLY,MDC,MSFT,Mutual Funds,NASDAQ01,NVO,OTCBULLB,RHHBY,SHY,SPY,Computing and Information Technology,TEVA,TLT,TOL,XLU"
+      }
+    ],
+    "peers": ["MSFT", "NOK", "IBM", "HPQ", "GOOGL", "BB", "XLK"]
+  },
+  "GOOG": {
+    "company": {
+      "symbol": "GOOG",
+      "companyName": "Alphabet Inc.",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Online Media",
+      "website": "https://www.abc.xyz",
+      "description":
+        "Alphabet Inc is a provider of internet content products and portals. Its suite of brands includes Search, Android, YouTube, Apps, Maps & Ads.",
+      "CEO": "Larry Page",
+      "issueType": "cs",
+      "sector": "Technology"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-07T11:36:14-05:00",
+        "headline": "Cutting Through The Smoke And Mirrors Of AI On Wall Street",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/5153160644143408",
+        "summary":
+          "   Artificial intelligence made lots of headlines in 2017. Alphabet ( GOOGL ) developed software that defeated the defending world champion in Go, then a few months later developed a new version that defeated the prior version 100 games to none.   These developments have spurred predictions that …",
+        "related": "GOOG,GOOGL,INT31168144,KO,MS,NASDAQ01,ONL31168,PEP,Computing and Information Technology,UBS"
+      },
+      {
+        "datetime": "2018-03-07T10:48:02-05:00",
+        "headline": "Huge Upside With Google's Core Business",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/5891519998403658",
+        "summary":
+          "   When Alphabet (GOOG) (GOOGL) peers into a mirror, it sees itself as two separate entities: Google and Other Bets. As investors, it may be extremely revealing to view GOOGL in the same light.   The premise of GOOGL's \"Other Bets\" is to continue to accelerate growth through organic development o…",
+        "related": "AUT10209,AUT10209017,CON102,F,GM,GMM.U:CA,GOOG,GOOGL,NASDAQ01,TSLA,TSXTSX01"
+      },
+      {
+        "datetime": "2018-03-07T09:03:19-05:00",
+        "headline": "Apple's New SwiftNIO Might Be A Hint Of Bigger Cloud Ambitions To Come!",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/4688891435123363",
+        "summary":
+          "   A few days ago at the  try! Swift Conference  Apple ( AAPL ) software engineer Norman Maurer introduced  SwiftNIO , a new high performance network for networked server and client applications. In this article we are going to discuss this new technology  and then wildly speculate about what thi…",
+        "related":
+          "AAPL,AMZN,Computer Software,GOOG,GOOGL,INT31168144,MSFT,NASDAQ01,ONL31168,Software,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-06T14:43:53-05:00",
+        "headline": "My 30 Stock Portfolio",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/4944407521846678",
+        "summary":
+          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
+        "related":
+          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
+      },
+      {
+        "datetime": "2018-03-06T08:21:17-05:00",
+        "headline": "Will Whitney Tilson's Kids Go To College?",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/8519517118863349",
+        "summary":
+          "   Value investor and finance whiz  Whitney Tilson  came out swinging March 1st, declaring that short selling is too difficult and dangerous, that he has learned his bearish lessons. He also announced he had recently purchased a perma-bull stake in  Berkshire Hathaway (BRK.A) (BRK.B), Howard Hugh…",
+        "related":
+          "AMZN,BRK.A,BRK.B,FB,GOOG,GOOGL,HHC,INT31168144,NASDAQ01,ONL31168,QQQ,Computing and Information Technology"
+      }
+    ],
+    "peers": ["MSFT", "AKAM", "ADBE", "AAPL", "EBAY", "BIDU", "IAC", "YNDX", "FB", "BCOR", "XLK"]
+  },
+  "MSFT": {
+    "company": {
+      "symbol": "MSFT",
+      "companyName": "Microsoft Corporation",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Application Software",
+      "website": "http://www.microsoft.com",
+      "description":
+        "Microsoft Corp is a technology company. It develop, license, and support a wide range of software products and services. Its business is organized into three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.",
+      "CEO": "Satya Nadella",
+      "issueType": "cs",
+      "sector": "Technology"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-07T09:03:19-05:00",
+        "headline": "Apple's New SwiftNIO Might Be A Hint Of Bigger Cloud Ambitions To Come!",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/4688891435123363",
+        "summary":
+          "   A few days ago at the  try! Swift Conference  Apple ( AAPL ) software engineer Norman Maurer introduced  SwiftNIO , a new high performance network for networked server and client applications. In this article we are going to discuss this new technology  and then wildly speculate about what thi…",
+        "related":
+          "AAPL,AMZN,Computer Software,GOOG,GOOGL,INT31168144,MSFT,NASDAQ01,ONL31168,Software,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-07T08:00:00-05:00",
+        "headline": "5 Dividend Stocks In My Portfolio Today",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7245084248517137",
+        "summary":
+          "   When Im looking for investments, I like solid dividends, strong fundamentals, and a cheap valuation.   I believe investors should be looking to reduce their volatility. Investing in the tech center, with highly valued companies like Microsoft ( MSFT ), carries significant risk. Intel (…",
+        "related": "BRX,EQR,GPMT,INTC,MO,MSFT,NASDAQ01,NLY,PM,Real Estate,REI10428,REITRETA"
+      },
+      {
+        "datetime": "2018-03-07T06:56:00-05:00",
+        "headline": "Games console market had its best year since 2011 thanks to Nintendo's 'record-breaking comeback'",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/8212892247354075",
+        "summary": "No summary available.",
+        "related": "MSFT,NTDOY,SNE"
+      },
+      {
+        "datetime": "2018-03-06T17:48:07-05:00",
+        "headline": "Why Bonds May Have More Fun, And Defensive Stocks, Too",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7587708211572373",
+        "summary":
+          "     Introduction - t  he best and the brightest fear bonds     Yet I think the widespread consensus could be wrong.   Here are two prominent examples of today's groupthink from last week:      Alan Greenspan: We are in a bond market bubble     Tudor Jones Stands With Dalio, Gross in Calling Bond…",
+        "related":
+          "AAPL,AZN,BMY,Computer Hardware,CON31167138,DHI,ETFC,GLD,ISRG,ITB,LLY,MDC,MSFT,Mutual Funds,NASDAQ01,NVO,OTCBULLB,RHHBY,SHY,SPY,Computing and Information Technology,TEVA,TLT,TOL,XLU"
+      },
+      {
+        "datetime": "2018-03-06T14:43:53-05:00",
+        "headline": "My 30 Stock Portfolio",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/4944407521846678",
+        "summary":
+          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
+        "related":
+          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
+      }
+    ],
+    "peers": ["XLK"]
+  }
+}
