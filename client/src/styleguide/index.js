@@ -5,18 +5,16 @@ import { mapProps } from './mapProps'
 
 export { colors, gradients } from '@adaptive-insights/common'
 
-export { ViewportRow, ViewportFlex, ViewportRowPadding, ViewportRowBody } from './ViewportRow'
+export { ViewportFlex } from './ViewportRow'
 
 export const Background = styled(Rebass.Box)`
   color: ${props => props.theme.colors.primary50a};
-  background-color: ${props => props.theme.gradients.primary[0]};
-  background-image: linear-gradient(135deg, ${props => props.theme.gradients.primary.join(', ')} 120%);
+  background-image: linear-gradient(323deg, ${props => props.theme.gradients.primary});
 `
 
 export const Root = Background.withComponent(Rebass.Flex).extend`
   height: 100%;
   width: 100%;
-  display: flex;
 `
 
 export const Divider = styled(Rebass.Border).attrs({

@@ -5,27 +5,34 @@
 }
 
 html {
-  overflow: auto;
+  height: 100%;
+  width: 100%;
 }
+
 body {
   display: flex;
 
   min-height: 100vh;
   max-width: 100vw;
 
+  height: 100%;
+  width: 100%;
+
   overflow-x: hidden;
-  overflow-y: auto;
 }
 
 :root,
 body {
   background-color: transparent;
+  height: 100%;
+  width: 100%;
 }
 
 #root,
 .root {
   flex: 1;
-
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex-flow: nowrap;

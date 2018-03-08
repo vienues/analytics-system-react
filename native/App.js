@@ -9,7 +9,7 @@ import Search from './src/Search'
 import History from './src/containers/History'
 
 import StockPrice from './src/containers/StockPrice'
-import { ApplicationBackground, Text } from './src/styleguide/index'
+import { ApplicationBackground, Text, Divider } from './src/styleguide/index'
 
 export default class App extends React.Component {
   state = {
@@ -34,17 +34,23 @@ const Details = ({ id }) => {
     <Fragment>
       <View
         style={{
-          flexDirection: 'row',
           width: '100%',
-          borderBottomWidth: 1,
-          borderColor: '#ddd',
           marginTop: 8,
-          paddingBottom: 8,
         }}
       >
         <StockPrice id={id} />
       </View>
       <History id={id} />
+      <Text
+        style={{
+          fontSize: 18,
+          marginTop: 26,
+          color: '#7fb3ff',
+        }}
+      >
+        Latest News
+      </Text>
+      <Divider />
       <News id={id} />
     </Fragment>
   )

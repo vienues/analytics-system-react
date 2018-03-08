@@ -12,25 +12,33 @@ import Search from '../../containers/Search'
 import Stats from '../../containers/Stats'
 import StockPrice from '../../containers/StockPrice'
 import AppBar from './AppBar'
+import { Flex } from 'rebass'
 
 export default ({ id }) => (
-  <Root column flex={1}>
-    <AppBar />
-    <ViewportFlex wrap f={5} align="center">
-      <Search url={/stock/} id={id} />
-      <StockPrice id={id} />
-      <Divider my={1} alt />
-    </ViewportFlex>
-
-    {id ? <StockDetails id={id} /> : null}
+  <Root column>
+    <ScrollableArea>
+      <ViewportFlex column>
+        <AppBar />
+        <SearchLayout id={id} />
+        {id ? <StockDetails id={id} /> : null}
+      </ViewportFlex>
+    </ScrollableArea>
     <Ribbon>
       <MarketList />
     </Ribbon>
   </Root>
 )
 
+const SearchLayout = ({ id }) => (
+  <Flex wrap f={5} align="center">
+    <Search url={/stock/} id={id} />
+    <StockPrice id={id} />
+    <Divider my={1} alt />
+  </Flex>
+)
+
 const StockDetails = ({ id }) => (
-  <ViewportFlex wrap>
+  <Flex wrap py={2}>
     <MainColumn py={3}>
       <History id={id} />
     </MainColumn>
@@ -47,8 +55,13 @@ const StockDetails = ({ id }) => (
       <PanelHeading>Company Overview</PanelHeading>
       <Company id={id} />
     </SidebarColumn>
-  </ViewportFlex>
+  </Flex>
 )
+
+const ScrollableArea = styled(Flex)`
+  flex-direction: column;
+  overflow-y: auto;
+`
 
 const MainColumn = styled(Panel).attrs({ flex: ['1 100%', '1 100%', 1], py: 2 })`
   min-height: calc(40vh - calc(12rem / 2));

@@ -12,6 +12,7 @@
     "add": "^2.0.6",
     "d3-shape": "^1.2.0",
     "lodash": "^4.17.5",
+    "numeral": "^2.0.6",
     "palx": "^1.0.3",
     "react-native-svg": "^6.2.2",
     "react-native-svg-charts": "^4.0.0",

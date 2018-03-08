@@ -1,29 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { ViewportFlex, gradients, Small } from 'styleguide'
+import { gradients, Small } from 'styleguide'
+import { Flex } from 'rebass'
 
-const Ribbon = styled(ViewportFlex).attrs({ f: 0, color: 'primary50', column: true })`
-  position: fixed;
-  bottom: 0;
-
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+const RibbonBG = styled(Flex).attrs({ f: 0, column: true, px: 2 })`
   line-height: 1.25rem;
-
-  display: flex;
-  align-items: center;
-
-  min-width: 100vw;
-  min-height: 3rem;
-  background-image: linear-gradient(180deg, ${gradients.secondary.join(', ')});
+  justify-content: center;
+  min-width: 100%;
+  width: 100%;
+  min-height: 3.4rem;
+  background-image: linear-gradient(to left, #00265d, #00204f);
 `
-
-export default props => (
-  <Ribbon>
+const Ribbon = props => (
+  <RibbonBG>
     <Small flex="1 100%" f={0}>
       US MARKET
     </Small>
     {props.children}
-  </Ribbon>
+  </RibbonBG>
 )
+
+export default Ribbon

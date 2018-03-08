@@ -30,6 +30,7 @@
     "ix": "^2.3.4",
     "moment": "^2.20.1",
     "node-fetch": "^2.0.0",
+    "numeral": "^2.0.6",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-native-svg": "^6.2.2",

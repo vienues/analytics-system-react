@@ -60,8 +60,8 @@ class History extends PureComponent {
     const Gradient = () => (
       <Defs key={'defs'}>
         <LinearGradient id={'gradient'} x1={'0%'} y={'0%'} x2={'0%'} y2={'100%'}>
-          <Stop offset="5%" stopColor="#8884d8" stopOpacity={0.9} />
-          <Stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+          <Stop offset="1%" stopColor="rgb(127, 179, 255)" stopOpacity={0.8} />
+          <Stop offset="95%" stopColor="rgb(127, 179, 255)" stopOpacity={0} />
         </LinearGradient>
       </Defs>
     )
@@ -73,7 +73,7 @@ class History extends PureComponent {
         contentInset={{ top: 25, bottom: 25 }}
         curve={shape.curveNatural}
         yAccessor={({ item }) => item.average}
-        svg={{ fill: 'rgba(134, 65, 244, 0.2)' }}
+        svg={{ fill: 'url(#gradient)' }}
         extras={[Gradient, Line]}
       />
     )

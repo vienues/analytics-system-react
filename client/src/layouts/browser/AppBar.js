@@ -2,21 +2,26 @@ import React from 'react'
 import styled from 'styled-components'
 import { Box } from 'rebass'
 import { NavLink } from 'react-router-dom'
-
+import { Flex } from 'rebass'
 import logoSVGURL from '../../assets/logo.svg'
-import { ViewportRowPadding, ViewportRowBody, textProps } from 'styleguide'
+import { textProps } from 'styleguide'
 
 const AppBar = () => (
-  <ViewportRowPadding>
-    <Body>
-      <Logo />
-      <Box flex="1" />
-      <Link to="/stock">Quotes</Link>
-      <Link to="/markets">Markets</Link>
-      <Link to="/watchlists">Watchlists</Link>
-    </Body>
-  </ViewportRowPadding>
+  <Body>
+    <Logo />
+    <Box flex="1" />
+    <Link to="/stock">Quotes</Link>
+    <Link to="/markets">Markets</Link>
+    <Link to="/watchlists">Watchlists</Link>
+  </Body>
 )
+
+const Body = styled(Flex)`
+  flex: 1;
+  align-items: center;
+  min-height: 6rem;
+  max-height: 6rem;
+`
 
 const Link = styled(NavLink)`
   ${textProps({ weight: 'normal', caps: true })};
@@ -37,13 +42,6 @@ const Link = styled(NavLink)`
   &.active {
     background-color: ${props => props.theme.colors.accent50a};
   }
-`
-
-const Body = styled(ViewportRowBody)`
-  display: flex;
-  align-items: center;
-  min-height: 6rem;
-  max-height: 6rem;
 `
 
 const Logo = styled(NavLink).attrs({ to: '/' })`

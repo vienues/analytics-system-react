@@ -52,8 +52,8 @@ class History extends PureComponent {
           <ReferenceLine y={previousClose} stroke={colors.accent} strokeDasharray="3 3" />
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#8884d8" stopOpacity={0.9} />
-              <stop offset="95%" stopColor="#8884d8" stopOpacity={0} />
+              <stop offset="5%" stopColor="#7fb3ff" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#7fb3ff00" stopOpacity={0} />
             </linearGradient>
           </defs>
           <Area
