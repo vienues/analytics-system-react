@@ -14,6 +14,7 @@
   },
   "scripts": {
     "start": "npm run bootstrap && lerna run --parallel start",
+    "offline-start": "set INSIGHTS_OFFLINE=true && npm run start",
     "bootstrap": "lerna bootstrap",
     "clean": "yarn && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
