@@ -14,52 +14,49 @@
     },
     "news": [
       {
-        "datetime": "2018-03-07T09:03:19-05:00",
-        "headline": "Apple's New SwiftNIO Might Be A Hint Of Bigger Cloud Ambitions To Come!",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/4688891435123363",
-        "summary":
-          "   A few days ago at the  try! Swift Conference  Apple ( AAPL ) software engineer Norman Maurer introduced  SwiftNIO , a new high performance network for networked server and client applications. In this article we are going to discuss this new technology  and then wildly speculate about what thi…",
-        "related":
-          "AAPL,AMZN,Computer Software,GOOG,GOOGL,INT31168144,MSFT,NASDAQ01,ONL31168,Software,Computing and Information Technology"
-      },
-      {
-        "datetime": "2018-03-07T08:02:57-05:00",
-        "headline": "By The Numbers: Quality Stocks For A Cheap Price",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7397121648838905",
-        "summary":
-          "   The numbers alone don't really tell you everything you need to know to make an investment decision, it's important to understand the business behind those numbers in order to build a complete investment thesis. That acknowledged, quantitative systems can be enormously valuable tools to identif…",
-        "related":
-          "AAPL,ABBV,ADS,ALK,AMAT,AMG,AZO,BIIB,CBS,CELG,CFG,CMA,Computer Hardware,CON31167138,DFS,DIS,DISCA,ETFC,FCX,FFIV,HBAN,HOG,KEY,KLAC,LOW,LRCX,LUV,MPC,MTB,MU,NASDAQ01,NFX,NSC,ORLY,PFE,PFG,PRU,RCL,RF,SIG,SNA,SPY,STI,STT,STX,SWKS,SYF,Computing and Information Technology,TMK,TWX,UNP,URI,WYNN,XEC"
-      },
-      {
-        "datetime": "2018-03-07T06:25:00-05:00",
-        "headline": "Taiwan Semiconductor Manufacturing Company Is A Pure Play - Mark Hibben's Idea Of The Month",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/6928016009509232",
-        "summary":
-          "    See Mark's recent article on Taiwan Semiconductor Manufacturing Company (TSM)      Read more …    ",
-        "related":
-          "AAPL,Computer,Electronics,INTC,MANUFACT,Manufacturing and Engineering,NASDAQ01,NVDA,OTCBULLB,SEM31169,SEM31169147,SSNLF,TAIWAN01,Computing and Information Technology,TSM"
-      },
-      {
-        "datetime": "2018-03-07T04:00:00-05:00",
-        "headline": "Amazon is backing Ecobee, a smart thermostat company, just days after buying Ring",
+        "datetime": "2018-03-09T12:32:00-05:00",
+        "headline": "This start-up wants to change the way you interact with your dentist, one toothbrush at a time",
         "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8726360307805303",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/5915486457894836",
         "summary": "No summary available.",
-        "related": "AAPL,AMZN,GOOGL"
+        "related": "AAPL,CL,PG"
       },
       {
-        "datetime": "2018-03-06T17:48:07-05:00",
-        "headline": "Why Bonds May Have More Fun, And Defensive Stocks, Too",
+        "datetime": "2018-03-09T11:13:00-05:00",
+        "headline": "How To Retire With Dividend Stocks And Recession Fears",
         "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7587708211572373",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7780566856492910",
         "summary":
-          "     Introduction - t  he best and the brightest fear bonds     Yet I think the widespread consensus could be wrong.   Here are two prominent examples of today's groupthink from last week:      Alan Greenspan: We are in a bond market bubble     Tudor Jones Stands With Dalio, Gross in Calling Bond…",
+          "   One challenge I frequently hear about from retirees is producing reliable income during retirement.   They may be focused on the total yield of their portfolio or they may be dealing with the required minimum distributions from tax advantaged retirement accounts.   The beautiful thing about th…",
         "related":
-          "AAPL,AZN,BMY,Computer Hardware,CON31167138,DHI,ETFC,GLD,ISRG,ITB,LLY,MDC,MSFT,Mutual Funds,NASDAQ01,NVO,OTCBULLB,RHHBY,SHY,SPY,Computing and Information Technology,TEVA,TLT,TOL,XLU"
+          "AAPL,AGNC,AMZN,AVB,Computer Hardware,CON31167138,DCT,DRE,EQR,FB,GOOG,LPT,MCD,MO,MSFT,NASDAQ01,NLY,NNN,O,PLD,PM,PSB,SPG,T,Computing and Information Technology,VZ"
+      },
+      {
+        "datetime": "2018-03-09T09:09:00-05:00",
+        "headline": "Your first trade for Friday, March 9",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8130993034929587",
+        "summary": "No summary available.",
+        "related": "AAPL,DERM,ED,EUFN,IWM"
+      },
+      {
+        "datetime": "2018-03-08T19:28:33-05:00",
+        "headline": "February Dividend Income Report",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/5026339382953709",
+        "summary":
+          "     Back in September 2017, I received slightly over $100K as a result of the commuted value of my pension plan. I decided to invest 100% of this money into dividend growth stocks. Each month, I publish my results. I dont do this to brag; I do this to show you its possible to bui…",
+        "related":
+          "AAPL,CRE10322,CRE10322056,DIS,Financial and Business Services,GNTX,HAS,HON,LAZ,MSFT,NASDAQ01,SBUX,TXN,UPS,V"
+      },
+      {
+        "datetime": "2018-03-08T15:56:12-05:00",
+        "headline": "This Summer, Apple Is Taking Me To The Island And Picking Up The Tab",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8993119210767996",
+        "summary":
+          "   I will soon enter my next life/work stage, sometimes known as  semi-retirement. I will then move to writing and blogging and influencing on a \"full time\" basis. While Americans are quick to get with the program and the benefits of simple low fee investing (at times by way of low fee index ETFs…",
+        "related": "AAPL,CANADA01,Computer Hardware,CON31167138,NASDAQ01,QQQ,Computing and Information Technology"
       }
     ],
     "peers": ["MSFT", "NOK", "IBM", "HPQ", "GOOGL", "BB", "XLK"]
@@ -79,6 +76,44 @@
     },
     "news": [
       {
+        "datetime": "2018-03-09T11:13:00-05:00",
+        "headline": "How To Retire With Dividend Stocks And Recession Fears",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/7780566856492910",
+        "summary":
+          "   One challenge I frequently hear about from retirees is producing reliable income during retirement.   They may be focused on the total yield of their portfolio or they may be dealing with the required minimum distributions from tax advantaged retirement accounts.   The beautiful thing about th…",
+        "related":
+          "AAPL,AGNC,AMZN,AVB,Computer Hardware,CON31167138,DCT,DRE,EQR,FB,GOOG,LPT,MCD,MO,MSFT,NASDAQ01,NLY,NNN,O,PLD,PM,PSB,SPG,T,Computing and Information Technology,VZ"
+      },
+      {
+        "datetime": "2018-03-09T09:55:19-05:00",
+        "headline": "Waymo launching self-driving truck pilot program in Atlanta",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/7141013283916792",
+        "summary":
+          "      Alphabets ( GOOG ,  GOOGL ) Waymo will  launch a self-driving truck  pilot program in Atlanta to deliver cargo to Googles data centers.   More news on: Alphabet Inc., Alphabet Inc., Uber, Tech stocks news,     Read more …     ",
+        "related": "GOOG,GOOGL,INT31168144,NASDAQ01,ONL31168,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-08T13:11:10-05:00",
+        "headline": "YouTube TV, MLB expand partnership to include World Series",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/4633496357913173",
+        "summary":
+          "      Alphabets ( GOOG ,  GOOGL ) YouTube TV  expands its partnership  with Major League Baseball.   More news on: Alphabet Inc., Alphabet Inc., Tech stocks news,     Read more …     ",
+        "related": "GOOG,GOOGL,INT31168144,NASDAQ01,ONL31168,SPORTS,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-08T02:49:45-05:00",
+        "headline": "Is The Technology Sector Headed For Another Q2 Breakout?",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/4689193667877452",
+        "summary":
+          "      From the Big Picture to Individual Stock Breakouts   This analysis starts with a 14 year chart of the Dow Jones US Computer Services Index shown below. This sub-sector of technology is one of many industries showing strong growth and a recent surge in volume over the past year. The technica…",
+        "related":
+          "AAPL,Computer Hardware,CON31167138,CSCO,EGAN,FB,FEYE,GOOG,INTC,KEM,MSFT,NASDAQ01,QNST,QTEC,ROM,SPY,T,Computing and Information Technology,TECL,TQQQ,V,VGT,VZ,XLK,XNTK"
+      },
+      {
         "datetime": "2018-03-07T11:36:14-05:00",
         "headline": "Cutting Through The Smoke And Mirrors Of AI On Wall Street",
         "source": "SeekingAlpha",
@@ -86,45 +121,6 @@
         "summary":
           "   Artificial intelligence made lots of headlines in 2017. Alphabet ( GOOGL ) developed software that defeated the defending world champion in Go, then a few months later developed a new version that defeated the prior version 100 games to none.   These developments have spurred predictions that …",
         "related": "GOOG,GOOGL,INT31168144,KO,MS,NASDAQ01,ONL31168,PEP,Computing and Information Technology,UBS"
-      },
-      {
-        "datetime": "2018-03-07T10:48:02-05:00",
-        "headline": "Huge Upside With Google's Core Business",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/goog/article/5891519998403658",
-        "summary":
-          "   When Alphabet (GOOG) (GOOGL) peers into a mirror, it sees itself as two separate entities: Google and Other Bets. As investors, it may be extremely revealing to view GOOGL in the same light.   The premise of GOOGL's \"Other Bets\" is to continue to accelerate growth through organic development o…",
-        "related": "AUT10209,AUT10209017,CON102,F,GM,GMM.U:CA,GOOG,GOOGL,NASDAQ01,TSLA,TSXTSX01"
-      },
-      {
-        "datetime": "2018-03-07T09:03:19-05:00",
-        "headline": "Apple's New SwiftNIO Might Be A Hint Of Bigger Cloud Ambitions To Come!",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/goog/article/4688891435123363",
-        "summary":
-          "   A few days ago at the  try! Swift Conference  Apple ( AAPL ) software engineer Norman Maurer introduced  SwiftNIO , a new high performance network for networked server and client applications. In this article we are going to discuss this new technology  and then wildly speculate about what thi…",
-        "related":
-          "AAPL,AMZN,Computer Software,GOOG,GOOGL,INT31168144,MSFT,NASDAQ01,ONL31168,Software,Computing and Information Technology"
-      },
-      {
-        "datetime": "2018-03-06T14:43:53-05:00",
-        "headline": "My 30 Stock Portfolio",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/goog/article/4944407521846678",
-        "summary":
-          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
-        "related":
-          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
-      },
-      {
-        "datetime": "2018-03-06T08:21:17-05:00",
-        "headline": "Will Whitney Tilson's Kids Go To College?",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/goog/article/8519517118863349",
-        "summary":
-          "   Value investor and finance whiz  Whitney Tilson  came out swinging March 1st, declaring that short selling is too difficult and dangerous, that he has learned his bearish lessons. He also announced he had recently purchased a perma-bull stake in  Berkshire Hathaway (BRK.A) (BRK.B), Howard Hugh…",
-        "related":
-          "AMZN,BRK.A,BRK.B,FB,GOOG,GOOGL,HHC,INT31168144,NASDAQ01,ONL31168,QQQ,Computing and Information Technology"
       }
     ],
     "peers": ["MSFT", "AKAM", "ADBE", "AAPL", "EBAY", "BIDU", "IAC", "YNDX", "FB", "BCOR", "XLK"]
@@ -144,53 +140,179 @@
     },
     "news": [
       {
-        "datetime": "2018-03-07T09:03:19-05:00",
-        "headline": "Apple's New SwiftNIO Might Be A Hint Of Bigger Cloud Ambitions To Come!",
+        "datetime": "2018-03-09T11:13:00-05:00",
+        "headline": "How To Retire With Dividend Stocks And Recession Fears",
         "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/4688891435123363",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7780566856492910",
         "summary":
-          "   A few days ago at the  try! Swift Conference  Apple ( AAPL ) software engineer Norman Maurer introduced  SwiftNIO , a new high performance network for networked server and client applications. In this article we are going to discuss this new technology  and then wildly speculate about what thi…",
+          "   One challenge I frequently hear about from retirees is producing reliable income during retirement.   They may be focused on the total yield of their portfolio or they may be dealing with the required minimum distributions from tax advantaged retirement accounts.   The beautiful thing about th…",
         "related":
-          "AAPL,AMZN,Computer Software,GOOG,GOOGL,INT31168144,MSFT,NASDAQ01,ONL31168,Software,Computing and Information Technology"
+          "AAPL,AGNC,AMZN,AVB,Computer Hardware,CON31167138,DCT,DRE,EQR,FB,GOOG,LPT,MCD,MO,MSFT,NASDAQ01,NLY,NNN,O,PLD,PM,PSB,SPG,T,Computing and Information Technology,VZ"
       },
       {
-        "datetime": "2018-03-07T08:00:00-05:00",
-        "headline": "5 Dividend Stocks In My Portfolio Today",
+        "datetime": "2018-03-08T19:28:33-05:00",
+        "headline": "February Dividend Income Report",
         "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/7245084248517137",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/5026339382953709",
         "summary":
-          "   When Im looking for investments, I like solid dividends, strong fundamentals, and a cheap valuation.   I believe investors should be looking to reduce their volatility. Investing in the tech center, with highly valued companies like Microsoft ( MSFT ), carries significant risk. Intel (…",
-        "related": "BRX,EQR,GPMT,INTC,MO,MSFT,NASDAQ01,NLY,PM,Real Estate,REI10428,REITRETA"
-      },
-      {
-        "datetime": "2018-03-07T06:56:00-05:00",
-        "headline": "Games console market had its best year since 2011 thanks to Nintendo's 'record-breaking comeback'",
-        "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/8212892247354075",
-        "summary": "No summary available.",
-        "related": "MSFT,NTDOY,SNE"
-      },
-      {
-        "datetime": "2018-03-06T17:48:07-05:00",
-        "headline": "Why Bonds May Have More Fun, And Defensive Stocks, Too",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/7587708211572373",
-        "summary":
-          "     Introduction - t  he best and the brightest fear bonds     Yet I think the widespread consensus could be wrong.   Here are two prominent examples of today's groupthink from last week:      Alan Greenspan: We are in a bond market bubble     Tudor Jones Stands With Dalio, Gross in Calling Bond…",
+          "     Back in September 2017, I received slightly over $100K as a result of the commuted value of my pension plan. I decided to invest 100% of this money into dividend growth stocks. Each month, I publish my results. I dont do this to brag; I do this to show you its possible to bui…",
         "related":
-          "AAPL,AZN,BMY,Computer Hardware,CON31167138,DHI,ETFC,GLD,ISRG,ITB,LLY,MDC,MSFT,Mutual Funds,NASDAQ01,NVO,OTCBULLB,RHHBY,SHY,SPY,Computing and Information Technology,TEVA,TLT,TOL,XLU"
+          "AAPL,CRE10322,CRE10322056,DIS,Financial and Business Services,GNTX,HAS,HON,LAZ,MSFT,NASDAQ01,SBUX,TXN,UPS,V"
       },
       {
-        "datetime": "2018-03-06T14:43:53-05:00",
-        "headline": "My 30 Stock Portfolio",
+        "datetime": "2018-03-08T14:55:51-05:00",
+        "headline": "Videogame stocks higher as White House summit eyes violence",
         "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/4944407521846678",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/5505559525189077",
         "summary":
-          "   Welcome to my first portfolio update for 2018. My ultimate goal is financial freedom. In the future I hope to own a portfolio of income producing investments that will give me enough income to live off and grow into perpetuity. That's why I'm naturally attracted to dividend growth investing.  …",
+          "     Stocks of big videogame makers are mostly higher heading into a White House meeting taking up the subject of whether games are a cause of violence.   More news on: Electronic Arts Inc., Take-Two Interactive Software, Inc., Microsoft Corporation, Tech stocks news, Stocks on the move,     Read…",
         "related":
-          "AAPL,ABBV,ABT,BDX,BTI,CL,CMG,Computer Hardware,CON31167138,DEO,EUO,FB,GILD,GOOG,GOOGL,IBM,INTHPINK,JNJ,JPM,KHC,KO,MCD,MDLZ,MKC,MSFT,NASDAQ01,NKE,NPSNY,NSRGY,NVDA,NVO,OKE,OTCBULLB,PEP,PG,PM,RHHBY,SBUX,SQ,SSNLF,TCEHY,Computing and Information Technology,TEVA,V,VBTIX,WBA,WFC,WMT"
+          "APPSOFTW,ATVI,EA,ELE31165130,INTHPINK,MSFT,NASDAQ01,NTDOY,SNE,Computing and Information Technology,TTWO"
+      },
+      {
+        "datetime": "2018-03-08T06:50:19-05:00",
+        "headline": "Microsoft Is Heading To $100 - Cramer's Lightning Round (3/7/18)",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7723984632505423",
+        "summary":
+          "    Stocks discussed on the Lightning Round segment of Jim Cramer's Mad Money Program, Wednesday, March 7.    Bullish Calls   Royal Caribbean Cruises (RCL): Cramer likes the stock along with Carnival Cruises (CCL).   Microsoft (MSFT) CEO Satya Nadella is a competitive guy and Cramer thinks the st…",
+        "related":
+          "APPSOFTW,CARIBEAN,CCL,CNX,ETP,ETSY,FRT,Futures Trading,MSFT,NASDAQ01,NGG,RCL,SHOP,SOF31165134,Computing and Information Technology,VTR"
+      },
+      {
+        "datetime": "2018-03-08T02:49:45-05:00",
+        "headline": "Is The Technology Sector Headed For Another Q2 Breakout?",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/4689193667877452",
+        "summary":
+          "      From the Big Picture to Individual Stock Breakouts   This analysis starts with a 14 year chart of the Dow Jones US Computer Services Index shown below. This sub-sector of technology is one of many industries showing strong growth and a recent surge in volume over the past year. The technica…",
+        "related":
+          "AAPL,Computer Hardware,CON31167138,CSCO,EGAN,FB,FEYE,GOOG,INTC,KEM,MSFT,NASDAQ01,QNST,QTEC,ROM,SPY,T,Computing and Information Technology,TECL,TQQQ,V,VGT,VZ,XLK,XNTK"
       }
     ],
     "peers": ["XLK"]
+  },
+  "F": {
+    "company": {
+      "symbol": "F",
+      "companyName": "Ford Motor Company",
+      "exchange": "New York Stock Exchange",
+      "industry": "Autos",
+      "website": "http://www.ford.com",
+      "description":
+        "Ford Motor Co manufactures, markets, and services Ford cars, trucks, sport utility vehicles, electronic vehicles, and Lincoln luxury vehicles. It also provides financial services through Ford Motor Credit Company.",
+      "CEO": "James P. Hackett",
+      "issueType": "cs",
+      "sector": "Consumer Cyclical"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-09T08:22:13-05:00",
+        "headline": "Ford shifts Asia focus as China sales trail off",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/5651938335501536",
+        "summary":
+          "     Ford (NYSE: F ) sales in China dropped again, due in part to a later Chinese New Year. After an 18% decline in January, sales in February fell off 30% to 47,483 units.   More news on: Ford Motor Company, Consumer stocks news,     Read more …     ",
+        "related": "Asia Pacific,AUT10209,AUT10209017,CHINA001,CON102,F,NYSE0001,WOMPOLIX"
+      },
+      {
+        "datetime": "2018-03-09T07:03:44-05:00",
+        "headline": "Wall Street Breakfast: Jobs And Wages In Focus",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/6619642160034558",
+        "summary":
+          "             Jobs and wage inflation   are set to be a major focus of investors today, with the February Employment Situation report due out from the Labor Department at 8:30 EST. The consensus forecast from economists is for nonfarm payrolls to be up 205K from January, although there is a wide r…",
+        "related":
+          "ACRX,BA,BMWYY,DIS,ERJ,F,FNSR,GM,GMM.U:CA,GPRO,HAS,INSY,INTHPINK,LOCO,MAT,MRVL,NASDAQ01,NSANY,PAY,PDLI,QQQ,SNAP,SPY,TGT,TSLA,TSXTSX01,VLKAY"
+      },
+      {
+        "datetime": "2018-03-08T18:31:00-05:00",
+        "headline": "Cramer: Ride-sharing is killing car sales-and it's only going to get worse",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/7165040554980791",
+        "summary": "No summary available.",
+        "related": "F,GM"
+      },
+      {
+        "datetime": "2018-03-08T06:57:00-05:00",
+        "headline": "'No more a passenger': Driving schools for women take off in Saudi Arabia",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/6700670008486511",
+        "summary": "No summary available.",
+        "related": "F"
+      },
+      {
+        "datetime": "2018-03-07T15:21:00-05:00",
+        "headline": "GM can 'more than offset' tariffs' impact, but rising costs could hurt demand and jobs, CEO says",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/5430269572043476",
+        "summary": "No summary available.",
+        "related": "F,GM"
+      }
+    ],
+    "peers": ["TSLA", "VLKPY", "HMC", "TM", "NSANY", "TTM", "POAHY", "GM", "PUGOY"]
+  },
+  "VOD": {
+    "company": {
+      "symbol": "VOD",
+      "companyName": "Vodafone Group Plc",
+      "exchange": "Nasdaq Global Select",
+      "industry": "Communication Services",
+      "website": "http://www.vodafone.com",
+      "description":
+        "Vodafone Group PLC is one of the largest wireless phone companies in the world. Its main line of business involves the provision of wireless mobile and data services to various parts of the world.",
+      "CEO": "Vittorio Amedeo Colao",
+      "issueType": "cs",
+      "sector": "Communication Services"
+    },
+    "news": [
+      {
+        "datetime": "2018-03-05T13:37:23-05:00",
+        "headline": "Liberty Global CEO: Talks with Vodafone ongoing amid 'convergence'",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/5353163612501420",
+        "summary":
+          "       Long-running talks  with Vodafone ( VOD   +1.1% ) over a European asset swap are ongoing, says Liberty Global ( LBTYA   +0.9% ) CEO Mike Fries, though \"too bad that's a public conversation.\"   More news on: Comcast Corporation, Sky Plc ADR, Twenty-First Century Fox, Inc., Merger &amp; acqu…",
+        "related":
+          "CMCSA,CON102,ENT10210,FOX,FOXA,LBTYA,MED10210023,Mergers & Acquisitions,NASDAQ01,OTCBULLB,SKYAY,VOD,WOMPOLIX"
+      },
+      {
+        "datetime": "2018-03-02T08:56:00-05:00",
+        "headline": "When Elon Musk sends people to the moon there may be a mobile network so they can check Facebook",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/5539791347639333",
+        "summary": "No summary available.",
+        "related": "VOD"
+      },
+      {
+        "datetime": "2018-02-26T08:36:51-05:00",
+        "headline": "Vodafone selling Qatar stake for Euro301M",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/6991102799189527",
+        "summary":
+          "      Vodafone (NASDAQ: VOD ) will  sell its 51% stake  in its Qatar operations to existing partner Qatar Foundation for 301M (about $371M).    More news on: Vodafone Group Plc, Tech stocks news, Stocks on the move,     Read more …     ",
+        "related": "COM308,COM30845,NASDAQ01,QATAR001,TEL30845100,VOD"
+      },
+      {
+        "datetime": "2018-02-26T06:57:58-05:00",
+        "headline": "Wall Street Breakfast: MWC Kicks Off In Barcelona",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/4944966000840290",
+        "summary":
+          "             Techies are gathering   in Barcelona, Spain for the Mobile World Congress, which kicks off today and runs through March 1. The trade show brings together mobile and phone manufacturers, distributors, carriers and engineers - apart from Apple (AAPL) - to present their latest work and …",
+        "related":
+          "AAPL,BA,BCCMY,BDRAF,BDRBF,BRK.A,BRK.B,CANADA01,CAR,CB,CENTAMER,CLNS,CMCSA,DAL,DB,DDAIF,DIS,EADSY,ERJ,Europe,FCAU,GE,GELYY,HTZ,INTC,INTHPINK,International Trade,LGF.A,LGF.B,MET,NAFTA001,NASDAQ01,NEWMEXIC,NOK,OTCBULLB,QCOM,QQQ,S,SAMERICA,SPAIN001,SPY,SSNLF,SYMC,TNTEY,UAL,UPS,VOD,WESTEURO"
+      },
+      {
+        "datetime": "2018-02-26T05:31:50-05:00",
+        "headline": "5G news at Mobile World Congress",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/4955012324481088",
+        "summary":
+          "     There's a lot of 5G news at the Mobile World Congress.   More news on: Airbus SE ADR, Delta Air Lines, Inc., Sprint Corporation, Tech stocks news,     Read more …     ",
+        "related": "AER31052,AER31052107,DAL,EADSY,IND310,INTC,INTHPINK,NASDAQ01,NOK,QCOM,S,VOD,WOMPOLIX"
+      }
+    ],
+    "peers": []
   }
 }
