@@ -1,10 +1,8 @@
 import date, { formatDate } from './date'
-import { createLogger } from 'bunyan'
 import { pubsub } from '../pubsub'
 import pricing from '../pricing'
 import search from './searchIndex'
 
-const log = createLogger({ name: 'GRAPHQL-SERVER' })
 pricing(pubsub)
 
 export default {
@@ -97,6 +95,7 @@ export default {
     getQuotes: {
       resolve: (payload, args, context, info) => payload,
       subscribe: (_, args) => {
+        console.info('hit resolver with:', args.symbols)
         pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols)
         return pubsub.asyncIterator(args.symbols.map(symbol => `MARKET_UPDATE.${symbol}`))
       },

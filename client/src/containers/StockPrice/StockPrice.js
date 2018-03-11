@@ -5,7 +5,7 @@ import ArrowUpward from 'material-ui-icons/ArrowUpward'
 import Numeral from '../../components/Numeral'
 
 import { Flex, Box } from 'rebass'
-import { Text } from '../../styleguide/index'
+import { Text } from 'styleguide'
 
 export const StockPrice = ({ data: { stock: { quote } } }) => {
   const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']

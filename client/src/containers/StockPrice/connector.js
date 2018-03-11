@@ -37,28 +37,28 @@ const connectQuery = graphql(query, {
 
 const connectSubscription = lifecycle({
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.data.loading) {
-      // Check for existing subscription
-      if (this.unsubscribe) {
-        // Check if props have changed and, if necessary, stop the subscription
-        if (this.props.data.stock.id !== nextProps.data.stock.id) {
-          console.log('unsubscribe')
-
-          this.unsubscribe()
-        }
-        return
-      }
+    if (nextProps.data.loading) {
+      return
     }
-    this.unsubscribe = nextProps.data.subscribeToMore({
-      document: subscribeMarket,
-      variables: {
-        markets: nextProps.data.stock.id,
-      },
-      updateQuery: (prev, { subscriptionData }) => {
-        const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes }
-        return { ...prev, stock: stockCpy }
-      },
-    })
+
+    if (!this.props.data.stock) {
+      this.unsubscribe && this.unsubscribe()
+      return
+    }
+
+    if (this.props.data.stock.id !== nextProps.data.stock.id) {
+      this.unsubscribe && this.unsubscribe()
+      this.unsubscribe = nextProps.data.subscribeToMore({
+        document: subscribeMarket,
+        variables: {
+          markets: nextProps.data.stock.id,
+        },
+        updateQuery: (prev, { subscriptionData }) => {
+          const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes }
+          return { ...prev, stock: stockCpy }
+        },
+      })
+    }
   },
   componentWillUnmount() {
     if (this.unsubscribe) {
