@@ -2,9 +2,8 @@
  * copied from react-select
  */
 import { css } from 'styled-components'
-import { colors } from 'styleguide'
 
-export default css`
+export default ({ colors }) => css`
   /*  */
   /* Spinner */
   /* ------------------------------ */

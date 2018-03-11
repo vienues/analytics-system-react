@@ -61,6 +61,7 @@ const StockDetails = ({ id }) => (
 const ScrollableArea = styled(Flex)`
   flex-direction: column;
   overflow-y: auto;
+  flex: 1;
 `
 
 const MainColumn = styled(Panel).attrs({ flex: ['1 100%', '1 100%', 1], py: 2 })`

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Flex, Box } from 'rebass'
-import { Text, Small, colors } from '../../styleguide'
+import { Text, Small } from '../../styleguide'
 import Numeral from '../../components/Numeral'
 import ArrowUpward from 'material-ui-icons/ArrowUpward'
 import ArrowDownward from 'material-ui-icons/ArrowDownward'
@@ -28,7 +28,7 @@ const Markets = ({ data: { markets } }) => {
               />
               <Numeral>{change}</Numeral>
             </Text>
-            <VerticalRule color={color} />
+            <VerticalRuleStyled color={color} />
             <Percent color={color}>
               {' '}
               <Numeral>{changePercent * 100}</Numeral>
@@ -71,11 +71,11 @@ const Percent = styled(SuperText)`
   }
 `
 
-const VerticalRule = ({ color }) => (
-  <svg width="8" height="12" viewBox="0 0 8 20" xmlns="http://www.w3.org/2000/svg">
+const VerticalRule = ({ className }) => (
+  <svg className={className} width="8" height="12" viewBox="0 0 8 20" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M4,4 L4,24"
-      stroke={colors[color]}
+      stroke="#fff"
       strokeWidth="2"
       fill="none"
       fillRule="evenodd"
@@ -84,5 +84,11 @@ const VerticalRule = ({ color }) => (
     />
   </svg>
 )
+
+const VerticalRuleStyled = styled(VerticalRule)`
+  > path {
+    stroke: ${({ color, theme }) => theme.colors[color]};
+  }
+`
 
 export default Markets

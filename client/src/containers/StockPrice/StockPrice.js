@@ -5,7 +5,7 @@ import ArrowUpward from 'material-ui-icons/ArrowUpward'
 import Numeral from '../../components/Numeral'
 
 import { Flex, Box } from 'rebass'
-import { colors, Text } from '../../styleguide/index'
+import { Text } from '../../styleguide/index'
 
 export const StockPrice = ({ data: { stock: { quote } } }) => {
   const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
@@ -22,7 +22,7 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
         />
         <Numeral>{change}</Numeral>
       </Text>
-      <VerticalRule color={color} />
+      <VerticalRuleStyled color={color} />
       <Percent color={color}>
         {' '}
         <Numeral>{changePercent * 100}</Numeral>
@@ -60,11 +60,11 @@ const Percent = styled(SuperText)`
   }
 `
 
-const VerticalRule = ({ color }) => (
-  <svg width="20" height="32" viewBox="0 0 20 32" xmlns="http://www.w3.org/2000/svg">
+const VerticalRule = ({ className }) => (
+  <svg className={className} width="20" height="32" viewBox="0 0 20 32" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M9.25,0 L9.25,32"
-      stroke={colors[color]}
+      stroke={'#fff'}
       strokeWidth="1.5"
       fill="none"
       fillRule="evenodd"
@@ -73,5 +73,11 @@ const VerticalRule = ({ color }) => (
     />
   </svg>
 )
+
+const VerticalRuleStyled = styled(VerticalRule)`
+  > path {
+    stroke: ${({ color, theme }) => theme.colors[color]};
+  }
+`
 
 export default StockPrice

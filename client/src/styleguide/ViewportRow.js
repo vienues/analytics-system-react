@@ -9,8 +9,8 @@ export const ViewportFlex = ({ className, ...props }) => (
 )
 
 const WithPadding = styled(Box).attrs({ px: [1, 2, 3] })`
-  min-width: 100vw;
-  max-width: 100vw;
+  min-width: 100%;
+  max-width: 100%;
 `
 
 const Centered = styled(Flex)`

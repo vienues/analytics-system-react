@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import Select from 'react-select'
 
-import { colors } from 'styleguide'
-
 import componentStyle from './componentStyle'
 import menuStyle from './menuStyle'
 import multiStyle from './multiStyle'
@@ -12,10 +10,10 @@ export default styled(Select)`
   flex: 1;
   background-color: transparent;
 
-  ${componentStyle};
-  ${menuStyle};
-  ${multiStyle};
-  ${spinnerStyle};
+  ${props => componentStyle(props.theme)};
+  ${props => menuStyle(props.theme)};
+  ${props => multiStyle(props.theme)};
+  ${props => spinnerStyle(props.theme)};
 
   .Select {
     &-multi-value-wrapper {
@@ -41,10 +39,10 @@ export default styled(Select)`
 
     &-value,
     &-input {
-      color: ${colors.white};
+      color: ${props => props.theme.colors.white};
     }
 
-    &-value {
+     {
       display: flex;
       flex-direction: row-reverse;
     }
@@ -78,8 +76,12 @@ export default styled(Select)`
       height: 2.5rem;
 
       &.is-focused {
-        background: linear-gradient(135deg, ${colors.accent50a}, ${colors.accent30a});
-        ${'' /* background-color: ${colors.accent}; */} mix-blend-mode: screen;
+        background: linear-gradient(
+          135deg,
+          ${props => props.theme.colors.accent50a},
+          ${props => props.theme.colors.accent30a}
+        );
+        mix-blend-mode: screen;
       }
     }
 

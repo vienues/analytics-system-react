@@ -1,9 +1,11 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "name": "@adaptive-insights/native",
   "private": true,
   "scripts": {
     "bootstrap": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp install:ios",
     "start": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --ios --tunnel",
+    "start_prod": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --ios --tunnel",
     "start:fast": "./node_modules/.bin/exp start --ios --tunnel",
     "restart": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --clear --tunnel"
   },

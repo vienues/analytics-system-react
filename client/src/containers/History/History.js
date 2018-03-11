@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 import _ from 'lodash'
 import React, { PureComponent } from 'react'
-import { colors } from 'styleguide'
 import { withTheme } from 'styled-components'
 
 import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
@@ -35,7 +34,7 @@ class History extends PureComponent {
   }
 
   render() {
-    let { previousClose } = this.props
+    let { theme, previousClose } = this.props
     if (typeof previousClose === 'string') {
       previousClose = Number(previousClose)
     }
@@ -48,8 +47,8 @@ class History extends PureComponent {
     return (
       <ResponsiveContainer width="99%" height="99%" minHeight={200}>
         <AreaChart data={chart} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
-          <CartesianGrid stroke={colors.primary50a} />
-          <ReferenceLine y={previousClose} stroke={colors.accent} strokeDasharray="3 3" />
+          <CartesianGrid stroke={theme.colors.primary50a} />
+          <ReferenceLine y={previousClose} stroke={theme.colors.accent} strokeDasharray="3 3" />
           <defs>
             <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
               <stop offset="5%" stopColor="#7fb3ff" stopOpacity={0.9} />
@@ -60,7 +59,7 @@ class History extends PureComponent {
             type="basisOpen"
             dataKey="average"
             strokeWidth={2}
-            stroke={this.props.theme.accent}
+            stroke={theme.colors.accent}
             fill="url(#colorUv)"
             dot={false}
             isAnimationActive={false}
@@ -70,7 +69,7 @@ class History extends PureComponent {
             interval={_.round(chart.length / 12)}
             tick={{ fontSize: 10 }}
             tickSize={12}
-            stroke={colors.primary50a}
+            stroke={theme.colors.primary50a}
           />
           <YAxis
             type="number"
@@ -79,7 +78,7 @@ class History extends PureComponent {
             tick={{ fontSize: 10 }}
             tickFormatter={x => (x < 100 ? x.toFixed(2) : x.toFixed(0))}
             orientation="right"
-            stroke={colors.primary50a}
+            stroke={theme.colors.primary50a}
           />
         </AreaChart>
       </ResponsiveContainer>

@@ -1,8 +1,8 @@
 import React from 'react'
+import { Flex } from 'rebass'
 import styled from 'styled-components'
 
-import { gradients, Small } from 'styleguide'
-import { Flex } from 'rebass'
+import { Small } from 'styleguide'
 
 const RibbonBG = styled(Flex).attrs({ f: 0, column: true, px: 2 })`
   line-height: 1.25rem;

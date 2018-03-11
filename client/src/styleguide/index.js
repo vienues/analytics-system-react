@@ -3,8 +3,6 @@ import * as Rebass from 'rebass'
 import styled, { css } from 'styled-components'
 import { mapProps } from './mapProps'
 
-export { colors, gradients } from '@adaptive-insights/common'
-
 export { ViewportFlex } from './ViewportRow'
 
 export const Background = styled(Rebass.Box)`
@@ -75,7 +73,7 @@ export const Lead = styled(Rebass.Lead)`
 `
 export const Small = styled(Rebass.Small)`
   ${textProps};
-  color: ${props => props.theme.colors.white};
+  color: ${props => props.theme.colors[props.color || 'white']};
 `
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`

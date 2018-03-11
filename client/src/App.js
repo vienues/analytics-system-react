@@ -9,7 +9,7 @@ import News from './containers/News'
 import History from './containers/History'
 import Stats from './containers/Stats'
 import Company from './containers/Company'
-import theme from './theme'
+import theme from './styleguide/theme'
 
 import MainLayout from './layouts/browser/MainLayout'
 import DesktopPanel from './layouts/desktop/DesktopPanel'

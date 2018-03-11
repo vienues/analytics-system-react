@@ -2,18 +2,20 @@
  * copied from react-select
  */
 import { css } from 'styled-components'
-import { colors } from 'styleguide'
-
-const backgroundColor = colors.transparent
-const inputBgFocus = colors.transparent
 
 const internalInputHeight = css`2.5rem`
 
-const arrowColor = colors.good
 const arrowWidth = '0.25rem'
 const clearWidth = '1rem'
 
-export default css`
+export default theme => {
+  const { colors } = theme
+
+  const backgroundColor = colors.transparent
+  const inputBgFocus = colors.transparent
+  const arrowColor = colors.good
+
+  return css`
 
   .Select-multi-value-wrapper {
     display: flex;
@@ -333,3 +335,4 @@ export default css`
   to { opacity: 1; }
 }
 `
+}
