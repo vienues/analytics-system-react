@@ -17,7 +17,7 @@ export const Root = Background.withComponent(Rebass.Flex).extend`
 
 export const Divider = styled(Rebass.Border).attrs({
   my: 2,
-  color: props => (props.alt ? 'offwhite50' : 'accent'),
+  color: props => (props.soft ? 'offwhite50' : 'accent'),
   borderWidth: 2,
   top: true,
 })`

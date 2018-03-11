@@ -33,7 +33,7 @@ const SearchLayout = ({ id }) => (
   <Flex wrap f={5} align="center">
     <Search url={/stock/} id={id} />
     <StockPrice id={id} />
-    <Divider my={1} alt />
+    <Divider my={1} soft="true" />
   </Flex>
 )
 
