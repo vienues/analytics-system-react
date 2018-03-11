@@ -14,6 +14,24 @@
     },
     "news": [
       {
+        "datetime": "2018-03-10T08:00:00-05:00",
+        "headline": "The Next Bear Market: How To Prepare Now",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7209721423147873",
+        "summary":
+          "   To be clear, we are not declaring the current bull market dead. We do not have any illusions of knowing which way the market is headed. However, fortunately, to be successful in investing, we do not need to be able to predict the market direction. Since the average duration of a bear market is…",
+        "related":
+          "AAPL,AMGN,ARCC,ASS10319,ASS10319042,CVS,CVX,D,Financial and Business Services,GBDC,HQH,INTHPINK,JNJ,JPC,KYN,LMT,MA,MAIN,MCY,MO,MSFT,NASDAQ01,NLY,NMZ,NRZ,NSRGY,O,OHI,PCI,PEP,PFE,PG,RFI,SHY,STAG,STK,STOR,T,TLT,UL,UTF,VLO,VTR,VZ,WM"
+      },
+      {
+        "datetime": "2018-03-09T18:25:00-05:00",
+        "headline": "Former Google engineer's start-up slammed by FCC for unauthorized satellite launch",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8866349054709075",
+        "summary": "No summary available.",
+        "related": "AAPL,GOOGL"
+      },
+      {
         "datetime": "2018-03-09T12:32:00-05:00",
         "headline": "This start-up wants to change the way you interact with your dentist, one toothbrush at a time",
         "source": "CNBC",
@@ -38,25 +56,6 @@
         "url": "https://api.iextrading.com/1.0/stock/aapl/article/8130993034929587",
         "summary": "No summary available.",
         "related": "AAPL,DERM,ED,EUFN,IWM"
-      },
-      {
-        "datetime": "2018-03-08T19:28:33-05:00",
-        "headline": "February Dividend Income Report",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/5026339382953709",
-        "summary":
-          "     Back in September 2017, I received slightly over $100K as a result of the commuted value of my pension plan. I decided to invest 100% of this money into dividend growth stocks. Each month, I publish my results. I dont do this to brag; I do this to show you its possible to bui…",
-        "related":
-          "AAPL,CRE10322,CRE10322056,DIS,Financial and Business Services,GNTX,HAS,HON,LAZ,MSFT,NASDAQ01,SBUX,TXN,UPS,V"
-      },
-      {
-        "datetime": "2018-03-08T15:56:12-05:00",
-        "headline": "This Summer, Apple Is Taking Me To The Island And Picking Up The Tab",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8993119210767996",
-        "summary":
-          "   I will soon enter my next life/work stage, sometimes known as  semi-retirement. I will then move to writing and blogging and influencing on a \"full time\" basis. While Americans are quick to get with the program and the benefits of simple low fee investing (at times by way of low fee index ETFs…",
-        "related": "AAPL,CANADA01,Computer Hardware,CON31167138,NASDAQ01,QQQ,Computing and Information Technology"
       }
     ],
     "peers": ["MSFT", "NOK", "IBM", "HPQ", "GOOGL", "BB", "XLK"]
@@ -75,6 +74,16 @@
       "sector": "Technology"
     },
     "news": [
+      {
+        "datetime": "2018-03-10T11:27:45-05:00",
+        "headline": "Venture capital deals of the week",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/7738911324248941",
+        "summary":
+          "       Smart thermostat:  Amazon (NASDAQ: AMZN ) Alexa Fund joined a  $61M round  in smart thermostat company Ecobee. Energy Impact Partners led the round, which brought total funding to $146M.   More news on: Amazon.com, Inc., Alphabet Inc., Alphabet Inc., Tech stocks news, Healthcare stocks new…",
+        "related":
+          "ACN,AMZN,AZN,BA,BABA,BIDU,CELG,CMCSA,CSCO,DIS,DLB,FOX,FOXA,Futures Trading,GE,GOOG,GOOGL,INT31168144,INTHPINK,LGF.A,LGF.B,NASDAQ01,ONL31168,PCRFF,PCRFY,TCEHY,TCTZF,Computing and Information Technology"
+      },
       {
         "datetime": "2018-03-09T11:13:00-05:00",
         "headline": "How To Retire With Dividend Stocks And Recession Fears",
@@ -112,15 +121,6 @@
           "      From the Big Picture to Individual Stock Breakouts   This analysis starts with a 14 year chart of the Dow Jones US Computer Services Index shown below. This sub-sector of technology is one of many industries showing strong growth and a recent surge in volume over the past year. The technica…",
         "related":
           "AAPL,Computer Hardware,CON31167138,CSCO,EGAN,FB,FEYE,GOOG,INTC,KEM,MSFT,NASDAQ01,QNST,QTEC,ROM,SPY,T,Computing and Information Technology,TECL,TQQQ,V,VGT,VZ,XLK,XNTK"
-      },
-      {
-        "datetime": "2018-03-07T11:36:14-05:00",
-        "headline": "Cutting Through The Smoke And Mirrors Of AI On Wall Street",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/goog/article/5153160644143408",
-        "summary":
-          "   Artificial intelligence made lots of headlines in 2017. Alphabet ( GOOGL ) developed software that defeated the defending world champion in Go, then a few months later developed a new version that defeated the prior version 100 games to none.   These developments have spurred predictions that …",
-        "related": "GOOG,GOOGL,INT31168144,KO,MS,NASDAQ01,ONL31168,PEP,Computing and Information Technology,UBS"
       }
     ],
     "peers": ["MSFT", "AKAM", "ADBE", "AAPL", "EBAY", "BIDU", "IAC", "YNDX", "FB", "BCOR", "XLK"]
@@ -139,6 +139,16 @@
       "sector": "Technology"
     },
     "news": [
+      {
+        "datetime": "2018-03-10T08:00:00-05:00",
+        "headline": "The Next Bear Market: How To Prepare Now",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/7209721423147873",
+        "summary":
+          "   To be clear, we are not declaring the current bull market dead. We do not have any illusions of knowing which way the market is headed. However, fortunately, to be successful in investing, we do not need to be able to predict the market direction. Since the average duration of a bear market is…",
+        "related":
+          "AAPL,AMGN,ARCC,ASS10319,ASS10319042,CVS,CVX,D,Financial and Business Services,GBDC,HQH,INTHPINK,JNJ,JPC,KYN,LMT,MA,MAIN,MCY,MO,MSFT,NASDAQ01,NLY,NMZ,NRZ,NSRGY,O,OHI,PCI,PEP,PFE,PG,RFI,SHY,STAG,STK,STOR,T,TLT,UL,UTF,VLO,VTR,VZ,WM"
+      },
       {
         "datetime": "2018-03-09T11:13:00-05:00",
         "headline": "How To Retire With Dividend Stocks And Recession Fears",
@@ -178,19 +188,9 @@
           "    Stocks discussed on the Lightning Round segment of Jim Cramer's Mad Money Program, Wednesday, March 7.    Bullish Calls   Royal Caribbean Cruises (RCL): Cramer likes the stock along with Carnival Cruises (CCL).   Microsoft (MSFT) CEO Satya Nadella is a competitive guy and Cramer thinks the st…",
         "related":
           "APPSOFTW,CARIBEAN,CCL,CNX,ETP,ETSY,FRT,Futures Trading,MSFT,NASDAQ01,NGG,RCL,SHOP,SOF31165134,Computing and Information Technology,VTR"
-      },
-      {
-        "datetime": "2018-03-08T02:49:45-05:00",
-        "headline": "Is The Technology Sector Headed For Another Q2 Breakout?",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/4689193667877452",
-        "summary":
-          "      From the Big Picture to Individual Stock Breakouts   This analysis starts with a 14 year chart of the Dow Jones US Computer Services Index shown below. This sub-sector of technology is one of many industries showing strong growth and a recent surge in volume over the past year. The technica…",
-        "related":
-          "AAPL,Computer Hardware,CON31167138,CSCO,EGAN,FB,FEYE,GOOG,INTC,KEM,MSFT,NASDAQ01,QNST,QTEC,ROM,SPY,T,Computing and Information Technology,TECL,TQQQ,V,VGT,VZ,XLK,XNTK"
       }
     ],
-    "peers": ["XLK"]
+    "peers": ["CSCO", "AAPL", "CA", "SAP", "RHT", "IBM", "ORCL", "HPQ", "GOOGL", "XLK"]
   },
   "F": {
     "company": {
@@ -206,6 +206,16 @@
       "sector": "Consumer Cyclical"
     },
     "news": [
+      {
+        "datetime": "2018-03-10T09:27:09-05:00",
+        "headline": "Stocks To Watch: Back To Basics Time",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/5644130430449510",
+        "summary":
+          "   Welcome to Seeking Alpha's Stocks to Watch - a preview of key events scheduled for the next week. Follow this account and turn the e-mail alert on to receive this article in your inbox every Saturday morning.   Investors head into next week with a bit of improved visibility after tariff exempt…",
+        "related":
+          "AAL,ADBE,AET,ALLY,ARNA,AVGO,AXP,BAC,BFRA,BKNG,C,CAL,CAT,CLAR,CNX,COF,CPB,CRI,CSX,CTRP,CVS,CZR,DAL,DDD,DFS,DG,DIS,DKS,DNKN,DRU20636,DRUGMMAJ,EFX,EL,ETFC,EXPE,F,GIGNY,GM,GMM.U:CA,GRPAF,GXYEF,HDS,Healthcare,HON,HOV,INFN,INTHPINK,JBLU,JCI,JPM,KR,KTOS,LVS,Meetings,MGM,MLCO,MO,MOTS,NASDAQ01,NAV,NFLX,NSANY,NSC,NTNX,NTR,ORCL,OSK,PBPB,PEG,PFE,PGR,R,REN,SCHW,SGAMY,SJMHY,SYF,TAP,TEX,TIF,TOL,TPX.B:CA,TSLA,TSXTSX01,UAL,ULTA,URBN,USFD,WMT,WSM,WSO,WYNN,YUM"
+      },
       {
         "datetime": "2018-03-09T08:22:13-05:00",
         "headline": "Ford shifts Asia focus as China sales trail off",
@@ -240,14 +250,6 @@
         "url": "https://api.iextrading.com/1.0/stock/f/article/6700670008486511",
         "summary": "No summary available.",
         "related": "F"
-      },
-      {
-        "datetime": "2018-03-07T15:21:00-05:00",
-        "headline": "GM can 'more than offset' tariffs' impact, but rising costs could hurt demand and jobs, CEO says",
-        "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/f/article/5430269572043476",
-        "summary": "No summary available.",
-        "related": "F,GM"
       }
     ],
     "peers": ["TSLA", "VLKPY", "HMC", "TM", "NSANY", "TTM", "POAHY", "GM", "PUGOY"]
@@ -266,6 +268,17 @@
       "sector": "Communication Services"
     },
     "news": [
+      {
+        "datetime": "2018-03-09T17:44:43-05:00",
+        "headline":
+          "Top Gain Communication Services Stocks Are VEON, China Mobile, Vodafone & BCE Per Broker March Targets",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/4570376976711032",
+        "summary":
+          "     Actionable Conclusion (1-10): Analysts Projected 5.95% To 76.6% Net Gains From Top Ten   Communication Services Stocks To 2019     Seven of ten top gaining Comm Services stocks, based on analyst 1-year target prices, were in the top ten dividend-yielders for the coming year (as tinted in the…",
+        "related":
+          "BCE,BCE:CA,BZQIY,CHL,COM308,COM30845,CTL,HKTTY,INTHPINK,MBT,NASDAQ01,NZTCF,OTCBULLB,RNRTY,ROSYY,TEL30845100,TEO,TLSYY,TSXTSX01,TTRAF,VEON,VOD"
+      },
       {
         "datetime": "2018-03-05T13:37:23-05:00",
         "headline": "Liberty Global CEO: Talks with Vodafone ongoing amid 'convergence'",
@@ -302,15 +315,6 @@
           "             Techies are gathering   in Barcelona, Spain for the Mobile World Congress, which kicks off today and runs through March 1. The trade show brings together mobile and phone manufacturers, distributors, carriers and engineers - apart from Apple (AAPL) - to present their latest work and …",
         "related":
           "AAPL,BA,BCCMY,BDRAF,BDRBF,BRK.A,BRK.B,CANADA01,CAR,CB,CENTAMER,CLNS,CMCSA,DAL,DB,DDAIF,DIS,EADSY,ERJ,Europe,FCAU,GE,GELYY,HTZ,INTC,INTHPINK,International Trade,LGF.A,LGF.B,MET,NAFTA001,NASDAQ01,NEWMEXIC,NOK,OTCBULLB,QCOM,QQQ,S,SAMERICA,SPAIN001,SPY,SSNLF,SYMC,TNTEY,UAL,UPS,VOD,WESTEURO"
-      },
-      {
-        "datetime": "2018-02-26T05:31:50-05:00",
-        "headline": "5G news at Mobile World Congress",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/vod/article/4955012324481088",
-        "summary":
-          "     There's a lot of 5G news at the Mobile World Congress.   More news on: Airbus SE ADR, Delta Air Lines, Inc., Sprint Corporation, Tech stocks news,     Read more …     ",
-        "related": "AER31052,AER31052107,DAL,EADSY,IND310,INTC,INTHPINK,NASDAQ01,NOK,QCOM,S,VOD,WOMPOLIX"
       }
     ],
     "peers": []
