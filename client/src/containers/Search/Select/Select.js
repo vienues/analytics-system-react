@@ -18,7 +18,6 @@ export default class SearchSelect extends PureComponent {
         placeholder="Enter a stock or symbol …"
         searchPromptText=""
         optionComponent={OptionDisplay}
-        // valueComponent={OptionDisplay}
         {...props}
       />
     )
