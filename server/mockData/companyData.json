@@ -14,6 +14,42 @@
     },
     "news": [
       {
+        "datetime": "2018-03-12T09:02:00-04:00",
+        "headline": "Tech investors in Apple and other stocks are now in the crosshairs of trade war",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7090037919518504",
+        "summary": "No summary available.",
+        "related": "AAPL,AVGO,BA,FXCOF"
+      },
+      {
+        "datetime": "2018-03-12T09:00:00-04:00",
+        "headline": "Why Semiconductors Are Hot And 'Retail' Tech Is Not - Yet",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/5521941586252536",
+        "summary":
+          "   Sometimes I wonder if I'm missing something in tech - kind of like wondering if someone else knows something I don't, or the world constructed in my brain is not  in  on the inside joke. That's typically when I survey the landscape of tech websites to see what's 'in' and what's 'up.'   Then I …",
+        "related":
+          "AAPL,AMZN,Computer Hardware,CON31167138,FB,GOOG,GOOGL,INTC,MSFT,MU,NASDAQ01,NVDA,OTCBULLB,SSNLF,SSNNF,Computing and Information Technology,WD"
+      },
+      {
+        "datetime": "2018-03-11T10:51:38-04:00",
+        "headline": "Healthcare Will Catalyze Apple's Growth",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/5996516607501277",
+        "summary":
+          "      Apple pushes into the healthcare industry with a network of clinics for its employees   Apple ( AAPL ) has been somehow associated with the health products since the launch of its HealthKit on WWDC 2014, and at that time, the scope of the corporation's efforts in the filed was limited to ha…",
+        "related":
+          "AAPL,Computer Hardware,CON31167138,Healthcare,Market and Economy,NASDAQ01,Computing and Information Technology"
+      },
+      {
+        "datetime": "2018-03-10T20:01:00-05:00",
+        "headline": "Facebook antagonist Senator Mark Warner is now concerned about bad security on connected devices",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/aapl/article/4664116385857937",
+        "summary": "No summary available.",
+        "related": "AAPL,AMZN,FB,GOOGL,TWTR"
+      },
+      {
         "datetime": "2018-03-10T08:00:00-05:00",
         "headline": "The Next Bear Market: How To Prepare Now",
         "source": "SeekingAlpha",
@@ -22,40 +58,6 @@
           "   To be clear, we are not declaring the current bull market dead. We do not have any illusions of knowing which way the market is headed. However, fortunately, to be successful in investing, we do not need to be able to predict the market direction. Since the average duration of a bear market is…",
         "related":
           "AAPL,AMGN,ARCC,ASS10319,ASS10319042,CVS,CVX,D,Financial and Business Services,GBDC,HQH,INTHPINK,JNJ,JPC,KYN,LMT,MA,MAIN,MCY,MO,MSFT,NASDAQ01,NLY,NMZ,NRZ,NSRGY,O,OHI,PCI,PEP,PFE,PG,RFI,SHY,STAG,STK,STOR,T,TLT,UL,UTF,VLO,VTR,VZ,WM"
-      },
-      {
-        "datetime": "2018-03-09T18:25:00-05:00",
-        "headline": "Former Google engineer's start-up slammed by FCC for unauthorized satellite launch",
-        "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8866349054709075",
-        "summary": "No summary available.",
-        "related": "AAPL,GOOGL"
-      },
-      {
-        "datetime": "2018-03-09T12:32:00-05:00",
-        "headline": "This start-up wants to change the way you interact with your dentist, one toothbrush at a time",
-        "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/5915486457894836",
-        "summary": "No summary available.",
-        "related": "AAPL,CL,PG"
-      },
-      {
-        "datetime": "2018-03-09T11:13:00-05:00",
-        "headline": "How To Retire With Dividend Stocks And Recession Fears",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/7780566856492910",
-        "summary":
-          "   One challenge I frequently hear about from retirees is producing reliable income during retirement.   They may be focused on the total yield of their portfolio or they may be dealing with the required minimum distributions from tax advantaged retirement accounts.   The beautiful thing about th…",
-        "related":
-          "AAPL,AGNC,AMZN,AVB,Computer Hardware,CON31167138,DCT,DRE,EQR,FB,GOOG,LPT,MCD,MO,MSFT,NASDAQ01,NLY,NNN,O,PLD,PM,PSB,SPG,T,Computing and Information Technology,VZ"
-      },
-      {
-        "datetime": "2018-03-09T09:09:00-05:00",
-        "headline": "Your first trade for Friday, March 9",
-        "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/aapl/article/8130993034929587",
-        "summary": "No summary available.",
-        "related": "AAPL,DERM,ED,EUFN,IWM"
       }
     ],
     "peers": ["MSFT", "NOK", "IBM", "HPQ", "GOOGL", "BB", "XLK"]
@@ -74,6 +76,16 @@
       "sector": "Technology"
     },
     "news": [
+      {
+        "datetime": "2018-03-12T09:00:00-04:00",
+        "headline": "Why Semiconductors Are Hot And 'Retail' Tech Is Not - Yet",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/goog/article/5521941586252536",
+        "summary":
+          "   Sometimes I wonder if I'm missing something in tech - kind of like wondering if someone else knows something I don't, or the world constructed in my brain is not  in  on the inside joke. That's typically when I survey the landscape of tech websites to see what's 'in' and what's 'up.'   Then I …",
+        "related":
+          "AAPL,AMZN,Computer Hardware,CON31167138,FB,GOOG,GOOGL,INTC,MSFT,MU,NASDAQ01,NVDA,OTCBULLB,SSNLF,SSNNF,Computing and Information Technology,WD"
+      },
       {
         "datetime": "2018-03-10T11:27:45-05:00",
         "headline": "Venture capital deals of the week",
@@ -111,16 +123,6 @@
         "summary":
           "      Alphabets ( GOOG ,  GOOGL ) YouTube TV  expands its partnership  with Major League Baseball.   More news on: Alphabet Inc., Alphabet Inc., Tech stocks news,     Read more …     ",
         "related": "GOOG,GOOGL,INT31168144,NASDAQ01,ONL31168,SPORTS,Computing and Information Technology"
-      },
-      {
-        "datetime": "2018-03-08T02:49:45-05:00",
-        "headline": "Is The Technology Sector Headed For Another Q2 Breakout?",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/goog/article/4689193667877452",
-        "summary":
-          "      From the Big Picture to Individual Stock Breakouts   This analysis starts with a 14 year chart of the Dow Jones US Computer Services Index shown below. This sub-sector of technology is one of many industries showing strong growth and a recent surge in volume over the past year. The technica…",
-        "related":
-          "AAPL,Computer Hardware,CON31167138,CSCO,EGAN,FB,FEYE,GOOG,INTC,KEM,MSFT,NASDAQ01,QNST,QTEC,ROM,SPY,T,Computing and Information Technology,TECL,TQQQ,V,VGT,VZ,XLK,XNTK"
       }
     ],
     "peers": ["MSFT", "AKAM", "ADBE", "AAPL", "EBAY", "BIDU", "IAC", "YNDX", "FB", "BCOR", "XLK"]
@@ -140,6 +142,43 @@
     },
     "news": [
       {
+        "datetime": "2018-03-12T09:00:00-04:00",
+        "headline": "Why Semiconductors Are Hot And 'Retail' Tech Is Not - Yet",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/5521941586252536",
+        "summary":
+          "   Sometimes I wonder if I'm missing something in tech - kind of like wondering if someone else knows something I don't, or the world constructed in my brain is not  in  on the inside joke. That's typically when I survey the landscape of tech websites to see what's 'in' and what's 'up.'   Then I …",
+        "related":
+          "AAPL,AMZN,Computer Hardware,CON31167138,FB,GOOG,GOOGL,INTC,MSFT,MU,NASDAQ01,NVDA,OTCBULLB,SSNLF,SSNNF,Computing and Information Technology,WD"
+      },
+      {
+        "datetime": "2018-03-12T08:00:48-04:00",
+        "headline": "Back Testing David Van Knapp's High Quality Dividend Growth Criteria",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/8900816853558606",
+        "summary":
+          "   David Van Knapp recently published an exceptional piece of research here on SeekingAlpha in an article entitled: What Are the Highest Quality Dividend Growth Stocks? Readers can access this article by clicking  this link .   In his article, David sets forth various criteria for selecting high …",
+        "related":
+          "ADP,Cash Or Stock Dividend,DRU20636,DRUGMMAJ,Healthcare,JNJ,KO,MMM,MRK,MSFT,NASDAQ01,NKE,ORCL,PFE,PG,SAFETY01,WMT"
+      },
+      {
+        "datetime": "2018-03-11T09:00:00-04:00",
+        "headline": "Arianna Huffington says she became successful after she quit one common bad habit",
+        "source": "CNBC",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/8562953810594477",
+        "summary": "No summary available.",
+        "related": "AMZN,MSFT"
+      },
+      {
+        "datetime": "2018-03-11T05:14:23-04:00",
+        "headline": "Podcast: Qualcomm-Broadcom, Gaming Industry Meets Trump, Machine Learning Software",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/msft/article/6796151895238093",
+        "summary":
+          "   This weeks Tech.pinions podcast features Tim Bajarin and Bob ODonnell analyzing the latest developments in the proposed Qualcomm (QCOM)-Broadcom (AVGO) merger, discussing this weeks meeting between gaming industry executives and President Trump, and chatting about the l…",
+        "related": "APPSOFTW,ARMH,AVGO,INTC,MSFT,NASDAQ01,QCOM,SOF31165134,Computing and Information Technology"
+      },
+      {
         "datetime": "2018-03-10T08:00:00-05:00",
         "headline": "The Next Bear Market: How To Prepare Now",
         "source": "SeekingAlpha",
@@ -148,46 +187,6 @@
           "   To be clear, we are not declaring the current bull market dead. We do not have any illusions of knowing which way the market is headed. However, fortunately, to be successful in investing, we do not need to be able to predict the market direction. Since the average duration of a bear market is…",
         "related":
           "AAPL,AMGN,ARCC,ASS10319,ASS10319042,CVS,CVX,D,Financial and Business Services,GBDC,HQH,INTHPINK,JNJ,JPC,KYN,LMT,MA,MAIN,MCY,MO,MSFT,NASDAQ01,NLY,NMZ,NRZ,NSRGY,O,OHI,PCI,PEP,PFE,PG,RFI,SHY,STAG,STK,STOR,T,TLT,UL,UTF,VLO,VTR,VZ,WM"
-      },
-      {
-        "datetime": "2018-03-09T11:13:00-05:00",
-        "headline": "How To Retire With Dividend Stocks And Recession Fears",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/7780566856492910",
-        "summary":
-          "   One challenge I frequently hear about from retirees is producing reliable income during retirement.   They may be focused on the total yield of their portfolio or they may be dealing with the required minimum distributions from tax advantaged retirement accounts.   The beautiful thing about th…",
-        "related":
-          "AAPL,AGNC,AMZN,AVB,Computer Hardware,CON31167138,DCT,DRE,EQR,FB,GOOG,LPT,MCD,MO,MSFT,NASDAQ01,NLY,NNN,O,PLD,PM,PSB,SPG,T,Computing and Information Technology,VZ"
-      },
-      {
-        "datetime": "2018-03-08T19:28:33-05:00",
-        "headline": "February Dividend Income Report",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/5026339382953709",
-        "summary":
-          "     Back in September 2017, I received slightly over $100K as a result of the commuted value of my pension plan. I decided to invest 100% of this money into dividend growth stocks. Each month, I publish my results. I dont do this to brag; I do this to show you its possible to bui…",
-        "related":
-          "AAPL,CRE10322,CRE10322056,DIS,Financial and Business Services,GNTX,HAS,HON,LAZ,MSFT,NASDAQ01,SBUX,TXN,UPS,V"
-      },
-      {
-        "datetime": "2018-03-08T14:55:51-05:00",
-        "headline": "Videogame stocks higher as White House summit eyes violence",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/5505559525189077",
-        "summary":
-          "     Stocks of big videogame makers are mostly higher heading into a White House meeting taking up the subject of whether games are a cause of violence.   More news on: Electronic Arts Inc., Take-Two Interactive Software, Inc., Microsoft Corporation, Tech stocks news, Stocks on the move,     Read…",
-        "related":
-          "APPSOFTW,ATVI,EA,ELE31165130,INTHPINK,MSFT,NASDAQ01,NTDOY,SNE,Computing and Information Technology,TTWO"
-      },
-      {
-        "datetime": "2018-03-08T06:50:19-05:00",
-        "headline": "Microsoft Is Heading To $100 - Cramer's Lightning Round (3/7/18)",
-        "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/msft/article/7723984632505423",
-        "summary":
-          "    Stocks discussed on the Lightning Round segment of Jim Cramer's Mad Money Program, Wednesday, March 7.    Bullish Calls   Royal Caribbean Cruises (RCL): Cramer likes the stock along with Carnival Cruises (CCL).   Microsoft (MSFT) CEO Satya Nadella is a competitive guy and Cramer thinks the st…",
-        "related":
-          "APPSOFTW,CARIBEAN,CCL,CNX,ETP,ETSY,FRT,Futures Trading,MSFT,NASDAQ01,NGG,RCL,SHOP,SOF31165134,Computing and Information Technology,VTR"
       }
     ],
     "peers": ["CSCO", "AAPL", "CA", "SAP", "RHT", "IBM", "ORCL", "HPQ", "GOOGL", "XLK"]
@@ -206,6 +205,17 @@
       "sector": "Consumer Cyclical"
     },
     "news": [
+      {
+        "datetime": "2018-03-11T12:23:06-04:00",
+        "headline":
+          "How Important Is International Trade To Each U.S. State's Economy? Pretty Important For Most U.S. States",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/f/article/7992862569234429",
+        "summary":
+          "   How important was international trade for each US state's economy in 2017? The map and table above help to answer that question. The table above shows GDP for each US state ( data here ) in 2017 (based on an average of the second and third quarter figures, data for Q4 aren't yet available), th…",
+        "related":
+          "AA,BA,CLKNF,DDM,DIA,DOG,DWDP,DXD,EEH,EPS,EQL,F,FEX,FWDD,GM,GMM.U:CA,HAOOF,HMC,HUSV,INTHPINK,International Trade,Interest Rates,IVV,IWL,IWM,JHML,JKD,NASDAQ01,NSANY,OTCBULLB,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RWL,RWM,RYARX,RYRSX,SBUS,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TM,TNA,TQQQ,TSXTSX01,TWM,TZA,UDOW,UDPIX,UPRO,URTY,USSD,USWD,UWM,VFINX,VLKAY,VOO,VTWO,VV"
+      },
       {
         "datetime": "2018-03-10T09:27:09-05:00",
         "headline": "Stocks To Watch: Back To Basics Time",
@@ -242,14 +252,6 @@
         "url": "https://api.iextrading.com/1.0/stock/f/article/7165040554980791",
         "summary": "No summary available.",
         "related": "F,GM"
-      },
-      {
-        "datetime": "2018-03-08T06:57:00-05:00",
-        "headline": "'No more a passenger': Driving schools for women take off in Saudi Arabia",
-        "source": "CNBC",
-        "url": "https://api.iextrading.com/1.0/stock/f/article/6700670008486511",
-        "summary": "No summary available.",
-        "related": "F"
       }
     ],
     "peers": ["TSLA", "VLKPY", "HMC", "TM", "NSANY", "TTM", "POAHY", "GM", "PUGOY"]
@@ -268,6 +270,16 @@
       "sector": "Communication Services"
     },
     "news": [
+      {
+        "datetime": "2018-03-11T12:51:37-04:00",
+        "headline": "30 'Safer' Dividend Communication Services Stocks For March",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/vod/article/8248194212165909",
+        "summary":
+          "    Actionable Conclusions (1-10): Analysts Calculate Top Ten 'Safer' Dividend Communications Services Stocks To Net 4.12% to 48.1% Net Gains By March, 2019    Six of ten top-yield \"safer\" dividend communication services dogs (tinted gray in the chart above) were among the top ten gainers for the…",
+        "related":
+          "BCE,BCE:CA,CHL,COM308,COM30845,Cash Or Stock Dividend,INTHPINK,MAOTF,MBT,NASDAQ01,ORAN,PCCWY,RCI,RCI.B:CA,SKM,TEF,TEFOF,TEL30845100,TEO,TLTZF,TSXTSX01,VOD,VODPF,WIN"
+      },
       {
         "datetime": "2018-03-09T17:44:43-05:00",
         "headline":
@@ -305,16 +317,208 @@
         "summary":
           "      Vodafone (NASDAQ: VOD ) will  sell its 51% stake  in its Qatar operations to existing partner Qatar Foundation for 301M (about $371M).    More news on: Vodafone Group Plc, Tech stocks news, Stocks on the move,     Read more …     ",
         "related": "COM308,COM30845,NASDAQ01,QATAR001,TEL30845100,VOD"
+      }
+    ],
+    "peers": []
+  },
+  "SPY": {
+    "company": {
+      "symbol": "SPY",
+      "companyName": "SPDR S&P 500",
+      "exchange": "NYSE Arca",
+      "industry": "",
+      "website": "http://www.spdrs.com",
+      "description":
+        "The investment seeks to provide investment results that, before expenses, correspond generally to the price and yield performance of the S&P 500® Index.\n The Trust seeks to achieve its investment objective by holding a portfolio of the common stocks that are included in the index (the ¿Portfolio¿), with the weight of each stock in the Portfolio substantially corresponding to the weight of such stock in the index.",
+      "CEO": "",
+      "issueType": "et",
+      "sector": ""
+    },
+    "news": [
+      {
+        "datetime": "2018-03-12T10:25:37-04:00",
+        "headline": "Trade Risks In The Spotlight",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/spy/article/5290382814674375",
+        "summary":
+          "   Key points     We do not see trade risks upsetting solid market fundamentals but would reassess if protectionism escalated and began hurting growth prospects.   Global stocks rallied on upbeat U.S. jobs data, shrugging off the limited U.S. steel and aluminum tariffs and the Italian election re…",
+        "related":
+          "ACWF,ACWI,BDD,BDG,BOM,BOS,CHN,CN,CPI00001,CXSE,DBB,DGT,DIA,DOG,DTEC:BZX,DXD,EPS,ESGF,ESGW,FCA,FEDRESRV,FIGY,FIHD,FLCH,FLQG,FLQH,FOIL,FXI,FXP,GCH,GLQ,GXC,HACW,HDMV,HEVY,IVV,IWM,JFC,JJM,JJU,KGRN,MCHI,NASDAQ01,PGJ,PSQ,QID,QLD,QQQ,RJZ,RSP,RWL,SDOW,SDS,SH,SPXL,SPXS,SPXU,SPY,SQQQ,SSO,TDF,TNA,TQQQ,TZA,UBM,UDOW,UPRO,URTY,UWM,VFINX,VGFO,VOO,VT,WBIL,WCHN,XMX:BZX,XPP,YANG,YAO,YINN,YXI"
       },
       {
-        "datetime": "2018-02-26T06:57:58-05:00",
-        "headline": "Wall Street Breakfast: MWC Kicks Off In Barcelona",
+        "datetime": "2018-03-12T10:10:07-04:00",
+        "headline": "Valuation Dashboard: Energy And Materials - Update",
         "source": "SeekingAlpha",
-        "url": "https://api.iextrading.com/1.0/stock/vod/article/4944966000840290",
+        "url": "https://api.iextrading.com/1.0/stock/spy/article/7276767074414372",
         "summary":
-          "             Techies are gathering   in Barcelona, Spain for the Mobile World Congress, which kicks off today and runs through March 1. The trade show brings together mobile and phone manufacturers, distributors, carriers and engineers - apart from Apple (AAPL) - to present their latest work and …",
+          "   This article series provides a monthly dashboard of industries in each sector of the GICS classification. It compares valuation and quality factors relative to their historical averages in each industry.    Executive summary    Integrated Oil/Gas looks undervalued for 3 valuation factors by 10…",
         "related":
-          "AAPL,BA,BCCMY,BDRAF,BDRBF,BRK.A,BRK.B,CANADA01,CAR,CB,CENTAMER,CLNS,CMCSA,DAL,DB,DDAIF,DIS,EADSY,ERJ,Europe,FCAU,GE,GELYY,HTZ,INTC,INTHPINK,International Trade,LGF.A,LGF.B,MET,NAFTA001,NASDAQ01,NEWMEXIC,NOK,OTCBULLB,QCOM,QQQ,S,SAMERICA,SPAIN001,SPY,SSNLF,SYMC,TNTEY,UAL,UPS,VOD,WESTEURO"
+          "ASIX,BASICMAT,CHE10103,CHE10103003,Commodities,EMN,FCX,Futures Trading,LYB,MOS,NASDAQ01,NBL,NOV,OI,OLN,RRC,SLGN,SPY,STLD,WOR,XLB,XLE"
+      },
+      {
+        "datetime": "2018-03-12T09:00:14-04:00",
+        "headline": "Volatility Shifts Gears",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/spy/article/8063384484658205",
+        "summary":
+          "    By VW Staff    Bandywine Asset Management commentary for the month of February 2018, titled, \"Volatility Shifts Gears.\"   Stock Market Volatility Leads to Largest Loss in the History of the Managed Futures Industry   The managed futures (CTA) indexes suffered their largest losses on record du…",
+        "related":
+          "BXUB,BXUC,CHGX,CRF,DDM,DIA,DMRL,DOG,DUSA,DXD,EDOW,EEH,EPS,EQL,ESGL,FEX,Futures Trading,FWDD,GSEW:BZX,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RVRS:BZX,RWM,RYARX,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPSM,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,U,UDOW,UDPIX,UPRO,URTY,USA,USMC,USSD,UWM,VFINX,VOO,VTWO,VV,ZF"
+      },
+      {
+        "datetime": "2018-03-12T07:59:24-04:00",
+        "headline": "This Might Become The Greatest Bull Market Of All Time",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/spy/article/6244455343873091",
+        "summary":
+          "   (Source:  Imgflip )   On March 9th, 2009, in the face of the worst financial crisis since The Great Depression, the stock market bottomed. In the ensuing nine years, the S&amp;P 500 ( SPY ), Dow Jones Industrial Average ( DIA ), and Nasdaq ( QQQ ) proceeded to soar as much as 637%.    ^SPXTR  …",
+        "related":
+          "BXUB,BXUC,CHGX,CRF,DDM,DIA,DMRL,DOG,DUSA,DXD,EDOW,EEH,EPS,EQL,ESGL,FEX,FWDD,GSEW:BZX,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RVRS:BZX,RWM,RYARX,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPSM,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,U,UDOW,UDPIX,UPRO,URTY,USA,USMC,USSD,UWM,VFINX,VOO,VTWO,VV,WOMPOLIX,ZF"
+      },
+      {
+        "datetime": "2018-03-12T07:55:42-04:00",
+        "headline": "Happy Anniversary, Bulls",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/spy/article/7181168533784015",
+        "summary":
+          "   Friday marked the nine-year anniversary from the point at which stocks troughed. On March 9th, 2009 the S&amp;P 500 ( SPY ) closed at 676. Over the past nine years, the U.S. stock benchmark has produced annualized total returns of 19.5%, including reinvested dividends.    Source: Bloomberg, St…",
+        "related":
+          "DDM,DIA,DOG,DXD,EEH,EPS,EQL,FEX,FWDD,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RWL,RWM,RYARX,RYRSX,SBUS,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,UDOW,UDPIX,UNEMPLOY,UPRO,URTY,USSD,USWD,UWM,VFINX,VOO,VTWO,VV"
+      }
+    ],
+    "peers": []
+  },
+  "DIA": {
+    "company": {
+      "symbol": "DIA",
+      "companyName": "SPDR Dow Jones Industrial Average",
+      "exchange": "NYSE Arca",
+      "industry": "",
+      "website": "http://www.spdrs.com",
+      "description":
+        "The investment seeks to provide investment results that, before expenses, correspond generally to the price and yield performance of the Dow Jones Industrial Average (the \"DJIA\").The Trust seeks to achieve its investment objective by holding a portfolio of the common stocks that are included in the DJIA (the \"Portfolio\"), with the weight of each stock in the Portfolio substantially corresponding to the weight of such stock in the DJIA.",
+      "CEO": "",
+      "issueType": "et",
+      "sector": ""
+    },
+    "news": [
+      {
+        "datetime": "2018-03-12T10:25:37-04:00",
+        "headline": "Trade Risks In The Spotlight",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/dia/article/5290382814674375",
+        "summary":
+          "   Key points     We do not see trade risks upsetting solid market fundamentals but would reassess if protectionism escalated and began hurting growth prospects.   Global stocks rallied on upbeat U.S. jobs data, shrugging off the limited U.S. steel and aluminum tariffs and the Italian election re…",
+        "related":
+          "ACWF,ACWI,BDD,BDG,BOM,BOS,CHN,CN,CPI00001,CXSE,DBB,DGT,DIA,DOG,DTEC:BZX,DXD,EPS,ESGF,ESGW,FCA,FEDRESRV,FIGY,FIHD,FLCH,FLQG,FLQH,FOIL,FXI,FXP,GCH,GLQ,GXC,HACW,HDMV,HEVY,IVV,IWM,JFC,JJM,JJU,KGRN,MCHI,NASDAQ01,PGJ,PSQ,QID,QLD,QQQ,RJZ,RSP,RWL,SDOW,SDS,SH,SPXL,SPXS,SPXU,SPY,SQQQ,SSO,TDF,TNA,TQQQ,TZA,UBM,UDOW,UPRO,URTY,UWM,VFINX,VGFO,VOO,VT,WBIL,WCHN,XMX:BZX,XPP,YANG,YAO,YINN,YXI"
+      },
+      {
+        "datetime": "2018-03-12T09:00:14-04:00",
+        "headline": "Volatility Shifts Gears",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/dia/article/8063384484658205",
+        "summary":
+          "    By VW Staff    Bandywine Asset Management commentary for the month of February 2018, titled, \"Volatility Shifts Gears.\"   Stock Market Volatility Leads to Largest Loss in the History of the Managed Futures Industry   The managed futures (CTA) indexes suffered their largest losses on record du…",
+        "related":
+          "BXUB,BXUC,CHGX,CRF,DDM,DIA,DMRL,DOG,DUSA,DXD,EDOW,EEH,EPS,EQL,ESGL,FEX,Futures Trading,FWDD,GSEW:BZX,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RVRS:BZX,RWM,RYARX,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPSM,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,U,UDOW,UDPIX,UPRO,URTY,USA,USMC,USSD,UWM,VFINX,VOO,VTWO,VV,ZF"
+      },
+      {
+        "datetime": "2018-03-12T07:59:24-04:00",
+        "headline": "This Might Become The Greatest Bull Market Of All Time",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/dia/article/6244455343873091",
+        "summary":
+          "   (Source:  Imgflip )   On March 9th, 2009, in the face of the worst financial crisis since The Great Depression, the stock market bottomed. In the ensuing nine years, the S&amp;P 500 ( SPY ), Dow Jones Industrial Average ( DIA ), and Nasdaq ( QQQ ) proceeded to soar as much as 637%.    ^SPXTR  …",
+        "related":
+          "BXUB,BXUC,CHGX,CRF,DDM,DIA,DMRL,DOG,DUSA,DXD,EDOW,EEH,EPS,EQL,ESGL,FEX,FWDD,GSEW:BZX,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RVRS:BZX,RWM,RYARX,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPSM,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,U,UDOW,UDPIX,UPRO,URTY,USA,USMC,USSD,UWM,VFINX,VOO,VTWO,VV,WOMPOLIX,ZF"
+      },
+      {
+        "datetime": "2018-03-12T07:55:42-04:00",
+        "headline": "Happy Anniversary, Bulls",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/dia/article/7181168533784015",
+        "summary":
+          "   Friday marked the nine-year anniversary from the point at which stocks troughed. On March 9th, 2009 the S&amp;P 500 ( SPY ) closed at 676. Over the past nine years, the U.S. stock benchmark has produced annualized total returns of 19.5%, including reinvested dividends.    Source: Bloomberg, St…",
+        "related":
+          "DDM,DIA,DOG,DXD,EEH,EPS,EQL,FEX,FWDD,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RWL,RWM,RYARX,RYRSX,SBUS,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,UDOW,UDPIX,UNEMPLOY,UPRO,URTY,USSD,USWD,UWM,VFINX,VOO,VTWO,VV"
+      },
+      {
+        "datetime": "2018-03-12T06:25:48-04:00",
+        "headline": "Stocks start week with U.S. jobs glow",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/dia/article/4627760859856390",
+        "summary":
+          "     Shares across the globe are starting the week with a bounce after a strong U.S. jobs report seemed to erase any potential concerns investors may have had about a looming trade war or inflation.   More news on: SPDR S&amp;P 500 Trust ETF, PowerShares QQQ Trust ETF, SPDR Dow Jones Industrial A…",
+        "related":
+          "DDM,DIA,DOG,DXD,EPS,IVV,Mutual Funds,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RWL,RYARX,SDOW,SDS,SFLA,SH,SPDN,SPLX,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SSO,TQQQ,UDOW,UDPIX,UPRO,VFINX,VOO"
+      }
+    ],
+    "peers": []
+  },
+  "IWM": {
+    "company": {
+      "symbol": "IWM",
+      "companyName": "iShares Russell 2000",
+      "exchange": "NYSE Arca",
+      "industry": "",
+      "website": "http://www.ishares.com",
+      "description":
+        "The investment seeks to track the investment results of the Russell 2000® Index, which measures the performance of the small-capitalization sector of the U.S. equity market.\n The fund generally invests at least 90% of its assets in securities of the underlying index and in depositary receipts representing securities of the underlying index. It may invest the remainder of its assets in certain futures, options and swap contracts, cash and cash equivalents, as well as in securities not included in the underlying index, but which the advisor believes will help the fund track the underlying index.",
+      "CEO": "",
+      "issueType": "et",
+      "sector": ""
+    },
+    "news": [
+      {
+        "datetime": "2018-03-12T10:25:37-04:00",
+        "headline": "Trade Risks In The Spotlight",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/iwm/article/5290382814674375",
+        "summary":
+          "   Key points     We do not see trade risks upsetting solid market fundamentals but would reassess if protectionism escalated and began hurting growth prospects.   Global stocks rallied on upbeat U.S. jobs data, shrugging off the limited U.S. steel and aluminum tariffs and the Italian election re…",
+        "related":
+          "ACWF,ACWI,BDD,BDG,BOM,BOS,CHN,CN,CPI00001,CXSE,DBB,DGT,DIA,DOG,DTEC:BZX,DXD,EPS,ESGF,ESGW,FCA,FEDRESRV,FIGY,FIHD,FLCH,FLQG,FLQH,FOIL,FXI,FXP,GCH,GLQ,GXC,HACW,HDMV,HEVY,IVV,IWM,JFC,JJM,JJU,KGRN,MCHI,NASDAQ01,PGJ,PSQ,QID,QLD,QQQ,RJZ,RSP,RWL,SDOW,SDS,SH,SPXL,SPXS,SPXU,SPY,SQQQ,SSO,TDF,TNA,TQQQ,TZA,UBM,UDOW,UPRO,URTY,UWM,VFINX,VGFO,VOO,VT,WBIL,WCHN,XMX:BZX,XPP,YANG,YAO,YINN,YXI"
+      },
+      {
+        "datetime": "2018-03-12T09:00:14-04:00",
+        "headline": "Volatility Shifts Gears",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/iwm/article/8063384484658205",
+        "summary":
+          "    By VW Staff    Bandywine Asset Management commentary for the month of February 2018, titled, \"Volatility Shifts Gears.\"   Stock Market Volatility Leads to Largest Loss in the History of the Managed Futures Industry   The managed futures (CTA) indexes suffered their largest losses on record du…",
+        "related":
+          "BXUB,BXUC,CHGX,CRF,DDM,DIA,DMRL,DOG,DUSA,DXD,EDOW,EEH,EPS,EQL,ESGL,FEX,Futures Trading,FWDD,GSEW:BZX,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RVRS:BZX,RWM,RYARX,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPSM,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,U,UDOW,UDPIX,UPRO,URTY,USA,USMC,USSD,UWM,VFINX,VOO,VTWO,VV,ZF"
+      },
+      {
+        "datetime": "2018-03-12T07:59:24-04:00",
+        "headline": "This Might Become The Greatest Bull Market Of All Time",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/iwm/article/6244455343873091",
+        "summary":
+          "   (Source:  Imgflip )   On March 9th, 2009, in the face of the worst financial crisis since The Great Depression, the stock market bottomed. In the ensuing nine years, the S&amp;P 500 ( SPY ), Dow Jones Industrial Average ( DIA ), and Nasdaq ( QQQ ) proceeded to soar as much as 637%.    ^SPXTR  …",
+        "related":
+          "BXUB,BXUC,CHGX,CRF,DDM,DIA,DMRL,DOG,DUSA,DXD,EDOW,EEH,EPS,EQL,ESGL,FEX,FWDD,GSEW:BZX,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RVRS:BZX,RWM,RYARX,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPSM,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,U,UDOW,UDPIX,UPRO,URTY,USA,USMC,USSD,UWM,VFINX,VOO,VTWO,VV,WOMPOLIX,ZF"
+      },
+      {
+        "datetime": "2018-03-12T07:55:42-04:00",
+        "headline": "Happy Anniversary, Bulls",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/iwm/article/7181168533784015",
+        "summary":
+          "   Friday marked the nine-year anniversary from the point at which stocks troughed. On March 9th, 2009 the S&amp;P 500 ( SPY ) closed at 676. Over the past nine years, the U.S. stock benchmark has produced annualized total returns of 19.5%, including reinvested dividends.    Source: Bloomberg, St…",
+        "related":
+          "DDM,DIA,DOG,DXD,EEH,EPS,EQL,FEX,FWDD,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RWL,RWM,RYARX,RYRSX,SBUS,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,UDOW,UDPIX,UNEMPLOY,UPRO,URTY,USSD,USWD,UWM,VFINX,VOO,VTWO,VV"
+      },
+      {
+        "datetime": "2018-03-12T06:12:43-04:00",
+        "headline":
+          "Danger Ahead, New High Stock Market: Is Capital Preservation With Appreciation The Answer? Weekly Blog # 514",
+        "source": "SeekingAlpha",
+        "url": "https://api.iextrading.com/1.0/stock/iwm/article/8334355438762846",
+        "summary":
+          "    Introduction    At the end of February I was about to suggest that both the high and low for the year 2018 were in place. If either price was violated it would be troublesome. After the first nine days in March I am getting much more concerned about a breakout above the January highs.    Why …",
+        "related":
+          "DDM,DIA,DOG,DXD,EEH,EPS,EQL,FEX,FWDD,HUSV,IVV,IWL,IWM,JHML,JKD,NASDAQ01,OTPIX,PSQ,QID,QLD,QQEW,QQQ,QQQE,QQXT,RSP,RWL,RWM,RYARX,RYRSX,SBUS,SCAP,SCHX,SDOW,SDS,SFLA,SH,SMLL,SPDN,SPLX,SPUU,SPXE,SPXL,SPXN,SPXS,SPXT,SPXU,SPXV,SPY,SQQQ,SRTY,SSO,SYE,TNA,TQQQ,TWM,TZA,UDOW,UDPIX,UPRO,URTY,USSD,USWD,UWM,VFINX,VOO,VTWO,VV"
       }
     ],
     "peers": []

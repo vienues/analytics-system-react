@@ -10,7 +10,7 @@
     "start": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
     "start_prod": "nodemon ./index.js --exec babel-node -e js,json,gql,graphql",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate-mock-data": "node ./builder.js aapl goog msft f vod"
+    "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm"
   },
   "license": "ISC",
   "dependencies": {
