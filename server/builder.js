@@ -30,6 +30,6 @@ const batchedSymbols = symbols.map(s => s.toLowerCase()).join(',')
 const companyRelation = new Map()
 companyRelation.set('marketListData', `/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
 companyRelation.set('companyData', `/stock/market/batch?symbols=${batchedSymbols}&types=company,news,peers&last=5`)
-companyRelation.set('stockData', `/stock/${symbols[0]}/batch?types=quote,stats,chart&range=1d`)
+companyRelation.set('stockData', `/stock/market/batch?symbols=${batchedSymbols}&types=quote,stats,chart&range=1d`)
 
 builder(companyRelation)
