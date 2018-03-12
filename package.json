@@ -21,12 +21,9 @@
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'",
     "precommit": "pretty-quick --staged",
-    "postmerge": "npm run clean && lerna bootstrap",
-    "openfin": "openfin --launch --config ./client/public/app.json"
+    "openfin": "openfin --launch --config ./client/public/app.json",
+    "demo": "lerna run --parallel demo"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "redis": "^2.8.0"
-  }
+  "license": "ISC"
 }

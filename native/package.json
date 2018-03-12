@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "bootstrap": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp install:ios",
+    "demo": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --ios --tunnel",
     "start": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --ios --tunnel",
-    "start_prod": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --ios --tunnel",
     "start:fast": "./node_modules/.bin/exp start --ios --tunnel",
     "restart": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --clear --tunnel"
   },
