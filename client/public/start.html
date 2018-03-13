@@ -41,45 +41,42 @@
     //OpenFin is ready
 
     const marginLeft = 30;
-    const marginTop = 30;
+    const marginTop = 60;
 
     const col1 = 600;
-    const row1 = 500;
+    const row1 = 550;
 
-    document.querySelector('#openCompanyApp')
-      .addEventListener('click', () => {
-        openApp('search/vod', {
-          defaultHeight: 150,
-          defaultWidth: 530,
-          defaultTop: marginTop,
-          defaultLeft: marginLeft
-        });
-        openApp('company', {
-          defaultHeight: 280,
-          defaultWidth: 440,
-          defaultTop: 200,
-          defaultLeft: marginLeft
-        });
-        openApp('history', {
-          defaultHeight: 280,
-          defaultWidth: 500,
-          defaultTop: row1,
-          defaultLeft: marginLeft
-        });
+    openApp('search/vod', {
+      defaultHeight: 150,
+      defaultWidth: 530,
+      defaultTop: marginTop,
+      defaultLeft: marginLeft
+    });
+    openApp('company', {
+      defaultHeight: 280,
+      defaultWidth: 440,
+      defaultTop: 200,
+      defaultLeft: marginLeft
+    });
+    openApp('history', {
+      defaultHeight: 280,
+      defaultWidth: 500,
+      defaultTop: row1,
+      defaultLeft: marginLeft
+    });
 
-        openApp('news', {
-          defaultHeight: 280,
-          defaultWidth: 440,
-          defaultTop: marginTop,
-          defaultLeft: col1
-        });
-        openApp('stats', {
-          defaultHeight: 550,
-          defaultWidth: 400,
-          defaultTop: row1 -150,
-          defaultLeft: col1
-        });
-      });
+    openApp('news', {
+      defaultHeight: 280,
+      defaultWidth: 440,
+      defaultTop: marginTop,
+      defaultLeft: col1
+    });
+    openApp('stats', {
+      defaultHeight: 550,
+      defaultWidth: 400,
+      defaultTop: row1 - 150,
+      defaultLeft: col1
+    });
   });
 </script>
 

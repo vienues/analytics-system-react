@@ -7,14 +7,12 @@ import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { execute, subscribe } from 'graphql'
 import { makeExecutableSchema } from 'graphql-tools'
 
-import resolvers from './resolvers'
-import typeDefs from './schema.graphql'
-import getDataSource from './connectors'
-import { createLogger } from 'bunyan'
+import resolvers from './resolvers/index'
+import typeDefs from '../schema.graphql'
+import getDataSource from './connectors/index'
 
 const PORT = 4000
 const CLIENT_PORT = 3000
-const log = createLogger({ name: 'GRAPHQL-SERVER' })
 
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 const schema = makeExecutableSchema({ typeDefs, resolvers })
@@ -48,7 +46,7 @@ server.use(
 const ws = createServer(server)
 
 ws.listen(PORT, () => {
-  log.info(`Apollo Server is now running on http://localhost:${PORT}`)
+  console.info(`Apollo Server is now running on http://localhost:${PORT}`)
   // Set up the WebSocket for handling GraphQL subscriptions
   new SubscriptionServer(
     {

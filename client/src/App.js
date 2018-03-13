@@ -14,6 +14,7 @@ import theme from './styleguide/theme'
 import MainLayout from './layouts/browser/MainLayout'
 import DesktopPanel from './layouts/desktop/DesktopPanel'
 import Search from './containers/Search'
+import { Background } from 'styleguide'
 
 const createDesktopRoute = (heading, comp) => {
   const Component = selectionConnector(comp)
@@ -43,8 +44,10 @@ class App extends Component {
                 exact
                 path="/search/:id"
                 component={({ match }) => (
-                  <DesktopPanel id={match.params.id} heading={'Search'}>
-                    <Search id={match.params.id} url={/search/} />
+                  <DesktopPanel id={match.params.id} bg={false} heading={'Search'}>
+                    <Background flex={1} w={1} p={2}>
+                      <Search id={match.params.id} url={/search/} />
+                    </Background>
                   </DesktopPanel>
                 )}
               />

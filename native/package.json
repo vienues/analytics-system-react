@@ -19,6 +19,7 @@
     "apollo-link-state": "^0.4.0",
     "apollo-link-ws": "^1.0.5",
     "apollo-utilities": "^1.0.8",
+    "client": "^0.0.1",
     "d3-shape": "^1.2.0",
     "expo": "^25.0.0",
     "graphql": "^0.13.1",

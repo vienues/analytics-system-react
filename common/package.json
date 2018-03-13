@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "add": "^2.0.6",
+    "client": "^0.0.1",
     "d3-shape": "^1.2.0",
     "lodash": "^4.17.5",
     "numeral": "^2.0.6",
