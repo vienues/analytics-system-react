@@ -1,7 +1,7 @@
 import { withProps } from 'recompose'
 import * as Rebass from 'rebass'
 import styled, { css } from 'styled-components'
-import { mapProps } from './mapProps'
+import { mapProps } from '@adaptive-insights/common'
 
 export { ViewportFlex } from './ViewportRow'
 

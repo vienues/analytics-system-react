@@ -2,7 +2,6 @@ import React from 'react'
 import { Text, View } from '../../styleguide/index'
 import numeral from 'numeral'
 import { colors } from '@adaptive-insights/common'
-import styled from 'styled-components'
 
 const StockPrice = props => {
   return !props.data ? (
@@ -55,7 +54,6 @@ const StockPrice = props => {
             props.data.stock.quote.changePercent * 100,
           ).format('0.00a')}`}
           <Text
-            style
             style={{
               fontSize: 16,
               lineHeight: 39,

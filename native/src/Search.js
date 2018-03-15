@@ -1,24 +1,23 @@
 import React, { PureComponent } from 'react'
 import { TouchableOpacity } from 'react-native'
-import styled, { css } from 'styled-components'
-
-import { mapProps } from './styleguide/mapProps'
-import { Text, TextInput, View, viewProps } from './styleguide/index'
+import styled from 'styled-components'
 import connect from './connector'
+
+import { Text, TextInput, View, viewProps } from './styleguide/index'
 
 class SearchManager extends PureComponent {
   state = {
     value: null,
-    options: false,
+    showOptions: false,
   }
 
   handleChangeText = text => {
     this.props.search.refetch({ text })
-    this.setState({ options: true })
+    this.setState({ showOptions: true })
   }
 
-  handleChange = symbol => {
-    this.setState({ value: symbol, inputText: '', options: false })
+  onSelection = symbol => {
+    this.setState({ value: symbol, inputText: '', showOptions: false })
   }
 
   handleBlur = e => {
@@ -26,7 +25,7 @@ class SearchManager extends PureComponent {
   }
 
   handlePress = () => {
-    this.handleChange(null)
+    this.onSelection(null)
     if (this.input) {
       this.input.focus()
     }
@@ -40,11 +39,11 @@ class SearchManager extends PureComponent {
   }
 
   render() {
-    const { details: Details } = this.props
+    const { renderDetails } = this.props
     const { value } = this.state
 
     return (
-      <View style={{ flexDirection: 'column', width: '100%', alignItems: 'flex-start' }}>
+      <Layout>
         <SearchInputContainer>
           {value ? (
             <SearchValue onPress={this.handlePress}>
@@ -60,24 +59,33 @@ class SearchManager extends PureComponent {
             />
           )}
         </SearchInputContainer>
-        {this.state.options && this.props.search.search
-          ? this.props.search.search.map(symbol => (
-              <SearchResult
-                key={symbol.id}
-                onPress={e => {
-                  this.handleChange(symbol)
-                }}
-              >
-                <Text style={{ width: 4 * 16 }}>{symbol.id} </Text>
-                <Text>{symbol.name}</Text>
-              </SearchResult>
-            ))
-          : null}
-        {value && Details && <Details id={value.id} />}
-      </View>
+        {this.state.showOptions &&
+          this.props.search.search &&
+          renderOptions({ lastSearchResults: this.props.search.search, onSelection: this.onSelection })}
+        {value && renderDetails({ id: value.id })}
+      </Layout>
     )
   }
 }
+
+const renderOptions = ({ lastSearchResults, onSelection }) =>
+  lastSearchResults.map(symbol => (
+    <SearchResult
+      key={symbol.id}
+      onPress={() => {
+        onSelection(symbol)
+      }}
+    >
+      <Text style={{ width: 4 * 16 }}>{symbol.id} </Text>
+      <Text>{symbol.name}</Text>
+    </SearchResult>
+  ))
+
+const Layout = styled(View)`
+  flex-flow: column;
+  width: 100%;
+  align-items: flex-start;
+`
 
 const SearchInputContainer = styled(View)`
   width: 100%;

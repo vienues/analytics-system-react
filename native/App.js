@@ -10,6 +10,8 @@ import History from './src/containers/History'
 
 import StockPrice from './src/containers/StockPrice'
 import { ApplicationBackground, Text, Divider } from './src/styleguide/index'
+import { ThemeProvider } from 'styled-components'
+import theme from './src/styleguide/theme'
 
 export default class App extends React.Component {
   state = {
@@ -24,12 +26,17 @@ export default class App extends React.Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <ApplicationBackground>{this.state.fontLoaded && <Search details={Details} />}</ApplicationBackground>
+        <ThemeProvider theme={theme}>
+          <ApplicationBackground>
+            {this.state.fontLoaded && <Search renderDetails={renderDetails} />}
+          </ApplicationBackground>
+        </ThemeProvider>
       </ApolloProvider>
     )
   }
 }
-const Details = ({ id }) => {
+
+const renderDetails = ({ id }) => {
   return (
     <Fragment>
       <View

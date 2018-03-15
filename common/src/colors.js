@@ -137,7 +137,6 @@ export const colors = flatten({
 })
 
 export const gradients = {
-  native: [rgb(43, 66, 164), rgb(0, 46, 113), rgb(0, 30, 76), rgb(0, 19, 51), rgb(0, 2, 5)],
   primary: `${rgb(1, 40, 97)}, ${rgb(2, 23, 56)}, ${rgb(2, 16, 37)}`,
-  secondary: [rgb(0, 38, 93), rgb(0, 32, 79)],
+  native: [rgb(43, 66, 164), rgb(0, 46, 113), rgb(0, 30, 76), rgb(0, 19, 51), rgb(0, 2, 5)],
 }

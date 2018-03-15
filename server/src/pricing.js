@@ -9,7 +9,7 @@ const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 const getQuoteUrl = symbol => `stock/${symbol}/quote`
 const requestQuote = symbol => iex.fetch(getQuoteUrl(symbol))
 
-const TICK_INTERVAL = 5000
+const TICK_INTERVAL = 3000
 
 // pricing brings back same price each time
 function createPriceStream(symbol) {

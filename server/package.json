@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon src/index.js --exec babel-node -e js,json,gql,graphql",
-    "demo": "set INSIGHTS_OFFLINE=true && yarn start",
+    "demo": "yarn start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm"
   },
