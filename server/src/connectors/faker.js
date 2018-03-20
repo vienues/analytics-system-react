@@ -1,19 +1,9 @@
-import marketData from '../mockData/marketListData.json'
-import companyData from '../mockData/companyData.json'
-import stockData from '../mockData/stockData.json'
-
-const transformIfQuote = (data, term, func) => {
-  return ['quote'].includes(term) ? func(data[term]) : data[term]
-}
-
-const ctx = {}
-
-const modify = (ctx, curr) => {
+const modify = (ctx, quote) => {
   const decimalConversion = val => {
     return Math.round(val * 100) / 100
   }
 
-  let result = { ...curr }
+  let result = { ...quote }
   let { symbol } = result
   let prev = ctx[symbol]
 
@@ -35,35 +25,38 @@ const modify = (ctx, curr) => {
   return result
 }
 
-export function fetch(path) {
-  let result
+const isMarketDataRequest = path => path.match(/stock\/market/)
+const isStockDataRequest = path => path.match(/stock\/(\w+)/)
 
-  if (path.match(/stock\/market/)) {
-    result = marketData
-  } else if (path.match(/stock\/(\w+)/)) {
-    let sourceMap = {
-      company: companyData,
-      news: companyData,
-      peers: companyData,
-      quote: stockData,
-      stats: stockData,
-      chart: stockData,
+function fetch(sourceMap, ctx = {}) {
+  return path => {
+    if (isMarketDataRequest(path)) {
+      return Promise.resolve(sourceMap.marketData)
     }
 
-    let [, symbol, term] = path.split('/')
-    if (Object.keys(sourceMap).includes(term)) {
-      let dataSource = sourceMap[term]
-      let data = dataSource[symbol] || Object.values(dataSource)[0]
-      result = data && transformIfQuote(data, term, modify.bind(null, ctx))
+    if (isStockDataRequest(path)) {
+      let [, symbol, term] = path.split('/')
+
+      if (!Object.keys(sourceMap).includes(term)) {
+        return Promise.reject(new Error('Unknown term'))
+      }
+
+      const dataSource = sourceMap[term]
+
+      let result = dataSource[symbol] || Object.values(dataSource)[0]
+      result = { ...result }
+
+      if (term === 'quote') {
+        result.quote = modify(ctx, result.quote) // spread
+      }
+
+      return Promise.resolve(result)
     }
-  } else {
     let [term] = path.split('/')
-    result = stockData[term]
+    return Promise.resolve(sourceMap.quote[term])
   }
-
-  if (result === undefined || result === null) {
-    throw new Error(`Unable to fetch data at this endpoint: ${path}`)
-  }
-
-  return Promise.resolve(result)
 }
+
+export default sourceMap => ({
+  fetch: fetch(sourceMap),
+})
