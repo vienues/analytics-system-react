@@ -52,8 +52,8 @@ function fetch(sourceMap, ctx = {}) {
 
       return Promise.resolve(result)
     }
-    let [term] = path.split('/')
-    return Promise.resolve(sourceMap.quote[term])
+
+    return Promise.reject(new Error("It don't work"))
   }
 }
 
