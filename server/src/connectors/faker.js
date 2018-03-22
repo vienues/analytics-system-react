@@ -1,19 +1,20 @@
-const modify = (ctx, quote) => {
-  const decimalConversion = val => {
-    return Math.round(val * 100) / 100
-  }
+const isMarketDataRequest = path => path.match(/stock\/market/)
+const isStockDataRequest = path => path.match(/stock\/(\w+)/)
+const fetchCompanyData = (store, symbol) => store[symbol] || Object.values(store)[0]
+const decimalConversion = val => Math.round(val * 100) / 100
 
+const modify = (ctx, quote) => {
   let result = { ...quote }
-  let { symbol } = result
-  let prev = ctx[symbol]
+  const { symbol } = result
+  const prev = ctx[symbol]
 
   if (prev) {
-    let dir = Math.round(Math.random()) ? -1 : 1
-    let delta = Math.random() * dir
+    const dir = Math.round(Math.random()) ? -1 : 1
+    const delta = Math.random() * dir
 
-    let latestPrice = prev.latestPrice + delta
-    let change = latestPrice - prev.previousClose
-    let percent = change / prev.previousClose
+    const latestPrice = prev.latestPrice + delta
+    const change = latestPrice - prev.previousClose
+    const percent = change / prev.previousClose
 
     result['latestPrice'] = decimalConversion(latestPrice)
     result['change'] = decimalConversion(change)
@@ -25,36 +26,30 @@ const modify = (ctx, quote) => {
   return result
 }
 
-const isMarketDataRequest = path => path.match(/stock\/market/)
-const isStockDataRequest = path => path.match(/stock\/(\w+)/)
-
-function fetch(sourceMap, ctx = {}) {
-  return path => {
-    if (isMarketDataRequest(path)) {
-      return Promise.resolve(sourceMap.marketData)
-    }
-
-    if (isStockDataRequest(path)) {
-      let [, symbol, term] = path.split('/')
-
-      if (!Object.keys(sourceMap).includes(term)) {
-        return Promise.reject(new Error('Unknown term'))
-      }
-
-      const dataSource = sourceMap[term]
-
-      let result = dataSource[symbol] || Object.values(dataSource)[0]
-      result = { ...result }
-
-      if (term === 'quote') {
-        result.quote = modify(ctx, result.quote) // spread
-      }
-
-      return Promise.resolve(result)
-    }
-
-    return Promise.reject(new Error("It don't work"))
+const fetch = (dataStore, context = {}) => path => {
+  if (isMarketDataRequest(path)) {
+    return Promise.resolve(dataStore.marketData)
   }
+
+  if (isStockDataRequest(path)) {
+    const [, symbol, resource] = path.split('/')
+
+    if (!Object.keys(dataStore).includes(resource)) {
+      return Promise.reject(new Error('Unrecognized request'))
+    }
+
+    const store = dataStore[resource]
+    const companyData = fetchCompanyData(store, symbol)
+
+    if (resource === 'quote') {
+      const quote = modify(context, companyData.quote)
+      return Promise.resolve(quote)
+    }
+
+    return Promise.resolve(companyData[resource])
+  }
+
+  return Promise.reject(new Error('Unrecognized request'))
 }
 
 export default sourceMap => ({

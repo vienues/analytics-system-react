@@ -1,5 +1,3 @@
-require('@babel/register')
-
 const { expect } = require('chai')
 
 const faker = require('../src/connectors/faker')
@@ -12,8 +10,8 @@ describe('Fake fetch something', function() {
 
     try {
       await fetch(path)
-    } catch (e) {
-      expect(e).to.be.an('error')
+    } catch (error) {
+      expect(error).to.be.an('error')
     }
   })
 })
