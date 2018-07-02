@@ -1,9 +1,3 @@
-# dependencies
-node_modules
-
-# production
-/build
-
 # ides
 .idea
 
@@ -12,18 +6,13 @@ node_modules
 .env.development.local
 .env.test.local
 .env.production.local
-
+Dockerfile
+.dockerignore
+README.md
+.vscode
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 *.iml
-.vscode
-
-# Helm
-*.tgz
-requirements.lock
-
-# temporary ignore
-/simulator
