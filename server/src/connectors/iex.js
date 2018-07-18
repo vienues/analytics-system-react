@@ -23,6 +23,6 @@ export async function fetch(path, options) {
   try {
     return await response.json()
   } catch (e) {
-    console.log('IEX connector error', e)
+    throw new Error('Invalid Stock')
   }
 }

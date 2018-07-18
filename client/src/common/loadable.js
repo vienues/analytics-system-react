@@ -15,7 +15,7 @@ const ErrorComponent = props => {
 
   return (
     <span>
-      Something went wrong<span>{JSON.stringify(props.data.error)}</span>
+      Something went wrong<span />
     </span>
   )
 }

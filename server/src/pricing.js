@@ -1,7 +1,8 @@
 import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/observable/interval'
+import 'rxjs/add/observable/empty'
 import { Observable } from 'rxjs/Observable'
-import { map, mergeMap } from 'rxjs/operators'
+import { map, mergeMap, catchError } from 'rxjs/operators'
 import getDataSource from './connectors/index'
 
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
@@ -14,7 +15,13 @@ const TICK_INTERVAL = 3000
 // pricing brings back same price each time
 function createPriceStream(symbol) {
   return Observable.interval(TICK_INTERVAL).pipe(
-    mergeMap(() => Observable.fromPromise(requestQuote(symbol))),
+    mergeMap(() =>
+      Observable.fromPromise(requestQuote(symbol)).pipe(
+        catchError(x => {
+          return Observable.empty()
+        }),
+      ),
+    ),
     map(quote => ((quote.id = quote.symbol), quote)),
   )
 }
