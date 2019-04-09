@@ -10,9 +10,12 @@ const AppBar = () => (
   <Body>
     <Logo />
     <Box flex="1" />
+    {/*  
+    // Hiding nav bar as sections are not implemented 
     <Link to="/stock">Quotes</Link>
     <Link to="/markets">Markets</Link>
     <Link to="/watchlists">Watchlists</Link>
+    */}
   </Body>
 )
 
