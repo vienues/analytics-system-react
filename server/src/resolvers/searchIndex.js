@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import Fuse from 'fuse.js'
-const data = require('./referenceSymbols')
+import data from './referenceSymbols.json'
 
 const INDEX = new Fuse(data.slice(0, 1000), {
   keys: [{ name: 'id', weight: 0.99 }, { name: 'name', weight: 0.1 }],

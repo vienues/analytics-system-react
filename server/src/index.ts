@@ -8,7 +8,8 @@ import { execute, subscribe } from 'graphql'
 import { makeExecutableSchema } from 'graphql-tools'
 
 import resolvers from './resolvers/index'
-import typeDefs from '../schema.graphql'
+// import typeDefs from '../schema.graphql'
+const typeDefs = require('../schema.graphql')
 import getDataSource from './connectors/index'
 
 const PORT = 4000
@@ -50,6 +51,7 @@ ws.listen(PORT, () => {
   // Set up the WebSocket for handling GraphQL subscriptions
   new SubscriptionServer(
     {
+      // @ts-ignore
       execute,
       subscribe,
       schema,
