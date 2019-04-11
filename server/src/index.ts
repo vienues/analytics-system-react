@@ -1,15 +1,16 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import path from 'path'
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
 import { createServer } from 'http'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { execute, subscribe } from 'graphql'
 import { makeExecutableSchema } from 'graphql-tools'
+import { importSchema } from 'graphql-import'
 
 import resolvers from './resolvers/index'
-// import typeDefs from '../schema.graphql'
-const typeDefs = require('../schema.graphql')
+const typeDefs = importSchema(path.join(__dirname, '../schema.graphql'))
 import getDataSource from './connectors/index'
 
 const PORT = 4000

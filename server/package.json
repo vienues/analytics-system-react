@@ -7,10 +7,11 @@
     "node": ">=8.9.0"
   },
   "scripts": {
-    "start": "tsc && nodemon lib/index.js --exec babel-node -e js,json,gql,graphql",
+    "start": "babel-node lib/index.js",
+    "start:dev": "nodemon --watch src -e js,json,ts,graphql,gql --exec \"tsc && babel-node lib/index.js\"",
     "demo": "yarn start",
     "test": "mocha --require @babel/register",
-    "tsc": "tsc",
+    "build": "tsc",
     "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm"
   },
   "license": "ISC",
@@ -21,6 +22,7 @@
     "express": "^4.16.2",
     "fuse.js": "^3.2.0",
     "graphql": "^14.2.1",
+    "graphql-import": "^0.7.1",
     "graphql-subscriptions": "^1.1.0",
     "graphql-tools": "^4.0.4",
     "moment": "^2.20.1",
