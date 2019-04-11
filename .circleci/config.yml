@@ -36,4 +36,5 @@ jobs:
       # Run SERVER tests.
       - run: |
           cd ~/repo/server &&
+          yarn run build &&
           yarn run test
