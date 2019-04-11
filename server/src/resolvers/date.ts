@@ -5,13 +5,13 @@ const EPOCH_MAX = 9999999999
 
 export default {
   Date: {
-    __parseValue(value) {
+    __parseValue(value: any) {
       return moment(formatDate(value)).toDate()
     },
-    __serialize(value) {
+    __serialize(value: any) {
       return moment(formatDate(value)).format('YYYY-MM-DD')
     },
-    __parseLiteral(ast) {
+    __parseLiteral(ast: any) {
       if (ast.kind === Kind.STRING) {
         return moment(formatDate(ast.value)).toDate()
       }
@@ -20,10 +20,10 @@ export default {
   },
 
   DateTime: {
-    __parseValue(value) {
+    __parseValue(value: any) {
       return moment(value).toDate()
     },
-    __serialize(value) {
+    __serialize(value: any) {
       if (value) {
         return moment(
           typeof value === 'string'
@@ -34,7 +34,7 @@ export default {
           .toISOString()
       }
     },
-    __parseLiteral(ast) {
+    __parseLiteral(ast: any) {
       if (ast.kind === Kind.STRING) {
         return moment(ast.value).toDate()
       }
@@ -43,13 +43,13 @@ export default {
   },
 
   Time: {
-    __parseValue(value) {
+    __parseValue(value: any) {
       return moment(value, 'HH:mm').format('HH:mm')
     },
-    __serialize(value) {
+    __serialize(value: any) {
       return moment(value, 'HH:mm').format('HH:mm')
     },
-    __parseLiteral(ast) {
+    __parseLiteral(ast: any) {
       if (ast.kind === Kind.STRING) {
         return moment(ast.value, 'HH:mm').format('HH:mm')
       }
@@ -59,9 +59,9 @@ export default {
 }
 
 const DATE_REGEXP = /(\d\d\d\d)[-]?(\d\d)[-]?(\d\d)/
-export function formatDate(date) {
+export function formatDate(date: string | any) {
   if (typeof date === 'string') {
-    return [...date.match(DATE_REGEXP)].slice(1).join('-')
+    return [...(date.match(DATE_REGEXP) || [])].slice(1).join('-')
   }
 
   return date

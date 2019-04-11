@@ -15,6 +15,6 @@ const fakeIex = faker({
   marketData,
 })
 
-export default function getDataSource(offlineMode) {
+export default function getDataSource(offlineMode?: string) {
   return offlineMode && offlineMode.match(/true/i) ? fakeIex : real
 }

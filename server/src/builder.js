@@ -1,3 +1,5 @@
+// This is a standalone script - no point in translating to TS
+
 const fs = require('fs')
 const fetch = require('node-fetch')
 
