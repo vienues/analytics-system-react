@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import ArrowDownward from 'material-ui-icons/ArrowDownward'
-import ArrowUpward from 'material-ui-icons/ArrowUpward'
+import ArrowDownward from '@material-ui/icons/ArrowDownward'
+import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import Numeral from '../../components/Numeral'
 
 import { Flex, Box } from 'rebass'
@@ -16,7 +16,6 @@ export const StockPrice = ({ data: { stock: { quote } } }) => {
       <Box px={1} />
       <Text color={color}>
         <Icon
-          fontSize
           viewBox="0 0 20 20"
           style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }}
         />

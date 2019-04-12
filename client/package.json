@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "engines": {
-    "node": ">=8.9.0"
-  },
   "dependencies": {
     "@adaptive-insights/common": "*",
     "apollo-cache-inmemory": "^1.1.7",
@@ -19,16 +16,16 @@
     "graphql": "^0.12.3",
     "graphql-tag": "^2.7.0",
     "lodash": "^4.17.5",
-    "material-ui": "^1.0.0-beta.33",
-    "material-ui-icons": "^1.0.0-beta.17",
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "moment": "^2.20.1",
     "numeral": "^2.0.6",
     "ramda": "^0.25.0",
-    "react": "^16.2.0",
+    "react": "^16.8.6",
     "react-apollo": "^2.0.4",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.8.6",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.1.1",
+    "react-scripts": "2.1.8",
     "react-select": "^1.2.1",
     "react-select-fast-filter-options": "^0.2.3",
     "rebass": "^1.0.4",
@@ -37,7 +34,8 @@
     "ress": "^1.2.2",
     "rxjs": "^5.5.6",
     "styled-components": "^3.1.6",
-    "subscriptions-transport-ws": "^0.9.5"
+    "subscriptions-transport-ws": "^0.9.5",
+    "typescript": "3.4.3"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -47,7 +45,22 @@
     "eject": "react-app-rewired eject"
   },
   "devDependencies": {
+    "@types/jest": "24.0.11",
+    "@types/node": "11.13.4",
+    "@types/openfin": "^39.0.1",
+    "@types/react": "16.8.13",
+    "@types/react-dom": "16.8.4",
+    "@types/react-router-dom": "^4.3.2",
     "react-app-rewire-babel-loader": "^0.1.1",
-    "react-app-rewired": "^1.5.0"
-  }
+    "react-app-rewired": "^2.1.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

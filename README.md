@@ -1,8 +1,26 @@
-## GraphQL Demo
+# Adaptive Insights
 
-# 🙌
+## Getting started
 
-**Adaptive Insights offline mode**
+1. Install dev dependencies (mainly `lerna`) at root level (`yarn` must be installed beforehand):
+
+   ```
+   [adaptive-insights] $ yarn install
+   ```
+
+2. Bootstrap all packages with lerna. This essentially runs yarn install in all packages (defined in `lerna.json`) and creates the necessary symlinks to resolve dependecies among them:
+
+   ```
+   [adaptive-insights] $ yarn run bootstrap
+   ```
+
+3. Start server & launch client. This runs `yarn start` in every package (defined in `lerna.json`):
+
+   ```
+   [adaptive-insights] $ yarn start
+   ```
+
+## Offline mode
 
 Enabling offline mode is as simple as creating an environment variable and setting it to `true`.
 

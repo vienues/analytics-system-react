@@ -4,17 +4,17 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "eslint": "^4.17.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-react-app": "^2.1.0",
+    "eslint": "5.12.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-config-react-app": "^3.0.8",
     "husky": "^0.14.3",
     "lerna": "^2.8.0",
-    "prettier": "^1.10.2",
+    "prettier": "^1.16.4",
     "pretty-quick": "^1.4.1"
   },
   "scripts": {
-    "start": "npm run bootstrap && lerna run --parallel start",
-    "offline-start": "set INSIGHTS_OFFLINE=true && npm run start",
+    "start": "yarn run bootstrap && lerna run --parallel start",
+    "offline-start": "set INSIGHTS_OFFLINE=true && yarn run start",
     "bootstrap": "lerna bootstrap",
     "clean": "yarn && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
