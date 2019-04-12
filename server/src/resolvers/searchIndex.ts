@@ -6,7 +6,7 @@ import { PubSub } from 'graphql-subscriptions'
 
 type SearchResult<T> = { item?: T } & { score: number }
 
-const INDEX = new Fuse(data.slice(0, 1000), {
+const INDEX = new Fuse<RefSymbol>(data.slice(0, 1000), {
   keys: [{ name: 'id', weight: 0.99 }, { name: 'name', weight: 0.1 }],
 
   threshold: 0.3,
@@ -49,7 +49,7 @@ export function search(term = '') {
     return SYMBOL_MAP.get(term.toUpperCase()) || []
   }
 
-  const results = [...(INDEX.search<RefSymbol>(term) || []), ...(SYMBOL_MAP.get(term.toUpperCase()) || [])]
+  const results = [...(INDEX.search(term) || []), ...(SYMBOL_MAP.get(term.toUpperCase()) || [])]
 
   return R.uniqBy(s => s.id, results.filter(Boolean))
 }
