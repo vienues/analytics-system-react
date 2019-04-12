@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "engines": {
-    "node": ">=8.9.0"
-  },
   "scripts": {
     "start": "tsc && babel-node lib/index.js",
     "start:dev": "nodemon --watch src -e js,json,ts,graphql,gql --exec \"npm run start\"",
