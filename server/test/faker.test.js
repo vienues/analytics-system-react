@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 
-const faker = require('../src/connectors/faker')
+const faker = require('../lib/connectors/faker')
 
 describe('Fake fetch something', function() {
   it('it should reject an invalid path', async function() {

@@ -1,19 +1,20 @@
+import { PubSub } from 'graphql-subscriptions'
+import { Observable, Subscription } from 'rxjs'
+import 'rxjs/add/observable/empty'
 import 'rxjs/add/observable/fromPromise'
 import 'rxjs/add/observable/interval'
-import 'rxjs/add/observable/empty'
-import { Observable } from 'rxjs/Observable'
-import { map, mergeMap, catchError } from 'rxjs/operators'
+import { catchError, map, mergeMap } from 'rxjs/operators'
 import getDataSource from './connectors/index'
 
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
-const getQuoteUrl = symbol => `stock/${symbol}/quote`
-const requestQuote = symbol => iex.fetch(getQuoteUrl(symbol))
+const getQuoteUrl = (symbol: string) => `stock/${symbol}/quote`
+const requestQuote = (symbol: string) => iex.fetch(getQuoteUrl(symbol))
 
 const TICK_INTERVAL = 3000
 
 // pricing brings back same price each time
-function createPriceStream(symbol) {
+function createPriceStream(symbol: string) {
   return Observable.interval(TICK_INTERVAL).pipe(
     mergeMap(() =>
       Observable.fromPromise(requestQuote(symbol)).pipe(
@@ -26,14 +27,14 @@ function createPriceStream(symbol) {
   )
 }
 
-const subscriptions = new Map()
+const subscriptions = new Map<string, Subscription>()
 
 const SUBSCRIBE_TO_INDEX_UPDATES = 'SUBSCRIBE_TO_MARKET_UPDATES'
 
-const createTopic = symbol => `MARKET_UPDATE.${symbol}`
+const createTopic = (symbol: string) => `MARKET_UPDATE.${symbol}`
 
-export default function(pubSub) {
-  const onMessage = symbols => {
+export default function(pubSub: PubSub) {
+  const onMessage = (symbols: string[]) => {
     symbols.filter(symbol => !subscriptions.has(symbol)).forEach(symbol => {
       console.info('Subscribing to:', createTopic(symbol))
       const subscription = createPriceStream(symbol).subscribe(price => {

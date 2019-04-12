@@ -1,9 +1,9 @@
-const isMarketDataRequest = path => path.match(/stock\/market/)
-const isStockDataRequest = path => path.match(/stock\/(\w+)/)
-const fetchCompanyData = (store, symbol) => store[symbol] || Object.values(store)[0]
-const decimalConversion = val => Math.round(val * 100) / 100
+const isMarketDataRequest = (path: string) => path.match(/stock\/market/)
+const isStockDataRequest = (path: string) => path.match(/stock\/(\w+)/)
+const fetchCompanyData = (store: { [s: string]: any }, symbol: string) => store[symbol] || Object.values(store)[0]
+const decimalConversion = (val: number) => Math.round(val * 100) / 100
 
-const modify = (ctx, quote) => {
+const modify = (ctx: any, quote: any) => {
   let result = { ...quote }
   const { symbol } = result
   const prev = ctx[symbol]
@@ -26,7 +26,7 @@ const modify = (ctx, quote) => {
   return result
 }
 
-const fetch = (dataStore, context = {}) => path => {
+const fetch = (dataStore: any, context = {}) => (path: string) => {
   if (isMarketDataRequest(path)) {
     return Promise.resolve(dataStore.marketData)
   }
@@ -52,6 +52,6 @@ const fetch = (dataStore, context = {}) => path => {
   return Promise.reject(new Error('Unrecognized request'))
 }
 
-export default sourceMap => ({
+export default (sourceMap: any) => ({
   fetch: fetch(sourceMap),
 })

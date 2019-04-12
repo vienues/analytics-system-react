@@ -4,6 +4,9 @@ node_modules
 # production
 /build
 
+# ts output
+server/lib
+
 # ides
 .idea
 
