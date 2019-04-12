@@ -26,6 +26,7 @@ const Body = styled(Flex)`
   max-height: 6rem;
 `
 
+// eslint-disable-next-line no-unused-vars
 const Link = styled(NavLink)`
   ${textProps({ weight: 'normal', caps: true })};
 

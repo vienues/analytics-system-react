@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { Flex, Box } from 'rebass'
 import { Text, Small } from '../../styleguide'
 import Numeral from '../../components/Numeral'
-import ArrowUpward from 'material-ui-icons/ArrowUpward'
-import ArrowDownward from 'material-ui-icons/ArrowDownward'
+import ArrowUpward from '@material-ui/icons/ArrowUpward'
+import ArrowDownward from '@material-ui/icons/ArrowDownward'
 
 const Markets = ({ data: { markets } }) => {
   return (
@@ -22,7 +22,6 @@ const Markets = ({ data: { markets } }) => {
             <Box pr={1} />
             <Text color={color}>
               <Icon
-                fontSize
                 viewBox="0 0 20 20"
                 style={{ verticalAlign: 'super', fontSize: '0.5rem', marginRight: '0.25rem' }}
               />
