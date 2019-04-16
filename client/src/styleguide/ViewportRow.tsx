@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Flex, Box } from 'rebass'
 
-export const ViewportFlex = ({ className, ...props }) => (
+export const ViewportFlex = ({ className, ...props }: any) => (
   <WithPadding className={className} {...props}>
     <Centered {...props} />
   </WithPadding>

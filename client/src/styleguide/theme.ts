@@ -1,4 +1,5 @@
-import { theme as rebassTheme } from 'rebass'
+import * as rebassTheme from 'rebass'
+// @ts-ignore
 import { gradients, colors } from '@adaptive-insights/common'
 
 export const theme = {
