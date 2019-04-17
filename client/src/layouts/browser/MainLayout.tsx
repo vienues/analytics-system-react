@@ -49,11 +49,13 @@ export default class MainLayout extends React.Component<Props> {
 }
 
 const SearchLayout = ({ id }: { id: any }) => (
-  <Flex wrap="true">
-    <Search url={/stock/} id={id} />
-    <StockPrice id={id} />
+  <>
+    <Flex wrap="true">
+      <Search url={/stock/} id={id} />
+      <StockPrice id={id} />
+    </Flex>
     <Divider my={1} soft="true" />
-  </Flex>
+  </>
 )
 
 const StockDetails = ({ id }: { id: any }) => (

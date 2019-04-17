@@ -8,4 +8,5 @@ export default compose(
   maybe({ cond: ({ id }: any) => id == null }),
   connect,
   loadable,
+  // @ts-ignore
 )(StockPrice)

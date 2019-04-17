@@ -8,4 +8,5 @@ import News, { NEWS_QUERY } from './News'
 export default compose(
   connect(NEWS_QUERY),
   loadable,
+  // @ts-ignore
 )(News)

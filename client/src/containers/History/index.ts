@@ -8,4 +8,5 @@ import History, { HISTORY_QUERY } from './History'
 export default compose(
   connect(HISTORY_QUERY),
   loadable,
+  // @ts-ignore
 )(History)

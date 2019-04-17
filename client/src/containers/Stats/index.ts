@@ -8,4 +8,5 @@ import Stats, { STOCK_STATS_QUERY } from './Stats'
 export default compose(
   connect(STOCK_STATS_QUERY),
   loadable,
+  // @ts-ignore
 )(Stats)

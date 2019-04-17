@@ -49,8 +49,9 @@ export function search(term = '') {
 
   // @ts-ignore
   return R.compose(
+    // @ts-ignore
     R.uniqBy(R.prop('id')),
-    R.filter(R.identity),
+    R.filter(R.identity as any),
     R.flatten,
   )([INDEX.search(term), SYMBOL_MAP.get(term.toUpperCase())])
 }

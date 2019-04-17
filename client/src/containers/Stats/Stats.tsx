@@ -51,7 +51,7 @@ export class Stats extends React.Component<ChildProps<IProps, Response>, {}> {
     stats = formatFields(stats)
     return (
       <Flex flex={1}>
-        <Box>
+        <Box width={1 / 2}>
           <FieldRow label="Previous Close">{quote.previousClose}</FieldRow>
           <FieldRow label="Day Range">
             $ {quote.low} - {quote.high}
@@ -60,7 +60,7 @@ export class Stats extends React.Component<ChildProps<IProps, Response>, {}> {
           <FieldRow label="Market Cap">{stats.marketcap}</FieldRow>
           <FieldRow label="P/E Ratio">{stats.peRatioHigh}</FieldRow>
         </Box>
-        <Box px={[0, 2]}>
+        <Box width={1 / 2} px={[0, 2]}>
           <FieldRow label="Open">{quote.open}</FieldRow>
           <FieldRow label="52 Week Range">
             $ {stats.week52low} - {stats.week52high}
@@ -76,13 +76,15 @@ export class Stats extends React.Component<ChildProps<IProps, Response>, {}> {
 
 const FieldRow = ({ label, children }: any) => {
   return (
-    <Flex flex={1} pt={1}>
-      <Flex flex={['auto']} color="offwhite50">
-        {label}
+    <>
+      <Flex flex={1} pt={1}>
+        <Flex flex={['auto']} color="offwhite50">
+          {label}
+        </Flex>
+        <Box color="offwhite">{children}</Box>
       </Flex>
-      <Box color="offwhite">{children}</Box>
-      <Divider color="primary50a" borderWidth={1} my={1} />
-    </Flex>
+      <Divider color="primary50a" borderWidth={1} my={1} mb={1} />
+    </>
   )
 }
 
