@@ -32,28 +32,29 @@ const subscribeMarket = gql`
 `
 
 const connectQuery = graphql(query, {
-  skip: ownProps => !ownProps.id,
+  skip: (ownProps: any) => !ownProps.id,
 })
 
 const connectSubscription = lifecycle({
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: any) {
+    const viewmodel = this as any
     if (nextProps.data.loading) {
       return
     }
 
-    if (!this.props.data.stock) {
-      this.unsubscribe && this.unsubscribe()
+    if (!viewmodel.props.data.stock) {
+      viewmodel.unsubscribe && viewmodel.unsubscribe()
       return
     }
 
-    if (this.props.data.stock.id !== nextProps.data.stock.id) {
-      this.unsubscribe && this.unsubscribe()
-      this.unsubscribe = nextProps.data.subscribeToMore({
+    if (viewmodel.props.data.stock.id !== nextProps.data.stock.id) {
+      viewmodel.unsubscribe && viewmodel.unsubscribe()
+      viewmodel.unsubscribe = nextProps.data.subscribeToMore({
         document: subscribeMarket,
         variables: {
           markets: nextProps.data.stock.id,
         },
-        updateQuery: (prev, { subscriptionData }) => {
+        updateQuery: (prev: any, { subscriptionData }: any) => {
           const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes }
           return { ...prev, stock: stockCpy }
         },
@@ -61,10 +62,14 @@ const connectSubscription = lifecycle({
     }
   },
   componentWillUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe()
+    const viewmodel = this as any
+    if (viewmodel.unsubscribe) {
+      viewmodel.unsubscribe()
     }
   },
 })
 
-export default compose(connectQuery, connectSubscription)
+export default compose(
+  connectQuery,
+  connectSubscription,
+)

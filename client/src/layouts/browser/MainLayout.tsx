@@ -13,6 +13,8 @@ import StockPrice from '../../containers/StockPrice'
 import AppBar from './AppBar'
 import { Flex } from 'rebass'
 
+import GlobalScrollbarStyle from '../GlobalScrollbarStyle'
+
 import { AnalyticsStyle, Title, Header } from '../../rt-theme/analyticsStyle'
 
 export interface Props {
@@ -30,6 +32,7 @@ export default class MainLayout extends React.Component<Props> {
     // const { before, header, body, footer, after } = this.props
     return (
       <AppLayoutRoot>
+        <GlobalScrollbarStyle />
         <AppBar />
         <ScrollableArea>
           <ViewportFlex column className="">
@@ -54,22 +57,31 @@ const SearchLayout = ({ id }: { id: any }) => (
 )
 
 const StockDetails = ({ id }: { id: any }) => (
-  <>
-    <AnalyticsStyle>
-      <Header>
-        <Title>Latest News</Title>
+  <Layout>
+    <div style={{ width: '800px', marginRight: '10px' }}>
+      <History id={id} />
+      <AnalyticsStyle>
+        <Header>
+          <Title>Key Stats</Title>
+        </Header>
+        <Stats id={id} />
+      </AnalyticsStyle>
+    </div>
+    <div style={{ height: '100%' }}>
+      <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
+        <Header>
+          <Title>Latest News</Title>
+        </Header>
         <News id={id} />
-      </Header>
-      <React.Fragment>
-        <Title>Company Overview</Title>
+      </AnalyticsStyle>
+      <AnalyticsStyle style={{ height: 'initial' }}>
+        <Header>
+          <Title>Company Overview</Title>
+        </Header>
         <Company id={id} />
-      </React.Fragment>
-    </AnalyticsStyle>
-
-    <History id={id} />
-    <Title>Key Stats</Title>
-    <Stats id={id} />
-  </>
+      </AnalyticsStyle>
+    </div>
+  </Layout>
 )
 
 const AppLayoutRoot = styled.div`
@@ -83,6 +95,15 @@ const AppLayoutRoot = styled.div`
   grid-template-rows: auto 1fr auto;
   background-color: ${({ theme }) => theme.core.darkBackground};
   color: ${({ theme }) => theme.core.textColor};
+`
+
+const Layout = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto;
+  @media (max-width: 750px) {
+    display: block;
+  }
+  width: 100%;
 `
 
 const ScrollableArea = styled(Flex)`

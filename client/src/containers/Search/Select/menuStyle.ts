@@ -3,7 +3,7 @@
  */
 import { css } from 'styled-components'
 
-export default ({ colors }) => css`
+export default ({ colors }: any) => css`
   /* */
   /* Select Menu */
   /* ------------------------------ */
@@ -49,7 +49,7 @@ export default ({ colors }) => css`
     padding: 0.5rem 1rem;
 
     &:last-child {
-      .border-bottom-radius( @select-input-border-radius );
+      .border-bottom-radius(@select-input-border-radius);
     }
 
     &.is-selected {

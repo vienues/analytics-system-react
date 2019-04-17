@@ -8,7 +8,7 @@ const internalInputHeight = css`2.5rem`
 const arrowWidth = '0.25rem'
 const clearWidth = '1rem'
 
-export default theme => {
+export default (theme: any) => {
   const { colors } = theme
 
   const backgroundColor = colors.transparent

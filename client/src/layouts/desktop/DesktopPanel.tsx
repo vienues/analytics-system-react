@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex, Button, Box } from 'rebass'
 import { withHandlers } from 'recompose'
-import { Text, Background } from 'styleguide'
+import { Text, Background } from '../../styleguide'
 import styled from 'styled-components'
 import logoSVG from '../../assets/logo.svg'
 import { CloseIcon, MinimizeIcon } from '../../assets/icons'
@@ -36,8 +36,8 @@ const PanelButton = styled(Button)`
   padding: 0 0.2rem;
 `
 
-const DesktopPanel = ({ heading, children, close, minimize, id, bg = true }) => (
-  <Flex column w={1} id={'bg'}>
+const DesktopPanel = ({ heading, children, close, minimize, id, bg = true }: any) => (
+  <Flex id={'bg'}>
     <PanelHeader>
       <Logo />
       <Text color="offwhite">{`${heading}`}</Text>
@@ -61,10 +61,10 @@ const DesktopPanel = ({ heading, children, close, minimize, id, bg = true }) => 
 )
 
 export default withHandlers({
-  close: props => event => {
-    window.fin.desktop.Application.getCurrent().close()
+  close: props => (event: any) => {
+    ;(window as any).fin.desktop.Application.getCurrent().close()
   },
-  minimize: props => event => {
-    window.fin.desktop.Window.getCurrent().minimize()
+  minimize: props => (event: any) => {
+    ;(window as any).fin.desktop.Window.getCurrent().minimize()
   },
 })(DesktopPanel)

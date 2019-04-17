@@ -4,7 +4,7 @@ import { from, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import { openfinLink } from 'apollo/openfinLink'
+import { openfinLink } from './openfinLink'
 
 const PORT = 4000
 
@@ -27,7 +27,7 @@ const links = [
   ),
 ]
 
-if (window.fin) {
+if ((window as any).fin) {
   links.unshift(openfinLink)
 }
 

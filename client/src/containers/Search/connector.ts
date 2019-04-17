@@ -2,6 +2,7 @@ import { compose, withProps } from 'recompose'
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
 import { withRouter } from 'react-router-dom'
+import { ISearchProps } from './Search'
 
 export default compose(
   graphql(
@@ -18,7 +19,7 @@ export default compose(
       }
     `,
     {
-      skip: ownProps => !ownProps.id,
+      skip: (ownProps: any) => !ownProps.id,
       options: ({ id }) => ({
         variables: { id },
       }),
@@ -43,12 +44,12 @@ export default compose(
     },
   ),
   withRouter,
-  withProps(props => {
+  withProps((props: ISearchProps) => {
     return {
-      onSymbolChanged: id => {
+      onSymbolChanged: (id: number) => {
         props.history.push(`${props.url}${id}`)
-        if (window.fin) {
-          window.fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
+        if ((window as any).fin) {
+          ;(window as any).fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
             data: {
               selection: {
                 id,

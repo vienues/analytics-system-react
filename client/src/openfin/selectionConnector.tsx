@@ -22,13 +22,13 @@ const QUERY_SELECTION = gql`
 `
 export default compose(
   graphql(QUERY_SELECTION, {
-    props: props => {
+    props: (props: any) => {
       return {
         ...props,
-        subscribeToSelection: params => {
+        subscribeToSelection: (params: any) => {
           return props.data.subscribeToMore({
             document: SUBSCRIBE_TO_SELECTION,
-            updateQuery: (prev, { subscriptionData }) => {
+            updateQuery: (prev: any, { subscriptionData }: any) => {
               if (!subscriptionData.data) {
                 return prev
               }
@@ -41,12 +41,14 @@ export default compose(
   }),
   lifecycle({
     componentWillMount() {
-      this.subscription = this.props.subscribeToSelection()
+      const viewmodel = this as any
+      viewmodel.subscription = viewmodel.props.subscribeToSelection()
     },
     componentWillUnmount() {
-      this.subscription.unsubscribe()
+      const viewmodel = this as any
+      viewmodel.subscription.unsubscribe()
     },
   }),
   loadable,
-  withProps(props => ({ id: props.data.selection.id })),
+  withProps((props: any) => ({ id: props.data.selection.id })),
 )

@@ -3,7 +3,7 @@
  */
 import { css } from 'styled-components'
 
-export default () => css`
+export default ({ colors }: any) => css`
 /* */
 /* Multi-Select */
 /* ------------------------------ */

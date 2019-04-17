@@ -4,8 +4,8 @@ import { getMainDefinition } from 'apollo-utilities/lib/index'
 import { Observable } from 'rxjs'
 
 const createSubscription = () => {
-  return Observable.create(observer => {
-    window.fin.desktop.InterApplicationBus.subscribe('*', null, 'SYMBOL.CHANGE', message => {
+  return Observable.create((observer: any) => {
+    ;(window as any).fin.desktop.InterApplicationBus.subscribe('*', null, 'SYMBOL.CHANGE', (message: any) => {
       observer.next(message)
     })
   })
@@ -28,7 +28,9 @@ const createQuery = () => {
 
 export const openfinLink = new ApolloLink((operation, forward) => {
   const isOpenfin = hasDirectives(['openfin'], operation.query)
-  if (!isOpenfin) return forward(operation)
+  if (!isOpenfin && forward) {
+    return forward(operation)
+  }
 
   const op = getMainDefinition(operation.query)
   const isSubscription = op.kind === 'OperationDefinition' && op.operation === 'subscription'

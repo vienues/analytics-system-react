@@ -5,29 +5,39 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import Numeral from '../../components/Numeral'
 
 import { Flex, Box } from 'rebass'
-import { Text } from 'styleguide'
+import { Text } from '../../styleguide'
 
-export const StockPrice = ({ data: { stock: { quote } } }) => {
-  const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
-  const { latestPrice, change, changePercent } = quote
-  return (
-    <Flex data-x={'ssss'} flex="none" align="flex-start" color="primary30">
-      <Currency>{latestPrice}</Currency>
-      <Box px={1} />
-      <Text color={color}>
-        <Icon
-          viewBox="0 0 20 20"
-          style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }}
-        />
-        <Numeral>{change}</Numeral>
-      </Text>
-      <VerticalRuleStyled color={color} />
-      <Percent color={color}>
-        {' '}
-        <Numeral>{changePercent * 100}</Numeral>
-      </Percent>
-    </Flex>
-  )
+export interface IProps {
+  data: {
+    stock: {
+      quote: any
+    }
+  }
+}
+
+export interface IState {}
+
+class StockPrice extends React.Component<IProps, IState> {
+  public render() {
+    const quote = this.props.data.stock.quote
+    const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
+    const { latestPrice, change, changePercent } = quote
+    return (
+      <Flex data-x={'ssss'} flex="none" color="primary30">
+        <Currency>{latestPrice}</Currency>
+        <Box px={1} />
+        <Text color={color}>
+          <Icon viewBox="0 0 20 20" style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }} />
+          <Numeral>{change}</Numeral>
+        </Text>
+        <VerticalRuleStyled className="" />
+        <Percent color={color}>
+          {' '}
+          <Numeral>{changePercent * 100}</Numeral>
+        </Percent>
+      </Flex>
+    )
+  }
 }
 
 const SuperText = styled(Text)`
@@ -59,7 +69,7 @@ const Percent = styled(SuperText)`
   }
 `
 
-const VerticalRule = ({ className }) => (
+const VerticalRule = ({ className }: any) => (
   <svg className={className} width="20" height="32" viewBox="0 0 20 32" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M9.25,0 L9.25,32"
@@ -75,7 +85,7 @@ const VerticalRule = ({ className }) => (
 
 const VerticalRuleStyled = styled(VerticalRule)`
   > path {
-    stroke: ${({ color, theme }) => theme.colors[color]};
+    stroke: ${({ color, theme }: any) => theme.colors[color]};
   }
 `
 

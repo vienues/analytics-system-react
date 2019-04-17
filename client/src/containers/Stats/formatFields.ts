@@ -8,7 +8,7 @@ const formats = {
   dollars: '$ 0,0[.]00',
 }
 
-const format = format => number => numeral(number).format(formats[format] || format)
+const format = (format: any) => (number: any) => numeral(number).format(formats[format] || format)
 
 const formatFields = R.evolve({
   // quote

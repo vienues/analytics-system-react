@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const CompanyConnector = fragment =>
+const CompanyConnector = (fragment: any) =>
   graphql(
     gql`
       query CompanyQuery($id: ID!) {
@@ -13,7 +13,7 @@ const CompanyConnector = fragment =>
       ${fragment}
     `,
     {
-      options: ({ id }) => ({
+      options: ({ id }: any) => ({
         variables: { id },
       }),
     },

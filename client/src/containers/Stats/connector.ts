@@ -1,19 +1,19 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-export const CompanyConnector = fragment =>
+export const CompanyConnector = (fragment: any) =>
   graphql(
     gql`
-      query HistoryQuery($id: ID!) {
+      query StatsQuery($id: ID!) {
         stock(id: $id) {
           id
-          ...History
+          ...Stats
         }
       }
       ${fragment}
     `,
     {
-      options: ({ id }) => ({
+      options: ({ id }: any) => ({
         variables: { id },
       }),
     },

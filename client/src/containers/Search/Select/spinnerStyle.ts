@@ -3,7 +3,7 @@
  */
 import { css } from 'styled-components'
 
-export default ({ colors }) => css`
+export default ({ colors }: any) => css`
   /*  */
   /* Spinner */
   /* ------------------------------ */

@@ -1,5 +1,6 @@
 import * as R from 'ramda'
 import Fuse from 'fuse.js'
+// @ts-ignore
 import data from '@adaptive-insights/data'
 
 const INDEX = new Fuse(data.referenceSymbols.slice(0, 1000), {
@@ -13,17 +14,18 @@ const INDEX = new Fuse(data.referenceSymbols.slice(0, 1000), {
 
   // Sort by lexical score, market percentage, volume
   shouldSort: true,
-  sortFn: (a, b) => {
+
+  sortFn: (a: any, b: any) => {
     return (
       a.score -
       b.score -
-      (a.item.marketPercent < b.item.marketPercent && b.score / 3) -
-      (a.item.volume < b.item.volume && b.score / 3)
+      ((a.item.marketPercent < b.item.marketPercent && b.score / 3) as any) -
+      ((a.item.volume < b.item.volume && b.score / 3) as any)
     )
   },
 })
 
-const SYMBOL_MAP = data.referenceSymbols.reduce((acc, symbol) => {
+const SYMBOL_MAP = data.referenceSymbols.reduce((acc: any, symbol: any) => {
   R.times(R.add(1), symbol.id.length).forEach(index => {
     const id = symbol.id.slice(0, index)
     const target = acc.get(id) || []
@@ -45,10 +47,12 @@ export function search(term = '') {
     return SYMBOL_MAP.get(term.toUpperCase()) || []
   }
 
-  return R.compose(R.uniqBy(R.prop('id')), R.filter(R.identity), R.flatten)([
-    INDEX.search(term),
-    SYMBOL_MAP.get(term.toUpperCase()),
-  ])
+  // @ts-ignore
+  return R.compose(
+    R.uniqBy(R.prop('id')),
+    R.filter(R.identity),
+    R.flatten,
+  )([INDEX.search(term), SYMBOL_MAP.get(term.toUpperCase())])
 }
 
 export default {

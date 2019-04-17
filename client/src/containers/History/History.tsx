@@ -5,35 +5,53 @@ import { withTheme } from 'styled-components'
 
 import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
 
-class History extends PureComponent {
-  static defaultProps = {
+export interface IProps {
+  data: {
+    stock: {
+      chart: any
+    }
+  }
+  theme: any
+  previousClose: any
+}
+
+export interface IState {
+  chart: any
+  low: any
+  high: any
+}
+
+class History extends PureComponent<IProps, IState> {
+  public static defaultProps = {
     data: [],
   }
 
-  state = {
+  public state = {
     chart: [],
+    low: 0,
+    high: 0,
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.update(this.props.data.stock.chart)
   }
 
-  componentWillReceiveProps(nextProps) {
+  public componentWillReceiveProps(nextProps: IProps) {
     if (this.props.data.stock.chart !== nextProps.data.stock.chart) {
       this.update(nextProps.data.stock.chart)
     }
   }
 
-  update(chart) {
-    chart = chart.filter(({ low, average, high }) => low > 0 || average > 0 || high > 0)
+  public update(chart: any) {
+    chart = chart.filter(({ low, average, high }: any) => low > 0 || average > 0 || high > 0)
 
-    let { low } = _.minBy(chart, 'low') || {}
-    let { high } = _.maxBy(chart, 'high') || {}
+    const { low } = (_.minBy(chart, 'low') || {}) as any
+    const { high } = (_.maxBy(chart, 'high') || {}) as any
 
     this.setState({ chart, low, high })
   }
 
-  render() {
+  public render() {
     let { theme, previousClose } = this.props
     if (typeof previousClose === 'string') {
       previousClose = Number(previousClose)
@@ -45,7 +63,7 @@ class History extends PureComponent {
     high += high * 0.0005
 
     return (
-      <ResponsiveContainer width="99%" height="99%" minHeight={200}>
+      <ResponsiveContainer width="99%" maxHeight={300} minHeight={200}>
         <AreaChart data={chart} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
           <CartesianGrid stroke={theme.colors.primary50a} />
           <ReferenceLine y={previousClose} stroke={theme.colors.accent} strokeDasharray="3 3" />
@@ -86,7 +104,7 @@ class History extends PureComponent {
   }
 }
 
-History.fragment = gql`
+export const HISTORY_QUERY = gql`
   fragment History on Stock {
     chart {
       label

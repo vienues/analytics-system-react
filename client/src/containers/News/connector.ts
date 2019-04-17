@@ -1,7 +1,7 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-export const StockNewsConnector = fragment =>
+export const StockNewsConnector = (fragment: any) =>
   graphql(
     gql`
       query NewsQuery($id: ID!) {
@@ -13,7 +13,7 @@ export const StockNewsConnector = fragment =>
       ${fragment}
     `,
     {
-      options: ({ id }) => ({
+      options: ({ id }: any) => ({
         variables: { id },
       }),
     },
