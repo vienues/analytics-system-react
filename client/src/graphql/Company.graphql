@@ -1,0 +1,15 @@
+fragment Company on Stock {
+  company {
+    id
+    symbol
+    name
+    exchange
+    industry
+    website
+    description
+    CEO
+    issueType
+    sector
+  }
+  peers
+}

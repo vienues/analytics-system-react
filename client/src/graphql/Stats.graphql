@@ -1,0 +1,21 @@
+fragment Stats on Stock {
+  stats {
+    marketcap
+    peRatioLow
+    peRatioHigh
+    week52low
+    week52high
+    latestEPS
+    dividendRate
+    dividendYield
+  }
+  quote {
+    id
+    low
+    high
+    open
+    previousClose
+    latestVolume
+    avgTotalVolume
+  }
+}

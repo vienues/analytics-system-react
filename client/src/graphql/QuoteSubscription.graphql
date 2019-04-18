@@ -1,0 +1,7 @@
+subscription onQuoteQuery($markets: [String!]!) {
+  getQuotes(symbols: $markets) {
+    id
+    changePercent
+    latestPrice
+  }
+}

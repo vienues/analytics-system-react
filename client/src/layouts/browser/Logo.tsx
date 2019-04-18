@@ -1,15 +1,15 @@
 import React, { SVGAttributes } from 'react'
 import { styled } from '../../rt-theme'
 
-interface LogoProps extends SVGAttributes<Element> {
+interface ILogoProps extends SVGAttributes<Element> {
   fill?: string
   size?: number
 }
 
-const Logo: React.FC<LogoProps> = ({ fill = '#000', size = 2, style, ...props }) => {
+const Logo: React.FC<ILogoProps> = ({ fill = '#000', size = 2, style, ...props }) => {
   style = {
-    width: size * 4.375 + 'rem',
     height: size + 'rem',
+    width: size * 4.375 + 'rem',
     ...style,
   }
 

@@ -7,8 +7,8 @@ import * as AdaptiveCommon from '@adaptive-insights/common'
 export { ViewportFlex } from './ViewportRow'
 
 export const Background = styled(Rebass.Box)`
-  color: ${props => props.theme.colors.primary50a};
-  background-image: linear-gradient(323deg, ${props => props.theme.gradients.primary});
+  color: ${({ theme }) => theme.core.textColor};
+  background-image: linear-gradient(323deg, ${({ theme }) => theme.core.darkBackground});
 `
 
 export const Root = (Background.withComponent(Rebass.Flex) as any).extend`

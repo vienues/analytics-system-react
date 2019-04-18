@@ -30,3 +30,4 @@ requirements.lock
 
 # temporary ignore
 /simulator
+client/src/__generated__/types.ts

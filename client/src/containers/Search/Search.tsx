@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchSelect from './Select'
+import SearchSelect from '../../components/Select'
 
 export interface ISearchProps {
   search: {

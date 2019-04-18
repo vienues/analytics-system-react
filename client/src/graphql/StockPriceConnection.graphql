@@ -1,0 +1,15 @@
+query StockPriceQuery($id: ID!) {
+  stock(id: $id) {
+    id
+    company {
+      id
+      name
+    }
+    quote {
+      id
+      change
+      changePercent
+      latestPrice
+    }
+  }
+}

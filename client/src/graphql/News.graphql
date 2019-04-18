@@ -1,0 +1,11 @@
+fragment News on Stock {
+  news(last: 3) {
+    id
+    datetime
+    headline
+    source
+    url
+    summary
+    related
+  }
+}

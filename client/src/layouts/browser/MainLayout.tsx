@@ -1,23 +1,15 @@
 import * as React from 'react'
 import styled from 'styled-components'
-
-import { Ribbon } from '../../components'
-import { Divider, ViewportFlex } from '../../styleguide'
-import Company from '../../containers/Company'
-import History from '../../containers/History'
-import MarketList from '../../containers/MarketList'
-import News from '../../containers/News'
+import { Company, History, MarketList, News, StockPrice } from '../../containers/'
 import Search from '../../containers/Search'
 import Stats from '../../containers/Stats'
-import StockPrice from '../../containers/StockPrice'
+import { Ribbon } from '../../components'
+import { Divider, ViewportFlex } from '../../styleguide'
 import AppBar from './AppBar'
 import { Flex } from 'rebass'
+import { AnalyticsStyle, Header, Title } from '../../rt-theme/analyticsStyle'
 
-import GlobalScrollbarStyle from '../GlobalScrollbarStyle'
-
-import { AnalyticsStyle, Title, Header } from '../../rt-theme/analyticsStyle'
-
-export interface Props {
+export interface IProps {
   before?: React.ReactNode
   header?: React.ReactNode
   body?: React.ReactNode
@@ -26,16 +18,15 @@ export interface Props {
   id: string
 }
 
-export default class MainLayout extends React.Component<Props> {
+export default class MainLayout extends React.Component<IProps> {
   public render() {
     const { id } = this.props
     // const { before, header, body, footer, after } = this.props
     return (
       <AppLayoutRoot>
-        <GlobalScrollbarStyle />
         <AppBar />
         <ScrollableArea>
-          <ViewportFlex column className="">
+          <ViewportFlex column={true} className="">
             <SearchLayout id={id} />
             {id ? <StockDetails id={id} /> : null}
           </ViewportFlex>
@@ -48,7 +39,7 @@ export default class MainLayout extends React.Component<Props> {
   }
 }
 
-const SearchLayout = ({ id }: { id: any }) => (
+const SearchLayout: React.FunctionComponent<{ id: string }> = ({ id }) => (
   <>
     <Flex wrap="true">
       <Search url={/stock/} id={id} />
@@ -58,7 +49,7 @@ const SearchLayout = ({ id }: { id: any }) => (
   </>
 )
 
-const StockDetails = ({ id }: { id: any }) => (
+const StockDetails: React.FunctionComponent<{ id: string }> = ({ id }) => (
   <Layout>
     <div style={{ width: '800px', marginRight: '10px' }}>
       <History id={id} />

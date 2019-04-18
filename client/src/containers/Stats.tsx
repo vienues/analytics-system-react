@@ -1,11 +1,40 @@
-import gql from 'graphql-tag'
 import React from 'react'
 import { Box, Flex } from 'rebass'
-import { Divider } from '../../styleguide'
+import { Divider } from '../styleguide'
 
-import formatFields from './formatFields'
+import { ChildProps, graphql } from 'react-apollo'
+import { loadable } from '../common'
+import { compose } from 'recompose'
 
-import { ChildProps } from 'react-apollo'
+const STATS_QUERY = require('../graphql/StatsConnection.graphql')
+import * as R from 'ramda'
+import numeral from 'numeral'
+
+const formats = {
+  number: '0,0[.]00',
+  integer: '0,0',
+  approximate: '(0.00 a)',
+  dollars: '$ 0,0[.]00',
+}
+
+const format = (format: any) => (number: any) => numeral(number).format(formats[format] || format)
+
+const formatFields = R.evolve({
+  // quote
+  previousClose: format('dollars'),
+  open: format('dollars'),
+  low: format('number'),
+  high: format('number'),
+  latestVolume: format('approximate'),
+  avgTotalVolume: format('approximate'),
+  // stats
+  marketcap: format('approximate'),
+  peRatioHigh: format('number'),
+  week52low: format('number'),
+  week52high: format('number'),
+  latestEPS: format('number'),
+  dividendYield: format('number'),
+})
 
 export interface IProps {
   data: {
@@ -15,30 +44,6 @@ export interface IProps {
     }
   }
 }
-
-export const STOCK_STATS_QUERY = gql`
-  fragment Stats on Stock {
-    stats {
-      marketcap
-      peRatioLow
-      peRatioHigh
-      week52low
-      week52high
-      latestEPS
-      dividendRate
-      dividendYield
-    }
-    quote {
-      id
-      low
-      high
-      open
-      previousClose
-      latestVolume
-      avgTotalVolume
-    }
-  }
-`
 
 export class Stats extends React.Component<ChildProps<IProps, Response>, {}> {
   constructor(props: ChildProps<IProps, Response>) {
@@ -88,4 +93,12 @@ const FieldRow = ({ label, children }: any) => {
   )
 }
 
-export default Stats
+export default compose(
+  graphql(STATS_QUERY, {
+    options: ({ id }: any) => ({
+      variables: { id },
+    }),
+    // @ts-ignore
+  }),
+  loadable,
+)(Stats)

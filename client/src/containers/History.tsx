@@ -1,7 +1,12 @@
-import gql from 'graphql-tag'
 import _ from 'lodash'
 import React, { PureComponent } from 'react'
 import { withTheme } from 'styled-components'
+
+import { ChildProps, graphql } from 'react-apollo'
+import { loadable } from '../common'
+import { compose } from 'recompose'
+
+const HISTORY_QUERY = require('../graphql/HistoryConnection.graphql')
 
 import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
 
@@ -21,7 +26,11 @@ export interface IState {
   high: any
 }
 
-class History extends PureComponent<IProps, IState> {
+class History extends PureComponent<ChildProps<IProps, Response>, IState> {
+  constructor(props: ChildProps<IProps, Response>) {
+    super(props)
+  }
+
   public static defaultProps = {
     data: [],
   }
@@ -104,16 +113,12 @@ class History extends PureComponent<IProps, IState> {
   }
 }
 
-export const HISTORY_QUERY = gql`
-  fragment History on Stock {
-    chart {
-      label
-      datetime
-      average
-      low
-      high
-    }
-  }
-`
-
-export default withTheme(History)
+export default compose(
+  graphql(HISTORY_QUERY, {
+    options: ({ id }: any) => ({
+      variables: { id },
+    }),
+    // @ts-ignore
+  }),
+  loadable,
+)(withTheme(History))

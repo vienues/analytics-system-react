@@ -1,9 +1,14 @@
-import gql from 'graphql-tag'
+// <reference> queryml.d.ts
 import React, { Fragment } from 'react'
 import { Box, Flex } from 'rebass'
-import { PanelHeading } from '../../components'
-import { Lead, HyperLinkedBlockLink, Gutter } from '../../styleguide'
-import { ChildProps } from 'react-apollo'
+import { PanelHeading } from '../components'
+import { Lead, HyperLinkedBlockLink, Gutter } from '../styleguide'
+import { ChildProps, graphql } from 'react-apollo'
+
+import { loadable } from '../common'
+import { compose } from 'recompose'
+
+import COMPANY_QUERY from '../graphql/CompanyConnection.graphql'
 
 const URL = /(http(s)?:\/\/)?/
 
@@ -53,22 +58,12 @@ class Company extends React.Component<ChildProps<IProps, Response>, {}> {
   }
 }
 
-export const COMPANY_QUERY = gql`
-  fragment Company on Stock {
-    company {
-      id
-      symbol
-      name
-      exchange
-      industry
-      website
-      description
-      CEO
-      issueType
-      sector
-    }
-    peers
-  }
-`
-
-export default Company
+export default compose(
+  graphql(COMPANY_QUERY, {
+    options: ({ id }: any) => ({
+      variables: { id },
+    }),
+    // @ts-ignore
+  }),
+  loadable,
+)(Company)

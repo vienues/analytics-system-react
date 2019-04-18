@@ -1,0 +1,7 @@
+#import "./Stats.graphql"
+query StatsQuery($id: ID!) {
+  stock(id: $id) {
+    id
+    ...Stats
+  }
+}

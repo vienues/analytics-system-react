@@ -1,11 +1,20 @@
+// <reference> queryml.d.ts
 import React from 'react'
 import styled from 'styled-components'
 
 import { Flex, Box } from 'rebass'
-import { Text, Small } from '../../styleguide'
-import Numeral from '../../components/Numeral'
+import { Text, Small } from '../styleguide'
+import Numeral from '../components/Numeral'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
+import { compose } from 'recompose'
+import { loadable } from '../common'
+
+import { ChildProps, graphql } from 'react-apollo'
+
+import subscribeMarket from '../graphql/QuoteSubscription.graphql'
+
+import getMarkets from '../graphql/QuoteConnection.graphql'
 
 export interface IProps {
   data: {
@@ -13,7 +22,36 @@ export interface IProps {
   }
 }
 
-class MarketsList extends React.Component<IProps, {}> {
+class MarketsList extends React.Component<ChildProps<IProps, Response>, {}> {
+  public componentWillReceiveProps(nextProps: any) {
+    if (!nextProps.data.loading) {
+      // Check for existing subscription
+      // @ts-ignore
+      if (this.unsubscribe) {
+        // Check if props have changed and, if necessary, stop the subscription
+        if (this.props.data.markets.length !== nextProps.data.markets.length) {
+          console.log('unsubscribe')
+          // @ts-ignore
+          this.unsubscribe()
+        }
+        return
+      }
+    }
+    ;(this as any).unsubscribe = nextProps.data.subscribeToMore({
+      document: subscribeMarket,
+      variables: {
+        markets: nextProps.data.markets.map((x: any) => x.id),
+      },
+      updateQuery: ({ markets }: any, { subscriptionData, variables }: any) => {
+        const copy = [...markets]
+        const index = copy.findIndex(({ id }) => id === subscriptionData.data.getQuotes.id)
+        const x = { ...copy[index] }
+        copy.splice(index, 1, x)
+        return { markets: copy }
+      },
+    })
+  }
+
   public render() {
     return (
       <Flex>
@@ -97,5 +135,8 @@ const VerticalRuleStyled = styled(VerticalRule)`
     stroke: ${({ color, theme }: any) => theme.colors[color]};
   }
 `
-
-export default MarketsList
+// @ts-ignore
+export default compose(
+  graphql(getMarkets),
+  loadable,
+)(MarketsList)

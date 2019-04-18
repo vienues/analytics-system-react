@@ -1,0 +1,7 @@
+#import "./Company.graphql"
+query CompanyQuery($id: ID!) {
+  stock(id: $id) {
+    id
+    ...Company
+  }
+}

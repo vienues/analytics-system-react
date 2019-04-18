@@ -1,30 +1,20 @@
 import moment from 'moment/moment'
 import React from 'react'
 import { Box } from 'rebass'
-import { Text, HyperLinkedLead } from '../../styleguide'
-import gql from 'graphql-tag'
+import { Text, HyperLinkedLead } from '../styleguide'
 import { withTheme } from 'styled-components'
 
-import { ChildProps } from 'react-apollo'
+import { ChildProps, graphql } from 'react-apollo'
+import { loadable } from '../common'
+import { compose } from 'recompose'
+
+const NEWS_QUERY = require('../graphql/NewsConnection.graphql')
 
 export interface IProps {
   data: any
   theme: any
 }
 
-export const NEWS_QUERY = gql`
-  fragment News on Stock {
-    news(last: 3) {
-      id
-      datetime
-      headline
-      source
-      url
-      summary
-      related
-    }
-  }
-`
 export class News extends React.Component<ChildProps<IProps, Response>, {}> {
   constructor(props: ChildProps<IProps, Response>) {
     super(props)
@@ -44,4 +34,12 @@ export class News extends React.Component<ChildProps<IProps, Response>, {}> {
   }
 }
 
-export default withTheme(News)
+export default compose(
+  graphql(NEWS_QUERY, {
+    options: ({ id }: any) => ({
+      variables: { id },
+    }),
+    // @ts-ignore
+  }),
+  loadable,
+)(withTheme(News))
