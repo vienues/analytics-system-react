@@ -1,12 +1,10 @@
 import React from 'react'
-import SearchSelect from '../components/Select'
-import { compose, withProps } from 'recompose'
 import { ChildProps, graphql } from 'react-apollo'
-
 import { withRouter } from 'react-router-dom'
-
-import SEARCH_QUERY from '../graphql/SearchConnection.graphql'
-import SIMPLE_SEARCH_QUERY from '../graphql/SimpleSearchConnection.graphql'
+import { compose, withProps } from 'recompose'
+import SearchSelect from '../components/Select'
+import SearchQuery from '../graphql/SearchConnection.graphql'
+import SimpleSearchQuery from '../graphql/SimpleSearchConnection.graphql'
 
 export interface ISearchProps {
   search: {
@@ -80,9 +78,9 @@ const searchProps = (props: ISearchProps) => {
         ;(window as any).fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
           data: {
             selection: {
+              __typename: 'Selection',
               id,
               symbol: id,
-              __typename: 'Selection',
             },
           },
         })
@@ -90,14 +88,15 @@ const searchProps = (props: ISearchProps) => {
     },
   }
 }
+
 export default compose(
-  graphql(SEARCH_QUERY, {
-    skip: (ownProps: any) => !ownProps.id,
+  graphql(SearchQuery, {
     options: ({ id }) => ({
       variables: { id },
     }),
+    skip: (ownProps: any) => !ownProps.id,
   }),
-  graphql(SIMPLE_SEARCH_QUERY, {
+  graphql(SimpleSearchQuery, {
     name: 'search',
     options: {
       variables: {

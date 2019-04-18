@@ -1,7 +1,6 @@
 import React from 'react'
 import { Flex } from 'rebass'
 import styled from 'styled-components'
-
 import { Small } from '../styleguide'
 
 const RibbonBG = styled(Flex).attrs({ f: 0, column: true, px: 2 })`

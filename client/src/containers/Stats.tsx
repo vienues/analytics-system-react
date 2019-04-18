@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Flex } from 'rebass'
-import { Divider } from '../styleguide'
+import { Divider, Label } from '../styleguide'
 
 import { ChildProps, graphql } from 'react-apollo'
 import { loadable } from '../common'
@@ -83,8 +83,8 @@ const FieldRow = ({ label, children }: any) => {
   return (
     <>
       <Flex flex={1} pt={1}>
-        <Flex flex={['auto']} color="offwhite50">
-          {label}
+        <Flex flex={['auto']}>
+          <Label>{label}</Label>
         </Flex>
         <Box color="offwhite">{children}</Box>
       </Flex>

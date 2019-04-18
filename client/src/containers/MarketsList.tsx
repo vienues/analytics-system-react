@@ -1,20 +1,16 @@
 // <reference> queryml.d.ts
-import React from 'react'
-import styled from 'styled-components'
-
-import { Flex, Box } from 'rebass'
-import { Text, Small } from '../styleguide'
-import Numeral from '../components/Numeral'
-import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
+import ArrowUpward from '@material-ui/icons/ArrowUpward'
+import React from 'react'
+import { ChildProps, graphql } from 'react-apollo'
+import { Box, Flex } from 'rebass'
 import { compose } from 'recompose'
 import { loadable } from '../common'
-
-import { ChildProps, graphql } from 'react-apollo'
-
-import subscribeMarket from '../graphql/QuoteSubscription.graphql'
-
+import Numeral from '../components/Numeral'
 import getMarkets from '../graphql/QuoteConnection.graphql'
+import subscribeMarket from '../graphql/QuoteSubscription.graphql'
+import { colors, styled } from '../rt-theme'
+import { Small, Text } from '../styleguide'
 
 export interface IProps {
   data: {
@@ -30,7 +26,6 @@ class MarketsList extends React.Component<ChildProps<IProps, Response>, {}> {
       if (this.unsubscribe) {
         // Check if props have changed and, if necessary, stop the subscription
         if (this.props.data.markets.length !== nextProps.data.markets.length) {
-          console.log('unsubscribe')
           // @ts-ignore
           this.unsubscribe()
         }
@@ -39,15 +34,15 @@ class MarketsList extends React.Component<ChildProps<IProps, Response>, {}> {
     }
     ;(this as any).unsubscribe = nextProps.data.subscribeToMore({
       document: subscribeMarket,
-      variables: {
-        markets: nextProps.data.markets.map((x: any) => x.id),
-      },
       updateQuery: ({ markets }: any, { subscriptionData, variables }: any) => {
         const copy = [...markets]
         const index = copy.findIndex(({ id }) => id === subscriptionData.data.getQuotes.id)
         const x = { ...copy[index] }
         copy.splice(index, 1, x)
         return { markets: copy }
+      },
+      variables: {
+        markets: nextProps.data.markets.map((x: any) => x.id),
       },
     })
   }
@@ -56,26 +51,27 @@ class MarketsList extends React.Component<ChildProps<IProps, Response>, {}> {
     return (
       <Flex>
         {this.props.data.markets.map(({ id, change, changePercent, latestPrice }: any) => {
-          const [Icon, color] = change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
+          const [Icon, color] =
+            change < 0 ? [ArrowDownward, colors.accents.bad.base] : [ArrowUpward, colors.accents.good.base]
           return (
-            <Flex key={id}>
-              <Small caps bold>
+            <Flex key={id} style={{ marginRight: '1rem' }}>
+              <Small caps={true} bold={true}>
                 {id}
               </Small>
               <Box pr={1} />
-              <Currency>{latestPrice}</Currency>
+              <Currency>{latestPrice.toFixed(2)}</Currency>
               <Box pr={1} />
               <Text color={color}>
                 <Icon
                   viewBox="0 0 20 20"
                   style={{ verticalAlign: 'super', fontSize: '0.5rem', marginRight: '0.25rem' }}
                 />
-                <Numeral>{change}</Numeral>
+                <Numeral>{change.toFixed(2)}</Numeral>
               </Text>
               <VerticalRuleStyled className="" />
               <Percent color={color}>
                 {' '}
-                <Numeral>{changePercent * 100}</Numeral>
+                <Numeral>{(changePercent * 100).toFixed(2)}</Numeral>
               </Percent>
             </Flex>
           )

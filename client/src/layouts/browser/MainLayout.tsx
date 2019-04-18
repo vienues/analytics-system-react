@@ -1,11 +1,11 @@
 import * as React from 'react'
-import styled from 'styled-components'
-import { Company, History, MarketList, News, Stats, StockPrice, Search } from '../../containers/'
-import { Ribbon } from '../../components'
-import { Divider, ViewportFlex } from '../../styleguide'
-import AppBar from './AppBar'
 import { Flex } from 'rebass'
+import styled from 'styled-components'
+import { Ribbon } from '../../components'
+import { Company, History, MarketList, News, Peers, Search, Stats, StockPrice } from '../../containers/'
 import { AnalyticsStyle, Header, Title } from '../../rt-theme/analyticsStyle'
+import { Divider, Gutter, ViewportFlex } from '../../styleguide'
+import AppBar from './AppBar'
 
 export interface IProps {
   before?: React.ReactNode
@@ -28,6 +28,7 @@ export default class MainLayout extends React.Component<IProps> {
             <SearchLayout id={id} />
             {id ? <StockDetails id={id} /> : null}
           </ViewportFlex>
+          <Gutter />
         </ScrollableArea>
         <Ribbon>
           <MarketList />
@@ -59,18 +60,9 @@ const StockDetails: React.FunctionComponent<{ id: string }> = ({ id }) => (
       </AnalyticsStyle>
     </div>
     <div style={{ height: '100%' }}>
-      <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
-        <Header>
-          <Title>Latest News</Title>
-        </Header>
-        <News id={id} />
-      </AnalyticsStyle>
-      <AnalyticsStyle style={{ height: 'initial' }}>
-        <Header>
-          <Title>Company Overview</Title>
-        </Header>
-        <Company id={id} />
-      </AnalyticsStyle>
+      <News id={id} />
+      <Company id={id} />
+      <Peers id={id} />
     </div>
   </Layout>
 )

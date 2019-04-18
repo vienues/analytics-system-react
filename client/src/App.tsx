@@ -1,22 +1,14 @@
-import { selectionConnector } from './openfin'
 import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { BrowserRouter, Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom'
-//
-import { ThemeProvider } from './rt-theme/ThemeContext'
-import GlobalStyle from './rt-theme/globals'
-
-import GlobalScrollbarStyle from './layouts/GlobalScrollbarStyle'
-
+import { BrowserRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
-import News from './containers/News'
-import History from './containers/History'
-import Stats from './containers/Stats'
-import Company from './containers/Company'
-
+import { Company, History, News, Search, Stats } from './containers/'
 import MainLayout from './layouts/browser/MainLayout'
 import DesktopPanel from './layouts/desktop/DesktopPanel'
-import Search from './containers/Search'
+import GlobalScrollbarStyle from './layouts/GlobalScrollbarStyle'
+import { selectionConnector } from './openfin'
+import GlobalStyle from './rt-theme/globals'
+import { ThemeProvider } from './rt-theme/ThemeContext'
 import { Background } from './styleguide'
 
 const createDesktopRoute = (heading: string, comp: JSX.Element) => {

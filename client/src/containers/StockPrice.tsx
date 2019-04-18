@@ -1,19 +1,16 @@
 // <reference> queryml.d.ts
-import React from 'react'
-import styled from 'styled-components'
 import ArrowDownward from '@material-ui/icons/ArrowDownward'
 import ArrowUpward from '@material-ui/icons/ArrowUpward'
-import Numeral from '../components/Numeral'
-import { loadable, maybe } from '../common'
-import { Flex, Box } from 'rebass'
-import { Text } from '../styleguide'
-
-import { compose } from 'recompose'
+import React from 'react'
 import { graphql } from 'react-apollo'
-
+import { Box, Flex } from 'rebass'
+import { compose } from 'recompose'
+import styled from 'styled-components'
+import { loadable, maybe } from '../common'
+import Numeral from '../components/Numeral'
 import subscribeMarket from '../graphql/MarketSubscription.graphql'
-
 import query from '../graphql/StockPriceConnection.graphql'
+import { Text } from '../styleguide'
 
 export interface IProps {
   data: {
@@ -23,9 +20,7 @@ export interface IProps {
   }
 }
 
-export interface IState {}
-
-class StockPrice extends React.Component<IProps, IState> {
+class StockPrice extends React.Component<IProps, {}> {
   public componentWillReceiveProps(nextProps: any) {
     const viewmodel = this as any
     if (nextProps.data.loading) {
@@ -33,20 +28,24 @@ class StockPrice extends React.Component<IProps, IState> {
     }
 
     if (!viewmodel.props.data.stock) {
-      viewmodel.unsubscribe && viewmodel.unsubscribe()
+      if (viewmodel.unsubscribe) {
+        viewmodel.unsubscribe()
+      }
       return
     }
 
     if (viewmodel.props.data.stock.id !== nextProps.data.stock.id) {
-      viewmodel.unsubscribe && viewmodel.unsubscribe()
+      if (viewmodel.unsubscribe) {
+        viewmodel.unsubscribe()
+      }
       viewmodel.unsubscribe = nextProps.data.subscribeToMore({
         document: subscribeMarket,
-        variables: {
-          markets: nextProps.data.stock.id,
-        },
         updateQuery: (prev: any, { subscriptionData }: any) => {
           const stockCpy = { ...prev.stock, quote: subscriptionData.data.getQuotes }
           return { ...prev, stock: stockCpy }
+        },
+        variables: {
+          markets: nextProps.data.stock.id,
         },
       })
     }

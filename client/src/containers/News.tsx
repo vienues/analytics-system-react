@@ -1,14 +1,14 @@
+// <reference> queryml.d.ts
 import moment from 'moment/moment'
 import React from 'react'
-import { Box } from 'rebass'
-import { Text, HyperLinkedLead } from '../styleguide'
-import { withTheme } from 'styled-components'
-
 import { ChildProps, graphql } from 'react-apollo'
-import { loadable } from '../common'
+import { Box } from 'rebass'
 import { compose } from 'recompose'
-
-const NEWS_QUERY = require('../graphql/NewsConnection.graphql')
+import { withTheme } from 'styled-components'
+import { loadable } from '../common'
+import NewsQuery from '../graphql/NewsConnection.graphql'
+import { AnalyticsStyle, Header, Title } from '../rt-theme/analyticsStyle'
+import { Caption, HyperLinkedLead } from '../styleguide'
 
 export interface IProps {
   data: any
@@ -21,21 +21,28 @@ export class News extends React.Component<ChildProps<IProps, Response>, {}> {
   }
 
   public render() {
-    return (this.props.data.stock.news || []).map((newsItem: any) => (
-      <Box key={newsItem.id} is="a" target="_blank" href={newsItem.url}>
-        <div>
-          <HyperLinkedLead f={1}>{newsItem.headline}</HyperLinkedLead>
-          <Text color={this.props.theme.colors.offwhite50}>
-            {moment(newsItem.datetime).fromNow()} - {newsItem.source}
-          </Text>
-        </div>
-      </Box>
-    ))
+    return (
+      <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
+        <Header>
+          <Title>Latest News</Title>
+        </Header>
+        {(this.props.data.stock.news || []).map((newsItem: any) => (
+          <Box key={newsItem.id} is="a" target="_blank" href={newsItem.url}>
+            <div style={{ marginBottom: '20px' }}>
+              <HyperLinkedLead f={1}>{newsItem.headline}</HyperLinkedLead>
+              <Caption>
+                {moment(newsItem.datetime).fromNow()} - {newsItem.source}
+              </Caption>
+            </div>
+          </Box>
+        ))}
+      </AnalyticsStyle>
+    )
   }
 }
 
 export default compose(
-  graphql(NEWS_QUERY, {
+  graphql(NewsQuery, {
     options: ({ id }: any) => ({
       variables: { id },
     }),

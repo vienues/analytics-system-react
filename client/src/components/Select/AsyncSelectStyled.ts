@@ -1,6 +1,5 @@
-import styled from 'styled-components'
 import Select from 'react-select'
-
+import styled from 'styled-components'
 import componentStyle from './componentStyle'
 import menuStyle from './menuStyle'
 import multiStyle from './multiStyle'
