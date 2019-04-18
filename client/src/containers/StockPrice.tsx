@@ -134,7 +134,7 @@ export default compose(
   maybe({ cond: ({ id }: any) => id == null }),
   graphql(query, {
     skip: (ownProps: any) => !ownProps.id,
-    // @ts-ignore
   }),
   loadable,
+  // @ts-ignore
 )(StockPrice)

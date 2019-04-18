@@ -1,5 +1,12 @@
 import React from 'react'
-import SearchSelect from '../../components/Select'
+import SearchSelect from '../components/Select'
+import { compose, withProps } from 'recompose'
+import { ChildProps, graphql } from 'react-apollo'
+
+import { withRouter } from 'react-router-dom'
+
+import SEARCH_QUERY from '../graphql/SearchConnection.graphql'
+import SIMPLE_SEARCH_QUERY from '../graphql/SimpleSearchConnection.graphql'
 
 export interface ISearchProps {
   search: {
@@ -18,8 +25,8 @@ export interface IState {
   } | null
 }
 
-export default class Search extends React.Component<ISearchProps, IState> {
-  constructor(props: ISearchProps) {
+export class Search extends React.Component<ChildProps<ISearchProps, Response>, IState> {
+  constructor(props: ChildProps<ISearchProps, Response>) {
     super(props)
     this.state = {
       currentSymbol: null,
@@ -64,3 +71,41 @@ export default class Search extends React.Component<ISearchProps, IState> {
     )
   }
 }
+
+const searchProps = (props: ISearchProps) => {
+  return {
+    onSymbolChanged: (id: number) => {
+      props.history.push(`${props.url}${id}`)
+      if ((window as any).fin) {
+        ;(window as any).fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
+          data: {
+            selection: {
+              id,
+              symbol: id,
+              __typename: 'Selection',
+            },
+          },
+        })
+      }
+    },
+  }
+}
+export default compose(
+  graphql(SEARCH_QUERY, {
+    skip: (ownProps: any) => !ownProps.id,
+    options: ({ id }) => ({
+      variables: { id },
+    }),
+  }),
+  graphql(SIMPLE_SEARCH_QUERY, {
+    name: 'search',
+    options: {
+      variables: {
+        text: '',
+      },
+    },
+  }),
+  withRouter,
+  withProps(searchProps),
+  // @ts-ignore
+)(Search)

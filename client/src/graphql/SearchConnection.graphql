@@ -1,0 +1,10 @@
+query searchQuery($id: ID!) {
+  stock(id: $id) {
+    id
+    company {
+      id
+      name
+      exchange
+    }
+  }
+}

@@ -135,8 +135,8 @@ const VerticalRuleStyled = styled(VerticalRule)`
     stroke: ${({ color, theme }: any) => theme.colors[color]};
   }
 `
-// @ts-ignore
 export default compose(
   graphql(getMarkets),
   loadable,
+  // @ts-ignore
 )(MarketsList)

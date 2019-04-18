@@ -39,7 +39,7 @@ export default compose(
     options: ({ id }: any) => ({
       variables: { id },
     }),
-    // @ts-ignore
   }),
   loadable,
+  // @ts-ignore
 )(withTheme(News))

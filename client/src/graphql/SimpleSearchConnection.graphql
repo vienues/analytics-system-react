@@ -1,0 +1,6 @@
+query search($text: String!) {
+  search(text: $text) {
+    id
+    name
+  }
+}
