@@ -24,7 +24,7 @@ class AppBar extends React.Component {
         <ThemeControl />
         {children == null ? null : (
           <React.Fragment>
-            <Division props />
+            <Division props={true} />
             {children}
           </React.Fragment>
         )}

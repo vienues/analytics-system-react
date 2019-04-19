@@ -5,11 +5,11 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import { Box, Flex } from 'rebass'
 import { compose } from 'recompose'
-import styled from 'styled-components'
 import { loadable, maybe } from '../common'
 import Numeral from '../components/Numeral'
 import subscribeMarket from '../graphql/MarketSubscription.graphql'
 import query from '../graphql/StockPriceConnection.graphql'
+import { colors, styled } from '../rt-theme'
 import { Text } from '../styleguide'
 
 export interface IProps {
@@ -60,7 +60,8 @@ class StockPrice extends React.Component<IProps, {}> {
 
   public render() {
     const quote = this.props.data.stock.quote
-    const [Icon, color] = quote.change < 0 ? [ArrowDownward, 'bad'] : [ArrowUpward, 'good']
+    const [Icon, color] =
+      quote.change < 0 ? [ArrowDownward, colors.accents.bad.base] : [ArrowUpward, colors.accents.good.base]
     const { latestPrice, change, changePercent } = quote
     return (
       <Flex data-x={'ssss'} flex="none" color="primary30">
@@ -68,15 +69,19 @@ class StockPrice extends React.Component<IProps, {}> {
         <Box px={1} />
         <Text color={color}>
           <Icon viewBox="0 0 20 20" style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }} />
-          <Numeral>{change}</Numeral>
+          <Numeral>{this.fixedFormat(change)}</Numeral>
         </Text>
         <VerticalRuleStyled className="" />
         <Percent color={color}>
           {' '}
-          <Numeral>{changePercent * 100}</Numeral>
+          <Numeral>{this.fixedFormat(changePercent * 100)}</Numeral>
         </Percent>
       </Flex>
     )
+  }
+
+  private fixedFormat = (e: number) => {
+    return e < 100 ? e.toFixed(2) : e.toFixed(0)
   }
 }
 

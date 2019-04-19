@@ -1,7 +1,6 @@
 // <reference> queryml.d.ts
 import React from 'react'
 import { ChildProps, graphql } from 'react-apollo'
-import { Box } from 'rebass'
 import { compose } from 'recompose'
 import { CompanyQuery, CompanyQueryVariables } from '../__generated__/types'
 import { loadable } from '../common'
@@ -26,11 +25,11 @@ const Company: React.FunctionComponent<ChildProps<Props, Response>> = (props: Ch
     const { company } = props.data.stock
     if (company) {
       return (
-        <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
+        <AnalyticsStyle>
           <Header>
             <Title>Company Overview</Title>
           </Header>
-          <Box>
+          <React.Fragment>
             <Lead>
               {company.name} ({company.symbol})
             </Lead>
@@ -42,7 +41,7 @@ const Company: React.FunctionComponent<ChildProps<Props, Response>> = (props: Ch
               <></>
             )}
             <Text>{company.description}</Text>
-          </Box>
+          </React.Fragment>
         </AnalyticsStyle>
       )
     }

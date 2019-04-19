@@ -49,7 +49,7 @@ class History extends PureComponent<ChildProps<Props, Response>, IState> {
   }
 
   public update(chart: any) {
-    chart = chart.filter(({ low, average, high }: any) => low > 0 || average > 0 || high > 0)
+    chart = chart.filter(({ low: aLow, average: aAverage, high: aHigh }: any) => aLow > 0 || aAverage > 0 || aHigh > 0)
 
     const { low } = (_.minBy(chart, 'low') || {}) as any
     const { high } = (_.maxBy(chart, 'high') || {}) as any

@@ -8,18 +8,12 @@ import { Divider, Gutter, ViewportFlex } from '../../styleguide'
 import AppBar from './AppBar'
 
 export interface IProps {
-  before?: React.ReactNode
-  header?: React.ReactNode
-  body?: React.ReactNode
-  footer?: React.ReactNode
-  after?: React.ReactNode
   id: string
 }
 
 export default class MainLayout extends React.Component<IProps> {
   public render() {
     const { id } = this.props
-    // const { before, header, body, footer, after } = this.props
     return (
       <AppLayoutRoot>
         <AppBar />

@@ -23,6 +23,7 @@ class MarketsList extends React.Component<ChildProps<IProps, Response>, {}> {
   constructor(props: ChildProps<IProps, Response>) {
     super(props)
   }
+
   public componentWillReceiveProps(nextProps: any) {
     if (!nextProps.data.loading) {
       // Check for existing subscription

@@ -9,13 +9,12 @@ export const AnalyticsStyle = styled.div`
   color: ${({ theme }: any) => theme.core.textColor};
   background-color: ${({ theme }: any) => theme.core.lightBackground};
   width: 100%;
-  height: 100%;
   position: relative;
   padding: 1rem;
   font-size: 1rem;
   overflow-x: hidden;
   overflow-y: scroll;
-
+  margin-bottom: 10px;
   /* axis */
   .nvd3 .nv-axis path,
   .nvd3 .nv-axis .tick.zero line {
