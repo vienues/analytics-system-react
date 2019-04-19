@@ -1,23 +1,20 @@
 import _ from 'lodash'
 import React, { PureComponent } from 'react'
-import { withTheme } from 'styled-components'
-
 import { ChildProps, graphql } from 'react-apollo'
-import { loadable } from '../common'
+import { Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts'
 import { compose } from 'recompose'
-
-const HISTORY_QUERY = require('../graphql/HistoryConnection.graphql')
-
-import { Area, AreaChart, XAxis, ResponsiveContainer, YAxis, ReferenceLine, CartesianGrid } from 'recharts'
+import { withTheme } from 'styled-components'
+import { HistoryQuery, HistoryQueryVariables } from '../__generated__/types'
+import { loadable } from '../common'
+import HistoryConnection from '../graphql/HistoryConnection.graphql'
 
 export interface IProps {
-  data: {
-    stock: {
-      chart: any
-    }
-  }
   theme: any
   previousClose: any
+}
+
+export interface IDataProps {
+  data: HistoryQuery
 }
 
 export interface IState {
@@ -26,27 +23,27 @@ export interface IState {
   high: any
 }
 
-class History extends PureComponent<ChildProps<IProps, Response>, IState> {
-  constructor(props: ChildProps<IProps, Response>) {
+type Props = IProps & IDataProps
+
+class History extends PureComponent<ChildProps<Props, Response>, IState> {
+  constructor(props: ChildProps<Props, Response>) {
     super(props)
-  }
-
-  public static defaultProps = {
-    data: [],
-  }
-
-  public state = {
-    chart: [],
-    low: 0,
-    high: 0,
+    this.fixedFormat = this.fixedFormat.bind(this)
+    this.state = {
+      chart: [],
+      high: 0,
+      low: 0,
+    }
   }
 
   public componentDidMount() {
-    this.update(this.props.data.stock.chart)
+    if (this.props.data.stock) {
+      this.update(this.props.data.stock.chart)
+    }
   }
 
-  public componentWillReceiveProps(nextProps: IProps) {
-    if (this.props.data.stock.chart !== nextProps.data.stock.chart) {
+  public componentWillReceiveProps(nextProps: Props) {
+    if (this.props.data.stock && nextProps.data.stock && this.props.data.stock.chart !== nextProps.data.stock.chart) {
       this.update(nextProps.data.stock.chart)
     }
   }
@@ -61,12 +58,10 @@ class History extends PureComponent<ChildProps<IProps, Response>, IState> {
   }
 
   public render() {
-    let { theme, previousClose } = this.props
-    if (typeof previousClose === 'string') {
-      previousClose = Number(previousClose)
-    }
-
-    let { chart, low, high } = this.state
+    const theme = this.props.theme
+    const previousClose = +this.props.previousClose
+    const chart = this.state.chart
+    let { low, high } = this.state
 
     low -= low * 0.0005
     high += high * 0.0005
@@ -100,10 +95,10 @@ class History extends PureComponent<ChildProps<IProps, Response>, IState> {
           />
           <YAxis
             type="number"
-            allowDecimals
+            allowDecimals={true}
             domain={[low, high]}
             tick={{ fontSize: 10 }}
-            tickFormatter={x => (x < 100 ? x.toFixed(2) : x.toFixed(0))}
+            tickFormatter={this.fixedFormat}
             orientation="right"
             stroke={theme.colors.primary50a}
           />
@@ -111,14 +106,21 @@ class History extends PureComponent<ChildProps<IProps, Response>, IState> {
       </ResponsiveContainer>
     )
   }
+
+  private fixedFormat = (e: number) => {
+    return e < 100 ? e.toFixed(2) : e.toFixed(0)
+  }
 }
 
-export default compose(
-  graphql(HISTORY_QUERY, {
-    options: ({ id }: any) => ({
-      variables: { id },
-    }),
+const withHistoryData = graphql<Response, HistoryQueryVariables>(HistoryConnection, {
+  options: ({ id }: any) => ({
+    variables: { id },
   }),
+})
+
+export default compose(
+  withTheme,
+  withHistoryData,
   loadable,
   // @ts-ignore
-)(withTheme(History))
+)(History)

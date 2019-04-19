@@ -5,28 +5,29 @@ import { ChildProps, graphql } from 'react-apollo'
 import { Box } from 'rebass'
 import { compose } from 'recompose'
 import { withTheme } from 'styled-components'
+import { NewsQuery, NewsQueryVariables } from '../__generated__/types'
 import { loadable } from '../common'
-import NewsQuery from '../graphql/NewsConnection.graphql'
+import NewsConnection from '../graphql/NewsConnection.graphql'
 import { AnalyticsStyle, Header, Title } from '../rt-theme/analyticsStyle'
 import { Caption, HyperLinkedLead } from '../styleguide'
 
 export interface IProps {
-  data: any
   theme: any
 }
+export interface IDataProps {
+  data: NewsQuery
+}
 
-export class News extends React.Component<ChildProps<IProps, Response>, {}> {
-  constructor(props: ChildProps<IProps, Response>) {
-    super(props)
-  }
+type Props = IProps & IDataProps
 
-  public render() {
-    return (
-      <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
-        <Header>
-          <Title>Latest News</Title>
-        </Header>
-        {(this.props.data.stock.news || []).map((newsItem: any) => (
+const News: React.FunctionComponent<ChildProps<Props, Response>> = (props: ChildProps<Props, Response>) => {
+  return (
+    <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
+      <Header>
+        <Title>Latest News</Title>
+      </Header>
+      {props.data.stock ? (
+        (props.data.stock.news || []).map((newsItem: any) => (
           <Box key={newsItem.id} is="a" target="_blank" href={newsItem.url}>
             <div style={{ marginBottom: '20px' }}>
               <HyperLinkedLead f={1}>{newsItem.headline}</HyperLinkedLead>
@@ -35,18 +36,22 @@ export class News extends React.Component<ChildProps<IProps, Response>, {}> {
               </Caption>
             </div>
           </Box>
-        ))}
-      </AnalyticsStyle>
-    )
-  }
+        ))
+      ) : (
+        <></>
+      )}
+    </AnalyticsStyle>
+  )
 }
 
-export default compose(
-  graphql(NewsQuery, {
-    options: ({ id }: any) => ({
-      variables: { id },
-    }),
+const withNewsData = graphql<Response, NewsQueryVariables>(NewsConnection, {
+  options: ({ id }: any) => ({
+    variables: { id },
   }),
+})
+
+export default compose(
+  withNewsData,
   loadable,
   // @ts-ignore
 )(withTheme(News))

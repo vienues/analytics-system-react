@@ -19,20 +19,23 @@ export interface IProps {
 }
 
 class MarketsList extends React.Component<ChildProps<IProps, Response>, {}> {
+  private unsubscribe: (() => void) | null = null
+  constructor(props: ChildProps<IProps, Response>) {
+    super(props)
+  }
   public componentWillReceiveProps(nextProps: any) {
     if (!nextProps.data.loading) {
       // Check for existing subscription
-      // @ts-ignore
       if (this.unsubscribe) {
         // Check if props have changed and, if necessary, stop the subscription
         if (this.props.data.markets.length !== nextProps.data.markets.length) {
-          // @ts-ignore
           this.unsubscribe()
         }
         return
       }
     }
-    ;(this as any).unsubscribe = nextProps.data.subscribeToMore({
+
+    this.unsubscribe = nextProps.data.subscribeToMore({
       document: subscribeMarket,
       updateQuery: ({ markets }: any, { subscriptionData, variables }: any) => {
         const copy = [...markets]
