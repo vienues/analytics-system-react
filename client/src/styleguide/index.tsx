@@ -1,3 +1,4 @@
+import React from 'react'
 import * as Rebass from 'rebass'
 import { withProps } from 'recompose'
 import styled, { css } from 'styled-components'
@@ -109,5 +110,56 @@ export const HyperLinkedBlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
   display: block;
   &:hover {
     color: ${(props: any) => props.theme.colors.gold};
+  }
+`
+
+export const SuperText = styled(Small)`
+  line-height: 1em;
+
+  &:after,
+  &:before {
+    display: inline-block;
+    vertical-align: super;
+    font-size: 1rem;
+    line-height: 1;
+
+    height: 0;
+    max-height: 0;
+  }
+`
+
+export const Currency = styled(SuperText)`
+  &:before {
+    content: '$';
+    font-size: 0.5rem;
+    padding-right: 0.25rem;
+  }
+`
+
+export const Percent = styled(SuperText)`
+  &:after {
+    content: '%';
+    font-size: 0.5rem;
+    padding-left: 0.125rem;
+  }
+`
+
+const VerticalRule = ({ className }: any) => (
+  <svg className={className} width="8" height="12" viewBox="0 0 8 20" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M4,4 L4,24"
+      stroke="#fff"
+      strokeWidth="2"
+      fill="none"
+      fillRule="evenodd"
+      opacity=".5"
+      strokeLinecap="square"
+    />
+  </svg>
+)
+
+export const VerticalRuleStyled = styled(VerticalRule)`
+  > path {
+    stroke: ${({ color, theme }: any) => theme.colors[color]};
   }
 `

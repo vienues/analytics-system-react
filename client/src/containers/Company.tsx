@@ -1,9 +1,8 @@
 // <reference> queryml.d.ts
 import React from 'react'
-import { ChildProps, graphql } from 'react-apollo'
-import { compose } from 'recompose'
+import { ChildProps } from 'react-apollo'
 import { CompanyQuery, CompanyQueryVariables } from '../__generated__/types'
-import { loadable } from '../common'
+import { AppQuery } from '../common/AppQuery'
 import CompanyConnection from '../graphql/CompanyConnection.graphql'
 import { AnalyticsStyle, Header, Title } from '../rt-theme/analyticsStyle'
 import { Caption, HyperLinkedBlockLink, Lead, Text } from '../styleguide'
@@ -11,51 +10,37 @@ import { Caption, HyperLinkedBlockLink, Lead, Text } from '../styleguide'
 const URL = /(http(s)?:\/\/)?/
 
 export interface IProps {
-  id?: string
+  id: string
 }
 
-export interface IDataProps {
-  data?: CompanyQuery
+const Company: React.FunctionComponent<ChildProps<IProps, Response>> = (props: ChildProps<IProps, Response>) => {
+  return (
+    <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id: props.id }}>
+      {(data, _) => {
+        if (data.stock && data.stock.company) {
+          return (
+            <AnalyticsStyle>
+              <Header>
+                <Title>Company Overview</Title>
+              </Header>
+              <Lead>
+                {data.stock.company.name} ({data.stock.company.symbol})
+              </Lead>
+              {data.stock.company.website ? (
+                <HyperLinkedBlockLink target="_blank" href={data.stock.company.website} f={1} color="offwhite50" mt={1}>
+                  <Caption>{data.stock.company.website.replace(URL, '')}</Caption>
+                </HyperLinkedBlockLink>
+              ) : (
+                <></>
+              )}
+              <Text>{data.stock.company.description}</Text>
+            </AnalyticsStyle>
+          )
+        }
+        return <></>
+      }}
+    </AppQuery>
+  )
 }
 
-type Props = IProps & IDataProps
-
-const Company: React.FunctionComponent<ChildProps<Props, Response>> = (props: ChildProps<Props, Response>) => {
-  if (props.data && props.data.stock) {
-    const { company } = props.data.stock
-    if (company) {
-      return (
-        <AnalyticsStyle>
-          <Header>
-            <Title>Company Overview</Title>
-          </Header>
-          <React.Fragment>
-            <Lead>
-              {company.name} ({company.symbol})
-            </Lead>
-            {company.website ? (
-              <HyperLinkedBlockLink target="_blank" href={company.website} f={1} color="offwhite50" mt={1}>
-                <Caption>{company.website.replace(URL, '')}</Caption>
-              </HyperLinkedBlockLink>
-            ) : (
-              <></>
-            )}
-            <Text>{company.description}</Text>
-          </React.Fragment>
-        </AnalyticsStyle>
-      )
-    }
-  }
-  return <></>
-}
-
-const withCustomerData = graphql<Response, CompanyQueryVariables>(CompanyConnection, {
-  options: ({ id }: any) => ({
-    variables: { id },
-  }),
-})
-
-export default compose(
-  withCustomerData,
-  loadable,
-)(Company) as any
+export default Company
