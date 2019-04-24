@@ -8,7 +8,7 @@ export interface IProps {
 
     id: string
   }
-  onSelect: (event: React.SyntheticEvent<HTMLDivElement, Event>) => void
+  onSelect: (event: any) => void
 }
 
 export interface IState {}
@@ -17,8 +17,7 @@ export class OptionDisplay extends PureComponent<IProps, IState> {
   public handleMouseDown = (event: any) => {
     event.preventDefault()
     event.stopPropagation()
-    this.props.onSelect(event)
-    //this.props.onSelect(this.props.option, event)
+    this.props.onSelect(this.props.option)
   }
 
   public render() {

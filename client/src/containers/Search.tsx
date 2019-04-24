@@ -1,110 +1,90 @@
-import React from 'react'
-import { ChildProps, graphql } from 'react-apollo'
+import React, { useEffect, useState } from 'react'
+// import { ChildProps, graphql } from 'react-apollo'
+import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { compose, withProps } from 'recompose'
+// import { compose, withProps } from 'recompose'
+import { search, search_search, searchQuery, searchQueryVariables, searchVariables } from '../__generated__/types'
+import { AppQuery } from '../common/AppQuery'
 import SearchSelect from '../components/Select'
-import SearchQuery from '../graphql/SearchConnection.graphql'
-import SimpleSearchQuery from '../graphql/SimpleSearchConnection.graphql'
+import SearchConnection from '../graphql/SearchConnection.graphql'
+import SimpleSearchConnection from '../graphql/SimpleSearchConnection.graphql'
 
-export interface ISearchProps {
-  search: {
-    search: any
-    refetch: ({}) => void
-  }
-  id: number
-  onSymbolChanged: (id: number) => void
-  history: any
-  url: any
+import apolloClient from '../apollo/client'
+
+export interface IProps {
+  id: string
+  url: RegExp
 }
 
-export interface IState {
-  currentSymbol: {
-    id: number
-  } | null
-}
+type Props = RouteComponentProps & IProps
 
-export class Search extends React.Component<ChildProps<ISearchProps, Response>, IState> {
-  constructor(props: ChildProps<ISearchProps, Response>) {
-    super(props)
-    this.state = {
-      currentSymbol: null,
-    }
-    this.onTextChange = this.onTextChange.bind(this)
-  }
+export const Search: React.FunctionComponent<Props> = (props: Props) => {
+  const [initialized, setInitialized] = useState(false)
+  const [currentSymbol, setCurrentSymbol] = useState<search_search | null>(null)
+  const [currentText, setCurrentText] = useState<string>('')
 
-  public componentWillReceiveProps(nextProps: any) {
-    const { data } = nextProps
-    let stock = null
-    if (data) {
-      stock = data.stock
-    }
-    const currentSymbol = this.state.currentSymbol
-    if (currentSymbol == null && stock != null) {
-      const symbol = { ...stock.company }
-      this.setState({ currentSymbol: symbol })
-    }
-  }
-
-  public handleChange = (symbol: any) => {
-    this.setState({ currentSymbol: symbol }, () => {
-      if (this.state.currentSymbol) {
-        this.props.onSymbolChanged(this.state.currentSymbol.id)
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true)
+      if (props.id) {
+        apolloClient
+          .query<searchQuery, searchQueryVariables>({
+            query: SearchConnection,
+            variables: { id: props.id },
+          })
+          .then(result => {
+            if (result.data && result.data.stock && result.data.stock.company) {
+              setCurrentSymbol({
+                __typename: 'SearchResult',
+                id: result.data.stock.company.id,
+                name: result.data.stock.company.name,
+              } as search_search)
+            }
+          })
       }
-    })
-  }
+    }
+  }, [props.id])
 
-  public onTextChange = (text: string) => {
-    this.props.search.refetch({ text })
-  }
-
-  public render() {
-    return (
-      <SearchSelect
-        onInputChange={this.onTextChange}
-        options={this.props.search.search}
-        onChange={this.handleChange}
-        value={this.state.currentSymbol}
-        onBlur={(this as any).handleBlur}
-      />
-    )
-  }
-}
-
-const searchProps = (props: ISearchProps) => {
-  return {
-    onSymbolChanged: (id: number) => {
-      props.history.push(`${props.url}${id}`)
-      if ((window as any).fin) {
-        ;(window as any).fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
-          data: {
-            selection: {
-              __typename: 'Selection',
-              id,
-              symbol: id,
-            },
+  const onSymbolChanged = (id: string) => {
+    props.history.push(`${props.url}${id}`)
+    if ((window as any).fin) {
+      ;(window as any).fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
+        data: {
+          selection: {
+            __typename: 'Selection',
+            id,
+            symbol: id,
           },
-        })
-      }
-    },
+        },
+      })
+    }
   }
+
+  const onTextChange = (text: string) => {
+    setCurrentText(text)
+  }
+
+  const handleChange = (symbol: search_search | null) => {
+    setCurrentSymbol(symbol)
+    if (symbol) {
+      onSymbolChanged(symbol.id)
+    }
+  }
+
+  return (
+    <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
+      {(data, __) => {
+        return (
+          <SearchSelect
+            onInputChange={onTextChange}
+            options={data.search}
+            onChange={handleChange}
+            value={currentSymbol}
+          />
+        )
+      }}
+    </AppQuery>
+  )
 }
 
-export default compose(
-  graphql(SearchQuery, {
-    options: ({ id }) => ({
-      variables: { id },
-    }),
-    skip: (ownProps: any) => !ownProps.id,
-  }),
-  graphql(SimpleSearchQuery, {
-    name: 'search',
-    options: {
-      variables: {
-        text: '',
-      },
-    },
-  }),
-  withRouter,
-  withProps(searchProps),
-  // @ts-ignore
-)(Search)
+export default withRouter(Search)

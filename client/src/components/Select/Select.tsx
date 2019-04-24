@@ -8,7 +8,7 @@ export interface IProps {
   options: any
   onChange: (symbol: any) => void
   value: any
-  onBlur: () => void
+  onBlur?: () => void
 }
 
 export interface IState {}
@@ -19,7 +19,7 @@ export default class SearchSelect extends PureComponent<IProps, IState> {
 
     return (
       <AsyncSelectStyled
-        autoFocus
+        autoFocus={true}
         autoBlur={false}
         key="id"
         valueKey="id"

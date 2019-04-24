@@ -165,6 +165,55 @@ export interface onQuoteQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: searchQuery
+// ====================================================
+
+export interface searchQuery_stock_company {
+  __typename: 'Company'
+  id: string
+  name: string | null
+  exchange: string | null
+}
+
+export interface searchQuery_stock {
+  __typename: 'Stock'
+  id: string
+  company: searchQuery_stock_company | null
+}
+
+export interface searchQuery {
+  stock: searchQuery_stock | null
+}
+
+export interface searchQueryVariables {
+  id: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: search
+// ====================================================
+
+export interface search_search {
+  __typename: 'SearchResult'
+  id: string
+  name: string
+}
+
+export interface search {
+  search: search_search[]
+}
+
+export interface searchVariables {
+  text: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: StatsQuery
 // ====================================================
 
