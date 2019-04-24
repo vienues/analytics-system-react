@@ -50,10 +50,16 @@ export interface HistoryQuery_stock_chart {
   high: number | null
 }
 
+export interface HistoryQuery_stock_quote {
+  __typename: 'Quote'
+  previousClose: number | null
+}
+
 export interface HistoryQuery_stock {
   __typename: 'Stock'
   id: string
   chart: (HistoryQuery_stock_chart | null)[] | null
+  quote: HistoryQuery_stock_quote | null
 }
 
 export interface HistoryQuery {
@@ -334,9 +340,15 @@ export interface History_chart {
   high: number | null
 }
 
+export interface History_quote {
+  __typename: 'Quote'
+  previousClose: number | null
+}
+
 export interface History {
   __typename: 'Stock'
   chart: (History_chart | null)[] | null
+  quote: History_quote | null
 }
 
 /* tslint:disable */

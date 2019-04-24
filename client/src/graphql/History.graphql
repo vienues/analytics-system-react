@@ -6,4 +6,7 @@ fragment History on Stock {
     low
     high
   }
+  quote {
+    previousClose
+  }
 }

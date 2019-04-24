@@ -43,7 +43,7 @@ const Stats: React.FunctionComponent<ChildProps<IProps, Response>> = (props: Chi
           return (
             <Flex flex={1}>
               <Box width={1 / 2}>
-                <FieldRow label="Previous Close" dataFormat="approximate">
+                <FieldRow label="Previous Close" dataFormat="dollars">
                   {quote.previousClose}
                 </FieldRow>
                 <FieldRow label="Day Range">
