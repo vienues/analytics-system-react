@@ -38,7 +38,7 @@ export default styled(Select)`
 
     &-value,
     &-input {
-      color: ${props => props.theme.colors.white};
+      color: ${({ theme }) => theme.core.textColor};
     }
 
      {
@@ -61,7 +61,11 @@ export default styled(Select)`
 
     &-menu-outer {
       transform: translateY(calc(0.75rem - 2px));
-      background: linear-gradient(to bottom, rgb(0, 19, 48), rgba(0, 8, 19, 0.8));
+      color: ${({ theme }) => theme.core.textColor};
+      background: ${({ theme }: any) => theme.core.lightBackground};
+      border-color: ${({ theme }: any) => theme.secondary.base};
+      border-style: solid;
+      border-size: 0.5rem;
     }
 
     &-noresults {
@@ -75,17 +79,13 @@ export default styled(Select)`
       height: 2.5rem;
 
       &.is-focused {
-        background: linear-gradient(
-          135deg,
-          ${props => props.theme.colors.accent50a},
-          ${props => props.theme.colors.accent30a}
-        );
-        mix-blend-mode: screen;
+        color: ${({ theme }) => theme.primary.base};
+        background: ${({ theme }) => theme.secondary.base};
       }
     }
 
     &-option {
-      color: white;
+      color: ${({ theme }) => theme.core.textColor};
     }
 
     &-clear {

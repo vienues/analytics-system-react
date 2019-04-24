@@ -34,7 +34,7 @@ export default class MainLayout extends React.Component<IProps> {
 
 const SearchLayout: React.FunctionComponent<{ id: string }> = ({ id }) => (
   <>
-    <Flex wrap="true">
+    <Flex wrap="true" style={{ marginTop: '16px' }}>
       <Search url={/stock/} id={id} />
       <StockPrice id={id} />
     </Flex>

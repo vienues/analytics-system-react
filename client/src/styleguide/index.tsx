@@ -199,3 +199,9 @@ export const ToolTipChildRight = styled.div`
   font-size: 10px;
   color: ${({ theme }) => theme.template.white.normal};
 `
+export const Large = styled.div`
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 2rem;
+  color: ${props => props.theme.colors[props.color || 'white']};
+`
