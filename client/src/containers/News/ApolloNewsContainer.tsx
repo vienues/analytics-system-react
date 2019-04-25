@@ -2,8 +2,8 @@ import React from 'react'
 import { ChildProps } from 'react-apollo'
 import { NewsQuery, NewsQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
-import NewsConnection from '../../graphql/NewsConnection.graphql'
 import { News, NewsItem } from './components'
+import NewsConnection from './graphql/NewsConnection.graphql'
 
 interface IProps {
   id: string
