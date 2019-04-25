@@ -2,14 +2,16 @@ import React from 'react'
 import { ChildProps } from 'react-apollo'
 import { NewsQuery, NewsQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
-import { News, NewsItem } from '../../components'
 import NewsConnection from '../../graphql/NewsConnection.graphql'
+import { News, NewsItem } from './components'
 
 interface IProps {
   id: string
 }
 
-const NewsContainer: React.FunctionComponent<ChildProps<IProps, Response>> = (props: ChildProps<IProps, Response>) => {
+const ApolloNewsContainer: React.FunctionComponent<ChildProps<IProps, Response>> = (
+  props: ChildProps<IProps, Response>,
+) => {
   const onNewsQueryResults = (data: NewsQuery) => {
     let news = [] as NewsItem[]
     if (data.stock && data.stock.news) {
@@ -25,4 +27,4 @@ const NewsContainer: React.FunctionComponent<ChildProps<IProps, Response>> = (pr
   )
 }
 
-export default NewsContainer
+export default ApolloNewsContainer
