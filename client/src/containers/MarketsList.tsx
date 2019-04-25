@@ -9,7 +9,7 @@ import Numeral from '../components/Numeral'
 import MarketSubscription from '../graphql/MarketSubscription.graphql'
 import MarketsConnection from '../graphql/QuoteConnection.graphql'
 import { colors } from '../rt-theme'
-import { Currency, Percent, Small, Text, VerticalRuleStyled } from '../styleguide'
+import { Currency, Percent, Small, Text, VerticalSeperator } from '../styleguide'
 
 const MarketListItem: React.FunctionComponent<ChildProps<{ symbol: string }, Response>> = (
   props: ChildProps<{ symbol: string }, Response>,
@@ -44,7 +44,7 @@ const MarketListItem: React.FunctionComponent<ChildProps<{ symbol: string }, Res
                   />
                   <Numeral>{change.toFixed(2)}</Numeral>
                 </Text>
-                <VerticalRuleStyled className="" />
+                <VerticalSeperator />
                 <Percent color={color}>
                   {' '}
                   <Numeral>{(changePercent * 100).toFixed(2)}</Numeral>

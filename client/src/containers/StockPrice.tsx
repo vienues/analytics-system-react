@@ -3,16 +3,16 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward'
 import React from 'react'
 import { ChildProps, Subscription } from 'react-apollo'
 import { Box, Flex } from 'rebass'
-import { withTheme } from 'styled-components'
 import { onMarketSubscription, onMarketSubscriptionVariables } from '../__generated__/types'
 import Numeral from '../components/Numeral'
 import MarketSubscription from '../graphql/MarketSubscription.graphql'
 import { colors } from '../rt-theme'
-import { Large } from '../styleguide'
+import { Large, VerticalSeperator } from '../styleguide'
+
+import { AdaptiveLoader } from '../styleguide/AdaptiveLoader'
 
 interface IProps {
   id: string
-  theme: any
 }
 
 const StockPrice: React.FunctionComponent<ChildProps<IProps, Response>> = (props: ChildProps<IProps, Response>) => {
@@ -35,7 +35,7 @@ const StockPrice: React.FunctionComponent<ChildProps<IProps, Response>> = (props
     >
       {({ data, loading }) => {
         if (loading) {
-          return <></>
+          return <AdaptiveLoader size={50} speed={1.4} />
         }
         if (data && data.getQuotes) {
           const { change, changePercent, latestPrice } = data.getQuotes
@@ -46,15 +46,14 @@ const StockPrice: React.FunctionComponent<ChildProps<IProps, Response>> = (props
               <Flex>
                 <Large>$ {latestPrice}</Large>
                 <Box px={1} />
-                <Large
-                  style={{ color, borderRight: `${props.theme.secondary.base} solid 0.125rem`, paddingRight: '0.5rem' }}
-                >
+                <Large style={{ color }}>
                   <Icon
                     viewBox="0 0 20 20"
                     style={{ verticalAlign: 'super', fontSize: '1rem', marginRight: '0.25rem' }}
                   />
                   <Numeral>{fixedFormat(change)}</Numeral>
                 </Large>
+                <VerticalSeperator />
                 <Large style={{ color, paddingLeft: '0.5rem' }}>
                   {' '}
                   <Numeral>{fixedFormat(changePercent * 100)}%</Numeral>
@@ -69,4 +68,4 @@ const StockPrice: React.FunctionComponent<ChildProps<IProps, Response>> = (props
   )
 }
 
-export default withTheme(StockPrice)
+export default StockPrice

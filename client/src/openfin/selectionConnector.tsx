@@ -1,7 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { compose, lifecycle, withProps } from 'recompose'
-import { loadable } from '../common'
 
 const SUBSCRIBE_TO_SELECTION = gql`
   subscription SelectionChange {
@@ -49,6 +48,5 @@ export default compose(
       viewmodel.subscription.unsubscribe()
     },
   }),
-  loadable,
   withProps((props: any) => ({ id: props.data.selection.id })),
 )

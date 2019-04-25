@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-// import { ChildProps, graphql } from 'react-apollo'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
-// import { compose, withProps } from 'recompose'
 import { search, search_search, searchQuery, searchQueryVariables, searchVariables } from '../__generated__/types'
 import { AppQuery } from '../common/AppQuery'
 import SearchSelect from '../components/Select'

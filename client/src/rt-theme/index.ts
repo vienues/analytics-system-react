@@ -1,4 +1,4 @@
-import { Color, colors, LightShade, DarkShade, ColorPalette, AccentName, AccentPaletteMap } from './colors'
+import { AccentName, AccentPaletteMap, Color, ColorPalette, colors, DarkShade, LightShade } from './colors'
 export { colors }
 export type LightShade = LightShade
 export type DarkShade = DarkShade
@@ -12,7 +12,7 @@ import baseStyled, { ThemedStyledInterface } from 'styled-components'
 export const styled: ThemedStyledInterface<Theme> = baseStyled
 
 export { ThemeName, ThemeProvider, ThemeConsumer, useTheme } from './ThemeContext'
-import { Theme, ColorProps, ThemeSelector, TouchableIntentName, themes, getThemeColor } from './themes'
+import { ColorProps, getThemeColor, Theme, themes, ThemeSelector, TouchableIntentName } from './themes'
 export type Theme = Theme
 export type TouchableIntentName = TouchableIntentName
 export type ColorProps = ColorProps

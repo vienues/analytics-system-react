@@ -16,7 +16,7 @@ export interface IProps {
 const Company: React.FunctionComponent<ChildProps<IProps, Response>> = (props: ChildProps<IProps, Response>) => {
   return (
     <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id: props.id }}>
-      {(data, _) => {
+      {data => {
         if (data.stock && data.stock.company) {
           return (
             <AnalyticsStyle>

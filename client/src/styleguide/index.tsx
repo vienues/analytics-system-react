@@ -145,6 +145,14 @@ export const Percent = styled(SuperText)`
     padding-left: 0.125rem;
   }
 `
+const bgColor = '#444c5f'
+export const VerticalSeperator = styled.div`
+  height:90%;
+  border: solid 1px ${bgColor}
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  opacity: 0.85;
+`
 
 const VerticalRule = ({ className }: any) => (
   <svg className={className} width="8" height="12" viewBox="0 0 8 20" xmlns="http://www.w3.org/2000/svg">
