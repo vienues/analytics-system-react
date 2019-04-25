@@ -38,6 +38,10 @@ interface IAppQueryProps<Data, Variables> {
 export class AppQuery<Data, Variables> extends React.Component<
   OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>
 > {
+  constructor(props: any) {
+    super(props)
+    this.onQueryResults = this.onQueryResults.bind(this)
+  }
   public defaultRenderNetworkStatus = (networkStatus: NetworkStatus, _: QueryResult<Data, Variables>) => {
     if (networkStatus === NetworkStatus.loading) {
       return (
@@ -63,28 +67,24 @@ export class AppQuery<Data, Variables> extends React.Component<
     return <div>No data</div>
   }
   public render() {
-    const { children, renderNetworkStatus, renderError, renderNoData, ...queryProps } = this.props
-    return (
-      <Query<Data, Variables> {...queryProps}>
-        {(result: QueryResult<Data, Variables>) => {
-          const networkStatusNode = (renderNetworkStatus || this.defaultRenderNetworkStatus)(
-            result!.networkStatus,
-            result,
-          )
-          if (networkStatusNode) {
-            return networkStatusNode
-          }
-          const errorNode = result.error ? (renderError || this.defaultRenderError)(result!.error!, result) : undefined
-          if (errorNode) {
-            return errorNode
-          }
-          const noDataNode = !result.data ? (renderNoData || this.defaultRenderNoData)(result) : undefined
-          if (noDataNode) {
-            return noDataNode
-          }
-          return children(result.data!, result)
-        }}
-      </Query>
-    )
+    const { ...queryProps } = this.props
+    return <Query<Data, Variables> {...queryProps}>{this.onQueryResults}</Query>
+  }
+
+  private onQueryResults = (result: QueryResult<Data, Variables>) => {
+    const { children, renderNetworkStatus, renderError, renderNoData } = this.props
+    const networkStatusNode = (renderNetworkStatus || this.defaultRenderNetworkStatus)(result!.networkStatus, result)
+    if (networkStatusNode) {
+      return networkStatusNode
+    }
+    const errorNode = result.error ? (renderError || this.defaultRenderError)(result!.error!, result) : undefined
+    if (errorNode) {
+      return errorNode
+    }
+    const noDataNode = !result.data ? (renderNoData || this.defaultRenderNoData)(result) : undefined
+    if (noDataNode) {
+      return noDataNode
+    }
+    return children(result.data!, result)
   }
 }

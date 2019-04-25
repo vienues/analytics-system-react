@@ -19,7 +19,7 @@ export const Root = (Background.withComponent(Rebass.Flex) as any).extend`
 `
 
 export const Divider = styled((Rebass as any).Border).attrs({
-  borderWidth: 2,
+  borderWidth: 1,
   color: (props: any) => (props.soft ? 'offwhite50' : 'accent'),
   my: 2,
   top: true,
@@ -66,6 +66,7 @@ export const textProps = AdaptiveCommon.mapProps({
 
 export const Text = styled(Rebass.Text).attrs({ is: 'div' })`
   ${textProps};
+  font-weight: 300;
 `
 export const Heading = styled(Rebass.Heading)`
   ${textProps};
@@ -104,6 +105,7 @@ export const HyperLinkedLead = styled((Rebass as any).Small)`
   &:hover {
     color: ${(props: any) => props.theme.colors.gold};
   }
+  font-weight: 300;
 `
 export const HyperLinkedBlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
   ${textProps};
