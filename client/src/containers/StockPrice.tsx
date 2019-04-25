@@ -20,10 +20,18 @@ const StockPrice: React.FunctionComponent<ChildProps<IProps, Response>> = (props
     return e < 100 ? e.toFixed(2) : e.toFixed(0)
   }
 
+  const shouldResubscribe = (curProps: any, nextProps: any) => {
+    if (curProps.variables.markets[0] !== nextProps.variables.markets[0]) {
+      return true
+    }
+    return false
+  }
+
   return (
     <Subscription<onMarketSubscription, onMarketSubscriptionVariables>
       subscription={MarketSubscription}
       variables={{ markets: [props.id] }}
+      shouldResubscribe={shouldResubscribe}
     >
       {({ data, loading }) => {
         if (loading) {
