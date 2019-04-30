@@ -3,7 +3,7 @@ import __fetch from 'node-fetch'
 
 const ENDPOINT = 'https://api.iextrading.com/1.0'
 
-export async function fetch(path: string | string[], options?: any) {
+export async function fetch<T>(path: string | string[], options?: any): Promise<T> {
   path = join('/', ...(Array.isArray(path) ? path : [path]))
   let response
 
@@ -27,4 +27,6 @@ export async function fetch(path: string | string[], options?: any) {
       throw new Error('Invalid Stock')
     }
   }
+
+  throw new Error('Something went wrong')
 }

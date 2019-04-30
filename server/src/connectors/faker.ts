@@ -26,7 +26,7 @@ const modify = (ctx: any, quote: any) => {
   return result
 }
 
-const fetch = (dataStore: any, context = {}) => (path: string) => {
+const fetch = (dataStore: any, context = {}) => <T>(path: string): Promise<T> => {
   if (isMarketDataRequest(path)) {
     return Promise.resolve(dataStore.marketData)
   }

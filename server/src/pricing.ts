@@ -9,7 +9,7 @@ import getDataSource from './connectors/index'
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 const getQuoteUrl = (symbol: string) => `stock/${symbol}/quote`
-const requestQuote = (symbol: string) => iex.fetch(getQuoteUrl(symbol))
+const requestQuote = (symbol: string) => iex.fetch<any>(getQuoteUrl(symbol))
 
 const TICK_INTERVAL = 3000
 
@@ -35,14 +35,14 @@ const createTopic = (symbol: string) => `MARKET_UPDATE.${symbol}`
 
 export default function(pubSub: PubSub) {
   const onMessage = (symbols: string[]) => {
-    symbols.filter(symbol => !subscriptions.has(symbol)).forEach(symbol => {
-      console.info('Subscribing to:', createTopic(symbol))
-      const subscription = createPriceStream(symbol).subscribe(price => {
-        console.info(`published ${createTopic(symbol)} with price ${price.latestPrice}`)
-        pubSub.publish(createTopic(symbol), price)
+    symbols
+      .filter(symbol => !subscriptions.has(symbol))
+      .forEach(symbol => {
+        const subscription = createPriceStream(symbol).subscribe(price => {
+          pubSub.publish(createTopic(symbol), price)
+        })
+        subscriptions.set(symbol, subscription)
       })
-      subscriptions.set(symbol, subscription)
-    })
   }
 
   pubSub.subscribe(SUBSCRIBE_TO_INDEX_UPDATES, message => {
