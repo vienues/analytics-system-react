@@ -6,17 +6,15 @@ export interface IProps {
   news: INewsItem[]
 }
 
-const News: React.FunctionComponent<IProps> = (props: IProps) => {
-  return (
-    <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
-      <Header>
-        <Title>Latest News</Title>
-      </Header>
-      {(props.news || []).map((newsItem: INewsItem) => (
-        <NewsItem key={newsItem.id} {...newsItem} />
-      ))}
-    </AnalyticsStyle>
-  )
-}
+const News: React.FunctionComponent<IProps> = props => (
+  <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
+    <Header>
+      <Title>Latest News</Title>
+    </Header>
+    {(props.news || []).map(newsItem => (
+      <NewsItem key={newsItem.id} {...newsItem} />
+    ))}
+  </AnalyticsStyle>
+)
 
 export default News

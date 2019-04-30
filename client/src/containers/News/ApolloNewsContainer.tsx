@@ -9,13 +9,11 @@ interface IProps {
   id: string
 }
 
-const ApolloNewsContainer: React.FunctionComponent<ChildProps<IProps, Response>> = (
-  props: ChildProps<IProps, Response>,
-) => {
-  const onNewsQueryResults = (data: NewsQuery) => {
+const ApolloNewsContainer: React.FunctionComponent<ChildProps<IProps, Response>> = props => {
+  const onNewsQueryResults = (data: NewsQuery): JSX.Element => {
     let news = [] as NewsItem[]
-    if (data.stock && data.stock.news) {
-      news = data.stock.news as NewsItem[]
+    if (data.news) {
+      news = data.news as NewsItem[]
     }
     return <News news={news} />
   }

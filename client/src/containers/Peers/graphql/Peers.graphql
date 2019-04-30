@@ -1,0 +1,3 @@
+fragment Peers on Stock {
+  peers
+}

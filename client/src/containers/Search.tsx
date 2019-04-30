@@ -3,9 +3,10 @@ import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import { search, search_search, searchQuery, searchQueryVariables, searchVariables } from '../__generated__/types'
 import { AppQuery } from '../common/AppQuery'
-import SearchSelect from '../components/Select'
 import SearchConnection from '../graphql/SearchConnection.graphql'
 import SimpleSearchConnection from '../graphql/SimpleSearchConnection.graphql'
+
+import { SearchBar } from './Search/components'
 
 import apolloClient from '../apollo/client'
 
@@ -37,6 +38,9 @@ export const Search: React.FunctionComponent<Props> = (props: Props) => {
                 id: result.data.stock.company.id,
                 name: result.data.stock.company.name,
               } as search_search)
+            }
+            if (currentSymbol) {
+              console.log('something')
             }
           })
       }
@@ -72,14 +76,7 @@ export const Search: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
       {(data, __) => {
-        return (
-          <SearchSelect
-            onInputChange={onTextChange}
-            options={data.search}
-            onChange={handleChange}
-            value={currentSymbol}
-          />
-        )
+        return <SearchBar items={data.search} onChange={handleChange} onTextChange={onTextChange} />
       }}
     </AppQuery>
   )

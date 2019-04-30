@@ -7,27 +7,21 @@
 
 export interface CompanyQuery_stock_company {
   __typename: 'Company'
-  id: string
-  symbol: string | null
-  name: string | null
-  exchange: string | null
-  industry: string | null
-  website: string | null
-  description: string | null
-  CEO: string | null
-  issueType: string | null
-  sector: string | null
+  symbol: string
+  name: string
+  website: string
+  description: string
 }
 
 export interface CompanyQuery_stock {
   __typename: 'Stock'
   id: string
-  company: CompanyQuery_stock_company | null
-  peers: (string | null)[] | null
+  company: CompanyQuery_stock_company
+  peers: string[]
 }
 
 export interface CompanyQuery {
-  stock: CompanyQuery_stock | null
+  stock: CompanyQuery_stock
 }
 
 export interface CompanyQueryVariables {
@@ -43,31 +37,52 @@ export interface CompanyQueryVariables {
 
 export interface HistoryQuery_stock_chart {
   __typename: 'Tick'
-  label: string | null
-  datetime: any | null
-  average: number | null
-  low: number | null
-  high: number | null
+  label: string
+  datetime: any
+  average: number
+  low: number
+  high: number
 }
 
 export interface HistoryQuery_stock_quote {
   __typename: 'Quote'
-  previousClose: number | null
+  id: string
+  previousClose: number
 }
 
 export interface HistoryQuery_stock {
   __typename: 'Stock'
   id: string
-  chart: (HistoryQuery_stock_chart | null)[] | null
-  quote: HistoryQuery_stock_quote | null
+  chart: HistoryQuery_stock_chart[]
+  quote: HistoryQuery_stock_quote
 }
 
 export interface HistoryQuery {
-  stock: HistoryQuery_stock | null
+  stock: HistoryQuery_stock
 }
 
 export interface HistoryQueryVariables {
   id: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: MarketQuery
+// ====================================================
+
+export interface MarketQuery_markets {
+  __typename: 'Quote'
+  id: string
+  companyName: string
+  change: number
+  changePercent: number
+  latestPrice: number
+}
+
+export interface MarketQuery {
+  markets: MarketQuery_markets[]
 }
 
 /* tslint:disable */
@@ -79,10 +94,10 @@ export interface HistoryQueryVariables {
 
 export interface onMarketSubscription_getQuotes {
   __typename: 'Quote'
-  id: string | null
-  change: number | null
-  changePercent: number | null
-  latestPrice: number | null
+  id: string
+  change: number
+  changePercent: number
+  latestPrice: number
 }
 
 export interface onMarketSubscription {
@@ -100,29 +115,67 @@ export interface onMarketSubscriptionVariables {
 // GraphQL query operation: NewsQuery
 // ====================================================
 
-export interface NewsQuery_stock_news {
+export interface NewsQuery_news {
   __typename: 'News'
   id: string
-  datetime: string | null
-  headline: string | null
-  source: string | null
-  url: string | null
-  summary: string | null
-  related: string | null
-}
-
-export interface NewsQuery_stock {
-  __typename: 'Stock'
-  id: string
-  news: (NewsQuery_stock_news | null)[] | null
+  datetime: string
+  headline: string
+  source: string
+  url: string
+  summary: string
+  related: string
 }
 
 export interface NewsQuery {
-  stock: NewsQuery_stock | null
+  news: NewsQuery_news[]
 }
 
 export interface NewsQueryVariables {
   id: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: PeersQuery
+// ====================================================
+
+export interface PeersQuery_stock {
+  __typename: 'Stock'
+  id: string
+  peers: string[]
+}
+
+export interface PeersQuery {
+  stock: PeersQuery_stock
+}
+
+export interface PeersQueryVariables {
+  id: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: onStockPriceSubscription
+// ====================================================
+
+export interface onStockPriceSubscription_getQuotes {
+  __typename: 'Quote'
+  id: string
+  change: number
+  changePercent: number
+  latestPrice: number
+}
+
+export interface onStockPriceSubscription {
+  getQuotes: onStockPriceSubscription_getQuotes
+}
+
+export interface onStockPriceSubscriptionVariables {
+  markets: string[]
 }
 
 /* tslint:disable */
@@ -134,37 +187,15 @@ export interface NewsQueryVariables {
 
 export interface QuoteQuery_markets {
   __typename: 'Quote'
-  id: string | null
-  companyName: string | null
-  change: number | null
-  changePercent: number | null
-  latestPrice: number | null
+  id: string
+  companyName: string
+  change: number
+  changePercent: number
+  latestPrice: number
 }
 
 export interface QuoteQuery {
   markets: QuoteQuery_markets[]
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL subscription operation: onQuoteQuery
-// ====================================================
-
-export interface onQuoteQuery_getQuotes {
-  __typename: 'Quote'
-  id: string | null
-  changePercent: number | null
-  latestPrice: number | null
-}
-
-export interface onQuoteQuery {
-  getQuotes: onQuoteQuery_getQuotes
-}
-
-export interface onQuoteQueryVariables {
-  markets: string[]
 }
 
 /* tslint:disable */
@@ -177,18 +208,18 @@ export interface onQuoteQueryVariables {
 export interface searchQuery_stock_company {
   __typename: 'Company'
   id: string
-  name: string | null
-  exchange: string | null
+  name: string
+  exchange: string
 }
 
 export interface searchQuery_stock {
   __typename: 'Stock'
   id: string
-  company: searchQuery_stock_company | null
+  company: searchQuery_stock_company
 }
 
 export interface searchQuery {
-  stock: searchQuery_stock | null
+  stock: searchQuery_stock
 }
 
 export interface searchQueryVariables {
@@ -225,36 +256,36 @@ export interface searchVariables {
 
 export interface StatsQuery_stock_stats {
   __typename: 'StockStats'
-  marketcap: number | null
-  peRatioLow: number | null
-  peRatioHigh: number | null
-  week52low: number | null
-  week52high: number | null
-  latestEPS: number | null
-  dividendRate: number | null
-  dividendYield: number | null
+  marketcap: number
+  peRatioLow: number
+  peRatioHigh: number
+  week52low: number
+  week52high: number
+  latestEPS: number
+  dividendRate: number
+  dividendYield: number
 }
 
 export interface StatsQuery_stock_quote {
   __typename: 'Quote'
-  id: string | null
-  low: number | null
-  high: number | null
-  open: number | null
-  previousClose: number | null
-  latestVolume: number | null
-  avgTotalVolume: number | null
+  id: string
+  low: number
+  high: number
+  open: number
+  previousClose: number
+  latestVolume: number
+  avgTotalVolume: number
 }
 
 export interface StatsQuery_stock {
   __typename: 'Stock'
   id: string
-  stats: StatsQuery_stock_stats | null
-  quote: StatsQuery_stock_quote | null
+  stats: StatsQuery_stock_stats
+  quote: StatsQuery_stock_quote
 }
 
 export interface StatsQuery {
-  stock: StatsQuery_stock | null
+  stock: StatsQuery_stock
 }
 
 export interface StatsQueryVariables {
@@ -271,26 +302,26 @@ export interface StatsQueryVariables {
 export interface StockPriceQuery_stock_company {
   __typename: 'Company'
   id: string
-  name: string | null
+  name: string
 }
 
 export interface StockPriceQuery_stock_quote {
   __typename: 'Quote'
-  id: string | null
-  change: number | null
-  changePercent: number | null
-  latestPrice: number | null
+  id: string
+  change: number
+  changePercent: number
+  latestPrice: number
 }
 
 export interface StockPriceQuery_stock {
   __typename: 'Stock'
   id: string
-  company: StockPriceQuery_stock_company | null
-  quote: StockPriceQuery_stock_quote | null
+  company: StockPriceQuery_stock_company
+  quote: StockPriceQuery_stock_quote
 }
 
 export interface StockPriceQuery {
-  stock: StockPriceQuery_stock | null
+  stock: StockPriceQuery_stock
 }
 
 export interface StockPriceQueryVariables {
@@ -306,22 +337,16 @@ export interface StockPriceQueryVariables {
 
 export interface Company_company {
   __typename: 'Company'
-  id: string
-  symbol: string | null
-  name: string | null
-  exchange: string | null
-  industry: string | null
-  website: string | null
-  description: string | null
-  CEO: string | null
-  issueType: string | null
-  sector: string | null
+  symbol: string
+  name: string
+  website: string
+  description: string
 }
 
 export interface Company {
   __typename: 'Stock'
-  company: Company_company | null
-  peers: (string | null)[] | null
+  company: Company_company
+  peers: string[]
 }
 
 /* tslint:disable */
@@ -333,22 +358,23 @@ export interface Company {
 
 export interface History_chart {
   __typename: 'Tick'
-  label: string | null
-  datetime: any | null
-  average: number | null
-  low: number | null
-  high: number | null
+  label: string
+  datetime: any
+  average: number
+  low: number
+  high: number
 }
 
 export interface History_quote {
   __typename: 'Quote'
-  previousClose: number | null
+  id: string
+  previousClose: number
 }
 
 export interface History {
   __typename: 'Stock'
-  chart: (History_chart | null)[] | null
-  quote: History_quote | null
+  chart: History_chart[]
+  quote: History_quote
 }
 
 /* tslint:disable */
@@ -358,20 +384,27 @@ export interface History {
 // GraphQL fragment: News
 // ====================================================
 
-export interface News_news {
+export interface News {
   __typename: 'News'
   id: string
-  datetime: string | null
-  headline: string | null
-  source: string | null
-  url: string | null
-  summary: string | null
-  related: string | null
+  datetime: string
+  headline: string
+  source: string
+  url: string
+  summary: string
+  related: string
 }
 
-export interface News {
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: Peers
+// ====================================================
+
+export interface Peers {
   __typename: 'Stock'
-  news: (News_news | null)[] | null
+  peers: string[]
 }
 
 /* tslint:disable */
@@ -383,31 +416,31 @@ export interface News {
 
 export interface Stats_stats {
   __typename: 'StockStats'
-  marketcap: number | null
-  peRatioLow: number | null
-  peRatioHigh: number | null
-  week52low: number | null
-  week52high: number | null
-  latestEPS: number | null
-  dividendRate: number | null
-  dividendYield: number | null
+  marketcap: number
+  peRatioLow: number
+  peRatioHigh: number
+  week52low: number
+  week52high: number
+  latestEPS: number
+  dividendRate: number
+  dividendYield: number
 }
 
 export interface Stats_quote {
   __typename: 'Quote'
-  id: string | null
-  low: number | null
-  high: number | null
-  open: number | null
-  previousClose: number | null
-  latestVolume: number | null
-  avgTotalVolume: number | null
+  id: string
+  low: number
+  high: number
+  open: number
+  previousClose: number
+  latestVolume: number
+  avgTotalVolume: number
 }
 
 export interface Stats {
   __typename: 'Stock'
-  stats: Stats_stats | null
-  quote: Stats_quote | null
+  stats: Stats_stats
+  quote: Stats_quote
 }
 
 /* tslint:disable */

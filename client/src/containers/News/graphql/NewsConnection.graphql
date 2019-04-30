@@ -1,6 +1,6 @@
 #import "./News.graphql"
 query NewsQuery($id: ID!) {
-  stock(id: $id) {
+  news(id: $id, last: 3) {
     id
     ...News
   }

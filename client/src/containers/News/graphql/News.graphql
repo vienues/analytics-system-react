@@ -1,11 +1,8 @@
-fragment News on Stock {
-  news(last: 3) {
-    id
-    datetime
-    headline
-    source
-    url
-    summary
-    related
-  }
+fragment News on News {
+  datetime
+  headline
+  source
+  url
+  summary
+  related
 }

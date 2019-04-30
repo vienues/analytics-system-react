@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Flex } from 'rebass'
 import styled from 'styled-components'
 import { Ribbon } from '../../components'
-import { Company, History, MarketList, News, Peers, Search, Stats, StockPrice } from '../../containers/'
+import { Company, History, MarketsList, News, Peers, Search, Stats, StockPrice } from '../../containers/'
 import { AnalyticsStyle, Header, Title } from '../../rt-theme/analyticsStyle'
 import { Divider, Gutter, ViewportFlex } from '../../styleguide'
 import AppBar from './AppBar'
@@ -25,7 +25,7 @@ export default class MainLayout extends React.Component<IProps> {
           <Gutter />
         </ScrollableArea>
         <Ribbon>
-          <MarketList />
+          <MarketsList />
         </Ribbon>
       </AppLayoutRoot>
     )
