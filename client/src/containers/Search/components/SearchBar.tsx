@@ -4,6 +4,7 @@ import { search_search } from '../../../__generated__/types'
 
 export interface ISearchBarProps {
   items: search_search[]
+  initialItem: search_search | null
   onChange: (symbol: search_search | null) => void
   onTextChange: (text: string) => void
 }
@@ -13,7 +14,12 @@ class SearchBar extends React.Component<ISearchBarProps, {}> {
 
   public render() {
     return (
-      <Downshift onChange={this.props.onChange} itemToString={this.searchResultToOptionString}>
+      // @ts-ignore
+      <Downshift
+        selectedItem={this.props.initialItem}
+        onChange={this.props.onChange}
+        itemToString={this.searchResultToOptionString}
+      >
         {({
           getInputProps,
           getItemProps,
@@ -27,8 +33,7 @@ class SearchBar extends React.Component<ISearchBarProps, {}> {
           this.props.onTextChange(inputValue || '')
           return (
             <div>
-              <label {...getLabelProps()}>Enter a fruit</label>
-              <input {...getInputProps()} />
+              <input {...getInputProps({ placeholder: 'Enter stock symbol...' })} />
               <ul {...getMenuProps()}>
                 {isOpen
                   ? this.props.items

@@ -35,12 +35,9 @@ export const Search: React.FunctionComponent<Props> = (props: Props) => {
             if (result.data && result.data.stock && result.data.stock.company) {
               setCurrentSymbol({
                 __typename: 'SearchResult',
-                id: result.data.stock.company.id,
-                name: result.data.stock.company.name,
+                id: result.data.stock.id,
+                name: result.data.stock.company.id,
               } as search_search)
-            }
-            if (currentSymbol) {
-              console.log('something')
             }
           })
       }
@@ -76,7 +73,14 @@ export const Search: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
       {(data, __) => {
-        return <SearchBar items={data.search} onChange={handleChange} onTextChange={onTextChange} />
+        return (
+          <SearchBar
+            initialItem={currentSymbol ? currentSymbol : null}
+            items={data.search}
+            onChange={handleChange}
+            onTextChange={onTextChange}
+          />
+        )
       }}
     </AppQuery>
   )
