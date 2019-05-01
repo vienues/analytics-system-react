@@ -1,9 +1,11 @@
-import { Args, Query, Resolver, Ctx, ArgsType, Field, Int } from 'type-graphql'
+import { Args, Query, Resolver, Ctx, ArgsType, Field, Int, FieldResolver, Root } from 'type-graphql'
 import { default as NewsSchema } from './News.schema'
-import getDataSource from '../../connectors'
 import { IdInputArgs } from '../GenericArgTypes'
+import { IIexNewsQuery, AdaptiveCtx } from '../../types'
 
-type Ctx = { iex: ReturnType<typeof getDataSource> }
+export interface AutoResolvedField {
+  id: string
+}
 
 @ArgsType()
 class NewsQueryArgs extends IdInputArgs {
@@ -14,8 +16,12 @@ class NewsQueryArgs extends IdInputArgs {
 @Resolver(of => NewsSchema)
 export default class News {
   @Query(returns => [NewsSchema])
-  async news(@Args() { id, last }: NewsQueryArgs, @Ctx() ctx: Ctx): Promise<NewsSchema[]> {
-    const news = await ctx.iex.fetch<any[]>(`stock/${id}/news/${last ? `last/${last}` : ''}`)
-    return news.map((item: any) => ({ id: item.url, ...item }))
+  async news(@Args() { id, last }: NewsQueryArgs, @Ctx() ctx: AdaptiveCtx): Promise<NewsSchema[]> {
+    return ctx.iex.fetch<IIexNewsQuery[] & AutoResolvedField[]>(`stock/${id}/news/${last ? `last/${last}` : ''}`)
+  }
+
+  @FieldResolver()
+  id(@Root() newsArticle: NewsSchema) {
+    return newsArticle.url
   }
 }
