@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import Fuse from 'fuse.js'
-import data from './referenceSymbols.json'
+import data from '../mockData/referenceSymbols.json'
 import { RefSymbol } from '../types'
 import { PubSub } from 'graphql-subscriptions'
 

@@ -1,9 +1,8 @@
-import 'reflect-metadata'
 import { Arg, FieldResolver, Query, Resolver, Root, Ctx, Args } from 'type-graphql'
 import { default as StockSchema } from './Stock.schema'
 import getDataSource from '../../connectors'
 import SearchResult from './SearchResult.schema'
-import search from '../../resolvers/searchIndex'
+import search from '../../services/searchIndex'
 import { IdInputArgs } from '../GenericArgTypes'
 
 type Ctx = { iex: ReturnType<typeof getDataSource> }

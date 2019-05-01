@@ -1,4 +1,3 @@
-import 'reflect-metadata'
 import { Arg, FieldResolver, Mutation, Query, Resolver, Root, Ctx, UseMiddleware } from 'type-graphql'
 import { default as CompanySchema } from './Company.schema'
 import getDataSource from '../../connectors'

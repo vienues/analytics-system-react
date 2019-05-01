@@ -1,12 +1,7 @@
-import 'reflect-metadata'
 import { FieldResolver, InputType, Query, Resolver, Root, Ctx, Subscription, ArgsType, Field, Args } from 'type-graphql'
 import { default as QuoteSchema } from './Quote.schema'
-import { pubsub } from '../../pubsub'
 import { IdInputArgs } from '../GenericArgTypes'
 import { AdaptiveCtx, IIexQuoteQuery, IIexBatchQuote } from '../../types'
-import pricing from '../../pricing'
-
-pricing(pubsub)
 
 @ArgsType()
 export class SubscriptionQuoteArgs {
@@ -35,11 +30,7 @@ export default class Quote {
   }
 
   @Subscription(returns => QuoteSchema, {
-    topics: ({ args }) => {
-      console.info('hit resolver with:', args.symbols)
-      pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', args.symbols)
-      return args.symbols.map((arg: string) => `MARKET_UPDATE.${arg}`)
-    },
+    topics: ({ args }) => args.symbols.map((arg: string) => `MARKET_UPDATE.${arg}`),
   })
   getQuotes(@Root() quote: QuoteSchema, @Args() _: SubscriptionQuoteArgs): QuoteSchema {
     return quote
