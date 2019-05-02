@@ -39,3 +39,9 @@ Optionally, you can fetch data for more companies by passing in a space delineat
 ```
 yarn generate-mock-data bac ge amd
 ```
+
+## Generating Schemas and Types
+
+If you make changes to the server-side classes that control the types, you can automatically generate the client-side typings to transpilation type checks by running
+
+    yarn run generate-schema-and-typings

@@ -22,7 +22,8 @@ export default class Quote {
 
   @Query(() => [QuoteSchema])
   async markets(@Ctx() ctx: AdaptiveCtx): Promise<QuoteSchema[]> {
-    return ctx.iex.fetch<IIexBatchQuote & AutoCastedFields[]>(`stock/market/batch?symbols=spy,dia,iwm&types=quote`)
+    const response = await ctx.iex.fetch<IIexBatchQuote>(`stock/market/batch?symbols=spy,dia,iwm&types=quote`)
+    return Object.values(response).map(quote => <IIexQuoteQuery & AutoCastedFields>quote.quote)
   }
 
   @FieldResolver()
