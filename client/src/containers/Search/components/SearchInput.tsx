@@ -9,7 +9,7 @@ export interface ISearchBarProps {
   onTextChange: (text: string) => void
 }
 
-class SearchBar extends React.Component<ISearchBarProps, {}> {
+class SearchInput extends React.Component<ISearchBarProps, {}> {
   public searchResultToOptionString = (item: search_search): string => (item ? `${item.id} ${item.name}` : '')
 
   public render() {
@@ -65,4 +65,4 @@ class SearchBar extends React.Component<ISearchBarProps, {}> {
   }
 }
 
-export default SearchBar
+export default SearchInput

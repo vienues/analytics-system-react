@@ -1,7 +1,7 @@
 import { memoize } from 'lodash'
 import { rgba } from 'polished'
 import React, { Component } from 'react'
-import { withTheme, createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, withTheme } from 'styled-components'
 import { Theme } from '../rt-theme'
 
 export const css = memoize(

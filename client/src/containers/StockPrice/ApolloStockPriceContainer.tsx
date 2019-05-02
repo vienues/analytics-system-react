@@ -1,17 +1,15 @@
 import React from 'react'
 import { ChildProps, Subscription, SubscriptionProps, SubscriptionResult } from 'react-apollo'
 import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../../__generated__/types'
+import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { AdaptiveLoader } from '../../styleguide/AdaptiveLoader'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 
-interface IProps {
-  id: string
-}
-
-const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IProps, Response>> = (
-  props: ChildProps<IProps, Response>,
-) => {
+const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
+  id,
+  gridArea,
+}) => {
   const onStockPriceSubscriptionSuccess = (results: SubscriptionResult<onStockPriceSubscription>): JSX.Element => {
     const { data, loading } = results
     if (loading) {
@@ -20,7 +18,7 @@ const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IProps, Resp
 
     if (data && data.getQuotes) {
       const stockPrice = data.getQuotes as StockPriceData
-      return <StockPrice stockPrice={stockPrice} />
+      return <StockPrice fontSize={2} stockPrice={stockPrice} />
     }
 
     return <></>
@@ -39,13 +37,15 @@ const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IProps, Resp
   }
 
   return (
-    <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
-      subscription={StockPriceSubscription}
-      variables={{ markets: [props.id] }}
-      shouldResubscribe={shouldResubscribe}
-    >
-      {onStockPriceSubscriptionSuccess}
-    </Subscription>
+    <div style={{ gridArea, display: 'grid', justifyContent: 'end' }}>
+      <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
+        subscription={StockPriceSubscription}
+        variables={{ markets: [id] }}
+        shouldResubscribe={shouldResubscribe}
+      >
+        {onStockPriceSubscriptionSuccess}
+      </Subscription>
+    </div>
   )
 }
 

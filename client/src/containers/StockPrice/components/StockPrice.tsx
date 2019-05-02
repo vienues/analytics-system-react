@@ -1,10 +1,9 @@
 import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { Box, Flex } from 'rebass'
-import Numeral from '../../../components/Numeral'
+import styled from 'styled-components'
 import { colors } from '../../../rt-theme'
-import { Large, VerticalSeperator } from '../../../styleguide'
+import { Label } from '../../../styleguide'
 
 export interface IStockPriceData {
   change: number
@@ -13,6 +12,8 @@ export interface IStockPriceData {
 }
 
 interface IStockPriceProps {
+  symbol?: string
+  fontSize?: number
   stockPrice: IStockPriceData
 }
 
@@ -26,20 +27,36 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = props => {
   }
 
   return (
-    <Flex>
-      <Large>$ {latestPrice}</Large>
-      <Box px={1} />
-      <Large style={{ color }}>
+    <Layout style={{ fontSize: props.fontSize }}>
+      {props.symbol ? <div style={{ gridArea: 'symbol' }}>{props.symbol}</div> : <></>}
+      <div style={{ gridArea: 'latest-price' }}>$ {latestPrice}</div>
+      <div style={{ color, gridArea: 'icon' }}>
         <FontAwesomeIcon icon={Icon} />
-        <Numeral>{fixedFormat(change)}</Numeral>
-      </Large>
-      <VerticalSeperator />
-      <Large style={{ color, paddingLeft: '0.5rem' }}>
+      </div>
+      <div style={{ color, gridArea: 'change' }}>
+        <Label>{fixedFormat(change)}</Label>
+      </div>
+      <div style={{ color, gridArea: 'change-percent' }}>
         {' '}
-        <Numeral>{fixedFormat(changePercent * 100)}%</Numeral>
-      </Large>
-    </Flex>
+        <Label>{fixedFormat(changePercent * 100)}%</Label>
+      </div>
+    </Layout>
   )
 }
+
+const Layout = styled.div`
+  display: grid
+  grid-template-columns: 3fr 4fr 1fr 2fr 2fr
+  grid-gap:0.5em
+  grid-template-areas:
+    "symbol latest-price icon change change-percent";
+  & > div {
+    font-size: ${props => {
+      if (props && props.style) {
+        return props.style.fontSize || 1
+      }
+      return 1
+    }}rem; }
+`
 
 export default StockPrice

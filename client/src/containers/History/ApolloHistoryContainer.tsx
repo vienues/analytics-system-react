@@ -1,20 +1,16 @@
-import _ from 'lodash'
 import moment from 'moment'
 import React from 'react'
 import { ChildProps } from 'react-apollo'
 import { HistoryQuery, HistoryQuery_stock_chart, HistoryQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
+import { IApolloContainerProps } from '../../common/IApolloContainerProps'
+import { History } from './components'
 import HistoryConnection from './graphql/HistoryConnection.graphql'
 
-import { History } from './components'
-
-export interface IProps {
-  id: string
-}
-
-export const ApolloHistoryContainer: React.FunctionComponent<ChildProps<IProps, Response>> = (
-  props: ChildProps<IProps, Response>,
-) => {
+export const ApolloHistoryContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
+  id,
+  gridArea,
+}) => {
   const onHistoryQueryResults = (data: HistoryQuery): JSX.Element => {
     let retElement = <></>
     if (data.stock && data.stock.chart && data.stock.quote && data.stock.quote.previousClose) {
@@ -36,9 +32,11 @@ export const ApolloHistoryContainer: React.FunctionComponent<ChildProps<IProps, 
   }
 
   return (
-    <AppQuery<HistoryQuery, HistoryQueryVariables> query={HistoryConnection} variables={{ id: props.id }}>
-      {onHistoryQueryResults}
-    </AppQuery>
+    <div style={{ gridArea }}>
+      <AppQuery<HistoryQuery, HistoryQueryVariables> query={HistoryConnection} variables={{ id }}>
+        {onHistoryQueryResults}
+      </AppQuery>
+    </div>
   )
 }
 

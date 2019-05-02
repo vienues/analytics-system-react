@@ -1,65 +1,57 @@
 import * as React from 'react'
-import { Flex } from 'rebass'
 import styled from 'styled-components'
-import { Ribbon } from '../../components'
-import { Company, History, MarketsList, News, Peers, Search, Stats, StockPrice } from '../../containers/'
-import { AnalyticsStyle, Header, Title } from '../../rt-theme/analyticsStyle'
-import { Divider, Gutter, ViewportFlex } from '../../styleguide'
+import { Search, StockPrice } from '../../containers/'
+import { Gutter } from '../../styleguide'
 import AppBar from './AppBar'
+import Footer from './Footer'
+
+import { Company, History, News, Peers, Stats } from '../../containers/'
 
 export interface IProps {
   id: string
 }
 
-export default class MainLayout extends React.Component<IProps> {
-  public render() {
-    const { id } = this.props
-    return (
-      <AppLayoutRoot>
-        <AppBar />
-        <ScrollableArea>
-          <ViewportFlex column={true} className="">
-            <SearchLayout id={id} />
-            {id ? <StockDetails id={id} /> : null}
-          </ViewportFlex>
-          <Gutter />
-        </ScrollableArea>
-        <Ribbon>
-          <MarketsList />
-        </Ribbon>
-      </AppLayoutRoot>
-    )
+export const MainLayout: React.FunctionComponent<IProps> = ({ id }) => (
+  <React.StrictMode>
+    <AppLayoutRoot>
+      <AppBar />
+      <ScrollableArea>
+        <MainContent>
+          <Search gridArea="search" url={/stock/} id={id} />
+          <StockPrice gridArea="stockprice" id={id} />
+          <History gridArea="history" id={id} />
+          <News gridArea="news" id={id} />
+          <Stats gridArea="stats" id={id} />
+          <Company gridArea="company" id={id} />
+          <Peers gridArea="peers" id={id} />
+        </MainContent>
+        <Gutter />
+      </ScrollableArea>
+      <Footer />
+    </AppLayoutRoot>
+  </React.StrictMode>
+)
+const MainContent = styled.div`
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 4fr minmax(30rem, 1fr);
+  grid-template-areas:
+    'search stockprice'
+    'history news'
+    'stats company'
+    'stats peers';
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'search'
+      'stockprice'
+      'history'
+      'stats'
+      'news'
+      'company'
+      'peers';
   }
-}
-
-const SearchLayout: React.FunctionComponent<{ id: string }> = ({ id }) => (
-  <>
-    <Flex wrap="true" style={{ marginTop: '16px' }}>
-      <Search url={/stock/} id={id} />
-      <StockPrice id={id} />
-    </Flex>
-    <Divider my={1} soft="true" />
-  </>
-)
-
-const StockDetails: React.FunctionComponent<{ id: string }> = ({ id }) => (
-  <Layout>
-    <div style={{ width: '800px', marginRight: '10px' }}>
-      <History id={id} />
-      <AnalyticsStyle>
-        <Header>
-          <Title>Key Stats</Title>
-        </Header>
-        <Stats id={id} />
-      </AnalyticsStyle>
-    </div>
-    <div style={{ height: '100%' }}>
-      <News id={id} />
-      <Company id={id} />
-      <Peers id={id} />
-    </div>
-  </Layout>
-)
+`
 
 const AppLayoutRoot = styled.div`
   width: 100%;
@@ -74,17 +66,11 @@ const AppLayoutRoot = styled.div`
   color: ${({ theme }) => theme.core.textColor};
 `
 
-const Layout = styled.div`
-  display: grid;
-  grid-template-columns: 1fr auto;
-  @media (max-width: 750px) {
-    display: block;
-  }
-  width: 100%;
-`
-
-const ScrollableArea = styled(Flex)`
+const ScrollableArea = styled.div`
   flex-direction: column;
   overflow-y: auto;
   flex: 1;
+  padding: 1rem;
 `
+
+export default MainLayout

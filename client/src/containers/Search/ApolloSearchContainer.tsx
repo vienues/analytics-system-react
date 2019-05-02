@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { search, search_search, searchQuery, searchQueryVariables, searchVariables } from '../__generated__/types'
-import { AppQuery } from '../common/AppQuery'
-import SearchConnection from '../graphql/SearchConnection.graphql'
-import SimpleSearchConnection from '../graphql/SimpleSearchConnection.graphql'
+import { search, search_search, searchQuery, searchQueryVariables, searchVariables } from '../../__generated__/types'
+import apolloClient from '../../apollo/client'
+import { AppQuery } from '../../common/AppQuery'
+import { IApolloContainerProps } from '../../common/IApolloContainerProps'
+import SearchConnection from '../../graphql/SearchConnection.graphql'
+import SimpleSearchConnection from '../../graphql/SimpleSearchConnection.graphql'
+import { SearchInput } from './components'
 
-import { SearchBar } from './Search/components'
-
-import apolloClient from '../apollo/client'
-
-export interface IProps {
-  id: string
+export interface IProps extends IApolloContainerProps {
   url: RegExp
 }
 
 type Props = RouteComponentProps & IProps
 
-export const Search: React.FunctionComponent<Props> = (props: Props) => {
+export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Props) => {
   const [initialized, setInitialized] = useState(false)
   const [currentSymbol, setCurrentSymbol] = useState<search_search | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
@@ -71,19 +69,21 @@ export const Search: React.FunctionComponent<Props> = (props: Props) => {
   }
 
   return (
-    <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
-      {(data, __) => {
-        return (
-          <SearchBar
-            initialItem={currentSymbol ? currentSymbol : null}
-            items={data.search}
-            onChange={handleChange}
-            onTextChange={onTextChange}
-          />
-        )
-      }}
-    </AppQuery>
+    <div style={{ gridArea: props.gridArea }}>
+      <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
+        {(data, __) => {
+          return (
+            <SearchInput
+              initialItem={currentSymbol ? currentSymbol : null}
+              items={data.search}
+              onChange={handleChange}
+              onTextChange={onTextChange}
+            />
+          )
+        }}
+      </AppQuery>
+    </div>
   )
 }
 
-export default withRouter(Search)
+export default withRouter(ApolloSeachContainer)
