@@ -4,7 +4,6 @@ import { from, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
-import { openfinLink } from './openfinLink'
 
 const PORT = 4000
 
@@ -18,18 +17,14 @@ const links = [
       return kind === 'OperationDefinition' && operation === 'subscription'
     },
     new WebSocketLink({
-      uri: `ws://localhost:${PORT}/subscriptions`,
       options: {
         reconnect: true,
       },
+      uri: `ws://localhost:${PORT}/subscriptions`,
     }),
     new HttpLink({ uri: `http://localhost:${PORT}/graphql` }),
   ),
 ]
-
-if ((window as any).fin) {
-  links.unshift(openfinLink)
-}
 
 const client = new ApolloClient({
   cache,

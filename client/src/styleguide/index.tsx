@@ -6,8 +6,6 @@ import styled, { css } from 'styled-components'
 // @ts-ignore
 import * as AdaptiveCommon from '@adaptive-insights/common'
 
-export { ViewportFlex } from './ViewportRow'
-
 export const Background = styled(Rebass.Box)`
   color: ${({ theme }) => theme.core.textColor};
   background-image: linear-gradient(323deg, ${({ theme }) => theme.core.darkBackground});

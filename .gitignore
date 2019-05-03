@@ -32,3 +32,6 @@ requirements.lock
 /simulator
 client/src/__generated__/types.ts
 server/schema.graphql
+client/schema.json
+client/src/__generated__/types.ts
+client/src/schema.json

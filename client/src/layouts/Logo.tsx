@@ -1,5 +1,5 @@
 import React, { SVGAttributes } from 'react'
-import { styled } from '../../rt-theme'
+import { styled } from '../rt-theme'
 
 interface ILogoProps extends SVGAttributes<Element> {
   fill?: string

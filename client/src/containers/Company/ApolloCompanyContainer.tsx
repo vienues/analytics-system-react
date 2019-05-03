@@ -3,14 +3,14 @@ import React from 'react'
 import { ChildProps } from 'react-apollo'
 import { CompanyQuery, CompanyQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
+import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { Company, CompanyDetails } from './components'
 import CompanyConnection from './graphql/CompanyConnection.graphql'
 
-export interface IProps {
-  id: string
-}
-
-const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IProps, Response>> = props => {
+const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
+  id,
+  gridArea,
+}) => {
   const onCompanyQueryResults = (data: CompanyQuery): JSX.Element => {
     let retElement = <></>
     if (data.stock && data.stock.company) {
@@ -21,9 +21,11 @@ const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IProps, Respons
   }
 
   return (
-    <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id: props.id }}>
-      {onCompanyQueryResults}
-    </AppQuery>
+    <div style={{ gridArea }}>
+      <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id }}>
+        {onCompanyQueryResults}
+      </AppQuery>
+    </div>
   )
 }
 
