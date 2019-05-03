@@ -1,31 +1,43 @@
 import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { BrowserRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
-import { Company, History, News, Search, Stats } from './containers/'
+import { Company, History, News, Peers, Search, Stats } from './containers/'
 import GlobalScrollbarStyle from './layouts/GlobalScrollbarStyle'
 import MainLayout from './layouts/MainLayout'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
 
+interface IComponentWithProps {
+  [path: string]: {
+    component: React.ElementType
+    props?: {
+      [key: string]: any
+    }
+  }
+}
+
 class App extends React.Component {
+  /** Rather than lambda or binding individual generators in the Route we will generate them from object */
+  private static routerItems: IComponentWithProps = {
+    '/': { component: MainLayout },
+    '/company/:id?': { component: Company },
+    '/history/:id?': { component: History },
+    '/news/:id?': { component: News },
+    '/peers/:id?': { component: Peers },
+    '/search/:id?': { component: Search, props: { url: /search/ } },
+    '/stats/:id?': { component: Stats },
+    '/stock/:id': { component: MainLayout },
+  }
+
   constructor(props: any) {
     super(props)
-    this.renderMainLayout = this.renderMainLayout.bind(this)
-    this.renderSearchLayout = this.renderSearchLayout.bind(this)
-    this.renderStatsLayout = this.renderStatsLayout.bind(this)
+    this.renderRouterElement = this.renderRouterElement.bind(this)
   }
 
-  public renderMainLayout(e: RouteComponentProps): JSX.Element {
-    return <MainLayout id={(e.match.params as any).id} />
-  }
-
-  public renderStatsLayout(e: RouteComponentProps): JSX.Element {
-    return <Stats id={(e.match.params as any).id} />
-  }
-
-  public renderSearchLayout(e: RouteComponentProps): JSX.Element {
-    return <Search id={(e.match.params as any).id} url={/search/} />
+  public renderRouterElement(e: RouteComponentProps): JSX.Element {
+    const element = App.routerItems[e.match.path]
+    return React.createElement(element.component, { ...element.props, id: (e.match.params as any).id })
   }
 
   public render() {
@@ -37,14 +49,9 @@ class App extends React.Component {
           <GlobalScrollbarStyle />
           <BrowserRouter>
             <Switch>
-              <Route exact={true} path="/" component={MainLayout} />
-              <Route exact={true} path="/stock/:id" component={this.renderMainLayout} />
-              <Route exact={true} path="/news/:id?" component={News} />
-              <Route exact={true} path="/history/:id?" component={History} />
-              <Route exact={true} path="/stats/:id?" component={this.renderStatsLayout} />
-              <Route exact={true} path="/company/:id?" component={Company} />
-              <Route exact={true} path="/search/:id" component={this.renderSearchLayout} />
-              <Redirect exact={true} from="/" to="/stock/aapl" />
+              {Object.keys(App.routerItems).map(route => (
+                <Route key={route} exact={true} path={route} component={this.renderRouterElement} />
+              ))}
             </Switch>
           </BrowserRouter>
         </ThemeProvider>

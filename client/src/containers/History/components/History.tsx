@@ -92,7 +92,7 @@ export const History: React.FunctionComponent<IHistoryProps> = props => {
             interval="preserveStartEnd"
             axisLine={false}
           />
-          <ReferenceLine y={props.history.previousClose} {...lineProps} stroke="white" />
+          <ReferenceLine y={props.history.previousClose} {...lineProps} stroke="#444C5F" />
           {offset < 1 && <ReferenceLine y={0} stroke="white" strokeOpacity={0.3} strokeWidth={1} />}
           {[props.history.dataPoints[0], ...dataPoints].map(({ x }, i) => (
             <ReferenceLine key={i} x={x} {...lineProps} />

@@ -1,6 +1,5 @@
 import React from 'react'
 import * as Rebass from 'rebass'
-import { withProps } from 'recompose'
 import styled, { css } from 'styled-components'
 
 // @ts-ignore
@@ -24,8 +23,6 @@ export const Divider = styled((Rebass as any).Border).attrs({
 })`
   flex: 1 100%;
 `
-
-export const Gutter = withProps({ p: [1, 2] })(Rebass.Box as any)
 
 export const textProps = AdaptiveCommon.mapProps({
   caps: css`

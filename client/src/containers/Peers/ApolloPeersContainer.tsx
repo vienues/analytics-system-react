@@ -6,10 +6,7 @@ import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { Peers } from './components'
 import CompanyConnection from './graphql/PeersConnection.graphql'
 
-const ApolloPeersContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
-  id,
-  gridArea,
-}) => {
+const ApolloPeersContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onCompanyQueryResult = (data: PeersQuery): JSX.Element => {
     let peers = [] as string[]
     if (data.stock && data.stock.peers) {
@@ -19,11 +16,9 @@ const ApolloPeersContainer: React.FunctionComponent<ChildProps<IApolloContainerP
   }
 
   return (
-    <div style={{ gridArea }}>
-      <AppQuery<PeersQuery, PeersQueryVariables> query={CompanyConnection} variables={{ id }}>
-        {onCompanyQueryResult}
-      </AppQuery>
-    </div>
+    <AppQuery<PeersQuery, PeersQueryVariables> query={CompanyConnection} variables={{ id }}>
+      {onCompanyQueryResult}
+    </AppQuery>
   )
 }
 

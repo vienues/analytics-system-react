@@ -6,10 +6,7 @@ import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import StatsConnection from '../../graphql/StatsConnection.graphql'
 import { Stats } from './components'
 
-const ApolloStatsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
-  id,
-  gridArea,
-}) => {
+const ApolloStatsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onStatsQueryResults = (data: StatsQuery): JSX.Element => {
     if (data.stock && data.stock.stats && data.stock.quote) {
       return <Stats stock={data.stock} />
@@ -19,11 +16,9 @@ const ApolloStatsContainer: React.FunctionComponent<ChildProps<IApolloContainerP
   }
 
   return (
-    <div style={{ gridArea }}>
-      <AppQuery<StatsQuery, StatsQueryVariables> query={StatsConnection} variables={{ id }}>
-        {onStatsQueryResults}
-      </AppQuery>
-    </div>
+    <AppQuery<StatsQuery, StatsQueryVariables> query={StatsConnection} variables={{ id }}>
+      {onStatsQueryResults}
+    </AppQuery>
   )
 }
 

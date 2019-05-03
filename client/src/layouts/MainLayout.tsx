@@ -1,22 +1,18 @@
 import * as React from 'react'
 import styled from 'styled-components'
+import { IApolloContainerProps } from '../common/IApolloContainerProps'
 import { Company, History, News, Peers, Search, Stats, StockPrice } from '../containers/'
-import { Gutter } from '../styleguide'
 import AppBar from './AppBar'
 import Footer from './Footer'
 
-export interface IProps {
-  id: string
-}
-
-export const MainLayout: React.FunctionComponent<IProps> = ({ id }) => (
-  <React.StrictMode>
-    <AppLayoutRoot>
-      <AppBar />
-      <MainSearchContent>
-        <Search url={/stock/} id={id} />
-        <StockPrice id={id} />
-      </MainSearchContent>
+export const MainLayout: React.FunctionComponent<IApolloContainerProps> = ({ id }) => (
+  <AppLayoutRoot>
+    <AppBar />
+    <MainSearchContent>
+      <Search id={id} url={/stock/} />
+      <StockPrice id={id} />
+    </MainSearchContent>
+    {id ? (
       <ScrollableArea>
         <MainContent>
           <MainInnerContent>
@@ -29,11 +25,12 @@ export const MainLayout: React.FunctionComponent<IProps> = ({ id }) => (
             <Peers id={id} />
           </MainInnerContent>
         </MainContent>
-        <Gutter />
       </ScrollableArea>
-      <Footer />
-    </AppLayoutRoot>
-  </React.StrictMode>
+    ) : (
+      <div />
+    )}
+    <Footer />
+  </AppLayoutRoot>
 )
 
 const ContentBase = styled.div`
@@ -43,7 +40,7 @@ const ContentBase = styled.div`
 
 const MainContent = styled(ContentBase)`
   grid-template-columns: 4fr minmax(30rem, 1fr);
-  @media (max-width: 700px) {
+  @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
 `
@@ -54,8 +51,10 @@ const MainInnerContent = styled(ContentBase)`
 const MainSearchContent = styled(ContentBase)`
   grid-template-columns: 1fr;
   grid-auto-flow: column;
-  border-bottom: solid grey 1px;
-  padding: 5px @media (max-width: 700px) {
+  border-bottom: solid 1px ${({ theme }) => theme.secondary.base};
+  padding: 5px;
+  position: relative;
+  @media (max-width: 900px) {
     grid-auto-flow: row;
   }
 `
@@ -78,6 +77,7 @@ const ScrollableArea = styled.div`
   overflow-y: auto;
   flex: 1;
   padding: 1rem;
+  padding-bottom: 2rem;
 `
 
 export default MainLayout

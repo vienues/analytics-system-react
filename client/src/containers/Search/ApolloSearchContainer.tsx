@@ -10,7 +10,7 @@ import SimpleSearchConnection from '../../graphql/SimpleSearchConnection.graphql
 import { SearchInput } from './components'
 
 export interface IProps extends IApolloContainerProps {
-  url: RegExp
+  url?: RegExp
 }
 
 type Props = RouteComponentProps & IProps
@@ -69,20 +69,18 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
   }
 
   return (
-    <div style={{ gridArea: props.gridArea }}>
-      <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
-        {(data, __) => {
-          return (
-            <SearchInput
-              initialItem={currentSymbol ? currentSymbol : null}
-              items={data.search}
-              onChange={handleChange}
-              onTextChange={onTextChange}
-            />
-          )
-        }}
-      </AppQuery>
-    </div>
+    <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
+      {(data, __) => {
+        return (
+          <SearchInput
+            initialItem={currentSymbol ? currentSymbol : null}
+            items={data.search}
+            onChange={handleChange}
+            onTextChange={onTextChange}
+          />
+        )
+      }}
+    </AppQuery>
   )
 }
 

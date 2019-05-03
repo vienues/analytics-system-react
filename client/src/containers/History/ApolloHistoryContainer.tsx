@@ -9,7 +9,6 @@ import HistoryConnection from './graphql/HistoryConnection.graphql'
 
 export const ApolloHistoryContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
   id,
-  gridArea,
 }) => {
   const onHistoryQueryResults = (data: HistoryQuery): JSX.Element => {
     let retElement = <></>
@@ -32,11 +31,9 @@ export const ApolloHistoryContainer: React.FunctionComponent<ChildProps<IApolloC
   }
 
   return (
-    <div style={{ gridArea }}>
-      <AppQuery<HistoryQuery, HistoryQueryVariables> query={HistoryConnection} variables={{ id }}>
-        {onHistoryQueryResults}
-      </AppQuery>
-    </div>
+    <AppQuery<HistoryQuery, HistoryQueryVariables> query={HistoryConnection} variables={{ id }}>
+      {onHistoryQueryResults}
+    </AppQuery>
   )
 }
 

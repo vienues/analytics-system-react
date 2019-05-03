@@ -7,10 +7,7 @@ import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { Company, CompanyDetails } from './components'
 import CompanyConnection from './graphql/CompanyConnection.graphql'
 
-const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
-  id,
-  gridArea,
-}) => {
+const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onCompanyQueryResults = (data: CompanyQuery): JSX.Element => {
     let retElement = <></>
     if (data.stock && data.stock.company) {
@@ -21,11 +18,9 @@ const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IApolloContaine
   }
 
   return (
-    <div style={{ gridArea }}>
-      <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id }}>
-        {onCompanyQueryResults}
-      </AppQuery>
-    </div>
+    <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id }}>
+      {onCompanyQueryResults}
+    </AppQuery>
   )
 }
 

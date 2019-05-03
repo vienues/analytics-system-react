@@ -6,10 +6,7 @@ import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { News, NewsItem } from './components'
 import NewsConnection from './graphql/NewsConnection.graphql'
 
-const ApolloNewsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
-  id,
-  gridArea,
-}) => {
+const ApolloNewsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onNewsQueryResults = (data: NewsQuery): JSX.Element => {
     let news = [] as NewsItem[]
     if (data.news) {
@@ -19,11 +16,9 @@ const ApolloNewsContainer: React.FunctionComponent<ChildProps<IApolloContainerPr
   }
 
   return (
-    <div style={{ gridArea }}>
-      <AppQuery<NewsQuery, NewsQueryVariables> query={NewsConnection} variables={{ id }}>
-        {onNewsQueryResults}
-      </AppQuery>
-    </div>
+    <AppQuery<NewsQuery, NewsQueryVariables> query={NewsConnection} variables={{ id }}>
+      {onNewsQueryResults}
+    </AppQuery>
   )
 }
 

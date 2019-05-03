@@ -6,10 +6,7 @@ import { AdaptiveLoader } from '../../styleguide/AdaptiveLoader'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 
-const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({
-  id,
-  gridArea,
-}) => {
+const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onStockPriceSubscriptionSuccess = (results: SubscriptionResult<onStockPriceSubscription>): JSX.Element => {
     const { data, loading } = results
     if (loading) {
@@ -37,7 +34,7 @@ const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloConta
   }
 
   return (
-    <div style={{ gridArea, display: 'grid', justifyContent: 'end' }}>
+    <div style={{ display: 'grid', justifyContent: 'end' }}>
       <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
         subscription={StockPriceSubscription}
         variables={{ markets: [id] }}
