@@ -3,12 +3,10 @@ import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
 import { Company, History, News, Search, Stats } from './containers/'
-import MainLayout from './layouts/browser/MainLayout'
-import DesktopPanel from './layouts/desktop/DesktopPanel'
 import GlobalScrollbarStyle from './layouts/GlobalScrollbarStyle'
+import MainLayout from './layouts/MainLayout'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
-import { Background } from './styleguide'
 
 class App extends React.Component {
   constructor(props: any) {
@@ -27,19 +25,14 @@ class App extends React.Component {
   }
 
   public renderSearchLayout(e: RouteComponentProps): JSX.Element {
-    return (
-      <DesktopPanel id={(e.match.params as any).id} bg={false} heading={'Search'}>
-        <Background>
-          <Search id={(e.match.params as any).id} url={/search/} />
-        </Background>
-      </DesktopPanel>
-    )
+    return <Search id={(e.match.params as any).id} url={/search/} />
   }
 
   public render() {
     return (
       <ApolloProvider client={apolloClient}>
         <GlobalStyle />
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
         <ThemeProvider>
           <GlobalScrollbarStyle />
           <BrowserRouter>

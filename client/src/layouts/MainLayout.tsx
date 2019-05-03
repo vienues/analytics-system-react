@@ -1,11 +1,9 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { Search, StockPrice } from '../../containers/'
-import { Gutter } from '../../styleguide'
+import { Company, History, News, Peers, Search, Stats, StockPrice } from '../containers/'
+import { Gutter } from '../styleguide'
 import AppBar from './AppBar'
 import Footer from './Footer'
-
-import { Company, History, News, Peers, Stats } from '../../containers/'
 
 export interface IProps {
   id: string
@@ -15,15 +13,21 @@ export const MainLayout: React.FunctionComponent<IProps> = ({ id }) => (
   <React.StrictMode>
     <AppLayoutRoot>
       <AppBar />
+      <MainSearchContent>
+        <Search url={/stock/} id={id} />
+        <StockPrice id={id} />
+      </MainSearchContent>
       <ScrollableArea>
         <MainContent>
-          <Search gridArea="search" url={/stock/} id={id} />
-          <StockPrice gridArea="stockprice" id={id} />
-          <History gridArea="history" id={id} />
-          <News gridArea="news" id={id} />
-          <Stats gridArea="stats" id={id} />
-          <Company gridArea="company" id={id} />
-          <Peers gridArea="peers" id={id} />
+          <MainInnerContent>
+            <History id={id} />
+            <Stats id={id} />
+          </MainInnerContent>
+          <MainInnerContent>
+            <News id={id} />
+            <Company id={id} />
+            <Peers id={id} />
+          </MainInnerContent>
         </MainContent>
         <Gutter />
       </ScrollableArea>
@@ -31,25 +35,28 @@ export const MainLayout: React.FunctionComponent<IProps> = ({ id }) => (
     </AppLayoutRoot>
   </React.StrictMode>
 )
-const MainContent = styled.div`
+
+const ContentBase = styled.div`
   display: grid;
   grid-gap: 1em;
+`
+
+const MainContent = styled(ContentBase)`
   grid-template-columns: 4fr minmax(30rem, 1fr);
-  grid-template-areas:
-    'search stockprice'
-    'history news'
-    'stats company'
-    'stats peers';
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
-    grid-template-areas:
-      'search'
-      'stockprice'
-      'history'
-      'stats'
-      'news'
-      'company'
-      'peers';
+  }
+`
+const MainInnerContent = styled(ContentBase)`
+  align-content: start;
+`
+
+const MainSearchContent = styled(ContentBase)`
+  grid-template-columns: 1fr;
+  grid-auto-flow: column;
+  border-bottom: solid grey 1px;
+  padding: 5px @media (max-width: 700px) {
+    grid-auto-flow: row;
   }
 `
 
@@ -61,7 +68,7 @@ const AppLayoutRoot = styled.div`
   overflow: hidden;
 
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
   background-color: ${({ theme }) => theme.core.darkBackground};
   color: ${({ theme }) => theme.core.textColor};
 `

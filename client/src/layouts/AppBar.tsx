@@ -1,5 +1,5 @@
 import React from 'react'
-import { styled, ThemeName, useTheme } from '../../rt-theme'
+import { styled, ThemeName, useTheme } from '../rt-theme'
 
 import Logo from './Logo'
 

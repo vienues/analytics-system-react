@@ -45,9 +45,9 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = props => {
 }
 
 const Layout = styled.div`
-  display: grid
-  grid-template-columns: 3fr 4fr 1fr 2fr 2fr
-  grid-gap:0.5em
+  display: grid;
+  grid-template-columns: 3fr 4fr 1fr 2fr 2fr;
+  grid-gap:0.5em;
   grid-template-areas:
     "symbol latest-price icon change change-percent";
   & > div {
@@ -57,6 +57,13 @@ const Layout = styled.div`
       }
       return 1
     }}rem; }
+    line-height: ${props => {
+      if (props && props.style) {
+        return props.style.fontSize || 1
+      }
+      return 1
+    }}rem; }
+  
 `
 
 export default StockPrice

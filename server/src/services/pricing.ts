@@ -29,8 +29,12 @@ export default function(pubsub: PubSub) {
   const executor = async () => {
     const prices = await getPricing(Object.keys(MarketSubscriptions))
     Object.values(prices).forEach(price => {
-      console.log(`publishing ${createTopic(price.quote.symbol)}`)
-      pubsub.publish(createTopic(price.quote.symbol), price.quote)
+      if (price.quote) {
+        console.log(`publishing ${createTopic(price.quote.symbol)}`)
+        pubsub.publish(createTopic(price.quote.symbol), price.quote)
+      } else {
+        console.error(`Pricing error happened, price exists but Quote does not on object ${JSON.stringify(price)}`)
+      }
     })
     timer = setTimeout(executor, TICK_INTERVAL)
   }
