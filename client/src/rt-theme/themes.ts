@@ -1,10 +1,9 @@
-import { mapValues } from 'lodash'
 import { darken } from 'polished'
 import { keyframes } from 'styled-components'
 
 import { AccentName, AccentPaletteMap, Color, colors, CorePalette, ICorePaletteMap, template } from './colors'
 
-interface BaseTheme {
+interface IBaseTheme {
   white: Color
   black: Color
   transparent: Color
@@ -14,15 +13,15 @@ interface BaseTheme {
   accents: AccentPaletteMap
   colors: typeof colors
 
-  motion: Motion & {
-    fast: Motion
-    normal: Motion
-    slow: Motion
+  motion: IMotion & {
+    fast: IMotion
+    normal: IMotion
+    slow: IMotion
   }
 
-  shell: ColorPair
+  shell: IColorPair
 
-  overlay: ColorPair
+  overlay: IColorPair
 
   button: TouchableStyleSet
 
@@ -35,31 +34,31 @@ interface BaseTheme {
 }
 
 type GeneratedTheme = ReturnType<typeof createTheme>
-export type Theme = BaseTheme & GeneratedTheme
+export type Theme = IBaseTheme & GeneratedTheme
 
-interface Touchable {
+interface ITouchable {
   backgroundColor: Color
   textColor: Color
 
-  active: ColorPair
-  disabled: ColorPair
+  active: IColorPair
+  disabled: IColorPair
 }
 export type TouchableIntentName = AccentName | 'primary' | 'secondary' | 'mute'
-type TouchableStyleSet = { [style in TouchableIntentName]: Touchable }
+type TouchableStyleSet = { [style in TouchableIntentName]: ITouchable }
 
-interface Motion {
+interface IMotion {
   duration: number
   easing: string
 }
 
-interface ColorPair {
+interface IColorPair {
   backgroundColor: string
   textColor?: string
 }
 
 export type ThemeSelector = (theme: Theme) => Color
 
-export interface ColorProps {
+export interface IColorProps {
   bg?: ThemeSelector
   fg?: ThemeSelector
 }
@@ -71,19 +70,20 @@ export const getThemeColor = (theme: Theme, color: Color | ThemeSelector, fallba
   typeof color === 'function' ? color(theme) || fallback : isColor(color) ? color : fallback
 
 const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: AccentPaletteMap) => ({
-  template,
   core,
-  white: colors.static.white,
+  template,
+
   black: colors.static.black,
   transparent: colors.static.transparent,
+  white: colors.static.white,
 
   backgroundColor: core.darkBackground,
   textColor: core.textColor,
 
-  primary,
-  secondary,
   accents,
   colors,
+  primary,
+  secondary,
 
   motion: {
     duration: 16 * 16,
@@ -162,18 +162,19 @@ const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: Acc
         backgroundColor: secondary[4],
       },
     },
-
-    ...mapValues(accents, ({ base, darker, lighter }) => ({
-      backgroundColor: base,
-      textColor: colors.light.primary.base,
-
-      active: {
-        backgroundColor: darker,
-      },
-      disabled: {
-        backgroundColor: lighter,
-      },
-    })),
+    ...Object.entries(accents).reduce((a, [key, { base, darker, lighter }]) => {
+      a[key] = {
+        active: {
+          backgroundColor: darker,
+        },
+        backgroundColor: base,
+        disabled: {
+          backgroundColor: lighter,
+        },
+        textColor: colors.light.primary.base,
+      }
+      return a
+    }, {}),
   } as TouchableStyleSet,
 })
 
@@ -183,6 +184,6 @@ const darkTheme = createTheme(colors.dark, colors.accents)
 darkTheme.button.secondary.textColor = darkTheme.primary.base
 
 export const themes = {
-  light: lightTheme,
   dark: darkTheme,
+  light: lightTheme,
 }

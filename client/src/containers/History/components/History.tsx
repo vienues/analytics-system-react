@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import numeral from 'numeral'
 import React, { useEffect, useState } from 'react'
 import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
@@ -66,8 +65,20 @@ export const History: React.FunctionComponent<IHistoryProps> = props => {
   const offset = getLinearGradientOffset(props.history.dataPoints, props.history.previousClose)
   const lineProps = { strokeDasharray: '4 3', stroke: '#444C5F', strokeOpacity: 0.9, strokeWidth: 0.8 }
   const dataPoints = getDataPoint(props.history.dataPoints)
-  const { low } = (_.minBy(props.history.dataPoints, 'y') || {}) as any
-  const { high } = (_.maxBy(props.history.dataPoints, 'y') || {}) as any
+  const { low, high } = props.history.dataPoints
+    .map(point => parseFloat(point.y))
+    .reduce(
+      (result, value) => {
+        if (value > result.high) {
+          result.high = value
+        }
+        if (value < result.low) {
+          result.low = value
+        }
+        return result
+      },
+      { high: -Infinity, low: +Infinity },
+    )
   return (
     <AnalyticsLineChartStyle>
       <ResponsiveContainer width="99%" maxHeight={300} minHeight={200}>

@@ -2,7 +2,7 @@ import React from 'react'
 import { ChildProps, Subscription, SubscriptionProps, SubscriptionResult } from 'react-apollo'
 import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../../__generated__/types'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import { AdaptiveLoader } from '../../rt-theme/AdaptiveLoader'
+import AdaptiveLoader from '../../rt-theme/AdaptiveLoader'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 

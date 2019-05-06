@@ -143,11 +143,11 @@ export interface ICorePaletteMap {
 export const light: ICorePaletteMap = {
   core: {
     alternateBackground: blue.L8,
+    backgroundHoverColor: WHITE,
     darkBackground: blue.L95,
     lightBackground: WHITE,
     offBackground: blue.L9,
     textColor: DARKGREY,
-    backgroundHoverColor: WHITE,
   },
   primary: {
     base: WHITE,
@@ -166,6 +166,14 @@ export const light: ICorePaletteMap = {
 }
 
 export const dark: ICorePaletteMap = {
+  core: {
+    alternateBackground: offblack.D1,
+    backgroundHoverColor: offblack.D1,
+    darkBackground: offblack.D4,
+    lightBackground: offblack.D3,
+    offBackground: offblack.base,
+    textColor: WHITE,
+  },
   primary: {
     base: offblack.D3,
     1: offblack.D4,
@@ -180,14 +188,6 @@ export const dark: ICorePaletteMap = {
     3: blue.L8,
     4: blue.L5,
   },
-  core: {
-    lightBackground: offblack.D3,
-    darkBackground: offblack.D4,
-    alternateBackground: offblack.D1,
-    offBackground: offblack.base,
-    textColor: WHITE,
-    backgroundHoverColor: offblack.D1,
-  },
 }
 
 /*--------------------------- 2.3 Accent palettes ----------------------------*/
@@ -195,7 +195,7 @@ export const dark: ICorePaletteMap = {
 /**
  * A theme agnostic palette consisting of a `base` and 2 variants
  */
-interface AccentPalette extends IBasePalette {
+interface IAccentPalette extends IBasePalette {
   darker: Color
   lighter: Color
 }
@@ -204,19 +204,9 @@ export type AccentName = 'dominant' | 'good' | 'aware' | 'bad'
 /**
  * A set of theme-agnostic palettes
  */
-export type AccentPaletteMap = { [accent in AccentName]: AccentPalette }
+export type AccentPaletteMap = { [accent in AccentName]: IAccentPalette }
 
 const accents: AccentPaletteMap = {
-  dominant: {
-    base: blue.base,
-    darker: blue.D2,
-    lighter: blue.L5,
-  },
-  good: {
-    base: green.base,
-    darker: green.D1,
-    lighter: green.L5,
-  },
   aware: {
     base: yellow.base,
     darker: yellow.D1,
@@ -227,23 +217,33 @@ const accents: AccentPaletteMap = {
     darker: red.D1,
     lighter: red.L5,
   },
+  dominant: {
+    base: blue.base,
+    darker: blue.D2,
+    lighter: blue.L5,
+  },
+  good: {
+    base: green.base,
+    darker: green.D1,
+    lighter: green.L5,
+  },
 }
 
 const spectrum = {
-  offblack,
-  brand,
-  red,
-  green,
-  yellow,
   blue,
+  brand,
+  green,
+  offblack,
+  red,
+  yellow,
 }
 
 export const colors = {
-  static: { white: WHITE, black: BLACK, transparent: TRANSPARENT },
-  spectrum,
   accents,
-  light,
   dark,
+  light,
+  spectrum,
+  static: { white: WHITE, black: BLACK, transparent: TRANSPARENT },
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -260,16 +260,16 @@ function createPalette(
 ): ColorPalette {
   return {
     // Light shades
-    L95: mix(0.95, whitePoint, base),
-    L9: mix(9 / 10, whitePoint, base),
-    L8: mix(8 / 10, whitePoint, base),
-    L7: mix(7 / 10, whitePoint, base),
-    L6: mix(6 / 10, whitePoint, base),
-    L5: mix(5 / 10, whitePoint, base),
-    L4: mix(4 / 10, whitePoint, base),
-    L3: mix(3 / 10, whitePoint, base),
-    L2: mix(2 / 10, whitePoint, base),
     L1: mix(1 / 10, whitePoint, base),
+    L2: mix(2 / 10, whitePoint, base),
+    L3: mix(3 / 10, whitePoint, base),
+    L4: mix(4 / 10, whitePoint, base),
+    L5: mix(5 / 10, whitePoint, base),
+    L6: mix(6 / 10, whitePoint, base),
+    L7: mix(7 / 10, whitePoint, base),
+    L8: mix(8 / 10, whitePoint, base),
+    L9: mix(9 / 10, whitePoint, base),
+    L95: mix(0.95, whitePoint, base),
 
     base,
 

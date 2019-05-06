@@ -12,10 +12,10 @@ import baseStyled, { ThemedStyledInterface } from 'styled-components'
 export const styled: ThemedStyledInterface<Theme> = baseStyled
 
 export { ThemeName, ThemeProvider, ThemeConsumer, useTheme } from './ThemeContext'
-import { ColorProps, getThemeColor, Theme, themes, ThemeSelector, TouchableIntentName } from './themes'
+import { getThemeColor, IColorProps, Theme, themes, ThemeSelector, TouchableIntentName } from './themes'
 export type Theme = Theme
 export type TouchableIntentName = TouchableIntentName
-export type ColorProps = ColorProps
+export type ColorProps = IColorProps
 export type ThemeSelector = ThemeSelector
 export { themes, getThemeColor }
 export { default as ThemeStorageSwitch } from './ThemeStorageSwitch'
