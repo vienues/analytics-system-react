@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnalyticsStyle, Header, Title } from '../../../rt-theme/analyticsStyle'
-import { Caption, HyperLinkedBlockLink, Lead, Text } from '../../../styleguide'
+import { Caption } from '../../../common/StyledComponents'
 
 const URL = /(http(s)?:\/\/)?/
 
@@ -22,13 +22,13 @@ const Company: React.FunctionComponent<ICompanyProps> = props => {
       <Header>
         <Title>Company Overview</Title>
       </Header>
-      <Lead>
+      <span>
         {name} ({symbol})
-      </Lead>
-      <HyperLinkedBlockLink target="_blank" href={website} f={1} color="offwhite50" mt={1}>
+      </span>
+      <a target="_blank" href={website} color="offwhite50">
         <Caption>{website.replace(URL, '')}</Caption>
-      </HyperLinkedBlockLink>
-      <Text>{description}</Text>
+      </a>
+      <span>{description}</span>
     </AnalyticsStyle>
   )
 }

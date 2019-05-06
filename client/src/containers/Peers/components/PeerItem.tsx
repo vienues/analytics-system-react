@@ -1,14 +1,13 @@
 import React from 'react'
-import { HyperLinkedBlockLink } from '../../../styleguide'
 
 interface IPeerData {
   symbol: string
 }
 
 const PeerItem: React.FunctionComponent<IPeerData> = props => (
-  <HyperLinkedBlockLink key={props.symbol} href={`/stock/${props.symbol}`} pr={1}>
+  <a key={props.symbol} href={`/stock/${props.symbol}`}>
     {props.symbol}
-  </HyperLinkedBlockLink>
+  </a>
 )
 
 export default PeerItem

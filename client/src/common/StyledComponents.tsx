@@ -1,101 +1,33 @@
-import React from 'react'
-import * as Rebass from 'rebass'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 // @ts-ignore
 import * as AdaptiveCommon from '@adaptive-insights/common'
 
-export const Background = styled(Rebass.Box)`
-  color: ${({ theme }) => theme.core.textColor};
-  background-image: linear-gradient(323deg, ${({ theme }) => theme.core.darkBackground});
-`
-
-export const Root = (Background.withComponent(Rebass.Flex) as any).extend`
-  height: 100%;
-  width: 100%;
-`
-
-export const Divider = styled((Rebass as any).Border).attrs({
-  borderWidth: 1,
-  color: (props: any) => (props.soft ? 'offwhite50' : 'accent'),
-  my: 2,
-  top: true,
-})`
-  flex: 1 100%;
-`
-
-export const textProps = AdaptiveCommon.mapProps({
-  caps: css`
-    text-transform: uppercase;
-    letter-spacing: 0.0625rem;
-  `,
-  display: {
-    inline: css`
-      display: inline;
-    `,
-  },
-  fontStyle: {
-    italic: css`
-      font-style: italic;
-    `,
-  },
-  lineHeight: (lineHeight: any) =>
-    css`
-      line-height: ${lineHeight};
-    `,
-  weight: {
-    bold: css`
-      font-weight: 600;
-    `,
-    default: (weight: any) => css`
-      font-weight: ${weight};
-    `,
-    light: css`
-      font-weight: 200;
-    `,
-    regular: css`
-      font-weight: 300;
-    `,
-  },
-})
-
-export const Text = styled(Rebass.Text).attrs({ is: 'div' })`
-  ${textProps};
+export const Text = styled.div`
   font-weight: 300;
 `
-export const Heading = styled(Rebass.Heading)`
-  ${textProps};
-`
-export const Lead = styled((Rebass as any).Lead)`
-  ${textProps};
-  color: ${props => props.theme.colors.offwhite};
-`
-export const Small = styled((Rebass as any).Small)`
-  ${textProps};
+export const Small = styled(Text)`
   color: ${props => props.theme.colors[props.color || 'white']};
 `
-export const Label = styled(Rebass.Text)`
-  ${textProps};
+export const Label = styled(Text)`
   opacity: 0.59;
   font-size: smaller;
 `
-export const Caption = styled((Rebass as any).Small)`
-  ${textProps};
+export const Caption = styled.span`
   color: ${props => props.theme.colors[props.color || 'white']};
   opacity: 0.59;
   display: block;
   line-height: 1rem;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
+  font-size: 0.75rem;
 `
 
 export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
-  ${textProps};
   display: block;
 `
 
-export const HyperLinkedLead = styled((Rebass as any).Small)`
-  ${textProps};
+export const HyperLinkedLead = styled.span`
   color: ${props => props.theme.colors[props.color || 'white']};
   &:hover {
     color: ${(props: any) => props.theme.colors.gold};
@@ -103,7 +35,6 @@ export const HyperLinkedLead = styled((Rebass as any).Small)`
   font-weight: 300;
 `
 export const HyperLinkedBlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
-  ${textProps};
   display: block;
   &:hover {
     color: ${(props: any) => props.theme.colors.gold};
@@ -147,26 +78,6 @@ export const VerticalSeperator = styled.div`
   margin-left: 0.25rem;
   margin-right: 0.25rem;
   opacity: 0.85;
-`
-
-const VerticalRule = ({ className }: any) => (
-  <svg className={className} width="8" height="12" viewBox="0 0 8 20" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M4,4 L4,24"
-      stroke="#fff"
-      strokeWidth="2"
-      fill="none"
-      fillRule="evenodd"
-      opacity=".5"
-      strokeLinecap="square"
-    />
-  </svg>
-)
-
-export const VerticalRuleStyled = styled(VerticalRule)`
-  > path {
-    stroke: ${({ color, theme }: any) => theme.colors[color]};
-  }
 `
 
 export const AnalyticsLineChartStyle = styled.div`

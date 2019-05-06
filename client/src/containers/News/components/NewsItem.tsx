@@ -1,7 +1,6 @@
 import moment from 'moment/moment'
 import React from 'react'
-import { Box } from 'rebass'
-import { Caption, HyperLinkedLead } from '../../../styleguide'
+import { Caption, HyperLinkedLead } from '../../../common/StyledComponents'
 
 export interface INewsItem {
   id: string
@@ -12,14 +11,14 @@ export interface INewsItem {
 }
 
 const NewsItem: React.FunctionComponent<INewsItem> = (newsItemProps: INewsItem) => (
-  <Box key={newsItemProps.id} is="a" target="_blank" href={newsItemProps.url}>
+  <a key={newsItemProps.id} is="a" target="_blank" href={newsItemProps.url}>
     <div style={{ marginBottom: '20px' }}>
-      <HyperLinkedLead f={1}>{newsItemProps.headline}</HyperLinkedLead>
+      <HyperLinkedLead>{newsItemProps.headline}</HyperLinkedLead>
       <Caption>
         {moment(newsItemProps.datetime).fromNow()} - {newsItemProps.source}
       </Caption>
     </div>
-  </Box>
+  </a>
 )
 
 export default NewsItem

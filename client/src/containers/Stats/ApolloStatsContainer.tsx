@@ -3,8 +3,8 @@ import { ChildProps } from 'react-apollo'
 import { StatsQuery, StatsQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import StatsConnection from '../../graphql/StatsConnection.graphql'
 import { Stats } from './components'
+import StatsConnection from './graphql/StatsConnection.graphql'
 
 const ApolloStatsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onStatsQueryResults = (data: StatsQuery): JSX.Element => {

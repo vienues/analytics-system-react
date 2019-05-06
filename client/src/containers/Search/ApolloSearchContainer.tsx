@@ -44,17 +44,6 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
 
   const onSymbolChanged = (id: string) => {
     props.history.push(`${props.url}${id}`)
-    if ((window as any).fin) {
-      ;(window as any).fin.desktop.InterApplicationBus.publish('SYMBOL.CHANGE', {
-        data: {
-          selection: {
-            __typename: 'Selection',
-            id,
-            symbol: id,
-          },
-        },
-      })
-    }
   }
 
   const onTextChange = (text: string) => {

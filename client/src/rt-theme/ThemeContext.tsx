@@ -1,76 +1,65 @@
-import React, { useContext } from 'react'
-import { themes } from './themes'
+import React, { useContext, useEffect, useState } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import { themes } from './themes'
 
 export enum ThemeName {
   Light = 'light',
   Dark = 'dark',
 }
 
-interface Props {
-  storage: typeof localStorage | typeof sessionStorage
+interface IProps {
+  storage?: typeof localStorage | typeof sessionStorage
 }
 
-interface State {
-  themeName: ThemeName
-}
-
-interface ContextValue {
+interface IContextValue {
   themeName?: string
   setTheme: (selector: { themeName: ThemeName }) => void
 }
 
-const ThemeContext = React.createContext<ContextValue>({
-  setTheme: () => console.warn('Missing StorageThemeProvider'),
+const ThemeContext = React.createContext<IContextValue>({
+  setTheme: () => null,
 })
 
 const STORAGE_KEY = 'themeName'
 
-class ThemeStorageProvider extends React.Component<Props, State> {
-  static defaultProps = {
-    storage: localStorage,
-  }
+const ThemeStorageProvider: React.FunctionComponent<IProps> = props => {
+  const [initialized, setInitialized] = useState(false)
+  const [themeName, setThemeName] = useState<ThemeName>(ThemeName.Dark)
 
-  state = {
-    themeName: ThemeName.Dark,
-  }
+  const storage = props.storage || localStorage
 
-  componentDidMount = () => {
-    this.setThemeFromStorage()
-    window.addEventListener('storage', this.setThemeFromStorage)
-  }
-
-  componentWillUnmount = () => {
-    window.removeEventListener('storage', this.setThemeFromStorage)
-  }
-
-  setThemeFromStorage = (event?: StorageEvent) => {
-    const { storage } = this.props
-
+  const setThemeFromStorage = (event?: StorageEvent) => {
     if (event == null || event.key === STORAGE_KEY) {
-      const themeName = storage.getItem(STORAGE_KEY) as ThemeName
-
-      if (themeName && themes[themeName] != null) {
-        this.setTheme({ themeName })
+      const storedThemeName = storage.getItem(STORAGE_KEY) as ThemeName
+      if (storedThemeName && themes[storedThemeName] != null) {
+        setTheme({ themeName: storedThemeName })
       }
     }
   }
 
-  setTheme = ({ themeName }: State) => {
-    if (themeName !== this.state.themeName) {
-      this.setState({ themeName }, () => this.props.storage.setItem(STORAGE_KEY, themeName))
+  const setTheme: (selector: { themeName: ThemeName }) => void = selector => {
+    if (selector.themeName !== themeName) {
+      setThemeName(selector.themeName)
+      storage.setItem(STORAGE_KEY, selector.themeName)
     }
   }
 
-  render() {
-    return (
-      <ThemeContext.Provider value={{ themeName: this.state.themeName, setTheme: this.setTheme }}>
-        <StyledThemeProvider theme={themes[this.state.themeName]}>
-          <>{this.props.children}</>
-        </StyledThemeProvider>
-      </ThemeContext.Provider>
-    )
-  }
+  useEffect(() => {
+    if (!initialized) {
+      setInitialized(true)
+      setThemeFromStorage()
+      window.addEventListener('storage', setThemeFromStorage)
+    }
+    return () => window.removeEventListener('storage', setThemeFromStorage)
+  })
+
+  return (
+    <ThemeContext.Provider value={{ themeName, setTheme }}>
+      <StyledThemeProvider theme={themes[themeName]}>
+        <>{props.children}</>
+      </StyledThemeProvider>
+    </ThemeContext.Provider>
+  )
 }
 
 export const useTheme = () => {

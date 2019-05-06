@@ -1,17 +1,7 @@
-import { memoize } from 'lodash'
 import { rgba } from 'polished'
-import React, { Component } from 'react'
+import React, { useMemo } from 'react'
 import { createGlobalStyle, withTheme } from 'styled-components'
 import { Theme } from '../rt-theme'
-
-export const css = memoize(
-  color => `
-    body ::-webkit-scrollbar-thumb {
-      background-color: ${color};
-    }
-`,
-  color => color,
-)
 
 const ScrollbarGlobal = createGlobalStyle`
 body, #root {
@@ -43,15 +33,20 @@ body .ag-body ::-webkit-scrollbar {
 }
 `
 
-export class GlobalScrollbarStyle extends Component<{ theme: Theme }> {
-  public render() {
-    return (
-      <React.Fragment>
-        <ScrollbarGlobal />
-        <style>{css(rgba(this.props.theme.secondary[3], 0.2))}</style>
-      </React.Fragment>
-    )
+const GlobalScrollbarStyle: React.FunctionComponent<{ theme: Theme }> = props => {
+  const getCss: (color: string) => string = color => `
+  body ::-webkit-scrollbar-thumb {
+    background-color: ${color};
   }
+`
+  const css = useMemo(() => getCss(rgba(props.theme.secondary[3], 0.2)), [rgba(props.theme.secondary[3], 0.2)])
+
+  return (
+    <React.Fragment>
+      <ScrollbarGlobal />
+      <style>{css}</style>
+    </React.Fragment>
+  )
 }
 
 export default withTheme(GlobalScrollbarStyle)

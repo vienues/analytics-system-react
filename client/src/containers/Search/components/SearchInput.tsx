@@ -1,3 +1,5 @@
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Downshift from 'downshift'
 import React from 'react'
 import styled from 'styled-components'
@@ -8,6 +10,17 @@ export interface ISearchBarProps {
   initialItem: search_search | null
   onChange: (symbol: search_search | null) => void
   onTextChange: (text: string) => void
+}
+
+const ClearSearch: React.FunctionComponent<{ clearFunction: () => void }> = props => {
+  const clearClick = (e: any) => {
+    props.clearFunction()
+  }
+  return (
+    <div style={{ cursor: 'pointer' }} onClick={clearClick}>
+      <FontAwesomeIcon icon={faTimes} />
+    </div>
+  )
 }
 
 class SearchInput extends React.Component<ISearchBarProps, {}> {
@@ -27,26 +40,19 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
         selectedItem={this.props.initialItem}
         onChange={this.props.onChange}
         itemToString={this.searchResultToOptionString}
+        defaultHighlightedIndex={0}
       >
-        {({
-          getInputProps,
-          getItemProps,
-          getLabelProps,
-          getMenuProps,
-          isOpen,
-          inputValue,
-          highlightedIndex,
-          selectedItem,
-        }) => {
+        {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, clearSelection }) => {
           this.props.onTextChange(inputValue || '')
           return (
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto' }}>
               <input
                 {...getInputProps({ placeholder: 'Enter a stock or symbol...' })}
                 onClick={this.inputFocus}
                 onFocus={this.inputFocus}
                 style={{ fontSize: '2rem', width: '100%' }}
               />
+              <ClearSearch clearFunction={clearSelection} />
               {isOpen ? (
                 <SearchResults {...getMenuProps()}>
                   {this.renderItems(this.props.items, inputValue, getItemProps)}

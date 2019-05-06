@@ -1,6 +1,6 @@
+import { mapValues } from 'lodash'
 import { darken } from 'polished'
 import { keyframes } from 'styled-components'
-import { mapValues } from 'lodash'
 
 import { AccentName, AccentPaletteMap, Color, colors, CorePalette, ICorePaletteMap, template } from './colors'
 

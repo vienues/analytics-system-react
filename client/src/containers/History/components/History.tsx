@@ -2,7 +2,12 @@ import _ from 'lodash'
 import numeral from 'numeral'
 import React, { useEffect, useState } from 'react'
 import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { AnalyticsLineChartStyle, ToolTipChildLeft, ToolTipChildRight, ToolTipStyle } from '../../../styleguide'
+import {
+  AnalyticsLineChartStyle,
+  ToolTipChildLeft,
+  ToolTipChildRight,
+  ToolTipStyle,
+} from '../../../common/StyledComponents'
 
 interface IHistoryData {
   previousClose: number

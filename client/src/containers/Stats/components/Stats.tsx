@@ -1,10 +1,9 @@
 import numeral from 'numeral'
 import * as React from 'react'
-import { Box, Flex } from 'rebass'
 import styled from 'styled-components'
 import { StatsQuery_stock } from '../../../__generated__/types'
+import { Label } from '../../../common/StyledComponents'
 import { AnalyticsStyle, Header, Title } from '../../../rt-theme/analyticsStyle'
-import { Label } from '../../../styleguide'
 
 export interface IProps {
   stock: StatsQuery_stock
@@ -18,10 +17,10 @@ const formats = {
 }
 
 const NewFieldRow = styled.div`
-  min-height: 2rem
+  min-height: 1.5rem
   border-bottom: 1px ${({ theme }) => theme.core.textColor} solid
   display: grid
-  grid-template-columns: 
+  grid-template-columns: 1fr auto
 `
 
 const format = (toFormat: string) => (val: any) => numeral(val).format(formats[toFormat] || toFormat)
@@ -29,12 +28,8 @@ const format = (toFormat: string) => (val: any) => numeral(val).format(formats[t
 const FieldRow = ({ label, children, dataFormat }: any) => {
   return (
     <NewFieldRow>
-      <Flex flex={1} pt={1}>
-        <Flex flex={['auto']}>
-          <Label>{label}</Label>
-        </Flex>
-        <Box color="offwhite">{dataFormat ? format(dataFormat)(children) : children}</Box>
-      </Flex>
+      <Label>{label}</Label>
+      <span color="offwhite">{dataFormat ? format(dataFormat)(children) : children}</span>
     </NewFieldRow>
   )
 }

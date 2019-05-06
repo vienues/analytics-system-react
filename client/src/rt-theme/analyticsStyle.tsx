@@ -13,7 +13,7 @@ export const AnalyticsStyle = styled.div`
   padding: 1rem;
   font-size: 1rem;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 10px;
   /* axis */
   .nvd3 .nv-axis path,

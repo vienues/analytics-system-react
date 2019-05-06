@@ -1,3 +1,6 @@
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
+import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
 import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
@@ -7,6 +10,8 @@ import GlobalScrollbarStyle from './layouts/GlobalScrollbarStyle'
 import MainLayout from './layouts/MainLayout'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
+
+library.add(faLightbulb, farLightBulb)
 
 interface IComponentWithProps {
   [path: string]: {
@@ -44,7 +49,6 @@ class App extends React.Component {
     return (
       <ApolloProvider client={apolloClient}>
         <GlobalStyle />
-        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
         <ThemeProvider>
           <GlobalScrollbarStyle />
           <BrowserRouter>

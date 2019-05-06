@@ -2,8 +2,8 @@ import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import styled from 'styled-components'
+import { Label } from '../../../common/StyledComponents'
 import { colors } from '../../../rt-theme'
-import { Label } from '../../../styleguide'
 
 export interface IStockPriceData {
   change: number
