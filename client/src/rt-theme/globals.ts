@@ -85,4 +85,18 @@ export default createGlobalStyle`
   html {
     overflow-y: initial;
   } 
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  a.visited {
+    text-decoration: none;
+  }
+  
+  svg {
+    display: inline-block;
+    overflow: visible;
+  }
 `

@@ -3,7 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { StatsQuery_stock } from '../../../__generated__/types'
 import { Label } from '../../../common/StyledComponents'
-import { AnalyticsStyle, Header, Title } from '../../../rt-theme/analyticsStyle'
+import { DataCard, Header, Title } from '../../../common/StyledComponents'
 
 export interface IProps {
   stock: StatsQuery_stock
@@ -35,7 +35,7 @@ const FieldRow = ({ label, children, dataFormat }: any) => {
 }
 
 const Stats: React.FunctionComponent<IProps> = ({ stock: { quote, stats } }) => (
-  <AnalyticsStyle>
+  <DataCard>
     <Header>
       <Title>Key Stats</Title>
     </Header>
@@ -71,7 +71,7 @@ const Stats: React.FunctionComponent<IProps> = ({ stock: { quote, stats } }) => 
         {stats.dividendYield}
       </FieldRow>
     </div>
-  </AnalyticsStyle>
+  </DataCard>
 )
 
 export default Stats

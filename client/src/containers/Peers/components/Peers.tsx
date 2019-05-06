@@ -1,5 +1,5 @@
 import React from 'react'
-import { AnalyticsStyle, Header, Title } from '../../../rt-theme/analyticsStyle'
+import { DataCard, Header, Title } from '../../../common/StyledComponents'
 import { default as Peer } from './PeerItem'
 
 interface IPeersProps {
@@ -8,17 +8,17 @@ interface IPeersProps {
 
 const Peers: React.FunctionComponent<IPeersProps> = props => {
   return (
-    <AnalyticsStyle style={{ height: 'initial', marginBottom: '10px' }}>
+    <DataCard>
       <Header>
         <Title>Top Peers</Title>
       </Header>
       <div
         style={{
           display: 'grid',
-          gridAutoFlow: 'column',
-          justifyContent: 'start',
-          gridGap: '0.25rem',
           fontSize: '0.5rem',
+          gridAutoFlow: 'column',
+          gridGap: '0.25rem',
+          justifyContent: 'start',
         }}
         color="offwhite50"
       >
@@ -26,7 +26,7 @@ const Peers: React.FunctionComponent<IPeersProps> = props => {
           <Peer key={peer} symbol={peer} />
         ))}
       </div>
-    </AnalyticsStyle>
+    </DataCard>
   )
 }
 

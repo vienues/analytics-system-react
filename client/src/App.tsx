@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
 import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
@@ -11,7 +11,7 @@ import MainLayout from './layouts/MainLayout'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
 
-library.add(faLightbulb, farLightBulb)
+library.add(fasLightBulb, farLightBulb)
 
 interface IComponentWithProps {
   [path: string]: {

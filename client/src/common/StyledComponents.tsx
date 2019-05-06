@@ -121,3 +121,26 @@ export const Large = styled.div`
   line-height: 2rem;
   color: ${props => props.theme.colors[props.color || 'white']};
 `
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+`
+
+export const Title = styled.div`
+  margin-bottom: 1rem;
+  height: 18px;
+  font-size: 15px;
+  font-weight: normal;
+`
+
+/** New for rt-theme */
+export const DataCard = styled.div`
+  display: grid
+  border-radius: 0.25rem;
+  background-color: ${({ theme }: any) => theme.core.lightBackground};
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 1rem;
+`

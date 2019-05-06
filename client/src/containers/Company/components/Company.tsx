@@ -1,6 +1,5 @@
 import React from 'react'
-import { AnalyticsStyle, Header, Title } from '../../../rt-theme/analyticsStyle'
-import { Caption } from '../../../common/StyledComponents'
+import { Caption, DataCard, Header, Title } from '../../../common/StyledComponents'
 
 const URL = /(http(s)?:\/\/)?/
 
@@ -18,7 +17,7 @@ interface ICompanyProps {
 const Company: React.FunctionComponent<ICompanyProps> = props => {
   const { description, name, symbol, website } = props.company
   return (
-    <AnalyticsStyle>
+    <DataCard>
       <Header>
         <Title>Company Overview</Title>
       </Header>
@@ -29,7 +28,7 @@ const Company: React.FunctionComponent<ICompanyProps> = props => {
         <Caption>{website.replace(URL, '')}</Caption>
       </a>
       <span>{description}</span>
-    </AnalyticsStyle>
+    </DataCard>
   )
 }
 export default Company
