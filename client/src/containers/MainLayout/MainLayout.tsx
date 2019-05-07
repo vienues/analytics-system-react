@@ -52,7 +52,7 @@ const MainSearchContent = styled(ContentBase)`
   grid-template-columns: 1fr;
   grid-auto-flow: column;
   border-bottom: solid 1px ${({ theme }) => theme.secondary.base};
-  padding: 5px;
+  padding: 1rem;
   position: relative;
   @media (max-width: 900px) {
     grid-auto-flow: row;

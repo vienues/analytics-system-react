@@ -4,17 +4,17 @@ import { MarketsList } from '../index'
 
 const FooterWrapper = styled.div`
   line-height: 1.25rem;
-  justify-content: center;
+  padding: 0 1rem;
+  display: grid;
+  align-items: center;
   min-width: 100%;
-  width: 100%;
-  min-height: 3.4rem;
+  min-height: 3.5rem;
   background-color: ${({ theme }: { theme: any }) => theme.core.lightBackground};
   border-top: 1px solid ${({ theme }: { theme: any }) => theme.core.darkBackground};
 `
 
 export const Footer = () => (
   <FooterWrapper>
-    <div>US Markets</div>
     <MarketsList />
   </FooterWrapper>
 )

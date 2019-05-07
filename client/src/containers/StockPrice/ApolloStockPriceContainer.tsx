@@ -1,8 +1,8 @@
 import React from 'react'
 import { ChildProps, Subscription, SubscriptionProps, SubscriptionResult } from 'react-apollo'
 import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../../__generated__/types'
+import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import AdaptiveLoader from '../../rt-theme/AdaptiveLoader'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 
@@ -34,15 +34,13 @@ const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloConta
   }
 
   return (
-    <div style={{ display: 'grid', justifyContent: 'end' }}>
-      <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
-        subscription={StockPriceSubscription}
-        variables={{ markets: [id] }}
-        shouldResubscribe={shouldResubscribe}
-      >
-        {onStockPriceSubscriptionSuccess}
-      </Subscription>
-    </div>
+    <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
+      subscription={StockPriceSubscription}
+      variables={{ markets: [id] }}
+      shouldResubscribe={shouldResubscribe}
+    >
+      {onStockPriceSubscriptionSuccess}
+    </Subscription>
   )
 }
 

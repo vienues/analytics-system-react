@@ -3,9 +3,8 @@
 import { NetworkStatus } from 'apollo-client'
 import React, { ReactNode } from 'react'
 import { Query, QueryProps, QueryResult } from 'react-apollo'
-
-import { styled } from '../rt-theme'
-import AdaptiveLoader from '../rt-theme/AdaptiveLoader'
+import styled from 'styled-components'
+import AdaptiveLoader from '../common/AdaptiveLoader'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 

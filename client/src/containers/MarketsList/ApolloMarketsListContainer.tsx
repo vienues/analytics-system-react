@@ -1,12 +1,12 @@
 import React from 'react'
 import { ChildProps, Subscription, SubscriptionResult } from 'react-apollo'
+import styled from 'styled-components'
 import { MarketQuery, onMarketSubscription, onMarketSubscriptionVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
+import { DataContents, Text } from '../../common/StyledComponents'
 import { StockPrice } from '../StockPrice/components'
 import MarketsConnection from './graphql/MarketConnection.graphql'
 import MarketSubscription from './graphql/MarketSubscription.graphql'
-
-import { VerticalDataContents } from '../../common/StyledComponents'
 
 const ApolloMarketsListContainer: React.FunctionComponent<ChildProps<{}, Response>> = () => {
   const onMarketSubscriptionSuccess = (results: SubscriptionResult<onMarketSubscription>): JSX.Element => {
@@ -23,22 +23,30 @@ const ApolloMarketsListContainer: React.FunctionComponent<ChildProps<{}, Respons
 
   const onMarketQueryResults: (data: MarketQuery) => JSX.Element = ({ markets }) => {
     return (
-      <VerticalDataContents>
-        {markets.map(market => (
-          <Subscription<onMarketSubscription, onMarketSubscriptionVariables>
-            key={market.id || ''}
-            subscription={MarketSubscription}
-            variables={{ markets: [market.id || ''] }}
-            shouldResubscribe={false}
-          >
-            {onMarketSubscriptionSuccess}
-          </Subscription>
-        ))}
-      </VerticalDataContents>
+      <DataContents style={{ gridGap: '0.1rem' }}>
+        <Text>US Markets</Text>
+        <MarketList>
+          {markets.map(market => (
+            <Subscription<onMarketSubscription, onMarketSubscriptionVariables>
+              key={market.id || ''}
+              subscription={MarketSubscription}
+              variables={{ markets: [market.id || ''] }}
+              shouldResubscribe={false}
+            >
+              {onMarketSubscriptionSuccess}
+            </Subscription>
+          ))}
+        </MarketList>
+      </DataContents>
     )
   }
 
   return <AppQuery<MarketQuery, {}> query={MarketsConnection}>{onMarketQueryResults}</AppQuery>
 }
+
+const MarketList = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 200px);
+`
 
 export default ApolloMarketsListContainer

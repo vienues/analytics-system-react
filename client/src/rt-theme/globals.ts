@@ -55,7 +55,7 @@ export default createGlobalStyle`
     font-size: 16px;
     line-height: 1rem;
     text-rendering: geometricPrecision;   
-
+    overflow: hidden;
 
     @media all and (max-width: 400px) {
       font-size: 14px;

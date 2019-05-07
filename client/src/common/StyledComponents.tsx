@@ -1,14 +1,5 @@
 import styled from 'styled-components'
 
-const bgColor = '#444c5f'
-export const VerticalSeperator = styled.div`
-  height: 90%;
-  border: solid 1px ${bgColor};
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
-  opacity: 0.85;
-`
-
 export const AnalyticsLineChartStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -45,7 +36,6 @@ export const ToolTipChildRight = styled.div`
   color: ${({ theme }) => theme.template.white.normal};
 `
 
-/** New for rt-theme */
 export const DataCard = styled.div`
   display: grid;
   border-radius: 0.25rem;
@@ -53,6 +43,9 @@ export const DataCard = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem;
+  -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
 `
 
 export const DataContents = styled.div`
