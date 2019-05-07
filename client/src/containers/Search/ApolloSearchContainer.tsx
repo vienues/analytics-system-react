@@ -5,9 +5,9 @@ import { search, search_search, searchQuery, searchQueryVariables, searchVariabl
 import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import SearchConnection from '../../graphql/SearchConnection.graphql'
-import SimpleSearchConnection from '../../graphql/SimpleSearchConnection.graphql'
 import { SearchInput } from './components'
+import SearchConnection from './graphql/SearchConnection.graphql'
+import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 
 export interface IProps extends IApolloContainerProps {
   url?: RegExp
@@ -42,10 +42,6 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
     }
   }, [props.id])
 
-  const onSymbolChanged = (id: string) => {
-    props.history.push(`${props.url}${id}`)
-  }
-
   const onTextChange = (text: string) => {
     setCurrentText(text)
   }
@@ -53,7 +49,9 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
   const handleChange = (symbol: search_search | null) => {
     setCurrentSymbol(symbol)
     if (symbol) {
-      onSymbolChanged(symbol.id)
+      props.history.push(`${props.url}${symbol.id}`)
+    } else {
+      props.history.push(``)
     }
   }
 

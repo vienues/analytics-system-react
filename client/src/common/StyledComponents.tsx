@@ -1,80 +1,9 @@
 import styled from 'styled-components'
 
-// @ts-ignore
-import * as AdaptiveCommon from '@adaptive-insights/common'
-
-export const Text = styled.div`
-  font-weight: 300;
-`
-export const Small = styled(Text)`
-  color: ${props => props.theme.colors[props.color || 'white']};
-`
-export const Label = styled(Text)`
-  opacity: 0.59;
-  font-size: smaller;
-`
-export const Caption = styled.span`
-  color: ${props => props.theme.colors[props.color || 'white']};
-  opacity: 0.59;
-  display: block;
-  line-height: 1rem;
-  margin-top: 0.25rem;
-  margin-bottom: 0.25rem;
-  font-size: 0.75rem;
-`
-
-export const BlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
-  display: block;
-`
-
-export const HyperLinkedLead = styled.span`
-  color: ${props => props.theme.colors[props.color || 'white']};
-  &:hover {
-    color: ${(props: any) => props.theme.colors.gold};
-  }
-  font-weight: 300;
-`
-export const HyperLinkedBlockLink = styled(Text).attrs({ is: 'a', f: 0 })`
-  display: block;
-  &:hover {
-    color: ${(props: any) => props.theme.colors.gold};
-  }
-`
-
-export const SuperText = styled(Small)`
-  line-height: 1em;
-
-  &:after,
-  &:before {
-    display: inline-block;
-    vertical-align: super;
-    font-size: 1rem;
-    line-height: 1;
-
-    height: 0;
-    max-height: 0;
-  }
-`
-
-export const Currency = styled(SuperText)`
-  &:before {
-    content: '$';
-    font-size: 0.5rem;
-    padding-right: 0.25rem;
-  }
-`
-
-export const Percent = styled(SuperText)`
-  &:after {
-    content: '%';
-    font-size: 0.5rem;
-    padding-left: 0.125rem;
-  }
-`
 const bgColor = '#444c5f'
 export const VerticalSeperator = styled.div`
-  height:90%;
-  border: solid 1px ${bgColor}
+  height: 90%;
+  border: solid 1px ${bgColor};
   margin-left: 0.25rem;
   margin-right: 0.25rem;
   opacity: 0.85;
@@ -115,32 +44,65 @@ export const ToolTipChildRight = styled.div`
   font-size: 10px;
   color: ${({ theme }) => theme.template.white.normal};
 `
-export const Large = styled.div`
-  font-size: 2rem;
-  font-weight: 300;
-  line-height: 2rem;
-  color: ${props => props.theme.colors[props.color || 'white']};
-`
-
-export const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-`
-
-export const Title = styled.div`
-  margin-bottom: 1rem;
-  height: 18px;
-  font-size: 15px;
-  font-weight: normal;
-`
 
 /** New for rt-theme */
 export const DataCard = styled.div`
-  display: grid
+  display: grid;
   border-radius: 0.25rem;
   background-color: ${({ theme }: any) => theme.core.lightBackground};
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem;
+`
+
+export const DataContents = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+`
+
+export const VerticalDataContents = styled(DataContents)`
+  grid-auto-flow: column;
+  justify-content: start;
+`
+
+export const Text = styled.span``
+
+export const LabeledData = styled.div`
+  min-height: 1.5rem;
+  border-bottom: 1px ${({ theme }) => theme.core.textColor} solid;
+  display: grid;
+  grid-template-columns: 1fr auto;
+`
+
+export const Heading = styled.h1`
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+`
+
+export const Subheading = styled.h2`
+  font-size: 1.25rem;
+  font-weight: 400;
+`
+
+export const Caption = styled.span`
+  color: ${props => props.theme.colors[props.color || 'white']};
+  opacity: 0.59;
+  display: block;
+  line-height: 1rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 300;
+`
+
+export const Link = styled.a`
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+export const FieldLabel = styled(Text)`
+  opacity: 0.59;
 `

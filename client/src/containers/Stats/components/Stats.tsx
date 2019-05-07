@@ -1,9 +1,8 @@
 import numeral from 'numeral'
 import * as React from 'react'
-import styled from 'styled-components'
 import { StatsQuery_stock } from '../../../__generated__/types'
-import { Label } from '../../../common/StyledComponents'
-import { DataCard, Header, Title } from '../../../common/StyledComponents'
+import { DataContents, FieldLabel, LabeledData, Text } from '../../../common/StyledComponents'
+import { DataCard, Heading } from '../../../common/StyledComponents'
 
 export interface IProps {
   stock: StatsQuery_stock
@@ -13,65 +12,50 @@ const formats = {
   approximate: '(0.00 a)',
   dollars: '$ 0,0[.]00',
   integer: '0,0',
-  number: '0,0[.]00',
+  number: '0,0.00',
 }
-
-const NewFieldRow = styled.div`
-  min-height: 1.5rem
-  border-bottom: 1px ${({ theme }) => theme.core.textColor} solid
-  display: grid
-  grid-template-columns: 1fr auto
-`
 
 const format = (toFormat: string) => (val: any) => numeral(val).format(formats[toFormat] || toFormat)
 
-const FieldRow = ({ label, children, dataFormat }: any) => {
+const Fields: Array<{ label: string; format: string; field: string | string[] }> = [
+  { label: 'Previous Close', format: 'dollars', field: 'previousClose' },
+  { label: 'Day Range', format: 'dollars', field: ['low', 'high'] },
+  { label: 'Volume', format: 'approximate', field: 'latestVolume' },
+  { label: 'Market Cap', format: 'approximate', field: 'marketcap' },
+  { label: 'P/E Ratio', format: 'number', field: 'peRatioHigh' },
+  { label: 'Open', format: 'dollars', field: 'open' },
+  { label: '52 Week Range', format: 'number', field: ['week52low', 'week52high'] },
+  { label: 'Total Avg. Volume', format: 'approximate', field: 'avgTotalVolume' },
+  { label: 'Earnings Per Share', format: 'number', field: 'latestEPS' },
+  { label: 'Dividend Yield', format: 'number', field: 'dividendYield' },
+]
+
+const Stats: React.FunctionComponent<IProps> = ({ stock: { quote, stats } }) => {
+  const data = { ...quote, ...stats }
   return (
-    <NewFieldRow>
-      <Label>{label}</Label>
-      <span color="offwhite">{dataFormat ? format(dataFormat)(children) : children}</span>
-    </NewFieldRow>
+    <DataCard>
+      <Heading>Key Stats</Heading>
+      <DataContents style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(20rem, 1fr))' }}>
+        {Fields.map(Field => {
+          if (Array.isArray(Field.field)) {
+            return (
+              <LabeledData key={Field.field.join('')}>
+                <FieldLabel>{Field.label}</FieldLabel>
+                <Text>{Field.field.map(field => format(Field.format)(data[field])).join(' - ')}</Text>
+              </LabeledData>
+            )
+          } else {
+            return (
+              <LabeledData key={Field.field}>
+                <FieldLabel>{Field.label}</FieldLabel>
+                <Text>{format(Field.format)(data[Field.field])}</Text>
+              </LabeledData>
+            )
+          }
+        })}
+      </DataContents>
+    </DataCard>
   )
 }
-
-const Stats: React.FunctionComponent<IProps> = ({ stock: { quote, stats } }) => (
-  <DataCard>
-    <Header>
-      <Title>Key Stats</Title>
-    </Header>
-    <div style={{ display: 'grid', gridGap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(20rem, 1fr))' }}>
-      <FieldRow label="Previous Close" dataFormat="dollars">
-        {quote.previousClose}
-      </FieldRow>
-      <FieldRow label="Day Range">
-        $ {format('number')(quote.low)} - {format('number')(quote.high)}
-      </FieldRow>
-      <FieldRow label="Volume" dataFormat="approximate">
-        {quote.latestVolume}
-      </FieldRow>
-      <FieldRow label="Market Cap" dataFormat="approximate">
-        {stats.marketcap}
-      </FieldRow>
-      <FieldRow label="P/E Ratio" dataFormat="number">
-        {stats.peRatioHigh}
-      </FieldRow>
-      <FieldRow label="Open" dataFormat="dollars">
-        {quote.open}
-      </FieldRow>
-      <FieldRow label="52 Week Range">
-        $ {format('number')(stats.week52low)} - {format('number')(stats.week52high)}
-      </FieldRow>
-      <FieldRow label="Total Avg. Volume" dataFormat="approximate">
-        {quote.avgTotalVolume}
-      </FieldRow>
-      <FieldRow label="Earnings Per Share" dataFormat="number">
-        {stats.latestEPS}
-      </FieldRow>
-      <FieldRow label="Dividend Yield" dataFormat="number">
-        {stats.dividendYield}
-      </FieldRow>
-    </div>
-  </DataCard>
-)
 
 export default Stats

@@ -1,9 +1,0 @@
-query QuoteQuery {
-  markets {
-    id
-    companyName
-    change
-    changePercent
-    latestPrice
-  }
-}

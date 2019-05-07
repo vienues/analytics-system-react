@@ -3,15 +3,11 @@ import { ChildProps } from 'react-apollo'
 import { NewsQuery, NewsQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import { News, NewsItem } from './components'
+import { News } from './components'
 import NewsConnection from './graphql/NewsConnection.graphql'
 
 const ApolloNewsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
-  const onNewsQueryResults = (data: NewsQuery): JSX.Element => {
-    let news = [] as NewsItem[]
-    if (data.news) {
-      news = data.news as NewsItem[]
-    }
+  const onNewsQueryResults: (data: NewsQuery) => JSX.Element = ({ news }): JSX.Element => {
     return <News news={news} />
   }
 

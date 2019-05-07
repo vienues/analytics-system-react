@@ -1,13 +1,14 @@
 import React from 'react'
+import { Link } from '../../../common/StyledComponents'
 
 interface IPeerData {
   symbol: string
 }
 
 const PeerItem: React.FunctionComponent<IPeerData> = props => (
-  <a key={props.symbol} href={`/stock/${props.symbol}`}>
+  <Link key={props.symbol} href={`/stock/${props.symbol}`}>
     {props.symbol}
-  </a>
+  </Link>
 )
 
 export default PeerItem

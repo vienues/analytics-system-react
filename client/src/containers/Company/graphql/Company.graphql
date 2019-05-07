@@ -1,5 +1,6 @@
 fragment Company on Stock {
   company {
+    id
     symbol
     name
     website

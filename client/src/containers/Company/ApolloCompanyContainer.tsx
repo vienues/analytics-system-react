@@ -1,4 +1,3 @@
-// <reference> queryml.d.ts
 import React from 'react'
 import { ChildProps } from 'react-apollo'
 import { CompanyQuery, CompanyQueryVariables } from '../../__generated__/types'
@@ -9,12 +8,8 @@ import CompanyConnection from './graphql/CompanyConnection.graphql'
 
 const ApolloCompanyContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
   const onCompanyQueryResults = (data: CompanyQuery): JSX.Element => {
-    let retElement = <></>
-    if (data.stock && data.stock.company) {
-      const company = data.stock.company as CompanyDetails
-      retElement = <Company company={company} />
-    }
-    return retElement
+    const company = data.stock.company as CompanyDetails
+    return <Company company={company} />
   }
 
   return (

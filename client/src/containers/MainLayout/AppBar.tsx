@@ -1,9 +1,11 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { styled, ThemeName, useTheme } from '../rt-theme'
+import { styled, ThemeName, useTheme } from '../../rt-theme'
 
-import Logo from './Logo'
+import Logo from '../../common/Logo'
+
+import { Link } from '../../common/StyledComponents'
 
 const ThemeControl = () => {
   const { themeName, toggleTheme } = useTheme()
@@ -19,8 +21,10 @@ const AppBar: React.FunctionComponent = () => {
 
   return (
     <Body>
-      <div style={{ cursor: 'pointer' }}>
-        <Logo size={1.75} onClick={onClick} />
+      <div>
+        <Link>
+          <Logo size={1.75} onClick={onClick} />
+        </Link>
       </div>
       <ThemeControl />
     </Body>

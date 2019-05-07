@@ -1,7 +1,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { IApolloContainerProps } from '../common/IApolloContainerProps'
-import { Company, History, News, Peers, Search, Stats, StockPrice } from '../containers/'
+import { IApolloContainerProps } from '../../common/IApolloContainerProps'
+import { Company, History, News, Peers, Search, Stats, StockPrice } from '../index'
 import AppBar from './AppBar'
 import Footer from './Footer'
 

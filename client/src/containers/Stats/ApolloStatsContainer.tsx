@@ -7,12 +7,8 @@ import { Stats } from './components'
 import StatsConnection from './graphql/StatsConnection.graphql'
 
 const ApolloStatsContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
-  const onStatsQueryResults = (data: StatsQuery): JSX.Element => {
-    if (data.stock && data.stock.stats && data.stock.quote) {
-      return <Stats stock={data.stock} />
-    } else {
-      return <></>
-    }
+  const onStatsQueryResults: (data: StatsQuery) => JSX.Element = ({ stock }) => {
+    return <Stats stock={stock} />
   }
 
   return (

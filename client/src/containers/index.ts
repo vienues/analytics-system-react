@@ -1,3 +1,5 @@
+export { MainLayout } from './MainLayout'
+
 export { Company } from './Company'
 export { History } from './History'
 export { News } from './News'

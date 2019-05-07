@@ -1,19 +1,22 @@
 import React from 'react'
-import { DataCard, Header, Title } from '../../../common/StyledComponents'
-import { default as NewsItem, INewsItem } from './NewsItem'
+import { NewsQuery_news } from '../../../__generated__/types'
+import { DataCard, DataContents, Heading, Text } from '../../../common/StyledComponents'
+import { default as NewsItem } from './NewsItem'
 
 export interface IProps {
-  news: INewsItem[]
+  news: NewsQuery_news[]
 }
 
 const News: React.FunctionComponent<IProps> = props => (
-  <DataCard style={{ height: 'initial', marginBottom: '10px' }}>
-    <Header>
-      <Title>Latest News</Title>
-    </Header>
-    {(props.news || []).map(newsItem => (
-      <NewsItem key={newsItem.id} {...newsItem} />
-    ))}
+  <DataCard>
+    <Heading>Latest News</Heading>
+    <DataContents>
+      {props.news.length > 0 ? (
+        props.news.map(newsItem => <NewsItem key={newsItem.id} {...newsItem} />)
+      ) : (
+        <Text>There is no news</Text>
+      )}
+    </DataContents>
   </DataCard>
 )
 

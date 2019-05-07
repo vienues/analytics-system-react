@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { MarketsList } from '../containers'
+import { MarketsList } from '../index'
 
 const FooterWrapper = styled.div`
   line-height: 1.25rem;

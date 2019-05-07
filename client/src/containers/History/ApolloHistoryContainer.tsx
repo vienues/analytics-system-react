@@ -1,7 +1,7 @@
 import moment from 'moment'
 import React from 'react'
 import { ChildProps } from 'react-apollo'
-import { HistoryQuery, HistoryQuery_stock_chart, HistoryQueryVariables } from '../../__generated__/types'
+import { HistoryQuery, HistoryQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { History } from './components'
@@ -11,23 +11,18 @@ export const ApolloHistoryContainer: React.FunctionComponent<ChildProps<IApolloC
   id,
 }) => {
   const onHistoryQueryResults = (data: HistoryQuery): JSX.Element => {
-    let retElement = <></>
-    if (data.stock && data.stock.chart && data.stock.quote && data.stock.quote.previousClose) {
-      const previousClose = data.stock.quote.previousClose || 0
-      const chart = (data.stock.chart || []) as HistoryQuery_stock_chart[]
+    const previousClose = data.stock.quote.previousClose
+    const chart = data.stock.chart
 
-      const mappedData = chart
-        .filter(
-          history => !!history && ((history.average || -1) > 0 || (history.low || -1) > 0 || (history.high || -1) > 0),
-        )
-        .map(history => ({
-          x: moment(history.datetime).format('hh:mm:ss A'),
-          y: `${history.average}`,
-        }))
-      retElement = <History history={{ previousClose, dataPoints: mappedData }} />
-    }
-
-    return retElement
+    const mappedData = chart
+      .filter(
+        history => !!history && ((history.average || -1) > 0 || (history.low || -1) > 0 || (history.high || -1) > 0),
+      )
+      .map(history => ({
+        x: moment(history.datetime).format('hh:mm:ss A'),
+        y: `${history.average}`,
+      }))
+    return <History history={{ previousClose, dataPoints: mappedData }} />
   }
 
   return (

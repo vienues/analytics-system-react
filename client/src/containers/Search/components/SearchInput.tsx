@@ -12,12 +12,12 @@ export interface ISearchBarProps {
   onTextChange: (text: string) => void
 }
 
-const ClearSearch: React.FunctionComponent<{ clearFunction: () => void }> = props => {
+const ClearSearch: React.FunctionComponent<{ clearFunction: () => void; style: any }> = props => {
   const clearClick = (e: any) => {
     props.clearFunction()
   }
   return (
-    <div style={{ cursor: 'pointer' }} onClick={clearClick}>
+    <div style={{ ...props.style, cursor: 'pointer' }} onClick={clearClick}>
       <FontAwesomeIcon icon={faTimes} />
     </div>
   )
@@ -29,13 +29,13 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
     this.inputFocus = this.inputFocus.bind(this)
   }
   public searchResultToOptionString = (item: search_search): string => (item ? `${item.id} ${item.name}` : '')
+
   public inputFocus = (e: any) => {
     e.target.select()
   }
 
   public render() {
     return (
-      // @ts-ignore
       <Downshift
         selectedItem={this.props.initialItem}
         onChange={this.props.onChange}
@@ -45,14 +45,25 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
         {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, clearSelection }) => {
           this.props.onTextChange(inputValue || '')
           return (
-            <div style={{ position: 'relative', display: 'grid', gridTemplateColumns: '1fr auto' }}>
+            <div
+              style={{
+                position: 'relative',
+                display: 'grid',
+                gridTemplateColumns: 'auto 1fr auto',
+                alignItems: 'center',
+                gridGap: '0.5rem',
+              }}
+            >
+              <ClearSearch
+                clearFunction={clearSelection}
+                style={{ visibility: inputValue === '' ? 'hidden' : 'visible' }}
+              />
               <input
                 {...getInputProps({ placeholder: 'Enter a stock or symbol...' })}
                 onClick={this.inputFocus}
                 onFocus={this.inputFocus}
                 style={{ fontSize: '2rem', width: '100%' }}
               />
-              <ClearSearch clearFunction={clearSelection} />
               {isOpen ? (
                 <SearchResults {...getMenuProps()}>
                   {this.renderItems(this.props.items, inputValue, getItemProps)}
@@ -83,14 +94,14 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
 const SearchResults = styled.menu`
   position: absolute;
   background: ${props => props.theme.core.darkBackground}E0;
-  z-index:1000;
-  border:solid 1px ${({ theme }) => theme.secondary.base}
+  z-index: 1000;
+  border: solid 1px ${({ theme }) => theme.secondary.base};
   border-radius: 5px;
   margin-top: 5px;
   top: 2.25rem;
-  left:0;
-  right:0;
-  cursor:pointer;
+  left: 0;
+  right: 0;
+  cursor: pointer;
 `
 const SearchResultItemBase = styled.div`
   padding: 5px;

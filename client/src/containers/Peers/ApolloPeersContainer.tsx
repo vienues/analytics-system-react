@@ -7,11 +7,7 @@ import { Peers } from './components'
 import CompanyConnection from './graphql/PeersConnection.graphql'
 
 const ApolloPeersContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
-  const onCompanyQueryResult = (data: PeersQuery): JSX.Element => {
-    let peers = [] as string[]
-    if (data.stock && data.stock.peers) {
-      peers = data.stock.peers as string[]
-    }
+  const onCompanyQueryResult: (data: PeersQuery) => JSX.Element = ({ stock: { peers } }) => {
     return <Peers peers={peers} />
   }
 

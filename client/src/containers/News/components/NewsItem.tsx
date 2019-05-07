@@ -1,24 +1,15 @@
 import moment from 'moment/moment'
 import React from 'react'
-import { Caption, HyperLinkedLead } from '../../../common/StyledComponents'
+import { NewsQuery_news } from '../../../__generated__/types'
+import { Caption, Link, Text } from '../../../common/StyledComponents'
 
-export interface INewsItem {
-  id: string
-  headline: string
-  url: string
-  datetime: string
-  source: string
-}
-
-const NewsItem: React.FunctionComponent<INewsItem> = (newsItemProps: INewsItem) => (
-  <a key={newsItemProps.id} is="a" target="_blank" href={newsItemProps.url}>
-    <div style={{ marginBottom: '20px' }}>
-      <HyperLinkedLead>{newsItemProps.headline}</HyperLinkedLead>
-      <Caption>
-        {moment(newsItemProps.datetime).fromNow()} - {newsItemProps.source}
-      </Caption>
-    </div>
-  </a>
+const NewsItem: React.FunctionComponent<NewsQuery_news> = ({ id, url, headline, datetime, source }) => (
+  <Link key={id} target="_blank" href={url}>
+    <Text>{headline}</Text>
+    <Caption>
+      {moment(datetime).fromNow()} - {source}
+    </Caption>
+  </Link>
 )
 
 export default NewsItem
