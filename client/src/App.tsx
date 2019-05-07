@@ -21,7 +21,7 @@ interface IComponentWithProps {
   }
 }
 
-class App extends React.Component {
+class App extends React.Component<{}, {}> {
   /** Rather than lambda or binding individual generators in the Route we will generate them from object */
   private static routerItems: IComponentWithProps = {
     '/': { component: MainLayout },
@@ -34,7 +34,7 @@ class App extends React.Component {
     '/stock/:id': { component: MainLayout },
   }
 
-  constructor(props: any) {
+  constructor(props: {}) {
     super(props)
     this.renderRouterElement = this.renderRouterElement.bind(this)
   }

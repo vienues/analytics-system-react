@@ -1,11 +1,10 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { styled, ThemeName, useTheme } from '../../rt-theme'
-
+import styled, { ThemeProps } from 'styled-components'
 import Logo from '../../common/Logo'
-
 import { Link } from '../../common/StyledComponents'
+import { Theme, ThemeName, useTheme } from '../../rt-theme'
 
 const ThemeControl = () => {
   const { themeName, toggleTheme } = useTheme()
@@ -37,9 +36,9 @@ const Body = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   align-content: center;
-  background-color: ${({ theme }: { theme: any }) => theme.core.lightBackground};
-  color: ${({ theme }: { theme: any }) => theme.core.textColor};
-  box-shadow: 0 0.125rem 0 ${({ theme }: { theme: any }) => theme.core.darkBackground};
+  background-color: ${({ theme }: ThemeProps<Theme>) => theme.core.lightBackground};
+  color: ${({ theme }: ThemeProps<Theme>) => theme.core.textColor};
+  box-shadow: 0 0.125rem 0 ${({ theme }: ThemeProps<Theme>) => theme.core.darkBackground};
 `
 
 const IconButton = styled.button`
@@ -56,12 +55,12 @@ const IconButton = styled.button`
 
   cursor: pointer;
 
-  transition: background-color ${({ theme }: { theme: any }) => theme.motion.duration}ms
-    ${({ theme }: { theme: any }) => theme.motion.easing};
+  transition: background-color ${({ theme }: ThemeProps<Theme>) => theme.motion.duration}ms
+    ${({ theme }: ThemeProps<Theme>) => theme.motion.easing};
 
   &:hover {
-    background-color: ${({ theme }: { theme: any }) => theme.button.secondary.active.backgroundColor};
-    color: ${({ theme }: { theme: any }) => theme.button.secondary.textColor};
+    background-color: ${({ theme }: ThemeProps<Theme>) => theme.button.secondary.active.backgroundColor};
+    color: ${({ theme }: ThemeProps<Theme>) => theme.button.secondary.textColor};
   }
 `
 

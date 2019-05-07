@@ -1,5 +1,6 @@
 import * as React from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProps } from 'styled-components'
+import { Theme } from '../../rt-theme'
 import { MarketsList } from '../index'
 
 const FooterWrapper = styled.div`
@@ -9,8 +10,8 @@ const FooterWrapper = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 3.5rem;
-  background-color: ${({ theme }: { theme: any }) => theme.core.lightBackground};
-  border-top: 1px solid ${({ theme }: { theme: any }) => theme.core.darkBackground};
+  background-color: ${({ theme }: ThemeProps<Theme>) => theme.core.lightBackground};
+  border-top: 1px solid ${({ theme }: ThemeProps<Theme>) => theme.core.darkBackground};
 `
 
 export const Footer = () => (

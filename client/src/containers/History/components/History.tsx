@@ -1,6 +1,6 @@
 import numeral from 'numeral'
 import React, { useEffect, useState } from 'react'
-import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, TooltipProps, XAxis, YAxis } from 'recharts'
 import {
   AnalyticsLineChartStyle,
   DataCard,
@@ -20,24 +20,19 @@ export interface IHistoryProps {
   history: IHistoryData
 }
 
-interface IToolTipProps {
-  payload: any[]
-  label: string
-}
-
 interface IDataPoint {
   x: string
   y: string
 }
 
-const CustomTooltip: React.FC<IToolTipProps> = ({ payload, label }) => {
-  return (
-    <ToolTipStyle>
-      <ToolTipChildLeft>{label}</ToolTipChildLeft>
-      <ToolTipChildRight>{payload.length > 0 && numeral(payload[0].value).format('$0,0[.]00')}</ToolTipChildRight>
-    </ToolTipStyle>
-  )
-}
+const CustomTooltip: React.FC<TooltipProps> = ({ payload, label }) => (
+  <ToolTipStyle>
+    <ToolTipChildLeft>{label}</ToolTipChildLeft>
+    <ToolTipChildRight>
+      {payload ? payload.length > 0 && numeral(payload[0].value).format('$0,0[.]00') : ''}
+    </ToolTipChildRight>
+  </ToolTipStyle>
+)
 
 export const History: React.FunctionComponent<IHistoryProps> = props => {
   const intervalWidth: number = 30

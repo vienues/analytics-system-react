@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { ThemeProps } from 'styled-components'
+import { Theme } from '../rt-theme'
 
 export const AnalyticsLineChartStyle = styled.div`
   width: 100%;
@@ -39,7 +40,7 @@ export const ToolTipChildRight = styled.div`
 export const DataCard = styled.div`
   display: grid;
   border-radius: 0.25rem;
-  background-color: ${({ theme }: any) => theme.core.lightBackground};
+  background-color: ${({ theme }: ThemeProps<Theme>) => theme.core.lightBackground};
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem;

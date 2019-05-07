@@ -37,7 +37,7 @@ interface IAppQueryProps<Data, Variables> {
 export class AppQuery<Data, Variables> extends React.Component<
   OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>
 > {
-  constructor(props: any) {
+  constructor(props: OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>) {
     super(props)
     this.onQueryResults = this.onQueryResults.bind(this)
   }

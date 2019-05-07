@@ -1,5 +1,6 @@
 import React, { SVGAttributes } from 'react'
-import { styled } from '../rt-theme'
+import styled, { ThemeProps } from 'styled-components'
+import { Theme } from '../rt-theme'
 
 interface ILogoProps extends SVGAttributes<Element> {
   fill?: string
@@ -46,6 +47,6 @@ const Logo: React.FC<ILogoProps> = ({ fill = '#000', size = 2, style, ...props }
 
 export default styled(Logo)`
   [fill] {
-    fill: ${(props: any) => props.theme.core.textColor};
+    fill: ${({ theme }: ThemeProps<Theme>) => theme.core.textColor};
   }
 `

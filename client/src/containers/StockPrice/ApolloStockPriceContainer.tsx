@@ -15,7 +15,7 @@ const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloConta
 
     if (data && data.getQuotes) {
       const stockPrice = data.getQuotes as StockPriceData
-      return <StockPrice fontSize={2} stockPrice={stockPrice} />
+      return <StockPrice stockPrice={stockPrice} />
     }
 
     return <></>

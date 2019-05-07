@@ -1,7 +1,7 @@
 import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import { FieldLabel, Text, VerticalDataContents } from '../../../common/StyledComponents'
+import { Text, VerticalDataContents } from '../../../common/StyledComponents'
 import { colors } from '../../../rt-theme'
 
 export interface IStockPriceData {
@@ -33,9 +33,9 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = props => {
       <div>${latestPrice.toFixed(2)}</div>
       <div style={{ display: 'grid', gridGap: '0.25em', gridAutoFlow: 'column', color, marginLeft: '0.5rem' }}>
         <FontAwesomeIcon icon={Icon} />
-        <FieldLabel>{fixedFormat(change)}</FieldLabel>
+        <Text>{fixedFormat(change)}</Text>
         <Text>|</Text>
-        <FieldLabel>{fixedFormat(changePercent * 100)}%</FieldLabel>
+        <Text>{fixedFormat(changePercent * 100)}%</Text>
       </div>
     </VerticalDataContents>
   )

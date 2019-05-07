@@ -49,12 +49,18 @@ const MainInnerContent = styled(ContentBase)`
 `
 
 const MainSearchContent = styled(ContentBase)`
+  font-size: 2rem;
+  line-height: 2rem;
   grid-template-columns: 1fr;
   grid-auto-flow: column;
   border-bottom: solid 1px ${({ theme }) => theme.secondary.base};
   padding: 1rem;
   position: relative;
   @media (max-width: 900px) {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+  @media (max-width: 500px) {
     grid-auto-flow: row;
   }
 `

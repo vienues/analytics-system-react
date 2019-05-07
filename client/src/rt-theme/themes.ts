@@ -28,9 +28,6 @@ interface IBaseTheme {
   // Known extensible properties
   backgroundColor: Color
   textColor: Color
-
-  // TODO (8/14/18) remove after theme migration
-  [key: string]: any
 }
 
 type GeneratedTheme = ReturnType<typeof createTheme>
