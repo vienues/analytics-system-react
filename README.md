@@ -1,47 +1,92 @@
 # Adaptive Insights
 
+- [Overview](#overview)
+- [Requirements](#requirements)
+- [Getting started](#getting-started)
+- [Core technologies used](#core-technologies-used)
+- [Useful tips and tricks](#useful-tips-and-tricks)
+
+## Overview
+
+Adaptive Insights is a monorepo, powered by [Lerna](https://github.com/lerna/lerna), to demonstrate how NodeJS, Apollo GraphQL, React, and Typescript can be used to develop robust data-driven web apps.
+
+Both the server-side and client-side code use strong types which are used to generate the GraphQL schema. This allows developers to detect data and schema errors at design-time and compile-time.
+
+## Requirements
+
+- [NodeJS v10](https://nodejs.org/en/download/)
+- [Typescript v3](https://www.npmjs.com/package/typescript)
+- [Yarn](https://yarnpkg.com/en/docs/install)
+
 ## Getting started
 
-1. Install dev dependencies (mainly `lerna`) at root level (`yarn` must be installed beforehand):
+After downloading or cloning repos open a terminal to the root folder and run `yarn` to install dependencies.
 
-   ```
-   [adaptive-insights] $ yarn install
-   ```
+        [adaptive-insights] $ yarn install
 
-2. Bootstrap all packages with lerna. This essentially runs yarn install in all packages (defined in `lerna.json`) and creates the necessary symlinks to resolve dependecies among them:
+Once the dependencies are install start the client and server using the start command.
 
-   ```
-   [adaptive-insights] $ yarn run bootstrap
-   ```
+        [adaptive-insights] $ yarn start
 
-3. Start server & launch client. This runs `yarn start` in every package (defined in `lerna.json`):
+This will open up a browser window to [http://localhost:3000](http://localhost:3000) for the client interface, and a GraphQL server on port 4000.
 
-   ```
-   [adaptive-insights] $ yarn start
-   ```
+### Data connection
 
-## Offline mode
+By default the server will connect to the [IEX trading system](https://iextrading.com/) to retrieve realtime market information. To simulate this in an offline environment set the `INSIGHT_OFFLINE=true` before starting the server.
 
-Enabling offline mode is as simple as creating an environment variable and setting it to `true`.
-
-```
-INSIGHTS_OFFLINE=true
+```cmd
+REM Windows Command Prompt
+set INSIGHT_OFFLINE=true
 ```
 
-By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). However, you can update the data stored by running an npm script from the `PROJECT_ROOT/server` directory.
-
+```ps
+#Windows Powershell
+$env:INSIGHT_OFFLINE="true"
 ```
+
+```sh
+#!/bin/bash
+export INSIGHT_OFFLINE=true
+```
+
+By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). The data can be updated from the [IEX trading system](https://iextrading.com/) by running an npm script from the `PROJECT_ROOT/server` directory.
+
+```console
 cd adaptive-insights/server && yarn generate-mock-data
 ```
 
-Optionally, you can fetch data for more companies by passing in a space delineated list of symbols.
+An optional parameter can be used to fetch data for more companies by passing in a space delineated list of symbols.
 
-```
+```console
 yarn generate-mock-data bac ge amd
 ```
 
-## Generating Schemas and Types
+## Core technologies used
 
-If you make changes to the server-side classes that control the types, you can automatically generate the client-side typings to transpilation type checks by running
+- [Lerna](https://github.com/lerna/lerna) - Multi-package manager to simplify the codebase in a single repository
+- [Apollo GraphQL](https://www.apollographql.com/) - GraphQL framework to allow rapid and reliable development of client-server communication
+- [Express](https://expressjs.com/) - Web server for hosting the GraphQL HTTP endpoints
+- [subscriptions-transport-ws](https://github.com/apollographql/subscriptions-transport-ws) - WebSocket communication for GraphQL
+- [TypeGraphQL](https://typegraphql.ml/) - Generate GraphQL schemas from TypeScript classes
+- [React](https://reactjs.org/) - Interface framework
+- [Styled-components](https://www.styled-components.com/) - Interface styling framework
 
-    yarn run generate-schema-and-typings
+## Useful developer add-ons
+
+When working with the Adaptive Insight repo, there are many add-ons that make development and debugging painless. When using [Visual Studio Code](https://code.visualstudio.com/) and [Google Chrome](https://www.google.com/chrome/) as a developer environment consider trying out some of the following tools.
+
+### Visual Studio Code extensions from the marketplace
+
+- **Apollo GraphQL** - Rich editor support for GraphQL client and server development that seamlessly integrates with the Apollo platform
+- **Debugger for Chrome** - Debug your JavaScript code in the Chrome browser, or any other target that supports the Chrome Debugger protocol.
+- **ESLine** - Integrates ESLint JavaScript into VS Code.
+- **jshint** - Integrates JSHint into VS Code. JSHint is a linter for JavaScript
+- **JSON to TS** - Convert JSON object to typescript interfaces
+- **markdownlint** - Markdown linting and style checking for Visual Studio Code
+- **vscode-styled-components** - Syntax highlighting for styled-components
+
+### Google Chrome extensions
+
+- [**GraphQL Network**](https://github.com/Ghirro/graphql-network) - Chrome Devtool that provides a "network"-style tab for GraphQL requests to allow developers to debug more easily.
+- [**Apollo Client Developer Tools**](https://github.com/apollographql/apollo-client-devtools) - GraphQL debugging tools for Apollo Client in the Chrome developer console.
+- [**React Developer Tools**](https://github.com/facebook/react-devtools) - Adds React debugging tools to the Chrome Developer Tools.
