@@ -12,6 +12,7 @@ const Footer = () => (
 
 const FooterWrapper = styled(Banner)`
   border-top: 1px solid ${({ theme }: ThemeProps<Theme>) => theme.core.darkBackground};
+  z-index: 1000;
 `
 
 export default Footer

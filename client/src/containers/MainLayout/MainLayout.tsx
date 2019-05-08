@@ -53,7 +53,9 @@ const MainSearchContent = styled(ContentBase)`
   line-height: 2rem;
   grid-template-columns: 1fr;
   grid-auto-flow: column;
-  border-bottom: solid 1px ${({ theme }) => theme.secondary.base};
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 1rem;
   position: relative;
   @media (max-width: 900px) {

@@ -1,10 +1,10 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import styled, { ThemeProps } from 'styled-components'
+import styled from 'styled-components'
 import Logo from '../../common/Logo'
 import { Banner, Link, SwitchThemeButton } from '../../common/StyledComponents'
-import { Theme, ThemeName, useTheme } from '../../rt-theme'
+import { ThemeName, useTheme } from '../../rt-theme'
 
 const ThemeControl = () => {
   const { themeName, toggleTheme } = useTheme()
@@ -29,7 +29,6 @@ const AppBar: React.FunctionComponent = () => (
 
 const AppWrapper = styled(Banner)`
   grid-template-columns: 1fr auto;
-  box-shadow: 0 0.125rem 0 ${({ theme }: ThemeProps<Theme>) => theme.core.darkBackground};
 `
 
 export default AppBar

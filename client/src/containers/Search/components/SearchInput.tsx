@@ -30,7 +30,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
     super(props)
     this.inputFocus = this.inputFocus.bind(this)
   }
-  public searchResultToOptionString = (item: search_search | null): string => (item ? `${item.id} ${item.name}` : '')
+  public searchResultToOptionString = (item: search_search | null): string => (item ? `${item.id} - ${item.name}` : '')
 
   public inputFocus = (e: React.SyntheticEvent<HTMLInputElement>) => {
     e.currentTarget.select()

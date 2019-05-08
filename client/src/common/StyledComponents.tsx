@@ -46,6 +46,9 @@ export const Banner = styled.div`
   min-height: 3.5rem;
   background-color: ${({ theme }: ThemeProps<Theme>) => theme.core.lightBackground};
   color: ${({ theme }: ThemeProps<Theme>) => theme.core.textColor};
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `
 
 export const DataCard = styled.div`
@@ -55,9 +58,9 @@ export const DataCard = styled.div`
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1rem;
-  -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `
 
 export const DataContents = styled.div`
