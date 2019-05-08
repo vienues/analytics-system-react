@@ -5,7 +5,7 @@ import { Company, History, News, Peers, Search, Stats, StockPrice } from '../ind
 import AppBar from './AppBar'
 import Footer from './Footer'
 
-export const MainLayout: React.FunctionComponent<IApolloContainerProps> = ({ id }) => (
+const MainLayout: React.FunctionComponent<IApolloContainerProps> = ({ id }) => (
   <AppLayoutRoot>
     <AppBar />
     <MainSearchContent>
@@ -39,7 +39,7 @@ const ContentBase = styled.div`
 `
 
 const MainContent = styled(ContentBase)`
-  grid-template-columns: 4fr minmax(30rem, 1fr);
+  grid-template-columns: 9fr 4fr;
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }

@@ -34,7 +34,7 @@ const CustomTooltip: React.FC<TooltipProps> = ({ payload, label }) => (
   </ToolTipStyle>
 )
 
-export const History: React.FunctionComponent<IHistoryProps> = props => {
+const History: React.FunctionComponent<IHistoryProps> = props => {
   const intervalWidth: number = 30
   const [storedOffset, setStoredOffset] = useState(0)
   const tickFormatYAxis: (x: string) => string = x => numeral(x).format('$0,0[.]00')
@@ -75,12 +75,12 @@ export const History: React.FunctionComponent<IHistoryProps> = props => {
         }
         return result
       },
-      { high: -Infinity, low: +Infinity },
+      { high: props.history.previousClose, low: props.history.previousClose },
     )
-  if (props.history.dataPoints.length > 0) {
-    return (
-      <DataCard>
-        <Heading>Market Summary</Heading>
+  return (
+    <DataCard>
+      <Heading>Market Summary</Heading>
+      {props.history.dataPoints.length > 0 ? (
         <AnalyticsLineChartStyle>
           <ResponsiveContainer width="99%" maxHeight={300} minHeight={200}>
             <LineChart data={props.history.dataPoints} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
@@ -97,7 +97,7 @@ export const History: React.FunctionComponent<IHistoryProps> = props => {
                 tickLine={false}
                 padding={{ top: 0, bottom: 0 }}
                 axisLine={false}
-                domain={[low, high]}
+                domain={[low * 0.999, high * 1.001]}
                 tickFormatter={tickFormatYAxis}
               />
 
@@ -117,11 +117,11 @@ export const History: React.FunctionComponent<IHistoryProps> = props => {
             </LineChart>
           </ResponsiveContainer>
         </AnalyticsLineChartStyle>
-      </DataCard>
-    )
-  } else {
-    return <Text>no data</Text>
-  }
+      ) : (
+        <Text>No market data available for today</Text>
+      )}
+    </DataCard>
+  )
 }
 
 export default History

@@ -2,6 +2,7 @@ import React from 'react'
 import { ChildProps, Subscription, SubscriptionResult } from 'react-apollo'
 import styled from 'styled-components'
 import { MarketQuery, onMarketSubscription, onMarketSubscriptionVariables } from '../../__generated__/types'
+import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { AppQuery } from '../../common/AppQuery'
 import { DataContents, Text } from '../../common/StyledComponents'
 import { StockPrice } from '../StockPrice/components'
@@ -12,7 +13,7 @@ const ApolloMarketsListContainer: React.FunctionComponent<ChildProps<{}, Respons
   const onMarketSubscriptionSuccess = (results: SubscriptionResult<onMarketSubscription>): JSX.Element => {
     const { data, loading } = results
     if (loading) {
-      return <>loading...</>
+      return <AdaptiveLoader size={35} speed={1.4} />
     }
     if (data) {
       const stockPrice = data.getQuotes

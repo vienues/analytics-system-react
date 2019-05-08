@@ -1,5 +1,6 @@
 import React from 'react'
-import { DataCard, Heading, Text, VerticalDataContents } from '../../../common/StyledComponents'
+import styled from 'styled-components'
+import { DataCard, DataContents, Heading, Text } from '../../../common/StyledComponents'
 import { default as Peer } from './PeerItem'
 
 interface IPeersProps {
@@ -9,10 +10,15 @@ interface IPeersProps {
 const Peers: React.FunctionComponent<IPeersProps> = props => (
   <DataCard>
     <Heading>Top Peers</Heading>
-    <VerticalDataContents>
+    <PeersWrapper>
       {props.peers.length > 0 ? props.peers.map(peer => <Peer key={peer} symbol={peer} />) : <Text>No peers</Text>}
-    </VerticalDataContents>
+    </PeersWrapper>
   </DataCard>
 )
+
+const PeersWrapper = styled(DataContents)`
+  grid-template-columns: repeat(auto-fit, minmax(3.5rem, 1fr));
+  justify-items: start;
+`
 
 export default Peers

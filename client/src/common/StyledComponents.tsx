@@ -37,6 +37,17 @@ export const ToolTipChildRight = styled.div`
   color: ${({ theme }) => theme.template.white.normal};
 `
 
+export const Banner = styled.div`
+  line-height: 1.25rem;
+  padding: 0 1rem;
+  display: grid;
+  align-items: center;
+  min-width: 100%;
+  min-height: 3.5rem;
+  background-color: ${({ theme }: ThemeProps<Theme>) => theme.core.lightBackground};
+  color: ${({ theme }: ThemeProps<Theme>) => theme.core.textColor};
+`
+
 export const DataCard = styled.div`
   display: grid;
   border-radius: 0.25rem;
@@ -99,4 +110,27 @@ export const Link = styled.a`
 
 export const FieldLabel = styled(Text)`
   opacity: 0.59;
+`
+
+export const SwitchThemeButton = styled.button`
+  width: 2rem;
+  height: 2rem;
+  font-size: 1rem;
+  line-height: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: background-color ${({ theme }: ThemeProps<Theme>) => theme.motion.duration}ms
+    ${({ theme }: ThemeProps<Theme>) => theme.motion.easing};
+
+  &:hover {
+    background-color: ${({ theme }: ThemeProps<Theme>) => theme.button.secondary.active.backgroundColor};
+    color: ${({ theme }: ThemeProps<Theme>) => theme.button.secondary.textColor};
+  }
 `

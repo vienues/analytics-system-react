@@ -65,6 +65,8 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
                 onClick={this.inputFocus}
                 onFocus={this.inputFocus}
                 style={{ width: '100%' }}
+                autoFocus={true}
+                spellCheck={false}
               />
               {isOpen ? (
                 <SearchResults {...getMenuProps()}>
