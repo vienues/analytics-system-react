@@ -8,7 +8,7 @@ const path = require('path')
 
 ;(async () => {
   const schema = await type_graphql.buildSchema({
-    resolvers: [path.normalize(`${__dirname}/../lib/GraphQL/**/*.resolver.js`)],
+    resolvers: [path.normalize(`${__dirname}/../src/GraphQL/**/*.resolver.ts`)],
   })
   const sdl = graphql_js.printSchema(schema)
   const filePath = path.join(__dirname, '..', 'schema.graphql')
