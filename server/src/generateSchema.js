@@ -7,8 +7,9 @@ const graphql_js = require('graphql')
 const path = require('path')
 
 ;(async () => {
+  require('child_process').execSync(`cd ${path.join(__dirname, '..')} && tsc`)
   const schema = await type_graphql.buildSchema({
-    resolvers: [path.normalize(`${__dirname}/../src/GraphQL/**/*.resolver.ts`)],
+    resolvers: [path.normalize(`${__dirname}/../lib/GraphQL/**/*.resolver.js`)],
   })
   const sdl = graphql_js.printSchema(schema)
   const filePath = path.join(__dirname, '..', 'schema.graphql')
