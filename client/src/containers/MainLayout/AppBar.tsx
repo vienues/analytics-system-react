@@ -10,7 +10,10 @@ const ThemeControl = () => {
   const { themeName, toggleTheme } = useTheme()
   return (
     <SwitchThemeButton onClick={toggleTheme}>
-      <FontAwesomeIcon icon={[`fa${themeName === ThemeName.Light ? 'r' : 's'}`, 'lightbulb'] as IconProp} />
+      <FontAwesomeIcon
+        title="Toggle theme"
+        icon={[`fa${themeName === ThemeName.Light ? 'r' : 's'}`, 'lightbulb'] as IconProp}
+      />
     </SwitchThemeButton>
   )
 }

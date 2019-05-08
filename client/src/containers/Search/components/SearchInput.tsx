@@ -13,13 +13,13 @@ export interface ISearchBarProps {
 }
 
 const ClearSearch: React.FunctionComponent<{ clearFunction: () => void; style: React.CSSProperties }> = props => {
-  const clearClick = (_: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const clearClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     props.clearFunction()
   }
   return (
-    <div style={{ ...props.style, cursor: 'pointer' }} onClick={clearClick}>
-      <FontAwesomeIcon icon={faTimes} />
-    </div>
+    <button style={{ ...props.style, cursor: 'pointer' }} onClick={clearClick}>
+      <FontAwesomeIcon icon={faTimes} title="Clear selection" />
+    </button>
   )
 }
 
