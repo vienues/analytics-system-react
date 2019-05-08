@@ -25,7 +25,7 @@
     "react-app-rewire-graphql-tag": "^1.1.0",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^3.0.1",
     "recharts": "^1.0.0-beta.10",
     "ress": "^1.2.2",
     "styled-components": "^4.2.0",
