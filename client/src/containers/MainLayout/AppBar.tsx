@@ -18,18 +18,14 @@ const ThemeControl = () => {
   )
 }
 
-const AppBar: React.FunctionComponent = () => {
-  const onClick = () => window.open('https://weareadaptive.com/')
-
-  return (
-    <AppWrapper>
-      <Link>
-        <Logo size={1.75} onClick={onClick} />
-      </Link>
-      <ThemeControl />
-    </AppWrapper>
-  )
-}
+const AppBar: React.FunctionComponent = () => (
+  <AppWrapper>
+    <Link target="_blank" href="https://weareadaptive.com/">
+      <Logo size={1.75} />
+    </Link>
+    <ThemeControl />
+  </AppWrapper>
+)
 
 const AppWrapper = styled(Banner)`
   grid-template-columns: 1fr auto;
