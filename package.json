@@ -15,7 +15,7 @@
   "scripts": {
     "start": "yarn run bootstrap && lerna run --parallel start",
     "offline-start": "set INSIGHTS_OFFLINE=true && yarn run start",
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap && yarn generate-schema-and-typings",
     "clean": "yarn && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",

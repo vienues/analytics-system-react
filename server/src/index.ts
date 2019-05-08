@@ -12,6 +12,7 @@ import { makeExecutableSchema } from 'graphql-tools'
 import { pubsub } from './pubsub'
 import MessageTypes from 'subscriptions-transport-ws/dist/message-types'
 import pricing from './services/pricing'
+import path from 'path'
 
 pricing(pubsub)
 
@@ -19,7 +20,7 @@ async function bootstrap() {
   const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
-    resolvers: [`${__dirname}\\GraphQL\\**\\*.resolver.js`],
+    resolvers: [path.normalize(`${__dirname}/GraphQL/**/*.resolver.js`)],
     pubSub: pubsub,
   })
   const schema = makeExecutableSchema({ typeDefs, resolvers })
