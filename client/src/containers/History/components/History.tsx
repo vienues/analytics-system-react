@@ -16,10 +16,6 @@ interface IHistoryData {
   dataPoints: IDataPoint[]
 }
 
-export interface IHistoryProps {
-  history: IHistoryData
-}
-
 interface IDataPoint {
   x: string
   y: string
@@ -34,56 +30,54 @@ const CustomTooltip: React.FC<TooltipProps> = ({ payload, label }) => (
   </ToolTipStyle>
 )
 
-const History: React.FunctionComponent<IHistoryProps> = props => {
-  const intervalWidth: number = 30
+const History: React.FunctionComponent<{ history: IHistoryData }> = ({ history: { dataPoints, previousClose } }) => {
+  const intervalWidth = 30
   const [storedOffset, setStoredOffset] = useState(0)
   const tickFormatYAxis: (x: string) => string = x => numeral(x).format('$0,0[.]00')
 
   useEffect(() => {
-    setStoredOffset(storedOffset + 1 === intervalWidth ? 0 : storedOffset + 1)
-  }, [props])
+    setStoredOffset(currentStoredOffset => (currentStoredOffset + 1 === intervalWidth ? 0 : currentStoredOffset + 1))
+  }, [dataPoints])
 
   const getDataPoint = (rawDataPoints: IDataPoint[]) =>
-    rawDataPoints.filter((value, index) => (index + storedOffset) % intervalWidth === 0)
+    rawDataPoints.filter((_, index) => (index + storedOffset) % intervalWidth === 0)
 
-  const getLinearGradientOffset: (data: IDataPoint[], previousClose: number) => number = (data, previousClose) => {
-    const yValues = data.map(i => parseFloat(i.y))
-    const dataMax = Math.max(...yValues)
-    const dataMin = Math.min(...yValues)
-
-    if (dataMax <= previousClose) {
+  const getLinearGradientOffset: (min: number, max: number, previousClose: number) => number = (min, max, pc) => {
+    if (max <= pc) {
       return 0
     }
-    if (dataMin >= previousClose) {
+    if (min >= pc) {
       return 1
     }
 
-    return 1 - (previousClose - dataMin) / (dataMax - dataMin)
+    return 1 - (pc - min) / (max - min)
   }
-  const offset = getLinearGradientOffset(props.history.dataPoints, props.history.previousClose)
   const lineProps = { strokeDasharray: '4 3', stroke: '#444C5F', strokeOpacity: 0.9, strokeWidth: 0.8 }
-  const dataPoints = getDataPoint(props.history.dataPoints)
-  const { low, high } = props.history.dataPoints
+  const filteredDataPoints = getDataPoint(dataPoints)
+  const { trueLow, trueHigh } = dataPoints
     .map(point => parseFloat(point.y))
     .reduce(
       (result, value) => {
-        if (value > result.high) {
-          result.high = value
+        if (value > result.trueHigh) {
+          result.trueHigh = value
         }
-        if (value < result.low) {
-          result.low = value
+        if (value < result.trueLow) {
+          result.trueLow = value
         }
         return result
       },
-      { high: props.history.previousClose, low: props.history.previousClose },
+      { trueHigh: -Infinity, trueLow: Infinity },
     )
+  const offset = getLinearGradientOffset(trueLow, trueHigh, previousClose)
+  const low = trueLow < previousClose ? trueLow : previousClose
+  const high = trueHigh > previousClose ? trueHigh : previousClose
   return (
     <DataCard>
       <Heading>Market Summary</Heading>
-      {props.history.dataPoints.length > 0 ? (
+      {dataPoints.length > 0 ? (
         <AnalyticsLineChartStyle>
           <ResponsiveContainer width="99%" maxHeight={300} minHeight={200}>
-            <LineChart data={props.history.dataPoints} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
+            <LineChart data={dataPoints} margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                   <stop offset={offset} stopColor="#28c988" stopOpacity={1} strokeWidth={1.2} />
@@ -105,13 +99,13 @@ const History: React.FunctionComponent<IHistoryProps> = props => {
                 dataKey="x"
                 tickLine={false}
                 width={400}
-                ticks={[props.history.dataPoints[0], ...dataPoints].map(({ x }) => x)}
+                ticks={[dataPoints[0], ...filteredDataPoints].map(({ x }) => x)}
                 interval="preserveStartEnd"
                 axisLine={false}
               />
-              <ReferenceLine y={props.history.previousClose} {...lineProps} stroke="#444C5F" />
+              <ReferenceLine y={previousClose} {...lineProps} />
               {offset < 1 && <ReferenceLine y={0} stroke="white" strokeOpacity={0.3} strokeWidth={1} />}
-              {[props.history.dataPoints[0], ...dataPoints].map(({ x }, i) => (
+              {[dataPoints[0], ...filteredDataPoints].map(({ x }, i) => (
                 <ReferenceLine key={i} x={x} {...lineProps} />
               ))}
             </LineChart>

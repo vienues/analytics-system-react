@@ -2,35 +2,41 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Downshift, { DownshiftInterface, GetItemPropsOptions } from 'downshift'
 import React from 'react'
-import styled from 'styled-components'
-import { search_search } from '../../../__generated__/types'
+import { search_search as SearchResult } from '../../../__generated__/types'
+import { styled } from '../../../rt-theme'
 
-export interface ISearchBarProps {
-  items: search_search[]
-  initialItem: search_search | null
-  onChange: (symbol: search_search | null) => void
-  onTextChange: (text: string) => void
+interface IClearSearchProps {
+  clearFunction: () => void
+  style: React.CSSProperties
 }
 
-const ClearSearch: React.FunctionComponent<{ clearFunction: () => void; style: React.CSSProperties }> = props => {
+const ClearSearch: React.FunctionComponent<IClearSearchProps> = ({ clearFunction, style }) => {
   const clearClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    props.clearFunction()
+    clearFunction()
   }
   return (
-    <button style={{ ...props.style, cursor: 'pointer' }} onClick={clearClick}>
+    <button style={{ ...style, cursor: 'pointer' }} onClick={clearClick}>
       <FontAwesomeIcon icon={faTimes} title="Clear selection" />
     </button>
   )
 }
 
-const TypedDownshift: DownshiftInterface<search_search> = Downshift
+const TypedDownshift: DownshiftInterface<SearchResult> = Downshift
+
+interface ISearchBarProps {
+  items: SearchResult[]
+  initialItem: SearchResult | null
+  onChange: (symbol: SearchResult | null) => void
+  onTextChange: (text: string) => void
+}
 
 class SearchInput extends React.Component<ISearchBarProps, {}> {
   constructor(props: ISearchBarProps) {
     super(props)
     this.inputFocus = this.inputFocus.bind(this)
   }
-  public searchResultToOptionString = (item: search_search | null): string => (item ? `${item.id} - ${item.name}` : '')
+
+  public searchResultToOptionString = (item: SearchResult | null): string => (item ? `${item.id} - ${item.name}` : '')
 
   public inputFocus = (e: React.SyntheticEvent<HTMLInputElement>) => {
     e.currentTarget.select()
@@ -81,9 +87,9 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
   }
 
   private renderItems(
-    itemsList: search_search[],
+    itemsList: SearchResult[],
     inputValue: string | null,
-    getItemProps: (options: GetItemPropsOptions<search_search>) => any,
+    getItemProps: (options: GetItemPropsOptions<SearchResult>) => any,
   ) {
     const filteredList = itemsList.filter(
       item => !inputValue || item.id.includes(inputValue) || item.name.includes(inputValue),
@@ -101,7 +107,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
 
 const SearchResults = styled.menu`
   position: absolute;
-  background: ${props => props.theme.core.darkBackground}E0;
+  background: ${({ theme }) => theme.core.darkBackground}E0;
   z-index: 1000;
   border: solid 1px ${({ theme }) => theme.secondary.base};
   border-radius: 5px;

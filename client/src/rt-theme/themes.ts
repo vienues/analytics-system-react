@@ -30,9 +30,6 @@ interface IBaseTheme {
   textColor: Color
 }
 
-type GeneratedTheme = ReturnType<typeof createTheme>
-export type Theme = IBaseTheme & GeneratedTheme
-
 interface ITouchable {
   backgroundColor: Color
   textColor: Color
@@ -52,19 +49,6 @@ interface IColorPair {
   backgroundColor: string
   textColor?: string
 }
-
-export type ThemeSelector = (theme: Theme) => Color
-
-export interface IColorProps {
-  bg?: ThemeSelector
-  fg?: ThemeSelector
-}
-
-function isColor(value: string | ThemeSelector): value is Color {
-  return typeof value === 'string' && /^(#|rgb|hsl)/.test(value)
-}
-export const getThemeColor = (theme: Theme, color: Color | ThemeSelector, fallback?: Color) =>
-  typeof color === 'function' ? color(theme) || fallback : isColor(color) ? color : fallback
 
 const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: AccentPaletteMap) => ({
   core,
@@ -174,6 +158,22 @@ const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: Acc
     }, {}),
   } as TouchableStyleSet,
 })
+
+type GeneratedTheme = ReturnType<typeof createTheme>
+export type Theme = IBaseTheme & GeneratedTheme
+
+export type ThemeSelector = (theme: Theme) => Color
+
+export interface IColorProps {
+  bg?: ThemeSelector
+  fg?: ThemeSelector
+}
+
+function isColor(value: string | ThemeSelector): value is Color {
+  return typeof value === 'string' && /^(#|rgb|hsl)/.test(value)
+}
+export const getThemeColor = (theme: Theme, color: Color | ThemeSelector, fallback?: Color) =>
+  typeof color === 'function' ? color(theme) || fallback : isColor(color) ? color : fallback
 
 const lightTheme = createTheme(colors.light, colors.accents)
 const darkTheme = createTheme(colors.dark, colors.accents)

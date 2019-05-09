@@ -1,7 +1,6 @@
 import * as React from 'react'
-import styled, { ThemeProps } from 'styled-components'
 import { Banner } from '../../common/StyledComponents'
-import { Theme } from '../../rt-theme'
+import { styled } from '../../rt-theme'
 import { MarketsList } from '../index'
 
 const Footer = () => (
@@ -11,7 +10,7 @@ const Footer = () => (
 )
 
 const FooterWrapper = styled(Banner)`
-  border-top: 1px solid ${({ theme }: ThemeProps<Theme>) => theme.core.darkBackground};
+  border-top: 1px solid ${({ theme }) => theme.core.darkBackground};
   z-index: 1000;
 `
 

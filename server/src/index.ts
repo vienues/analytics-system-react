@@ -22,6 +22,7 @@ async function bootstrap() {
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     resolvers: [path.normalize(`${__dirname}/GraphQL/**/*.resolver.js`)],
     pubSub: pubsub,
+    validate: false,
   })
   const schema = makeExecutableSchema({ typeDefs, resolvers })
   const PORT = 4000

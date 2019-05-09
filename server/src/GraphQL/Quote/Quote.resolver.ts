@@ -1,4 +1,4 @@
-import { FieldResolver, InputType, Query, Resolver, Root, Ctx, Subscription, ArgsType, Field, Args } from 'type-graphql'
+import { FieldResolver, Query, Resolver, Root, Ctx, Subscription, ArgsType, Field, Args } from 'type-graphql'
 import { default as QuoteSchema } from './Quote.schema'
 import { IdInputArgs } from '../GenericArgTypes'
 import { AdaptiveCtx, IIexQuoteQuery, IIexBatchQuote } from '../../types'

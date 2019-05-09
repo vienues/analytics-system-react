@@ -1,10 +1,9 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
-import styled from 'styled-components'
 import Logo from '../../common/Logo'
 import { Banner, Link, SwitchThemeButton } from '../../common/StyledComponents'
-import { ThemeName, useTheme } from '../../rt-theme'
+import { styled, ThemeName, useTheme } from '../../rt-theme'
 
 const ThemeControl = () => {
   const { themeName, toggleTheme } = useTheme()
@@ -18,7 +17,7 @@ const ThemeControl = () => {
   )
 }
 
-const AppBar: React.FunctionComponent = () => (
+const AppBar = () => (
   <AppWrapper>
     <Link target="_blank" href="https://weareadaptive.com/">
       <Logo size={1.75} />

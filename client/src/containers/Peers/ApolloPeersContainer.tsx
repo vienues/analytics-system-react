@@ -1,13 +1,12 @@
 import React from 'react'
-import { ChildProps } from 'react-apollo'
 import { PeersQuery, PeersQueryVariables } from '../../__generated__/types'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { Peers } from './components'
 import CompanyConnection from './graphql/PeersConnection.graphql'
 
-const ApolloPeersContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
-  const onCompanyQueryResult: (data: PeersQuery) => JSX.Element = ({ stock: { peers } }) => {
+const ApolloPeersContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
+  const onCompanyQueryResult = ({ stock: { peers } }: PeersQuery): JSX.Element => {
     return <Peers peers={peers} />
   }
 

@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { search, search_search, searchQuery, searchQueryVariables, searchVariables } from '../../__generated__/types'
+import {
+  search as SimpleSearchQuery,
+  search_search,
+  searchQuery,
+  searchQueryVariables,
+  searchVariables,
+} from '../../__generated__/types'
 import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
@@ -9,13 +15,13 @@ import { SearchInput } from './components'
 import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 
-export interface IProps extends IApolloContainerProps {
+interface IProps extends IApolloContainerProps {
   url?: RegExp
 }
 
 type Props = RouteComponentProps & IProps
 
-export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Props) => {
+const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url }: Props) => {
   const [initialized, setInitialized] = useState(false)
   const [currentSymbol, setCurrentSymbol] = useState<search_search | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
@@ -23,11 +29,11 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
   useEffect(() => {
     if (!initialized) {
       setInitialized(true)
-      if (props.id) {
+      if (id) {
         apolloClient
           .query<searchQuery, searchQueryVariables>({
             query: SearchConnection,
-            variables: { id: props.id },
+            variables: { id },
           })
           .then(result => {
             if (result.data && result.data.stock && result.data.stock.company) {
@@ -40,7 +46,7 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
           })
       }
     }
-  }, [props.id])
+  }, [initialized, id])
 
   const onTextChange = (text: string) => {
     setCurrentText(text)
@@ -49,24 +55,26 @@ export const ApolloSeachContainer: React.FunctionComponent<Props> = (props: Prop
   const handleChange = (symbol: search_search | null) => {
     setCurrentSymbol(symbol)
     if (symbol) {
-      props.history.push(`${props.url}${symbol.id}`)
+      history.push(`${url}${symbol.id}`)
     } else {
-      props.history.push(``)
+      history.push(``)
     }
   }
 
+  const onSearchInputResults = ({ search }: SimpleSearchQuery): JSX.Element => {
+    return (
+      <SearchInput
+        initialItem={currentSymbol ? currentSymbol : null}
+        items={search}
+        onChange={handleChange}
+        onTextChange={onTextChange}
+      />
+    )
+  }
+
   return (
-    <AppQuery<search, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
-      {(data, __) => {
-        return (
-          <SearchInput
-            initialItem={currentSymbol ? currentSymbol : null}
-            items={data.search}
-            onChange={handleChange}
-            onTextChange={onTextChange}
-          />
-        )
-      }}
+    <AppQuery<SimpleSearchQuery, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
+      {onSearchInputResults}
     </AppQuery>
   )
 }

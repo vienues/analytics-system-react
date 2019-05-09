@@ -1,12 +1,12 @@
 import React from 'react'
-import { ChildProps, Subscription, SubscriptionProps, SubscriptionResult } from 'react-apollo'
+import { Subscription, SubscriptionProps, SubscriptionResult } from 'react-apollo'
 import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../../__generated__/types'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 
-const ApolloStockPriceContainer: React.FunctionComponent<ChildProps<IApolloContainerProps, Response>> = ({ id }) => {
+const ApolloStockPriceContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
   const onStockPriceSubscriptionSuccess = (results: SubscriptionResult<onStockPriceSubscription>): JSX.Element => {
     const { data, loading } = results
     if (loading) {

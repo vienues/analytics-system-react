@@ -24,6 +24,7 @@ const Bar = styled('rect')<IBarProps>`
 `
 
 type LoaderType = 'primary' | 'secondary'
+
 interface IProps {
   size: number | string
   type?: LoaderType
@@ -31,9 +32,13 @@ interface IProps {
   speed?: number
 }
 
-const AdaptiveLoader: React.FunctionComponent<IProps> = props => {
-  const { size, type = 'primary', seperation, speed = ANIMATION_SPEED, children } = props
-
+const AdaptiveLoader: React.FunctionComponent<IProps> = ({
+  size,
+  type = 'primary',
+  seperation,
+  speed = ANIMATION_SPEED,
+  children,
+}) => {
   const sizeNum = Number(size)
   const barHeight = sizeNum * 0.75
   const barWidth = barHeight / 4

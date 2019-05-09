@@ -1,17 +1,16 @@
 import React from 'react'
-import { ChildProps, Subscription, SubscriptionResult } from 'react-apollo'
-import styled from 'styled-components'
+import { Subscription, SubscriptionResult } from 'react-apollo'
 import { MarketQuery, onMarketSubscription, onMarketSubscriptionVariables } from '../../__generated__/types'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { AppQuery } from '../../common/AppQuery'
 import { DataContents, Text } from '../../common/StyledComponents'
+import { styled } from '../../rt-theme'
 import { StockPrice } from '../StockPrice/components'
 import MarketsConnection from './graphql/MarketConnection.graphql'
 import MarketSubscription from './graphql/MarketSubscription.graphql'
 
-const ApolloMarketsListContainer: React.FunctionComponent<ChildProps<{}, Response>> = () => {
-  const onMarketSubscriptionSuccess = (results: SubscriptionResult<onMarketSubscription>): JSX.Element => {
-    const { data, loading } = results
+const ApolloMarketsListContainer = () => {
+  const onMarketSubscriptionSuccess = ({ data, loading }: SubscriptionResult<onMarketSubscription>): JSX.Element => {
     if (loading) {
       return <AdaptiveLoader size={35} speed={1.4} />
     }

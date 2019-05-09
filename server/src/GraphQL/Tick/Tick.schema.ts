@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType, Float } from 'type-graphql'
+import { Field, ObjectType, Float } from 'type-graphql'
 import { DateScalar, TimeScalar, DateTime, DateTimeScalar, Date, Time } from '../DateScalars'
 
 @ObjectType()

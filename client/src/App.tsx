@@ -21,46 +21,39 @@ interface IComponentWithProps {
   }
 }
 
-class App extends React.Component<{}, {}> {
-  /** Rather than lambda or binding individual generators in the Route we will generate them from object */
-  private static routerItems: IComponentWithProps = {
-    '/': { component: MainLayout },
-    '/company/:id?': { component: Company },
-    '/history/:id?': { component: History },
-    '/news/:id?': { component: News },
-    '/peers/:id?': { component: Peers },
-    '/search/:id?': { component: Search, props: { url: /search/ } },
-    '/stats/:id?': { component: Stats },
-    '/stock/:id': { component: MainLayout },
-  }
+/** Rather than lambda or binding individual generators in the Route we will generate them from object */
+const routerItems: IComponentWithProps = {
+  '/': { component: MainLayout },
+  '/company/:id?': { component: Company },
+  '/history/:id?': { component: History },
+  '/news/:id?': { component: News },
+  '/peers/:id?': { component: Peers },
+  '/search/:id?': { component: Search, props: { url: /search/ } },
+  '/stats/:id?': { component: Stats },
+  '/stock/:id': { component: MainLayout },
+}
 
-  constructor(props: {}) {
-    super(props)
-    this.renderRouterElement = this.renderRouterElement.bind(this)
-  }
-
-  public renderRouterElement(e: RouteComponentProps): JSX.Element {
-    const element = App.routerItems[e.match.path]
+const App = () => {
+  const renderRouterElement = (e: RouteComponentProps): JSX.Element => {
+    const element = routerItems[e.match.path]
     return React.createElement(element.component, { ...element.props, id: (e.match.params as any).id })
   }
 
-  public render() {
-    return (
-      <ApolloProvider client={apolloClient}>
-        <GlobalStyle />
-        <ThemeProvider>
-          <GlobalScrollbarStyle />
-          <BrowserRouter>
-            <Switch>
-              {Object.keys(App.routerItems).map(route => (
-                <Route key={route} exact={true} path={route} component={this.renderRouterElement} />
-              ))}
-            </Switch>
-          </BrowserRouter>
-        </ThemeProvider>
-      </ApolloProvider>
-    )
-  }
+  return (
+    <ApolloProvider client={apolloClient}>
+      <GlobalStyle />
+      <ThemeProvider>
+        <GlobalScrollbarStyle />
+        <BrowserRouter>
+          <Switch>
+            {Object.keys(routerItems).map(route => (
+              <Route key={route} exact={true} path={route} component={renderRouterElement} />
+            ))}
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </ApolloProvider>
+  )
 }
 
 export default App

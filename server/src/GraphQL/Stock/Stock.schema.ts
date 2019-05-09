@@ -1,4 +1,4 @@
-import { Field, Float, ID, ObjectType, InputType, Query } from 'type-graphql'
+import { Field, Float, ID, ObjectType } from 'type-graphql'
 import StockStats from './StockStats.schema'
 import Tick from '../Tick/Tick.schema'
 import Company from '../Company/Company.schema'

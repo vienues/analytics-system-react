@@ -2,7 +2,6 @@ import * as R from 'ramda'
 import Fuse from 'fuse.js'
 import data from '../mockData/referenceSymbols.json'
 import { RefSymbol } from '../types'
-import { PubSub } from 'graphql-subscriptions'
 
 type SearchResult<T> = { item?: T } & { score: number }
 

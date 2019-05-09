@@ -10,11 +10,9 @@ export interface ICompanyDetails {
   description: string
 }
 
-interface ICompanyProps {
-  company: ICompanyDetails
-}
-
-const Company: React.FunctionComponent<ICompanyProps> = ({ company: { description, name, symbol, website } }) => (
+const Company: React.FunctionComponent<{ company: ICompanyDetails }> = ({
+  company: { description, name, symbol, website },
+}) => (
   <DataCard>
     <Heading>Company Overview</Heading>
     <Link target="_blank" href={website}>

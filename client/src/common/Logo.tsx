@@ -1,13 +1,12 @@
 import React, { SVGAttributes } from 'react'
-import styled, { ThemeProps } from 'styled-components'
-import { Theme } from '../rt-theme'
+import { styled } from '../rt-theme'
 
 interface ILogoProps extends SVGAttributes<Element> {
   fill?: string
   size?: number
 }
 
-const Logo: React.FC<ILogoProps> = ({ fill = '#000', size = 2, style, ...props }) => {
+const Logo: React.FunctionComponent<ILogoProps> = ({ fill = '#000', size = 2, style, ...props }) => {
   style = {
     height: size + 'rem',
     width: size * 4.375 + 'rem',
@@ -47,6 +46,6 @@ const Logo: React.FC<ILogoProps> = ({ fill = '#000', size = 2, style, ...props }
 
 export default styled(Logo)`
   [fill] {
-    fill: ${({ theme }: ThemeProps<Theme>) => theme.core.textColor};
+    fill: ${({ theme }) => theme.core.textColor};
   }
 `
