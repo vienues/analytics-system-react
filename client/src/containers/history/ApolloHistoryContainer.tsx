@@ -25,7 +25,11 @@ export const ApolloHistoryContainer: React.FunctionComponent<IApolloContainerPro
   }
 
   return (
-    <AppQuery<HistoryQuery, HistoryQueryVariables> query={HistoryConnection} variables={{ id }}>
+    <AppQuery<HistoryQuery, HistoryQueryVariables>
+      query={HistoryConnection}
+      variables={{ id }}
+      renderLoadingHeight="275px"
+    >
       {onHistoryQueryResults}
     </AppQuery>
   )

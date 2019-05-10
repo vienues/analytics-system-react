@@ -32,6 +32,7 @@ interface IAppQueryProps<Data, Variables> {
   renderNetworkStatus?: (networkStatus: NetworkStatus, result: QueryResult<Data, Variables>) => ReactNode
   renderError?: (error: Error, result: QueryResult<Data, Variables>) => ReactNode
   renderNoData?: (result: QueryResult<Data, Variables>) => ReactNode
+  renderLoadingHeight?: string
 }
 
 export class AppQuery<Data, Variables> extends React.Component<
@@ -40,11 +41,12 @@ export class AppQuery<Data, Variables> extends React.Component<
   constructor(props: OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>) {
     super(props)
     this.onQueryResults = this.onQueryResults.bind(this)
+    this.defaultRenderNetworkStatus = this.defaultRenderNetworkStatus.bind(this)
   }
   public defaultRenderNetworkStatus = (networkStatus: NetworkStatus, _: QueryResult<Data, Variables>) => {
     if (networkStatus === NetworkStatus.loading) {
       return (
-        <LoadableStyle>
+        <LoadableStyle minHeight={this.props.renderLoadingHeight}>
           <AdaptiveLoader size={50} speed={1.4} />
         </LoadableStyle>
       )

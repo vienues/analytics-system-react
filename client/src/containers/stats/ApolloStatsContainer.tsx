@@ -11,7 +11,7 @@ const ApolloStatsContainer: React.FunctionComponent<IApolloContainerProps> = ({ 
   }
 
   return (
-    <AppQuery<StatsQuery, StatsQueryVariables> query={StatsConnection} variables={{ id }}>
+    <AppQuery<StatsQuery, StatsQueryVariables> query={StatsConnection} variables={{ id }} renderLoadingHeight="225px">
       {onStatsQueryResults}
     </AppQuery>
   )

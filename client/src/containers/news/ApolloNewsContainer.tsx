@@ -11,7 +11,7 @@ const ApolloNewsContainer: React.FunctionComponent<IApolloContainerProps> = ({ i
   }
 
   return (
-    <AppQuery<NewsQuery, NewsQueryVariables> query={NewsConnection} variables={{ id }}>
+    <AppQuery<NewsQuery, NewsQueryVariables> query={NewsConnection} variables={{ id }} renderLoadingHeight="225px">
       {onNewsQueryResults}
     </AppQuery>
   )

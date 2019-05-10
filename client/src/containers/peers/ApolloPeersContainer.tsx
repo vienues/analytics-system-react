@@ -11,7 +11,7 @@ const ApolloPeersContainer: React.FunctionComponent<IApolloContainerProps> = ({ 
   }
 
   return (
-    <AppQuery<PeersQuery, PeersQueryVariables> query={CompanyConnection} variables={{ id }}>
+    <AppQuery<PeersQuery, PeersQueryVariables> query={CompanyConnection} variables={{ id }} renderLoadingHeight="100px">
       {onCompanyQueryResult}
     </AppQuery>
   )

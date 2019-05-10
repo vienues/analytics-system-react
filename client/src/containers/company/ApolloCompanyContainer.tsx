@@ -12,7 +12,11 @@ const ApolloCompanyContainer: React.FunctionComponent<IApolloContainerProps> = (
   }
 
   return (
-    <AppQuery<CompanyQuery, CompanyQueryVariables> query={CompanyConnection} variables={{ id }}>
+    <AppQuery<CompanyQuery, CompanyQueryVariables>
+      query={CompanyConnection}
+      variables={{ id }}
+      renderLoadingHeight="175px"
+    >
       {onCompanyQueryResults}
     </AppQuery>
   )
