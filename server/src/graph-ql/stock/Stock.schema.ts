@@ -1,9 +1,9 @@
 import { Field, Float, ID, ObjectType } from 'type-graphql'
 import StockStats from './StockStats.schema'
-import Tick from '../Tick/Tick.schema'
-import Company from '../Company/Company.schema'
-import Quote from '../Quote/Quote.schema'
-import News from '../News/News.schema'
+import Tick from '../tick/Tick.schema'
+import Company from '../company/Company.schema'
+import Quote from '../quote/Quote.schema'
+import News from '../news/News.schema'
 
 @ObjectType()
 export default class Stock {

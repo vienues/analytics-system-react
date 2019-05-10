@@ -20,7 +20,7 @@ async function bootstrap() {
   const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
-    resolvers: [path.normalize(`${__dirname}/GraphQL/**/*.resolver.js`)],
+    resolvers: [path.normalize(`${__dirname}/graph-ql/**/*.resolver.js`)],
     pubSub: pubsub,
     validate: false,
   })

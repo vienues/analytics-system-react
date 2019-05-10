@@ -1,5 +1,5 @@
 import { Field, Float, ID, ObjectType } from 'type-graphql'
-import Company from '../Company/Company.schema'
+import Company from '../company/Company.schema'
 import { DateScalar, Date } from '../DateScalars'
 
 @ObjectType()

@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType, Float, Int } from 'type-graphql'
-import Company from '../Company/Company.schema'
+import Company from '../company/Company.schema'
 
 @ObjectType()
 export default class Quote {

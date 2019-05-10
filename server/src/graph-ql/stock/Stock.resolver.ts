@@ -4,11 +4,11 @@ import SearchResult from './SearchResult.schema'
 import search from '../../services/searchIndex'
 import { IdInputArgs } from '../GenericArgTypes'
 import { IIexQuoteQuery, IIexCompanyQuery, IIexStatsQuery, IIexChart1d, AdaptiveCtx } from '../../types'
-import Quote from '../Quote/Quote.schema'
-import Company from '../Company/Company.schema'
-import { AutoResolvedFields as AutoResolvedCompanyFields } from '../Company/Company.resolver'
-import Tick from '../Tick/Tick.schema'
-import { AutoCastedFields as AutoCastedQuoteFields } from '../Quote/Quote.resolver'
+import Quote from '../quote/Quote.schema'
+import Company from '../company/Company.schema'
+import { AutoResolvedFields as AutoResolvedCompanyFields } from '../company/Company.resolver'
+import Tick from '../tick/Tick.schema'
+import { AutoCastedFields as AutoCastedQuoteFields } from '../quote/Quote.resolver'
 
 @Resolver(of => StockSchema)
 export default class Stock {
