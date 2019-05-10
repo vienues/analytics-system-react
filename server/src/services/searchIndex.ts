@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import Fuse from 'fuse.js'
-import data from '../mockData/referenceSymbols.json'
+import data from '../mock-data/referenceSymbols.json'
 import { RefSymbol } from '../types'
 
 type SearchResult<T> = { item?: T } & { score: number }

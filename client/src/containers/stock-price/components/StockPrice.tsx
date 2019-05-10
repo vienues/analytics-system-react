@@ -46,8 +46,8 @@ interface IStockPriceWrapperAttrs {
 }
 
 const StockPriceWrapper = styled(VerticalDataContents)<IStockPriceWrapperAttrs>`
-  font-size: ${({ size }) => size || 1}rem;
-  line-height: ${({ size }) => size || 1}rem;
+  font-size: ${({ size }) => `${size}rem` || `inherit`};
+  line-height: ${({ size }) => `${size}rem` || `inherit`};
   grid-gap: 0.5rem;
 `
 

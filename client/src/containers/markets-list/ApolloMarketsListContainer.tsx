@@ -5,7 +5,7 @@ import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { AppQuery } from '../../common/AppQuery'
 import { DataContents, Text } from '../../common/StyledComponents'
 import { styled } from '../../rt-theme'
-import { StockPrice } from '../StockPrice/components'
+import { StockPrice } from '../stock-price/components'
 import MarketsConnection from './graphql/MarketConnection.graphql'
 import MarketSubscription from './graphql/MarketSubscription.graphql'
 

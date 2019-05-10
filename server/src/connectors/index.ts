@@ -1,9 +1,9 @@
 import * as real from './iex'
 import faker from './faker'
 
-import companyData from '../mockData/companyData.json'
-import stockData from '../mockData/stockData.json'
-import marketData from '../mockData/marketListData.json'
+import companyData from '../mock-data/companyData.json'
+import stockData from '../mock-data/stockData.json'
+import marketData from '../mock-data/marketListData.json'
 
 const fakeIex = faker({
   company: companyData,
