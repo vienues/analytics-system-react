@@ -38,9 +38,7 @@
     "demo": "serve -s -p=3000 build",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-app-rewired eject",
-    "schema": "apollo-codegen introspect-schema http://localhost:4000/graphql --output ./src/schema.json",
-    "types": "./node_modules/.bin/apollo-codegen generate src/**/*.graphql --addTypename --schema ./src/schema.json --target typescript --output ./src/__generated__/types.ts"
+    "eject": "react-app-rewired eject"
   },
   "devDependencies": {
     "@types/jest": "24.0.11",

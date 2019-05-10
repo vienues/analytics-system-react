@@ -1,5 +1,7 @@
 # Adaptive Insights
 
+[![CircleCI](https://circleci.com/gh/AdaptiveConsulting/adaptive-insights.svg?style=svg&circle-token=8dfbb24676c7e9d51bc4668cacec12d31104b0f6)](https://circleci.com/gh/AdaptiveConsulting/adaptive-insights)
+
 - [Overview](#overview)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
