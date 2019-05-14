@@ -118,7 +118,7 @@ export interface onMarketSubscriptionVariables {
 export interface NewsQuery_news {
   __typename: 'News'
   id: string
-  datetime: string
+  datetime: any
   headline: string
   source: string
   url: string
@@ -212,7 +212,7 @@ export interface searchVariables {
 // ====================================================
 
 export interface StatsQuery_stock_stats {
-  __typename: 'StockStats'
+  __typename: 'Stats'
   marketcap: number
   peRatioLow: number
   peRatioHigh: number
@@ -330,7 +330,7 @@ export interface History {
 
 export interface News {
   __typename: 'News'
-  datetime: string
+  datetime: any
   headline: string
   source: string
   url: string
@@ -358,7 +358,7 @@ export interface Peers {
 // ====================================================
 
 export interface Stats_stats {
-  __typename: 'StockStats'
+  __typename: 'Stats'
   marketcap: number
   peRatioLow: number
   peRatioHigh: number

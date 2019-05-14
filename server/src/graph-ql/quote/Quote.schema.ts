@@ -1,119 +1,120 @@
-import { Field, ID, ObjectType, Float, Int } from 'type-graphql'
+import { Field, Float, ID, Int, ObjectType } from 'type-graphql'
 import Company from '../company/Company.schema'
+import { DateTime, DateTimeScalar, Time, TimeScalar } from '../DateScalars'
 
 @ObjectType()
 export default class Quote {
   @Field(() => ID)
-  id?: string | undefined
+  public id!: string
 
   @Field()
-  symbol?: string
+  public symbol!: string
 
   @Field(type => Company)
-  company?: Company
+  public company!: Company
 
   @Field()
-  companyName?: string
+  public companyName!: string
 
   @Field()
-  primaryExchange?: string
+  public primaryExchange!: string
 
   @Field()
-  sector?: string
+  public sector!: string
 
   @Field()
-  calculationPrice?: string
+  public calculationPrice!: string
 
   @Field(() => Float)
-  open?: number
+  public open!: number
 
-  @Field()
-  openTime?: Date
-
-  @Field(() => Float)
-  close?: number
-
-  @Field()
-  closeTime?: Date
+  @Field(type => DateTimeScalar)
+  public openTime!: DateTime
 
   @Field(() => Float)
-  high?: number
+  public close!: number
+
+  @Field(type => DateTimeScalar)
+  public closeTime!: DateTime
 
   @Field(() => Float)
-  low?: number
+  public high!: number
 
   @Field(() => Float)
-  latestPrice?: number
+  public low!: number
+
+  @Field(() => Float)
+  public latestPrice!: number
 
   @Field()
-  latestSource?: string
+  public latestSource!: string
 
-  @Field()
-  latestTime?: Date
+  @Field(type => TimeScalar)
+  public latestTime!: Time
 
-  @Field()
-  latestUpdate?: Date
+  @Field(type => DateTimeScalar)
+  public latestUpdate!: DateTime
 
   @Field(() => Int)
-  latestVolume?: number
+  public latestVolume!: number
 
   @Field(() => Float)
-  iexRealtimePrice?: number
+  public iexRealtimePrice!: number
 
   @Field(() => Int)
-  iexRealtimeSize?: number
+  public iexRealtimeSize!: number
 
-  @Field()
-  iexLastUpdated?: Date
-
-  @Field(() => Float)
-  delayedPrice?: number
-
-  @Field()
-  delayedPriceTime?: Date
+  @Field(type => DateTimeScalar)
+  public iexLastUpdated!: DateTime
 
   @Field(() => Float)
-  previousClose?: number
+  public delayedPrice!: number
+
+  @Field(type => DateTimeScalar)
+  public delayedPriceTime!: DateTime
 
   @Field(() => Float)
-  change?: number
+  public previousClose!: number
 
   @Field(() => Float)
-  changePercent?: number
+  public change!: number
 
   @Field(() => Float)
-  iexMarketPercent?: number
+  public changePercent!: number
+
+  @Field(() => Float)
+  public iexMarketPercent!: number
 
   @Field(() => Int)
-  iexVolume?: number
+  public iexVolume!: number
 
   @Field(() => Int)
-  avgTotalVolume?: number
+  public avgTotalVolume!: number
 
   @Field(() => Float)
-  iexBidPrice?: number
+  public iexBidPrice!: number
 
   @Field(() => Int)
-  iexBidSize?: number
+  public iexBidSize!: number
 
   @Field(() => Float)
-  iexAskPrice?: number
+  public iexAskPrice!: number
 
   @Field(() => Int)
-  iexAskSize?: number
+  public iexAskSize!: number
 
   @Field(() => Float)
-  marketCap?: number
+  public marketCap!: number
+
+  @Field(() => Float, { nullable: true })
+  public peRatio?: number
 
   @Field(() => Float)
-  peRatio?: number
+  public week52High!: number
 
   @Field(() => Float)
-  week52High?: number
+  public week52Low!: number
 
   @Field(() => Float)
-  week52Low?: number
-
-  @Field(() => Float)
-  ytdChange?: number
+  public ytdChange!: number
 }

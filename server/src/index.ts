@@ -1,18 +1,20 @@
-import 'reflect-metadata'
-import express from 'express'
+import { graphiqlExpress, graphqlExpress } from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express'
-import { createServer } from 'http'
-import { SubscriptionServer, ConnectionContext } from 'subscriptions-transport-ws'
+import express from 'express'
 import { execute, subscribe } from 'graphql'
-import getDataSource from './connectors/index'
-import { buildTypeDefsAndResolvers } from 'type-graphql'
 import { makeExecutableSchema } from 'graphql-tools'
-import { pubsub } from './pubsub'
-import MessageTypes from 'subscriptions-transport-ws/dist/message-types'
-import pricing from './services/pricing'
+import { createServer } from 'http'
 import path from 'path'
+import 'reflect-metadata'
+import { SubscriptionServer } from 'subscriptions-transport-ws'
+import MessageTypes from 'subscriptions-transport-ws/dist/message-types'
+import { buildTypeDefsAndResolvers } from 'type-graphql'
+import { Container } from 'typedi'
+import getDataSource from './connectors/index'
+import { pubsub } from './pubsub'
+import logger from './services/logger'
+import pricing from './services/pricing'
 
 pricing(pubsub)
 
@@ -20,8 +22,9 @@ async function bootstrap() {
   const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
-    resolvers: [path.normalize(`${__dirname}/graph-ql/**/*.resolver.js`)],
+    container: Container,
     pubSub: pubsub,
+    resolvers: [path.normalize(`${__dirname}/graph-ql/**/*.resolver.js`)],
     validate: false,
   })
   const schema = makeExecutableSchema({ typeDefs, resolvers })
@@ -41,8 +44,8 @@ async function bootstrap() {
     '/graphql',
     bodyParser.json(),
     graphqlExpress({
-      schema,
       context: { iex },
+      schema,
     }),
   )
 
@@ -57,7 +60,7 @@ async function bootstrap() {
   // Wrap the Express server
   const ws = createServer(server)
 
-  interface SubscriptionOptions extends Object {
+  interface ISubscriptionOptions extends Object {
     query: string
     variables: {
       [key: string]: any
@@ -71,33 +74,36 @@ async function bootstrap() {
     }
   }
 
-  interface SubscribeMessage extends Object {
+  interface ISubscribeMessage extends Object {
     id: string
     type: MessageTypes
-    payload: SubscriptionOptions
+    payload: ISubscriptionOptions
   }
 
   type OperationId = string
   type Symbols = string[]
 
-  interface WebSocketWithQuoteExtras extends WebSocket {
+  interface IWebSocketWithQuoteExtras extends WebSocket {
     id?: string
     operation: Map<OperationId, Symbols>
   }
 
   ws.listen(PORT, () => {
-    console.info(`Apollo Server is now running on http://localhost:${PORT}`)
+    logger.info(`Apollo Server is now running on http://localhost:${PORT}`)
     // Set up the WebSocket for handling GraphQL subscriptions
+    // tslint:disable-next-line:no-unused-expression
     new SubscriptionServer(
       {
         execute,
-        subscribe,
         schema,
+        subscribe,
+
+        // tslint:disable-next-line:object-literal-sort-keys
         onOperation: (
-          message: SubscribeMessage,
-          params: SubscriptionOptions,
-          socket: WebSocketWithQuoteExtras,
-        ): SubscriptionOptions => {
+          message: ISubscribeMessage,
+          params: ISubscriptionOptions,
+          socket: IWebSocketWithQuoteExtras,
+        ): ISubscriptionOptions => {
           if (!socket.operation) {
             socket.operation = new Map<OperationId, Symbols>()
           }
@@ -105,17 +111,17 @@ async function bootstrap() {
           if (socket.operation.has(message.id)) {
             throw new Error(`Received same operation twice!`)
           }
-          socket.operation.set(<OperationId>message.id, <Symbols>message.payload.variables.markets)
+          socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
           pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)
           return params
         },
-        onOperationComplete: (socket: WebSocketWithQuoteExtras, opId: string) => {
+        onOperationComplete: (socket: IWebSocketWithQuoteExtras, opId: string) => {
           pubsub.publish('UNSUBSCRIBE_TO_MARKET_UPDATES', socket.operation.get(opId))
         },
       },
       {
-        server: ws,
         path: '/subscriptions',
+        server: ws,
       },
     )
   })

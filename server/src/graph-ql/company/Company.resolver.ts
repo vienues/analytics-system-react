@@ -1,26 +1,24 @@
-import { Arg, FieldResolver, Query, Resolver, Root, Ctx } from 'type-graphql'
+import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
+import { IAdaptiveCtx, IIexCompanyQuery } from '../../types'
 import { default as CompanySchema } from './Company.schema'
-import { IIexCompanyQuery, AdaptiveCtx } from '../../types'
+import CompanyService from './Company.service'
 
-export interface AutoResolvedFields {
+export interface IAutoResolvedFields {
   id: string
   name: string
 }
 
 @Resolver(of => CompanySchema)
 export default class Company {
+  constructor(private readonly companyService: CompanyService) {}
+
   @Query(returns => CompanySchema)
-  async company(@Arg('id') id: string, @Ctx() ctx: AdaptiveCtx): Promise<CompanySchema> {
-    return ctx.iex.fetch<IIexCompanyQuery & AutoResolvedFields>(`stock/${id}/company`)
+  public async company(@Arg('id') id: string, @Ctx() ctx: IAdaptiveCtx): Promise<CompanySchema> {
+    return this.companyService.getCompany(id, ctx)
   }
 
   @FieldResolver()
-  name(@Root() { companyName }: any) {
-    return companyName
-  }
-
-  @FieldResolver()
-  id(@Root() { companyName }: any) {
+  public name(@Root() { companyName }: IIexCompanyQuery) {
     return companyName
   }
 }

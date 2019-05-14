@@ -1,8 +1,10 @@
 import getDataSource from './connectors'
 
-export type AdaptiveCtx = { iex: ReturnType<typeof getDataSource> }
+export interface IAdaptiveCtx {
+  iex: ReturnType<typeof getDataSource>
+}
 
-export interface RefSymbol {
+export interface IRefSymbol {
   id: string
   symbol: string
   marketPercent: number
@@ -47,7 +49,7 @@ export interface IIexQuoteQuery {
   iexAskPrice: number
   iexAskSize: number
   marketCap: number
-  peRatio: number
+  peRatio?: number
   week52High: number
   week52Low: number
   ytdChange: number
@@ -99,7 +101,7 @@ export interface IIexStatsQuery {
   debt: number
   ttmEPS: number
   revenuePerShare: number
-  revenuePerEmployee: number
+  revenuePerEmployee: number | 'NaN'
   peRatioHigh: number
   peRatioLow: number
   returnOnAssets: number
@@ -155,4 +157,18 @@ export interface IIexNewsQuery {
   summary: string
   related: string
   image: string
+}
+
+export interface IIexPreviousQuery {
+  symbol: string
+  date: string
+  open: number
+  high: number
+  low: number
+  close: number
+  volume: number
+  unadjustedVolume: number
+  change: number
+  changePercent: number
+  vwap: number
 }

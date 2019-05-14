@@ -1,6 +1,7 @@
 import { PubSub } from 'graphql-subscriptions'
 import getDataSource from '../connectors'
 import { IIexBatchQuote } from '../types'
+import logger from './logger'
 
 const SUBSCRIBE_TO_INDEX_UPDATES = 'SUBSCRIBE_TO_MARKET_UPDATES'
 const UNSUBSCRIBE_TO_INDEX_UPDATES = 'UNSUBSCRIBE_TO_MARKET_UPDATES'
@@ -10,13 +11,13 @@ const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 const createTopic = (symbol: string) => `MARKET_UPDATE.${symbol}`
 
-interface MarketSubscription {
+interface IMarketSubscription {
   [stockSymbol: string]: {
     listenerCount: number
   }
 }
 
-const MarketSubscriptions: MarketSubscription = {}
+const MarketSubscriptions: IMarketSubscription = {}
 
 const getPricing = async (symbols: string[]): Promise<IIexBatchQuote> => {
   return iex.fetch<IIexBatchQuote>(`stock/market/batch?symbols=${symbols.join(',')}&types=quote`)
@@ -30,10 +31,10 @@ export default function(pubsub: PubSub) {
     const prices = await getPricing(Object.keys(MarketSubscriptions))
     Object.values(prices).forEach(price => {
       if (price.quote) {
-        console.log(`publishing ${createTopic(price.quote.symbol)}`)
+        logger.info(`publishing ${createTopic(price.quote.symbol)}`)
         pubsub.publish(createTopic(price.quote.symbol), price.quote)
       } else {
-        console.error(`Pricing error happened, price exists but Quote does not on object ${JSON.stringify(price)}`)
+        logger.error(`Pricing error happened, price exists but Quote does not on object ${JSON.stringify(price)}`)
       }
     })
     timer = setTimeout(executor, TICK_INTERVAL)

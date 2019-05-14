@@ -28,7 +28,9 @@
     "ramda": "^0.25.0",
     "reflect-metadata": "^0.1.13",
     "subscriptions-transport-ws": "^0.9.5",
-    "type-graphql": "^0.17.3"
+    "type-graphql": "^0.17.3",
+    "typedi": "^0.8.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.39",
@@ -48,6 +50,8 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.0.4",
     "nodemon": "^1.18.11",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3"
   }
 }

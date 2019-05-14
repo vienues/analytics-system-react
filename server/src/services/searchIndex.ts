@@ -1,22 +1,21 @@
-import * as R from 'ramda'
 import Fuse from 'fuse.js'
+import * as R from 'ramda'
 import data from '../mock-data/referenceSymbols.json'
-import { RefSymbol } from '../types'
+import { IRefSymbol } from '../types'
 
 type SearchResult<T> = { item?: T } & { score: number }
 
-const INDEX = new Fuse<RefSymbol>(data.slice(0, 1000), {
-  keys: [{ name: 'id', weight: 0.99 }, { name: 'name', weight: 0.1 }],
-
-  threshold: 0.3,
-  location: 0,
+const INDEX = new Fuse<IRefSymbol>(data.slice(0, 1000), {
   distance: 8,
+  keys: [{ name: 'id', weight: 0.99 }, { name: 'name', weight: 0.1 }],
+  location: 0,
   maxPatternLength: 32,
   minMatchCharLength: 2,
+  threshold: 0.3,
 
   // Sort by lexical score, market percentage, volume
   shouldSort: true,
-  sortFn: (a: SearchResult<RefSymbol>, b: SearchResult<RefSymbol>) => {
+  sortFn: (a: SearchResult<IRefSymbol>, b: SearchResult<IRefSymbol>) => {
     return (
       a.score -
       b.score -
@@ -26,7 +25,7 @@ const INDEX = new Fuse<RefSymbol>(data.slice(0, 1000), {
   },
 })
 
-const SYMBOL_MAP: Map<string, RefSymbol[]> = data.reduce((acc, symbol) => {
+const SYMBOL_MAP: Map<string, IRefSymbol[]> = data.reduce((acc, symbol) => {
   R.times(R.add(1), symbol.id.length).forEach(index => {
     const id = symbol.id.slice(0, index)
     const target = acc.get(id) || []

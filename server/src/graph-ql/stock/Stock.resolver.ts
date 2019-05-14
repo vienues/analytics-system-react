@@ -1,52 +1,98 @@
-import { Arg, FieldResolver, Query, Resolver, Root, Ctx, Args } from 'type-graphql'
-import { default as StockSchema } from './Stock.schema'
-import SearchResult from './SearchResult.schema'
+import { Arg, Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
 import search from '../../services/searchIndex'
+import { IAdaptiveCtx, IIexPreviousQuery } from '../../types'
+import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
-import { IIexQuoteQuery, IIexCompanyQuery, IIexStatsQuery, IIexChart1d, AdaptiveCtx } from '../../types'
-import Quote from '../quote/Quote.schema'
-import Company from '../company/Company.schema'
-import { AutoResolvedFields as AutoResolvedCompanyFields } from '../company/Company.resolver'
-import Tick from '../tick/Tick.schema'
-import { AutoCastedFields as AutoCastedQuoteFields } from '../quote/Quote.resolver'
+import { NewsSchema, NewsService } from '../news'
+import { QuoteSchema, QuoteService } from '../quote'
+import { StatsSchema, StatsService } from '../stats'
+import { TickSchema, TickService } from '../tick'
+import Previous from './Previous.schema'
+import SearchResult from './SearchResult.schema'
+import { default as StockSchema } from './Stock.schema'
+
+interface IStockFields {
+  id: string
+  symbol: string
+}
+
+interface IAutoResolvedFields {
+  chart: TickSchema[]
+  stats: StatsSchema
+  peers: string[]
+  quote: QuoteSchema
+  price: number
+  previous: Previous
+  company: CompanySchema
+  news: (last: number) => NewsSchema[]
+}
+
+type AutoFields = IAutoResolvedFields & IStockFields
 
 @Resolver(of => StockSchema)
 export default class Stock {
+  constructor(
+    private readonly companyService: CompanyService,
+    private readonly tickService: TickService,
+    private readonly newsService: NewsService,
+    private readonly statsService: StatsService,
+    private readonly quoteService: QuoteService,
+  ) {}
+
   @Query(returns => StockSchema)
-  async stock(@Args() { id }: IdInputArgs, @Ctx() ctx: AdaptiveCtx): Promise<StockSchema> {
+  public async stock(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<StockSchema> {
     return {
       id: id.toUpperCase(),
       symbol: id,
-    }
+    } as AutoFields
   }
 
   @Query(retuns => [SearchResult])
-  async search(@Arg('text') text: string) {
+  public async search(@Arg('text') text: string) {
     return search(text)
   }
 
   @FieldResolver()
-  async chart(@Root() stock: StockSchema, @Ctx() ctx: AdaptiveCtx): Promise<Tick[]> {
-    return ctx.iex.fetch<IIexChart1d[]>(`stock/${stock.id}/chart/1d`)
+  public async chart(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<TickSchema[]> {
+    return this.tickService.getChart(stock.id, ctx)
   }
 
   @FieldResolver()
-  async stats(@Root() stock: StockSchema, @Ctx() ctx: AdaptiveCtx) {
-    return ctx.iex.fetch<IIexStatsQuery>(`stock/${stock.id}/stats`)
+  public async stats(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<StatsSchema> {
+    return this.statsService.getStats(stock.id, ctx)
   }
 
   @FieldResolver()
-  async company(@Root() stock: StockSchema, @Ctx() ctx: AdaptiveCtx): Promise<Company> {
-    return ctx.iex.fetch<IIexCompanyQuery & AutoResolvedCompanyFields>(`stock/${stock.id}/company`)
+  public async company(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<CompanySchema> {
+    return this.companyService.getCompany(stock.id, ctx)
   }
 
   @FieldResolver()
-  async peers(@Root() stock: StockSchema, @Ctx() ctx: AdaptiveCtx): Promise<string[]> {
+  public async peers(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<string[]> {
     return ctx.iex.fetch<string[]>(`stock/${stock.id}/peers`)
   }
 
   @FieldResolver()
-  async quote(@Root() stock: StockSchema, @Ctx() ctx: AdaptiveCtx): Promise<Quote> {
-    return ctx.iex.fetch<IIexQuoteQuery & AutoCastedQuoteFields>(`stock/${stock.id}/quote`)
+  public async quote(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema> {
+    return this.quoteService.getQuote(stock.id, ctx)
+  }
+
+  @FieldResolver()
+  public async price(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<number> {
+    return ctx.iex.fetch<number>(`stock/${stock.id}/price`)
+  }
+
+  @FieldResolver()
+  public async previous(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Previous> {
+    return ctx.iex.fetch<IIexPreviousQuery & { date: Date }>(`stock/${stock.id}/previous`)
+  }
+
+  @FieldResolver()
+  public async news(
+    @Root() stock: StockSchema,
+    @Ctx() ctx: IAdaptiveCtx,
+    @Arg('last') last: number,
+  ): Promise<NewsSchema[]> {
+    return this.newsService.getLatestNews(stock.id, last, ctx)
   }
 }

@@ -3,35 +3,34 @@ import { Field, ID, ObjectType } from 'type-graphql'
 @ObjectType()
 export default class Company {
   @Field(() => ID)
-  id: string | undefined
+  get id(): string {
+    return this.symbol
+  }
 
   @Field()
-  symbol?: string
+  public name?: string
 
   @Field()
-  name?: string
+  public symbol!: string
 
   @Field()
-  exchange?: string
+  public exchange!: string
 
   @Field()
-  industry?: string
+  public industry!: string
 
   @Field()
-  website?: string
+  public website!: string
 
   @Field()
-  description?: string
+  public description!: string
 
   @Field()
-  CEO?: string
+  public CEO!: string
 
   @Field()
-  issueType?: string
+  public issueType!: string
 
   @Field()
-  sector?: string
-
-  @Field(() => [String])
-  peers?: [string]
+  public sector!: string
 }

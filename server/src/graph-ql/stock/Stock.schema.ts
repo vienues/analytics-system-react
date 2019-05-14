@@ -1,39 +1,40 @@
 import { Field, Float, ID, ObjectType } from 'type-graphql'
-import StockStats from './StockStats.schema'
-import Tick from '../tick/Tick.schema'
 import Company from '../company/Company.schema'
-import Quote from '../quote/Quote.schema'
 import News from '../news/News.schema'
+import Quote from '../quote/Quote.schema'
+import Stats from '../stats/Stats.schema'
+import Tick from '../tick/Tick.schema'
+import Previous from './Previous.schema'
 
 @ObjectType()
 export default class Stock {
   @Field(type => ID)
-  id: string | undefined
+  public id!: string
 
   @Field()
-  symbol?: string
+  public symbol!: string
 
   @Field(type => Float)
-  price?: number
+  public price!: number
 
-  @Field(type => StockStats)
-  stats?: StockStats
+  @Field(type => Stats)
+  public stats!: Stats
 
   @Field(() => [String])
-  peers?: string[]
+  public peers!: string[]
 
   @Field(() => [Tick])
-  chart?: Tick[]
+  public chart!: Tick[]
 
   @Field(() => Company)
-  company?: Company
+  public company!: Company
 
   @Field(() => Quote)
-  quote?: Quote
+  public quote!: Quote
 
   @Field(() => [News])
-  latestNews?: News[]
+  public news!: (last: number) => News[]
 
-  @Field(() => Tick)
-  previous?: Tick
+  @Field(() => Previous)
+  public previous!: Previous
 }

@@ -1,5 +1,6 @@
-import { join } from 'path'
 import __fetch from 'node-fetch'
+import { join } from 'path'
+import logger from '../services/logger'
 
 const ENDPOINT = 'https://api.iextrading.com/1.0'
 
@@ -9,15 +10,15 @@ export async function fetch<T>(path: string | string[], options?: any): Promise<
 
   try {
     response = await __fetch(`${ENDPOINT}${path}`, {
-      method: 'get',
-      // cache: 'no-cache',
-      redirect: 'follow',
       headers: {
         Accept: 'application/json',
       },
+      method: 'get',
+      // cache: 'no-cache',
+      redirect: 'follow',
     })
   } catch (e) {
-    console.log('IEX request error', e)
+    logger.log('IEX request error', e)
   }
 
   if (response) {

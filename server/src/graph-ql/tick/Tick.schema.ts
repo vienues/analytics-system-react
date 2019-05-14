@@ -1,59 +1,59 @@
-import { Field, ObjectType, Float } from 'type-graphql'
-import { DateScalar, TimeScalar, DateTime, DateTimeScalar, Date, Time } from '../DateScalars'
+import { Field, Float, ObjectType } from 'type-graphql'
+import { Date, DateScalar, DateTime, DateTimeScalar, Time, TimeScalar } from '../DateScalars'
 
 @ObjectType()
 export default class Tick {
   @Field(type => DateScalar)
-  date?: Date
+  public date!: Date
 
   @Field(type => TimeScalar)
-  minute?: Time
+  public minute!: Time
 
   @Field(type => DateTimeScalar)
-  datetime?: DateTime
+  public datetime!: DateTime
 
   @Field()
-  label?: string
+  public label!: string
 
   @Field(type => Float)
-  high?: number
+  public high!: number
 
   @Field(type => Float)
-  low?: number
+  public low!: number
 
   @Field(type => Float)
-  average?: number
+  public average!: number
 
   @Field(type => Float)
-  volume?: number
+  public volume!: number
 
   @Field(type => Float)
-  notional?: number
+  public notional!: number
 
   @Field(type => Float)
-  numberOfTrades?: number
+  public numberOfTrades!: number
 
   @Field(type => Float)
-  changeOverTime?: number
+  public changeOverTime!: number
 
   @Field(type => Float)
-  marktHigh?: number
+  public marketHigh!: number
 
   @Field(type => Float)
-  marketLow?: number
+  public marketLow!: number
 
   @Field(type => Float)
-  marketAverage?: number
+  public marketAverage!: number
 
   @Field(type => Float)
-  marketVolume?: number
+  public marketVolume!: number
 
   @Field(type => Float)
-  marketNotional?: number
+  public marketNotional!: number
 
   @Field(type => Float)
-  marketNumberOfTrades?: number
+  public marketNumberOfTrades!: number
 
   @Field(type => Float)
-  marketChangeOverTime?: number
+  public marketChangeOverTime!: number
 }

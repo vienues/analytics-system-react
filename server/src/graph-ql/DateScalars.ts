@@ -1,5 +1,5 @@
-import moment from 'moment'
 import { GraphQLScalarType, Kind } from 'graphql'
+import moment from 'moment'
 
 const EPOCH_MAX = 9999999999
 const DATE_REGEXP = /(\d\d\d\d)[-]?(\d\d)[-]?(\d\d)/
@@ -17,8 +17,8 @@ export type Date = any
 export type Time = any
 
 export const DateScalar = new GraphQLScalarType({
-  name: 'Date',
   description: 'Date in ISO 8601 format, i.e. YYYY-MM-DD',
+  name: 'Date',
   parseValue(value: any) {
     return moment(formatDate(value)).toDate()
   },
@@ -34,8 +34,8 @@ export const DateScalar = new GraphQLScalarType({
 })
 
 export const DateTimeScalar = new GraphQLScalarType({
-  name: 'ISODateTime',
   description: 'Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ',
+  name: 'ISODateTime',
   parseValue(value: any) {
     return moment(value).toDate()
   },
@@ -63,8 +63,8 @@ export const DateTimeScalar = new GraphQLScalarType({
 })
 
 export const TimeScalar = new GraphQLScalarType({
-  name: 'Time',
   description: 'Hours and minutes in ISO 8601 format HH:mm',
+  name: 'Time',
   parseValue(value: any) {
     return moment(value, 'HH:mm').format('HH:mm')
   },

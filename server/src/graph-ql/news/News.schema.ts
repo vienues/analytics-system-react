@@ -1,25 +1,28 @@
 import { Field, ID, ObjectType } from 'type-graphql'
+import { DateTime, DateTimeScalar } from '../DateScalars'
 
 @ObjectType()
 export default class News {
   @Field(() => ID)
-  id: string | undefined
+  get id(): string {
+    return this.url
+  }
+
+  @Field(type => DateTimeScalar)
+  public datetime!: DateTime
 
   @Field()
-  datetime?: string
+  public headline!: string
 
   @Field()
-  headline?: string
+  public source!: string
 
   @Field()
-  source?: string
+  public url!: string
 
   @Field()
-  url?: string
+  public summary!: string
 
   @Field()
-  summary?: string
-
-  @Field()
-  related?: string
+  public related!: string
 }

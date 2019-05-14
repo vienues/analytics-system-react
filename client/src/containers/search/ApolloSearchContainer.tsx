@@ -40,7 +40,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
               setCurrentSymbol({
                 __typename: 'SearchResult',
                 id: result.data.stock.id,
-                name: result.data.stock.company.id,
+                name: result.data.stock.company.name,
               } as search_search)
             }
           })
