@@ -1,5 +1,8 @@
 import { styled } from '../rt-theme'
 
+import { default as dataCard } from './DataCard'
+export const DataCard = dataCard
+
 export const AnalyticsLineChartStyle = styled.div`
   width: 100%;
   height: 100%;
@@ -38,25 +41,13 @@ export const ToolTipChildRight = styled.div`
 
 export const Banner = styled.div`
   line-height: 1.25rem;
-  padding: 0 1rem;
+  padding: 0 0 0 1rem;
   display: grid;
   align-items: center;
   min-width: 100%;
   min-height: 3.5rem;
   background-color: ${({ theme }) => theme.core.lightBackground};
   color: ${({ theme }) => theme.core.textColor};
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-`
-
-export const DataCard = styled.div`
-  display: grid;
-  border-radius: 0.25rem;
-  background-color: ${({ theme }) => theme.core.lightBackground};
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 1rem;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -81,10 +72,13 @@ export const LabeledData = styled.div`
   grid-template-columns: 1fr auto;
 `
 
-export const Heading = styled.h1`
+export const Title = styled.h1`
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
   font-weight: 400;
+`
+
+export const Heading = styled(Title)`
+  margin-bottom: 1.5rem;
 `
 
 export const Subheading = styled.h2`
@@ -134,4 +128,17 @@ export const SwitchThemeButton = styled.button`
     background-color: ${({ theme }) => theme.button.secondary.active.backgroundColor};
     color: ${({ theme }) => theme.button.secondary.textColor};
   }
+`
+
+export const PopoutButton = styled('button')`
+  .svg-icon {
+    stroke: ${({ theme }) => theme.core.textColor};
+    fill: ${({ theme }) => theme.core.textColor};
+  }
+`
+
+export const DragHandle = styled.div`
+  -webkit-app-region: drag;
+  cursor: pointer;
+  height: 100%;
 `

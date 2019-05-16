@@ -11,6 +11,7 @@ import {
 import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
+import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
 import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
@@ -56,6 +57,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
     setCurrentSymbol(symbol)
     if (symbol) {
       history.push(`${url}${symbol.id}`)
+      OpenfinService.NavigateToStock(symbol.id)
     } else {
       history.push(``)
     }

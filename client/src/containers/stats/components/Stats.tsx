@@ -1,7 +1,7 @@
 import numeral from 'numeral'
 import * as React from 'react'
 import { StatsQuery_stock as StatsQueryStock } from '../../../__generated__/types'
-import { DataCard, DataContents, FieldLabel, Heading, LabeledData, Text } from '../../../common/StyledComponents'
+import { DataCard, DataContents, FieldLabel, LabeledData, Text } from '../../../common/StyledComponents'
 import { styled } from '../../../rt-theme'
 
 const formats = {
@@ -29,8 +29,7 @@ const Fields: Array<{ key: number; label: string; format: string; field: string 
 const Stats: React.FunctionComponent<{ stock: StatsQueryStock }> = ({ stock: { quote, stats } }) => {
   const data = { ...quote, ...stats }
   return (
-    <DataCard>
-      <Heading>Key Stats</Heading>
+    <DataCard cardType="stats" title="Key Stats">
       <FieldsWrapper>
         {Fields.map(Field => {
           return (

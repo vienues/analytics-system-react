@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { DataCard, DataContents, Heading, Text } from '../../../common/StyledComponents'
+import { DataCard, DataContents, Text } from '../../../common/StyledComponents'
 import { default as Peer } from './PeerItem'
 
 const Peers: React.FunctionComponent<{ peers: string[] }> = ({ peers }) => (
-  <DataCard>
-    <Heading>Top Peers</Heading>
+  <DataCard cardType="peers" title="Top Peers">
     <PeersWrapper>
       {peers.length > 0 ? peers.map(peer => <Peer key={peer} symbol={peer} />) : <Text>No peers</Text>}
     </PeersWrapper>

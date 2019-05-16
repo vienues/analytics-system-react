@@ -4,7 +4,6 @@ import { Line, LineChart, ReferenceLine, ResponsiveContainer, Tooltip, TooltipPr
 import {
   AnalyticsLineChartStyle,
   DataCard,
-  Heading,
   Text,
   ToolTipChildLeft,
   ToolTipChildRight,
@@ -72,8 +71,7 @@ const History: React.FunctionComponent<{ history: IHistoryData }> = ({ history: 
   const low = trueLow < previousClose ? trueLow : previousClose
   const high = trueHigh > previousClose ? trueHigh : previousClose
   return (
-    <DataCard>
-      <Heading>Market Summary</Heading>
+    <DataCard cardType="history" title="Market Summary">
       {dataPoints.length > 0 ? (
         <AnalyticsLineChartStyle>
           <ResponsiveContainer width="99%" maxHeight={300} minHeight={200}>

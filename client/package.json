@@ -20,6 +20,7 @@
     "graphql-tag": "^2.7.0",
     "moment": "^2.20.1",
     "numeral": "^2.0.6",
+    "openfin-layouts": "^1.0.3",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-app-rewire-graphql-tag": "^1.1.0",
@@ -31,7 +32,8 @@
     "styled-components": "^4.2.0",
     "subscriptions-transport-ws": "^0.9.16",
     "typeface-lato": "^0.0.54",
-    "typeface-montserrat": "^0.0.54"
+    "typeface-montserrat": "^0.0.54",
+    "unstated": "^2.1.1"
   },
   "scripts": {
     "start": "tsc & react-app-rewired start",
@@ -44,6 +46,7 @@
     "@types/jest": "24.0.11",
     "@types/node": "11.13.4",
     "@types/numeral": "0.0.25",
+    "@types/openfin": "^41.0.0",
     "@types/react": "16.8.13",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "^4.3.2",

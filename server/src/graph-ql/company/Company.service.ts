@@ -6,6 +6,10 @@ import { default as CompanySchema } from './Company.schema'
 @Service()
 export default class {
   public async getCompany(symbol: string, ctx: IAdaptiveCtx): Promise<CompanySchema> {
-    return ctx.iex.fetch<IIexCompanyQuery & IAutoResolvedFields>(`stock/${symbol}/company`)
+    try {
+      return ctx.iex.fetch<IIexCompanyQuery & IAutoResolvedFields>(`stock/${symbol}/company`)
+    } catch {
+      return Promise.reject(`Error`)
+    }
   }
 }

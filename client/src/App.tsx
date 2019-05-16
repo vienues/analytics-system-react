@@ -1,12 +1,14 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
-import * as React from 'react'
+import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
 import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
 import { Company, History, MainLayout, News, Peers, Search, Stats } from './containers/'
+import { OpenfinApiProvider } from './openfin/OpenfinService'
+import { styled } from './rt-theme'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
 
@@ -40,20 +42,34 @@ const App = () => {
   }
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <GlobalStyle />
-      <ThemeProvider>
-        <GlobalScrollbarStyle />
-        <BrowserRouter>
-          <Switch>
-            {Object.keys(routerItems).map(route => (
-              <Route key={route} exact={true} path={route} component={renderRouterElement} />
-            ))}
-          </Switch>
-        </BrowserRouter>
-      </ThemeProvider>
-    </ApolloProvider>
+    <OpenfinApiProvider>
+      <ApolloProvider client={apolloClient}>
+        <GlobalStyle />
+        <ThemeProvider>
+          <GlobalScrollbarStyle />
+          <ParentContainer>
+            <BrowserRouter>
+              <Switch>
+                {Object.keys(routerItems).map(route => (
+                  <Route key={route} exact={true} path={route} component={renderRouterElement} />
+                ))}
+              </Switch>
+            </BrowserRouter>
+          </ParentContainer>
+        </ThemeProvider>
+      </ApolloProvider>
+    </OpenfinApiProvider>
   )
 }
+
+const ParentContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+
+  background-color: ${({ theme }) => theme.core.darkBackground};
+  color: ${({ theme }) => theme.core.textColor};
+`
 
 export default App

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Caption, DataCard, Heading, Link, Subheading, Text } from '../../../common/StyledComponents'
+import { Caption, DataCard, Link, Subheading, Text } from '../../../common/StyledComponents'
 
 const URL = /(http(s)?:\/\/)?/
 
@@ -13,8 +13,7 @@ export interface ICompanyDetails {
 const Company: React.FunctionComponent<{ company: ICompanyDetails }> = ({
   company: { description, name, symbol, website },
 }) => (
-  <DataCard>
-    <Heading>Company Overview</Heading>
+  <DataCard cardType="company" title="Company Overview">
     <Link target="_blank" href={website}>
       <Subheading>
         {name} ({symbol})

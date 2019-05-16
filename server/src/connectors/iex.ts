@@ -18,7 +18,7 @@ export async function fetch<T>(path: string | string[], options?: any): Promise<
       redirect: 'follow',
     })
   } catch (e) {
-    logger.log('IEX request error', e)
+    logger.info('IEX request error', e)
   }
 
   if (response) {

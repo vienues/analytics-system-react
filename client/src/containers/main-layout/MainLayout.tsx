@@ -74,8 +74,6 @@ const AppLayoutRoot = styled.div`
 
   display: grid;
   grid-template-rows: auto auto 1fr auto;
-  background-color: ${({ theme }) => theme.core.darkBackground};
-  color: ${({ theme }) => theme.core.textColor};
 `
 
 const ScrollableArea = styled.div`

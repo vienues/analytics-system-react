@@ -39,7 +39,7 @@ const ThemeStorageProvider: React.FunctionComponent<{ storage?: typeof localStor
       if (event.key === STORAGE_KEY) {
         const storedThemeName = internalStorage.getItem(STORAGE_KEY) as ThemeName
         if (storedThemeName && themes[storedThemeName] != null) {
-          setThemeName(themeName)
+          setThemeName(storedThemeName)
         }
       }
     }
@@ -49,7 +49,7 @@ const ThemeStorageProvider: React.FunctionComponent<{ storage?: typeof localStor
       setThemeName((internalStorage.getItem(STORAGE_KEY) as ThemeName) || ThemeName.Dark)
       window.addEventListener('storage', setThemeFromStorage)
     }
-    return () => window.removeEventListener('storage', setThemeFromStorage)
+    // return () => { window.removeEventListener('storage', setThemeFromStorage) }
   }, [initialized, internalStorage, themeName])
 
   return (

@@ -1,10 +1,9 @@
 import React from 'react'
-import { DataCard, DataContents, Heading, Text } from '../../../common/StyledComponents'
+import { DataCard, DataContents, Text } from '../../../common/StyledComponents'
 import { default as NewsItem, INewsArticle } from './NewsItem'
 
 const News: React.FunctionComponent<{ news: INewsArticle[] }> = ({ news }) => (
-  <DataCard>
-    <Heading>Latest News</Heading>
+  <DataCard cardType="news" title="Latest News">
     <DataContents>
       {news.length > 0 ? (
         news.map(newsItem => <NewsItem key={newsItem.id} {...newsItem} />)
