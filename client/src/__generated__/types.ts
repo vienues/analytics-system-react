@@ -39,9 +39,9 @@ export interface HistoryQuery_stock_chart {
   __typename: 'Tick'
   label: string
   datetime: any
-  average: number
-  low: number
-  high: number
+  average: number | null
+  low: number | null
+  high: number | null
 }
 
 export interface HistoryQuery_stock_quote {
@@ -213,14 +213,12 @@ export interface searchVariables {
 
 export interface StatsQuery_stock_stats {
   __typename: 'Stats'
-  marketcap: number
-  peRatioLow: number
-  peRatioHigh: number
-  week52low: number
-  week52high: number
-  latestEPS: number
-  dividendRate: number
-  dividendYield: number
+  week52high: number | null
+  week52low: number | null
+  ttmEPS: number | null
+  ttmDividendRate: number | null
+  dividendYield: number | null
+  peRatio: number | null
 }
 
 export interface StatsQuery_stock_quote {
@@ -304,9 +302,9 @@ export interface History_chart {
   __typename: 'Tick'
   label: string
   datetime: any
-  average: number
-  low: number
-  high: number
+  average: number | null
+  low: number | null
+  high: number | null
 }
 
 export interface History_quote {
@@ -359,14 +357,12 @@ export interface Peers {
 
 export interface Stats_stats {
   __typename: 'Stats'
-  marketcap: number
-  peRatioLow: number
-  peRatioHigh: number
-  week52low: number
-  week52high: number
-  latestEPS: number
-  dividendRate: number
-  dividendYield: number
+  week52high: number | null
+  week52low: number | null
+  ttmEPS: number | null
+  ttmDividendRate: number | null
+  dividendYield: number | null
+  peRatio: number | null
 }
 
 export interface Stats_quote {

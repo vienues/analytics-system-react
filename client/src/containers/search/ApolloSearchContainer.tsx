@@ -23,31 +23,27 @@ interface IProps extends IApolloContainerProps {
 type Props = RouteComponentProps & IProps
 
 const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url }: Props) => {
-  const [initialized, setInitialized] = useState(false)
   const [currentSymbol, setCurrentSymbol] = useState<search_search | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
 
   useEffect(() => {
-    if (!initialized) {
-      setInitialized(true)
-      if (id) {
-        apolloClient
-          .query<searchQuery, searchQueryVariables>({
-            query: SearchConnection,
-            variables: { id },
-          })
-          .then(result => {
-            if (result.data && result.data.stock && result.data.stock.company) {
-              setCurrentSymbol({
-                __typename: 'SearchResult',
-                id: result.data.stock.id,
-                name: result.data.stock.company.name,
-              } as search_search)
-            }
-          })
-      }
+    if (id) {
+      apolloClient
+        .query<searchQuery, searchQueryVariables>({
+          query: SearchConnection,
+          variables: { id },
+        })
+        .then(result => {
+          if (result.data && result.data.stock && result.data.stock.company) {
+            setCurrentSymbol({
+              __typename: 'SearchResult',
+              id: result.data.stock.id,
+              name: result.data.stock.company.name,
+            } as search_search)
+          }
+        })
     }
-  }, [initialized, id])
+  }, [id])
 
   const onTextChange = (text: string) => {
     setCurrentText(text)

@@ -20,7 +20,8 @@ interface IMarketSubscription {
 const MarketSubscriptions: IMarketSubscription = {}
 
 const getPricing = async (symbols: string[]): Promise<IIexBatchQuote> => {
-  return iex.fetch<IIexBatchQuote>(`stock/market/batch?symbols=${symbols.join(',')}&types=quote`)
+  // the current iexcloud_api_wrapper does not support batch operations so making a direct call
+  return iex.iexApiRequest(`/stock/market/batch?symbols=${symbols.join(',')}&types=quote`)
 }
 
 export default function(pubsub: PubSub) {

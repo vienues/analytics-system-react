@@ -70,14 +70,10 @@ const DataContents: React.FunctionComponent<IProps> = props => {
 
 const VanillaDataCard = styled.div`
   display: grid;
-  border-radius: 0.25rem;
   background-color: ${({ theme }) => theme.core.lightBackground};
   overflow-x: hidden;
   overflow-y: hidden;
   padding: 1rem;
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `
 
 const PopupDataCard = styled.div`

@@ -1,13 +1,12 @@
 fragment Stats on Stock {
   stats {
-    marketcap
-    peRatioLow
-    peRatioHigh
-    week52low
     week52high
-    latestEPS
-    dividendRate
+    week52low
+    ttmEPS
+    ttmDividendRate
     dividendYield
+    peRatio
+    marketcap
   }
   quote {
     id

@@ -4,6 +4,7 @@ import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
 import { QuoteService, SubscriptionQuoteArgs } from './'
 import { default as QuoteSchema } from './Quote.schema'
+import { Quote as QuoteAPI } from 'iexcloud_api_wrapper'
 
 export interface IAutoResolvedFields {
   id: string
@@ -32,9 +33,10 @@ export default class Quote {
   @Query(() => [QuoteSchema])
   public async markets(@Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema[]> {
     try {
-      const response = await ctx.iex.fetch<IIexBatchQuote>(`stock/market/batch?symbols=spy,dia,iwm&types=quote`)
+      const response: QuoteAPI = await ctx.iex.iexApiRequest(`/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
       return Object.values(response).map(quote => quote.quote as IIexQuoteQuery & AutoFields)
-    } catch {
+    } catch (e) {
+      console.log(`Error: ${e.message}`)
       return Promise.reject(`Error`)
     }
   }

@@ -25,8 +25,8 @@ export default class Company {
   @Field()
   public description!: string
 
-  @Field()
-  public CEO!: string
+  @Field({ nullable: true })
+  public CEO?: string
 
   @Field()
   public issueType!: string

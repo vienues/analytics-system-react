@@ -17,12 +17,6 @@ export default class Quote {
   public companyName!: string
 
   @Field()
-  public primaryExchange!: string
-
-  @Field()
-  public sector!: string
-
-  @Field()
   public calculationPrice!: string
 
   @Field(() => Float)

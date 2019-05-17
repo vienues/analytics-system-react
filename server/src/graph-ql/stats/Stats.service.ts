@@ -1,11 +1,12 @@
+import { KeyStats } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
-import { IAdaptiveCtx, IIexStatsQuery } from '../../types'
+import { IAdaptiveCtx } from '../../types'
 import { IAutoResolvedFields } from './Stats.resolver'
-import { default as CompanySchema } from './Stats.schema'
+import { default as StatsSchema } from './Stats.schema'
 
 @Service()
 export default class {
-  public async getStats(symbol: string, ctx: IAdaptiveCtx): Promise<CompanySchema> {
-    return ctx.iex.fetch<IIexStatsQuery & IAutoResolvedFields>(`stock/${symbol}/stats`)
+  public async getStats(symbol: string, ctx: IAdaptiveCtx): Promise<StatsSchema> {
+    return ctx.iex.keyStats(symbol) as Promise<KeyStats & IAutoResolvedFields>
   }
 }

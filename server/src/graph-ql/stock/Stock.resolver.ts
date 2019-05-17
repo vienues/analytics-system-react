@@ -10,6 +10,7 @@ import { TickSchema, TickService } from '../tick'
 import Previous from './Previous.schema'
 import SearchResult from './SearchResult.schema'
 import { default as StockSchema } from './Stock.schema'
+import { PreviousDay } from 'iexcloud_api_wrapper'
 
 interface IStockFields {
   id: string
@@ -69,7 +70,7 @@ export default class Stock {
 
   @FieldResolver()
   public async peers(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<string[]> {
-    return ctx.iex.fetch<string[]>(`stock/${stock.id}/peers`)
+    return ctx.iex.peers(stock.id)
   }
 
   @FieldResolver()
@@ -79,12 +80,13 @@ export default class Stock {
 
   @FieldResolver()
   public async price(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<number> {
-    return ctx.iex.fetch<number>(`stock/${stock.id}/price`)
+    return ctx.iex.price(stock.id)
   }
 
   @FieldResolver()
   public async previous(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Previous> {
-    return ctx.iex.fetch<IIexPreviousQuery & { date: Date }>(`stock/${stock.id}/previous`)
+    // @ts-ignore - vwap does not exist in typings
+    return ctx.iex.previousDay(stock.id)
   }
 
   @FieldResolver()

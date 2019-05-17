@@ -1,12 +1,12 @@
 type Company {
   id: ID!
-  symbol: String!
   name: String!
+  symbol: String!
   exchange: String!
   industry: String!
   website: String!
   description: String!
-  CEO: String!
+  CEO: String
   issueType: String!
   sector: String!
 }
@@ -60,8 +60,6 @@ type Quote {
   symbol: String!
   company: Company!
   companyName: String!
-  primaryExchange: String!
-  sector: String!
   calculationPrice: String!
   open: Float!
   openTime: ISODateTime!
@@ -104,55 +102,37 @@ type SearchResult {
 type Stats {
   id: ID!
   symbol: String!
-  company: Company!
-  companyName: String!
-  marketcap: Float!
-  beta: Float!
-  week52high: Float!
-  week52low: Float!
-  week52change: Float!
-  shortInterest: Float!
-  shortDate: Date!
-  dividendRate: Float!
-  dividendYield: Float!
-  exDividendDate: Date!
-  latestEPS: Float!
-  latestEPSDate: String!
-  sharesOutstanding: Float!
-  float: Float!
-  returnOnEquity: Float!
-  consensusEPS: Float!
-  numberOfEstimates: Float!
-  EBITDA: Float!
-  revenue: Float!
-  grossProfit: Float!
-  cash: Float!
-  debt: Float!
-  ttmEPS: Float!
-  revenuePerShare: Float!
-  revenuePerEmployee: Float
-  peRatioHigh: Float!
-  peRatioLow: Float!
-  EPSSurpriseDollar: String
-  EPSSurprisePercent: Float!
-  returnOnAssets: Float!
-  returnOnCapital: String
-  profitMargin: Float!
-  priceToSales: Float!
-  priceToBook: Float!
-  day200MovingAvg: Float!
-  day50MovingAvg: Float!
-  institutionPercent: Float!
-  insiderPercent: String
-  shortRatio: Float
-  year5ChangePercent: Float!
-  year2ChangePercent: Float!
-  year1ChangePercent: Float!
-  ytdChangePercent: Float!
-  month6ChangePercent: Float!
-  month3ChangePercent: Float!
-  month1ChangePercent: Float!
-  day5ChangePercent: Float!
+  company: Company
+  companyName: String
+  marketcap: Float
+  week52high: Float
+  week52low: Float
+  week52change: Float
+  sharesOutstanding: Float
+  float: Float
+  avg10Volume: Int
+  avg30Volume: Int
+  day200MovingAvg: Float
+  day50MovingAvg: Float
+  employees: Int
+  ttmEPS: Float
+  ttmDividendRate: Float
+  dividendYield: Float
+  nextDividendDate: Date
+  exDividendDate: Date
+  nextEarningsDate: Date
+  peRatio: Float
+  beta: Float
+  maxChangePercent: Float
+  year5ChangePercent: Float
+  year2ChangePercent: Float
+  year1ChangePercent: Float
+  ytdChangePercent: Float
+  month6ChangePercent: Float
+  month3ChangePercent: Float
+  month1ChangePercent: Float
+  day30ChangePercent: Float
+  day5ChangePercent: Float
 }
 
 type Stock {
@@ -177,9 +157,9 @@ type Tick {
   minute: Time!
   datetime: ISODateTime!
   label: String!
-  high: Float!
-  low: Float!
-  average: Float!
+  high: Float
+  low: Float
+  average: Float
   volume: Float!
   notional: Float!
   numberOfTrades: Float!

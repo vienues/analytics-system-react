@@ -8,7 +8,16 @@ import StatsService from './Stats.service'
 export interface IAutoResolvedFields {
   id: string
   company: Company
-  revenuePerEmployee?: number
+
+  // https://github.com/schardtbc/iexcloud_api_wrapper/issues/3
+  ttmEPS: number
+  ttmDividendRate: number
+  dividendYield: number
+  nextDividendDate: string
+  exDividendDate: string
+  nextEarningsDate: string
+  peRatio: number
+  beta: number
 }
 
 @Resolver(of => StatsSchema)
@@ -19,7 +28,6 @@ export default class Stats {
   public async stats(@Arg('id') id: string, @Ctx() ctx: IAdaptiveCtx): Promise<StatsSchema> {
     return this.statsService.getStats(id, ctx)
   }
-
   @FieldResolver()
   public async company(@Root() stats: StatsSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Company> {
     return this.companyService.getCompany(stats.id, ctx)
