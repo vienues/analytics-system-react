@@ -12,26 +12,35 @@ export const ApolloHistoryContainer: React.FunctionComponent<IApolloContainerPro
       quote: { previousClose },
       chart,
     },
+    OLHC,
   }: HistoryQuery): JSX.Element => {
     const mappedData = chart
       .filter(
         history => !!history && ((history.average || -1) > 0 || (history.low || -1) > 0 || (history.high || -1) > 0),
       )
       .map(history => ({
+        Close: history.close,
+        Date: history.datetime,
+        High: history.high,
+        Low: history.low,
+        Open: history.open,
+        Volume: history.volume,
         x: moment(history.datetime).format('hh:mm:ss A'),
         y: `${history.average}`,
       }))
-    return <History history={{ previousClose, dataPoints: mappedData }} />
+    return <History history={{ olhc: OLHC, previousClose, dataPoints: mappedData }} id={id} />
   }
 
   return (
-    <AppQuery<HistoryQuery, HistoryQueryVariables>
-      query={HistoryConnection}
-      variables={{ id }}
-      renderLoadingHeight="275px"
-    >
-      {onHistoryQueryResults}
-    </AppQuery>
+    <>
+      <AppQuery<HistoryQuery, HistoryQueryVariables>
+        query={HistoryConnection}
+        variables={{ id }}
+        renderLoadingHeight="275px"
+      >
+        {onHistoryQueryResults}
+      </AppQuery>
+    </>
   )
 }
 

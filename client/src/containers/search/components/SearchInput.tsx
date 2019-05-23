@@ -1,4 +1,4 @@
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Downshift, { DownshiftInterface, GetItemPropsOptions } from 'downshift'
 import React from 'react'
@@ -7,7 +7,7 @@ import { styled } from '../../../rt-theme'
 
 interface IClearSearchProps {
   clearFunction: () => void
-  style: React.CSSProperties
+  style?: React.CSSProperties
 }
 
 const ClearSearch: React.FunctionComponent<IClearSearchProps> = ({ clearFunction, style }) => {
@@ -50,22 +50,11 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
         itemToString={this.searchResultToOptionString}
         defaultHighlightedIndex={0}
       >
-        {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, clearSelection }) => {
+        {({ getInputProps, getItemProps, getMenuProps, getRootProps, isOpen, inputValue, clearSelection }) => {
           this.props.onTextChange(inputValue || '')
           return (
-            <div
-              style={{
-                alignItems: 'center',
-                display: 'grid',
-                gridGap: '0.5rem',
-                gridTemplateColumns: 'auto 1fr auto',
-                position: 'relative',
-              }}
-            >
-              <ClearSearch
-                clearFunction={clearSelection}
-                style={{ visibility: inputValue === '' ? 'hidden' : 'visible' }}
-              />
+            <SearchWrapper {...getRootProps()}>
+              {inputValue === '' ? <FontAwesomeIcon icon={faSearch} /> : <ClearSearch clearFunction={clearSelection} />}
               <input
                 {...getInputProps({ placeholder: 'Enter a stock or symbol...' })}
                 onClick={this.inputFocus}
@@ -79,7 +68,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
                   {this.renderItems(this.props.items, inputValue, getItemProps)}
                 </SearchResults>
               ) : null}
-            </div>
+            </SearchWrapper>
           )
         }}
       </TypedDownshift>
@@ -104,6 +93,17 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
     ))
   }
 }
+
+const SearchWrapper = styled.div`
+  align-items: center;
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: auto 1fr auto;
+  position: relative;
+  & svg {
+    color: ${({ theme }) => theme.core.lightBackground};
+  }
+`
 
 const SearchResults = styled.menu`
   position: absolute;

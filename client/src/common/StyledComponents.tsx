@@ -48,9 +48,6 @@ export const Banner = styled.div`
   min-height: 3.5rem;
   background-color: ${({ theme }) => theme.core.lightBackground};
   color: ${({ theme }) => theme.core.textColor};
-  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `
 
 export const DataContents = styled.div`
@@ -74,7 +71,7 @@ export const LabeledData = styled.div`
 
 export const Title = styled.h1`
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 300;
 `
 
 export const Heading = styled(Title)`
@@ -83,7 +80,7 @@ export const Heading = styled(Title)`
 
 export const Subheading = styled.h2`
   font-size: 1.25rem;
-  font-weight: 400;
+  font-weight: 300;
 `
 
 export const Caption = styled.span`
@@ -94,7 +91,6 @@ export const Caption = styled.span`
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   font-size: 0.75rem;
-  font-weight: 300;
 `
 
 export const Link = styled.a`

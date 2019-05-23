@@ -32,10 +32,11 @@ export class OpenfinContainer extends Container<IOpinfinState> {
   }
 
   public NavigateToStock(symbol: string) {
-    this.windows.forEach((window, name) => {
+    this.windows.forEach(async (window, name) => {
       // typings don't match functions
+      // const newWindow = await (window as any).getNativeWindow()
+      // newWindow.history.pushState(null,null, `/${name}/${symbol}`)
       window.navigate(`http://localhost:3000/${name}/${symbol}`)
-      // (window as any).getNativeWindow().location.href =
     })
   }
 

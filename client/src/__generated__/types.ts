@@ -40,14 +40,17 @@ export interface HistoryQuery_stock_chart {
   label: string
   datetime: any
   average: number | null
+  open: number | null
   low: number | null
   high: number | null
+  close: number | null
+  volume: number
 }
 
 export interface HistoryQuery_stock_quote {
   __typename: 'Quote'
   id: string
-  previousClose: number
+  previousClose: number | null
 }
 
 export interface HistoryQuery_stock {
@@ -57,8 +60,17 @@ export interface HistoryQuery_stock {
   quote: HistoryQuery_stock_quote
 }
 
+export interface HistoryQuery_OLHC {
+  __typename: 'OLHC'
+  open: number
+  close: number
+  low: number
+  high: number
+}
+
 export interface HistoryQuery {
   stock: HistoryQuery_stock
+  OLHC: HistoryQuery_OLHC
 }
 
 export interface HistoryQueryVariables {
@@ -75,10 +87,10 @@ export interface HistoryQueryVariables {
 export interface MarketQuery_markets {
   __typename: 'Quote'
   id: string
-  companyName: string
-  change: number
-  changePercent: number
-  latestPrice: number
+  companyName: string | null
+  change: number | null
+  changePercent: number | null
+  latestPrice: number | null
 }
 
 export interface MarketQuery {
@@ -95,9 +107,9 @@ export interface MarketQuery {
 export interface onMarketSubscription_getQuotes {
   __typename: 'Quote'
   id: string
-  change: number
-  changePercent: number
-  latestPrice: number
+  change: number | null
+  changePercent: number | null
+  latestPrice: number | null
 }
 
 export interface onMarketSubscription {
@@ -219,17 +231,18 @@ export interface StatsQuery_stock_stats {
   ttmDividendRate: number | null
   dividendYield: number | null
   peRatio: number | null
+  marketcap: number | null
 }
 
 export interface StatsQuery_stock_quote {
   __typename: 'Quote'
   id: string
-  low: number
-  high: number
-  open: number
-  previousClose: number
-  latestVolume: number
-  avgTotalVolume: number
+  low: number | null
+  high: number | null
+  open: number | null
+  previousClose: number | null
+  latestVolume: number | null
+  avgTotalVolume: number | null
 }
 
 export interface StatsQuery_stock {
@@ -257,9 +270,9 @@ export interface StatsQueryVariables {
 export interface onStockPriceSubscription_getQuotes {
   __typename: 'Quote'
   id: string
-  change: number
-  changePercent: number
-  latestPrice: number
+  change: number | null
+  changePercent: number | null
+  latestPrice: number | null
 }
 
 export interface onStockPriceSubscription {
@@ -303,14 +316,17 @@ export interface History_chart {
   label: string
   datetime: any
   average: number | null
+  open: number | null
   low: number | null
   high: number | null
+  close: number | null
+  volume: number
 }
 
 export interface History_quote {
   __typename: 'Quote'
   id: string
-  previousClose: number
+  previousClose: number | null
 }
 
 export interface History {
@@ -363,17 +379,18 @@ export interface Stats_stats {
   ttmDividendRate: number | null
   dividendYield: number | null
   peRatio: number | null
+  marketcap: number | null
 }
 
 export interface Stats_quote {
   __typename: 'Quote'
   id: string
-  low: number
-  high: number
-  open: number
-  previousClose: number
-  latestVolume: number
-  avgTotalVolume: number
+  low: number | null
+  high: number | null
+  open: number | null
+  previousClose: number | null
+  latestVolume: number | null
+  avgTotalVolume: number | null
 }
 
 export interface Stats {

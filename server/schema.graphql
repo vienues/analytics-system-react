@@ -31,6 +31,16 @@ type News {
   related: String!
 }
 
+type OLHC {
+  symbol: ID!
+  open: Float!
+  close: Float!
+  openTime: ISODateTime!
+  closeTime: ISODateTime!
+  high: Float!
+  low: Float!
+}
+
 type Previous {
   symbol: ID!
   date: Date!
@@ -52,46 +62,47 @@ type Query {
   markets: [Quote!]!
   stats(id: String!): Stats!
   stock(id: ID = ""): Stock!
+  OLHC(id: ID = ""): OLHC!
   search(text: String!): [SearchResult!]!
 }
 
 type Quote {
   id: ID!
   symbol: String!
-  company: Company!
-  companyName: String!
-  calculationPrice: String!
-  open: Float!
-  openTime: ISODateTime!
-  close: Float!
-  closeTime: ISODateTime!
-  high: Float!
-  low: Float!
-  latestPrice: Float!
-  latestSource: String!
-  latestTime: Time!
-  latestUpdate: ISODateTime!
-  latestVolume: Int!
-  iexRealtimePrice: Float!
-  iexRealtimeSize: Int!
-  iexLastUpdated: ISODateTime!
-  delayedPrice: Float!
-  delayedPriceTime: ISODateTime!
-  previousClose: Float!
-  change: Float!
-  changePercent: Float!
-  iexMarketPercent: Float!
-  iexVolume: Int!
-  avgTotalVolume: Int!
-  iexBidPrice: Float!
-  iexBidSize: Int!
-  iexAskPrice: Float!
-  iexAskSize: Int!
-  marketCap: Float!
+  company: Company
+  companyName: String
+  calculationPrice: String
+  open: Float
+  openTime: ISODateTime
+  close: Float
+  closeTime: ISODateTime
+  high: Float
+  low: Float
+  latestPrice: Float
+  latestSource: String
+  latestTime: Time
+  latestUpdate: ISODateTime
+  latestVolume: Int
+  iexRealtimePrice: Float
+  iexRealtimeSize: Int
+  iexLastUpdated: ISODateTime
+  delayedPrice: Float
+  delayedPriceTime: ISODateTime
+  previousClose: Float
+  change: Float
+  changePercent: Float
+  iexMarketPercent: Float
+  iexVolume: Int
+  avgTotalVolume: Int
+  iexBidPrice: Float
+  iexBidSize: Int
+  iexAskPrice: Float
+  iexAskSize: Int
+  marketCap: Float
   peRatio: Float
-  week52High: Float!
-  week52Low: Float!
-  ytdChange: Float!
+  week52High: Float
+  week52Low: Float
+  ytdChange: Float
 }
 
 type SearchResult {
@@ -160,6 +171,8 @@ type Tick {
   high: Float
   low: Float
   average: Float
+  open: Float
+  close: Float
   volume: Float!
   notional: Float!
   numberOfTrades: Float!

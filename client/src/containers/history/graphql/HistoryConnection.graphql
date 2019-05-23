@@ -4,4 +4,10 @@ query HistoryQuery($id: ID!) {
     id
     ...History
   }
+  OLHC(id: $id) {
+    open
+    close
+    low
+    high
+  }
 }

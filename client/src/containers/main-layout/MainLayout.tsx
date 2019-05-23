@@ -8,10 +8,12 @@ import Footer from './Footer'
 const MainLayout: React.FunctionComponent<IApolloContainerProps> = ({ id }) => (
   <AppLayoutRoot>
     <AppBar />
-    <MainSearchContent>
-      <Search id={id} url={/stock/} />
-      <StockPrice id={id} />
-    </MainSearchContent>
+    <div style={{ padding: '0rem 1rem' }}>
+      <MainSearchContent>
+        <Search id={id} url={/stock/} />
+        <StockPrice id={id} />
+      </MainSearchContent>
+    </div>
     {id ? (
       <ScrollableArea>
         <MainContent>
@@ -35,11 +37,11 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps> = ({ id }) => (
 
 const ContentBase = styled.div`
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 0.5em;
 `
 
 const MainContent = styled(ContentBase)`
-  grid-template-columns: 9fr 4fr;
+  grid-template-columns: 3fr 1fr;
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
   }
@@ -53,9 +55,9 @@ const MainSearchContent = styled(ContentBase)`
   line-height: 2rem;
   grid-template-columns: 1fr;
   grid-auto-flow: column;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 1rem;
   position: relative;
+  border-bottom: solid 2px ${({ theme }) => theme.core.lightBackground};
   @media (max-width: 900px) {
     font-size: 1rem;
     line-height: 1rem;

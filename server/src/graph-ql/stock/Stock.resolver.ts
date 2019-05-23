@@ -7,10 +7,10 @@ import { NewsSchema, NewsService } from '../news'
 import { QuoteSchema, QuoteService } from '../quote'
 import { StatsSchema, StatsService } from '../stats'
 import { TickSchema, TickService } from '../tick'
+import { default as OLHCSchema } from './OLHC.schema'
 import Previous from './Previous.schema'
 import SearchResult from './SearchResult.schema'
 import { default as StockSchema } from './Stock.schema'
-import { PreviousDay } from 'iexcloud_api_wrapper'
 
 interface IStockFields {
   id: string
@@ -46,6 +46,11 @@ export default class Stock {
       id: id.toUpperCase(),
       symbol: id,
     } as AutoFields
+  }
+
+  @Query(returns => OLHCSchema)
+  public async OLHC(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<OLHCSchema> {
+    return ctx.iex.ohlc(id)
   }
 
   @Query(retuns => [SearchResult])

@@ -10,105 +10,105 @@ export default class Quote {
   @Field()
   public symbol!: string
 
-  @Field(type => Company)
-  public company!: Company
+  @Field(() => Company, { nullable: true })
+  public company?: Company
 
-  @Field()
-  public companyName!: string
+  @Field({ nullable: true })
+  public companyName?: string
 
-  @Field()
-  public calculationPrice!: string
+  @Field({ nullable: true })
+  public calculationPrice?: string
 
-  @Field(() => Float)
-  public open!: number
+  @Field(() => Float, { nullable: true })
+  public open?: number
 
-  @Field(type => DateTimeScalar)
-  public openTime!: DateTime
+  @Field(() => DateTimeScalar, { nullable: true })
+  public openTime?: DateTime
 
-  @Field(() => Float)
-  public close!: number
+  @Field(() => Float, { nullable: true })
+  public close?: number
 
-  @Field(type => DateTimeScalar)
-  public closeTime!: DateTime
+  @Field(() => DateTimeScalar, { nullable: true })
+  public closeTime?: DateTime
 
-  @Field(() => Float)
-  public high!: number
+  @Field(() => Float, { nullable: true })
+  public high?: number
 
-  @Field(() => Float)
-  public low!: number
+  @Field(() => Float, { nullable: true })
+  public low?: number
 
-  @Field(() => Float)
-  public latestPrice!: number
+  @Field(() => Float, { nullable: true })
+  public latestPrice?: number
 
-  @Field()
-  public latestSource!: string
+  @Field({ nullable: true })
+  public latestSource?: string
 
-  @Field(type => TimeScalar)
-  public latestTime!: Time
+  @Field(() => TimeScalar, { nullable: true })
+  public latestTime?: Time
 
-  @Field(type => DateTimeScalar)
-  public latestUpdate!: DateTime
+  @Field(() => DateTimeScalar, { nullable: true })
+  public latestUpdate?: DateTime
 
-  @Field(() => Int)
-  public latestVolume!: number
+  @Field(() => Int, { nullable: true })
+  public latestVolume?: number
 
-  @Field(() => Float)
-  public iexRealtimePrice!: number
+  @Field(() => Float, { nullable: true })
+  public iexRealtimePrice?: number
 
-  @Field(() => Int)
-  public iexRealtimeSize!: number
+  @Field(() => Int, { nullable: true })
+  public iexRealtimeSize?: number
 
-  @Field(type => DateTimeScalar)
-  public iexLastUpdated!: DateTime
+  @Field(() => DateTimeScalar, { nullable: true })
+  public iexLastUpdated?: DateTime
 
-  @Field(() => Float)
-  public delayedPrice!: number
+  @Field(() => Float, { nullable: true })
+  public delayedPrice?: number
 
-  @Field(type => DateTimeScalar)
-  public delayedPriceTime!: DateTime
+  @Field(() => DateTimeScalar, { nullable: true })
+  public delayedPriceTime?: DateTime
 
-  @Field(() => Float)
-  public previousClose!: number
+  @Field(() => Float, { nullable: true })
+  public previousClose?: number
 
-  @Field(() => Float)
-  public change!: number
+  @Field(() => Float, { nullable: true })
+  public change?: number
 
-  @Field(() => Float)
-  public changePercent!: number
+  @Field(() => Float, { nullable: true })
+  public changePercent?: number
 
-  @Field(() => Float)
-  public iexMarketPercent!: number
+  @Field(() => Float, { nullable: true })
+  public iexMarketPercent?: number
 
-  @Field(() => Int)
-  public iexVolume!: number
+  @Field(() => Int, { nullable: true })
+  public iexVolume?: number
 
-  @Field(() => Int)
-  public avgTotalVolume!: number
+  @Field(() => Int, { nullable: true })
+  public avgTotalVolume?: number
 
-  @Field(() => Float)
-  public iexBidPrice!: number
+  @Field(() => Float, { nullable: true })
+  public iexBidPrice?: number
 
-  @Field(() => Int)
-  public iexBidSize!: number
+  @Field(() => Int, { nullable: true })
+  public iexBidSize?: number
 
-  @Field(() => Float)
-  public iexAskPrice!: number
+  @Field(() => Float, { nullable: true })
+  public iexAskPrice?: number
 
-  @Field(() => Int)
-  public iexAskSize!: number
+  @Field(() => Int, { nullable: true })
+  public iexAskSize?: number
 
-  @Field(() => Float)
-  public marketCap!: number
+  @Field(() => Float, { nullable: true })
+  public marketCap?: number
 
   @Field(() => Float, { nullable: true })
   public peRatio?: number
 
-  @Field(() => Float)
-  public week52High!: number
+  @Field(() => Float, { nullable: true })
+  public week52High?: number
 
-  @Field(() => Float)
-  public week52Low!: number
+  @Field(() => Float, { nullable: true })
+  public week52Low?: number
 
-  @Field(() => Float)
-  public ytdChange!: number
+  @Field(() => Float, { nullable: true })
+  public ytdChange?: number
 }

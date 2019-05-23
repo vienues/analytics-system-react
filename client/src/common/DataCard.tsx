@@ -10,7 +10,7 @@ interface IProps {
     [key: string]: any
   }
   cardType: 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' | 'stock'
-  title: string
+  title: string | JSX.Element
 }
 
 const DataContents: React.FunctionComponent<IProps> = props => {
