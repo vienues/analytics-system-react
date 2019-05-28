@@ -78,7 +78,6 @@ const quoteFeed = {
 const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol }) => {
   const [currentTheme, setCurrentTheme] = useState('')
   const [stxx, setStxx] = useState<any>(null)
-  const [subscription, setSubscription] = useState<any>(null)
 
   useEffect(() => {
     CIQ.Studies.studyLibrary['vol undr'] = {
@@ -106,9 +105,6 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
 
   useEffect(() => {
     if (stxx) {
-      if (subscription) {
-        subscription.unsubscribe()
-      }
       // optionally configure the chart
       stxx.chart.xAxis.axisType = 'ntb'
       stxx.chart.yAxis.goldenRatioYAxis = true
@@ -122,8 +118,15 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
       UIContext.lookupDriver = new CIQ.UI.Lookup.Driver.ChartIQ()
 
       stxx.controls.chartControls = null
-      stxx.newChart(symbol, null, null, () => {}, { span: { base: 'today' } })
-      CIQ.Studies.addStudy(stxx, 'vol undr')
+      stxx.newChart(
+        symbol,
+        null,
+        null,
+        () => {
+          CIQ.Studies.addStudy(stxx, 'vol undr')
+        },
+        { span: { base: 'today' } },
+      )
 
       const stockSubscription = client.subscribe<onStockPriceSubscription, onStockPriceSubscriptionVariables>({
         query: StockPriceSubscription,
@@ -147,7 +150,13 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
         },
         error(err: any) {},
       })
-      setSubscription(stockSubscriptionSubscribe)
+      return () => {
+        if (stockSubscriptionSubscribe) {
+          stockSubscriptionSubscribe.unsubscribe()
+        }
+      }
+    } else {
+      return () => {}
     }
   }, [symbol, stxx])
 
