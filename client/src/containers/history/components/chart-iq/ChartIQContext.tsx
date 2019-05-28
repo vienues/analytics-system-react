@@ -11,7 +11,10 @@ import {
   IntradayQuery,
   IntradayQueryVariables,
   HistoryQueryVariables,
+  onStockPriceSubscription,
+  onStockPriceSubscriptionVariables,
 } from '../../../../__generated__/types'
+import StockPriceSubscription from '../../../stock-price/graphql/StockPriceSubscription.graphql'
 
 const convertDataToChartIQ = (raw: any) => {
   return raw
@@ -75,6 +78,7 @@ const quoteFeed = {
 const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol }) => {
   const [currentTheme, setCurrentTheme] = useState('')
   const [stxx, setStxx] = useState<any>(null)
+  const [subscription, setSubscription] = useState<any>(null)
 
   useEffect(() => {
     CIQ.Studies.studyLibrary['vol undr'] = {
@@ -93,12 +97,18 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
         init: { heightPercentage: 0.5 },
       },
     }
+    const chartEngine = new CIQ.ChartEngine({ container: document.querySelector('#chartContainer') })
 
-    setStxx(new CIQ.ChartEngine({ container: document.querySelector('#chartContainer') }))
+    // connect chart to data
+    chartEngine.attachQuoteFeed(quoteFeed, { refreshInterval: 60 })
+    setStxx(chartEngine)
   }, [])
 
   useEffect(() => {
     if (stxx) {
+      if (subscription) {
+        subscription.unsubscribe()
+      }
       // optionally configure the chart
       stxx.chart.xAxis.axisType = 'ntb'
       stxx.chart.yAxis.goldenRatioYAxis = true
@@ -106,8 +116,6 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
       stxx.preferences.currentPriceLine = true
       stxx.xaxisHeight = 30
       stxx.chart.xAxis.displayGridLines = false
-      // connect chart to data
-      stxx.attachQuoteFeed(quoteFeed, { refreshInterval: 60 })
 
       const UIContext = new CIQ.UI.Context(stxx, document.querySelector('*[cq-context]'))
 
@@ -116,6 +124,22 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
       stxx.controls.chartControls = null
       stxx.newChart(symbol, null, null, () => {}, { span: { base: 'today' } })
       CIQ.Studies.addStudy(stxx, 'vol undr')
+
+      const stockSubscription = client.subscribe<onStockPriceSubscription, onStockPriceSubscriptionVariables>({
+        query: StockPriceSubscription,
+        variables: { markets: [symbol] },
+      })
+      const stockSubscriptionSubscribe = stockSubscription.subscribe({
+        next(data: any) {
+          stxx.appendMasterData({
+            ...stxx.masterData[stxx.masterData.length - 1],
+            Close: data.data.getQuotes.latestPrice,
+          })
+          stxx.draw()
+        },
+        error(err: any) {},
+      })
+      setSubscription(stockSubscriptionSubscribe)
     }
   }, [symbol, stxx])
 
