@@ -26,19 +26,23 @@ interface IComponentWithProps {
 /** Rather than lambda or binding individual generators in the Route we will generate them from object */
 const routerItems: IComponentWithProps = {
   '/': { component: MainLayout },
+  '/(bond|crypto|currency|future|index|stock)/:id?': { component: MainLayout },
   '/company/:id?': { component: Company },
   '/history/:id?': { component: History },
   '/news/:id?': { component: News },
   '/peers/:id?': { component: Peers },
   '/search/:id?': { component: Search, props: { url: /search/ } },
   '/stats/:id?': { component: Stats },
-  '/stock/:id': { component: MainLayout },
 }
 
 const App = () => {
   const renderRouterElement = (e: RouteComponentProps): JSX.Element => {
     const element = routerItems[e.match.path]
-    return React.createElement(element.component, { ...element.props, id: (e.match.params as any).id })
+    return React.createElement(element.component, {
+      ...element.props,
+      id: (e.match.params as any).id,
+      market: e.match.params[0] || 'stock',
+    })
   }
 
   return (

@@ -17,7 +17,7 @@ const News: React.FunctionComponent<{ news: INewsArticle[] }> = ({ news }) => (
 
 const NewsDataContents = styled(DataContents)`
   & a {
-    border-bottom: 1px ${({ theme }) => theme.core.textColor} solid;
+    border-bottom: 1px #54606d solid;
   }
 
   & a:last-child {

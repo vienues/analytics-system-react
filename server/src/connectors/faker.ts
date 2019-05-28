@@ -1,6 +1,7 @@
 import * as IEXCloud from 'iexcloud_api_wrapper'
 import {
   AccountMetaData,
+  AdvancedStats,
   Auction,
   BalanceSheet,
   Book,
@@ -15,6 +16,7 @@ import {
   DelayedQuote,
   Dividends,
   Earnings,
+  EarningsToday,
   EffectiveSpread,
   EndOfDay,
   EndOfDayCloseOnly,
@@ -101,6 +103,7 @@ import stockData from '../mock-data/stockData.json'
 
 class Faker implements IFaker {
   public Auction = Auction
+  public AdvancedStats = AdvancedStats
   public BalanceSheet = BalanceSheet
   public Book = Book
   public CashFlowStatement = CashFlowStatement
@@ -113,6 +116,7 @@ class Faker implements IFaker {
   public DelayedQuote = DelayedQuote
   public Dividends = Dividends
   public Earnings = Earnings
+  public EarningsToday = EarningsToday
   public EffectiveSpread = EffectiveSpread
   public EndOfDay = EndOfDay
   public EndOfDayCloseOnly = EndOfDayCloseOnly
@@ -150,6 +154,10 @@ class Faker implements IFaker {
   }
 
   private context = {}
+
+  public advancedStats: (symbol: string) => Promise<AdvancedStats> = () => {
+    throw new Error(`not yet implemented`)
+  }
 
   public auction: (symbol: string) => Promise<Auction> = () => {
     throw new Error(`not yet implemented`)
@@ -243,6 +251,10 @@ class Faker implements IFaker {
     chartReset?: boolean,
     chartSimplify?: boolean,
   ) => Promise<EndOfDayCloseOnly[]> = () => {
+    throw new Error(`not yet implemented`)
+  }
+
+  public earningsToday: (symbol: string) => Promise<EarningsToday[]> = () => {
     throw new Error(`not yet implemented`)
   }
 

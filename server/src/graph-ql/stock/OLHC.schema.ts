@@ -6,21 +6,21 @@ export default class OLHC {
   @Field(() => ID)
   public symbol!: string
 
-  @Field(() => Float)
-  public open!: number
+  @Field(() => Float, { nullable: true })
+  public open?: number
 
-  @Field(() => Float)
-  public close!: number
+  @Field(() => Float, { nullable: true })
+  public close?: number
 
-  @Field(() => DateTimeScalar)
-  public openTime!: number
+  @Field(() => DateTimeScalar, { nullable: true })
+  public openTime?: number
 
-  @Field(() => DateTimeScalar)
-  public closeTime!: number
+  @Field(() => DateTimeScalar, { nullable: true })
+  public closeTime?: number
 
-  @Field(type => Float)
-  public high!: number
+  @Field(type => Float, { nullable: true })
+  public high?: number
 
-  @Field(type => Float)
-  public low!: number
+  @Field(type => Float, { nullable: true })
+  public low?: number
 }

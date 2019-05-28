@@ -17,7 +17,7 @@ interface IStockPriceProps {
 }
 
 const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSize, stockPrice }) => {
-  if (!stockPrice) {
+  if (stockPrice === null) {
     return <div>N/A</div>
   }
   const { change, changePercent, latestPrice } = stockPrice
@@ -25,7 +25,7 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSiz
     (change || 0) < 0 ? [faCaretDown, colors.accents.bad.base] : [faCaretUp, colors.accents.good.base]
 
   const fixedFormat = (e: number | null) => {
-    if (!e) {
+    if (e === null) {
       return 'N/A'
     }
     return e < 100 ? e.toFixed(2) : e.toFixed(0)
@@ -34,12 +34,12 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSiz
   return (
     <StockPriceWrapper size={fontSize}>
       <Text>{symbol}</Text>
-      <Text>${latestPrice ? latestPrice.toFixed(2) : `N/A`}</Text>
+      <Text>${latestPrice !== null ? latestPrice.toFixed(2) : `N/A`}</Text>
       <StockPriceChangeWrapper fontColor={color}>
         <FontAwesomeIcon icon={Icon} />
         <Text>{fixedFormat(change)}</Text>
         <Text>|</Text>
-        <Text>{changePercent ? fixedFormat(changePercent * 100) : `N/A`}%</Text>
+        <Text>{changePercent !== null ? fixedFormat(changePercent * 100) : `N/A`}%</Text>
       </StockPriceChangeWrapper>
     </StockPriceWrapper>
   )

@@ -73,7 +73,7 @@ const VanillaDataCard = styled.div`
   background-color: ${({ theme }) => theme.core.lightBackground};
   overflow-x: hidden;
   overflow-y: hidden;
-  padding: 1rem;
+  padding: 1.5rem;
 `
 
 const PopupDataCard = styled.div`

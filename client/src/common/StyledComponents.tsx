@@ -64,13 +64,14 @@ export const Text = styled.span``
 
 export const LabeledData = styled.div`
   min-height: 1.5rem;
-  border-bottom: 1px ${({ theme }) => theme.core.textColor} solid;
+  border-bottom: 1px #54606d solid;
   display: grid;
   grid-template-columns: 1fr auto;
 `
 
 export const Title = styled.h1`
-  font-size: 1.5rem;
+  margin-top: 0rem;
+  font-size: 1.25rem;
   font-weight: 300;
 `
 
@@ -100,9 +101,15 @@ export const Link = styled.a`
   }
 `
 
-export const FieldLabel = styled(Text)`
+export const StrongLabel = styled(Text)`
+  font-weight: 600;
+`
+
+export const OpaqueLabel = styled(Text)`
   opacity: 0.59;
 `
+
+export const FieldLabel = styled(Text)``
 
 export const SwitchThemeButton = styled.button`
   width: 2rem;
@@ -135,6 +142,5 @@ export const PopoutButton = styled('button')`
 
 export const DragHandle = styled.div`
   -webkit-app-region: drag;
-  cursor: pointer;
   height: 100%;
 `

@@ -17,7 +17,7 @@ import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 
 interface IProps extends IApolloContainerProps {
-  url?: RegExp
+  url?: string
 }
 
 type Props = RouteComponentProps & IProps
@@ -52,7 +52,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   const handleChange = (symbol: search_search | null) => {
     setCurrentSymbol(symbol)
     if (symbol) {
-      history.push(`${url}${symbol.id}`)
+      history.push(`/${url}/${symbol.id}`)
       OpenfinService.NavigateToStock(symbol.id)
     } else {
       history.push(``)

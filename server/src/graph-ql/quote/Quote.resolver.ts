@@ -1,5 +1,5 @@
 import { Quote as QuoteAPI } from 'iexcloud_api_wrapper'
-import { Args, ArgsType, Ctx, Field, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
+import { Arg, Args, ArgsType, Ctx, Field, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
 import logger from '../../services/logger'
 import { IAdaptiveCtx, IIexBatchQuote, IIexQuoteQuery } from '../../types'
 import { CompanySchema, CompanyService } from '../company'
@@ -60,7 +60,7 @@ export default class Quote {
   @Subscription(returns => QuoteSchema, {
     topics: ({ args }) => args.symbols.map((arg: string) => `MARKET_UPDATE.${arg}`),
   })
-  public getQuotes(@Root() quote: QuoteSchema, @Args() _: SubscriptionQuoteArgs): QuoteSchema {
+  public getQuotes(@Root() quote: QuoteSchema, @Arg('symbols', type => [String]) symbols: string[]): QuoteSchema {
     return quote
   }
 }

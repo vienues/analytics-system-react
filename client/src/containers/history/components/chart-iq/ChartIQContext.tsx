@@ -1,12 +1,78 @@
+import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import { colors, ThemeConsumer } from '../../../../rt-theme'
 import { themes } from '../../../../rt-theme/themes'
 
+import HistoryConnection from '../../graphql/HistoryConnection.graphql'
+import IntradayConnection from '../../graphql/IntradayConnection.graphql'
+import client from '../../../../apollo/client'
+import {
+  HistoryQuery,
+  IntradayQuery,
+  IntradayQueryVariables,
+  HistoryQueryVariables,
+} from '../../../../__generated__/types'
+
+const convertDataToChartIQ = (raw: any) => {
+  return raw
+    .filter(
+      (history: any) =>
+        !!history && ((history.average || -1) > 0 || (history.low || -1) > 0 || (history.high || -1) > 0),
+    )
+    .map((history: any) => ({
+      Close: history.close,
+      Date: history.datetime,
+      High: history.high,
+      Low: history.low,
+      Open: history.open,
+      Volume: history.volume,
+      x: moment(history.datetime).format('hh:mm:ss A'),
+      y: `${history.average}`,
+    }))
+}
+
 // CHART-IQ TESTING
 const CIQ = (window as any).CIQ
-// const quotefeedSimulator = (window as any).quotefeedSimulator
 
-const ChartIQContext: React.FunctionComponent<{ symbol: string; dataPoints: any }> = ({ symbol, dataPoints }) => {
+const quoteFeed = {
+  fetchInitialData: async (
+    symbol: string,
+    startDate: Date,
+    endDate: Date,
+    params: { interval: string; period: string },
+    cb: (params: { error?: string; quotes?: any[]; moreAvailable?: boolean }) => void,
+  ) => {
+    const { data } = await client.query<HistoryQuery, HistoryQueryVariables>({
+      query: HistoryConnection,
+      variables: { id: symbol },
+    })
+    cb({ quotes: convertDataToChartIQ(data.stock.chart) })
+  },
+  fetchUpdateData: async (
+    symbol: string,
+    startDate: Date,
+    params: { interval: string; period: string },
+    cb: (params: { error?: string; quotes?: any[]; moreAvailable?: boolean }) => void,
+  ) => {
+    const { data } = await client.query<IntradayQuery, IntradayQueryVariables>({
+      query: IntradayConnection,
+      variables: { symbol: symbol },
+    })
+    cb({ quotes: convertDataToChartIQ(data.intradayPrices) })
+  },
+  fetchPaginationData: async (
+    symbol: string,
+    suggestedStartDate: Date,
+    endDate: Date,
+    params: { interval: string; period: string },
+    cb: (params: { error?: string; quotes?: any[]; moreAvailable?: boolean }) => void,
+  ) => {
+    // Intraday only, let ChartIQ not to ask for any more data than what the initial fetch provided
+    cb({ quotes: [], moreAvailable: false })
+  },
+}
+
+const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol }) => {
   const [currentTheme, setCurrentTheme] = useState('')
   const [stxx, setStxx] = useState<any>(null)
 
@@ -37,24 +103,25 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string; dataPoints: any 
       stxx.chart.xAxis.axisType = 'ntb'
       stxx.chart.yAxis.goldenRatioYAxis = true
       stxx.chart.yAxis.drawCurrentPriceLabel = true
+      stxx.preferences.currentPriceLine = true
       stxx.xaxisHeight = 30
       stxx.chart.xAxis.displayGridLines = false
       // connect chart to data
-      // stxx.attachQuoteFeed(quotefeedSimulator,{refreshInterval:1});
+      stxx.attachQuoteFeed(quoteFeed, { refreshInterval: 60 })
 
       const UIContext = new CIQ.UI.Context(stxx, document.querySelector('*[cq-context]'))
 
       UIContext.lookupDriver = new CIQ.UI.Lookup.Driver.ChartIQ()
-      stxx.controls.chartControls.style.display = 'none'
-      stxx.controls.chartControls = null
-      stxx.newChart(symbol, dataPoints, null, () => {}, { span: { base: 'today' } })
 
+      stxx.controls.chartControls = null
+      stxx.newChart(symbol, null, null, () => {}, { span: { base: 'today' } })
       CIQ.Studies.addStudy(stxx, 'vol undr')
     }
   }, [symbol, stxx])
 
   useEffect(() => {
     if (stxx) {
+      stxx.setStyle('cq-attrib-container', 'color', themes[currentTheme].core.textColor)
       stxx.setStyle('stx_xaxis', 'color', themes[currentTheme].core.textColor)
       stxx.setStyle('stx_xaxis', 'borderRightColor', 'red')
       stxx.setStyle('stx_grid_border', 'color', '#54606D')
@@ -85,6 +152,15 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string; dataPoints: any 
   <div cq-context>
     <cq-ui-manager></cq-ui-manager>
     <div style="position: relative; height:400px" id="chartContainer">
+      <cq-attribution>
+        <template>
+          <cq-attrib-container>
+            <cq-attrib-source>IEXCloud</cq-attrib-source>
+          </cq-attrib-container>
+        </template>
+      </cq-attribution>
+    </div>
+    <cq-show-range>
   </div>
 `
 

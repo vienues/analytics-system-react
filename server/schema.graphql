@@ -11,10 +11,56 @@ type Company {
   sector: String!
 }
 
+type Crypto {
+  symbol: ID!
+  quote: Quote!
+}
+
 """
 Date in ISO 8601 format, i.e. YYYY-MM-DD
 """
 scalar Date
+
+"""
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type FxCurrencies {
+  code: ID!
+  name: String!
+}
+
+type FxPairs {
+  from: String!
+  to: String!
+}
+
+type FxRate {
+  date: DateTime!
+  fromCurrency: String!
+  toCurrency: String!
+  rate: Float!
+}
+
+type FxSymbols {
+  currencies: [FxCurrencies!]!
+  pairs: [FxPairs!]!
+}
+
+type Intraday {
+  date: Date
+  minute: Time
+  datetime: ISODateTime
+  high: Float
+  low: Float
+  average: Float
+  open: Float
+  close: Float
+  volume: Float
+  notional: Float
+  numberOfTrades: Int
+}
 
 """
 Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ
@@ -33,12 +79,12 @@ type News {
 
 type OLHC {
   symbol: ID!
-  open: Float!
-  close: Float!
-  openTime: ISODateTime!
-  closeTime: ISODateTime!
-  high: Float!
-  low: Float!
+  open: Float
+  close: Float
+  openTime: ISODateTime
+  closeTime: ISODateTime
+  high: Float
+  low: Float
 }
 
 type Previous {
@@ -57,10 +103,13 @@ type Previous {
 
 type Query {
   company(id: String!): Company!
-  news(id: ID = "", last: Int = 0): [News!]!
   quote(id: ID = ""): Quote!
   markets: [Quote!]!
+  crypto(symbol: String!): Crypto!
+  symbols: FxSymbols!
+  news(id: ID = "", last: Int = 0): [News!]!
   stats(id: String!): Stats!
+  intradayPrices(symbol: String!, lastN: Int!): [Intraday!]!
   stock(id: ID = ""): Stock!
   OLHC(id: ID = ""): OLHC!
   search(text: String!): [SearchResult!]!
@@ -160,7 +209,8 @@ type Stock {
 }
 
 type Subscription {
-  getQuotes(symbols: [String!] = []): Quote!
+  getQuotes(symbols: [String!]!): Quote!
+  getIntradayPrices(symbol: String!): [Intraday!]!
 }
 
 type Tick {

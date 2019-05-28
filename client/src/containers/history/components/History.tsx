@@ -1,58 +1,49 @@
 import React from 'react'
-import { DataCard } from '../../../common/StyledComponents'
+import { DataCard, OpaqueLabel, StrongLabel } from '../../../common/StyledComponents'
 import { styled } from '../../../rt-theme'
 import ChartIQ from './chart-iq/ChartIQContext'
 
 interface IHistoryData {
   olhc: IOlhcData
-  previousClose: number | null
-  dataPoints: IDataPoint[]
 }
 
 interface IOlhcData {
-  open: number
-  low: number
-  high: number
-  close: number
-}
-
-interface IDataPoint {
-  x: string
-  y: string
+  open: number | null
+  low: number | null
+  high: number | null
+  close: number | null
 }
 
 const History: React.FunctionComponent<{ history: IHistoryData; id: string }> = ({
   history: {
     olhc: { open, low, high, close },
-    dataPoints,
-    previousClose,
   },
   id,
 }) => {
   const historyTitle = (
     <HeaderContainer>
       <div>
-        <span style={{ fontWeight: 600 }}>O&nbsp;</span>
-        <span style={{ opacity: 0.59 }}>{open}</span>
+        <StrongLabel>O&nbsp;</StrongLabel>
+        <OpaqueLabel>{open === null ? `N/A` : open}</OpaqueLabel>
       </div>
       <div>
-        <span style={{ fontWeight: 600 }}>L&nbsp;</span>
-        <span style={{ opacity: 0.59 }}>{low}</span>
+        <StrongLabel>L&nbsp;</StrongLabel>
+        <OpaqueLabel>{low === null ? `N/A` : low}</OpaqueLabel>
       </div>
       <div>
-        <span style={{ fontWeight: 600 }}>H&nbsp;</span>
-        <span style={{ opacity: 0.59 }}>{high}</span>
+        <StrongLabel>H&nbsp;</StrongLabel>
+        <OpaqueLabel>{high === null ? `N/A` : high}</OpaqueLabel>
       </div>
       <div>
-        <span style={{ fontWeight: 600 }}>C&nbsp;</span>
-        <span style={{ opacity: 0.59 }}>{close}</span>
+        <StrongLabel>C&nbsp;</StrongLabel>
+        <OpaqueLabel>{close === null ? `N/A` : close}</OpaqueLabel>
       </div>
     </HeaderContainer>
   )
 
   return (
     <DataCard cardType="history" title={historyTitle}>
-      <ChartIQ symbol={id} dataPoints={dataPoints} />
+      <ChartIQ symbol={id} />
     </DataCard>
   )
 }

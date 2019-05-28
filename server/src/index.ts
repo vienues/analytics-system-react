@@ -16,6 +16,8 @@ import { pubsub } from './pubsub'
 import logger from './services/logger'
 import pricing from './services/pricing'
 
+import { ReactiveTraderCloud } from './services/ReactiveTraderCloud'
+
 pricing(pubsub)
 
 async function bootstrap() {
@@ -96,7 +98,27 @@ async function bootstrap() {
       {
         execute,
         schema,
-        subscribe,
+        subscribe: (
+          schema1,
+          document,
+          rootValue,
+          contextValue,
+          variableValues,
+          operationName,
+          fieldResolver,
+          subscribeFieldResolver,
+        ) => {
+          return subscribe(
+            schema1,
+            document,
+            rootValue,
+            contextValue,
+            variableValues,
+            operationName,
+            fieldResolver,
+            subscribeFieldResolver,
+          )
+        },
 
         // tslint:disable-next-line:object-literal-sort-keys
         onOperation: (
@@ -107,16 +129,25 @@ async function bootstrap() {
           if (!socket.operation) {
             socket.operation = new Map<OperationId, Symbols>()
           }
-
           if (socket.operation.has(message.id)) {
             throw new Error(`Received same operation twice!`)
           }
-          socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
-          pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)
+          // HACK! I know what the client called the operation, this would not work otherwise
+          if (params.operationName === 'onIntradayPricingSubscription') {
+            pubsub.publish('SUBSCRIBE_TO_INTRADAY_UPDATES', message.payload.variables.symbol)
+          } else {
+            socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
+            pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)
+          }
           return params
         },
         onOperationComplete: (socket: IWebSocketWithQuoteExtras, opId: string) => {
-          pubsub.publish('UNSUBSCRIBE_TO_MARKET_UPDATES', socket.operation.get(opId))
+          const param = socket.operation.get(opId)
+          if (Array.isArray(param)) {
+            pubsub.publish('UNSUBSCRIBE_TO_MARKET_UPDATES', param)
+          } else {
+            pubsub.publish('UNSUBSCRIBE_TO_INTRADAY_UPDATES', param)
+          }
         },
       },
       {
@@ -125,6 +156,7 @@ async function bootstrap() {
       },
     )
   })
+  ReactiveTraderCloud.init()
 }
 
 bootstrap()

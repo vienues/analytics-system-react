@@ -54,7 +54,11 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
           this.props.onTextChange(inputValue || '')
           return (
             <SearchWrapper {...getRootProps()}>
-              {inputValue === '' ? <FontAwesomeIcon icon={faSearch} /> : <ClearSearch clearFunction={clearSelection} />}
+              {inputValue === '' ? (
+                <FontAwesomeIcon style={{ paddingRight: '1rem' }} icon={faSearch} />
+              ) : (
+                <ClearSearch style={{ paddingRight: '1rem' }} clearFunction={clearSelection} />
+              )}
               <input
                 {...getInputProps({ placeholder: 'Enter a stock or symbol...' })}
                 onClick={this.inputFocus}

@@ -4,13 +4,15 @@ import { styled } from '../../rt-theme'
 import { Company, History, News, Peers, Search, Stats, StockPrice } from '../index'
 import AppBar from './AppBar'
 import Footer from './Footer'
+import MarketSelection from './MarketSelection'
 
-const MainLayout: React.FunctionComponent<IApolloContainerProps> = ({ id }) => (
+const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: string }> = ({ id, market }) => (
   <AppLayoutRoot>
     <AppBar />
+    <MarketSelection />
     <div style={{ padding: '0rem 1rem' }}>
       <MainSearchContent>
-        <Search id={id} url={/stock/} />
+        <Search id={id} url={market} />
         <StockPrice id={id} />
       </MainSearchContent>
     </div>
@@ -75,7 +77,7 @@ const AppLayoutRoot = styled.div`
   overflow: hidden;
 
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
+  grid-template-rows: auto auto auto 1fr auto;
 `
 
 const ScrollableArea = styled.div`

@@ -62,10 +62,10 @@ export interface HistoryQuery_stock {
 
 export interface HistoryQuery_OLHC {
   __typename: 'OLHC'
-  open: number
-  close: number
-  low: number
-  high: number
+  open: number | null
+  close: number | null
+  low: number | null
+  high: number | null
 }
 
 export interface HistoryQuery {
@@ -75,6 +75,58 @@ export interface HistoryQuery {
 
 export interface HistoryQueryVariables {
   id: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: IntradayQuery
+// ====================================================
+
+export interface IntradayQuery_intradayPrices {
+  __typename: 'Intraday'
+  datetime: any | null
+  open: number | null
+  close: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  numberOfTrades: number | null
+}
+
+export interface IntradayQuery {
+  intradayPrices: IntradayQuery_intradayPrices[]
+}
+
+export interface IntradayQueryVariables {
+  symbol: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: onIntradayPricingSubscription
+// ====================================================
+
+export interface onIntradayPricingSubscription_getIntradayPrices {
+  __typename: 'Intraday'
+  datetime: any | null
+  open: number | null
+  close: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  numberOfTrades: number | null
+}
+
+export interface onIntradayPricingSubscription {
+  getIntradayPrices: onIntradayPricingSubscription_getIntradayPrices[]
+}
+
+export interface onIntradayPricingSubscriptionVariables {
+  symbol: string
 }
 
 /* tslint:disable */
@@ -333,6 +385,24 @@ export interface History {
   __typename: 'Stock'
   chart: History_chart[]
   quote: History_quote
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: Intraday
+// ====================================================
+
+export interface Intraday {
+  __typename: 'Intraday'
+  datetime: any | null
+  open: number | null
+  close: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  numberOfTrades: number | null
 }
 
 /* tslint:disable */

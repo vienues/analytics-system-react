@@ -1,0 +1,56 @@
+{
+  "BTCUSDT": {
+    "name": "Bitcoin USD"
+  },
+  "EOSUSDT": {
+    "name": "EOS USD"
+  },
+  "ETHUSDT": {
+    "name": "Ethereum USD"
+  },
+  "BNBUSDT": {
+    "name": "Binance Coin USD"
+  },
+  "ONTUSDT": {
+    "name": "Ontology USD"
+  },
+  "BCCUSDT": {
+    "name": "Bitcoin Cash USD"
+  },
+  "ADAUSDT": {
+    "name": "Cardano USD"
+  },
+  "XRPUSDT": {
+    "name": "Ripple USD"
+  },
+  "TUSDUSDT": {
+    "name": "TrueUSD"
+  },
+  "TRXUSDT": {
+    "name": "TRON USD"
+  },
+  "LTCUSDT": {
+    "name": "Litecoin USD"
+  },
+  "ETCUSDT": {
+    "name": "Ethereum Classic USD"
+  },
+  "IOTAUSDT": {
+    "name": "MIOTA USD"
+  },
+  "ICXUSDT": {
+    "name": "ICON USD"
+  },
+  "NEOUSDT": {
+    "name": "NEO USD"
+  },
+  "VENUSDT": {
+    "name": "VeChain USD"
+  },
+  "XLMUSDT": {
+    "name": "Stellar Lumens USD"
+  },
+  "QTUMUSDT": {
+    "name": "Qtum USD"
+  }
+}

@@ -2724,8 +2724,6 @@ cq-comparison-loader.stx-show {
 
 cq-attrib-container {
   position: absolute;
-  background: rgba(250, 250, 250, 0.9);
-  color: rgba(0, 0, 0, 0.4);
   left: 30px;
   bottom: 5px;
   margin: 0;

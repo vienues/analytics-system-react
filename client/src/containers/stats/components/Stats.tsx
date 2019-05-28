@@ -35,7 +35,7 @@ const Fields: Array<{ key: number; label: string; format: string; field: string 
 const Stats: React.FunctionComponent<{ stock: StatsQueryStock }> = ({ stock: { quote, stats } }) => {
   const data = { ...quote, ...stats }
   return (
-    <DataCard cardType="stats" title="Key Stats">
+    <DataCard cardType="stats" title="Key Statistics">
       <FieldsWrapper>
         {Fields.map(Field => {
           return (
