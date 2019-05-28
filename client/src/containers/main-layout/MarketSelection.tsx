@@ -21,22 +21,22 @@ const MarketSelection: React.FunctionComponent<RouteComponentProps & {}> = ({ hi
   return (
     <LeftNav>
       <LeftNavItemFirst style={{ fontWeight: 500 }}>Markets</LeftNavItemFirst>
-      <NavItem data-market="currency" active={currentMarket === 'currency'} onClick={onMarketClick}>
+      <NavItem data-market="currency" active={currentMarket === 'currency'} style={{ cursor: 'not-allowed' }}>
         Currencies
       </NavItem>
       <NavItem data-market="stock" active={currentMarket === 'stock'} onClick={onMarketClick}>
         Stocks
       </NavItem>
-      <NavItem data-market="index" active={currentMarket === 'index'} onClick={onMarketClick}>
+      <NavItem data-market="index" active={currentMarket === 'index'} style={{ cursor: 'not-allowed' }}>
         Indicies
       </NavItem>
-      <NavItem data-market="future" active={currentMarket === 'future'} onClick={onMarketClick}>
+      <NavItem data-market="future" active={currentMarket === 'future'} style={{ cursor: 'not-allowed' }}>
         Futures
       </NavItem>
-      <NavItem data-market="bond" active={currentMarket === 'bond'} onClick={onMarketClick}>
+      <NavItem data-market="bond" active={currentMarket === 'bond'} style={{ cursor: 'not-allowed' }}>
         Bonds
       </NavItem>
-      <NavItem data-market="crypto" active={currentMarket === 'crypto'} onClick={onMarketClick}>
+      <NavItem data-market="crypto" active={currentMarket === 'crypto'} style={{ cursor: 'not-allowed' }}>
         Cryptocurrencies
       </NavItem>
     </LeftNav>

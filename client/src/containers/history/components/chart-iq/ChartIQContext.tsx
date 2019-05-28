@@ -134,6 +134,14 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
           stxx.appendMasterData({
             ...stxx.masterData[stxx.masterData.length - 1],
             Close: data.data.getQuotes.latestPrice,
+            Low:
+              stxx.masterData[stxx.masterData.length - 1].Low > data.data.getQuotes.latestPrice
+                ? data.data.getQuotes.latestPrice
+                : stxx.masterData[stxx.masterData.length - 1].Low,
+            High:
+              stxx.masterData[stxx.masterData.length - 1].High < data.data.getQuotes.latestPrice
+                ? data.data.getQuotes.latestPrice
+                : stxx.masterData[stxx.masterData.length - 1].High,
           })
           stxx.draw()
         },
