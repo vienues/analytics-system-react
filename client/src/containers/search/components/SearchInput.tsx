@@ -2,7 +2,7 @@ import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Downshift, { DownshiftInterface, GetItemPropsOptions } from 'downshift'
 import React from 'react'
-import { search_search as SearchResult } from '../../../__generated__/types'
+import { search_symbols as SearchResult } from '../../../__generated__/types'
 import { styled } from '../../../rt-theme'
 
 interface IClearSearchProps {

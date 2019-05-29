@@ -16,6 +16,8 @@ import {
 } from '../../../../__generated__/types'
 import StockPriceSubscription from '../../../stock-price/graphql/StockPriceSubscription.graphql'
 
+const CIQ = (window as any).CIQ
+
 const convertDataToChartIQ = (raw: any) => {
   return raw
     .filter(
@@ -34,9 +36,6 @@ const convertDataToChartIQ = (raw: any) => {
     }))
 }
 
-// CHART-IQ TESTING
-const CIQ = (window as any).CIQ
-
 const quoteFeed = {
   fetchInitialData: async (
     symbol: string,
@@ -49,7 +48,11 @@ const quoteFeed = {
       query: HistoryConnection,
       variables: { id: symbol },
     })
-    cb({ quotes: convertDataToChartIQ(data.stock.chart) })
+    if (data && data.stock && data.stock.chart && data.stock.chart.length > 0) {
+      cb({ quotes: convertDataToChartIQ(data.stock.chart) })
+    } else {
+      cb({ error: 'No data' })
+    }
   },
   fetchUpdateData: async (
     symbol: string,
@@ -134,19 +137,24 @@ const ChartIQContext: React.FunctionComponent<{ symbol: string }> = ({ symbol })
       })
       const stockSubscriptionSubscribe = stockSubscription.subscribe({
         next(data: any) {
-          stxx.appendMasterData({
-            ...stxx.masterData[stxx.masterData.length - 1],
-            Close: data.data.getQuotes.latestPrice,
-            Low:
-              stxx.masterData[stxx.masterData.length - 1].Low > data.data.getQuotes.latestPrice
-                ? data.data.getQuotes.latestPrice
-                : stxx.masterData[stxx.masterData.length - 1].Low,
-            High:
-              stxx.masterData[stxx.masterData.length - 1].High < data.data.getQuotes.latestPrice
-                ? data.data.getQuotes.latestPrice
-                : stxx.masterData[stxx.masterData.length - 1].High,
-          })
-          stxx.draw()
+          try {
+            stxx.appendMasterData({
+              ...stxx.masterData[stxx.masterData.length - 1],
+              Close: data.data.getQuotes.latestPrice,
+              Low:
+                stxx.masterData[stxx.masterData.length - 1].Low > data.data.getQuotes.latestPrice
+                  ? data.data.getQuotes.latestPrice
+                  : stxx.masterData[stxx.masterData.length - 1].Low,
+              High:
+                stxx.masterData[stxx.masterData.length - 1].High < data.data.getQuotes.latestPrice
+                  ? data.data.getQuotes.latestPrice
+                  : stxx.masterData[stxx.masterData.length - 1].High,
+            })
+            stxx.draw()
+          } catch (e) {
+            // probably due to no master data existing so it cannot be appended.
+            // just leave silence
+          }
         },
         error(err: any) {},
       })

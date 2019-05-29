@@ -1,5 +1,5 @@
-query search($text: String!) {
-  search(text: $text) {
+query search($text: String!, $marketSegment: MarketSegment!) {
+  symbols(text: $text, marketSegment: $marketSegment) {
     id
     name
   }

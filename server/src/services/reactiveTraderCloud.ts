@@ -4,8 +4,8 @@ import logger from './logger'
 export const ReactiveTraderCloud = {
   init: async () => {
     const connection = new autobahn.Connection({
-      url: 'ws://web-demo.adaptivecluster.com:80/ws',
       realm: 'com.weareadaptive.reactivetrader',
+      url: 'ws://web-demo.adaptivecluster.com:80/ws',
     })
     let statusSubscription: any
     connection.onopen = async (session: any) => {

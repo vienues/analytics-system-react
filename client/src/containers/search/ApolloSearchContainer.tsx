@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import {
+  MarketSegment,
   search as SimpleSearchQuery,
-  search_search,
+  search_symbols,
   searchQuery,
   searchQueryVariables,
   searchVariables,
@@ -18,12 +19,13 @@ import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 
 interface IProps extends IApolloContainerProps {
   url?: string
+  market: MarketSegment
 }
 
 type Props = RouteComponentProps & IProps
 
-const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url }: Props) => {
-  const [currentSymbol, setCurrentSymbol] = useState<search_search | null>(null)
+const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url, market }: Props) => {
+  const [currentSymbol, setCurrentSymbol] = useState<search_symbols | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
 
   useEffect(() => {
@@ -39,7 +41,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
               __typename: 'SearchResult',
               id: result.data.stock.id,
               name: result.data.stock.company.name,
-            } as search_search)
+            } as search_symbols)
           }
         })
     }
@@ -49,7 +51,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
     setCurrentText(text)
   }
 
-  const handleChange = (symbol: search_search | null) => {
+  const handleChange = (symbol: search_symbols | null) => {
     setCurrentSymbol(symbol)
     if (symbol) {
       history.push(`/${url}/${symbol.id}`)
@@ -59,11 +61,11 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
     }
   }
 
-  const onSearchInputResults = ({ search }: SimpleSearchQuery): JSX.Element => {
+  const onSearchInputResults = ({ symbols }: SimpleSearchQuery): JSX.Element => {
     return (
       <SearchInput
         initialItem={currentSymbol ? currentSymbol : null}
-        items={search}
+        items={symbols}
         onChange={handleChange}
         onTextChange={onTextChange}
       />
@@ -71,7 +73,10 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   }
 
   return (
-    <AppQuery<SimpleSearchQuery, searchVariables> query={SimpleSearchConnection} variables={{ text: currentText }}>
+    <AppQuery<SimpleSearchQuery, searchVariables>
+      query={SimpleSearchConnection}
+      variables={{ text: currentText, marketSegment: market.toUpperCase() as MarketSegment }}
+    >
       {onSearchInputResults}
     </AppQuery>
   )

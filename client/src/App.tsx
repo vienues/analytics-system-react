@@ -38,10 +38,11 @@ const routerItems: IComponentWithProps = {
 const App = () => {
   const renderRouterElement = (e: RouteComponentProps): JSX.Element => {
     const element = routerItems[e.match.path]
+    const param0 = e.match.params[0] || 'stock'
     return React.createElement(element.component, {
       ...element.props,
       id: (e.match.params as any).id,
-      market: e.match.params[0] || 'stock',
+      market: param0,
     })
   }
 

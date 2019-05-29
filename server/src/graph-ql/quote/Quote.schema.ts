@@ -49,7 +49,7 @@ export default class Quote {
   @Field(() => DateTimeScalar, { nullable: true })
   public latestUpdate?: DateTime
 
-  @Field(() => Int, { nullable: true })
+  @Field(() => Float, { nullable: true })
   public latestVolume?: number
 
   @Field(() => Float, { nullable: true })

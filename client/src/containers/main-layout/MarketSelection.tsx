@@ -36,7 +36,7 @@ const MarketSelection: React.FunctionComponent<RouteComponentProps & {}> = ({ hi
       <NavItem data-market="bond" active={currentMarket === 'bond'} style={{ cursor: 'not-allowed' }}>
         Bonds
       </NavItem>
-      <NavItem data-market="crypto" active={currentMarket === 'crypto'} style={{ cursor: 'not-allowed' }}>
+      <NavItem data-market="crypto" active={currentMarket === 'crypto'} onClick={onMarketClick}>
         Cryptocurrencies
       </NavItem>
     </LeftNav>

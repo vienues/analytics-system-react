@@ -7,6 +7,7 @@ import { default as StatsSchema } from './Stats.schema'
 @Service()
 export default class {
   public async getStats(symbol: string, ctx: IAdaptiveCtx): Promise<StatsSchema> {
-    return ctx.iex.keyStats(symbol) as Promise<KeyStats & IAutoResolvedFields>
+    const retVal = (await ctx.iex.keyStats(symbol)) as KeyStats & IAutoResolvedFields
+    return retVal
   }
 }

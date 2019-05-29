@@ -21,7 +21,8 @@ export default class {
   private timer: NodeJS.Timeout | null = null
   private intradaySubscriptions: IIntradaySubscription = {}
   public async getQuote(symbol: string, ctx: IAdaptiveCtx): Promise<QuoteSchema> {
-    return ctx.iex.quote(symbol) as Promise<Quote & AutoFields>
+    const retVal = (await ctx.iex.quote(symbol)) as Quote & AutoFields
+    return retVal
   }
 
   public async startIntradayPricingLoop(symbol: string) {

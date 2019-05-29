@@ -1,18 +1,19 @@
 type Company {
   id: ID!
-  name: String!
+  name: String
   symbol: String!
-  exchange: String!
-  industry: String!
-  website: String!
-  description: String!
+  exchange: String
+  industry: String
+  website: String
+  description: String
   CEO: String
-  issueType: String!
-  sector: String!
+  issueType: String
+  sector: String
 }
 
 type Crypto {
   symbol: ID!
+  name: String!
   quote: Quote!
 }
 
@@ -67,6 +68,18 @@ Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ
 """
 scalar ISODateTime
 
+"""
+The type of market
+"""
+enum MarketSegment {
+  CURRENCY
+  STOCK
+  INDEX
+  FUTURE
+  BOND
+  CRYPTO
+}
+
 type News {
   id: ID!
   datetime: ISODateTime!
@@ -106,8 +119,10 @@ type Query {
   quote(id: ID = ""): Quote!
   markets: [Quote!]!
   crypto(symbol: String!): Crypto!
-  symbols: FxSymbols!
+  cryptoSymbols(text: String!): [SearchResult!]!
+  currencySymbols: FxSymbols!
   news(id: ID = "", last: Int = 0): [News!]!
+  symbols(text: String!, marketSegment: MarketSegment!): [SearchResult!]!
   stats(id: String!): Stats!
   intradayPrices(symbol: String!, lastN: Int!): [Intraday!]!
   stock(id: ID = ""): Stock!

@@ -1,7 +1,6 @@
 import { Quote } from 'iexcloud_api_wrapper'
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
 import { CryptoService } from '.'
-import data from '../../mock-data/cryptoSymbols.json'
 import { IAdaptiveCtx, IIexNewsQuery } from '../../types'
 import { QuoteSchema } from '../quote'
 import { AutoFields as QuoteAutoFields } from '../quote/Quote.resolver'
@@ -12,14 +11,8 @@ interface IAutoResolvedFields {
   quote: QuoteSchema
 }
 
-interface ISymbolData {
-  [key: string]: {
-    name: string
-  }
-}
-
 @Resolver(of => CryptoSchema)
-export default class News {
+export default class {
   constructor(private readonly cryptoService: CryptoService) {}
 
   @Query(returns => CryptoSchema)
@@ -29,10 +22,7 @@ export default class News {
 
   @Query(returns => [SearchResult])
   public cryptoSymbols(@Arg('text') text: string): SearchResult[] {
-    const symbolData = data as ISymbolData
-    return Object.keys(symbolData)
-      .filter(key => key.includes(text) || symbolData[key].name.includes(text))
-      .map(key => ({ id: key, name: symbolData[key].name }))
+    return this.cryptoService.getSymbols(text)
   }
 
   @FieldResolver(() => QuoteSchema)

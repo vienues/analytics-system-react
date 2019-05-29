@@ -9,9 +9,9 @@ export interface CompanyQuery_stock_company {
   __typename: 'Company'
   id: string
   symbol: string
-  name: string
-  website: string
-  description: string
+  name: string | null
+  website: string | null
+  description: string | null
 }
 
 export interface CompanyQuery_stock {
@@ -229,8 +229,8 @@ export interface PeersQueryVariables {
 export interface searchQuery_stock_company {
   __typename: 'Company'
   id: string
-  name: string
-  exchange: string
+  name: string | null
+  exchange: string | null
 }
 
 export interface searchQuery_stock {
@@ -254,18 +254,19 @@ export interface searchQueryVariables {
 // GraphQL query operation: search
 // ====================================================
 
-export interface search_search {
+export interface search_symbols {
   __typename: 'SearchResult'
   id: string
   name: string
 }
 
 export interface search {
-  search: search_search[]
+  symbols: search_symbols[]
 }
 
 export interface searchVariables {
   text: string
+  marketSegment: MarketSegment
 }
 
 /* tslint:disable */
@@ -346,9 +347,9 @@ export interface Company_company {
   __typename: 'Company'
   id: string
   symbol: string
-  name: string
-  website: string
-  description: string
+  name: string | null
+  website: string | null
+  description: string | null
 }
 
 export interface Company {
@@ -475,6 +476,16 @@ export interface Stats {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+// The type of market
+export enum MarketSegment {
+  BOND = 'BOND',
+  CRYPTO = 'CRYPTO',
+  CURRENCY = 'CURRENCY',
+  FUTURE = 'FUTURE',
+  INDEX = 'INDEX',
+  STOCK = 'STOCK',
+}
 
 //==============================================================
 // END Enums and Input Objects
