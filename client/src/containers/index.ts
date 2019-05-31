@@ -1,7 +1,7 @@
 export { MainLayout } from './main-layout'
 
 export { Company } from './company'
-export { History } from './history'
+export { OLHCHistory } from './history'
 export { News } from './news'
 export { MarketsList } from './markets-list'
 export { Peers } from './peers'

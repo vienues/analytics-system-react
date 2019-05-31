@@ -32,6 +32,31 @@ export interface CompanyQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: ABMHistoryQuery
+// ====================================================
+
+export interface ABMHistoryQuery_getPriceHistory {
+  __typename: 'FxPricing'
+  ask: number
+  bid: number
+  mid: number
+  valueDate: any
+  creationTimestamp: any
+}
+
+export interface ABMHistoryQuery {
+  getPriceHistory: ABMHistoryQuery_getPriceHistory[]
+}
+
+export interface ABMHistoryQueryVariables {
+  from: string
+  to: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: HistoryQuery
 // ====================================================
 
@@ -226,25 +251,19 @@ export interface PeersQueryVariables {
 // GraphQL query operation: searchQuery
 // ====================================================
 
-export interface searchQuery_stock_company {
-  __typename: 'Company'
+export interface searchQuery_symbol {
+  __typename: 'SearchResult'
   id: string
-  name: string | null
-  exchange: string | null
-}
-
-export interface searchQuery_stock {
-  __typename: 'Stock'
-  id: string
-  company: searchQuery_stock_company
+  name: string
 }
 
 export interface searchQuery {
-  stock: searchQuery_stock
+  symbol: searchQuery_symbol
 }
 
 export interface searchQueryVariables {
   id: string
+  market: string
 }
 
 /* tslint:disable */

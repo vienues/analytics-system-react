@@ -16,8 +16,6 @@ import { pubsub } from './pubsub'
 import logger from './services/logger'
 import pricing from './services/pricing'
 
-import { ReactiveTraderCloud } from './services/ReactiveTraderCloud'
-
 pricing(pubsub)
 
 async function bootstrap() {
@@ -156,7 +154,6 @@ async function bootstrap() {
       },
     )
   })
-  ReactiveTraderCloud.init()
 }
 
 bootstrap()

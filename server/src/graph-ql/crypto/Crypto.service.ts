@@ -25,6 +25,11 @@ export default class {
     }
   }
 
+  public getSymbol(id: string): SearchResult {
+    const symbolData = data as ISymbolData
+    return { id, name: symbolData[id].name }
+  }
+
   public getSymbols(filterText: string): SearchResult[] {
     const symbolData = data as ISymbolData
     return Object.keys(symbolData)

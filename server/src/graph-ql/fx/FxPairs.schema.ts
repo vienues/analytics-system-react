@@ -1,6 +1,7 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { ArgsType, Field, ID, ObjectType } from 'type-graphql'
 
 @ObjectType()
+@ArgsType()
 export default class FxPairs {
   @Field()
   public from!: string

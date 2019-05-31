@@ -37,6 +37,15 @@ type FxPairs {
   to: String!
 }
 
+type FxPricing {
+  Pair: FxPairs!
+  ask: Float!
+  bid: Float!
+  creationTimestamp: ISODateTime!
+  mid: Float!
+  valueDate: Date!
+}
+
 type FxRate {
   date: DateTime!
   fromCurrency: String!
@@ -120,8 +129,9 @@ type Query {
   markets: [Quote!]!
   crypto(symbol: String!): Crypto!
   cryptoSymbols(text: String!): [SearchResult!]!
-  currencySymbols: FxSymbols!
+  getPriceHistory(from: String!, to: String!): [FxPricing!]!
   news(id: ID = "", last: Int = 0): [News!]!
+  symbol(market: String!, id: String!): SearchResult!
   symbols(text: String!, marketSegment: MarketSegment!): [SearchResult!]!
   stats(id: String!): Stats!
   intradayPrices(symbol: String!, lastN: Int!): [Intraday!]!
@@ -146,7 +156,7 @@ type Quote {
   latestSource: String
   latestTime: Time
   latestUpdate: ISODateTime
-  latestVolume: Int
+  latestVolume: Float
   iexRealtimePrice: Float
   iexRealtimeSize: Int
   iexLastUpdated: ISODateTime

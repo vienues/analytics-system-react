@@ -28,22 +28,30 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   const [currentSymbol, setCurrentSymbol] = useState<search_symbols | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
 
+  const placeholderTest = {
+    crypto: 'Enter a crypto currency or ticket symbol...',
+    currency: 'Enter a currency pair...',
+    stock: 'Enter a stock or symbol...',
+  }
+
   useEffect(() => {
     if (id) {
       apolloClient
         .query<searchQuery, searchQueryVariables>({
           query: SearchConnection,
-          variables: { id },
+          variables: { id, market },
         })
         .then(result => {
-          if (result.data && result.data.stock && result.data.stock.company) {
+          if (result.data && result.data.symbol) {
             setCurrentSymbol({
               __typename: 'SearchResult',
-              id: result.data.stock.id,
-              name: result.data.stock.company.name,
+              id: result.data.symbol.id,
+              name: result.data.symbol.name,
             } as search_symbols)
           }
         })
+    } else {
+      setCurrentSymbol(null)
     }
   }, [id])
 
@@ -57,7 +65,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
       history.push(`/${url}/${symbol.id}`)
       OpenfinService.NavigateToStock(symbol.id)
     } else {
-      history.push(``)
+      history.push(`/${url}`)
     }
   }
 
@@ -68,6 +76,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
         items={symbols}
         onChange={handleChange}
         onTextChange={onTextChange}
+        placeholder={placeholderTest[market.toLowerCase()]}
       />
     )
   }

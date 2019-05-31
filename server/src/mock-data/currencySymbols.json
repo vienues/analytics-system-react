@@ -1,0 +1,29 @@
+{
+  "EUR/USD": {
+    "name": "Euro to United States dollar"
+  },
+  "USD/JPY": {
+    "name": "US dollar to Japanese yen"
+  },
+  "GBP/JPY": {
+    "name": "Pound sterling to Japanese yen"
+  },
+  "GBP/USD": {
+    "name": "Pound sterling to United States dollar"
+  },
+  "EUR/JPY": {
+    "name": "Euro to Japanese yen"
+  },
+  "EUR/CAD": {
+    "name": "Euro to Canadian dollar"
+  },
+  "AUD/USD": {
+    "name": "Australian dollar to United States dollar"
+  },
+  "NZD/USD": {
+    "name": "New Zealand dollar to United States dollar"
+  },
+  "EUR/AUD": {
+    "name": "Euro to Australian dollar"
+  }
+}

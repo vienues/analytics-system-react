@@ -5,7 +5,7 @@ import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { History } from './components'
 import HistoryConnection from './graphql/HistoryConnection.graphql'
 
-export const ApolloHistoryContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
+export const ApolloOLHCHistoryContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
   const onHistoryQueryResults = ({ OLHC }: HistoryQuery): JSX.Element => {
     return <History history={{ olhc: OLHC }} id={id} />
   }
@@ -23,4 +23,4 @@ export const ApolloHistoryContainer: React.FunctionComponent<IApolloContainerPro
   )
 }
 
-export default ApolloHistoryContainer
+export default ApolloOLHCHistoryContainer

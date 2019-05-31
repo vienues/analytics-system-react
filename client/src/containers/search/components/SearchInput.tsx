@@ -28,6 +28,7 @@ interface ISearchBarProps {
   initialItem: SearchResult | null
   onChange: (symbol: SearchResult | null) => void
   onTextChange: (text: string) => void
+  placeholder: string
 }
 
 class SearchInput extends React.Component<ISearchBarProps, {}> {
@@ -60,7 +61,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
                 <ClearSearch style={{ paddingRight: '1rem' }} clearFunction={clearSelection} />
               )}
               <input
-                {...getInputProps({ placeholder: 'Enter a stock or symbol...' })}
+                {...getInputProps({ placeholder: this.props.placeholder })}
                 onClick={this.inputFocus}
                 onFocus={this.inputFocus}
                 style={{ width: '100%' }}
