@@ -1,0 +1,8 @@
+fragment News on News {
+  datetime
+  headline
+  source
+  url
+  summary
+  related
+}

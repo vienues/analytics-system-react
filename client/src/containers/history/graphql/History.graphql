@@ -1,0 +1,13 @@
+fragment History on Stock {
+  chart {
+    label
+    datetime
+    average
+    low
+    high
+  }
+  quote {
+    id
+    previousClose
+  }
+}

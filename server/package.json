@@ -9,7 +9,8 @@
     "demo": "yarn start",
     "test": "mocha --require @babel/register",
     "build": "tsc",
-    "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm"
+    "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm",
+    "generate-graphql-schema": "node ./src/generateSchema.js"
   },
   "license": "ISC",
   "dependencies": {
@@ -24,10 +25,12 @@
     "graphql-tools": "^4.0.4",
     "moment": "^2.20.1",
     "node-fetch": "^2.0.0",
-    "numeral": "^2.0.6",
     "ramda": "^0.25.0",
-    "rxjs": "^5.5.7",
-    "subscriptions-transport-ws": "^0.9.5"
+    "reflect-metadata": "^0.1.13",
+    "subscriptions-transport-ws": "^0.9.5",
+    "type-graphql": "^0.17.3",
+    "typedi": "^0.8.0",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.39",
@@ -47,6 +50,8 @@
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.0.4",
     "nodemon": "^1.18.11",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.3"
   }
 }

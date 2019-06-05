@@ -1,67 +1,59 @@
-import { selectionConnector } from './openfin'
-import React, { Component } from 'react'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
+import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
+import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { ThemeProvider } from 'styled-components'
-import { BrowserRouter, Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom'
-
+import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
-import News from './containers/News'
-import History from './containers/History'
-import Stats from './containers/Stats'
-import Company from './containers/Company'
-import theme from './styleguide/theme'
+import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
+import { Company, History, MainLayout, News, Peers, Search, Stats } from './containers/'
+import GlobalStyle from './rt-theme/globals'
+import { ThemeProvider } from './rt-theme/ThemeContext'
 
-import MainLayout from './layouts/browser/MainLayout'
-import DesktopPanel from './layouts/desktop/DesktopPanel'
-import Search from './containers/Search'
-import { Background } from './styleguide'
+library.add(fasLightBulb, farLightBulb)
 
-const createDesktopRoute = (heading: string, comp: JSX.Element) => {
-  const Component = selectionConnector(comp)
-  return () => {
-    return (
-      <DesktopPanel heading={heading}>
-        <Component />
-      </DesktopPanel>
-    )
+interface IComponentWithProps {
+  [path: string]: {
+    component: React.ElementType
+    props?: {
+      [key: string]: any
+    }
   }
 }
 
-class App extends Component {
-  render() {
-    return (
-      <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={MainLayout} />
-              <Route
-                exact
-                path="/stock/:id"
-                component={({ match }: RouteComponentProps<{ id: string }>) => <MainLayout id={match.params.id} />}
-              />
-              <Route exact path="/news/:id?" component={createDesktopRoute('Recent News', News)} />
-              <Route exact path="/history/:id?" component={createDesktopRoute('History', History)} />
-              <Route exact path="/stats/:id?" component={createDesktopRoute('Stats', Stats)} />
-              <Route exact path="/company/:id?" component={createDesktopRoute('Company', Company)} />
-              <Route
-                exact
-                path="/search/:id"
-                component={({ match }: RouteComponentProps<{ id: string }>) => (
-                  <DesktopPanel id={match.params.id} bg={false} heading={'Search'}>
-                    <Background flex={1} w={1} p={2}>
-                      <Search id={match.params.id} url={/search/} />
-                    </Background>
-                  </DesktopPanel>
-                )}
-              />
-              <Redirect exact from="/" to="/stock/aapl" />
-            </Switch>
-          </BrowserRouter>
-        </ThemeProvider>
-      </ApolloProvider>
-    )
+/** Rather than lambda or binding individual generators in the Route we will generate them from object */
+const routerItems: IComponentWithProps = {
+  '/': { component: MainLayout },
+  '/company/:id?': { component: Company },
+  '/history/:id?': { component: History },
+  '/news/:id?': { component: News },
+  '/peers/:id?': { component: Peers },
+  '/search/:id?': { component: Search, props: { url: /search/ } },
+  '/stats/:id?': { component: Stats },
+  '/stock/:id': { component: MainLayout },
+}
+
+const App = () => {
+  const renderRouterElement = (e: RouteComponentProps): JSX.Element => {
+    const element = routerItems[e.match.path]
+    return React.createElement(element.component, { ...element.props, id: (e.match.params as any).id })
   }
+
+  return (
+    <ApolloProvider client={apolloClient}>
+      <GlobalStyle />
+      <ThemeProvider>
+        <GlobalScrollbarStyle />
+        <BrowserRouter>
+          <Switch>
+            {Object.keys(routerItems).map(route => (
+              <Route key={route} exact={true} path={route} component={renderRouterElement} />
+            ))}
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </ApolloProvider>
+  )
 }
 
 export default App

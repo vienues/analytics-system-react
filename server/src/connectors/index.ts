@@ -1,18 +1,17 @@
-import * as real from './iex'
+import companyData from '../mock-data/companyData.json'
+import marketData from '../mock-data/marketListData.json'
+import stockData from '../mock-data/stockData.json'
 import faker from './faker'
-
-import companyData from '../mockData/companyData.json'
-import stockData from '../mockData/stockData.json'
-import marketData from '../mockData/marketListData.json'
+import * as real from './iex'
 
 const fakeIex = faker({
+  chart: stockData,
   company: companyData,
+  marketData,
   news: companyData,
   peers: companyData,
   quote: stockData,
   stats: stockData,
-  chart: stockData,
-  marketData,
 })
 
 export default function getDataSource(offlineMode?: string) {

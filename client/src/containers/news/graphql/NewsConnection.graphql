@@ -1,0 +1,7 @@
+#import "./News.graphql"
+query NewsQuery($id: ID!) {
+  news(id: $id, last: 3) {
+    id
+    ...News
+  }
+}

@@ -1,0 +1,7 @@
+#import "./History.graphql"
+query HistoryQuery($id: ID!) {
+  stock(id: $id) {
+    id
+    ...History
+  }
+}

@@ -1,0 +1,9 @@
+query MarketQuery {
+  markets {
+    id
+    companyName
+    change
+    changePercent
+    latestPrice
+  }
+}

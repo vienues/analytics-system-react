@@ -4,7 +4,7 @@ const fetchCompanyData = (store: { [s: string]: any }, symbol: string) => store[
 const decimalConversion = (val: number) => Math.round(val * 100) / 100
 
 const modify = (ctx: any, quote: any) => {
-  let result = { ...quote }
+  const result = { ...quote }
   const { symbol } = result
   const prev = ctx[symbol]
 
@@ -16,9 +16,9 @@ const modify = (ctx: any, quote: any) => {
     const change = latestPrice - prev.previousClose
     const percent = change / prev.previousClose
 
-    result['latestPrice'] = decimalConversion(latestPrice)
-    result['change'] = decimalConversion(change)
-    result['changePercent'] = percent
+    result.latestPrice = decimalConversion(latestPrice)
+    result.change = decimalConversion(change)
+    result.changePercent = percent
   }
 
   ctx[symbol] = result
@@ -26,7 +26,7 @@ const modify = (ctx: any, quote: any) => {
   return result
 }
 
-const fetch = (dataStore: any, context = {}) => (path: string) => {
+const fetch = (dataStore: any, context = {}) => <T>(path: string): Promise<T> => {
   if (isMarketDataRequest(path)) {
     return Promise.resolve(dataStore.marketData)
   }
