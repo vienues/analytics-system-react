@@ -3,8 +3,8 @@ import { DataCard, DataContents, Text } from '../../../common/StyledComponents'
 import { styled } from '../../../rt-theme'
 import { default as NewsItem, INewsArticle } from './NewsItem'
 
-const News: React.FunctionComponent<{ news: INewsArticle[] }> = ({ news }) => (
-  <DataCard cardType="news" title="News">
+const News: React.FunctionComponent<{ news: INewsArticle[]; id: string }> = ({ news, id }) => (
+  <DataCard cardType="news" title="News" instrument={id}>
     <NewsDataContents>
       {news.length > 0 ? (
         news.map(newsItem => <NewsItem key={newsItem.id} {...newsItem} />)

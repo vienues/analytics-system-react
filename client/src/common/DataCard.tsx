@@ -5,12 +5,16 @@ import { styled } from '../rt-theme'
 import PopoutIcon from './PopoutIcon'
 import { DragHandle, Heading, PopoutButton, Title } from './StyledComponents'
 
+type stockCard = 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' | 'stock'
+type currenciesCard = 'abm'
+
 interface IProps {
   style?: {
     [key: string]: any
   }
-  cardType: 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' | 'stock'
+  cardType: stockCard | currenciesCard
   title: string | JSX.Element
+  instrument: string
 }
 
 const DataContents: React.FunctionComponent<IProps> = props => {
@@ -23,7 +27,7 @@ const DataContents: React.FunctionComponent<IProps> = props => {
   const popoutClickHandler = async () => {
     setPoppedOut(true)
     OpenfinService.OpenWindow(
-      { url: `http://localhost:3000/${props.cardType}/AAPL`, name: props.cardType },
+      { url: `http://localhost:3000/${props.cardType}/${props.instrument}`, name: props.cardType },
       closeHandler,
     )
   }

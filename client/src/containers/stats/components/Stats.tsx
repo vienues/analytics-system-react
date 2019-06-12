@@ -32,10 +32,10 @@ const Fields: Array<{ key: number; label: string; format: string; field: string 
   { key: 10, label: 'Dividend Yield', format: 'number', field: 'dividendYield' },
 ]
 
-const Stats: React.FunctionComponent<{ stock: StatsQueryStock }> = ({ stock: { quote, stats } }) => {
+const Stats: React.FunctionComponent<{ stock: StatsQueryStock; id: string }> = ({ stock: { quote, stats }, id }) => {
   const data = { ...quote, ...stats }
   return (
-    <DataCard cardType="stats" title="Key Statistics">
+    <DataCard cardType="stats" title="Key Statistics" instrument={id}>
       <FieldsWrapper>
         {Fields.map(Field => {
           return (

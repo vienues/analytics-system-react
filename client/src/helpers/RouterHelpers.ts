@@ -1,3 +1,4 @@
+import { ABMHistory } from 'containers/history'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { Company, MainLayout, News, OLHCHistory, Peers, Search, Stats } from '../containers'
@@ -56,6 +57,7 @@ export default class RouterHelper {
     '/peers/:id?': { component: Peers },
     '/search/:id?': { component: Search, props: { url: /search/ } },
     '/stats/:id?': { component: Stats },
+    '/abm/:from/:to': { component: ABMHistory },
   }
 
   private static mainRouterItems: IComponentWithProps = {

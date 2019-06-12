@@ -7,7 +7,7 @@ import NewsConnection from './graphql/NewsConnection.graphql'
 
 const ApolloNewsContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
   const onNewsQueryResults = ({ news }: NewsQuery): JSX.Element => {
-    return <News news={news} />
+    return <News news={news} id={id} />
   }
 
   return (

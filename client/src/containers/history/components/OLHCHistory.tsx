@@ -42,7 +42,7 @@ const History: React.FunctionComponent<{ history: IHistoryData; id: string }> = 
   )
 
   return (
-    <DataCard cardType="history" title={historyTitle}>
+    <DataCard cardType="history" title={historyTitle} instrument={id}>
       <ChartIQ symbol={id} />
     </DataCard>
   )

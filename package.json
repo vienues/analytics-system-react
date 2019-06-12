@@ -21,7 +21,7 @@
     "format": "prettier --write '{client,server}/**/*.{js,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{js,json,gql,graphql}'",
     "precommit": "pretty-quick --staged",
-    "openfin": "openfin --launch --config ./client/public/app.json",
+    "openfin": "openfin --launch --config ./client/app.json",
     "demo": "lerna run --parallel demo",
     "generate-server-schema": "node ./server/src/generateSchema.js",
     "generate-client-schema": "./client/node_modules/.bin/apollo-codegen introspect-schema ./server/schema.graphql --output ./client/src/schema.json",
@@ -29,5 +29,8 @@
     "generate-schema-and-typings": "yarn generate-server-schema && yarn generate-client-schema && yarn run generate-client-typings"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "openfin-fdc3": "^0.1.1"
+  }
 }
