@@ -1,4 +1,5 @@
-import React from 'react'
+import * as fdc3 from 'openfin-fdc3'
+import React, { useEffect, useState } from 'react'
 import { Subscription, SubscriptionResult } from 'react-apollo'
 import { Line, LineChart, Tooltip, YAxis } from 'recharts'
 import {
@@ -14,6 +15,15 @@ import StockPriceSubscription from '../stock-price/graphql/StockPriceSubscriptio
 import ABMHistoryConnection from './graphql/ABMHistoryConnection.graphql'
 
 export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
+  const [currencyContext, setCurrencyContext] = useState('')
+
+  useEffect(() => {
+    fdc3.addContextListener(context => {
+      const currencyPair = context && context.name ? `${context.name.slice(0, 3)}/${context.name.slice(3, 6)}` : ''
+      setCurrencyContext(currencyPair)
+    })
+  }, [])
+
   const onHistoryQueryResults = ({ getPriceHistory }: ABMHistoryQuery): JSX.Element => {
     // const yAxisRange = getPriceHistory.reduce(
     //   (acc, val) => {
@@ -28,7 +38,7 @@ export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainer
     // )
     return (
       <>
-        <DataCard cardType="abm" instrument={`${from}/${to}`} title="ABM History">
+        <DataCard cardType="abm" instrument={id} title={`ABM History - ${currencyContext || id}`}>
           <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
             subscription={StockPriceSubscription}
             shouldResubscribe={true}
@@ -60,7 +70,8 @@ export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainer
     )
   }
 
-  const [from, to] = id.split('/')
+  console.log(currencyContext)
+  const [from, to] = currencyContext ? currencyContext.split('/') : id.split('/')
 
   return (
     <>

@@ -13,7 +13,7 @@
     "pretty-quick": "^1.4.1"
   },
   "scripts": {
-    "start": "yarn run bootstrap && lerna run --parallel start",
+    "start": "yarn run bootstrap && lerna run --parallel start --port 8080",
     "offline-start": "set INSIGHTS_OFFLINE=true && yarn run start",
     "bootstrap": "lerna bootstrap",
     "clean": "yarn && lerna clean --yes",

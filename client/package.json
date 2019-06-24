@@ -21,6 +21,7 @@
     "moment": "^2.20.1",
     "numeral": "^2.0.6",
     "openfin-layouts": "^1.0.3",
+    "openfin-fdc3": "0.1.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.5",
     "react-app-rewire-graphql-tag": "^1.1.0",
@@ -37,7 +38,7 @@
   },
   "scripts": {
     "start": "tsc & react-app-rewired start",
-    "demo": "serve -s -p=3000 build",
+    "demo": "serve -s -p=8080 build",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
