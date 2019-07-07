@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import Fdc3Context from 'containers/fdc3/fdc3-context'
+import React, { useContext, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import {
@@ -28,6 +29,12 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   const [currentSymbol, setCurrentSymbol] = useState<search_symbols | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
 
+  const fdc3Context = useContext(Fdc3Context)
+  const fdc3ContextId = fdc3Context.name ? `${fdc3Context.name.slice(0, 3)}/${fdc3Context.name.slice(3, 6)}` : undefined
+
+  const instrumentMarket = fdc3Context.market || market
+  const instrumentId = fdc3ContextId ? fdc3ContextId : id
+
   const placeholderTest = {
     crypto: 'Enter a crypto currency or ticket symbol...',
     currency: 'Enter a currency pair...',
@@ -35,25 +42,30 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   }
 
   useEffect(() => {
-    if (id) {
+    if (instrumentId) {
       apolloClient
         .query<searchQuery, searchQueryVariables>({
           query: SearchConnection,
-          variables: { id, market },
+          variables: { id: instrumentId, market: instrumentMarket },
         })
-        .then(result => {
+        .then((result: any) => {
           if (result.data && result.data.symbol) {
             setCurrentSymbol({
               __typename: 'SearchResult',
               id: result.data.symbol.id,
               name: result.data.symbol.name,
             } as search_symbols)
+
+            if (fdc3ContextId) {
+              history.replace(`/${url}/${result.data.symbol.id}`)
+              OpenfinService.NavigateToStock(result.data.symbol.id)
+            }
           }
         })
     } else {
       setCurrentSymbol(null)
     }
-  }, [id])
+  }, [instrumentId, fdc3ContextId, url, instrumentMarket, history])
 
   const onTextChange = (text: string) => {
     setCurrentText(text)

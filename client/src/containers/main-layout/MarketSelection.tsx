@@ -10,7 +10,7 @@ const MarketSelection: React.FunctionComponent<RouteComponentProps & {}> = ({ hi
     if (market) {
       setCurrentMarket(market)
     } else {
-      setCurrentMarket('stock')
+      setCurrentMarket('currency')
     }
   }, [location])
 
