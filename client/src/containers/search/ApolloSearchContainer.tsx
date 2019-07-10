@@ -29,11 +29,9 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   const [currentSymbol, setCurrentSymbol] = useState<search_symbols | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
 
-  const fdc3Context = useContext(Fdc3Context)
-  const fdc3ContextId = fdc3Context.name ? `${fdc3Context.name.slice(0, 3)}/${fdc3Context.name.slice(3, 6)}` : undefined
-
-  const instrumentMarket = fdc3Context.market || market
-  const instrumentId = fdc3ContextId ? fdc3ContextId : id
+  const currencyPairContext = useContext(Fdc3Context)
+  const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === 'CURRENCY'
+  const instrumentId = hasCurrencyPairContext ? currencyPairContext.name : id
 
   const placeholderTest = {
     crypto: 'Enter a crypto currency or ticket symbol...',
@@ -46,7 +44,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
       apolloClient
         .query<searchQuery, searchQueryVariables>({
           query: SearchConnection,
-          variables: { id: instrumentId, market: instrumentMarket },
+          variables: { id: instrumentId, market },
         })
         .then((result: any) => {
           if (result.data && result.data.symbol) {
@@ -56,7 +54,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
               name: result.data.symbol.name,
             } as search_symbols)
 
-            if (fdc3ContextId) {
+            if (hasCurrencyPairContext) {
               history.replace(`/${url}/${result.data.symbol.id}`)
               OpenfinService.NavigateToStock(result.data.symbol.id)
             }
@@ -65,7 +63,7 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
     } else {
       setCurrentSymbol(null)
     }
-  }, [instrumentId, fdc3ContextId, url, instrumentMarket, history])
+  }, [instrumentId, market, url, hasCurrencyPairContext, history])
 
   const onTextChange = (text: string) => {
     setCurrentText(text)

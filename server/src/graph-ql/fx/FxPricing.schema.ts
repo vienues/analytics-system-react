@@ -13,7 +13,7 @@ export default class FxPricing {
   @Field(type => Float)
   public bid!: number
 
-  @Field(type => DateTimeScalar)
+  @Field(type => DateTimeScalar, { nullable: true })
   public creationTimestamp!: DateTime
 
   @Field(type => Float)

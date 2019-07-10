@@ -1,7 +1,8 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
-import { Context, Fdc3ContextProvider } from 'containers/fdc3/fdc3-context'
+import { Fdc3ContextProvider } from 'containers/fdc3/fdc3-context'
+import { Context } from 'openfin-fdc3'
 import React, { useEffect, useState } from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
@@ -15,7 +16,7 @@ import { ThemeProvider } from './rt-theme/ThemeContext'
 library.add(fasLightBulb, farLightBulb)
 
 const App = () => {
-  const [fdc3Context, setFdc3Context] = useState({} as Context)
+  const [currencyPairContext, setCurrencyPairContext] = useState({} as Context)
 
   useEffect(() => {
     if (typeof fin === 'undefined') {
@@ -23,13 +24,13 @@ const App = () => {
     }
     const fdc3 = require('openfin-fdc3')
     fdc3.addContextListener((context: Context) => {
-      setFdc3Context(context)
+      setCurrencyPairContext(context)
     })
-  }, [fdc3Context])
+  }, [currencyPairContext])
 
   return (
     <OpenfinApiProvider>
-      <Fdc3ContextProvider value={fdc3Context}>
+      <Fdc3ContextProvider value={currencyPairContext}>
         <ApolloProvider client={apolloClient}>
           <GlobalStyle />
           <ThemeProvider>
