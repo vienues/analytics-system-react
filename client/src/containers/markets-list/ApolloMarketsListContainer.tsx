@@ -46,7 +46,7 @@ const ApolloMarketsListContainer = () => {
 
 const MarketList = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  grid-template-columns: repeat(auto-fit, 200px);
 `
 
 export default ApolloMarketsListContainer

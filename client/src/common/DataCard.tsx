@@ -86,6 +86,7 @@ const PopupDataCard = styled.div`
   overflow-x: hidden;
   overflow-y: hidden;
   background-color: ${({ theme }) => theme.core.darkBackground};
+  grid-template-columns: 100%;
 `
 
 const VanillaHeader = styled.div`
