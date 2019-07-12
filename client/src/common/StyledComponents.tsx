@@ -6,7 +6,7 @@ export const DataCard = dataCard
 export const AnalyticsLineChartStyle = styled.div`
   width: 100%;
   height: 100%;
-  min-height: 35px; /* Required to avoid JS errors when resizing the height of the browser small enough such 
+  min-height: 35px; /* Required to avoid JS errors when resizing the height of the browser small enough such
                         that the height of the chart is computed as negative values. -D.S. ARTP-394 */
   overflow-y: hidden;
   .recharts-cartesian-axis-ticks {
@@ -41,7 +41,7 @@ export const ToolTipChildRight = styled.div`
 
 export const Banner = styled.div`
   line-height: 1.25rem;
-  padding: 0 0 0 1rem;
+  padding: 0.5rem 1rem;
   display: grid;
   align-items: center;
   min-width: 100%;
@@ -183,9 +183,9 @@ export const AppLayoutRoot = styled.div`
   min-height: 100vh;
   max-height: 100vh;
   overflow: hidden;
-
   display: grid;
   grid-template-rows: auto auto auto 1fr auto;
+  grid-template-columns: 100%;
 `
 
 export const ScrollableArea = styled.div`

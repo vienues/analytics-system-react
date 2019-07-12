@@ -52,6 +52,7 @@ const StockPriceWrapper = styled(VerticalDataContents)<IStockPriceWrapperAttrs>`
   font-size: ${({ size }) => `${size}rem` || `inherit`};
   line-height: ${({ size }) => `${size}rem` || `inherit`};
   grid-gap: 0.5rem;
+  margin-top: 4px;
 `
 
 interface IStockPriceChangeWrapperAttrs {

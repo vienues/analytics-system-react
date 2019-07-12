@@ -47,12 +47,12 @@ const LeftNav = styled.ul`
   display: grid;
   justify-content: start;
   grid-gap: 1rem;
-  grid-template-columns: repeat(7, auto);
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(auto, 120px));
   margin: 1rem;
 `
 const LiStyle = styled.li`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-content: center;
   font-size: 14px;
@@ -60,6 +60,7 @@ const LiStyle = styled.li`
 const LeftNavItemFirst = styled(LiStyle)`
   list-style-type: none;
   font-size: 16px;
+  align-self: auto;
 `
 
 const NavItem = styled(LiStyle)<{ active: boolean }>`

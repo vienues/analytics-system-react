@@ -1,25 +1,7 @@
-import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Downshift, { DownshiftInterface, GetItemPropsOptions } from 'downshift'
 import React from 'react'
 import { search_symbols as SearchResult } from '../../../__generated__/types'
 import { styled } from '../../../rt-theme'
-
-interface IClearSearchProps {
-  clearFunction: () => void
-  style?: React.CSSProperties
-}
-
-const ClearSearch: React.FunctionComponent<IClearSearchProps> = ({ clearFunction, style }) => {
-  const clearClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    clearFunction()
-  }
-  return (
-    <button style={{ ...style, cursor: 'pointer' }} onClick={clearClick}>
-      <FontAwesomeIcon icon={faTimes} title="Clear selection" />
-    </button>
-  )
-}
 
 const TypedDownshift: DownshiftInterface<SearchResult> = Downshift
 
@@ -34,14 +16,9 @@ interface ISearchBarProps {
 class SearchInput extends React.Component<ISearchBarProps, {}> {
   constructor(props: ISearchBarProps) {
     super(props)
-    this.inputFocus = this.inputFocus.bind(this)
   }
 
   public searchResultToOptionString = (item: SearchResult | null): string => (item ? `${item.id} - ${item.name}` : '')
-
-  public inputFocus = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    e.currentTarget.select()
-  }
 
   public render() {
     return (
@@ -51,19 +28,12 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
         itemToString={this.searchResultToOptionString}
         defaultHighlightedIndex={0}
       >
-        {({ getInputProps, getItemProps, getMenuProps, getRootProps, isOpen, inputValue, clearSelection }) => {
+        {({ getInputProps, getItemProps, getMenuProps, getRootProps, isOpen, inputValue }) => {
           this.props.onTextChange(inputValue || '')
           return (
             <SearchWrapper {...getRootProps()}>
-              {inputValue === '' ? (
-                <FontAwesomeIcon style={{ paddingRight: '1rem' }} icon={faSearch} />
-              ) : (
-                <ClearSearch style={{ paddingRight: '1rem' }} clearFunction={clearSelection} />
-              )}
               <input
                 {...getInputProps({ placeholder: this.props.placeholder })}
-                onClick={this.inputFocus}
-                onFocus={this.inputFocus}
                 style={{ width: '100%' }}
                 autoFocus={true}
                 spellCheck={false}
@@ -103,7 +73,7 @@ const SearchWrapper = styled.div`
   align-items: center;
   display: grid;
   grid-gap: 0.5rem;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   position: relative;
   & svg {
     color: ${({ theme }) => theme.core.lightBackground};

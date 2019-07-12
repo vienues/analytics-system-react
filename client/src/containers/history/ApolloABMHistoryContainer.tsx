@@ -1,6 +1,6 @@
 import React from 'react'
 import { Subscription, SubscriptionResult } from 'react-apollo'
-import { Line, LineChart, Tooltip, YAxis } from 'recharts'
+import { Line, LineChart, Tooltip, YAxis, ResponsiveContainer } from 'recharts'
 import {
   ABMHistoryQuery,
   ABMHistoryQueryVariables,
@@ -47,11 +47,13 @@ export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainer
               }
               const chartData = getPriceHistory.slice(getPriceHistory.length - 100, getPriceHistory.length)
               return (
-                <LineChart width={1000} height={600} data={chartData}>
-                  <YAxis domain={['dataMin', 'dataMax']} scale="auto" />
-                  <Tooltip />
-                  <Line dot={false} type="monotone" dataKey="mid" stroke="#54606D" />
-                </LineChart>
+                <ResponsiveContainer height={600}>
+                  <LineChart data={chartData}>
+                    <YAxis domain={['dataMin', 'dataMax']} scale="auto" />
+                    <Tooltip />
+                    <Line dot={false} type="monotone" dataKey="mid" stroke="#54606D" />
+                  </LineChart>
+                </ResponsiveContainer>
               )
             }}
           </Subscription>

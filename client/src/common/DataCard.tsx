@@ -74,6 +74,7 @@ const DataContents: React.FunctionComponent<IProps> = props => {
 
 const VanillaDataCard = styled.div`
   display: grid;
+  grid-template-columns: 100%;
   background-color: ${({ theme }) => theme.core.lightBackground};
   overflow-x: hidden;
   overflow-y: hidden;
