@@ -3,8 +3,11 @@ fragment History on Stock {
     label
     datetime
     average
+    open
     low
     high
+    close
+    volume
   }
   quote {
     id

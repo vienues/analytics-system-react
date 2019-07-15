@@ -1,25 +1,7 @@
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Downshift, { DownshiftInterface, GetItemPropsOptions } from 'downshift'
 import React from 'react'
-import { search_search as SearchResult } from '../../../__generated__/types'
+import { search_symbols as SearchResult } from '../../../__generated__/types'
 import { styled } from '../../../rt-theme'
-
-interface IClearSearchProps {
-  clearFunction: () => void
-  style: React.CSSProperties
-}
-
-const ClearSearch: React.FunctionComponent<IClearSearchProps> = ({ clearFunction, style }) => {
-  const clearClick = (_: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    clearFunction()
-  }
-  return (
-    <button style={{ ...style, cursor: 'pointer' }} onClick={clearClick}>
-      <FontAwesomeIcon icon={faTimes} title="Clear selection" />
-    </button>
-  )
-}
 
 const TypedDownshift: DownshiftInterface<SearchResult> = Downshift
 
@@ -28,19 +10,15 @@ interface ISearchBarProps {
   initialItem: SearchResult | null
   onChange: (symbol: SearchResult | null) => void
   onTextChange: (text: string) => void
+  placeholder: string
 }
 
 class SearchInput extends React.Component<ISearchBarProps, {}> {
   constructor(props: ISearchBarProps) {
     super(props)
-    this.inputFocus = this.inputFocus.bind(this)
   }
 
   public searchResultToOptionString = (item: SearchResult | null): string => (item ? `${item.id} - ${item.name}` : '')
-
-  public inputFocus = (e: React.SyntheticEvent<HTMLInputElement>) => {
-    e.currentTarget.select()
-  }
 
   public render() {
     return (
@@ -50,26 +28,12 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
         itemToString={this.searchResultToOptionString}
         defaultHighlightedIndex={0}
       >
-        {({ getInputProps, getItemProps, getMenuProps, isOpen, inputValue, clearSelection }) => {
+        {({ getInputProps, getItemProps, getMenuProps, getRootProps, isOpen, inputValue }) => {
           this.props.onTextChange(inputValue || '')
           return (
-            <div
-              style={{
-                alignItems: 'center',
-                display: 'grid',
-                gridGap: '0.5rem',
-                gridTemplateColumns: 'auto 1fr auto',
-                position: 'relative',
-              }}
-            >
-              <ClearSearch
-                clearFunction={clearSelection}
-                style={{ visibility: inputValue === '' ? 'hidden' : 'visible' }}
-              />
+            <SearchWrapper {...getRootProps()}>
               <input
-                {...getInputProps({ placeholder: 'Enter a stock or symbol...' })}
-                onClick={this.inputFocus}
-                onFocus={this.inputFocus}
+                {...getInputProps({ placeholder: this.props.placeholder })}
                 style={{ width: '100%' }}
                 autoFocus={true}
                 spellCheck={false}
@@ -79,7 +43,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
                   {this.renderItems(this.props.items, inputValue, getItemProps)}
                 </SearchResults>
               ) : null}
-            </div>
+            </SearchWrapper>
           )
         }}
       </TypedDownshift>
@@ -104,6 +68,17 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
     ))
   }
 }
+
+const SearchWrapper = styled.div`
+  align-items: center;
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: 1fr auto;
+  position: relative;
+  & svg {
+    color: ${({ theme }) => theme.core.lightBackground};
+  }
+`
 
 const SearchResults = styled.menu`
   position: absolute;

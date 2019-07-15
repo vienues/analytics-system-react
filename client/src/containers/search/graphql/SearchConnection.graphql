@@ -1,10 +1,6 @@
-query searchQuery($id: ID!) {
-  stock(id: $id) {
+query searchQuery($id: String!, $market: String!) {
+  symbol(id: $id, market: $market) {
     id
-    company {
-      id
-      name
-      exchange
-    }
+    name
   }
 }

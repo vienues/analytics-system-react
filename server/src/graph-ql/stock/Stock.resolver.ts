@@ -7,6 +7,7 @@ import { NewsSchema, NewsService } from '../news'
 import { QuoteSchema, QuoteService } from '../quote'
 import { StatsSchema, StatsService } from '../stats'
 import { TickSchema, TickService } from '../tick'
+import { default as OLHCSchema } from './OLHC.schema'
 import Previous from './Previous.schema'
 import SearchResult from './SearchResult.schema'
 import { default as StockSchema } from './Stock.schema'
@@ -47,6 +48,11 @@ export default class Stock {
     } as AutoFields
   }
 
+  @Query(returns => OLHCSchema)
+  public async OLHC(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<OLHCSchema> {
+    return ctx.iex.ohlc(id)
+  }
+
   @Query(retuns => [SearchResult])
   public async search(@Arg('text') text: string) {
     return search(text)
@@ -69,7 +75,7 @@ export default class Stock {
 
   @FieldResolver()
   public async peers(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<string[]> {
-    return ctx.iex.fetch<string[]>(`stock/${stock.id}/peers`)
+    return ctx.iex.peers(stock.id)
   }
 
   @FieldResolver()
@@ -79,12 +85,13 @@ export default class Stock {
 
   @FieldResolver()
   public async price(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<number> {
-    return ctx.iex.fetch<number>(`stock/${stock.id}/price`)
+    return ctx.iex.price(stock.id)
   }
 
   @FieldResolver()
   public async previous(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Previous> {
-    return ctx.iex.fetch<IIexPreviousQuery & { date: Date }>(`stock/${stock.id}/previous`)
+    // @ts-ignore - vwap does not exist in typings
+    return ctx.iex.previousDay(stock.id)
   }
 
   @FieldResolver()

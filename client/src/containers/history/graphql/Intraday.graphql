@@ -1,0 +1,9 @@
+fragment Intraday on Intraday {
+  datetime
+  open
+  close
+  high
+  low
+  volume
+  numberOfTrades
+}

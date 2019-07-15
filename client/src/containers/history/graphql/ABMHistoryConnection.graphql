@@ -1,0 +1,9 @@
+query ABMHistoryQuery($from: String!, $to: String!) {
+  getPriceHistory(from: $from, to: $to) {
+    ask
+    bid
+    mid
+    valueDate
+    creationTimestamp
+  }
+}

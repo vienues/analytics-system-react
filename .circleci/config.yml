@@ -25,6 +25,7 @@ jobs:
       #     - v1-dependencies-
 
       - run: sudo npm install --global lerna
+      - run: yarn install
       - run: yarn run bootstrap
 
       # - save_cache:
@@ -36,5 +37,5 @@ jobs:
       # Run SERVER tests.
       - run: |
           cd ~/repo/server &&
-          yarn run build &&
-          yarn run test
+          yarn &&
+          yarn run build

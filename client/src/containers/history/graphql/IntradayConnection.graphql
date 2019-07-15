@@ -1,0 +1,6 @@
+#import "./Intraday.graphql"
+query IntradayQuery($symbol: String!) {
+  intradayPrices(symbol: $symbol, lastN: 2) {
+    ...Intraday
+  }
+}

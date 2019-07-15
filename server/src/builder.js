@@ -1,5 +1,7 @@
 // This is a standalone script - no point in translating to TS
 
+// TODO: This is no longer current as we are using iexcloud, not iextrading
+
 const fs = require('fs')
 const fetch = require('node-fetch')
 

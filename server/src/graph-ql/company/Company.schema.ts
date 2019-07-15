@@ -7,30 +7,30 @@ export default class Company {
     return this.symbol
   }
 
-  @Field()
+  @Field({ nullable: true })
   public name?: string
 
   @Field()
   public symbol!: string
 
-  @Field()
-  public exchange!: string
+  @Field({ nullable: true })
+  public exchange?: string
 
-  @Field()
-  public industry!: string
+  @Field({ nullable: true })
+  public industry?: string
 
-  @Field()
-  public website!: string
+  @Field({ nullable: true })
+  public website?: string
 
-  @Field()
+  @Field({ nullable: true })
   public description!: string
 
-  @Field()
-  public CEO!: string
+  @Field({ nullable: true })
+  public CEO?: string
 
-  @Field()
-  public issueType!: string
+  @Field({ nullable: true })
+  public issueType?: string
 
-  @Field()
-  public sector!: string
+  @Field({ nullable: true })
+  public sector?: string
 }

@@ -6,6 +6,8 @@ import CompanyService from './Company.service'
 export interface IAutoResolvedFields {
   id: string
   name: string
+  // https://github.com/schardtbc/iexcloud_api_wrapper/issues/3
+  CEO: string
 }
 
 @Resolver(of => CompanySchema)

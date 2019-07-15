@@ -15,14 +15,25 @@ export default class Tick {
   @Field()
   public label!: string
 
-  @Field(type => Float)
+  // new from iexcloud
+  @Field(type => Float, { nullable: true })
   public high!: number
 
-  @Field(type => Float)
+  // new from iexcloud
+  @Field(type => Float, { nullable: true })
   public low!: number
 
-  @Field(type => Float)
+  // new from iexcloud
+  @Field(type => Float, { nullable: true })
   public average!: number
+
+  // new from iexcloud
+  @Field(type => Float, { nullable: true })
+  public open!: number
+
+  // new from iexcloud
+  @Field(type => Float, { nullable: true })
+  public close!: number
 
   @Field(type => Float)
   public volume!: number

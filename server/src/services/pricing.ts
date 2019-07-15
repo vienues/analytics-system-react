@@ -20,7 +20,8 @@ interface IMarketSubscription {
 const MarketSubscriptions: IMarketSubscription = {}
 
 const getPricing = async (symbols: string[]): Promise<IIexBatchQuote> => {
-  return iex.fetch<IIexBatchQuote>(`stock/market/batch?symbols=${symbols.join(',')}&types=quote`)
+  // the current iexcloud_api_wrapper does not support batch operations so making a direct call
+  return iex.iexApiRequest(`/stock/market/batch?symbols=${symbols.join(',')}&types=quote`)
 }
 
 export default function(pubsub: PubSub) {
@@ -28,15 +29,21 @@ export default function(pubsub: PubSub) {
   let isExecuting = false
 
   const executor = async () => {
-    const prices = await getPricing(Object.keys(MarketSubscriptions))
-    Object.values(prices).forEach(price => {
-      if (price.quote) {
-        logger.info(`publishing ${createTopic(price.quote.symbol)}`)
-        pubsub.publish(createTopic(price.quote.symbol), price.quote)
-      } else {
-        logger.error(`Pricing error happened, price exists but Quote does not on object ${JSON.stringify(price)}`)
+    try {
+      const prices = await getPricing(Object.keys(MarketSubscriptions))
+      if (prices) {
+        Object.values(prices).forEach(price => {
+          if (price.quote) {
+            logger.info(`publishing ${createTopic(price.quote.symbol)}`)
+            pubsub.publish(createTopic(price.quote.symbol), price.quote)
+          } else {
+            logger.error(`Pricing error happened, price exists but Quote does not on object ${JSON.stringify(price)}`)
+          }
+        })
       }
-    })
+    } catch (e) {
+      logger.error(`Error: ${e.message}`)
+    }
     timer = setTimeout(executor, TICK_INTERVAL)
   }
 

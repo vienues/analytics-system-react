@@ -1,14 +1,20 @@
 type Company {
   id: ID!
+  name: String
   symbol: String!
+  exchange: String
+  industry: String
+  website: String
+  description: String
+  CEO: String
+  issueType: String
+  sector: String
+}
+
+type Crypto {
+  symbol: ID!
   name: String!
-  exchange: String!
-  industry: String!
-  website: String!
-  description: String!
-  CEO: String!
-  issueType: String!
-  sector: String!
+  quote: Quote!
 }
 
 """
@@ -17,9 +23,71 @@ Date in ISO 8601 format, i.e. YYYY-MM-DD
 scalar Date
 
 """
+The javascript `Date` as string. Type represents date and time as the ISO Date string.
+"""
+scalar DateTime
+
+type FxCurrencies {
+  code: ID!
+  name: String!
+}
+
+type FxPairs {
+  from: String!
+  to: String!
+}
+
+type FxPricing {
+  Pair: FxPairs!
+  ask: Float!
+  bid: Float!
+  creationTimestamp: ISODateTime!
+  mid: Float!
+  valueDate: Date!
+}
+
+type FxRate {
+  date: DateTime!
+  fromCurrency: String!
+  toCurrency: String!
+  rate: Float!
+}
+
+type FxSymbols {
+  currencies: [FxCurrencies!]!
+  pairs: [FxPairs!]!
+}
+
+type Intraday {
+  date: Date
+  minute: Time
+  datetime: ISODateTime
+  high: Float
+  low: Float
+  average: Float
+  open: Float
+  close: Float
+  volume: Float
+  notional: Float
+  numberOfTrades: Int
+}
+
+"""
 Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ
 """
 scalar ISODateTime
+
+"""
+The type of market
+"""
+enum MarketSegment {
+  CURRENCY
+  STOCK
+  INDEX
+  FUTURE
+  BOND
+  CRYPTO
+}
 
 type News {
   id: ID!
@@ -29,6 +97,16 @@ type News {
   url: String!
   summary: String!
   related: String!
+}
+
+type OLHC {
+  symbol: ID!
+  open: Float
+  close: Float
+  openTime: ISODateTime
+  closeTime: ISODateTime
+  high: Float
+  low: Float
 }
 
 type Previous {
@@ -47,53 +125,58 @@ type Previous {
 
 type Query {
   company(id: String!): Company!
-  news(id: ID = "", last: Int = 0): [News!]!
   quote(id: ID = ""): Quote!
   markets: [Quote!]!
+  crypto(symbol: String!): Crypto!
+  cryptoSymbols(text: String!): [SearchResult!]!
+  getPriceHistory(from: String!, to: String!): [FxPricing!]!
+  news(id: ID = "", last: Int = 0): [News!]!
+  symbol(market: String!, id: String!): SearchResult!
+  symbols(text: String!, marketSegment: MarketSegment!): [SearchResult!]!
   stats(id: String!): Stats!
+  intradayPrices(symbol: String!, lastN: Int!): [Intraday!]!
   stock(id: ID = ""): Stock!
+  OLHC(id: ID = ""): OLHC!
   search(text: String!): [SearchResult!]!
 }
 
 type Quote {
   id: ID!
   symbol: String!
-  company: Company!
-  companyName: String!
-  primaryExchange: String!
-  sector: String!
-  calculationPrice: String!
-  open: Float!
-  openTime: ISODateTime!
-  close: Float!
-  closeTime: ISODateTime!
-  high: Float!
-  low: Float!
-  latestPrice: Float!
-  latestSource: String!
-  latestTime: Time!
-  latestUpdate: ISODateTime!
-  latestVolume: Int!
-  iexRealtimePrice: Float!
-  iexRealtimeSize: Int!
-  iexLastUpdated: ISODateTime!
-  delayedPrice: Float!
-  delayedPriceTime: ISODateTime!
-  previousClose: Float!
-  change: Float!
-  changePercent: Float!
-  iexMarketPercent: Float!
-  iexVolume: Int!
-  avgTotalVolume: Int!
-  iexBidPrice: Float!
-  iexBidSize: Int!
-  iexAskPrice: Float!
-  iexAskSize: Int!
-  marketCap: Float!
+  company: Company
+  companyName: String
+  calculationPrice: String
+  open: Float
+  openTime: ISODateTime
+  close: Float
+  closeTime: ISODateTime
+  high: Float
+  low: Float
+  latestPrice: Float
+  latestSource: String
+  latestTime: Time
+  latestUpdate: ISODateTime
+  latestVolume: Float
+  iexRealtimePrice: Float
+  iexRealtimeSize: Int
+  iexLastUpdated: ISODateTime
+  delayedPrice: Float
+  delayedPriceTime: ISODateTime
+  previousClose: Float
+  change: Float
+  changePercent: Float
+  iexMarketPercent: Float
+  iexVolume: Int
+  avgTotalVolume: Int
+  iexBidPrice: Float
+  iexBidSize: Int
+  iexAskPrice: Float
+  iexAskSize: Int
+  marketCap: Float
   peRatio: Float
-  week52High: Float!
-  week52Low: Float!
-  ytdChange: Float!
+  week52High: Float
+  week52Low: Float
+  ytdChange: Float
 }
 
 type SearchResult {
@@ -104,55 +187,37 @@ type SearchResult {
 type Stats {
   id: ID!
   symbol: String!
-  company: Company!
-  companyName: String!
-  marketcap: Float!
-  beta: Float!
-  week52high: Float!
-  week52low: Float!
-  week52change: Float!
-  shortInterest: Float!
-  shortDate: Date!
-  dividendRate: Float!
-  dividendYield: Float!
-  exDividendDate: Date!
-  latestEPS: Float!
-  latestEPSDate: String!
-  sharesOutstanding: Float!
-  float: Float!
-  returnOnEquity: Float!
-  consensusEPS: Float!
-  numberOfEstimates: Float!
-  EBITDA: Float!
-  revenue: Float!
-  grossProfit: Float!
-  cash: Float!
-  debt: Float!
-  ttmEPS: Float!
-  revenuePerShare: Float!
-  revenuePerEmployee: Float
-  peRatioHigh: Float!
-  peRatioLow: Float!
-  EPSSurpriseDollar: String
-  EPSSurprisePercent: Float!
-  returnOnAssets: Float!
-  returnOnCapital: String
-  profitMargin: Float!
-  priceToSales: Float!
-  priceToBook: Float!
-  day200MovingAvg: Float!
-  day50MovingAvg: Float!
-  institutionPercent: Float!
-  insiderPercent: String
-  shortRatio: Float
-  year5ChangePercent: Float!
-  year2ChangePercent: Float!
-  year1ChangePercent: Float!
-  ytdChangePercent: Float!
-  month6ChangePercent: Float!
-  month3ChangePercent: Float!
-  month1ChangePercent: Float!
-  day5ChangePercent: Float!
+  company: Company
+  companyName: String
+  marketcap: Float
+  week52high: Float
+  week52low: Float
+  week52change: Float
+  sharesOutstanding: Float
+  float: Float
+  avg10Volume: Int
+  avg30Volume: Int
+  day200MovingAvg: Float
+  day50MovingAvg: Float
+  employees: Int
+  ttmEPS: Float
+  ttmDividendRate: Float
+  dividendYield: Float
+  nextDividendDate: Date
+  exDividendDate: Date
+  nextEarningsDate: Date
+  peRatio: Float
+  beta: Float
+  maxChangePercent: Float
+  year5ChangePercent: Float
+  year2ChangePercent: Float
+  year1ChangePercent: Float
+  ytdChangePercent: Float
+  month6ChangePercent: Float
+  month3ChangePercent: Float
+  month1ChangePercent: Float
+  day30ChangePercent: Float
+  day5ChangePercent: Float
 }
 
 type Stock {
@@ -169,7 +234,8 @@ type Stock {
 }
 
 type Subscription {
-  getQuotes(symbols: [String!] = []): Quote!
+  getQuotes(symbols: [String!]!): Quote!
+  getIntradayPrices(symbol: String!): [Intraday!]!
 }
 
 type Tick {
@@ -177,9 +243,11 @@ type Tick {
   minute: Time!
   datetime: ISODateTime!
   label: String!
-  high: Float!
-  low: Float!
-  average: Float!
+  high: Float
+  low: Float
+  average: Float
+  open: Float
+  close: Float
   volume: Float!
   notional: Float!
   numberOfTrades: Float!

@@ -54,8 +54,9 @@ export default createGlobalStyle`
     font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 16px;
     line-height: 1rem;
-    text-rendering: geometricPrecision;   
+    text-rendering: geometricPrecision;
     overflow: hidden;
+    font-weight: 300;
 
     @media all and (max-width: 400px) {
       font-size: 14px;
@@ -65,7 +66,7 @@ export default createGlobalStyle`
       font-size: 12px;
     }
   }
-  
+
   body, #root {
     height: 100vh;
     max-width: 100vw;
@@ -76,27 +77,33 @@ export default createGlobalStyle`
     border-width: 0;
     border-color: transparent;
   }
-  
+
   button:focus {
     outline: none;
   }
-  
+
   /* Undo ress.css overflow-y rule */
   html {
     overflow-y: initial;
-  } 
-  
+  }
+
   a {
     text-decoration: none;
     color: inherit;
   }
-  
+
   a.visited {
     text-decoration: none;
   }
-  
+
   svg {
     display: inline-block;
     overflow: visible;
+  }
+
+  input {
+    &:focus {
+      outline: none;
+    }
   }
 `

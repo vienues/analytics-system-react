@@ -1,18 +1,28 @@
 import React from 'react'
-import { DataCard, DataContents, Heading, Text } from '../../../common/StyledComponents'
+import { DataCard, DataContents, Text } from '../../../common/StyledComponents'
+import { styled } from '../../../rt-theme'
 import { default as NewsItem, INewsArticle } from './NewsItem'
 
-const News: React.FunctionComponent<{ news: INewsArticle[] }> = ({ news }) => (
-  <DataCard>
-    <Heading>Latest News</Heading>
-    <DataContents>
+const News: React.FunctionComponent<{ news: INewsArticle[]; id: string }> = ({ news, id }) => (
+  <DataCard cardType="news" title="News" instrument={id}>
+    <NewsDataContents>
       {news.length > 0 ? (
         news.map(newsItem => <NewsItem key={newsItem.id} {...newsItem} />)
       ) : (
         <Text>There is no news</Text>
       )}
-    </DataContents>
+    </NewsDataContents>
   </DataCard>
 )
+
+const NewsDataContents = styled(DataContents)`
+  & a {
+    border-bottom: 1px #54606d solid;
+  }
+
+  & a:last-child {
+    border-bottom: none;
+  }
+`
 
 export default News

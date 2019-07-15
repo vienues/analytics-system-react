@@ -9,9 +9,9 @@ export interface CompanyQuery_stock_company {
   __typename: 'Company'
   id: string
   symbol: string
-  name: string
-  website: string
-  description: string
+  name: string | null
+  website: string | null
+  description: string | null
 }
 
 export interface CompanyQuery_stock {
@@ -32,6 +32,31 @@ export interface CompanyQueryVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: ABMHistoryQuery
+// ====================================================
+
+export interface ABMHistoryQuery_getPriceHistory {
+  __typename: 'FxPricing'
+  ask: number
+  bid: number
+  mid: number
+  valueDate: any
+  creationTimestamp: any
+}
+
+export interface ABMHistoryQuery {
+  getPriceHistory: ABMHistoryQuery_getPriceHistory[]
+}
+
+export interface ABMHistoryQueryVariables {
+  from: string
+  to: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: HistoryQuery
 // ====================================================
 
@@ -39,15 +64,18 @@ export interface HistoryQuery_stock_chart {
   __typename: 'Tick'
   label: string
   datetime: any
-  average: number
-  low: number
-  high: number
+  average: number | null
+  open: number | null
+  low: number | null
+  high: number | null
+  close: number | null
+  volume: number
 }
 
 export interface HistoryQuery_stock_quote {
   __typename: 'Quote'
   id: string
-  previousClose: number
+  previousClose: number | null
 }
 
 export interface HistoryQuery_stock {
@@ -57,12 +85,73 @@ export interface HistoryQuery_stock {
   quote: HistoryQuery_stock_quote
 }
 
+export interface HistoryQuery_OLHC {
+  __typename: 'OLHC'
+  open: number | null
+  close: number | null
+  low: number | null
+  high: number | null
+}
+
 export interface HistoryQuery {
   stock: HistoryQuery_stock
+  OLHC: HistoryQuery_OLHC
 }
 
 export interface HistoryQueryVariables {
   id: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: IntradayQuery
+// ====================================================
+
+export interface IntradayQuery_intradayPrices {
+  __typename: 'Intraday'
+  datetime: any | null
+  open: number | null
+  close: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  numberOfTrades: number | null
+}
+
+export interface IntradayQuery {
+  intradayPrices: IntradayQuery_intradayPrices[]
+}
+
+export interface IntradayQueryVariables {
+  symbol: string
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL subscription operation: onIntradayPricingSubscription
+// ====================================================
+
+export interface onIntradayPricingSubscription_getIntradayPrices {
+  __typename: 'Intraday'
+  datetime: any | null
+  open: number | null
+  close: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  numberOfTrades: number | null
+}
+
+export interface onIntradayPricingSubscription {
+  getIntradayPrices: onIntradayPricingSubscription_getIntradayPrices[]
+}
+
+export interface onIntradayPricingSubscriptionVariables {
+  symbol: string
 }
 
 /* tslint:disable */
@@ -75,10 +164,10 @@ export interface HistoryQueryVariables {
 export interface MarketQuery_markets {
   __typename: 'Quote'
   id: string
-  companyName: string
-  change: number
-  changePercent: number
-  latestPrice: number
+  companyName: string | null
+  change: number | null
+  changePercent: number | null
+  latestPrice: number | null
 }
 
 export interface MarketQuery {
@@ -95,9 +184,9 @@ export interface MarketQuery {
 export interface onMarketSubscription_getQuotes {
   __typename: 'Quote'
   id: string
-  change: number
-  changePercent: number
-  latestPrice: number
+  change: number | null
+  changePercent: number | null
+  latestPrice: number | null
 }
 
 export interface onMarketSubscription {
@@ -162,25 +251,19 @@ export interface PeersQueryVariables {
 // GraphQL query operation: searchQuery
 // ====================================================
 
-export interface searchQuery_stock_company {
-  __typename: 'Company'
+export interface searchQuery_symbol {
+  __typename: 'SearchResult'
   id: string
   name: string
-  exchange: string
-}
-
-export interface searchQuery_stock {
-  __typename: 'Stock'
-  id: string
-  company: searchQuery_stock_company
 }
 
 export interface searchQuery {
-  stock: searchQuery_stock
+  symbol: searchQuery_symbol
 }
 
 export interface searchQueryVariables {
   id: string
+  market: string
 }
 
 /* tslint:disable */
@@ -190,18 +273,19 @@ export interface searchQueryVariables {
 // GraphQL query operation: search
 // ====================================================
 
-export interface search_search {
+export interface search_symbols {
   __typename: 'SearchResult'
   id: string
   name: string
 }
 
 export interface search {
-  search: search_search[]
+  symbols: search_symbols[]
 }
 
 export interface searchVariables {
   text: string
+  marketSegment: MarketSegment
 }
 
 /* tslint:disable */
@@ -213,25 +297,24 @@ export interface searchVariables {
 
 export interface StatsQuery_stock_stats {
   __typename: 'Stats'
-  marketcap: number
-  peRatioLow: number
-  peRatioHigh: number
-  week52low: number
-  week52high: number
-  latestEPS: number
-  dividendRate: number
-  dividendYield: number
+  week52high: number | null
+  week52low: number | null
+  ttmEPS: number | null
+  ttmDividendRate: number | null
+  dividendYield: number | null
+  peRatio: number | null
+  marketcap: number | null
 }
 
 export interface StatsQuery_stock_quote {
   __typename: 'Quote'
   id: string
-  low: number
-  high: number
-  open: number
-  previousClose: number
-  latestVolume: number
-  avgTotalVolume: number
+  low: number | null
+  high: number | null
+  open: number | null
+  previousClose: number | null
+  latestVolume: number | null
+  avgTotalVolume: number | null
 }
 
 export interface StatsQuery_stock {
@@ -259,9 +342,9 @@ export interface StatsQueryVariables {
 export interface onStockPriceSubscription_getQuotes {
   __typename: 'Quote'
   id: string
-  change: number
-  changePercent: number
-  latestPrice: number
+  change: number | null
+  changePercent: number | null
+  latestPrice: number | null
 }
 
 export interface onStockPriceSubscription {
@@ -283,9 +366,9 @@ export interface Company_company {
   __typename: 'Company'
   id: string
   symbol: string
-  name: string
-  website: string
-  description: string
+  name: string | null
+  website: string | null
+  description: string | null
 }
 
 export interface Company {
@@ -304,21 +387,42 @@ export interface History_chart {
   __typename: 'Tick'
   label: string
   datetime: any
-  average: number
-  low: number
-  high: number
+  average: number | null
+  open: number | null
+  low: number | null
+  high: number | null
+  close: number | null
+  volume: number
 }
 
 export interface History_quote {
   __typename: 'Quote'
   id: string
-  previousClose: number
+  previousClose: number | null
 }
 
 export interface History {
   __typename: 'Stock'
   chart: History_chart[]
   quote: History_quote
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: Intraday
+// ====================================================
+
+export interface Intraday {
+  __typename: 'Intraday'
+  datetime: any | null
+  open: number | null
+  close: number | null
+  high: number | null
+  low: number | null
+  volume: number | null
+  numberOfTrades: number | null
 }
 
 /* tslint:disable */
@@ -359,25 +463,24 @@ export interface Peers {
 
 export interface Stats_stats {
   __typename: 'Stats'
-  marketcap: number
-  peRatioLow: number
-  peRatioHigh: number
-  week52low: number
-  week52high: number
-  latestEPS: number
-  dividendRate: number
-  dividendYield: number
+  week52high: number | null
+  week52low: number | null
+  ttmEPS: number | null
+  ttmDividendRate: number | null
+  dividendYield: number | null
+  peRatio: number | null
+  marketcap: number | null
 }
 
 export interface Stats_quote {
   __typename: 'Quote'
   id: string
-  low: number
-  high: number
-  open: number
-  previousClose: number
-  latestVolume: number
-  avgTotalVolume: number
+  low: number | null
+  high: number | null
+  open: number | null
+  previousClose: number | null
+  latestVolume: number | null
+  avgTotalVolume: number | null
 }
 
 export interface Stats {
@@ -392,6 +495,16 @@ export interface Stats {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+// The type of market
+export enum MarketSegment {
+  BOND = 'BOND',
+  CRYPTO = 'CRYPTO',
+  CURRENCY = 'CURRENCY',
+  FUTURE = 'FUTURE',
+  INDEX = 'INDEX',
+  STOCK = 'STOCK',
+}
 
 //==============================================================
 // END Enums and Input Objects

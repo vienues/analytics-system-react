@@ -1,4 +1,6 @@
-import { Args, ArgsType, Ctx, Field, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
+import { Quote as QuoteAPI } from 'iexcloud_api_wrapper'
+import { Arg, Args, ArgsType, Ctx, Field, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
+import logger from '../../services/logger'
 import { IAdaptiveCtx, IIexBatchQuote, IIexQuoteQuery } from '../../types'
 import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
@@ -25,14 +27,24 @@ export type AutoFields = IAutoResolvedFields & IAutoCastedFields
 export default class Quote {
   constructor(private readonly quoteService: QuoteService, private readonly companyService: CompanyService) {}
   @Query(() => QuoteSchema)
-  public async quote(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema> {
-    return this.quoteService.getQuote(id, ctx)
+  public async quote(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema | null> {
+    try {
+      return this.quoteService.getQuote(id, ctx)
+    } catch (e) {
+      logger.error(`Error: ${e.message}`)
+      return null
+    }
   }
 
   @Query(() => [QuoteSchema])
-  public async markets(@Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema[]> {
-    const response = await ctx.iex.fetch<IIexBatchQuote>(`stock/market/batch?symbols=spy,dia,iwm&types=quote`)
-    return Object.values(response).map(quote => quote.quote as IIexQuoteQuery & AutoFields)
+  public async markets(@Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema[] | null> {
+    try {
+      const response: QuoteAPI = await ctx.iex.iexApiRequest(`/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
+      return Object.values(response).map(quote => quote.quote as IIexQuoteQuery & AutoFields)
+    } catch (e) {
+      logger.error(`Error: ${e.message}`)
+      return null
+    }
   }
 
   @FieldResolver()
@@ -48,7 +60,7 @@ export default class Quote {
   @Subscription(returns => QuoteSchema, {
     topics: ({ args }) => args.symbols.map((arg: string) => `MARKET_UPDATE.${arg}`),
   })
-  public getQuotes(@Root() quote: QuoteSchema, @Args() _: SubscriptionQuoteArgs): QuoteSchema {
+  public getQuotes(@Root() quote: QuoteSchema, @Arg('symbols', type => [String]) symbols: string[]): QuoteSchema {
     return quote
   }
 }

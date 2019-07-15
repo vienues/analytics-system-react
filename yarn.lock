@@ -1649,6 +1649,11 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
+openfin-fdc3@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/openfin-fdc3/-/openfin-fdc3-0.1.1.tgz#73be86fb6768233fd59013bbb8d80a2b048f8a61"
+  integrity sha512-IyBXvkpJNG6NVlyC3rBe0seMNt75HOCMawOqq7sM3Cl4p8uvLA1p3sbopYkGXPl2Dgxe/xGXQwPymdigWyxSvQ==
+
 optimist@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"

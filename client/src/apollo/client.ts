@@ -32,4 +32,10 @@ const client = new ApolloClient({
   link: from(links),
 })
 
+cache.writeData({
+  data: {
+    symbol: '',
+  },
+})
+
 export default client

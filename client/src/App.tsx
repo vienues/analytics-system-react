@@ -1,59 +1,63 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
-import * as React from 'react'
+import { Fdc3ContextProvider } from 'containers/fdc3/fdc3-context'
+import { Context } from 'openfin-fdc3'
+import React, { useEffect, useState } from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { BrowserRouter, Route, RouteComponentProps, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
 import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
-import { Company, History, MainLayout, News, Peers, Search, Stats } from './containers/'
+import { RouterHelpers } from './helpers'
+import { OpenfinApiProvider } from './openfin/OpenfinService'
+import { styled } from './rt-theme'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
-
 library.add(fasLightBulb, farLightBulb)
 
-interface IComponentWithProps {
-  [path: string]: {
-    component: React.ElementType
-    props?: {
-      [key: string]: any
-    }
-  }
-}
-
-/** Rather than lambda or binding individual generators in the Route we will generate them from object */
-const routerItems: IComponentWithProps = {
-  '/': { component: MainLayout },
-  '/company/:id?': { component: Company },
-  '/history/:id?': { component: History },
-  '/news/:id?': { component: News },
-  '/peers/:id?': { component: Peers },
-  '/search/:id?': { component: Search, props: { url: /search/ } },
-  '/stats/:id?': { component: Stats },
-  '/stock/:id': { component: MainLayout },
-}
-
 const App = () => {
-  const renderRouterElement = (e: RouteComponentProps): JSX.Element => {
-    const element = routerItems[e.match.path]
-    return React.createElement(element.component, { ...element.props, id: (e.match.params as any).id })
-  }
+  const [currencyPairContext, setCurrencyPairContext] = useState({} as Context)
+
+  useEffect(() => {
+    if (typeof fin === 'undefined') {
+      return
+    }
+    const fdc3 = require('openfin-fdc3')
+    fdc3.addContextListener((context: Context) => {
+      setCurrencyPairContext(context)
+    })
+  }, [currencyPairContext])
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <GlobalStyle />
-      <ThemeProvider>
-        <GlobalScrollbarStyle />
-        <BrowserRouter>
-          <Switch>
-            {Object.keys(routerItems).map(route => (
-              <Route key={route} exact={true} path={route} component={renderRouterElement} />
-            ))}
-          </Switch>
-        </BrowserRouter>
-      </ThemeProvider>
-    </ApolloProvider>
+    <OpenfinApiProvider>
+      <Fdc3ContextProvider value={currencyPairContext}>
+        <ApolloProvider client={apolloClient}>
+          <GlobalStyle />
+          <ThemeProvider>
+            <GlobalScrollbarStyle />
+            <ParentContainer>
+              <BrowserRouter>
+                <Switch>
+                  {Object.keys(RouterHelpers.RootRouterItems).map(route => (
+                    <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
+                  ))}
+                </Switch>
+              </BrowserRouter>
+            </ParentContainer>
+          </ThemeProvider>
+        </ApolloProvider>
+      </Fdc3ContextProvider>
+    </OpenfinApiProvider>
   )
 }
+
+const ParentContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  background-color: ${({ theme }) => theme.core.darkBackground};
+  color: ${({ theme }) => theme.core.textColor};
+`
 
 export default App

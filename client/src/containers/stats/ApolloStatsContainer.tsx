@@ -7,7 +7,7 @@ import StatsConnection from './graphql/StatsConnection.graphql'
 
 const ApolloStatsContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
   const onStatsQueryResults: (data: StatsQuery) => JSX.Element = ({ stock }) => {
-    return <Stats stock={stock} />
+    return <Stats stock={stock} id={id} />
   }
 
   return (

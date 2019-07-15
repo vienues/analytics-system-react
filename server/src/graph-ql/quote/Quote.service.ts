@@ -1,11 +1,77 @@
+import { IntradayIEXOnly, Quote } from 'iexcloud_api_wrapper'
+import moment = require('moment')
 import { Service } from 'typedi'
-import { IAdaptiveCtx, IIexQuoteQuery } from '../../types'
+import getDataSource from '../../connectors'
+import { pubsub } from '../../pubsub'
+import logger from '../../services/logger'
+import { IAdaptiveCtx } from '../../types'
 import { AutoFields } from './Quote.resolver'
-import { default as Quote } from './Quote.schema'
+import { default as QuoteSchema } from './Quote.schema'
+
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
+
+interface IIntradaySubscription {
+  [stockSymbol: string]: {
+    listenerCount: number
+  }
+}
 
 @Service()
 export default class {
-  public async getQuote(symbol: string, ctx: IAdaptiveCtx): Promise<Quote> {
-    return ctx.iex.fetch<IIexQuoteQuery & AutoFields>(`stock/${symbol}/quote`)
+  private timer: NodeJS.Timeout | null = null
+  private intradaySubscriptions: IIntradaySubscription = {}
+  public async getQuote(symbol: string, ctx: IAdaptiveCtx): Promise<QuoteSchema> {
+    const retVal = (await ctx.iex.quote(symbol)) as Quote & AutoFields
+    return retVal
+  }
+
+  public async startIntradayPricingLoop(symbol: string) {
+    if (this.intradaySubscriptions[symbol]) {
+      this.intradaySubscriptions[symbol].listenerCount++
+    } else {
+      this.intradaySubscriptions[symbol] = {
+        listenerCount: 1,
+      }
+    }
+    if (!this.timer) {
+      this.getIntradayPricingLoop()
+    }
+  }
+
+  public stopIntradayPricingLoop(symbol: string) {
+    if (this.intradaySubscriptions[symbol]) {
+      this.intradaySubscriptions[symbol].listenerCount--
+      if (!this.intradaySubscriptions[symbol].listenerCount) {
+        delete this.intradaySubscriptions[symbol]
+      }
+    }
+    if (!Object.keys(this.intradaySubscriptions).length && this.timer) {
+      clearInterval(this.timer)
+      this.timer = null
+    }
+  }
+
+  private async getIntradayPricingLoop() {
+    Promise.all(
+      Object.keys(this.intradaySubscriptions).map(async (symbol: string) => {
+        try {
+          const pricing = await iex.iexApiRequest(`/stock/${symbol}/intraday-prices?chartIEXOnly=true&chartLast=5`)
+          if (pricing) {
+            pricing.map((price: any) => {
+              price.datetime = moment(new Date().toLocaleDateString() + ' ' + price.minute)
+                .utc()
+                .toISOString()
+              return price
+            })
+            pubsub.publish(`INTRADAY_PRICING.${symbol}`, pricing)
+            return Promise.resolve(true)
+          }
+        } catch (e) {
+          logger.error(`getIntradayPricingLoop: ${e.message}`)
+        }
+        return Promise.resolve(false)
+      }),
+    )
+    this.timer = setTimeout(this.getIntradayPricingLoop.bind(this), 1000)
   }
 }
