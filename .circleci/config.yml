@@ -38,5 +38,4 @@ jobs:
       - run: |
           cd ~/repo/server &&
           yarn &&
-          yarn run build &&
-          yarn run test
+          yarn run build
