@@ -6,7 +6,7 @@ describe('Fake fetch something', function() {
   it('it should reject an invalid path', async function() {
     const path = '/not/a/real/path'
     const mockData = {}
-    const { fetch } = faker.default(mockData)
+    const { fetch } = faker(mockData)
 
     try {
       await fetch(path)
