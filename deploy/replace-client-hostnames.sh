@@ -17,5 +17,5 @@ sed -i -e 's|http:\/\/[^/]*|https:\/\/'"$domain_name"'|g' \
 
 # Replaces all Websocket ws://string until a slash to wss://domain_name
 sed -i -e 's|ws:\/\/[^/]*|wss:\/\/'"$domain_name"'|g'     \
-    client/src/apollo/client.js    \
+    client/src/apollo/client.ts    \
     .graphqlconfig
