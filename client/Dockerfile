@@ -4,7 +4,8 @@ ARG DOMAIN_NAME="localhost"
 RUN apk update         \
  && apk add nodejs     \
             nodejs-npm \
-            yarn
+            yarn       \
+            git
 RUN npm install --global lerna
 COPY . /app
 WORKDIR /app

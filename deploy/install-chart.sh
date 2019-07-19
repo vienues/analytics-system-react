@@ -8,7 +8,7 @@ if [ $# -lt 5 ]; then
 	echo "    [SERVER_TAG] Tag from docker image that will be used by kubernetes to fetch the artifact from GCP." >&2
 	echo "    [NAMESPACE] Kubernetes cluster namespace that will be used as release name." >&2
 	echo "    [LOAD_BALANCER_IP] IP of the load balancer assigned to this release. Find in GCP." >&2
-	echo "    [DOMAIN_NAME] Name of the domain binded to the load balancer IP." >&2
+	echo "    [DOMAIN_NAME] Name of the domain bound to the load balancer IP." >&2
 	echo "    [ENVIRONMENT] Environment where the application will be deployed. Example format: (DEV), (TEST)..." >&2
 	echo "" >&2
 	echo "CAUTION: Load balancer IP and domain name should be tied previously." >&2

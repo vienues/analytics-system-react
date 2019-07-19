@@ -4,14 +4,14 @@ Quick reference to manage Adaptive Reactive Analytics deployment.
 
 ## Pre-requisites
 
-* A Kubernetes cluster up and running
-* A Service account in the Cloud provider to authenticate against the cluster (Ask for permissions to helpdesk)
-* [Gsutil](https://cloud.google.com/storage/docs/gsutil_install)
-* [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl) (Note that kubectl can be installed as part of the Google Cloud SDK)
-* [Helm](https://helm.sh/)
-* Tiller installed in the cluster by helm (kube-system namespace)
-  * If tiller is not installed in the cluster and you had to install it, is possible that you will need to configure the cluster role binding and tiller user for helm to be able to access tiller in the cluster. To do so, run clusterrolebinding.yaml provided in the "reactive-analytics" folder, in "kube-system" namespace. This script already creates the service account. Then, right after that, you will need to install tiller using the service account you already provided: `helm init --service-account="tiller"`
-  * Note that the `helm init --service-account="tiller"`, the own service account should coincide with the one setted in "clusterrolebinding.yaml" file.
+- A Kubernetes cluster up and running
+- A Service account in the Cloud provider to authenticate against the cluster (Ask for permissions to helpdesk)
+- [Gsutil](https://cloud.google.com/storage/docs/gsutil_install)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl) (Note that kubectl can be installed as part of the Google Cloud SDK)
+- [Helm](https://helm.sh/)
+- Tiller installed in the cluster by helm (kube-system namespace)
+  - If tiller is not installed in the cluster and you had to install it, is possible that you will need to configure the cluster role binding and tiller user for helm to be able to access tiller in the cluster. To do so, run clusterrolebinding.yaml provided in the "reactive-analytics" folder, in "kube-system" namespace. This script already creates the service account. Then, right after that, you will need to install tiller using the service account you already provided: `helm init --service-account="tiller"`
+  - Note that the `helm init --service-account="tiller"`, the own service account should coincide with the one setted in "clusterrolebinding.yaml" file.
 
 ## Deployment of Reactive Analytics in a Kubernetes cluster in the cloud from a local computer
 
@@ -23,7 +23,7 @@ The installation is done through Helm. Helm will automatically apply the configu
 
 Inside the repository, navigate to _deploy_ directory.
 
-Run the _install-sh.sh_ script passing the following arguments:
+Run the _install-chart.sh_ script passing the following arguments:
 
 ```
 bash install-chart.sh \
@@ -60,6 +60,7 @@ Considering that we are inside the directory _deploy_:
 ```
 helm upgrade reactive-analytics reactive-analytics
 ```
+
 Where the first "reactive-analytics" is the chart name, and the second is the path to the chart.
 
 ## Removing a deployment

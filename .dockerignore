@@ -1,18 +1,21 @@
-# ides
+# IDE & CI
 .idea
-
-# misc
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-Dockerfile
-.dockerignore
-README.md
 .vscode
+.circleci
+.editorconfig
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-*.iml
+# Directories
+deploy
+node_modules
+native
+docs 
+
+# Config files
+Dockerfile
+.gitignore
+docker-compose.yaml
+
+# Logs/Locks
+*.log
+*.md
+yarn.lock

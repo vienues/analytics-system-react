@@ -4,11 +4,12 @@ ARG DOMAIN_NAME="localhost"
 RUN apk update         \
  && apk add nodejs     \
             nodejs-npm \
-            yarn
+            yarn       \
+            git
 COPY . /app
 WORKDIR /app
 RUN sh deploy/replace-server-hostnames.sh $DOMAIN_NAME
-RUN cd /app/server && yarn install
+RUN cd /app/server && yarn install --network-concurrency 1
 
 # CREATE SERVER ARTIFACT
 FROM node:9-alpine
@@ -20,7 +21,6 @@ COPY --from=server_builder /app/.graphqlconfig        /app/.graphqlconfig
 COPY --from=server_builder /app/graphql.config.json   /app/graphql.config.json
 COPY --from=server_builder /app/.graphqlrc            /app/.graphqlrc
 COPY --from=server_builder /app/app.json              /app/app.json
-
 
 CMD ["yarn", "start"]
 
