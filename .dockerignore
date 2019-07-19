@@ -1,0 +1,21 @@
+# IDE & CI
+.idea
+.vscode
+.circleci
+.editorconfig
+
+# Directories
+deploy
+node_modules
+native
+docs 
+
+# Config files
+Dockerfile
+.gitignore
+docker-compose.yaml
+
+# Logs/Locks
+*.log
+*.md
+yarn.lock
