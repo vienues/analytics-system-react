@@ -2,10 +2,10 @@
 
 ## Pre-requisites
 
-* [npm](https://www.npmjs.com/)
-* [yarn](https://yarnpkg.com/lang/en/) (optional)
-* [lerna](https://lernajs.io/)
-* [serve](https://www.npmjs.com/package/serve) (optional)
+- [npm](https://www.npmjs.com/)
+- [yarn](https://yarnpkg.com/lang/en/) (optional)
+- [lerna](https://lernajs.io/)
+- [serve](https://www.npmjs.com/package/serve) (optional)
 
 ## Build
 
@@ -13,15 +13,15 @@
 
 **(2) Domain replacement.**
 
-For local, it will not be needed to do any replacements in domain/ip addresses as it's going to be used localhost and the default ports. 
+For local, it will not be needed to do any replacements in domain/ip addresses as it's going to be used localhost and the default ports.
 
 **(3) Download the dependencies (node_modules) for the modules of the project.**
 
-This project is using lerna. One of the features is that it can handle the dependencies for all the modules in a single run. 
+This project is using lerna. One of the features is that it can handle the dependencies for all the modules in a single run.
 
-To do so, in the root folder, where the file `lerna.json` is, type: `lerna bootstrap`.
+To do so, in the root folder, where the file `lerna.json` is, type: `yarn bootstrap`.
 
-This will download the node_modules in the modules stated in "packages" inside the lerna.json file. To avoid building for a certain module, is enough to remove the relevant package.
+This will download the node_modules in the modules stated in "packages" inside the lerna.json file. To avoid building for a certain module, it is enough to remove the relevant package from the `lerna.json` file.
 
 **(4) (OPTIONAL) Build the client.**
 
