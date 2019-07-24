@@ -17,11 +17,11 @@ FROM node:9-alpine
 LABEL maintainer="Lluis Marquez - lluis@weareadaptive.com; Bernardo Salazar - bernardo@weareadaptive.com"
 WORKDIR /app
 
-COPY --from=server_builder /server                       /server
-COPY --from=server_builder /server/.graphqlconfig        /server/.graphqlconfig
-COPY --from=server_builder /server/graphql.config.json   /server/graphql.config.json
-COPY --from=server_builder /server/.graphqlrc            /server/.graphqlrc
-COPY --from=server_builder /server/app.json              /server/app.json
+COPY --from=server_builder /app                       /app
+COPY --from=server_builder /app/.graphqlconfig        /app/.graphqlconfig
+COPY --from=server_builder /app/graphql.config.json   /app/graphql.config.json
+COPY --from=server_builder /app/.graphqlrc            /app/.graphqlrc
+COPY --from=server_builder /app/app.json              /app/app.json
 
 CMD ["yarn", "start"]
 
