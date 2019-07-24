@@ -38,6 +38,7 @@ jobs:
       - run: |
           cd ~/repo/server &&
           yarn &&
+          yarn cache clean &&
           yarn run build
       # Build and tag client and server docker images
       # - run: |
