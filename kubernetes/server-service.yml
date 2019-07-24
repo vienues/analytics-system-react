@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: reactive-analytics-server
+  name: server-service
+spec:
+  type: ClusterIP
+  selector:
+    app: server
+  ports:
+    - port: 4000
+      targetPort: 4000
