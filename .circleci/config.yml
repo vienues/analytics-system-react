@@ -10,9 +10,9 @@ jobs:
 
     working_directory: ~/repo
 
-    branches:
-      ignore:
-        - deployment
+    # branches:
+    #   ignore:
+    #     - deployment
 
     steps:
       - checkout
@@ -37,8 +37,8 @@ jobs:
       # Run SERVER tests.
       - run: |
           cd ~/repo/server &&
-          yarn &&
           yarn cache clean &&
+          yarn &&
           yarn run build
       # Build and tag client and server docker images
       # - run: |
