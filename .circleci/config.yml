@@ -39,3 +39,13 @@ jobs:
           cd ~/repo/server &&
           yarn &&
           yarn run build
+      # Build and tag client and server docker images
+      # - run: |
+      #   cd ~/repo &&
+      #   docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:dev -f server/Dockerfile --build-arg DOMAIN_NAME="dev-reactive-analytics.adaptivecluster.com" .
+      #   docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev -f client/Dockerfile --build-arg DOMAIN_NAME="dev-reactive-analytics.adaptivecluster.com" .
+      # Push docker images to Google Container Registry
+      #   docker push eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:dev
+      #   docker push eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev
+      # Execute deploy/install-chart.sh with parameters for deploying on k8s cluster as dev environment
+      #

@@ -6,21 +6,22 @@ RUN apk update         \
             nodejs-npm \
             yarn       \
             git
-COPY . /app
+COPY ./server /app
 WORKDIR /app
-RUN sh deploy/replace-server-hostnames.sh $DOMAIN_NAME
-RUN cd /app/server && yarn install --network-concurrency 1
+
+RUN sh scripts/replace-server-hostnames.sh $DOMAIN_NAME
+RUN yarn install --network-concurrency 1
 
 # CREATE SERVER ARTIFACT
 FROM node:9-alpine
-LABEL maintainer="Lluis Marquez - lluis@weareadaptive.com"
-WORKDIR /app/server
+LABEL maintainer="Lluis Marquez - lluis@weareadaptive.com; Bernardo Salazar - bernardo@weareadaptive.com"
+WORKDIR /app
 
-COPY --from=server_builder /app/server                /app/server
-COPY --from=server_builder /app/.graphqlconfig        /app/.graphqlconfig
-COPY --from=server_builder /app/graphql.config.json   /app/graphql.config.json
-COPY --from=server_builder /app/.graphqlrc            /app/.graphqlrc
-COPY --from=server_builder /app/app.json              /app/app.json
+COPY --from=server_builder /server                       /server
+COPY --from=server_builder /server/.graphqlconfig        /server/.graphqlconfig
+COPY --from=server_builder /server/graphql.config.json   /server/graphql.config.json
+COPY --from=server_builder /server/.graphqlrc            /server/.graphqlrc
+COPY --from=server_builder /server/app.json              /server/app.json
 
 CMD ["yarn", "start"]
 

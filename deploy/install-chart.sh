@@ -34,3 +34,5 @@ helm upgrade "$namespace" reactive-analytics \
 	--set deploymentClient.nginxConf.domainName="$domain_name" \
 	--set openFin.environment="$environment" \
   --namespace="$namespace"
+
+# .\install-chart.sh test test cluster-tests 35.233.20.204 test-reactive-analytics.adaptivecluster.com test
