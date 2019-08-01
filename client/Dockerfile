@@ -1,34 +1,21 @@
-# BUILD CLIENT
-FROM alpine:edge as client_builder
-ARG DOMAIN_NAME="localhost"
-RUN apk update         \
- && apk add nodejs     \
-            nodejs-npm \
-            yarn       \
-            git
+FROM node:11.10-alpine as builder
+WORKDIR /
+ARG ANALYTICS_SERVER_HOST="localhost"
+ENV REACT_APP_ANALYTICS_SERVER_HOST=${ANALYTICS_SERVER_HOST}
 RUN npm install --global lerna
 COPY ./lerna.json /lerna.json
 COPY ./package.json /package.json
-COPY ./client /app
 COPY ./common /common
-
-RUN sh ./app/scripts/replace-client-hostnames.sh $DOMAIN_NAME
-WORKDIR /
-
+COPY ./client /app
 RUN lerna bootstrap
-RUN cd /app && npm run build
 
-# CREATE CLIENT ARTIFACT
-FROM nginx:alpine
-LABEL maintainer="Lluis Marquez - lluis@weareadaptive.com; Bernardo Salazar - bernardo@weareadaptive.com"
-RUN mkdir -p /etc/nginx/ssl
 WORKDIR /app
+RUN npm run build
 
-COPY --from=client_builder /app/build                       /usr/share/nginx/html/
-COPY --from=client_builder /common                          /usr/share/nginx/html/common/
-COPY --from=client_builder /app/scripts/nginx-boot.sh       /app/scripts/nginx-boot.sh
-RUN chmod +x /app/scripts/nginx-boot.sh
+FROM nginx
+EXPOSE 3000
+COPY ./client/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/build /usr/share/nginx/html
 
-CMD ["sh", "-c", "/app/scripts/nginx-boot.sh"]
-
-# docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev -f client/Dockerfile --build-arg DOMAIN_NAME="$domain_name.adaptivecluster.com" .
+# docker build -t "eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:$build" -f .\client\Dockerfile --build-arg ANALYTICS_SERVER_HOST=$url .
+# docker push "eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:$build"

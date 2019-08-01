@@ -49,6 +49,10 @@ async function bootstrap() {
     }),
   )
 
+  server.get('/healthz', (req, res) => {
+    res.status(200).send('tiptop')
+  })
+
   server.use(
     '/graphiql',
     graphiqlExpress({
