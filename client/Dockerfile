@@ -1,6 +1,6 @@
 FROM node:11.10-alpine as builder
 WORKDIR /
-ARG ANALYTICS_SERVER_HOST="localhost"
+ARG ANALYTICS_SERVER_HOST
 ENV REACT_APP_ANALYTICS_SERVER_HOST=${ANALYTICS_SERVER_HOST}
 RUN npm install --global lerna
 COPY ./lerna.json /lerna.json
