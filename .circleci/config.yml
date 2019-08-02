@@ -1,52 +1,76 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
 version: 2
 jobs:
   build:
-    docker:
-      - image: circleci/node:11.10
-
-    working_directory: ~/repo
-
-    # branches:
-    #   ignore:
-    #     - deployment
-
+    machine:
+      enabled: true
     steps:
       - checkout
-      # check about "save_cache | store cache" options in steps.
-      # Download and cache dependencies
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "package.json" }}
-      #     # fallback to using the latest cache if no exact match is found
-      #     - v1-dependencies-
-
-      - run: sudo npm install --global lerna
-      - run: yarn install
-      - run: yarn run bootstrap
-
-      # - save_cache:
+      - run:
+          name: Create network
+          command: 'docker network create -d bridge circleci'
+      - run:
+          name: Build client
+          command: 'docker build -t reactive-analytics-client:${CIRCLE_BUILD_NUM} -f ./client/Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
+          # command: 'docker build -t ${DOCKER_USER}/reactive-analytics-client:${CIRCLE_BUILD_NUM} -f .\client\Dockerfile --build-arg ANALYTICS_SERVER_HOST=$url .'
+      - run:
+          name: Build server
+          command: 'docker build -t reactive-analytics-server:${CIRCLE_BUILD_NUM} -f ./server/Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
+          # command: 'docker build -t ${DOCKER_USER}/reactive-analytics-server:${CIRCLE_BUILD_NUM} -f .\server\Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
+      - run:
+          name: List containers
+          command: 'docker ps'
+      # - run:
+      #     name: Push images to dockerhub
+      #     command:
+      #       'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &&
+      #       docker push ${DOCKER_USER}/reactive-analytics-server:${CIRCLE_BUILD_NUM} &&
+      #       docker push ${DOCKER_USER}/reactive-analytics-client:${CIRCLE_BUILD_NUM}'
+      # - run:
+      #     name: Store build number
+      #     command: |
+      #       mkdir -p envs
+      #       echo "export BUILD_NUM=${CIRCLE_BUILD_NUM}" >> envs/env_build_num
+      # - persist_to_workspace:
+      #     root: envs
       #     paths:
-      #       - node_modules
-      #     key: v1-dependencies-{{ checksum "package.json" }}
+      #       - env_build_num
 
-      # Run tests (Client tests fails.)
-      # Run SERVER tests.
-      - run: |
-          cd ~/repo/server &&
-          yarn cache clean &&
-          yarn &&
-          yarn run build
-      # Build and tag client and server docker images
-      # - run: |
-      #   cd ~/repo &&
-      #   docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:dev -f server/Dockerfile --build-arg DOMAIN_NAME="dev-reactive-analytics.adaptivecluster.com" .
-      #   docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev -f client/Dockerfile --build-arg DOMAIN_NAME="dev-reactive-analytics.adaptivecluster.com" .
-      # Push docker images to Google Container Registry
-      #   docker push eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:dev
-      #   docker push eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev
-      # Execute deploy/install-chart.sh with parameters for deploying on k8s cluster as dev environment
-      #
+# deploy:
+#     docker:
+#       - image: google/cloud-sdk
+#     steps:
+#       - checkout
+#       - attach_workspace:
+#           at: /envs
+#       - run:
+#           name: Restore build number
+#           command: cat /envs/env_build_num >> $BASH_ENV;
+#       - run:
+#           name: Authenticate with gcloud
+#           command: |
+#             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+#             gcloud config set project ${GOOGLE_PROJECT_ID}
+#             gcloud config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+#             gcloud container clusters get-credentials cluster
+#       - run:
+#           name: Set namespace
+#           command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}'" >> $BASH_ENV;
+#       - run:
+#           name: Update images
+#           command: |
+#             kubectl --namespace=${NAMESPACE} set image deployments/analytics-client broker=${DOCKER_USER}/broker:${BUILD_NUM}
+#             kubectl --namespace=${NAMESPACE} set image deployments/analytics-server eventstore=${DOCKER_USER}/eventstore:${BUILD_NUM}
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+      # - deploy:
+      #     requires:
+      #       - build
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      #           - develop

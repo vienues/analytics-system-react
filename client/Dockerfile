@@ -1,13 +1,18 @@
 FROM node:11.10-alpine as builder
+
 WORKDIR /
 ARG ANALYTICS_SERVER_HOST
 ENV REACT_APP_ANALYTICS_SERVER_HOST=${ANALYTICS_SERVER_HOST}
 RUN npm install --global lerna
+RUN npm install --global yarn
+
 COPY ./lerna.json /lerna.json
 COPY ./package.json /package.json
 COPY ./common /common
 COPY ./client /app
-RUN lerna bootstrap
+
+RUN yarn install
+RUN yarn bootstrap
 
 WORKDIR /app
 RUN npm run build
