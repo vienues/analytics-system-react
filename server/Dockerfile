@@ -1,5 +1,4 @@
 FROM node:11.10-alpine as builder
-# ARG DOMAIN_NAME='localhost'
 COPY ./server /app
 RUN apk update && apk add git
 

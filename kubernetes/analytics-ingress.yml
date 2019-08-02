@@ -2,19 +2,19 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: analytics-ingress
-  namespace: test-reactive-analytics
+  namespace: dev-reactive-analytics
   annotations:
     kubernetes.io/ingress.class: 'nginx'
 spec:
   tls:
     - hosts:
-        - test-reactive-analytics.adaptivecluster.com
+        - dev-reactive-analytics.adaptivecluster.com
       secretName: nginx-ingress-tls
   backend:
     serviceName: analytics-client
     servicePort: 3000
   rules:
-    - host: test-reactive-analytics.adaptivecluster.com
+    - host: dev-reactive-analytics.adaptivecluster.com
       http:
         paths:
           - path: /
