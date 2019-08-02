@@ -10,12 +10,12 @@ jobs:
           command: 'docker network create -d bridge circleci'
       - run:
           name: Build client
-          command: 'docker build -t reactive-analytics-client:${CIRCLE_BUILD_NUM} -f ./client/Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
+          command: 'cd ./client && docker build -t reactive-analytics-client:${CIRCLE_BUILD_NUM} --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
           # command: 'docker build -t ${DOCKER_USER}/reactive-analytics-client:${CIRCLE_BUILD_NUM} -f .\client\Dockerfile --build-arg ANALYTICS_SERVER_HOST=$url .'
       - run:
           name: Build server
-          command: 'docker build -t reactive-analytics-server:${CIRCLE_BUILD_NUM} -f ./server/Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
-          # command: 'docker build -t ${DOCKER_USER}/reactive-analytics-server:${CIRCLE_BUILD_NUM} -f .\server\Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
+          command: 'cd ./server && docker build -t reactive-analytics-server:${CIRCLE_BUILD_NUM} .'
+          # command: 'cd ./server && docker build -t ${DOCKER_USER}/reactive-analytics-server:${CIRCLE_BUILD_NUM} -f .\server\Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
       - run:
           name: List containers
           command: 'docker ps'
