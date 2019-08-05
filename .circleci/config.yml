@@ -10,13 +10,17 @@ jobs:
           command: 'docker network create -d bridge circleci'
       - run:
           name: Set namespace
-          command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}" >> $BASH_ENV;
+          command: |
+            if [ ${CIRCLE_BRANCH} == "master" ]; 
+            then echo 'export NAMESPACE="demo"' >> $BASH_ENV; 
+            else echo 'export NAMESPACE="dev"' >> $BASH_ENV ; 
+            fi
       - run:
           name: Build client
-          command: 'cd ./client && docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${CIRCLE_BUILD_NUM} --build-arg ANALYTICS_SERVER_HOST=${NAMESPACE}-reactive-analytics.adaptivecluster.com .'
+          command: 'cd ./client && docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${NAMESPACE}-${CIRCLE_BUILD_NUM} --build-arg ANALYTICS_SERVER_HOST=${NAMESPACE}-reactive-analytics.adaptivecluster.com .'
       - run:
           name: Build server
-          command: 'cd ./server && docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${CIRCLE_BUILD_NUM} .'
+          command: 'cd ./server && docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${NAMESPACE}-${CIRCLE_BUILD_NUM} .'
       - run:
           name: List containers
           command: 'docker ps'
@@ -30,8 +34,8 @@ jobs:
       - run:
           name: Push images to GCR
           command: |
-            gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${CIRCLE_BUILD_NUM} &&
-            gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${CIRCLE_BUILD_NUM}
+            gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${NAMESPACE}-${CIRCLE_BUILD_NUM} &&
+            gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${NAMESPACE}-${CIRCLE_BUILD_NUM}
       - run:
           name: Store build number
           command: |
@@ -61,12 +65,12 @@ jobs:
             gcloud container clusters get-credentials ${GOOGLE_GKE_CLUSTER}
       - run:
           name: Set namespace
-          command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}-reactive-analytics'" >> $BASH_ENV;
+          command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}'" >> $BASH_ENV;
       - run:
           name: Update images
           command: |
-            kubectl --namespace=${NAMESPACE} set image deployments/analytics-client reactive-analytics-client=${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${BUILD_NUM}
-            kubectl --namespace=${NAMESPACE} set image deployments/analytics-server reactive-analytics-server=${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${BUILD_NUM}
+            kubectl --namespace=${NAMESPACE}-reactive-analytics set image deployments/analytics-client reactive-analytics-client=${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${NAMESPACE}-${BUILD_NUM}
+            kubectl --namespace=${NAMESPACE}-reactive-analytics set image deployments/analytics-server reactive-analytics-server=${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${NAMESPACE}-${BUILD_NUM}
 
 workflows:
   version: 2
@@ -79,5 +83,5 @@ workflows:
           filters:
             branches:
               only:
-                # - master
+                - master
                 - develop
