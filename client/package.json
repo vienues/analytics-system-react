@@ -4,7 +4,6 @@
   "description": "",
   "private": true,
   "dependencies": {
-    "@adaptive-insights/common": "*",
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-regular-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",

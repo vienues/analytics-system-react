@@ -1,28 +1,18 @@
-# BUILD SERVER
-FROM alpine:edge as server_builder
-ARG DOMAIN_NAME="localhost"
-RUN apk update         \
- && apk add nodejs     \
-            nodejs-npm \
-            yarn       \
-            git
-COPY ./server /app
-WORKDIR /app
-
-RUN sh scripts/replace-server-hostnames.sh $DOMAIN_NAME
+FROM node:11.10-alpine as builder
+WORKDIR /
+COPY . .
+RUN apk update && apk add git
 RUN yarn install --network-concurrency 1
 
-# CREATE SERVER ARTIFACT
-FROM node:9-alpine
-LABEL maintainer="Lluis Marquez - lluis@weareadaptive.com; Bernardo Salazar - bernardo@weareadaptive.com"
+FROM node:11.10-alpine
 WORKDIR /app
-
-COPY --from=server_builder /app                       /app
-COPY --from=server_builder /app/.graphqlconfig        /app/.graphqlconfig
-COPY --from=server_builder /app/graphql.config.json   /app/graphql.config.json
-COPY --from=server_builder /app/.graphqlrc            /app/.graphqlrc
-COPY --from=server_builder /app/app.json              /app/app.json
+COPY --from=builder /                      /app
+COPY --from=builder /.graphqlconfig        /app/.graphqlconfig
+COPY --from=builder /graphql.config.json   /app/graphql.config.json
+COPY --from=builder /.graphqlrc            /app/.graphqlrc
+COPY --from=builder /app.json              /app/app.json
 
 CMD ["yarn", "start"]
 
-# docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:0.0.1 -f server/Dockerfile --build-arg DOMAIN_NAME="$domain_name.adaptivecluster.com" .
+# docker build -t "eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:$build" -f .\server\Dockerfile .
+# docker push "eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:$build"

@@ -20,6 +20,7 @@ server/lib
 *.log*
 *.iml
 .vscode
+server/yarn.lock
 
 # Helm
 *.tgz
