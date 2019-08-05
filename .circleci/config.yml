@@ -10,67 +10,70 @@ jobs:
           command: 'docker network create -d bridge circleci'
       - run:
           name: Build client
-          command: 'cd ./client && docker build -t reactive-analytics-client:${CIRCLE_BUILD_NUM} --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
-          # command: 'docker build -t ${DOCKER_USER}/reactive-analytics-client:${CIRCLE_BUILD_NUM} -f .\client\Dockerfile --build-arg ANALYTICS_SERVER_HOST=$url .'
+          command: 'cd ./client && docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${CIRCLE_BUILD_NUM} --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
       - run:
           name: Build server
-          command: 'cd ./server && docker build -t reactive-analytics-server:${CIRCLE_BUILD_NUM} .'
-          # command: 'cd ./server && docker build -t ${DOCKER_USER}/reactive-analytics-server:${CIRCLE_BUILD_NUM} -f .\server\Dockerfile --build-arg ANALYTICS_SERVER_HOST=${ENVIRONMENT}-reactive-analytics.adaptivecluster.com .'
+          command: 'cd ./server && docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${CIRCLE_BUILD_NUM} .'
       - run:
           name: List containers
           command: 'docker ps'
-      # - run:
-      #     name: Push images to dockerhub
-      #     command:
-      #       'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin &&
-      #       docker push ${DOCKER_USER}/reactive-analytics-server:${CIRCLE_BUILD_NUM} &&
-      #       docker push ${DOCKER_USER}/reactive-analytics-client:${CIRCLE_BUILD_NUM}'
-      # - run:
-      #     name: Store build number
-      #     command: |
-      #       mkdir -p envs
-      #       echo "export BUILD_NUM=${CIRCLE_BUILD_NUM}" >> envs/env_build_num
-      # - persist_to_workspace:
-      #     root: envs
-      #     paths:
-      #       - env_build_num
-
-# deploy:
-#     docker:
-#       - image: google/cloud-sdk
-#     steps:
-#       - checkout
-#       - attach_workspace:
-#           at: /envs
-#       - run:
-#           name: Restore build number
-#           command: cat /envs/env_build_num >> $BASH_ENV;
-#       - run:
-#           name: Authenticate with gcloud
-#           command: |
-#             echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
-#             gcloud config set project ${GOOGLE_PROJECT_ID}
-#             gcloud config set compute/zone ${GOOGLE_COMPUTE_ZONE}
-#             gcloud container clusters get-credentials cluster
-#       - run:
-#           name: Set namespace
-#           command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}'" >> $BASH_ENV;
-#       - run:
-#           name: Update images
-#           command: |
-#             kubectl --namespace=${NAMESPACE} set image deployments/analytics-client broker=${DOCKER_USER}/broker:${BUILD_NUM}
-#             kubectl --namespace=${NAMESPACE} set image deployments/analytics-server eventstore=${DOCKER_USER}/eventstore:${BUILD_NUM}
+      - run:
+          name: Authenticate with gcloud
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            gcloud config set project ${GOOGLE_PROJECT_ID}
+            gcloud config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+            gcloud container clusters get-credentials ${GOOGLE_GKE_CLUSTER}
+      - run:
+          name: Push images to GCR
+          command: |
+            gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${CIRCLE_BUILD_NUM} &&
+            gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${CIRCLE_BUILD_NUM}
+      - run:
+          name: Store build number
+          command: |
+            mkdir -p envs
+            echo "export BUILD_NUM=${CIRCLE_BUILD_NUM}" >> envs/env_build_num
+      - persist_to_workspace:
+          root: envs
+          paths:
+            - env_build_num
+deploy:
+  docker:
+    - image: google/cloud-sdk
+  steps:
+    - checkout
+    - attach_workspace:
+        at: /envs
+    - run:
+        name: Restore build number
+        command: cat /envs/env_build_num >> $BASH_ENV;
+    - run:
+        name: Authenticate with gcloud
+        command: |
+          echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+          gcloud config set project ${GOOGLE_PROJECT_ID}
+          gcloud config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+          gcloud container clusters get-credentials ${GOOGLE_GKE_CLUSTER}
+    # - run:
+    #     name: Set namespace
+    #     command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}-reactive-analytics'" >> $BASH_ENV;
+    # - run:
+    #     name: Update images
+    #     command: |
+    #       kubectl --namespace=${NAMESPACE} set image deployments/analytics-client broker=${DOCKER_USER}/broker:${BUILD_NUM}
+    #       kubectl --namespace=${NAMESPACE} set image deployments/analytics-server eventstore=${DOCKER_USER}/eventstore:${BUILD_NUM}
 
 workflows:
   version: 2
   main:
     jobs:
       - build
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only:
-      #           - master
-      #           - develop
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+                - develop

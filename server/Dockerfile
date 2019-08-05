@@ -6,7 +6,7 @@ RUN yarn install --network-concurrency 1
 
 FROM node:11.10-alpine
 WORKDIR /app
-COPY --from=builder /                       /app
+COPY --from=builder /                      /app
 COPY --from=builder /.graphqlconfig        /app/.graphqlconfig
 COPY --from=builder /graphql.config.json   /app/graphql.config.json
 COPY --from=builder /.graphqlrc            /app/.graphqlrc
