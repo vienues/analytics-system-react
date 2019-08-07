@@ -12,7 +12,7 @@ jobs:
           name: Set namespace
           command: |
             if [ ${CIRCLE_BRANCH} == "master" ]; 
-            then echo 'export NAMESPACE="demo"' >> $BASH_ENV; 
+            then echo 'export NAMESPACE="demo"' >> $BASH_ENV ; 
             else echo 'export NAMESPACE="dev"' >> $BASH_ENV ; 
             fi
       - run:
