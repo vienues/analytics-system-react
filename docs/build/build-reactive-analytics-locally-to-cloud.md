@@ -6,7 +6,7 @@ The module "native" is not supported yet in this project to dockerize.
 
 ## Pre-requisites
 
-* [Docker](https://docs.docker.com/install/)
+- [Docker](https://docs.docker.com/install/)
 
 ## Build
 
@@ -15,16 +15,14 @@ Building the Dockerfiles will get the source code into a container which will bu
 
 **(1) Build the client image**
 
-From the root folder, run the following command:
+From the ./client folder, run the following command:
 
-**Note:** The bit _$domain_name_ right after --build-arg DOMAIN_NAME should be replaced for one of the existing environments: `dev` or `demo`. Also, the docker image tag version (`-0.0.1`) can be replaced for any version you like.
+**Note:** The bit _\$domain_name_ right after --build-arg DOMAIN_NAME should be replaced for one of the existing environments: `dev` or `demo`. Also, the docker image tag version (`-0.0.1`) can be replaced for any version you like.
 
-`docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev-0.0.1 -f client/Dockerfile --build-arg DOMAIN_NAME="$domain_name.adaptivecluster.com" .`
- 
- **(2) Build the server image**
+`docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:dev-0.0.1 --build-arg ANALYTICS_SERVER_HOST="$domain_name.adaptivecluster.com" .`
 
-From the root folder, run the following command:
+**(2) Build the server image**
 
-**Note:** The bit _$domain_name_ right after --build-arg DOMAIN_NAME should be replaced for one of the existing environments: `dev` or `demo`. Also, the docker image tag version (`-0.0.1`) can be replaced for any version you like.
+From the ./server folder, run the following command:
 
-`docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:dev-0.0.1 -f server/Dockerfile --build-arg DOMAIN_NAME="$domain_name.adaptivecluster.com" .`
+`docker build --no-cache -t eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:dev-0.0.1`
