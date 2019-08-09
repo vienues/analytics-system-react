@@ -1,4 +1,8 @@
-## Set Gcloud session for reactive analytics
+# Create a new environment
+
+The following steps are necessary to create a new environment deployed in the **reactive-analyics** Kubernetes cluster.
+
+### Set Gcloud session for reactive analytics
 
 ```
 gcloud config set project adaptive-reactive-analytics
@@ -9,12 +13,15 @@ gcloud container clusters get-credentials reactive-analytics
 ### Replace values in the Kubernetes templates with the new namespace
 
 The ./kubernetes/ directory holds the templates to create a new namespaced environment within the running Kubernetes cluster.
+
 For now, namespace values are hardcoded in the templates, so each one needs replacing with a new environment name.
+
 It's recommended to follow the naming convenction: **<environment-name>-reactive-analytics**
 
 ### Apply the Kubernetes resources templates
 
 Each template creates a specific resource: client, server and ingress.
+
 The ingress depends on a secret which is stored in Kubernetes secrets. This is used for TLS communication.
 
 ```
