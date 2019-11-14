@@ -11,9 +11,9 @@ jobs:
       - run:
           name: Set namespace
           command: |
-            if [ ${CIRCLE_BRANCH} == "master" ]; 
-            then echo 'export NAMESPACE="demo"' >> $BASH_ENV ; 
-            else echo 'export NAMESPACE="dev"' >> $BASH_ENV ; 
+            if [ ${CIRCLE_BRANCH} == "master" ];
+            then echo 'export NAMESPACE="demo"' >> $BASH_ENV ;
+            else echo 'export NAMESPACE="dev"' >> $BASH_ENV ;
             fi
       - run:
           name: Build client
@@ -66,6 +66,18 @@ jobs:
       - run:
           name: Set namespace
           command: declare -A envs=( ["develop"]="dev" ["master"]="demo"); echo "export NAMESPACE='${envs[$CIRCLE_BRANCH]}'" >> $BASH_ENV;
+      - run:
+          name: Create or update secrets
+          command: |
+            # The commands to create the secrets use a combination of create and apply. This means the secrets will be created
+            # the first time they are run against the cluster or updated on all subsequent runs.
+            # The way they work is:
+            # 1. kubectl create is run as a dry-run with the output set to yaml
+            # 2. The ouput is piped to kubectl apply using the "-f" and "-" flags to set it to read from a file and
+            #    read the file from stdin
+            # The result is the same a creating a yaml file with the secret set but all kept in memory
+            kubectl create --namespace=${NAMESPACE} secret generic iex-cloud-version --from-literal=iex-cloud-version-value='${TEST_IEX_CLOUD_API_VERSION}' --dry-run -o yaml | kubectl apply -f -
+            kubectl create --namespace=${NAMESPACE} secret generic iex-cloud-public-key --from-literal=iex-cloud-public-key-value='${TEST_IEX_CLOUD_PUBLIC_KEY}' --dry-run -o yaml | kubectl apply -f -
       - run:
           name: Update images
           command: |

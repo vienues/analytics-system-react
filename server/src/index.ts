@@ -19,7 +19,14 @@ import pricing from './services/pricing'
 pricing(pubsub)
 
 async function bootstrap() {
-  const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
+  const isOffline = process.env.INSIGHTS_OFFLINE
+  const iex = getDataSource(isOffline)
+  if (isOffline !== 'true') {
+    if (!process.env.IEXCLOUD_API_VERSION || !process.env.IEXCLOUD_PUBLIC_KEY) {
+      // TODO: Send a friendly error to the client rather than just giving up
+      throw new Error('iex-cloud API key must be set')
+    }
+  }
 
   const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
     container: Container,
