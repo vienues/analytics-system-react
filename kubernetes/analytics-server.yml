@@ -25,6 +25,17 @@ spec:
       containers:
         - name: reactive-analytics-server
           image: eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:0.8
+          env:
+            - name: IEXCLOUD_API_VERSION
+              valuefrom:
+                secretkeyref:
+                  name: iex-cloud-version
+                  key: iex-cloud-version-value
+            - name: IEXCLOUD_PUBLIC_KEY
+              valuefrom:
+                secretkeyref:
+                  name: iex-cloud-public-key
+                  key: iex-cloud-public-key-value
           livenessProbe:
             httpGet:
               path: /healthz

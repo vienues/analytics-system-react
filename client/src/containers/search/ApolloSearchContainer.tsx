@@ -25,7 +25,7 @@ interface IProps extends IApolloContainerProps {
 
 type Props = RouteComponentProps & IProps
 
-const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url, market }: Props) => {
+const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }: Props) => {
   const [currentSymbol, setCurrentSymbol] = useState<search_symbols | null>(null)
   const [currentText, setCurrentText] = useState<string>('')
 
@@ -101,4 +101,4 @@ const ApolloSeachContainer: React.FunctionComponent<Props> = ({ id, history, url
   )
 }
 
-export default withRouter(ApolloSeachContainer)
+export default withRouter(ApolloSearchContainer)
