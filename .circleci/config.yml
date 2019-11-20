@@ -76,8 +76,8 @@ jobs:
             # 2. The ouput is piped to kubectl apply using the "-f" and "-" flags to set it to read from a file and
             #    read the file from stdin
             # The result is the same a creating a yaml file with the secret set but all kept in memory
-            kubectl create --namespace=${NAMESPACE} secret generic iex-cloud-version --from-literal=iex-cloud-version-value='${TEST_IEX_CLOUD_API_VERSION}' --dry-run -o yaml | kubectl apply -f -
-            kubectl create --namespace=${NAMESPACE} secret generic iex-cloud-public-key --from-literal=iex-cloud-public-key-value='${TEST_IEX_CLOUD_PUBLIC_KEY}' --dry-run -o yaml | kubectl apply -f -
+            kubectl create --namespace=${NAMESPACE}-reactive-analytics secret generic iex-cloud-version --from-literal=iex-cloud-version-value='${TEST_IEX_CLOUD_API_VERSION}' --dry-run -o yaml | kubectl apply -f -
+            kubectl create --namespace=${NAMESPACE}-reactive-analytics secret generic iex-cloud-public-key --from-literal=iex-cloud-public-key-value='${TEST_IEX_CLOUD_PUBLIC_KEY}' --dry-run -o yaml | kubectl apply -f -
       - run:
           name: Update images
           command: |
