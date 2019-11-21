@@ -24,7 +24,7 @@ async function bootstrap() {
   if (isOffline !== 'true') {
     if (!process.env.IEXCLOUD_API_VERSION || !process.env.IEXCLOUD_PUBLIC_KEY) {
       // TODO: Send a friendly error to the client rather than just giving up
-      throw new Error('iex-cloud API key must be set')
+      logger.error('iex-cloud API key must be set')
     }
   }
 
