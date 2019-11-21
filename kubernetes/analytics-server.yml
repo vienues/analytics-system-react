@@ -26,13 +26,13 @@ spec:
           image: ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${NAMESPACE}-${BUILD_NUM}
           env:
             - name: IEXCLOUD_API_VERSION
-              valuefrom:
-                secretkeyref:
+              valueFrom:
+                secretKeyRef:
                   name: iex-cloud-version
                   key: iex-cloud-version-value
             - name: IEXCLOUD_PUBLIC_KEY
-              valuefrom:
-                secretkeyref:
+              valueFrom:
+                secretKeyRef:
                   name: iex-cloud-public-key
                   key: iex-cloud-public-key-value
           livenessProbe:
