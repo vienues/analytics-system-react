@@ -9,7 +9,6 @@ kind: Deployment
 metadata:
   labels:
     app: reactive-analytics-client
-  namespace: dev-reactive-analytics
   name: analytics-client
 spec:
   replicas: 1
@@ -23,7 +22,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:0.8
+          image: ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${NAMESPACE}-${BUILD_NUM}
           ports:
             - containerPort: 3000
 
@@ -33,7 +32,6 @@ kind: Service
 metadata:
   labels:
     app: reactive-analytics-client
-  namespace: dev-reactive-analytics
   name: analytics-client
 spec:
   selector:

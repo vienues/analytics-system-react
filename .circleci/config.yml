@@ -51,6 +51,10 @@ jobs:
       - image: google/cloud-sdk
     steps:
       - checkout
+      - run:
+        name: 'Install required OS dependencies'
+        command: |
+          apt-get install gettext -qy
       - attach_workspace:
           at: /envs
       - run:
@@ -79,10 +83,11 @@ jobs:
             kubectl create --namespace=${NAMESPACE}-reactive-analytics secret generic iex-cloud-version --from-literal=iex-cloud-version-value='${TEST_IEX_CLOUD_API_VERSION}' --dry-run -o yaml | kubectl apply -f -
             kubectl create --namespace=${NAMESPACE}-reactive-analytics secret generic iex-cloud-public-key --from-literal=iex-cloud-public-key-value='${TEST_IEX_CLOUD_PUBLIC_KEY}' --dry-run -o yaml | kubectl apply -f -
       - run:
-          name: Update images
+          name: Update all kuberenetes definitions
           command: |
-            kubectl --namespace=${NAMESPACE}-reactive-analytics set image deployments/analytics-client reactive-analytics-client=${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${NAMESPACE}-${BUILD_NUM}
-            kubectl --namespace=${NAMESPACE}-reactive-analytics set image deployments/analytics-server reactive-analytics-server=${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${NAMESPACE}-${BUILD_NUM}
+            for f in ./kubernetes/*.yml; do
+              cat $f | /usr/bin/evnsubst | kubectl --namespace=${NAMESPACE} apply -f -
+            done
 
 workflows:
   version: 2
