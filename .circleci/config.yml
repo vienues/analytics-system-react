@@ -86,7 +86,7 @@ jobs:
           name: Update all kuberenetes definitions
           command: |
             for f in ./kubernetes/*.yml; do
-              cat $f | /usr/bin/envsubst | kubectl --namespace=${NAMESPACE} apply -f -
+              cat $f | /usr/bin/envsubst | kubectl --namespace=${NAMESPACE}-reactive-analytics apply -f -
             done
 
 workflows:
