@@ -27,6 +27,7 @@
     '127.0.0.1',
     'localhost',
     'adaptiveconsulting.github.io',
+    'dev-reactive-analytics.adaptivecluster.com',
     'demo-reactive-analytics.adaptivecluster.com',
   ]
   var filesystem = false
@@ -1022,7 +1023,8 @@
     return Y
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var q7d = [arguments]
     q7d[4] = 2
     for (; q7d[4] !== 1; ) {
@@ -3758,7 +3760,8 @@
     return K9
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var c2R = [arguments]
     c2R[4] = 2
     for (; c2R[4] !== 1; ) {
@@ -4318,7 +4321,8 @@
     return U4X
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var b17 = [arguments]
     b17[4] = 2
     for (; b17[4] !== 1; ) {
@@ -8084,7 +8088,8 @@
     return { Intl: N47 }
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var f3h = [arguments]
     f3h[4] = 2
     for (; f3h[4] !== 1; ) {
@@ -8913,7 +8918,8 @@
     return n7H
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var h4q = [arguments]
     h4q[4] = 2
     for (; h4q[4] !== 1; ) {
@@ -10065,7 +10071,8 @@
     return o6N
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var U0Q = [arguments]
     U0Q[4] = 2
     for (; U0Q[4] !== 1; ) {
@@ -10440,7 +10447,8 @@
     return M5V
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var M8V = [arguments]
     M8V[4] = 2
     for (; M8V[4] !== 1; ) {
@@ -10845,7 +10853,7 @@
           }
           return
         }
-        if (b0A === J1V && (Y0A && Y0A.interval === 'day')) {
+        if (b0A === J1V && Y0A && Y0A.interval === 'day') {
           v0A = e4A.multiplier
           F0A = h0A < v0A ? 0 : h0A - v0A
           M0A = F0A
@@ -11482,7 +11490,8 @@
     }
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var W74 = [arguments]
     W74[4] = 2
     for (; W74[4] !== 1; ) {
@@ -17855,7 +17864,8 @@
     return K2Q
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var c3R = [arguments]
     c3R[4] = 2
     for (; c3R[4] !== 1; ) {
@@ -19059,7 +19069,8 @@
     return g5X
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var p1p = [arguments]
     p1p[4] = 2
     for (; p1p[4] !== 1; ) {
@@ -23731,7 +23742,8 @@
     return x0h
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var u5U = [arguments]
     u5U[4] = 2
     for (; u5U[4] !== 1; ) {
@@ -25692,7 +25704,8 @@
     return L99
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var r3R = [arguments]
     r3R[4] = 2
     for (; r3R[4] !== 1; ) {
@@ -26067,7 +26080,8 @@
     return L3o
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var H3B = [arguments]
     H3B[4] = 2
     for (; H3B[4] !== 1; ) {
@@ -26688,7 +26702,8 @@
     return h67
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var M9Q = [arguments]
     M9Q[4] = 2
     for (; M9Q[4] !== 1; ) {
@@ -31313,7 +31328,8 @@
     return q9A
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var K6N = [arguments]
     K6N[4] = 2
     for (; K6N[4] !== 1; ) {
@@ -31603,7 +31619,7 @@
       if (
         K6l.getMonth() < +'2' ||
         (K6l.getMonth() == 2 && K6l.getDate() < 11) ||
-        (K6l.getMonth() > 10 || (K6l.getMonth() == 10 && K6l.getDate() >= 4))
+        K6l.getMonth() > 10 || (K6l.getMonth() == 10 && K6l.getDate() >= 4)
       ) {
         N6l = 5
       }
@@ -34799,7 +34815,8 @@
     return R6l
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var r7w = [arguments]
     r7w[4] = 2
     for (; r7w[4] !== 1; ) {
@@ -35504,8 +35521,14 @@
     Q9d.ChartEngine.YAxis.prototype.width = 50
     Q9d.ChartEngine.YAxis.prototype.textStyle = null
     Q9d.ChartEngine.YAxis.prototype.position = null
-    Q9d.ChartEngine.YAxis.defaultShadowBreaks = [[1000, 2], [1, 4]]
-    Q9d.ChartEngine.YAxis.smallChartShadowBreaks = [[10, 2], [1, 4]]
+    Q9d.ChartEngine.YAxis.defaultShadowBreaks = [
+      [1000, 2],
+      [1, 4],
+    ]
+    Q9d.ChartEngine.YAxis.smallChartShadowBreaks = [
+      [10, 2],
+      [1, 4],
+    ]
     Q9d.ChartEngine.YAxis.prototype.pretty = !!1
     Q9d.ChartEngine.YAxis.prototype.increments = [1, 2.5, 5]
     Q9d.ChartEngine.YAxis.prototype.prettySemiLog = !!{}
@@ -37757,7 +37780,7 @@
                 this.anyHighlighted = !!'1'
               } else if ((h0n.params.subtype == 'step' || y0n.type == H0B) && z0n > 0) {
                 D0n = h0n.caches[y0n.field] && h0n.caches[y0n.field][z0n - 1]
-                if (((D0n || D0n === 0) && (k0n > v0n && k0n < D0n)) || (k0n < v0n && k0n > D0n)) {
+                if (((D0n || D0n === 0) && k0n > v0n && k0n < D0n) || (k0n < v0n && k0n > D0n)) {
                   y0n.highlight = !![]
                   this.anyHighlighted = !!1
                 }
@@ -44984,7 +45007,8 @@
     return C9d
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var D0K = [arguments]
     D0K[4] = 2
     for (; D0K[4] !== 1; ) {
@@ -47265,7 +47289,8 @@
     return h2o
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var j7C = [arguments]
     j7C[4] = 2
     for (; j7C[4] !== 1; ) {
@@ -47741,7 +47766,7 @@
             var G5E = 4,
               K5E = function() {}.constructor
             return K5E(
-              new function(p5E) {
+              new (function(p5E) {
                 var F8M = 2
                 for (; F8M !== 1; ) {
                   switch (F8M) {
@@ -47779,7 +47804,7 @@
                       break
                   }
                 }
-              }(z5E).d(G5E),
+              })(z5E).d(G5E),
             )()
             break
         }
@@ -55199,7 +55224,8 @@
     return r4Y
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var Q49 = [arguments]
     Q49[4] = 2
     for (; Q49[4] !== 1; ) {
@@ -55658,7 +55684,8 @@
     return U1g
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var P2C = [arguments]
     P2C[4] = 2
     for (; P2C[4] !== 1; ) {
@@ -57464,7 +57491,7 @@
           return this._dateProxy.getTimezoneOffset()
         },
       }
-      V9w.timezone = new function() {
+      V9w.timezone = new (function() {
         var D1C,
           X1C,
           r1C,
@@ -58373,7 +58400,7 @@
             this.loadZoneFiles(l5w)
           }
         }
-      }()
+      })()
     }.call(typeof window !== 'undefined' ? window : this))
     A9w.timezoneJS.timezone.loadingScheme = A9w.timezoneJS.timezone.loadingSchemes.MANUAL_LOAD
     A9w.timezoneJS.timezone.loadZoneDataFromObject({
@@ -58555,7 +58582,10 @@
           [-540, '-', '+09', 1414288800000],
           [-480, (1850, 281.8) < (6000, 2922) ? '-' : 0x8cd, G3C, null],
         ],
-        'Asia/Yakutsk': [[-600, '8820' - 0 === 8833 ? 't' : '-', '+10', 1414288800000], [-540, '-', '+09', null]],
+        'Asia/Yakutsk': [
+          [-600, '8820' - 0 === 8833 ? 't' : '-', '+10', 1414288800000],
+          [-540, '-', '+09', null],
+        ],
         'Asia/Vladivostok': [
           [
             -660,
@@ -59775,7 +59805,8 @@
     return A9w
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var Z6a = [arguments]
     Z6a[4] = 2
     for (; Z6a[4] !== 1; ) {
@@ -62135,7 +62166,7 @@
       return Q03
     }
     return o6u
-  } /* ignore jslint end   */ /* eslint-enable  */ /* jshint ignore:end   */
+  } /* jshint ignore:end   */ /* ignore jslint end   */ /* eslint-enable  */
 
   _exports = _exports || {}
   __js_core_polyfills_(_exports)
