@@ -1,7 +1,7 @@
 import React from 'react'
 import { DataCard, OpaqueLabel, StrongLabel } from '../../../common/StyledComponents'
 import { styled } from '../../../rt-theme'
-import ChartIQ from './chart-iq/ChartIQContext'
+import { StockHistoryContainer } from '../StockHistory'
 
 interface IHistoryData {
   olhc: IOlhcData
@@ -43,7 +43,7 @@ const History: React.FunctionComponent<{ history: IHistoryData; id: string }> = 
 
   return (
     <DataCard cardType="history" title={historyTitle} instrument={id}>
-      <ChartIQ symbol={id} />
+      <StockHistoryContainer id={id} />
     </DataCard>
   )
 }

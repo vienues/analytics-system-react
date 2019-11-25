@@ -41,7 +41,7 @@ type FxPricing {
   Pair: FxPairs!
   ask: Float!
   bid: Float!
-  creationTimestamp: ISODateTime!
+  creationTimestamp: ISODateTime
   mid: Float!
   valueDate: Date!
 }

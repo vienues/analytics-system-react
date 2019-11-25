@@ -7,7 +7,10 @@ type SearchResult<T> = { item?: T } & { score: number }
 
 const INDEX = new Fuse<IRefSymbol>(data.slice(0, 1000), {
   distance: 8,
-  keys: [{ name: 'id', weight: 0.99 }, { name: 'name', weight: 0.1 }],
+  keys: [
+    { name: 'id', weight: 0.99 },
+    { name: 'name', weight: 0.1 },
+  ],
   location: 0,
   maxPatternLength: 32,
   minMatchCharLength: 2,

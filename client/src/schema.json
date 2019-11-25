@@ -1355,13 +1355,9 @@
               "description": "",
               "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ISODateTime",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "ISODateTime",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
