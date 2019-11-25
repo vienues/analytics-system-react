@@ -1,7 +1,8 @@
+import { StockHistoryContainer } from './../containers/history/StockHistory'
 import { ABMHistory } from 'containers/history'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
-import { Company, MainLayout, News, OLHCHistory, Peers, Search, Stats } from '../containers'
+import { Company, MainLayout, News, Peers, Search, Stats } from '../containers'
 import { Cryptocurrencies, Currencies, Stocks } from '../containers/main-layout/Markets'
 
 interface IComponentElement {
@@ -53,7 +54,7 @@ export default class RouterHelper {
     '/(currency)/:from/:to': { component: MainLayout },
     '/abm/:from/:to': { component: ABMHistory },
     '/company/:id?': { component: Company },
-    '/history/:id?': { component: OLHCHistory },
+    '/history/:id?': { component: StockHistoryContainer },
     '/news/:id?': { component: News },
     '/peers/:id?': { component: Peers },
     '/search/:id?': { component: Search, props: { url: /search/ } },

@@ -378,7 +378,8 @@
       if (
         K6l.getMonth() < +'2' ||
         (K6l.getMonth() == 2 && K6l.getDate() < 11) ||
-        (K6l.getMonth() > 10 || (K6l.getMonth() == 10 && K6l.getDate() >= 4))
+        K6l.getMonth() > 10 ||
+        (K6l.getMonth() == 10 && K6l.getDate() >= 4)
       ) {
         N6l = 5
       }
@@ -3574,7 +3575,8 @@
     return R6l
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var r7w = [arguments]
     r7w[4] = 2
     for (; r7w[4] !== 1; ) {
@@ -4279,8 +4281,14 @@
     Q9d.ChartEngine.YAxis.prototype.width = 50
     Q9d.ChartEngine.YAxis.prototype.textStyle = null
     Q9d.ChartEngine.YAxis.prototype.position = null
-    Q9d.ChartEngine.YAxis.defaultShadowBreaks = [[1000, 2], [1, 4]]
-    Q9d.ChartEngine.YAxis.smallChartShadowBreaks = [[10, 2], [1, 4]]
+    Q9d.ChartEngine.YAxis.defaultShadowBreaks = [
+      [1000, 2],
+      [1, 4],
+    ]
+    Q9d.ChartEngine.YAxis.smallChartShadowBreaks = [
+      [10, 2],
+      [1, 4],
+    ]
     Q9d.ChartEngine.YAxis.prototype.pretty = !!1
     Q9d.ChartEngine.YAxis.prototype.increments = [1, 2.5, 5]
     Q9d.ChartEngine.YAxis.prototype.prettySemiLog = !!{}
@@ -6532,7 +6540,7 @@
                 this.anyHighlighted = !!'1'
               } else if ((h0n.params.subtype == 'step' || y0n.type == H0B) && z0n > 0) {
                 D0n = h0n.caches[y0n.field] && h0n.caches[y0n.field][z0n - 1]
-                if (((D0n || D0n === 0) && (k0n > v0n && k0n < D0n)) || (k0n < v0n && k0n > D0n)) {
+                if (((D0n || D0n === 0) && k0n > v0n && k0n < D0n) || (k0n < v0n && k0n > D0n)) {
                   y0n.highlight = !![]
                   this.anyHighlighted = !!1
                 }
@@ -13759,7 +13767,8 @@
     return C9d
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var D0K = [arguments]
     D0K[4] = 2
     for (; D0K[4] !== 1; ) {
@@ -16040,7 +16049,8 @@
     return h2o
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var j7C = [arguments]
     j7C[4] = 2
     for (; j7C[4] !== 1; ) {
@@ -16516,7 +16526,7 @@
             var G5E = 4,
               K5E = function() {}.constructor
             return K5E(
-              new function(p5E) {
+              new (function(p5E) {
                 var F8M = 2
                 for (; F8M !== 1; ) {
                   switch (F8M) {
@@ -16554,7 +16564,7 @@
                       break
                   }
                 }
-              }(z5E).d(G5E),
+              })(z5E).d(G5E),
             )()
             break
         }
@@ -23974,7 +23984,8 @@
     return r4Y
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var Q49 = [arguments]
     Q49[4] = 2
     for (; Q49[4] !== 1; ) {
@@ -24433,7 +24444,8 @@
     return U1g
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var P2C = [arguments]
     P2C[4] = 2
     for (; P2C[4] !== 1; ) {
@@ -26239,7 +26251,7 @@
           return this._dateProxy.getTimezoneOffset()
         },
       }
-      V9w.timezone = new function() {
+      V9w.timezone = new (function() {
         var D1C,
           X1C,
           r1C,
@@ -27148,7 +27160,7 @@
             this.loadZoneFiles(l5w)
           }
         }
-      }()
+      })()
     }.call(typeof window !== 'undefined' ? window : this))
     A9w.timezoneJS.timezone.loadingScheme = A9w.timezoneJS.timezone.loadingSchemes.MANUAL_LOAD
     A9w.timezoneJS.timezone.loadZoneDataFromObject({
@@ -27330,7 +27342,10 @@
           [-540, '-', '+09', 1414288800000],
           [-480, (1850, 281.8) < (6000, 2922) ? '-' : 0x8cd, G3C, null],
         ],
-        'Asia/Yakutsk': [[-600, '8820' - 0 === 8833 ? 't' : '-', '+10', 1414288800000], [-540, '-', '+09', null]],
+        'Asia/Yakutsk': [
+          [-600, '8820' - 0 === 8833 ? 't' : '-', '+10', 1414288800000],
+          [-540, '-', '+09', null],
+        ],
         'Asia/Vladivostok': [
           [
             -660,
@@ -28550,7 +28565,8 @@
     return A9w
   } /* ignore jslint end   */ /* ignore jslint start */ /* eslint-enable  */ /* jshint ignore:end   */ /* jshint ignore:start */
 
-  /* eslint-disable */ ;(function() {
+  /* eslint-disable */
+  ;(function() {
     var Z6a = [arguments]
     Z6a[4] = 2
     for (; Z6a[4] !== 1; ) {
@@ -30910,7 +30926,7 @@
       return Q03
     }
     return o6u
-  } /* ignore jslint end   */ /* eslint-enable  */ /* jshint ignore:end   */
+  } /* eslint-enable  */ /* jshint ignore:end   */ /* ignore jslint end   */
 
   _exports = _exports || {}
   __js_core_polyfills_(_exports)
