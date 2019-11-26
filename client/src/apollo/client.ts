@@ -7,6 +7,7 @@ import { getMainDefinition } from 'apollo-utilities'
 
 const cache = new InMemoryCache()
 const address = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
+const { http, ws } = process.env.NODE_ENV === 'development' ? { http: 'http', ws: 'ws' } : { http: 'https', ws: 'wss' }
 
 const links = [
   split(
@@ -19,9 +20,9 @@ const links = [
       options: {
         reconnect: true,
       },
-      uri: `wss://${address}/subscriptions`,
+      uri: `${ws}://${address}/subscriptions`,
     }),
-    new HttpLink({ uri: `https://${address}/graphql` }),
+    new HttpLink({ uri: `${http}://${address}/graphql` }),
   ),
 ]
 

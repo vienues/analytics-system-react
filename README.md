@@ -38,17 +38,17 @@ By default the server will connect to the [IEX trading system](https://iextradin
 
 ```cmd
 REM Windows Command Prompt
-set INSIGHT_OFFLINE=true
+set INSIGHTS_OFFLINE=true
 ```
 
 ```ps
 #Windows Powershell
-$env:INSIGHT_OFFLINE="true"
+$env:INSIGHTS_OFFLINE="true"
 ```
 
 ```sh
 #!/bin/bash
-export INSIGHT_OFFLINE=true
+export INSIGHTS_OFFLINE=true
 ```
 
 By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). The data can be updated from the [IEX trading system](https://iextrading.com/) by running an npm script from the `PROJECT_ROOT/server` directory.

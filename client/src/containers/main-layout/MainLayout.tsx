@@ -7,12 +7,10 @@ import { RouterHelpers } from '../../helpers'
 import { Search, StockPrice } from '../index'
 import AppBar from './AppBar'
 import Footer from './Footer'
-import MarketSelection from './MarketSelection'
 
 const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({ id, market }) => (
   <AppLayoutRoot>
     <AppBar />
-    <MarketSelection />
     <div style={{ padding: '0rem 1rem' }}>
       <MainSearchContent>
         <Search id={id} url={market} market={market} />

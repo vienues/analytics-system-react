@@ -7,7 +7,6 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: dev-reactive-analytics
   name: analytics-server
   labels:
     app: reactive-analytics-server
@@ -24,7 +23,18 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
         - name: reactive-analytics-server
-          image: eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:0.8
+          image: ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${NAMESPACE}-${BUILD_NUM}
+          env:
+            - name: IEXCLOUD_API_VERSION
+              valueFrom:
+                secretKeyRef:
+                  name: iex-cloud-version
+                  key: iex-cloud-version-value
+            - name: IEXCLOUD_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: iex-cloud-public-key
+                  key: iex-cloud-public-key-value
           livenessProbe:
             httpGet:
               path: /healthz
@@ -39,7 +49,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: dev-reactive-analytics
   name: analytics-server
   labels:
     app: reactive-analytics-server

@@ -1,10 +1,11 @@
+import { StockHistoryContainer } from '../containers/history/StockHistoryContianer'
 import { ABMHistory } from 'containers/history'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
-import { Company, MainLayout, News, OLHCHistory, Peers, Search, Stats } from '../containers'
+import { Company, MainLayout, News, Peers, Search, Stats } from '../containers'
 import { Cryptocurrencies, Currencies, Stocks } from '../containers/main-layout/Markets'
 
-interface IComponenetElement {
+interface IComponentElement {
   component: React.ElementType
   props?: {
     [key: string]: any
@@ -12,7 +13,7 @@ interface IComponenetElement {
 }
 
 interface IComponentWithProps {
-  [path: string]: IComponenetElement
+  [path: string]: IComponentElement
 }
 
 interface IPathParams {
@@ -51,13 +52,13 @@ export default class RouterHelper {
     '/': { component: MainLayout },
     '/(bond|crypto|currency|future|index|stock)/:id?': { component: MainLayout },
     '/(currency)/:from/:to': { component: MainLayout },
+    '/abm/:from/:to': { component: ABMHistory },
     '/company/:id?': { component: Company },
-    '/history/:id?': { component: OLHCHistory },
+    '/history/:id?': { component: StockHistoryContainer },
     '/news/:id?': { component: News },
     '/peers/:id?': { component: Peers },
     '/search/:id?': { component: Search, props: { url: /search/ } },
     '/stats/:id?': { component: Stats },
-    '/abm/:from/:to': { component: ABMHistory },
   }
 
   private static mainRouterItems: IComponentWithProps = {
@@ -70,7 +71,7 @@ export default class RouterHelper {
     '/stock/:id?': { component: Stocks },
   }
 
-  private static renderRouterElement(element: IComponenetElement, params: IPathParams, isRoot: boolean) {
+  private static renderRouterElement(element: IComponentElement, params: IPathParams, isRoot: boolean) {
     if (element) {
       const market = params[0] || 'stock'
       let id
