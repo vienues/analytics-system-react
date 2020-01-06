@@ -27,7 +27,7 @@ const DataContents: React.FunctionComponent<IProps> = props => {
   const popoutClickHandler = async () => {
     setPoppedOut(true)
     OpenfinService.OpenWindow(
-      { url: `http://localhost:3000/${props.cardType}/${props.instrument}`, name: props.cardType },
+      { url: `${window.location.protocol}//${window.location.host}/${props.cardType}/${props.instrument}`, name: props.cardType },
       closeHandler,
     )
   }
@@ -49,23 +49,23 @@ const DataContents: React.FunctionComponent<IProps> = props => {
         const Wrapper = openfin.win.identity.name === openfin.app.identity.uuid ? VanillaDataCard : PopupDataCard
         const Header = openfin.win.identity.name === openfin.app.identity.uuid ? VanillaHeader : DataCardHeading
 
-        return poppedOut ? (
-          <></>
-        ) : (
-          <Wrapper {...props.style}>
-            <Header>
-              <Title>{props.title}</Title>
-              <DragHandle />
-              {openfin.win.identity.name === openfin.app.identity.uuid ? (
-                <PopoutButton onClick={popoutClickHandler} style={{ height: '0px', justifySelf: 'end' }}>
-                  <PopoutIcon width={0.8125} height={0.75} />
-                </PopoutButton>
-              ) : (
-                <OpenfinWindowControls />
-              )}
-            </Header>
-            <div style={{ padding: '1rem' }}>{props.children}</div>
-          </Wrapper>
+        return (
+          poppedOut || (
+            <Wrapper {...props.style}>
+              <Header>
+                <Title>{props.title}</Title>
+                <DragHandle />
+                {openfin.win.identity.name === openfin.app.identity.uuid ? (
+                  <PopoutButton onClick={popoutClickHandler} style={{ height: '0px', justifySelf: 'end' }}>
+                    <PopoutIcon width={0.8125} height={0.75} />
+                  </PopoutButton>
+                ) : (
+                  <OpenfinWindowControls />
+                )}
+              </Header>
+              <div style={{ padding: '1rem' }}>{props.children}</div>
+            </Wrapper>
+          )
         )
       }}
     </OpenfinApiSubscribe>
