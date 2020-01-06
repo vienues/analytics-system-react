@@ -27,7 +27,10 @@ const DataContents: React.FunctionComponent<IProps> = props => {
   const popoutClickHandler = async () => {
     setPoppedOut(true)
     OpenfinService.OpenWindow(
-      { url: `${window.location.protocol}//${window.location.host}/${props.cardType}/${props.instrument}`, name: props.cardType },
+      {
+        url: `${window.location.protocol}//${window.location.host}/${props.cardType}/${props.instrument}`,
+        name: props.cardType,
+      },
       closeHandler,
     )
   }
