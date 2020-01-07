@@ -34,7 +34,11 @@ This will open up a browser window to [http://localhost:3000](http://localhost:3
 
 ### Data connection
 
-By default the server will connect to the [IEX trading system](https://iextrading.com/) to retrieve realtime market information. To simulate this in an offline environment set the `INSIGHT_OFFLINE=true` before starting the server.
+By default the server will connect to the [IEX trading system](https://iextrading.com/) to retrieve realtime market information.
+
+To connect to [IEX](https://iextrading.com/) during development, copy `server/.env.example` to `server/.env` and set the value of `IEXCLOUD_PUBLIC_KEY` to a valid IEX key.
+
+To simulate this in an offline environment set the `INSIGHT_OFFLINE=true` before starting the server.
 
 ```cmd
 REM Windows Command Prompt
