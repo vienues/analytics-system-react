@@ -34,9 +34,9 @@ This will open up a browser window to [http://localhost:3000](http://localhost:3
 
 ### Data connection
 
-By default the server will connect to the [IEX trading system](https://iextrading.com/) to retrieve realtime market information.
+By default the server will connect to the [IEX trading system](https://iexcloud.io/) to retrieve realtime market information.
 
-To connect to [IEX](https://iextrading.com/) during development, copy `server/.env.example` to `server/.env` and set the value of `IEXCLOUD_PUBLIC_KEY` to a valid IEX key.
+To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.example` to `server/.env` and set the value of `IEXCLOUD_PUBLIC_KEY` to a valid IEX key.
 
 To simulate this in an offline environment set the `INSIGHT_OFFLINE=true` before starting the server.
 
@@ -55,7 +55,7 @@ $env:INSIGHTS_OFFLINE="true"
 export INSIGHTS_OFFLINE=true
 ```
 
-By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). The data can be updated from the [IEX trading system](https://iextrading.com/) by running an npm script from the `PROJECT_ROOT/server` directory.
+By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). The data can be updated from the [IEX trading system](https://iexcloud.io/) by running an npm script from the `PROJECT_ROOT/server` directory.
 
 ```console
 cd adaptive-insights/server && yarn generate-mock-data
