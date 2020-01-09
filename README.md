@@ -1,6 +1,6 @@
-# Adaptive Insights
+# Reactive Analytics
 
-[![CircleCI](https://circleci.com/gh/AdaptiveConsulting/adaptive-insights.svg?style=svg&circle-token=8dfbb24676c7e9d51bc4668cacec12d31104b0f6)](https://circleci.com/gh/AdaptiveConsulting/adaptive-insights)
+[![CircleCI](https://circleci.com/gh/AdaptiveConsulting/ReactiveAnalytics.svg?style=svg&circle-token=8dfbb24676c7e9d51bc4668cacec12d31104b0f6)](https://circleci.com/gh/AdaptiveConsulting/ReactiveAnalytics)
 
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -10,7 +10,7 @@
 
 ## Overview
 
-Adaptive Insights is a monorepo, powered by [Lerna](https://github.com/lerna/lerna), to demonstrate how NodeJS, Apollo GraphQL, React, and Typescript can be used to develop robust data-driven web apps.
+Reactive Analytics is a monorepo, powered by [Lerna](https://github.com/lerna/lerna), to demonstrate how NodeJS, Apollo GraphQL, React, and Typescript can be used to develop robust data-driven web apps.
 
 Both the server-side and client-side code use strong types which are used to generate the GraphQL schema. This allows developers to detect data and schema errors at design-time and compile-time.
 
@@ -24,11 +24,11 @@ Both the server-side and client-side code use strong types which are used to gen
 
 After downloading or cloning repos open a terminal to the root folder and run `yarn` to install dependencies.
 
-        [adaptive-insights] $ yarn install
+        [ReactiveAnalytics] $ yarn install
 
 Once the dependencies are install start the client and server using the start command.
 
-        [adaptive-insights] $ yarn start
+        [ReactiveAnalytics] $ yarn start
 
 This will open up a browser window to [http://localhost:3000](http://localhost:3000) for the client interface, and a GraphQL server on port 4000.
 
