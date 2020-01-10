@@ -56,7 +56,10 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
     getItemProps: (options: GetItemPropsOptions<SearchResult>) => any,
   ) {
     const filteredList = itemsList.filter(
-      item => !inputValue || item.id.includes(inputValue) || item.name.includes(inputValue),
+      item =>
+        !inputValue ||
+        item.id.toUpperCase().includes(inputValue.toUpperCase()) ||
+        item.name.toUpperCase().includes(inputValue.toUpperCase()),
     )
     if (filteredList.length === 0) {
       return <SearchResultNoItem>No results found...</SearchResultNoItem>

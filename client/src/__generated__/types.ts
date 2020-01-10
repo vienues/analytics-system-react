@@ -303,7 +303,7 @@ export interface searchQuery {
 
 export interface searchQueryVariables {
   id: string
-  market: string
+  market?: string
 }
 
 /* tslint:disable */
