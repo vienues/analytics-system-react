@@ -1,5 +1,5 @@
 query searchQuery($id: String!, $market: String!) {
-  symbol(id: $id) {
+  symbol(id: $id, market: $market) {
     id
     name
   }

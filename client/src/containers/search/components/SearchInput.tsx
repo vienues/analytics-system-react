@@ -68,7 +68,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
       const bStart = (inputValue && b.id.match(matchInput(inputValue))) || []
 
       if (aStart.length !== bStart.length) return bStart.length - aStart.length
-      return a.id > b.id ? 1 : -1
+      return a.id.localeCompare(b.id)
     })
 
     if (itemsList.length === 0) {
