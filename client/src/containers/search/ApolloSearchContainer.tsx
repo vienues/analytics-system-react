@@ -2,13 +2,21 @@ import Fdc3Context from 'containers/fdc3/fdc3-context'
 import React, { useContext, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import { MarketSegment, search as SimpleSearchQuery, search_symbols, searchVariables } from '../../__generated__/types'
+import {
+  MarketSegment,
+  search as SimpleSearchQuery,
+  search_symbols,
+  searchVariables,
+  CompanyQuery,
+  CompanyQueryVariables,
+} from '../../__generated__/types'
 import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
+import SearchbarConnection from './graphql/SearchbarConnection.graphql'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -34,21 +42,21 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   useEffect(() => {
     if (instrumentId) {
       apolloClient
-        .query<SimpleSearchQuery, searchVariables>({
-          query: SimpleSearchConnection,
-          variables: { text: instrumentId, marketSegment: market.toUpperCase() as MarketSegment },
+        .query<CompanyQuery, CompanyQueryVariables>({
+          query: SearchbarConnection,
+          variables: { id: instrumentId },
         })
         .then((result: any) => {
-          if (result.data && result.data.symbol) {
+          if (result.data && result.data.stock) {
             setCurrentSymbol({
               __typename: 'SearchResult',
-              id: result.data.symbol.id,
-              name: result.data.symbol.name,
+              id: result.data.stock.id,
+              name: result.data.stock.company.name,
             } as search_symbols)
 
             if (hasCurrencyPairContext) {
-              history.replace(`/${url}/${result.data.symbol.id}`)
-              OpenfinService.NavigateToStock(result.data.symbol.id)
+              history.replace(`/${url}/${result.data.stock.id}`)
+              OpenfinService.NavigateToStock(result.data.stock.id)
             }
           }
         })
