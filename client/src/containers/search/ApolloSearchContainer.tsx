@@ -141,6 +141,17 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     setCurrentText(text)
   }
 
+  const handleChange = (symbol: search_symbols | null) => {
+    setCurrentSymbol(symbol)
+    if (symbol) {
+      history.push(`/${url}/${symbol.id}`)
+      OpenfinService.NavigateToStock(symbol.id)
+      OpenfinService.broadcastStock(symbol)
+    } else {
+      history.push(`/${url}`)
+    }
+  }
+
   const onSearchInputResults = ({ symbols }: SimpleSearchQuery): JSX.Element => {
     if (!(currentSymbol && currentSymbol.id) && id && searching) {
       return <AdaptiveLoader size={50} speed={1.4} />

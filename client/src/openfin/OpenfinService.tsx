@@ -5,8 +5,11 @@ import { _Window } from 'openfin/_v2/api/window/window'
 import { Application } from 'openfin/_v2/main'
 import React from 'react'
 import { Container, Provider, Subscribe } from 'unstated'
+import { Context } from 'openfin-fdc3'
+import { search_symbols } from '__generated__/types'
+import { getStockContext } from './util'
 
-interface IOpinfinState {
+interface IOpenfinState {
   openfin?: {
     app: Application
     win: _Window
@@ -18,8 +21,14 @@ interface IWindowConfig {
   url: string
 }
 
-export class OpenfinContainer extends Container<IOpinfinState> {
+export class OpenfinContainer extends Container<IOpenfinState> {
   private readonly windows: Map<string, fin.OpenFinWindow> = new Map()
+
+  fdc3Context = require('openfin-fdc3')
+
+  fdc3 = {
+    broadcast: (context: Context) => this.fdc3Context.broadcast(context),
+  }
 
   constructor() {
     super()
@@ -36,6 +45,10 @@ export class OpenfinContainer extends Container<IOpinfinState> {
       // newWindow.history.pushState(null,null, `/${name}/${symbol}`)
       window.navigate(`http://localhost:3000/${name}/${symbol}`)
     })
+  }
+
+  public broadcastStock(symbol: search_symbols) {
+    this.fdc3.broadcast(getStockContext(symbol))
   }
 
   public async OpenWindow(config: IWindowConfig, onClose?: () => void) {
