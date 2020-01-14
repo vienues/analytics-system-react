@@ -24,13 +24,16 @@
     "openfin": "openfin --launch --config ./client/app.json",
     "demo": "lerna run --parallel demo",
     "generate-server-schema": "node ./server/src/generateSchema.js",
-    "generate-client-schema": "./client/node_modules/.bin/apollo-codegen introspect-schema ./server/schema.graphql --output ./client/src/schema.json",
-    "generate-client-typings": "./client/node_modules/.bin/apollo-codegen generate ./client/src/**/*.graphql --addTypename --schema=./client/src/schema.json --target typescript --output ./client/src/__generated__/types.ts",
+    "generate-client-schema": "./client/node_modules/.bin/apollo client:download-schema ./client/src/schema.json",
+    "generate-client-typings": "./client/node_modules/.bin/apollo client:codegen ./client/src/__generated__/types.ts --outputFlat --includes ./client/src/**/*.graphql --addTypename --localSchemaFile=./client/src/schema.json --target=typescript",
     "generate-schema-and-typings": "yarn generate-server-schema && yarn generate-client-schema && yarn run generate-client-typings"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "openfin-fdc3": "^0.1.1"
+  },
+  "resolutions": {
+    "graphql": "^14.5.8"
   }
 }
