@@ -4,23 +4,22 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-config-react-app": "^4.0.1",
-    "husky": "^0.14.3",
-    "lerna": "^2.8.0",
-    "prettier": "^1.16.4",
-    "pretty-quick": "^1.4.1"
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-react-app": "^5.1.0",
+    "husky": "^4.0.9",
+    "lerna": "^3.20.2",
+    "prettier": "^1.19.1",
+    "pretty-quick": "^2.0.1"
   },
   "scripts": {
-    "start": "yarn run bootstrap && lerna run --parallel start --port 8080",
+    "start": "yarn run bootstrap && lerna run --parallel start -- --port 8080",
     "offline-start": "set INSIGHTS_OFFLINE=true && yarn run start",
     "bootstrap": "lerna bootstrap",
     "clean": "yarn && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
-    "precommit": "pretty-quick --staged",
     "openfin": "openfin --launch --config ./client/app.json",
     "demo": "lerna run --parallel demo",
     "generate-server-schema": "node ./server/src/generateSchema.js",
@@ -31,9 +30,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "openfin-fdc3": "^0.1.1"
+    "openfin-fdc3": "^0.2.0"
   },
   "resolutions": {
     "graphql": "^14.5.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
