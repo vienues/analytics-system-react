@@ -21,7 +21,7 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
       return (
         <ScrollableArea>
           <MainContent>
-            <span>{errorMessage || 'Something went wrong.'}</span>
+            <span>{errorMessage}</span>
           </MainContent>
         </ScrollableArea>
       )
