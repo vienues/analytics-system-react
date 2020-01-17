@@ -3,15 +3,16 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import {
+  CompanyQuery,
+  CompanyQueryVariables,
   MarketSegment,
   search as SimpleSearchQuery,
   search_symbols,
   searchVariables,
-  CompanyQuery,
-  CompanyQueryVariables,
 } from '../../__generated__/types'
 import apolloClient from '../../apollo/client'
-import { AppQuery, APOLLO_POLLING_INTERVAL } from '../../common/AppQuery'
+import { AppQuery } from '../../common/AppQuery'
+import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
@@ -30,9 +31,8 @@ type Props = RouteComponentProps & IProps
 
 const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }: Props) => {
   const [currentText, setCurrentText] = useState<string>('')
-  const [refetchAttempts, setRefetchAttempts] = useState<number>(0)
 
-  const { currentSymbol, searching, dispatch } = useContext(SearchContext)
+  const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
   const currencyPairContext = useContext(Fdc3Context)
 
   const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === 'CURRENCY'
@@ -48,7 +48,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       if (dispatch) {
         dispatch({
           type: SearchContextActionTypes.SelectedSymbol,
-          payload: { searching: false, currentSymbol: symbol },
+          payload: { currentSymbol: symbol },
         })
       }
       if (symbol) {
@@ -62,21 +62,11 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   )
 
   useEffect(() => {
-    setRefetchAttempts(0)
-  }, [instrumentId])
-
-  useEffect(() => {
     if (dispatch) {
       if (instrumentId) {
-        dispatch({
-          type: SearchContextActionTypes.FindSymbol,
-          payload: { searching: true, currentSymbol: null },
-        })
+        dispatch({ type: SearchContextActionTypes.FindSymbol })
       } else {
-        dispatch({
-          type: SearchContextActionTypes.ClearedSymbol,
-          payload: { searching: false, currentSymbol: null },
-        })
+        dispatch({ type: SearchContextActionTypes.ClearedSymbol })
       }
     }
   }, [dispatch, instrumentId])
@@ -101,7 +91,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
             if (result.data.stock.id === instrumentId.toUpperCase()) {
               dispatch({
                 type: SearchContextActionTypes.FoundSymbol,
-                payload: { searching: false, currentSymbol: foundSymbol },
+                payload: { currentSymbol: foundSymbol },
               })
               if (hasCurrencyPairContext) {
                 history.replace(`/${url}/${result.data.stock.id}`)
@@ -111,19 +101,10 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
               throw new Error('Returned symbol does not match requested symbol.')
             }
           } else {
-            if (
-              APOLLO_POLLING_INTERVAL &&
-              result.errors &&
-              result.errors
-                .map((error: { message: any }) => error!.message || '')
-                .includes('Request failed with status code 429')
-            ) {
-              refetchTimeout = setTimeout(() => {
-                setRefetchAttempts((prevRefetchAttempts: number) => prevRefetchAttempts + 1)
-              }, APOLLO_POLLING_INTERVAL)
-            } else {
-              throw new Error('Symbol not recognized.')
-            }
+            refetchTimeout = AppQueryForceRefetcher(result, () =>
+              dispatch({ type: SearchContextActionTypes.AttemptRefetchSymbol }),
+            )
+            if (!refetchTimeout) throw new Error('Symbol not recognized.')
           }
         })
         .catch(ex => {
@@ -131,8 +112,6 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
           dispatch({
             type: SearchContextActionTypes.UnrecognizedSymbol,
             payload: {
-              searching: false,
-              currentSymbol: null,
               errorMessage: (
                 <SearchErrorCard id={instrumentId} market={market} foundSymbol={foundSymbol} onClick={handleChange} />
               ),

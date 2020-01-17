@@ -5,6 +5,7 @@ import React, { ReactNode } from 'react'
 import { Query, QueryProps, QueryResult } from 'react-apollo'
 import styled from 'styled-components'
 import AdaptiveLoader from '../common/AdaptiveLoader'
+import { AppQueryForcePoller } from './AppQueryForceRetry'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
@@ -27,6 +28,14 @@ const LoadableStyle = styled.div<{ minWidth?: string; minHeight?: string }>`
   fill: ${({ theme }) => theme.core.textColor};
 `
 
+export const AppQueryDefaultLoadingIndicator: React.FunctionComponent<{ renderLoadingHeight?: string }> = React.memo(
+  ({ renderLoadingHeight }) => (
+    <LoadableStyle minHeight={renderLoadingHeight}>
+      <AdaptiveLoader size={50} speed={1.4} />
+    </LoadableStyle>
+  ),
+)
+
 interface IAppQueryProps<Data, Variables> {
   children: (data: Data, result: QueryResult<Data, Variables>) => ReactNode
   renderNetworkStatus?: (networkStatus: NetworkStatus, result: QueryResult<Data, Variables>) => ReactNode
@@ -35,23 +44,18 @@ interface IAppQueryProps<Data, Variables> {
   renderLoadingHeight?: string
 }
 
-export const APOLLO_POLLING_INTERVAL: number = process.env.NODE_ENV === 'development' ? 500 : 0
-
 export class AppQuery<Data, Variables> extends React.Component<
   OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>
 > {
-  private polling: Boolean = false
-
   constructor(props: OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>) {
     super(props)
 
     this.onQueryResults = this.onQueryResults.bind(this)
-    this.defaultRenderNetworkStatus = this.defaultRenderNetworkStatus.bind(this)
   }
 
   public defaultRenderNetworkStatus = (networkStatus: NetworkStatus, _: QueryResult<Data, Variables>) => {
     if (networkStatus === NetworkStatus.loading) {
-      return this.defaultLoader
+      return <AppQueryDefaultLoadingIndicator renderLoadingHeight={this.props.renderLoadingHeight} />
     }
     return null
   }
@@ -69,38 +73,25 @@ export class AppQuery<Data, Variables> extends React.Component<
   public defaultRenderNoData = (_: QueryResult<Data, Variables>) => {
     return <div>No data</div>
   }
-  public renderPolling = (result: QueryResult<Data, Variables>) => {
-    const { startPolling, stopPolling } = result
-    if (!result!.data) {
-      if (!this.polling) {
-        this.polling = true
-        startPolling(APOLLO_POLLING_INTERVAL)
-      }
-      return this.defaultLoader
-    } else if (this.polling) {
-      this.polling = false
-      stopPolling()
-    }
-    return null
-  }
-
-  private defaultLoader: ReactNode = (
-    <LoadableStyle minHeight={this.props.renderLoadingHeight}>
-      <AdaptiveLoader size={50} speed={1.4} />
-    </LoadableStyle>
-  )
 
   public render() {
     const { ...queryProps } = this.props
-    return <Query<Data, Variables> {...queryProps}>{this.onQueryResults}</Query>
+    return (
+      <Query<Data, Variables> {...queryProps}>
+        {(result: QueryResult<Data, Variables>) => {
+          const { renderLoadingHeight } = this.props
+          return (
+            <AppQueryForcePoller result={result} renderLoadingHeight={renderLoadingHeight}>
+              {this.onQueryResults(result)}
+            </AppQueryForcePoller>
+          )
+        }}
+      </Query>
+    )
   }
 
   private onQueryResults = (result: QueryResult<Data, Variables>) => {
     const { children, renderNetworkStatus, renderError, renderNoData } = this.props
-    const pollingNode = APOLLO_POLLING_INTERVAL ? this.renderPolling(result) : null
-    if (pollingNode) {
-      return pollingNode
-    }
     const networkStatusNode = (renderNetworkStatus || this.defaultRenderNetworkStatus)(result!.networkStatus, result)
     if (networkStatusNode) {
       return networkStatusNode
