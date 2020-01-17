@@ -26,7 +26,7 @@ const checkSandbox = async () => {
 
 export const APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE = Promise.all([checkSandbox()])
 const APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE: string = 'Request failed with status code 429'
-let APOLLO_QUERY_FORCE_RETRY_POLLING_DURATION = APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE ? 500 : 0
+const APOLLO_QUERY_FORCE_RETRY_POLLING_INTERVAL_DURATION: number = APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE ? 500 : 0
 
 const checkQueryResultErrors = (result: any) => {
   const { errors = [], error = {} } = result
@@ -45,7 +45,7 @@ interface IProps {
 
 export const AppQueryForceRefetcher = (result: any, handler: Function) => {
   if (APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE && checkQueryResultErrors(result))
-    return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_POLLING_DURATION)
+    return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_POLLING_INTERVAL_DURATION)
   return 0
 }
 
@@ -59,7 +59,7 @@ export const AppQueryForcePoller: React.FunctionComponent<IProps> = props => {
       if (checkQueryResultErrors(props.result)) {
         if (!isPolling) {
           setIsPolling(true)
-          startPolling(APOLLO_QUERY_FORCE_RETRY_POLLING_DURATION)
+          startPolling(APOLLO_QUERY_FORCE_RETRY_POLLING_INTERVAL_DURATION)
         }
         return (
           props.pollingIndicator || <AppQueryDefaultLoadingIndicator renderLoadingHeight={props.renderLoadingHeight} />
