@@ -84,6 +84,9 @@ const SearchWrapper = styled.div`
   & svg {
     color: ${({ theme }) => theme.core.lightBackground};
   }
+  > input {
+    color: ${({ theme }) => theme.core.textColor};
+  }
 `
 
 const SearchResults = styled.menu`
