@@ -69,6 +69,8 @@ export class AppQuery<Data, Variables> extends React.Component<
   }
   public render() {
     const { ...queryProps } = this.props
+    // https://github.com/apollographql/apollo-client/issues/3090#issuecomment-390057662
+    // @ts-ignore
     return <Query<Data, Variables> {...queryProps}>{this.onQueryResults}</Query>
   }
 
