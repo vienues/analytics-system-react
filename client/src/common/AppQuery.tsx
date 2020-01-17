@@ -76,9 +76,9 @@ export class AppQuery<Data, Variables> extends React.Component<
 
   public render() {
     const { ...queryProps } = this.props
-    // https://github.com/apollographql/apollo-client/issues/3090#issuecomment-390057662
-    // @ts-ignore
     return (
+      // https://github.com/apollographql/apollo-client/issues/3090#issuecomment-390057662
+      // @ts-ignore
       <Query<Data, Variables> {...queryProps}>
         {(result: QueryResult<Data, Variables>) => {
           const { renderLoadingHeight } = this.props
