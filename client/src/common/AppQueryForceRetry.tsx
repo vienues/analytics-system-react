@@ -8,10 +8,25 @@ import React, { useState } from 'react'
 import { QueryResult } from 'react-apollo'
 import { AppQueryDefaultLoadingIndicator } from './AppQuery'
 
-export const APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE: Boolean = process.env.NODE_ENV === 'development'
+let isSandbox: Boolean | null = null
 
+const checkSandbox = async () => {
+  if (isSandbox === null) {
+    const host = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
+    try {
+      const response = await fetch(`//${host}/iexsandbox`, { cache: 'force-cache' })
+      const json = await response.json()
+      isSandbox = !!json.isSandbox
+    } catch (ex) {
+      console.error(ex)
+    }
+  }
+  return isSandbox
+}
+
+export const APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE = Promise.all([checkSandbox()])
 const APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE: string = 'Request failed with status code 429'
-const APOLLO_QUERY_FORCE_RETRY_POLLING_DURATION: number = APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE ? 500 : 0
+let APOLLO_QUERY_FORCE_RETRY_POLLING_DURATION = APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE ? 500 : 0
 
 const checkQueryResultErrors = (result: any) => {
   const { errors = [], error = {} } = result
