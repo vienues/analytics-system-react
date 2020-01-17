@@ -2,12 +2,14 @@ import React, { createContext, Dispatch, useReducer } from 'react'
 import { search_symbols } from '../../__generated__/types'
 
 interface IState {
-  currentSymbol: search_symbols | null
+  currentSymbol?: search_symbols | null
   errorMessage?: string | JSX.Element
-  searching: Boolean
+  refetchAttempts?: number
+  searching?: Boolean
 }
 
 export enum SearchContextActionTypes {
+  AttemptRefetchSymbol = 'attemptRefetchSymbol',
   ClearedSymbol = 'clearedSymbol',
   FindSymbol = 'findSymbol',
   FoundSymbol = 'foundSymbol',
@@ -17,27 +19,31 @@ export enum SearchContextActionTypes {
 
 interface IAction {
   type: SearchContextActionTypes
-  payload: IState
+  payload?: IState | null
 }
 
 interface IProvide extends IState {
   dispatch?: Dispatch<IAction>
 }
 
+const initialState: IState = { currentSymbol: null, refetchAttempts: 0, searching: false }
+
 const reducer: React.Reducer<IState, IAction> = (state, action) => {
   switch (action.type) {
+    case SearchContextActionTypes.AttemptRefetchSymbol:
+      return { ...state, refetchAttempts: state.refetchAttempts ? state.refetchAttempts++ : 1 }
     case SearchContextActionTypes.ClearedSymbol:
+      return { ...initialState }
     case SearchContextActionTypes.FindSymbol:
+      return { ...initialState, searching: true }
     case SearchContextActionTypes.FoundSymbol:
     case SearchContextActionTypes.SelectedSymbol:
     case SearchContextActionTypes.UnrecognizedSymbol:
-      return { ...action.payload }
+      return { ...initialState, ...action.payload }
     default:
       return state
   }
 }
-
-const initialState: IState = { searching: false, currentSymbol: null }
 
 const SearchContext = createContext<IProvide>(initialState)
 const SearchContextConsumer = SearchContext.Consumer
