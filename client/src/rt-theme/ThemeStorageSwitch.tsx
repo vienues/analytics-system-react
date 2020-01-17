@@ -10,7 +10,6 @@ const ThemeStorageSwitch: React.FC<IThemeStorageSwitchProps & { theme: Theme }> 
 
   return (
     <Switch
-      ariaLabel="Switch Theme"
       onChange={toggleTheme}
       checked={themeName === ThemeName.Dark}
       checkedIcon={false}
