@@ -33,7 +33,7 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
     return Object.keys(RouterHelpers.MainRouterItems).map(route => (
       <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
     ))
-  }, [])
+  }, [id, market])
 
   return (
     <>

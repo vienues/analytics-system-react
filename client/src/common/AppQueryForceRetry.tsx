@@ -4,38 +4,9 @@
   the IEX sandbox. As of today, this only applies to the
   development environment.
  */
-import React, { useState } from 'react'
-import { QueryResult } from 'react-apollo'
-import { AppQueryDefaultLoadingIndicator } from './AppQuery'
-
-let isSandbox: Boolean | null = null
-
-const checkSandbox = async () => {
-  if (isSandbox === null) {
-    const host = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
-    try {
-      const response = await fetch(`//${host}/iexsandbox`, { cache: 'force-cache' })
-      const json = await response.json()
-      isSandbox = !!json.isSandbox
-    } catch (ex) {
-      console.error(ex)
-    }
-  }
-  return isSandbox
-}
-
-export const APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE = Promise.all([checkSandbox()])
-const APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE: string = 'Request failed with status code 429'
-const APOLLO_QUERY_FORCE_RETRY_POLLING_INTERVAL_DURATION: number = APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE ? 500 : 0
-
-const checkQueryResultErrors = (result: any) => {
-  const { errors = [], error = {} } = result
-  return [...errors]
-    .concat([...(error.graphQLErrors || [])])
-    .filter(e => !!e)
-    .map(error => error.message)
-    .includes(APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE)
-}
+import React, {useEffect, useMemo, useState} from 'react'
+import {QueryResult} from 'react-apollo'
+import {AppQueryDefaultLoadingIndicator} from './AppQuery'
 
 interface IProps {
   pollingIndicator?: JSX.Element
@@ -43,27 +14,76 @@ interface IProps {
   result: QueryResult
 }
 
-export const AppQueryForceRefetcher = (result: any, handler: Function) => {
-  if (APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE && checkQueryResultErrors(result))
-    return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_POLLING_INTERVAL_DURATION)
-  return 0
+interface ISettings {
+  isSandbox: Boolean | null
 }
 
-export const AppQueryForcePoller: React.FunctionComponent<IProps> = props => {
+const APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE: string = 'Request failed with status code 429'
+const APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION: number = 500
+
+let forceQuerySettings: ISettings = {
+  isSandbox: null
+}
+
+async function getForceQuerySettings() {
+  if (forceQuerySettings.isSandbox === null) {
+    const host = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
+    try {
+      const response = await fetch(`//${host}/iexsandbox`, {cache: 'force-cache'})
+      const json = await response.json()
+      forceQuerySettings.isSandbox = !!json.isSandbox
+    } catch (ex) {
+      console.error(ex)
+    }
+  }
+  return forceQuerySettings
+}
+
+const checkQueryResultErrors = (result: any) => {
+  const {errors = [], error = {}} = result
+  return [...errors]
+    .concat([...(error.graphQLErrors || [])])
+    .filter(e => !!e)
+    .map(error => error.message)
+    .includes(APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE)
+}
+
+export const AppQueryForceRefetcher = (result: any, handler: Function, override: Boolean) => {
+  return getForceQuerySettings()
+    .then(({isSandbox}) => {
+      if ((!!override || isSandbox) && checkQueryResultErrors(result))
+        return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION)
+      return 0
+    });
+}
+
+export const AppQueryForcePoller: React.FunctionComponent<IProps> = ({children, pollingIndicator, renderLoadingHeight, result}) => {
   const [isPolling, setIsPolling] = useState(false)
+  const [settings, setSettings] = useState<ISettings>(forceQuerySettings)
 
-  const { startPolling, stopPolling } = props.result
+  const loadingIndicator = useMemo(() => {
+    return pollingIndicator || <AppQueryDefaultLoadingIndicator renderLoadingHeight={renderLoadingHeight}/>
+  }, [pollingIndicator, renderLoadingHeight])
 
-  if (APOLLO_QUERY_FORCE_RETRY_IS_ACTIVE) {
-    if (!props.result.data) {
-      if (checkQueryResultErrors(props.result)) {
+  const {startPolling, stopPolling} = result
+
+  useEffect(() => {
+    getForceQuerySettings()
+      .then(({isSandbox}) => {
+        setSettings({isSandbox})
+      })
+  }, [])
+
+  if (settings.isSandbox === null)
+    return loadingIndicator;
+  else if (settings.isSandbox) {
+    if (!result.data || Object.entries(result.data).length === 0) {
+      if (checkQueryResultErrors(result)) {
         if (!isPolling) {
           setIsPolling(true)
-          startPolling(APOLLO_QUERY_FORCE_RETRY_POLLING_INTERVAL_DURATION)
+          startPolling(APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION)
         }
-        return (
-          props.pollingIndicator || <AppQueryDefaultLoadingIndicator renderLoadingHeight={props.renderLoadingHeight} />
-        )
+        return loadingIndicator
       }
     } else if (isPolling) {
       setIsPolling(false)
@@ -71,5 +91,5 @@ export const AppQueryForcePoller: React.FunctionComponent<IProps> = props => {
     }
   }
 
-  return <>{props.children}</>
+  return <>{children}</>
 }
