@@ -60,7 +60,7 @@ export class AppQuery<Data, Variables> extends React.Component<
     return null
   }
   public defaultRenderError = (_: Error, result: QueryResult<Data, Variables>) => {
-    if (!result.data) {
+    if (!result.data || Object.entries(result.data).length === 0) {
       return (
         <span>
           Something went wrong
@@ -75,21 +75,16 @@ export class AppQuery<Data, Variables> extends React.Component<
   }
 
   public render() {
-    const { ...queryProps } = this.props
-    return (
-      // https://github.com/apollographql/apollo-client/issues/3090#issuecomment-390057662
-      // @ts-ignore
-      <Query<Data, Variables> {...queryProps}>
-        {(result: QueryResult<Data, Variables>) => {
-          const { renderLoadingHeight } = this.props
-          return (
-            <AppQueryForcePoller result={result} renderLoadingHeight={renderLoadingHeight}>
-              {this.onQueryResults(result)}
-            </AppQueryForcePoller>
-          )
-        }}
-      </Query>
-    )
+    const { renderLoadingHeight, ...queryProps } = this.props
+    // https://github.com/apollographql/apollo-client/issues/3090#issuecomment-390057662
+    // @ts-ignore
+    return <Query<Data, Variables> {...queryProps}>
+      {(result: QueryResult<Data, Variables>) => (
+        <AppQueryForcePoller result={result} renderLoadingHeight={renderLoadingHeight}>
+          {this.onQueryResults(result)}
+        </AppQueryForcePoller>
+      )}
+    </Query>
   }
 
   private onQueryResults = (result: QueryResult<Data, Variables>) => {
@@ -102,7 +97,7 @@ export class AppQuery<Data, Variables> extends React.Component<
     if (errorNode) {
       return errorNode
     }
-    const noDataNode = !result.data ? (renderNoData || this.defaultRenderNoData)(result) : undefined
+    const noDataNode = !result.data || Object.entries(result.data).length === 0 ? (renderNoData || this.defaultRenderNoData)(result) : undefined
     if (noDataNode) {
       return noDataNode
     }
