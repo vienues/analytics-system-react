@@ -29,7 +29,7 @@ async function getForceQuerySettings() {
   if (forceQuerySettings.isSandbox === null) {
     const host = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
     try {
-      const response = await fetch(`//${host}/iexsandbox`, {cache: 'force-cache'})
+      const response = await fetch(`//${host}/iexsandbox`, {cache: 'force-cache', method: 'POST'})
       const json = await response.json()
       forceQuerySettings.isSandbox = !!json.isSandbox
     } catch (ex) {
@@ -51,7 +51,7 @@ const checkQueryResultErrors = (result: any) => {
 export const AppQueryForceRefetcher = (result: any, handler: Function, override: Boolean) => {
   return getForceQuerySettings()
     .then(({isSandbox}) => {
-      if ((!!override || isSandbox) && checkQueryResultErrors(result))
+      if ((override || isSandbox) && checkQueryResultErrors(result))
         return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION)
       return 0
     });
