@@ -61,6 +61,10 @@ async function bootstrap() {
     res.status(200).send('tiptop')
   })
 
+  server.get(`/iexsandbox`, (req, res) => {
+    res.status(200).json({ isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T') })
+  })
+
   server.use(
     '/graphiql',
     graphiqlExpress({
