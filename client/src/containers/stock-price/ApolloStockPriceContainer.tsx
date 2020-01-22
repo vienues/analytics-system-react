@@ -1,5 +1,5 @@
-import React from 'react'
-import { Subscription, SubscriptionProps, SubscriptionResult } from 'react-apollo'
+import { useSubscription } from '@apollo/react-hooks'
+import React, { useEffect, useState } from 'react'
 import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../../__generated__/types'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
@@ -7,8 +7,28 @@ import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 
 const ApolloStockPriceContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
-  const onStockPriceSubscriptionSuccess = (results: SubscriptionResult<onStockPriceSubscription>): JSX.Element => {
-    const { data, loading } = results
+  const [shouldResubscribe, setShouldResubscribe] = useState(true)
+  const [currentId, setCurrentId] = useState(id)
+
+  useEffect(() => {
+    if (currentId && id) {
+      if (currentId !== id) {
+        setShouldResubscribe(true)
+        setCurrentId(id)
+        return
+      }
+    }
+    setShouldResubscribe(false)
+  }, [currentId, id, setShouldResubscribe, setCurrentId])
+
+  const { loading, data } = useSubscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>(
+    StockPriceSubscription,
+    {
+      shouldResubscribe,
+      variables: { markets: [id] },
+    },
+  )
+  const onStockPriceSubscriptionSuccess = (): JSX.Element => {
     if (loading) {
       return <AdaptiveLoader size={50} speed={1.4} />
     }
@@ -21,27 +41,7 @@ const ApolloStockPriceContainer: React.FunctionComponent<IApolloContainerProps> 
     return <></>
   }
 
-  const shouldResubscribe = (
-    curProps: SubscriptionProps<onStockPriceSubscription, onStockPriceSubscriptionVariables>,
-    nextProps: SubscriptionProps<onStockPriceSubscription, onStockPriceSubscriptionVariables>,
-  ) => {
-    if (curProps.variables && nextProps.variables) {
-      if (curProps.variables.markets[0] !== nextProps.variables.markets[0]) {
-        return true
-      }
-    }
-    return false
-  }
-
-  return (
-    <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
-      subscription={StockPriceSubscription}
-      variables={{ markets: [id] }}
-      shouldResubscribe={shouldResubscribe}
-    >
-      {onStockPriceSubscriptionSuccess}
-    </Subscription>
-  )
+  return <>{onStockPriceSubscriptionSuccess()}</>
 }
 
 export default ApolloStockPriceContainer
