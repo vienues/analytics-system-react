@@ -35,3 +35,8 @@ spec:
             backend:
               serviceName: analytics-server
               servicePort: 4000
+
+          - path: /iexsandbox
+            backend:
+              serviceName: analytics-server
+              servicePort: 4000

@@ -49,6 +49,14 @@ async function bootstrap() {
   )
 
   server.use(
+    '/iexsandbox',
+    bodyParser.json(),
+    (req, res) => {
+      res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
+    }
+  )
+
+  server.use(
     '/graphql',
     bodyParser.json(),
     graphqlExpress({
@@ -56,6 +64,10 @@ async function bootstrap() {
       schema,
     }),
   )
+
+  server.get('/iexsandbox', (req, res) => {
+    res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
+  })
 
   server.get('/healthz', (req, res) => {
     res.status(200).send('tiptop')

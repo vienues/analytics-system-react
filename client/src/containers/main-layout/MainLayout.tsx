@@ -21,7 +21,7 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
       return (
         <ScrollableArea>
           <MainContent>
-            <span>{errorMessage || 'Something went wrong.'}</span>
+            <span>{errorMessage}</span>
           </MainContent>
         </ScrollableArea>
       )
@@ -33,7 +33,7 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
     return Object.keys(RouterHelpers.MainRouterItems).map(route => (
       <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
     ))
-  }, [])
+  }, [id, market])
 
   return (
     <>

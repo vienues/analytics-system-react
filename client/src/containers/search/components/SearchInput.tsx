@@ -1,10 +1,7 @@
-import Downshift, { DownshiftInterface, GetItemPropsOptions } from 'downshift'
+import Downshift, { GetItemPropsOptions } from 'downshift'
 import React from 'react'
 import { search_symbols as SearchResult } from '../../../__generated__/types'
 import { styled } from '../../../rt-theme'
-
-const TypedDownshift: DownshiftInterface<SearchResult> = Downshift
-
 interface ISearchBarProps {
   items: SearchResult[]
   initialItem: SearchResult | null
@@ -14,15 +11,11 @@ interface ISearchBarProps {
 }
 
 class SearchInput extends React.Component<ISearchBarProps, {}> {
-  constructor(props: ISearchBarProps) {
-    super(props)
-  }
-
   public searchResultToOptionString = (item: SearchResult | null): string => (item ? `${item.id} - ${item.name}` : '')
 
   public render() {
     return (
-      <TypedDownshift
+      <Downshift
         selectedItem={this.props.initialItem}
         onChange={this.props.onChange}
         itemToString={this.searchResultToOptionString}
@@ -46,7 +39,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
             </SearchWrapper>
           )
         }}
-      </TypedDownshift>
+      </Downshift>
     )
   }
 
@@ -90,6 +83,9 @@ const SearchWrapper = styled.div`
   position: relative;
   & svg {
     color: ${({ theme }) => theme.core.lightBackground};
+  }
+  > input {
+    color: ${({ theme }) => theme.core.textColor};
   }
 `
 

@@ -5,6 +5,7 @@ import React, { ReactNode } from 'react'
 import { Query, QueryProps, QueryResult } from 'react-apollo'
 import styled from 'styled-components'
 import AdaptiveLoader from '../common/AdaptiveLoader'
+import { AppQueryForcePoller } from './AppQueryForceRetry'
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 
@@ -27,6 +28,14 @@ const LoadableStyle = styled.div<{ minWidth?: string; minHeight?: string }>`
   fill: ${({ theme }) => theme.core.textColor};
 `
 
+export const AppQueryDefaultLoadingIndicator: React.FunctionComponent<{ renderLoadingHeight?: string }> = React.memo(
+  ({ renderLoadingHeight }) => (
+    <LoadableStyle minHeight={renderLoadingHeight}>
+      <AdaptiveLoader size={50} speed={1.4} />
+    </LoadableStyle>
+  ),
+)
+
 interface IAppQueryProps<Data, Variables> {
   children: (data: Data, result: QueryResult<Data, Variables>) => ReactNode
   renderNetworkStatus?: (networkStatus: NetworkStatus, result: QueryResult<Data, Variables>) => ReactNode
@@ -40,21 +49,18 @@ export class AppQuery<Data, Variables> extends React.Component<
 > {
   constructor(props: OmitChildren<QueryProps<Data, Variables>> & IAppQueryProps<Data, Variables>) {
     super(props)
+
     this.onQueryResults = this.onQueryResults.bind(this)
-    this.defaultRenderNetworkStatus = this.defaultRenderNetworkStatus.bind(this)
   }
+
   public defaultRenderNetworkStatus = (networkStatus: NetworkStatus, _: QueryResult<Data, Variables>) => {
     if (networkStatus === NetworkStatus.loading) {
-      return (
-        <LoadableStyle minHeight={this.props.renderLoadingHeight}>
-          <AdaptiveLoader size={50} speed={1.4} />
-        </LoadableStyle>
-      )
+      return <AppQueryDefaultLoadingIndicator renderLoadingHeight={this.props.renderLoadingHeight} />
     }
     return null
   }
   public defaultRenderError = (_: Error, result: QueryResult<Data, Variables>) => {
-    if (!result.data) {
+    if (!result.data || Object.entries(result.data).length === 0) {
       return (
         <span>
           Something went wrong
@@ -67,9 +73,18 @@ export class AppQuery<Data, Variables> extends React.Component<
   public defaultRenderNoData = (_: QueryResult<Data, Variables>) => {
     return <div>No data</div>
   }
+
   public render() {
-    const { ...queryProps } = this.props
-    return <Query<Data, Variables> {...queryProps}>{this.onQueryResults}</Query>
+    const { renderLoadingHeight, ...queryProps } = this.props
+    // https://github.com/apollographql/apollo-client/issues/3090#issuecomment-390057662
+    // @ts-ignore
+    return <Query<Data, Variables> {...queryProps}>
+      {(result: QueryResult<Data, Variables>) => (
+        <AppQueryForcePoller result={result} renderLoadingHeight={renderLoadingHeight}>
+          {this.onQueryResults(result)}
+        </AppQueryForcePoller>
+      )}
+    </Query>
   }
 
   private onQueryResults = (result: QueryResult<Data, Variables>) => {
@@ -82,7 +97,7 @@ export class AppQuery<Data, Variables> extends React.Component<
     if (errorNode) {
       return errorNode
     }
-    const noDataNode = !result.data ? (renderNoData || this.defaultRenderNoData)(result) : undefined
+    const noDataNode = !result.data || Object.entries(result.data).length === 0 ? (renderNoData || this.defaultRenderNoData)(result) : undefined
     if (noDataNode) {
       return noDataNode
     }
