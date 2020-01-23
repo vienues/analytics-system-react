@@ -5,14 +5,12 @@ import { _Window } from 'openfin/_v2/api/window/window'
 import React, { CSSProperties, useEffect, useState } from 'react'
 import { styled } from '../rt-theme'
 
-const fin = (window as any).fin
-
 interface IProps {
   styles?: CSSProperties
 }
 
 const OpenfinWindowControls: React.FunctionComponent<IProps> = ({ styles }) => {
-  const [window, setWindow] = useState<_Window | undefined>()
+  const [window, setWindow] = useState<fin.OpenFinWindow | undefined>()
   const [maximized, setMaximized] = useState(false)
   useEffect(() => {
     const getWindow = async () => {
