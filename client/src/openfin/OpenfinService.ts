@@ -25,6 +25,15 @@ export class OpenfinContainer extends IContainerService {
     }
   }
 
+  public navigateParent(symbol: string) {
+    const parent = fin.desktop.Window.getCurrent().getParentWindow()
+    parent.navigate(`http://localhost:3000/stock/${symbol}`)
+  }
+
+  public addContextListener(callback: (context: Context) => void) {
+    this.fdc3.addContextListener(callback)
+  }
+
   public broadcast(context: Context) {
     this.fdc3.broadcast(context)
   }
