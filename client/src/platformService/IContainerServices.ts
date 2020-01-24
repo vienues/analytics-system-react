@@ -1,6 +1,5 @@
 import { Context } from 'openfin-fdc3'
 import { IWindowConfig } from 'openfin/OpenfinService'
-import { _Window } from 'openfin/_v2/api/window/window'
 import { Container } from 'unstated'
 
 type WindowIdentity = { name?: string }

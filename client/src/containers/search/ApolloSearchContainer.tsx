@@ -102,21 +102,20 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
             } else {
               throw new Error('Returned symbol does not match requested symbol.')
             }
-            return Promise.resolve();
+            return Promise.resolve()
           } else {
             return AppQueryForceRefetcher(
               result,
-              () => dispatch({type: SearchContextActionTypes.AttemptRefetchSymbol}),
-              true
-            )
-              .then((refetcher: number) => {
-                refetchTimeout = refetcher;
-                if (refetchTimeout) {
-                  return Promise.resolve();
-                } else {
-                  throw new Error('Symbol not recognized.')
-                }
-              })
+              () => dispatch({ type: SearchContextActionTypes.AttemptRefetchSymbol }),
+              true,
+            ).then((refetcher: number) => {
+              refetchTimeout = refetcher
+              if (refetchTimeout) {
+                return Promise.resolve()
+              } else {
+                throw new Error('Symbol not recognized.')
+              }
+            })
           }
         })
         .catch(ex => {
@@ -141,17 +140,6 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
   const onTextChange = (text: string) => {
     setCurrentText(text)
-  }
-
-  const handleChange = (symbol: search_symbols | null) => {
-    setCurrentSymbol(symbol)
-    if (symbol) {
-      history.push(`/${url}/${symbol.id}`)
-      OpenfinService.NavigateToStock(symbol.id)
-      OpenfinService.broadcastStock(symbol)
-    } else {
-      history.push(`/${url}`)
-    }
   }
 
   const onSearchInputResults = ({ symbols }: SimpleSearchQuery): JSX.Element => {

@@ -1,11 +1,10 @@
 /** The Apollo cache seems to use a deep copy of an object and failed on storing functions.
  *  So we will store a globally accessible instance of Openfin.
  */
-import { _Window } from 'openfin/_v2/api/window/window'
 import { Context } from 'openfin-fdc3'
 import { FDC3Provider } from 'containers/fdc3/fdc3-providerType'
 import { IContainerService } from 'platformService/IContainerServices'
-import { assert } from 'console'
+import { assertIsDefined } from 'helpers/assertIsDefined'
 
 export interface IWindowConfig {
   name: string
@@ -19,7 +18,7 @@ export class OpenfinContainer extends IContainerService {
 
   constructor(fdc3Provider: FDC3Provider) {
     super()
-    assert(typeof fin !== 'undefined')
+    assertIsDefined(fin)
     this.state = { win: undefined, app: undefined }
     this.fdc3 = fdc3Provider
     this.loadOpenfin()
