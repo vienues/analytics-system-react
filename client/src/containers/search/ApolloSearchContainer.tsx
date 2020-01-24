@@ -3,11 +3,11 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import {
-  CompanyQuery,
-  CompanyQueryVariables,
   MarketSegment,
   search as SimpleSearchQuery,
   search_symbols,
+  searchQuery,
+  searchQueryVariables,
   searchVariables,
 } from '../../__generated__/types'
 import apolloClient from '../../apollo/client'
@@ -52,7 +52,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         })
       }
       if (symbol) {
-        history.push(`/${url}/${symbol.id}`)
+        history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
         OpenfinService.NavigateToStock(symbol.id)
       } else {
         history.push(`/${url}`)
@@ -76,15 +76,15 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     if (searching && dispatch && instrumentId) {
       let foundSymbol: search_symbols | undefined
       apolloClient
-        .query<CompanyQuery, CompanyQueryVariables>({
+        .query<searchQuery, searchQueryVariables>({
           errorPolicy: 'all',
           query: SearchbarConnection,
-          variables: { id: instrumentId.toUpperCase() },
+          variables: { id: instrumentId.toUpperCase(), market: market.toUpperCase() },
         })
         .then((result: any) => {
+          console.log('result...', result)
           if (result.data && result.data.stock) {
             foundSymbol = {
-              __typename: 'SearchResult',
               id: result.data.stock.id,
               name: result.data.stock.company.name,
             } as search_symbols
@@ -100,25 +100,23 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
             } else {
               throw new Error('Returned symbol does not match requested symbol.')
             }
-            return Promise.resolve();
+            return Promise.resolve()
           } else {
             return AppQueryForceRefetcher(
               result,
-              () => dispatch({type: SearchContextActionTypes.AttemptRefetchSymbol}),
-              true
-            )
-              .then((refetcher: number) => {
-                refetchTimeout = refetcher;
-                if (refetchTimeout) {
-                  return Promise.resolve();
-                } else {
-                  throw new Error('Symbol not recognized.')
-                }
-              })
+              () => dispatch({ type: SearchContextActionTypes.AttemptRefetchSymbol }),
+              true,
+            ).then((refetcher: number) => {
+              refetchTimeout = refetcher
+              if (refetchTimeout) {
+                return Promise.resolve()
+              } else {
+                throw new Error('Symbol not recognized.')
+              }
+            })
           }
         })
         .catch(ex => {
-          console.error(ex)
           dispatch({
             type: SearchContextActionTypes.UnrecognizedSymbol,
             payload: {
@@ -141,14 +139,26 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     setCurrentText(text)
   }
 
-  const onSearchInputResults = ({ symbols }: SimpleSearchQuery): JSX.Element => {
+  const onSearchInputResults = (
+    stockSearch: SimpleSearchQuery | null,
+    fxSearch?: SimpleSearchQuery | null,
+  ): JSX.Element => {
     if (!(currentSymbol && currentSymbol.id) && id && searching) {
       return <AdaptiveLoader size={50} speed={1.4} />
     }
+
+    const stockSymbols = stockSearch ? stockSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.STOCK })) : []
+    const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.CURRENCY })) : []
+    const symbols = stockSymbols
+      .concat(fxSymbols)
+      .sort((a, b) => (a.id < b.id ? -1 : 1))
+      .slice(0, 9)
+
     return (
       <SearchInput
         initialItem={currentSymbol ? currentSymbol : null}
         items={symbols}
+        maxItems={8}
         onChange={handleChange}
         onTextChange={onTextChange}
         placeholder={placeholderTest[market.toLowerCase()]}
@@ -159,9 +169,19 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   return (
     <AppQuery<SimpleSearchQuery, searchVariables>
       query={SimpleSearchConnection}
-      variables={{ text: currentText, marketSegment: market.toUpperCase() as MarketSegment }}
+      variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.STOCK }}
     >
-      {onSearchInputResults}
+      {(stockSearch: SimpleSearchQuery) => {
+        return (
+          <AppQuery<SimpleSearchQuery, searchVariables>
+            query={SimpleSearchConnection}
+            variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.CURRENCY }}
+            renderNoData={() => onSearchInputResults(stockSearch)}
+          >
+            {(fxSearch: SimpleSearchQuery) => onSearchInputResults(stockSearch, fxSearch)}
+          </AppQuery>
+        )
+      }}
     </AppQuery>
   )
 }

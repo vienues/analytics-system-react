@@ -328,6 +328,7 @@ export interface search_symbols {
   __typename: 'SearchResult'
   id: string
   name: string
+  marketSegment?: MarketSegment
 }
 
 export interface search {
