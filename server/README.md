@@ -4,11 +4,11 @@ Reactive Analytics server is a strongly typed NodeJS application that showcases 
 
 ## Installation
 
-Reactive Analytics server has package dependencies on the parent repository that gets injected using Lerna. From the root directory run `yarn install && yarn bootstrap` to install all dependencies.
+Reactive Analytics server has package dependencies on the parent repository that gets injected using Lerna. From the root directory run `npm install && npm run bootstrap` to install all dependencies.
 
 ```sh
-  [ReactiveAnalytics] $ yarn install
-  [ReactiveAnalytics] $ yarn bootstrap
+  [ReactiveAnalytics] $ npm install
+  [ReactiveAnalytics] $ npm run bootstrap
 ```
 
 ## Working with the server

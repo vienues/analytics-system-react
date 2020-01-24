@@ -13,10 +13,10 @@
     "pretty-quick": "^2.0.1"
   },
   "scripts": {
-    "start": "yarn run bootstrap && lerna run --parallel start -- --port 8080",
-    "offline-start": "set INSIGHTS_OFFLINE=true && yarn run start",
+    "start": "npm run bootstrap && lerna run --parallel start -- --port 8080",
+    "offline-start": "set INSIGHTS_OFFLINE=true && npm run start",
     "bootstrap": "lerna bootstrap",
-    "clean": "yarn && lerna clean --yes",
+    "clean": "npm install && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
@@ -25,7 +25,7 @@
     "generate-server-schema": "node ./server/src/generateSchema.js",
     "generate-client-schema": "./client/node_modules/.bin/apollo client:download-schema ./client/src/schema.json",
     "generate-client-typings": "./client/node_modules/.bin/apollo client:codegen ./client/src/__generated__/types.ts --outputFlat --includes ./client/src/**/*.graphql --addTypename --localSchemaFile=./client/src/schema.json --target=typescript",
-    "generate-schema-and-typings": "yarn generate-server-schema && yarn generate-client-schema && yarn run generate-client-typings"
+    "generate-schema-and-typings": "npm generate-server-schema && npm generate-client-schema && npm run generate-client-typings"
   },
   "author": "",
   "license": "ISC",
