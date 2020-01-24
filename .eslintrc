@@ -1,6 +1,3 @@
 {
-  "extends": "react-app",
-  "globals": {
-    "fin": "readonly"
-  }
+  "extends": "react-app"
 }
