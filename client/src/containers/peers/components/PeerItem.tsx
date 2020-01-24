@@ -3,8 +3,6 @@ import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Link } from '../../../common/StyledComponents'
 import OpenfinService from '../../../openfin/OpenfinService'
 
-const fin = (window as any).fin
-
 const PeerItem: React.FunctionComponent<RouteComponentProps & { symbol: string }> = ({ symbol, history }) => {
   const navClickHandler = async (e: any) => {
     const newSymbol = e.currentTarget.dataset.symbol
@@ -17,8 +15,8 @@ const PeerItem: React.FunctionComponent<RouteComponentProps & { symbol: string }
         OpenfinService.NavigateToStock(newSymbol)
       } else {
         // child window, tell parent to navigate
-        const parent = await fin.desktop.Window.getParentWindow()
-        parent.location.href = `http://localhost:3000/stock/${newSymbol}`
+        const parent = await fin.desktop.Window.getCurrent().getParentWindow()
+        parent.navigate(`http://localhost:3000/stock/${newSymbol}`)
       }
     } else {
       history.push(`/stock/${newSymbol}`)

@@ -6,8 +6,6 @@ import { Application } from 'openfin/_v2/main'
 import React from 'react'
 import { Container, Provider, Subscribe } from 'unstated'
 
-const fin = (window as any).fin
-
 interface IOpinfinState {
   openfin?: {
     app: Application
@@ -21,7 +19,7 @@ interface IWindowConfig {
 }
 
 export class OpenfinContainer extends Container<IOpinfinState> {
-  private readonly windows: Map<string, _Window> = new Map()
+  private readonly windows: Map<string, fin.OpenFinWindow> = new Map()
 
   constructor() {
     super()
@@ -62,7 +60,7 @@ export class OpenfinContainer extends Container<IOpinfinState> {
     )
   }
 
-  public getWindowHandle(name: string): _Window | undefined {
+  public getWindowHandle(name: string): fin.OpenFinWindow | undefined {
     return this.windows.get(name)
   }
 
