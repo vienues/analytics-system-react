@@ -1,7 +1,6 @@
 import { faWindowMaximize, faWindowRestore } from '@fortawesome/free-regular-svg-icons'
 import { faMinus, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { _Window } from 'openfin/_v2/api/window/window'
 import React, { CSSProperties, useEffect, useState } from 'react'
 import { styled } from '../rt-theme'
 
