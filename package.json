@@ -4,19 +4,28 @@
   "description": "",
   "main": "index.js",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.17.0",
+    "@typescript-eslint/parser": "^2.17.0",
+    "babel-eslint": "^10.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
     "eslint-config-react-app": "^5.1.0",
+    "eslint-plugin-flowtype": "^4.6.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "husky": "^4.0.9",
     "lerna": "^3.20.2",
     "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1"
+    "pretty-quick": "^2.0.1",
+    "typescript": "3.4.3"
   },
   "scripts": {
-    "start": "yarn run bootstrap && lerna run --parallel start -- --port 8080",
-    "offline-start": "set INSIGHTS_OFFLINE=true && yarn run start",
+    "start": "npm run bootstrap && lerna run --parallel start -- --port 8080",
+    "offline-start": "set INSIGHTS_OFFLINE=true && npm run start",
     "bootstrap": "lerna bootstrap",
-    "clean": "yarn && lerna clean --yes",
+    "clean": "npm install && lerna clean --yes",
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
@@ -25,7 +34,7 @@
     "generate-server-schema": "node ./server/src/generateSchema.js",
     "generate-client-schema": "./client/node_modules/.bin/apollo client:download-schema ./client/src/schema.json",
     "generate-client-typings": "./client/node_modules/.bin/apollo client:codegen ./client/src/__generated__/types.ts --outputFlat --includes ./client/src/**/*.graphql --addTypename --localSchemaFile=./client/src/schema.json --target=typescript",
-    "generate-schema-and-typings": "yarn generate-server-schema && yarn generate-client-schema && yarn run generate-client-typings"
+    "generate-schema-and-typings": "npm generate-server-schema && npm generate-client-schema && npm run generate-client-typings"
   },
   "author": "",
   "license": "ISC",
