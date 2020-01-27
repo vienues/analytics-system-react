@@ -14,9 +14,10 @@ interface IStockPriceProps {
   symbol?: string
   fontSize?: number
   stockPrice: IStockPriceData | null
+  hideChange?: Boolean
 }
 
-const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSize, stockPrice }) => {
+const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSize, stockPrice, hideChange }) => {
   if (stockPrice === null) {
     return <div>N/A</div>
   }
@@ -41,7 +42,7 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSiz
     <StockPriceWrapper size={fontSize}>
       <Text>{symbol}</Text>
       <Text>${fixedFormat(latestPrice)}</Text>
-      <StockPriceChangeWrapper fontColor={color}>
+      <StockPriceChangeWrapper isHidden={hideChange} fontColor={color}>
         <FontAwesomeIcon icon={Icon} />
         <Text>{fixedFormat(change)}</Text>
         <Text>|</Text>
@@ -63,10 +64,11 @@ const StockPriceWrapper = styled(VerticalDataContents)<IStockPriceWrapperAttrs>`
 
 interface IStockPriceChangeWrapperAttrs {
   fontColor: string
+  isHidden: Boolean | undefined
 }
 
 const StockPriceChangeWrapper = styled.div<IStockPriceChangeWrapperAttrs>`
-  display: grid;
+  display: ${({ isHidden }) => (isHidden ? 'none' : 'grid')};
   grid-gap: 0.25em;
   grid-auto-flow: column;
   margin-left: 0.5rem;

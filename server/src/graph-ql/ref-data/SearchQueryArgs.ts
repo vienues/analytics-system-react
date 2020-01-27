@@ -2,7 +2,7 @@ import { ArgsType, Field, Int, registerEnumType } from 'type-graphql'
 import { IdInputArgs } from '../GenericArgTypes'
 
 export enum MarketSegments {
-  CURRENCY = 'currency',
+  FX = 'fx',
   STOCK = 'stock',
   INDEX = 'index',
   FUTURE = 'future',

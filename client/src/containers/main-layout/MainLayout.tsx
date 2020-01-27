@@ -40,7 +40,7 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
       <div style={{ padding: '0rem 1rem' }}>
         <MainSearchContent>
           <Search id={id} url={market} market={market} />
-          <StockPrice id={id} />
+          <StockPrice id={id} market={market} />
         </MainSearchContent>
       </div>
       {renderedErrorMessage || renderedRoutes}

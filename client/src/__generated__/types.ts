@@ -563,7 +563,7 @@ export interface Stats {
 export enum MarketSegment {
   BOND = 'BOND',
   CRYPTO = 'CRYPTO',
-  CURRENCY = 'CURRENCY',
+  FX = 'FX',
   FUTURE = 'FUTURE',
   INDEX = 'INDEX',
   STOCK = 'STOCK',

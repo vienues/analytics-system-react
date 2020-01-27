@@ -35,11 +35,11 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
   const currencyPairContext = useContext(Fdc3Context)
 
-  const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === 'CURRENCY'
+  const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === MarketSegment.FX
   const instrumentId = hasCurrencyPairContext ? currencyPairContext.name : id
   const placeholderTest = {
     crypto: 'Enter a crypto currency or ticket symbol...',
-    currency: 'Enter a currency pair...',
+    fx: 'Enter a currency pair...',
     stock: 'Enter a stock or symbol...',
   }
 
@@ -148,7 +148,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     }
 
     const stockSymbols = stockSearch ? stockSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.STOCK })) : []
-    const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.CURRENCY })) : []
+    const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.FX })) : []
     const symbols = stockSymbols
       .concat(fxSymbols)
       .sort((a, b) => {
@@ -186,7 +186,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         return (
           <AppQuery<SimpleSearchQuery, searchVariables>
             query={SimpleSearchConnection}
-            variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.CURRENCY }}
+            variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.FX }}
             renderNoData={() => onSearchInputResults(stockSearch)}
           >
             {(fxSearch: SimpleSearchQuery) => onSearchInputResults(stockSearch, fxSearch)}

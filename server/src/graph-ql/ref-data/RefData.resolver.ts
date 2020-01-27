@@ -23,7 +23,7 @@ export default class RefData {
       case MarketSegments.CRYPTO: {
         return this.cryptoService.getSymbol(id)
       }
-      case MarketSegments.CURRENCY: {
+      case MarketSegments.FX: {
         return this.fxService.getSymbol(id)
       }
       default: {
@@ -41,7 +41,7 @@ export default class RefData {
       case MarketSegments.CRYPTO: {
         return this.cryptoService.getSymbols(text)
       }
-      case MarketSegments.CURRENCY: {
+      case MarketSegments.FX: {
         return this.fxService.getSymbols(text)
       }
       default: {
