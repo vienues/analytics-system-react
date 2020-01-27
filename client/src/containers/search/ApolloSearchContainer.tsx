@@ -16,8 +16,8 @@ import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
+import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
-import SearchbarConnection from './graphql/SearchbarConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
@@ -78,17 +78,17 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       apolloClient
         .query<searchQuery, searchQueryVariables>({
           errorPolicy: 'all',
-          query: SearchbarConnection,
+          query: SearchConnection,
           variables: { id: instrumentId.toUpperCase(), market: market.toUpperCase() },
         })
         .then((result: any) => {
           console.log('result...', result)
-          if (result.data && result.data.stock) {
+          if (result.data && result.data.symbol) {
             foundSymbol = {
-              id: result.data.stock.id,
-              name: result.data.stock.company.name,
+              id: result.data.symbol.id,
+              name: result.data.symbol.name,
             } as search_symbols
-            if (result.data.stock.id === instrumentId.toUpperCase()) {
+            if (foundSymbol.id === instrumentId.toUpperCase()) {
               dispatch({
                 type: SearchContextActionTypes.FoundSymbol,
                 payload: { currentSymbol: foundSymbol },
@@ -97,10 +97,10 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
                 history.replace(`/${url}/${result.data.stock.id}`)
                 OpenfinService.NavigateToStock(result.data.stock.id)
               }
+              return Promise.resolve()
             } else {
               throw new Error('Returned symbol does not match requested symbol.')
             }
-            return Promise.resolve()
           } else {
             return AppQueryForceRefetcher(
               result,
@@ -117,6 +117,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
           }
         })
         .catch(ex => {
+          console.error(ex)
           dispatch({
             type: SearchContextActionTypes.UnrecognizedSymbol,
             payload: {
@@ -151,7 +152,18 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.CURRENCY })) : []
     const symbols = stockSymbols
       .concat(fxSymbols)
-      .sort((a, b) => (a.id < b.id ? -1 : 1))
+      .sort((a, b) => {
+        switch (true) {
+          case a.id === currentText.toUpperCase():
+            return -1
+          case b.id === currentText.toUpperCase():
+            return 1
+          case a.id < b.id:
+            return -1
+          default:
+            return 1
+        }
+      })
       .slice(0, 9)
 
     return (
