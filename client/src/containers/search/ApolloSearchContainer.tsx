@@ -82,7 +82,6 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
           variables: { id: instrumentId.toUpperCase(), market: market.toUpperCase() },
         })
         .then((result: any) => {
-          console.log('result...', result)
           if (result.data && result.data.symbol) {
             foundSymbol = {
               id: result.data.symbol.id,
