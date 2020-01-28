@@ -1,4 +1,3 @@
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -29,7 +28,6 @@ export interface CompanyQueryVariables {
   id: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -55,7 +53,6 @@ export interface ABMHistoryQueryVariables {
   to: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -105,7 +102,6 @@ export interface HistoryQueryVariables {
   id: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -132,7 +128,6 @@ export interface IntradayQueryVariables {
   symbol: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -159,7 +154,6 @@ export interface onIntradayPricingSubscriptionVariables {
   symbol: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -200,7 +194,6 @@ export interface StockHistoryQueryVariables {
   id: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -221,7 +214,6 @@ export interface MarketQuery {
   markets: MarketQuery_markets[]
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -245,7 +237,6 @@ export interface onMarketSubscriptionVariables {
   markets: string[]
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -272,7 +263,6 @@ export interface NewsQueryVariables {
   id: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -294,7 +284,6 @@ export interface PeersQueryVariables {
   id: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -316,7 +305,6 @@ export interface searchQueryVariables {
   market: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -339,7 +327,6 @@ export interface searchVariables {
   marketSegment: MarketSegment
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -384,7 +371,6 @@ export interface StatsQueryVariables {
   id: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -408,7 +394,6 @@ export interface onStockPriceSubscriptionVariables {
   markets: string[]
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -430,7 +415,6 @@ export interface Company {
   company: Company_company
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -462,7 +446,6 @@ export interface History {
   quote: History_quote
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -481,7 +464,6 @@ export interface Intraday {
   numberOfTrades: number | null
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -499,7 +481,6 @@ export interface News {
   related: string
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -512,7 +493,6 @@ export interface Peers {
   peers: string[]
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
@@ -548,7 +528,6 @@ export interface Stats {
   quote: Stats_quote
 }
 
-/* tslint:disable */
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
