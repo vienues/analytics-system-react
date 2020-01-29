@@ -14,13 +14,14 @@ import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 import SearchbarConnection from './graphql/SearchbarConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
+import { getStockContext } from 'openfin/util'
+import { ContainerService } from 'platformService/ContainerService'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -53,7 +54,8 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       }
       if (symbol) {
         history.push(`/${url}/${symbol.id}`)
-        OpenfinService.NavigateToStock(symbol.id)
+        ContainerService.navigateToStock(symbol.id)
+        ContainerService.broadcast(getStockContext(symbol))
       } else {
         history.push(`/${url}`)
       }
@@ -95,26 +97,25 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
               })
               if (hasCurrencyPairContext) {
                 history.replace(`/${url}/${result.data.stock.id}`)
-                OpenfinService.NavigateToStock(result.data.stock.id)
+                ContainerService.navigateToStock(result.data.stock.id)
               }
             } else {
               throw new Error('Returned symbol does not match requested symbol.')
             }
-            return Promise.resolve();
+            return Promise.resolve()
           } else {
             return AppQueryForceRefetcher(
               result,
-              () => dispatch({type: SearchContextActionTypes.AttemptRefetchSymbol}),
-              true
-            )
-              .then((refetcher: number) => {
-                refetchTimeout = refetcher;
-                if (refetchTimeout) {
-                  return Promise.resolve();
-                } else {
-                  throw new Error('Symbol not recognized.')
-                }
-              })
+              () => dispatch({ type: SearchContextActionTypes.AttemptRefetchSymbol }),
+              true,
+            ).then((refetcher: number) => {
+              refetchTimeout = refetcher
+              if (refetchTimeout) {
+                return Promise.resolve()
+              } else {
+                throw new Error('Symbol not recognized.')
+              }
+            })
           }
         })
         .catch(ex => {
