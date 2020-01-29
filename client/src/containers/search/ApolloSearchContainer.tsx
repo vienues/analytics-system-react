@@ -14,13 +14,14 @@ import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
 import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
+import { getStockContext } from 'openfin/util'
+import { ContainerService } from 'platformService/ContainerService'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -53,7 +54,8 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       }
       if (symbol) {
         history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
-        OpenfinService.NavigateToStock(symbol.id)
+        ContainerService.navigateToStock(symbol.id)
+        ContainerService.broadcast(getStockContext(symbol))
       } else {
         history.push(`/${url}`)
       }
@@ -93,8 +95,8 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
                 payload: { currentSymbol: foundSymbol },
               })
               if (hasCurrencyPairContext) {
-                history.replace(`/${url}/${result.data.stock.id}`)
-                OpenfinService.NavigateToStock(result.data.stock.id)
+                history.replace(`/${url}/${result.data.symbol.id}`)
+                ContainerService.navigateToStock(result.data.symbol.id)
               }
               return Promise.resolve()
             } else {
