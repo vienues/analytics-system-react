@@ -1,27 +1,39 @@
-import React from 'react'
+import React, { MouseEventHandler } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Link } from '../../../common/StyledComponents'
-import OpenfinService from '../../../openfin/OpenfinService'
+import { ContainerService } from 'platformService/ContainerService'
 
-const PeerItem: React.FunctionComponent<RouteComponentProps & { symbol: string }> = ({ symbol, history }) => {
-  const navClickHandler = async (e: any) => {
-    const newSymbol = e.currentTarget.dataset.symbol
-    if (OpenfinService.state && OpenfinService.state.openfin) {
-      const openfin = OpenfinService.state.openfin
-      // we in an openfin app, let's see if we are in a child window
-      if (openfin.win.identity.name === openfin.app.identity.uuid) {
-        // parent window, proceed
-        history.push(`/stock/${newSymbol}`)
-        OpenfinService.NavigateToStock(newSymbol)
-      } else {
-        // child window, tell parent to navigate
-        const parent = await fin.desktop.Window.getCurrent().getParentWindow()
-        parent.navigate(`http://localhost:3000/stock/${newSymbol}`)
+type PeerItemProps = RouteComponentProps & {
+  symbol: string
+}
+
+const PeerItem: React.FunctionComponent<PeerItemProps> = ({ symbol, history }) => {
+  const navClickHandler: MouseEventHandler<HTMLAnchorElement> = async event => {
+    const newSymbol = event.currentTarget.dataset.symbol
+    if (ContainerService.agent === 'desktop' && newSymbol) {
+      const { win, app } = ContainerService.state
+      if (!win || !app) {
+        // This has been clicked whilst the OpenfinService#loadOpenfin is running.
+        // TODO: What should we do in this case?
+        return
       }
-    } else {
-      history.push(`/stock/${newSymbol}`)
+
+      // we are in an desktop app, let's see if we are in a child window
+      if (win.identity.name === app.identity.uuid) {
+        // parent window
+        history.push(`/stock/${newSymbol}`)
+        ContainerService.navigateToStock(newSymbol)
+        return
+      }
+
+      // child window, tell parent to navigate
+      ContainerService.navigateParent(newSymbol)
+      return
     }
+
+    history.push(`/stock/${newSymbol}`)
   }
+
   return (
     <Link onClick={navClickHandler} data-symbol={symbol} key={symbol}>
       {symbol}
