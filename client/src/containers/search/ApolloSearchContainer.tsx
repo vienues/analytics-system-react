@@ -38,11 +38,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
   const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === MarketSegment.FX
   const instrumentId = hasCurrencyPairContext ? currencyPairContext.name : id
-  const placeholderTest = {
-    crypto: 'Enter a crypto currency or ticket symbol...',
-    fx: 'Enter a currency pair...',
-    stock: 'Enter a stock or symbol...',
-  }
+  const placeholderTest = 'Enter a stock, symbol, or currency pair...'
 
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
@@ -174,7 +170,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         maxItems={8}
         onChange={handleChange}
         onTextChange={onTextChange}
-        placeholder={placeholderTest[market.toLowerCase()]}
+        placeholder={placeholderTest}
       />
     )
   }
