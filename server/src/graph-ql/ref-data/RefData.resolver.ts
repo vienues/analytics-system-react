@@ -1,6 +1,5 @@
-import { Arg, Args, Ctx, Query, Resolver } from 'type-graphql'
+import { Arg, Args, Query, Resolver } from 'type-graphql'
 import search from '../../services/searchIndex'
-import { IAdaptiveCtx, IIexNewsQuery } from '../../types'
 import { CryptoService } from '../crypto'
 import { FxService } from '../fx'
 import { default as SearchResultSchema } from '../stock/SearchResult.schema'
@@ -16,18 +15,15 @@ export default class RefData {
 
   @Query(returns => SearchResultSchema)
   public async symbol(@Arg('id') id: string, @Arg('market') market: MarketSegments) {
-    switch (market) {
-      case MarketSegments.STOCK:
-        {
-          return search(id)[0]
-        }
-        break
-      case MarketSegments.CRYPTO:
-        {
-          return this.cryptoService.getSymbol(id)
-        }
-        break
-      case MarketSegments.CURRENCY: {
+    switch (market.toLowerCase()) {
+      case MarketSegments.STOCK: {
+        const results = search(id)
+        return results.find(s => s.id == id) || results[0]
+      }
+      case MarketSegments.CRYPTO: {
+        return this.cryptoService.getSymbol(id)
+      }
+      case MarketSegments.FX: {
         return this.fxService.getSymbol(id)
       }
       default: {
@@ -38,18 +34,14 @@ export default class RefData {
 
   @Query(retuns => [SearchResultSchema])
   public async symbols(@Args() { text, marketSegment }: SearchQueryArgs) {
-    switch (marketSegment) {
-      case MarketSegments.STOCK:
-        {
-          return search(text)
-        }
-        break
-      case MarketSegments.CRYPTO:
-        {
-          return this.cryptoService.getSymbols(text)
-        }
-        break
-      case MarketSegments.CURRENCY: {
+    switch (marketSegment.toLowerCase()) {
+      case MarketSegments.STOCK: {
+        return search(text)
+      }
+      case MarketSegments.CRYPTO: {
+        return this.cryptoService.getSymbols(text)
+      }
+      case MarketSegments.FX: {
         return this.fxService.getSymbols(text)
       }
       default: {

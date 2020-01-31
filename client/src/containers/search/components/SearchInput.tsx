@@ -5,6 +5,7 @@ import { styled } from '../../../rt-theme'
 interface ISearchBarProps {
   items: SearchResult[]
   initialItem: SearchResult | null
+  maxItems?: number
   onChange: (symbol: SearchResult | null) => void
   onTextChange: (text: string) => void
   placeholder: string
@@ -31,11 +32,7 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
                 autoFocus={true}
                 spellCheck={false}
               />
-              {isOpen ? (
-                <SearchResults {...getMenuProps()}>
-                  {this.renderItems(this.props.items, inputValue, getItemProps)}
-                </SearchResults>
-              ) : null}
+              {isOpen ? <SearchResults {...getMenuProps()}>{this.renderItems(getItemProps)}</SearchResults> : null}
             </SearchWrapper>
           )
         }}
@@ -43,32 +40,20 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
     )
   }
 
-  private renderItems(
-    itemsList: SearchResult[],
-    inputValue: string | null,
-    getItemProps: (options: GetItemPropsOptions<SearchResult>) => any,
-  ) {
-    const matchInput = (input: string) => new RegExp('^' + input.toUpperCase())
-    const filteredData = itemsList.filter(
-      input =>
-        !inputValue ||
-        input.id.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1 ||
-        input.name.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1,
-    )
-
-    const sortDataByRelevance = filteredData.sort((a, b) => {
-      const aStart = (inputValue && a.id.match(matchInput(inputValue))) || []
-      const bStart = (inputValue && b.id.match(matchInput(inputValue))) || []
-
-      if (aStart.length !== bStart.length) return bStart.length - aStart.length
-      return a.id.localeCompare(b.id)
-    })
-
-    if (itemsList.length === 0) {
+  private renderItems(getItemProps: (options: GetItemPropsOptions<SearchResult>) => any) {
+    const { items, maxItems } = this.props
+    if (items.length === 0) {
       return <SearchResultNoItem>No results found...</SearchResultNoItem>
     }
-    return sortDataByRelevance.map((item, index) => (
+    let sliceTo = (maxItems || items.length) + 1
+    return items.slice(0, sliceTo).map((item, index) => (
       <SearchResultItem key={item.id} {...getItemProps({ index, item })}>
+        {item.marketSegment && (
+          <>
+            <small>{item.marketSegment}</small>
+            <small>/</small>
+          </>
+        )}
         {item.id.toUpperCase()} - {item.name}
       </SearchResultItem>
     ))
@@ -111,6 +96,11 @@ const SearchResultNoItem = styled(SearchResultItemBase)`
 
 const SearchResultItem = styled(SearchResultItemBase)`
   padding: 5px;
+  > small {
+    display: inline-block;
+    font-size: 0.5em;
+    padding-right: 5px;
+  }
   &[aria-selected='true'] {
     color: ${({ theme }) => theme.primary.base};
     background: ${({ theme }) => theme.secondary.base};

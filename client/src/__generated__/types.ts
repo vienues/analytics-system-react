@@ -316,6 +316,7 @@ export interface search_symbols {
   __typename: 'SearchResult'
   id: string
   name: string
+  marketSegment?: MarketSegment
 }
 
 export interface search {
@@ -541,7 +542,7 @@ export interface Stats {
 export enum MarketSegment {
   BOND = 'BOND',
   CRYPTO = 'CRYPTO',
-  CURRENCY = 'CURRENCY',
+  FX = 'FX',
   FUTURE = 'FUTURE',
   INDEX = 'INDEX',
   STOCK = 'STOCK',
