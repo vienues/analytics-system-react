@@ -14,7 +14,7 @@ export interface INewsArticle {
 
 const NewsItem: React.FunctionComponent<INewsArticle> = ({ id, url, headline, datetime, source }) => (
   <>
-    <Link style={{ cursor: 'pointer' }}>
+    <Link style={{ cursor: 'pointer' }} target="_blank" href={url}>
       <div style={{ marginBottom: '1rem' }}>{headline}</div>
       <NewsCaption>
         {moment(datetime).fromNow()} - {source}
