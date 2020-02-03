@@ -33,14 +33,14 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
     return Object.keys(RouterHelpers.MainRouterItems).map(route => (
       <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
     ))
-  }, [id, market])
+  }, [])
 
   return (
     <>
       <div style={{ padding: '0rem 1rem' }}>
         <MainSearchContent>
           <Search id={id} url={market} market={market} />
-          <StockPrice id={id} />
+          <StockPrice id={id} market={market} />
         </MainSearchContent>
       </div>
       {renderedErrorMessage || renderedRoutes}

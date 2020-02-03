@@ -1584,7 +1584,7 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "CURRENCY",
+            "name": "FX",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null

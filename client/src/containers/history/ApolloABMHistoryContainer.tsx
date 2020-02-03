@@ -1,6 +1,6 @@
+import { useSubscription } from '@apollo/react-hooks'
 import React from 'react'
-import { Subscription, SubscriptionResult } from 'react-apollo'
-import { Line, LineChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts'
+import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts'
 import {
   ABMHistoryQuery,
   ABMHistoryQueryVariables,
@@ -14,7 +14,26 @@ import StockPriceSubscription from '../stock-price/graphql/StockPriceSubscriptio
 import ABMHistoryConnection from './graphql/ABMHistoryConnection.graphql'
 
 export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
+
+  const { loading, data } = useSubscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>(
+    StockPriceSubscription,
+    {
+      shouldResubscribe: true,
+      variables: { markets: [id] },
+    },
+  )
+
   const onHistoryQueryResults = ({ getPriceHistory }: ABMHistoryQuery): JSX.Element => {
+    if (!loading && data && data.getQuotes.latestPrice) {
+      getPriceHistory.push({
+        __typename: 'FxPricing',
+        ask: 0,
+        bid: 0,
+        creationTimestamp: '',
+        mid: data.getQuotes.latestPrice,
+        valueDate: '',
+      })
+    }
     // const yAxisRange = getPriceHistory.reduce(
     //   (acc, val) => {
     //     if (val.ask > acc.max) {
@@ -26,37 +45,39 @@ export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainer
     //   },
     //   { min: Infinity, max: -Infinity },
     // )
+    const chartData = getPriceHistory.slice(getPriceHistory.length - 100, getPriceHistory.length)
+
     return (
       <>
         <DataCard cardType="abm" instrument={id} title={`ABM History - ${id}`}>
-          <Subscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>
-            subscription={StockPriceSubscription}
-            shouldResubscribe={true}
-            variables={{ markets: [id] }}
-          >
-            {({ data, loading }: SubscriptionResult<onStockPriceSubscription>) => {
-              if (!loading && data && data.getQuotes.latestPrice) {
-                getPriceHistory.push({
-                  __typename: 'FxPricing',
-                  ask: 0,
-                  bid: 0,
-                  creationTimestamp: '',
-                  mid: data.getQuotes.latestPrice,
-                  valueDate: '',
-                })
-              }
-              const chartData = getPriceHistory.slice(getPriceHistory.length - 100, getPriceHistory.length)
-              return (
-                <ResponsiveContainer height={600}>
-                  <LineChart data={chartData}>
-                    <YAxis domain={['dataMin', 'dataMax']} scale="auto" />
-                    <Tooltip />
-                    <Line dot={false} type="monotone" dataKey="mid" stroke="#54606D" />
-                  </LineChart>
-                </ResponsiveContainer>
-              )
-            }}
-          </Subscription>
+          <ResponsiveContainer width="99%" height="99%" minHeight={300}>
+            <AreaChart data={chartData} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#93e4c3" stopOpacity={0.9} />
+                  <stop offset="95%" stopColor="#93e4c300" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <Area
+                type="basisOpen"
+                dataKey="mid"
+                strokeWidth={2}
+                fill="url(#colorUv)"
+                dot={false}
+                isAnimationActive={false}
+                stroke="#93e4c3"
+              />
+              <YAxis
+                type="number"
+                allowDecimals={true}
+                domain={['dataMin', 'dataMax']}
+                tick={{ fontSize: 10 }}
+                orientation="right"
+                scale="auto"
+              />
+              <Tooltip />
+            </AreaChart>
+          </ResponsiveContainer>
         </DataCard>
       </>
     )

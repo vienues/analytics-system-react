@@ -2,11 +2,15 @@
 
 [![CircleCI](https://circleci.com/gh/AdaptiveConsulting/ReactiveAnalytics.svg?style=svg&circle-token=8dfbb24676c7e9d51bc4668cacec12d31104b0f6)](https://circleci.com/gh/AdaptiveConsulting/ReactiveAnalytics)
 
-- [Overview](#overview)
-- [Requirements](#requirements)
-- [Getting started](#getting-started)
-- [Core technologies used](#core-technologies-used)
-- [Useful tips and tricks](#useful-tips-and-tricks)
+- [Reactive Analytics](#reactive-analytics)
+  - [Overview](#overview)
+  - [Requirements](#requirements)
+  - [Getting started](#getting-started)
+    - [Data connection](#data-connection)
+  - [Core technologies used](#core-technologies-used)
+  - [Useful developer add-ons](#useful-developer-add-ons)
+    - [Visual Studio Code extensions from the marketplace](#visual-studio-code-extensions-from-the-marketplace)
+    - [Google Chrome extensions](#google-chrome-extensions)
 
 ## Overview
 
@@ -18,17 +22,16 @@ Both the server-side and client-side code use strong types which are used to gen
 
 - [NodeJS v10](https://nodejs.org/en/download/)
 - [Typescript v3](https://www.npmjs.com/package/typescript)
-- [Yarn](https://yarnpkg.com/en/docs/install)
 
 ## Getting started
 
-After downloading or cloning repos open a terminal to the root folder and run `yarn` to install dependencies.
+After downloading or cloning repos open a terminal to the root folder and run `npm install` to install dependencies.
 
-        [ReactiveAnalytics] $ yarn install
+        [ReactiveAnalytics] $ npm install
 
 Once the dependencies are install start the client and server using the start command.
 
-        [ReactiveAnalytics] $ yarn start
+        [ReactiveAnalytics] $ npm start
 
 This will open up a browser window to [http://localhost:3000](http://localhost:3000) for the client interface, and a GraphQL server on port 4000.
 
@@ -58,13 +61,13 @@ export INSIGHTS_OFFLINE=true
 By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). The data can be updated from the [IEX trading system](https://iexcloud.io/) by running an npm script from the `PROJECT_ROOT/server` directory.
 
 ```console
-cd adaptive-insights/server && yarn generate-mock-data
+cd adaptive-insights/server && npm run generate-mock-data
 ```
 
 An optional parameter can be used to fetch data for more companies by passing in a space delineated list of symbols.
 
 ```console
-yarn generate-mock-data bac ge amd
+npm run generate-mock-data bac ge amd
 ```
 
 ## Core technologies used

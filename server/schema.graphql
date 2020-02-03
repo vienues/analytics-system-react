@@ -81,7 +81,7 @@ scalar ISODateTime
 The type of market
 """
 enum MarketSegment {
-  CURRENCY
+  FX
   STOCK
   INDEX
   FUTURE

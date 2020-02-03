@@ -7,7 +7,7 @@
     "start": "tsc && babel-node lib/index.js",
     "start:prod": "babel-node lib/index.js",
     "start:dev": "nodemon --watch src -e js,json,ts,graphql,gql --exec \"npm run start\"",
-    "demo": "yarn start",
+    "demo": "npm start",
     "test": "mocha --require @babel/register",
     "build": "tsc",
     "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm",

@@ -3,24 +3,25 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
 import {
-  CompanyQuery,
-  CompanyQueryVariables,
   MarketSegment,
   search as SimpleSearchQuery,
   search_symbols,
+  searchQuery,
+  searchQueryVariables,
   searchVariables,
 } from '../../__generated__/types'
 import apolloClient from '../../apollo/client'
 import { AppQuery } from '../../common/AppQuery'
 import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import OpenfinService from '../../openfin/OpenfinService'
 import { SearchInput } from './components'
+import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
-import SearchbarConnection from './graphql/SearchbarConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
+import { getStockContext } from 'openfin/util'
+import { ContainerService } from 'platformService/ContainerService'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -35,13 +36,9 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
   const currencyPairContext = useContext(Fdc3Context)
 
-  const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === 'CURRENCY'
+  const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === MarketSegment.FX
   const instrumentId = hasCurrencyPairContext ? currencyPairContext.name : id
-  const placeholderTest = {
-    crypto: 'Enter a crypto currency or ticket symbol...',
-    currency: 'Enter a currency pair...',
-    stock: 'Enter a stock or symbol...',
-  }
+  const placeholderTest = 'Enter a stock, symbol, or currency pair...'
 
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
@@ -52,8 +49,9 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         })
       }
       if (symbol) {
-        history.push(`/${url}/${symbol.id}`)
-        OpenfinService.NavigateToStock(symbol.id)
+        history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
+        ContainerService.navigateToStock(symbol.id)
+        ContainerService.broadcast(getStockContext(symbol))
       } else {
         history.push(`/${url}`)
       }
@@ -76,45 +74,43 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     if (searching && dispatch && instrumentId) {
       let foundSymbol: search_symbols | undefined
       apolloClient
-        .query<CompanyQuery, CompanyQueryVariables>({
+        .query<searchQuery, searchQueryVariables>({
           errorPolicy: 'all',
-          query: SearchbarConnection,
-          variables: { id: instrumentId.toUpperCase() },
+          query: SearchConnection,
+          variables: { id: instrumentId.toUpperCase(), market: market.toUpperCase() },
         })
         .then((result: any) => {
-          if (result.data && result.data.stock) {
+          if (result.data && result.data.symbol) {
             foundSymbol = {
-              __typename: 'SearchResult',
-              id: result.data.stock.id,
-              name: result.data.stock.company.name,
+              id: result.data.symbol.id,
+              name: result.data.symbol.name,
             } as search_symbols
-            if (result.data.stock.id === instrumentId.toUpperCase()) {
+            if (foundSymbol.id === instrumentId.toUpperCase()) {
               dispatch({
                 type: SearchContextActionTypes.FoundSymbol,
                 payload: { currentSymbol: foundSymbol },
               })
               if (hasCurrencyPairContext) {
-                history.replace(`/${url}/${result.data.stock.id}`)
-                OpenfinService.NavigateToStock(result.data.stock.id)
+                history.replace(`/${url}/${result.data.symbol.id}`)
+                ContainerService.navigateToStock(result.data.symbol.id)
               }
+              return Promise.resolve()
             } else {
               throw new Error('Returned symbol does not match requested symbol.')
             }
-            return Promise.resolve();
           } else {
             return AppQueryForceRefetcher(
               result,
-              () => dispatch({type: SearchContextActionTypes.AttemptRefetchSymbol}),
-              true
-            )
-              .then((refetcher: number) => {
-                refetchTimeout = refetcher;
-                if (refetchTimeout) {
-                  return Promise.resolve();
-                } else {
-                  throw new Error('Symbol not recognized.')
-                }
-              })
+              () => dispatch({ type: SearchContextActionTypes.AttemptRefetchSymbol }),
+              true,
+            ).then((refetcher: number) => {
+              refetchTimeout = refetcher
+              if (refetchTimeout) {
+                return Promise.resolve()
+              } else {
+                throw new Error('Symbol not recognized.')
+              }
+            })
           }
         })
         .catch(ex => {
@@ -141,17 +137,40 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     setCurrentText(text)
   }
 
-  const onSearchInputResults = ({ symbols }: SimpleSearchQuery): JSX.Element => {
+  const onSearchInputResults = (
+    stockSearch: SimpleSearchQuery | null,
+    fxSearch?: SimpleSearchQuery | null,
+  ): JSX.Element => {
     if (!(currentSymbol && currentSymbol.id) && id && searching) {
       return <AdaptiveLoader size={50} speed={1.4} />
     }
+
+    const stockSymbols = stockSearch ? stockSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.STOCK })) : []
+    const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.FX })) : []
+    const symbols = stockSymbols
+      .concat(fxSymbols)
+      .sort((a, b) => {
+        switch (true) {
+          case a.id === currentText.toUpperCase():
+            return -1
+          case b.id === currentText.toUpperCase():
+            return 1
+          case a.id < b.id:
+            return -1
+          default:
+            return 1
+        }
+      })
+      .slice(0, 9)
+
     return (
       <SearchInput
         initialItem={currentSymbol ? currentSymbol : null}
         items={symbols}
+        maxItems={8}
         onChange={handleChange}
         onTextChange={onTextChange}
-        placeholder={placeholderTest[market.toLowerCase()]}
+        placeholder={placeholderTest}
       />
     )
   }
@@ -159,9 +178,19 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   return (
     <AppQuery<SimpleSearchQuery, searchVariables>
       query={SimpleSearchConnection}
-      variables={{ text: currentText, marketSegment: market.toUpperCase() as MarketSegment }}
+      variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.STOCK }}
     >
-      {onSearchInputResults}
+      {(stockSearch: SimpleSearchQuery) => {
+        return (
+          <AppQuery<SimpleSearchQuery, searchVariables>
+            query={SimpleSearchConnection}
+            variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.FX }}
+            renderNoData={() => onSearchInputResults(stockSearch)}
+          >
+            {(fxSearch: SimpleSearchQuery) => onSearchInputResults(stockSearch, fxSearch)}
+          </AppQuery>
+        )
+      }}
     </AppQuery>
   )
 }

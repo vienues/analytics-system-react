@@ -4,9 +4,9 @@
   the IEX sandbox. As of today, this only applies to the
   development environment.
  */
-import React, {useEffect, useMemo, useState} from 'react'
-import {QueryResult} from 'react-apollo'
-import {AppQueryDefaultLoadingIndicator} from './AppQuery'
+import React, { useEffect, useMemo, useState } from 'react'
+import { QueryResult } from '@apollo/react-common'
+import { AppQueryDefaultLoadingIndicator } from './AppQuery'
 
 interface IProps {
   pollingIndicator?: JSX.Element
@@ -22,14 +22,14 @@ const APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE: string = 'Request failed with st
 const APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION: number = 500
 
 let forceQuerySettings: ISettings = {
-  isSandbox: null
+  isSandbox: null,
 }
 
 async function getForceQuerySettings() {
   if (forceQuerySettings.isSandbox === null) {
     const host = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
     try {
-      const response = await fetch(`//${host}/iexsandbox`, {cache: 'force-cache', method: 'POST'})
+      const response = await fetch(`//${host}/iexsandbox`, { cache: 'force-cache', method: 'POST' })
       const json = await response.json()
       forceQuerySettings.isSandbox = !!json.isSandbox
     } catch (ex) {
@@ -40,7 +40,7 @@ async function getForceQuerySettings() {
 }
 
 const checkQueryResultErrors = (result: any) => {
-  const {errors = [], error = {}} = result
+  const { errors = [], error = {} } = result
   return [...errors]
     .concat([...(error.graphQLErrors || [])])
     .filter(e => !!e)
@@ -49,33 +49,35 @@ const checkQueryResultErrors = (result: any) => {
 }
 
 export const AppQueryForceRefetcher = (result: any, handler: Function, override: Boolean) => {
-  return getForceQuerySettings()
-    .then(({isSandbox}) => {
-      if ((override || isSandbox) && checkQueryResultErrors(result))
-        return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION)
-      return 0
-    });
+  return getForceQuerySettings().then(({ isSandbox }) => {
+    if ((override || isSandbox) && checkQueryResultErrors(result))
+      return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION)
+    return 0
+  })
 }
 
-export const AppQueryForcePoller: React.FunctionComponent<IProps> = ({children, pollingIndicator, renderLoadingHeight, result}) => {
+export const AppQueryForcePoller: React.FunctionComponent<IProps> = ({
+  children,
+  pollingIndicator,
+  renderLoadingHeight,
+  result,
+}) => {
   const [isPolling, setIsPolling] = useState(false)
   const [settings, setSettings] = useState<ISettings>(forceQuerySettings)
 
   const loadingIndicator = useMemo(() => {
-    return pollingIndicator || <AppQueryDefaultLoadingIndicator renderLoadingHeight={renderLoadingHeight}/>
+    return pollingIndicator || <AppQueryDefaultLoadingIndicator renderLoadingHeight={renderLoadingHeight} />
   }, [pollingIndicator, renderLoadingHeight])
 
-  const {startPolling, stopPolling} = result
+  const { startPolling, stopPolling } = result
 
   useEffect(() => {
-    getForceQuerySettings()
-      .then(({isSandbox}) => {
-        setSettings({isSandbox})
-      })
+    getForceQuerySettings().then(({ isSandbox }) => {
+      setSettings({ isSandbox })
+    })
   }, [])
 
-  if (settings.isSandbox === null)
-    return loadingIndicator;
+  if (settings.isSandbox === null) return loadingIndicator
   else if (settings.isSandbox) {
     if (!result.data || Object.entries(result.data).length === 0) {
       if (checkQueryResultErrors(result)) {

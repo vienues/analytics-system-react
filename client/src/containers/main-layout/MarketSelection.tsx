@@ -21,7 +21,7 @@ const MarketSelection: React.FunctionComponent<RouteComponentProps & {}> = ({ hi
   return (
     <LeftNav>
       <LeftNavItemFirst style={{ fontWeight: 500 }}>Markets</LeftNavItemFirst>
-      <NavItem data-market="currency" active={currentMarket === 'currency'} onClick={onMarketClick}>
+      <NavItem data-market="fx" active={currentMarket === 'fx'} onClick={onMarketClick}>
         Currencies
       </NavItem>
       <NavItem data-market="stock" active={currentMarket === 'stock'} onClick={onMarketClick}>

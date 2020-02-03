@@ -13,11 +13,19 @@ const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 interface ISymbolData {
   [key: string]: {
     name: string
+    ratePrecision?: number
+    pipsPosition?: number
+    base?: string
+    terms?: string
   }
 }
 
 interface IStatusTopic {
   [key: string]: string | null
+}
+
+interface IPreviousMid {
+  [key: string]: number | null
 }
 
 @Service()
@@ -28,6 +36,7 @@ export default class {
     priceHistory: null,
     pricing: null,
   }
+  private context: IPreviousMid = {}
   constructor() {
     this.connection = new autobahn.Connection({
       realm: 'com.weareadaptive.reactivetrader',
@@ -53,14 +62,14 @@ export default class {
 
   public getSymbol(id: string): SearchResult {
     const symbolData = data as ISymbolData
-    return { id, name: symbolData[id].name }
+    return { id, ...symbolData[id] }
   }
 
   public getSymbols(filterText: string): SearchResult[] {
     const symbolData = data as ISymbolData
     return Object.keys(symbolData)
       .filter(key => key.includes(filterText) || symbolData[key].name.includes(filterText))
-      .map(key => ({ id: key, name: symbolData[key].name }))
+      .map(key => ({ id: key, ...symbolData[key] }))
   }
 
   public async getPriceHistory(from: string, to: string) {

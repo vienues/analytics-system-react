@@ -1,35 +1,29 @@
+import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
 import { Fdc3ContextProvider } from 'containers/fdc3/fdc3-context'
 import { Context } from 'openfin-fdc3'
 import React, { useEffect, useState } from 'react'
-import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
 import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
 import { RouterHelpers } from './helpers'
-import { OpenfinApiProvider } from './openfin/OpenfinService'
 import { styled } from './rt-theme'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
+import { ContainerServiceProvider, ContainerService } from 'platformService/ContainerService'
 library.add(fasLightBulb, farLightBulb)
 
 const App = () => {
   const [currencyPairContext, setCurrencyPairContext] = useState({} as Context)
 
   useEffect(() => {
-    if (typeof fin === 'undefined') {
-      return
-    }
-    const fdc3 = require('openfin-fdc3')
-    fdc3.addContextListener((context: Context) => {
-      setCurrencyPairContext(context)
-    })
-  }, [currencyPairContext])
+    ContainerService.addContextListener(setCurrencyPairContext)
+  }, [])
 
   return (
-    <OpenfinApiProvider>
+    <ContainerServiceProvider>
       <Fdc3ContextProvider value={currencyPairContext}>
         <ApolloProvider client={apolloClient}>
           <GlobalStyle />
@@ -47,7 +41,7 @@ const App = () => {
           </ThemeProvider>
         </ApolloProvider>
       </Fdc3ContextProvider>
-    </OpenfinApiProvider>
+    </ContainerServiceProvider>
   )
 }
 
