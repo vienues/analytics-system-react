@@ -20,12 +20,6 @@ const NewsItem: React.FunctionComponent<INewsArticle> = ({ id, url, headline, da
         {moment(datetime).fromNow()} - {source}
       </NewsCaption>
     </Link>
-    {/* <Link key={id} target="_blank" href={url}>
-    <Text style={{marginBottom: '2rem'}}>{headline}</Text>
-    <Caption>
-      {moment(datetime).fromNow()} - {source}
-    </Caption>
-  </Link> */}
   </>
 )
 
