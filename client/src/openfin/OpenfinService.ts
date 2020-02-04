@@ -31,8 +31,8 @@ export class OpenfinContainer extends IContainerService {
     native.location.href = `http://localhost:3000/stock/${symbol}`
   }
 
-  public addContextListener(callback: (context: Context) => void) {
-    this.fdc3.addContextListener(callback)
+  public addContextListener(handler: (context: Context) => void) {
+    return this.fdc3.addContextListener(handler)
   }
 
   public broadcast(context: Context) {

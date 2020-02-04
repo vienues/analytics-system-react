@@ -8,7 +8,8 @@ export class FDC3OpenfinProvider implements FDC3Provider {
     this._fdc3.then(fdc3 => fdc3.broadcast(context))
   }
 
-  public addContextListener(callback: (context: Context) => void): void {
-    this._fdc3.then(fdc3 => fdc3.addContextListener(callback))
+  public async addContextListener(handler: (context: Context) => void) {
+    const fdc3 = await this._fdc3
+    return fdc3.addContextListener(handler)
   }
 }

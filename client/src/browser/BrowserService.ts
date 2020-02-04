@@ -15,7 +15,9 @@ export class BrowserContainer extends IContainerService {
 
   public broadcast = () => {}
 
-  public addContextListener = () => {}
+  public addContextListener = () => {
+    return new Promise<undefined>((res, rej) => {})
+  }
 
   public navigateToStock = () => {}
 

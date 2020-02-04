@@ -1,4 +1,3 @@
-import Fdc3Context from 'containers/fdc3/fdc3-context'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
@@ -22,6 +21,7 @@ import { SearchErrorCard } from './SearchErrorCard'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { getStockContext } from 'openfin/util'
 import { ContainerService } from 'platformService/ContainerService'
+import { Context } from 'openfin-fdc3'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -33,11 +33,25 @@ type Props = RouteComponentProps & IProps
 const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }: Props) => {
   const [currentText, setCurrentText] = useState<string>('')
 
-  const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
-  const currencyPairContext = useContext(Fdc3Context)
+  useEffect(() => {
+    let didCancel = false
 
-  const hasCurrencyPairContext = currencyPairContext && currencyPairContext.market === MarketSegment.FX
-  const instrumentId = hasCurrencyPairContext ? currencyPairContext.name : id
+    const contextListener = ContainerService.addContextListener((context: Context) => {
+      if (!didCancel && context.type === 'fdc3.instrument' && context.id) {
+        const ccyPair = context.id.ticker?.slice(0, 3) + '/' + context.id.ticker?.slice(3)
+        context.marketSegment ? history.push(`/${context.marketSegment}/${ccyPair}`) : history.push(`/fx/${ccyPair}`)
+      }
+    })
+
+    return () => {
+      didCancel = true
+      contextListener.then(_listener => _listener?.unsubscribe())
+    }
+  }, [history])
+
+  const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
+
+  const instrumentId = id
   const placeholderTest = 'Enter a stock, symbol, or currency pair...'
 
   const handleChange = useCallback(
@@ -90,10 +104,6 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
                 type: SearchContextActionTypes.FoundSymbol,
                 payload: { currentSymbol: foundSymbol },
               })
-              if (hasCurrencyPairContext) {
-                history.replace(`/${url}/${result.data.symbol.id}`)
-                ContainerService.navigateToStock(result.data.symbol.id)
-              }
               return Promise.resolve()
             } else {
               throw new Error('Returned symbol does not match requested symbol.')
@@ -131,7 +141,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         refetchTimeout = 0
       }
     }
-  }, [dispatch, history, instrumentId, market, refetchAttempts, searching, url, handleChange, hasCurrencyPairContext])
+  }, [dispatch, history, instrumentId, market, refetchAttempts, searching, url, handleChange])
 
   const onTextChange = (text: string) => {
     setCurrentText(text)
