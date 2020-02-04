@@ -1,8 +1,8 @@
 import moment from 'moment/moment'
 import React from 'react'
 import { Link } from '../../../common/StyledComponents'
-// import { Caption, Link, Text } from '../../../common/StyledComponents'
 import { styled } from '../../../rt-theme'
+import { openUrlInBrowser } from 'platformService/openUrlInBrowser'
 
 export interface INewsArticle {
   id: string
@@ -14,7 +14,7 @@ export interface INewsArticle {
 
 const NewsItem: React.FunctionComponent<INewsArticle> = ({ id, url, headline, datetime, source }) => (
   <>
-    <Link style={{ cursor: 'pointer' }} target="_blank" href={url}>
+    <Link style={{ cursor: 'pointer' }} href={url} onClick={openUrlInBrowser}>
       <div style={{ marginBottom: '1rem' }}>{headline}</div>
       <NewsCaption>
         {moment(datetime).fromNow()} - {source}
