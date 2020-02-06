@@ -64,7 +64,7 @@ const SearchWrapper = styled.div`
   align-items: center;
   display: grid;
   grid-gap: 0.5rem;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 2fr 1fr;
   position: relative;
   & svg {
     color: ${({ theme }) => theme.core.lightBackground};
