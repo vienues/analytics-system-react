@@ -1,12 +1,20 @@
 {
   "devtools_port": 9090,
+  "splashScreenImage": "http://localhost:3000/static/media/splash-screen.jpg",
   "startup_app": {
-    "name": "OpenfinPOC",
-    "description": "OpenFin POC",
+    "name": "Reactive Analytics Cloud",
+    "description": "Desktop Reactive Analytics Cloud",
     "url": "http://localhost:3000",
     "uuid": "OpenfinPOC-f3ylnh9u12q",
     "autoShow": true,
+    "defaultWidth": 1280,
+    "defaultHeight": 900,
+    "minWidth": 800,
+    "minHeight": 600,
+    "resizable": true,
+    "maximizable": true,
     "frame": false,
+    "applicationIcon": "http://localhost:3000//icon-dark-desktop.ico",
     "icon": "http://localhost:3000//icon.ico"
   },
   "services": [
@@ -15,12 +23,14 @@
     }
   ],
   "runtime": {
-    "arguments": "",
-    "version": "stable"
+    "version": "14.78.47.23",
+    "futureVersion": "14.78.47.23",
+    "forceLatest": true
   },
   "shortcut": {
-    "company": "OpenFin",
-    "description": "Openfin POC",
-    "name": "Openfin POC"
+    "company": "Adaptive Consulting",
+    "description": "Desktop Reactive Analytics Cloud",
+    "icon": "http://localhost:3000//icon-dark-desktop.ico",
+    "name": "Reactive Analytics Cloud (LOCAL)"
   }
 }
