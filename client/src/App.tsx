@@ -1,10 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
-import { Fdc3ContextProvider } from 'containers/fdc3/fdc3-context'
-import { Context } from 'openfin-fdc3'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import apolloClient from './apollo/client'
 import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
@@ -16,27 +14,23 @@ import { ContainerServiceProvider } from 'platformService/ContainerService'
 library.add(fasLightBulb, farLightBulb)
 
 const App = () => {
-  const [currencyPairContext] = useState({} as Context)
-
   return (
     <ContainerServiceProvider>
-      <Fdc3ContextProvider value={currencyPairContext}>
-        <ApolloProvider client={apolloClient}>
-          <GlobalStyle />
-          <ThemeProvider>
-            <GlobalScrollbarStyle />
-            <ParentContainer>
-              <BrowserRouter>
-                <Switch>
-                  {Object.keys(RouterHelpers.RootRouterItems).map(route => (
-                    <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
-                  ))}
-                </Switch>
-              </BrowserRouter>
-            </ParentContainer>
-          </ThemeProvider>
-        </ApolloProvider>
-      </Fdc3ContextProvider>
+      <ApolloProvider client={apolloClient}>
+        <GlobalStyle />
+        <ThemeProvider>
+          <GlobalScrollbarStyle />
+          <ParentContainer>
+            <BrowserRouter>
+              <Switch>
+                {Object.keys(RouterHelpers.RootRouterItems).map(route => (
+                  <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
+                ))}
+              </Switch>
+            </BrowserRouter>
+          </ParentContainer>
+        </ThemeProvider>
+      </ApolloProvider>
     </ContainerServiceProvider>
   )
 }
