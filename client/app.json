@@ -15,7 +15,7 @@
     "maximizable": true,
     "frame": false,
     "applicationIcon": "http://localhost:3000//icon-dark-desktop.ico",
-    "icon": "http://localhost:3000//icon.ico"
+    "icon": "http://localhost:3000//icon.png"
   },
   "services": [
     {

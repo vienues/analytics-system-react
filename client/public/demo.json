@@ -6,6 +6,7 @@
     "url": "https://demo-reactive-analytics.adaptivecluster.com",
     "uuid": "reactive-analytics-cloud-web-demo",
     "applicationIcon": "https://demo-reactive-analytics.adaptivecluster.com/icon-dark-desktop.ico",
+    "icon": "https://demo-reactive-analytics.adaptivecluster.com/icon.png",
     "autoShow": true,
     "defaultWidth": 1280,
     "defaultHeight": 900,
