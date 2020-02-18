@@ -38,8 +38,10 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
     const contextListener = ContainerService.addContextListener((context: Context) => {
       if (!didCancel && context.type === 'fdc3.instrument' && context.id) {
+        const defaultMarketSegment = 'fx'
         const ccyPair = context.id.ticker?.slice(0, 3) + '/' + context.id.ticker?.slice(3)
-        context.marketSegment ? history.push(`/${context.marketSegment}/${ccyPair}`) : history.push(`/fx/${ccyPair}`)
+        const marketSegment = context.marketSegment || defaultMarketSegment
+        history.push(`/${marketSegment}/${ccyPair}`)
       }
     })
 
@@ -51,7 +53,6 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
   const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
 
-  const instrumentId = id
   const placeholderTest = 'Enter a stock, symbol, or currency pair...'
 
   const handleChange = useCallback(
@@ -75,23 +76,23 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
   useEffect(() => {
     if (dispatch) {
-      if (instrumentId) {
+      if (id) {
         dispatch({ type: SearchContextActionTypes.FindSymbol })
       } else {
         dispatch({ type: SearchContextActionTypes.ClearedSymbol })
       }
     }
-  }, [dispatch, instrumentId])
+  }, [dispatch, id])
 
   useEffect(() => {
     let refetchTimeout: number = 0
-    if (searching && dispatch && instrumentId) {
+    if (searching && dispatch && id) {
       let foundSymbol: search_symbols | undefined
       apolloClient
         .query<searchQuery, searchQueryVariables>({
           errorPolicy: 'all',
           query: SearchConnection,
-          variables: { id: instrumentId.toUpperCase(), market: market.toUpperCase() },
+          variables: { id: id.toUpperCase(), market: market.toUpperCase() },
         })
         .then((result: any) => {
           if (result.data && result.data.symbol) {
@@ -99,7 +100,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
               id: result.data.symbol.id,
               name: result.data.symbol.name,
             } as search_symbols
-            if (foundSymbol.id === instrumentId.toUpperCase()) {
+            if (foundSymbol.id === id.toUpperCase()) {
               dispatch({
                 type: SearchContextActionTypes.FoundSymbol,
                 payload: { currentSymbol: foundSymbol },
@@ -129,7 +130,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
             type: SearchContextActionTypes.UnrecognizedSymbol,
             payload: {
               errorMessage: (
-                <SearchErrorCard id={instrumentId} market={market} foundSymbol={foundSymbol} onClick={handleChange} />
+                <SearchErrorCard id={id} market={market} foundSymbol={foundSymbol} onClick={handleChange} />
               ),
             },
           })
@@ -141,7 +142,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         refetchTimeout = 0
       }
     }
-  }, [dispatch, history, instrumentId, market, refetchAttempts, searching, url, handleChange])
+  }, [dispatch, history, id, market, refetchAttempts, searching, url, handleChange])
 
   const onTextChange = (text: string) => {
     setCurrentText(text)
