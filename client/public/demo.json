@@ -5,7 +5,8 @@
     "name": "Reactive Analytics Cloud",
     "url": "https://demo-reactive-analytics.adaptivecluster.com",
     "uuid": "reactive-analytics-cloud-web-demo",
-    "applicationIcon": "https://demo-reactive-analytics.adaptivecluster.com/static/media/adaptive-mark-large.png",
+    "applicationIcon": "https://demo-reactive-analytics.adaptivecluster.com/icon-dark-desktop.ico",
+    "icon": "https://demo-reactive-analytics.adaptivecluster.com/icon.png",
     "autoShow": true,
     "defaultWidth": 1280,
     "defaultHeight": 900,
@@ -23,7 +24,7 @@
   "shortcut": {
     "company": "Adaptive Consulting",
     "description": "Desktop Reactive Analytics Cloud",
-    "icon": "https://demo-reactive-analytics.adaptivecluster.com/static/media/icon.ico",
+    "icon": "https://demo-reactive-analytics.adaptivecluster.com/icon-dark-desktop.ico",
     "name": "Reactive Analytics Cloud"
   },
   "services": [
