@@ -25,7 +25,7 @@ const ApolloStockPriceContainer: React.FunctionComponent<IApolloContainerProps> 
     StockPriceSubscription,
     {
       shouldResubscribe,
-      variables: { markets: [id] },
+      variables: { markets: [currentId] },
     },
   )
   const onStockPriceSubscriptionSuccess = (): JSX.Element => {
