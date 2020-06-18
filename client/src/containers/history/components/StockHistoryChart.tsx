@@ -15,7 +15,7 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
 
   const { low: lowestPrice } = minBy(chartData, 'low') || { low: undefined }
   const { high: highestPrice } = maxBy(chartData, 'high') || { high: undefined }
-  const tickFormatter: TickFormatterFunction = tick => (tick < 100 ? tick.toFixed(2) : tick.toFixed(0))
+  const tickFormatter: TickFormatterFunction = (tick: number) => (tick < 100 ? tick.toFixed(2) : tick.toFixed(0))
 
   return (
     <DataCard cardType="history" title={id} instrument={id}>
