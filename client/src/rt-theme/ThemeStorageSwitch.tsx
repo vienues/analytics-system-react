@@ -17,11 +17,11 @@ const ThemeStorageSwitch: React.FC<IThemeStorageSwitchProps & { theme: Theme }> 
       height={12}
       width={27}
       handleDiameter={props.handleDiameter}
-      offColor={theme.secondary[4]}
-      offHandleColor={theme.secondary.base}
-      onColor={theme.primary[4]}
-      onHandleColor={theme.primary[2]}
-      activeBoxShadow={`0 0 0 0.125rem ${theme.secondary[4]} inset`}
+      offColor={theme.secondary.coreSecondary}
+      offHandleColor={theme.secondary.coreSecondary}
+      onColor={theme.primary.corePrimary4}
+      onHandleColor={theme.primary.corePrimary2}
+      activeBoxShadow={`0 0 0 0.125rem ${theme.secondary.coreSecondary4} inset`}
       {...props}
     />
   )

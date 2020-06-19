@@ -31,12 +31,12 @@ export const ToolTipChildLeft = styled.div`
   width: 70px;
   opacity: 0.6;
   font-size: 10px;
-  color: ${({ theme }) => theme.template.white.dark};
+  color: ${({ theme }) => theme.primary.corePrimary};
 `
 export const ToolTipChildRight = styled.div`
   width: 30px;
   font-size: 10px;
-  color: ${({ theme }) => theme.template.white.normal};
+  color: ${({ theme }) => theme.primary.corePrimary};
 `
 
 export const Banner = styled.div`
@@ -46,8 +46,8 @@ export const Banner = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 4.5rem;
-  background-color: ${({ theme }) => theme.core.lightBackground};
-  color: ${({ theme }) => theme.core.textColor};
+  background-color: ${({ theme }) => theme.primary.corePrimary};
+  color: ${({ theme }) => theme.textColor};
 `
 
 export const DataContents = styled.div`
@@ -135,8 +135,8 @@ export const SwitchThemeButton = styled.button`
 
 export const PopoutButton = styled('button')`
   .svg-icon {
-    stroke: ${({ theme }) => theme.core.textColor};
-    fill: ${({ theme }) => theme.core.textColor};
+    stroke: ${({ theme }) => theme.textColor};
+    fill: ${({ theme }) => theme.textColor};
   }
 `
 
@@ -167,7 +167,7 @@ export const MainSearchContent = styled(ContentBase)`
   grid-auto-flow: column;
   padding: 1rem;
   position: relative;
-  border-bottom: solid 2px ${({ theme }) => theme.core.lightBackground};
+  border-bottom: solid 2px ${({ theme }) => theme.primary.corePrimary};
   @media (max-width: 900px) {
     font-size: 1rem;
     line-height: 1rem;
