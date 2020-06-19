@@ -17,7 +17,7 @@ interface IProps {
   instrument: string
 }
 
-const DataContents: React.FunctionComponent<IProps> = props => {
+const DataContents: React.FunctionComponent<IProps> = (props) => {
   const [poppedOut, setPoppedOut] = useState(false)
 
   const closeHandler = () => {
@@ -37,7 +37,7 @@ const DataContents: React.FunctionComponent<IProps> = props => {
 
   return (
     <ContainerServiceSubscribe>
-      {containerApi => {
+      {(containerApi) => {
         const { app, win } = containerApi.state
 
         if (containerApi.agent !== 'desktop' || !app || !win) {
@@ -78,7 +78,7 @@ const DataContents: React.FunctionComponent<IProps> = props => {
 const VanillaDataCard = styled.div`
   display: grid;
   grid-template-columns: 100%;
-  background-color: ${({ theme }) => theme.core.lightBackground};
+  background-color: ${({ theme }) => theme.primary.corePrimary};
   overflow-x: hidden;
   overflow-y: hidden;
   padding: 1.5rem;
@@ -88,7 +88,7 @@ const PopupDataCard = styled.div`
   display: grid;
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: ${({ theme }) => theme.core.darkBackground};
+  background-color: ${({ theme }) => theme.primary.corePrimary};
   grid-template-columns: 100%;
 `
 
@@ -105,8 +105,8 @@ const DataCardHeading = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 3.5rem;
-  background-color: ${({ theme }) => theme.core.lightBackground};
-  color: ${({ theme }) => theme.core.textColor};
+  background-color: ${({ theme }) => theme.primary.corePrimary};
+  color: ${({ theme }) => theme.textColor};
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

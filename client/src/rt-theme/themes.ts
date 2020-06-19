@@ -1,16 +1,16 @@
 import { darken } from 'polished'
 import { keyframes } from 'styled-components'
 
-import { AccentName, AccentPaletteMap, Color, colors, CorePalette, ICorePaletteMap, template } from './colors'
+import { Color, colors, ColorPalettes, PrimaryPalette, SecondaryPalette, AccentPalette } from './colors'
 
 interface IBaseTheme {
   white: Color
   black: Color
   transparent: Color
 
-  primary: CorePalette
-  secondary: CorePalette
-  accents: AccentPaletteMap
+  primary: PrimaryPalette
+  secondary: SecondaryPalette
+  accents: AccentPalette
   colors: typeof colors
 
   motion: IMotion & {
@@ -23,22 +23,9 @@ interface IBaseTheme {
 
   overlay: IColorPair
 
-  button: TouchableStyleSet
-
-  // Known extensible properties
   backgroundColor: Color
   textColor: Color
 }
-
-interface ITouchable {
-  backgroundColor: Color
-  textColor: Color
-
-  active: IColorPair
-  disabled: IColorPair
-}
-export type TouchableIntentName = AccentName | 'primary' | 'secondary' | 'mute'
-type TouchableStyleSet = { [style in TouchableIntentName]: ITouchable }
 
 interface IMotion {
   duration: number
@@ -50,16 +37,23 @@ interface IColorPair {
   textColor?: string
 }
 
-const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: AccentPaletteMap) => ({
-  core,
-  template,
+interface ITouchable {
+  backgroundColor: Color
+  textColor: Color
 
-  black: colors.static.black,
-  transparent: colors.static.transparent,
-  white: colors.static.white,
+  active: IColorPair
+  disabled: IColorPair
+}
+export type TouchableIntentName = 'primary' | 'secondary' | 'mute'
+type TouchableStyleSet = { [style in TouchableIntentName]: ITouchable }
 
-  backgroundColor: core.darkBackground,
-  textColor: core.textColor,
+const createTheme = ({ primary, secondary, accents }: ColorPalettes) => ({
+  black: '#000000',
+  transparent: '#00000000',
+  white: '#FFFFFF',
+
+  backgroundColor: primary.corePrimary,
+  textColor: secondary.coreSecondary,
 
   accents,
   colors,
@@ -87,60 +81,60 @@ const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: Acc
   },
 
   overlay: {
-    backgroundColor: darken(0.1, primary[1]),
-    textColor: secondary[2],
+    backgroundColor: darken(0.1, primary.corePrimary4),
+    textColor: secondary.coreSecondary2,
   },
 
   tile: {
-    inputColor: secondary[4],
+    inputColor: secondary.coreSecondary4,
   },
 
   flash: keyframes`
     0% {
-      background-color: ${primary.base};
+      background-color: ${primary.corePrimary};
     }
     50% {
-      background-color: ${accents.dominant.darker};
+      background-color: ${accents.accentBeAware};
     }
     100% {
-      background-color: ${primary.base};
+      background-color: ${primary.corePrimary};
     }
   `,
 
   button: {
     mute: {
-      backgroundColor: primary.base,
-      textColor: secondary.base,
+      backgroundColor: primary.corePrimary,
+      textColor: secondary.coreSecondary,
 
       active: {
-        backgroundColor: primary[4],
+        backgroundColor: primary.corePrimary4,
       },
       disabled: {
-        backgroundColor: primary[3],
+        backgroundColor: primary.corePrimary3,
       },
     },
 
     primary: {
-      backgroundColor: accents.dominant.base,
-      textColor: colors.light.primary.base,
+      backgroundColor: accents.accentPositive,
+      textColor: primary.corePrimary,
 
       active: {
-        backgroundColor: accents.dominant.darker,
+        backgroundColor: accents.accentPositive3,
       },
       disabled: {
-        backgroundColor: accents.dominant.lighter,
+        backgroundColor: accents.accentNegative3,
       },
     },
 
     secondary: {
-      backgroundColor: secondary.base,
-      textColor: primary.base,
+      backgroundColor: secondary.coreSecondary,
+      textColor: primary.corePrimary,
 
       active: {
-        backgroundColor: secondary[3],
+        backgroundColor: secondary.coreSecondary3,
       },
       disabled: {
-        backgroundColor: secondary[4],
+        backgroundColor: secondary.coreSecondary4,
       },
     },
     ...Object.entries(accents).reduce((a, [key, { base, darker, lighter }]) => {
@@ -152,7 +146,7 @@ const createTheme = ({ primary, secondary, core }: ICorePaletteMap, accents: Acc
         disabled: {
           backgroundColor: lighter,
         },
-        textColor: colors.light.primary.base,
+        textColor: secondary.coreSecondary,
       }
       return a
     }, {}),
@@ -175,10 +169,10 @@ function isColor(value: string | ThemeSelector): value is Color {
 export const getThemeColor = (theme: Theme, color: Color | ThemeSelector, fallback?: Color) =>
   typeof color === 'function' ? color(theme) || fallback : isColor(color) ? color : fallback
 
-const lightTheme = createTheme(colors.light, colors.accents)
-const darkTheme = createTheme(colors.dark, colors.accents)
+const lightTheme = createTheme(colors.light)
+const darkTheme = createTheme(colors.dark)
 // Manual overrides
-darkTheme.button.secondary.textColor = darkTheme.primary.base
+darkTheme.button.secondary.textColor = darkTheme.primary.corePrimary
 
 export const themes = {
   dark: darkTheme,

@@ -23,7 +23,9 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSiz
   }
   const { change, changePercent, latestPrice } = stockPrice
   const [Icon, color] =
-    (change || 0) < 0 ? [faCaretDown, colors.accents.bad.base] : [faCaretUp, colors.accents.good.base]
+    (change || 0) < 0
+      ? [faCaretDown, colors.dark.accents.accentNegative]
+      : [faCaretUp, colors.dark.accents.accentPositive]
 
   const fixedFormat = (e: number | null, isPercentage?: Boolean) => {
     if (e === null) {

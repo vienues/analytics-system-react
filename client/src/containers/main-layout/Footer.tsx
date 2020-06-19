@@ -10,7 +10,7 @@ const Footer = () => (
 )
 
 const FooterWrapper = styled(Banner)`
-  border-top: 1px solid ${({ theme }) => theme.core.darkBackground};
+  border-top: 1px solid ${({ theme }) => theme.primary.corePrimary};
   z-index: 1000;
 `
 
