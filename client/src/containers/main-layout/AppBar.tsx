@@ -1,9 +1,10 @@
 import { ContainerService } from 'platformService/ContainerService'
-import React, { useContext } from 'react'
+import { default as React, useContext } from 'react'
+import styled from 'styled-components/macro'
+import { pxToRems } from 'utils'
 import LogoWithText from '../../common/LogoWithText'
 import OpenfinWindowControls from '../../openfin/OpenfinWindowControls'
-import { useTheme, styled } from '../../rt-theme'
-import { pxToRems } from 'utils'
+import { useTheme } from '../../rt-theme'
 import { SearchContext } from '../search/SearchContext'
 
 const Sidebar = styled.div<{ hasNoSearch: boolean }>`

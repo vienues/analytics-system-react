@@ -49,8 +49,8 @@ import 'typeface-roboto'
  * achieve a consistent vertical rhythm.
  */
 
-import { createGlobalStyle } from 'styled-components'
 import { baselineFontSize } from './fonts'
+import { createGlobalStyle } from 'styled-components/macro'
 
 export default createGlobalStyle`
   :root, body {
