@@ -34,6 +34,8 @@
     "subscriptions-transport-ws": "^0.9.16",
     "typeface-lato": "^0.0.75",
     "typeface-montserrat": "^0.0.75",
+    "typeface-roboto": "^0.0.75",
+    "typeface-merriweather": "^0.0.72",
     "unstated": "^2.1.1"
   },
   "scripts": {

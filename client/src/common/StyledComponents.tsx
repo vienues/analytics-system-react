@@ -1,6 +1,8 @@
 import { styled } from '../rt-theme'
 
 import { default as dataCard } from './DataCard'
+import { fonts } from 'rt-theme/fonts'
+import { pxToRems } from 'utils'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
@@ -71,8 +73,9 @@ export const LabeledData = styled.div`
 
 export const Title = styled.h1`
   margin-top: 0rem;
-  font-size: 1.25rem;
+  font-size: ${pxToRems(16)};
   font-weight: 300;
+  font-family: ${fonts.secondaryFontFamily};
 `
 
 export const Heading = styled(Title)`
@@ -150,6 +153,12 @@ const ContentBase = styled.div`
   grid-gap: 0.5em;
 `
 
+export const WrapperContent = styled.div`
+  flex-direction: column;
+  overflow-y: auto;
+  flex: 1;
+`
+
 export const MainContent = styled(ContentBase)`
   grid-template-columns: 3fr 1fr;
   @media (max-width: 900px) {
@@ -177,6 +186,11 @@ export const MainSearchContent = styled(ContentBase)`
   }
 `
 
+export const MainLayoutWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
+`
+
 export const AppLayoutRoot = styled.div`
   width: 100%;
   height: 100%;
@@ -184,8 +198,7 @@ export const AppLayoutRoot = styled.div`
   max-height: 100vh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-columns: 100%;
+  grid-template-columns: 1fr auto;
 `
 
 export const ScrollableArea = styled.div`

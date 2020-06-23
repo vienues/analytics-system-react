@@ -55,6 +55,8 @@ const createTheme = ({ primary, secondary, accents }: ColorPalettes) => ({
   backgroundColor: primary.corePrimary,
   textColor: secondary.coreSecondary,
 
+  fontSizeBaseline: 16,
+
   accents,
   colors,
   primary,

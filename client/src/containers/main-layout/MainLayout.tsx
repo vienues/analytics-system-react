@@ -1,14 +1,20 @@
 import React, { useContext, useMemo } from 'react'
 import { Route } from 'react-router'
-import { MarketSegment } from '../../__generated__/types'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import { AppLayoutRoot, MainSearchContent } from '../../common/StyledComponents'
+import {
+  AppLayoutRoot,
+  MainContent,
+  MainLayoutWrapper,
+  MainSearchContent,
+  ScrollableArea,
+  WrapperContent,
+} from '../../common/StyledComponents'
 import { RouterHelpers } from '../../helpers'
+import { MarketSegment } from '../../__generated__/types'
 import { Search, StockPrice } from '../index'
+import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
 import Footer from './Footer'
-import { SearchContext, SearchContextProvider } from '../search/SearchContext'
-import { MainContent, ScrollableArea } from '../../common/StyledComponents'
 
 const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,
@@ -30,33 +36,34 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
   }, [currentSymbol, errorMessage, id])
 
   const renderedRoutes = useMemo(() => {
-    return Object.keys(RouterHelpers.MainRouterItems).map(route => (
+    console.log(Object.keys(RouterHelpers.MainRouterItems))
+    return Object.keys(RouterHelpers.MainRouterItems).map((route) => (
       <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
     ))
   }, [])
 
   return (
-    <>
-      <div style={{ padding: '0rem 1rem' }}>
-        <MainSearchContent>
-          <Search id={id} url={market} market={market} />
-          <StockPrice id={id} market={market} />
-        </MainSearchContent>
-      </div>
+    <WrapperContent>
+      <MainSearchContent>
+        <Search id={id} url={market} market={market} />
+        <StockPrice id={id} market={market} />
+      </MainSearchContent>
       {renderedErrorMessage || renderedRoutes}
-    </>
+      <Footer />
+    </WrapperContent>
   )
 }
 
-const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = props => {
+const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = (props) => {
   return (
-    <AppLayoutRoot>
+    <MainLayoutWrapper>
       <AppBar />
-      <SearchContextProvider>
-        <CurrentSymbolLayout {...props} />
-      </SearchContextProvider>
-      <Footer />
-    </AppLayoutRoot>
+      <AppLayoutRoot>
+        <SearchContextProvider>
+          <CurrentSymbolLayout {...props} />
+        </SearchContextProvider>
+      </AppLayoutRoot>
+    </MainLayoutWrapper>
   )
 }
 
