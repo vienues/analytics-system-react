@@ -1,44 +1,19 @@
 import { darken } from 'polished'
-import { keyframes } from 'styled-components'
-
-import { Color, colors, ColorPalettes, PrimaryPalette, SecondaryPalette, AccentPalette } from './colors'
+import { DefaultTheme, keyframes } from 'styled-components/macro'
+import { Color, colors, defaultTheme } from './colors'
 import { baselineFontSize } from './fonts'
 
-interface IBaseTheme {
-  white: Color
-  black: Color
-  transparent: Color
-
-  primary: PrimaryPalette
-  secondary: SecondaryPalette
-  accents: AccentPalette
-  colors: typeof colors
-
-  motion: IMotion & {
-    fast: IMotion
-    normal: IMotion
-    slow: IMotion
-  }
-
-  shell: IColorPair
-
-  overlay: IColorPair
-
-  backgroundColor: Color
-  textColor: Color
-}
-
-interface IMotion {
+export interface IMotion {
   duration: number
   easing: string
 }
 
-interface IColorPair {
+export interface IColorPair {
   backgroundColor: string
   textColor?: string
 }
 
-interface ITouchable {
+export interface ITouchable {
   backgroundColor: Color
   textColor: Color
 
@@ -46,9 +21,9 @@ interface ITouchable {
   disabled: IColorPair
 }
 export type TouchableIntentName = 'primary' | 'secondary' | 'mute'
-type TouchableStyleSet = { [style in TouchableIntentName]: ITouchable }
+export type TouchableStyleSet = { [style in TouchableIntentName]: ITouchable }
 
-const createTheme = ({ primary, secondary, accents }: ColorPalettes) => ({
+const createTheme = ({ accents, primary, secondary, motion, button }: DefaultTheme) => ({
   black: '#000000',
   transparent: '#00000000',
   white: '#FFFFFF',
@@ -63,25 +38,8 @@ const createTheme = ({ primary, secondary, accents }: ColorPalettes) => ({
   primary,
   secondary,
 
-  motion: {
-    duration: 16 * 16,
-    easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-
-    fast: {
-      duration: 16 * 16,
-      easing: 'cubic-bezier(0.19, 1, 0.22, 1)',
-    },
-
-    normal: {
-      duration: 16 * 16,
-      easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-    },
-
-    slow: {
-      duration: 16 * 16,
-      easing: 'cubic-bezier(0.165, 0.84, 0.44, 1)',
-    },
-  },
+  motion,
+  button,
 
   overlay: {
     backgroundColor: darken(0.1, primary.corePrimary4),
@@ -103,61 +61,10 @@ const createTheme = ({ primary, secondary, accents }: ColorPalettes) => ({
       background-color: ${primary.corePrimary};
     }
   `,
-
-  button: {
-    mute: {
-      backgroundColor: primary.corePrimary,
-      textColor: secondary.coreSecondary,
-
-      active: {
-        backgroundColor: primary.corePrimary4,
-      },
-      disabled: {
-        backgroundColor: primary.corePrimary3,
-      },
-    },
-
-    primary: {
-      backgroundColor: accents.accentPositive,
-      textColor: primary.corePrimary,
-
-      active: {
-        backgroundColor: accents.accentPositive3,
-      },
-      disabled: {
-        backgroundColor: accents.accentNegative3,
-      },
-    },
-
-    secondary: {
-      backgroundColor: secondary.coreSecondary,
-      textColor: primary.corePrimary,
-
-      active: {
-        backgroundColor: secondary.coreSecondary3,
-      },
-      disabled: {
-        backgroundColor: secondary.coreSecondary4,
-      },
-    },
-    ...Object.entries(accents).reduce((a, [key, { base, darker, lighter }]) => {
-      a[key] = {
-        active: {
-          backgroundColor: darker,
-        },
-        backgroundColor: base,
-        disabled: {
-          backgroundColor: lighter,
-        },
-        textColor: secondary.coreSecondary,
-      }
-      return a
-    }, {}),
-  } as TouchableStyleSet,
 })
 
 type GeneratedTheme = ReturnType<typeof createTheme>
-export type Theme = IBaseTheme & GeneratedTheme
+export type Theme = DefaultTheme & GeneratedTheme
 
 export type ThemeSelector = (theme: Theme) => Color
 
@@ -172,7 +79,7 @@ function isColor(value: string | ThemeSelector): value is Color {
 export const getThemeColor = (theme: Theme, color: Color | ThemeSelector, fallback?: Color) =>
   typeof color === 'function' ? color(theme) || fallback : isColor(color) ? color : fallback
 
-const lightTheme = createTheme(colors.light)
+const lightTheme = createTheme(defaultTheme)
 const darkTheme = createTheme(colors.dark)
 // Manual overrides
 darkTheme.button.secondary.textColor = darkTheme.primary.corePrimary

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { keyframes, Keyframes } from 'styled-components'
+import { keyframes, Keyframes } from 'styled-components/macro'
 import styled from 'styled-components/macro'
 
 const ANIMATION_SPEED = 2

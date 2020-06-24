@@ -1,3 +1,7 @@
+import { DefaultTheme } from 'styled-components/macro'
+import { buttons } from './buttons'
+import { animations } from './animations'
+
 export type Color = string
 
 export interface PrimaryPalette {
@@ -46,7 +50,7 @@ export interface ColorPalettes {
   accents: AccentPalette
 }
 
-export const light: ColorPalettes = {
+export const defaultTheme: DefaultTheme = {
   primary: {
     corePrimary: '#323232',
     corePrimary1: '#383838',
@@ -84,9 +88,12 @@ export const light: ColorPalettes = {
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
   },
+  textColor: '#8f8f8f',
+  ...buttons,
+  ...animations,
 }
 
-export const dark: ColorPalettes = {
+export const dark: DefaultTheme = {
   primary: {
     corePrimary: '#FFFFFF',
     corePrimary1: '#F9F9F9',
@@ -124,9 +131,12 @@ export const dark: ColorPalettes = {
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
   },
+  textColor: '#8f8f8f',
+  ...animations,
+  ...buttons,
 }
 
 export const colors = {
   dark,
-  light,
+  defaultTheme,
 }
