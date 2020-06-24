@@ -50,11 +50,12 @@ import 'typeface-roboto'
  */
 
 import { createGlobalStyle } from 'styled-components'
+import { baselineFontSize } from './fonts'
 
 export default createGlobalStyle`
   :root, body {
     font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 16px;
+    font-size: ${baselineFontSize}px;
     line-height: 1rem;
     text-rendering: geometricPrecision;
     overflow: hidden;

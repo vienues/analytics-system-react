@@ -8,13 +8,13 @@ import {
   MainSearchContent,
   ScrollableArea,
   WrapperContent,
+  SearchGridArea,
 } from '../../common/StyledComponents'
 import { RouterHelpers } from '../../helpers'
 import { MarketSegment } from '../../__generated__/types'
 import { Search, StockPrice } from '../index'
 import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
-import Footer from './Footer'
 
 const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,
@@ -36,7 +36,6 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
   }, [currentSymbol, errorMessage, id])
 
   const renderedRoutes = useMemo(() => {
-    console.log(Object.keys(RouterHelpers.MainRouterItems))
     return Object.keys(RouterHelpers.MainRouterItems).map((route) => (
       <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
     ))
@@ -44,12 +43,13 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
 
   return (
     <WrapperContent>
-      <MainSearchContent>
-        <Search id={id} url={market} market={market} />
-        <StockPrice id={id} market={market} />
+      <MainSearchContent hasNoSearch={!currentSymbol}>
+        <SearchGridArea>
+          <Search id={id} url={market} market={market} />
+          <StockPrice id={id} market={market} />
+        </SearchGridArea>
       </MainSearchContent>
       {renderedErrorMessage || renderedRoutes}
-      <Footer />
     </WrapperContent>
   )
 }
@@ -57,12 +57,12 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
 const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = (props) => {
   return (
     <MainLayoutWrapper>
-      <AppBar />
-      <AppLayoutRoot>
-        <SearchContextProvider>
+      <SearchContextProvider>
+        <AppBar />
+        <AppLayoutRoot>
           <CurrentSymbolLayout {...props} />
-        </SearchContextProvider>
-      </AppLayoutRoot>
+        </AppLayoutRoot>
+      </SearchContextProvider>
     </MainLayoutWrapper>
   )
 }

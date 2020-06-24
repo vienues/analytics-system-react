@@ -2,6 +2,7 @@ import { darken } from 'polished'
 import { keyframes } from 'styled-components'
 
 import { Color, colors, ColorPalettes, PrimaryPalette, SecondaryPalette, AccentPalette } from './colors'
+import { baselineFontSize } from './fonts'
 
 interface IBaseTheme {
   white: Color
@@ -55,7 +56,7 @@ const createTheme = ({ primary, secondary, accents }: ColorPalettes) => ({
   backgroundColor: primary.corePrimary,
   textColor: secondary.coreSecondary,
 
-  fontSizeBaseline: 16,
+  fontSizeBaseline: baselineFontSize,
 
   accents,
   colors,

@@ -4,6 +4,7 @@ import { styled } from '../rt-theme'
 import PopoutIcon from './PopoutIcon'
 import { DragHandle, Heading, PopoutButton, Title } from './StyledComponents'
 import { ContainerServiceSubscribe, ContainerService } from 'platformService/ContainerService'
+import { pxToRems } from 'utils'
 
 type stockCard = 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' | 'stock'
 type currenciesCard = 'abm'
@@ -78,10 +79,9 @@ const DataContents: React.FunctionComponent<IProps> = (props) => {
 const VanillaDataCard = styled.div`
   display: grid;
   grid-template-columns: 100%;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
   overflow-x: hidden;
   overflow-y: hidden;
-  padding: 1.5rem;
+  padding: ${pxToRems(28)} ${pxToRems(32)};
 `
 
 const PopupDataCard = styled.div`
