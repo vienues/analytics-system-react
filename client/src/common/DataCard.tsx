@@ -82,6 +82,7 @@ const VanillaDataCard = styled.div`
   overflow-x: hidden;
   overflow-y: hidden;
   padding: ${pxToRems(28)} ${pxToRems(32)};
+  align-content: baseline;
 `
 
 const PopupDataCard = styled.div`
@@ -106,7 +107,7 @@ const DataCardHeading = styled.div`
   min-width: 100%;
   min-height: 3.5rem;
   background-color: ${({ theme }) => theme.primary.corePrimary};
-  color: ${({ theme }) => theme.textColor};
+  color: ${({ theme }) => theme.textColorPrimary};
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

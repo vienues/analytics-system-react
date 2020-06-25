@@ -29,7 +29,8 @@ const createTheme = ({ accents, primary, secondary, motion, button }: DefaultThe
   white: '#FFFFFF',
 
   backgroundColor: primary.corePrimary,
-  textColor: secondary.coreSecondary,
+  textColorPrimary: secondary.coreSecondary2,
+  textColorSecondary: secondary.coreSecondary5,
 
   fontSizeBaseline: baselineFontSize,
 

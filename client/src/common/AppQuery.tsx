@@ -13,14 +13,13 @@ const LoadableStyle = styled.div<{ minWidth?: string; minHeight?: string }>`
   height: 100%;
   min-height: ${({ minHeight = '100%' }) => minHeight};
   border-radius: 0.1875rem;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
-  color: ${({ theme }) => theme.textColor};
+  color: ${({ theme }) => theme.textColorPrimary};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   opacity: 0.59;
-  fill: ${({ theme }) => theme.textColor};
+  fill: ${({ theme }) => theme.textColorPrimary};
 `
 
 export const AppQueryDefaultLoadingIndicator: React.FunctionComponent<{ renderLoadingHeight?: string }> = React.memo(

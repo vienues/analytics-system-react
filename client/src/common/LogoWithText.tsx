@@ -33,6 +33,6 @@ const LogoWithText: React.FunctionComponent<ILogoProps> = ({ fill = '#000', size
 
 export default styled(LogoWithText)`
   [fill] {
-    fill: ${({ theme }) => theme.textColor};
+    fill: ${({ theme }) => theme.secondary.coreSecondary};
   }
 `
