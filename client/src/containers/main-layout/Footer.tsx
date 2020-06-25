@@ -11,7 +11,8 @@ const Footer = () => (
 
 const FooterWrapper = styled(Banner)`
   border-top: 1px solid ${({ theme }) => theme.primary.corePrimary};
-  z-index: 1000;
+  padding: 1.75rem 2rem;
+  height: 200px;
 `
 
 export default Footer

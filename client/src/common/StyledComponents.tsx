@@ -1,6 +1,9 @@
 import { styled } from '../rt-theme'
 
 import { default as dataCard } from './DataCard'
+import { fonts } from 'rt-theme/fonts'
+import { pxToRems } from 'utils'
+import { css } from 'styled-components'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
@@ -46,7 +49,6 @@ export const Banner = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 4.5rem;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
   color: ${({ theme }) => theme.textColor};
 `
 
@@ -71,8 +73,9 @@ export const LabeledData = styled.div`
 
 export const Title = styled.h1`
   margin-top: 0rem;
-  font-size: 1.25rem;
+  font-size: ${pxToRems(16)};
   font-weight: 300;
+  font-family: ${fonts.secondaryFontFamily};
 `
 
 export const Heading = styled(Title)`
@@ -160,14 +163,16 @@ export const MainInnerContent = styled(ContentBase)`
   align-content: start;
 `
 
-export const MainSearchContent = styled(ContentBase)`
+export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
+  grid-area: Search;
+  display: block;
   font-size: 2rem;
   line-height: 2rem;
   grid-template-columns: 1fr;
   grid-auto-flow: column;
-  padding: 1rem;
+  margin: ${pxToRems(32)} ${pxToRems(22)} ${pxToRems(12)};
   position: relative;
-  border-bottom: solid 2px ${({ theme }) => theme.primary.corePrimary};
+  border-bottom: solid 2px ${({ theme }) => theme.primary.corePrimary3};
   @media (max-width: 900px) {
     font-size: 1rem;
     line-height: 1rem;
@@ -175,6 +180,46 @@ export const MainSearchContent = styled(ContentBase)`
   @media (max-width: 500px) {
     grid-auto-flow: row;
   }
+  ${({ hasNoSearch }) =>
+    hasNoSearch &&
+    css`
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100vh;
+    `}
+`
+
+export const WrapperContent = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-areas: 'Search Search News' 'Main Main News' 'Main Main News';
+`
+
+export const SearchGridArea = styled.div`
+  grid-area: Search;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin-bottom: ${pxToRems(10)};
+`
+
+export const NewsGridArea = styled.div`
+  grid-area: News;
+  background-color: ${({ theme }) => theme.primary.corePrimary2};
+  height: 100vh;
+  overflow-y: auto;
+`
+
+export const MainGridArea = styled.div`
+  grid-area: Main;
+  overflow-y: auto;
+  height: 100vh;
+`
+
+export const MainLayoutWrapper = styled.div`
+  display: grid;
+  grid-template-columns: auto 1fr;
 `
 
 export const AppLayoutRoot = styled.div`
@@ -184,8 +229,7 @@ export const AppLayoutRoot = styled.div`
   max-height: 100vh;
   overflow: hidden;
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  grid-template-columns: 100%;
+  grid-template-columns: 1fr auto;
 `
 
 export const ScrollableArea = styled.div`

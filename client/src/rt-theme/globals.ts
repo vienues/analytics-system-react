@@ -28,6 +28,8 @@ import 'ress'
  */
 import 'typeface-lato'
 import 'typeface-montserrat'
+import 'typeface-merriweather'
+import 'typeface-roboto'
 
 /**
  * Establishing a Baseline
@@ -48,11 +50,12 @@ import 'typeface-montserrat'
  */
 
 import { createGlobalStyle } from 'styled-components'
+import { baselineFontSize } from './fonts'
 
 export default createGlobalStyle`
   :root, body {
-    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 16px;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: ${baselineFontSize}px;
     line-height: 1rem;
     text-rendering: geometricPrecision;
     overflow: hidden;

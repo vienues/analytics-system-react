@@ -8,7 +8,7 @@ const URL = /(http(s)?:\/\/)?/
 const Company: React.FunctionComponent<{ company: CompanyDetails }> = ({
   company: { description, name, symbol, website },
 }) => (
-  <DataCard cardType="company" title="Summary" instrument={symbol}>
+  <DataCard cardType="company" title="Company Summary" instrument={symbol}>
     <Link target="_blank" href={website || ''} onClick={openUrlInBrowser}>
       <Subheading>
         {name} ({symbol})

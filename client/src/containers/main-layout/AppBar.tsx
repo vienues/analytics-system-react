@@ -1,37 +1,31 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import Logo from '../../common/Logo'
-import { Banner, DragHandle, Link, SwitchThemeButton } from '../../common/StyledComponents'
-import OpenfinWindowControls from '../../openfin/OpenfinWindowControls'
-import { styled, ThemeName, useTheme } from '../../rt-theme'
 import { ContainerService } from 'platformService/ContainerService'
+import React, { useContext } from 'react'
+import LogoWithText from '../../common/LogoWithText'
+import OpenfinWindowControls from '../../openfin/OpenfinWindowControls'
+import { useTheme, styled } from '../../rt-theme'
+import { pxToRems } from 'utils'
+import { SearchContext } from '../search/SearchContext'
 
-const ThemeControl = () => {
-  const { themeName, toggleTheme } = useTheme()
+const Sidebar = styled.div<{ hasNoSearch: boolean }>`
+  display: flex;
+  align-items: ${({ hasNoSearch }) => (hasNoSearch ? 'center' : 'flex-start')};
+  justify-content: center;
+  background: ${({ theme }) => theme.primary.corePrimary2};
+  width: ${pxToRems(129)};
+`
+
+const AppBar = () => {
+  const { toggleTheme } = useTheme()
+  const { currentSymbol } = useContext(SearchContext)
+
   return (
-    <SwitchThemeButton style={{ marginRight: '1rem' }} onClick={toggleTheme}>
-      <FontAwesomeIcon
-        title="Toggle theme"
-        icon={[`fa${themeName === ThemeName.Light ? 'r' : 's'}`, 'lightbulb'] as IconProp}
-      />
-    </SwitchThemeButton>
+    <Sidebar hasNoSearch={!currentSymbol}>
+      <div onDoubleClick={toggleTheme}>
+        <LogoWithText size={6} />
+      </div>
+      {ContainerService.agent === 'desktop' && <OpenfinWindowControls />}
+    </Sidebar>
   )
 }
-
-const AppBar = () => (
-  <AppWrapper>
-    <Link target="_blank" href="https://weareadaptive.com/">
-      <Logo size={1.75} />
-    </Link>
-    <DragHandle />
-    <ThemeControl />
-    {ContainerService.agent === 'desktop' && <OpenfinWindowControls />}
-  </AppWrapper>
-)
-
-const AppWrapper = styled(Banner)`
-  grid-template-columns: auto 1fr auto auto;
-`
 
 export default AppBar

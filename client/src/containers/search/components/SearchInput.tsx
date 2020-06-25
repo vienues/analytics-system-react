@@ -2,6 +2,7 @@ import Downshift, { GetItemPropsOptions } from 'downshift'
 import React from 'react'
 import { search_symbols as SearchResult } from '../../../__generated__/types'
 import { styled } from '../../../rt-theme'
+import { fonts } from 'rt-theme/fonts'
 interface ISearchBarProps {
   items: SearchResult[]
   initialItem: SearchResult | null
@@ -66,6 +67,7 @@ const SearchWrapper = styled.div`
   grid-gap: 0.5rem;
   grid-template-columns: 1fr auto;
   position: relative;
+  font-family: ${fonts.secondaryFontFamily};
   & svg {
     color: ${({ theme }) => theme.primary.corePrimary};
   }
