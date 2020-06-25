@@ -1,8 +1,8 @@
 import Downshift, { GetItemPropsOptions } from 'downshift'
 import React from 'react'
 import { search_symbols as SearchResult } from '../../../__generated__/types'
-import { styled } from '../../../rt-theme'
 import { fonts } from 'rt-theme/fonts'
+import styled from 'styled-components/macro'
 interface ISearchBarProps {
   items: SearchResult[]
   initialItem: SearchResult | null

@@ -1,6 +1,6 @@
 import React from 'react'
 import { DataCard, DataContents, Text } from '../../../common/StyledComponents'
-import { styled } from '../../../rt-theme'
+import styled from 'styled-components/macro'
 import { default as NewsItem, INewsArticle } from './NewsItem'
 
 const News: React.FunctionComponent<{ news: INewsArticle[]; id: string }> = ({ news, id }) => (

@@ -1,7 +1,7 @@
 import moment from 'moment/moment'
 import React from 'react'
 import { Link } from '../../../common/StyledComponents'
-import { styled } from '../../../rt-theme'
+import styled from 'styled-components/macro'
 import { openUrlInBrowser } from 'platformService/openUrlInBrowser'
 
 export interface INewsArticle {
@@ -24,7 +24,7 @@ const NewsItem: React.FunctionComponent<INewsArticle> = ({ id, url, headline, da
 )
 
 export const NewsCaption = styled.span`
-  color: ${({ theme, color }) => theme.colors[color || 'white']};
+  color: ${({ theme }) => theme.primary.corePrimary2};
   opacity: 0.59;
   display: block;
   line-height: 1rem;

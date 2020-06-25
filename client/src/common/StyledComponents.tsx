@@ -1,4 +1,4 @@
-import { styled } from '../rt-theme'
+import styled from 'styled-components/macro'
 
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
@@ -49,7 +49,8 @@ export const Banner = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 4.5rem;
-  color: ${({ theme }) => theme.textColor};
+  background-color: ${({ theme }) => theme.primary.corePrimary};
+  color: ${({ theme }) => theme.secondary.coreSecondary};
 `
 
 export const DataContents = styled.div`
@@ -88,7 +89,7 @@ export const Subheading = styled.h2`
 `
 
 export const Caption = styled.span`
-  color: ${({ theme, color }) => theme.colors[color || 'white']};
+  color: ${({ theme, color }) => theme.primary.corePrimary3};
   opacity: 0.59;
   display: block;
   line-height: 1rem;
