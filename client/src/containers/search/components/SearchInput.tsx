@@ -72,7 +72,7 @@ const SearchWrapper = styled.div`
     color: ${({ theme }) => theme.primary.corePrimary};
   }
   > input {
-    color: ${({ theme }) => theme.textColor};
+    color: ${({ theme }) => theme.textColorPrimary};
   }
 `
 

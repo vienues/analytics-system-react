@@ -88,7 +88,8 @@ export const defaultTheme: DefaultTheme = {
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
   },
-  textColor: '#8f8f8f',
+  textColorPrimary: '#F2F2F2',
+  textColorSecondary: '#BBBBBB',
   ...buttons,
   ...animations,
 }
@@ -131,7 +132,8 @@ export const dark: DefaultTheme = {
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
   },
-  textColor: '#8f8f8f',
+  textColorPrimary: '#F2F2F2',
+  textColorSecondary: '#BBBBBB',
   ...animations,
   ...buttons,
 }

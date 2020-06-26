@@ -42,17 +42,6 @@ export const ToolTipChildRight = styled.div`
   color: ${({ theme }) => theme.primary.corePrimary};
 `
 
-export const Banner = styled.div`
-  line-height: 1.25rem;
-  padding: 0.5rem 1rem;
-  display: grid;
-  align-items: center;
-  min-width: 100%;
-  min-height: 4.5rem;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
-  color: ${({ theme }) => theme.secondary.coreSecondary};
-`
-
 export const DataContents = styled.div`
   display: grid;
   grid-gap: 1rem;
@@ -60,10 +49,16 @@ export const DataContents = styled.div`
 
 export const VerticalDataContents = styled(DataContents)`
   grid-auto-flow: column;
-  justify-content: start;
+  justify-content: center;
 `
 
-export const Text = styled.span``
+export const Text = styled.span`
+  color: ${({ theme }) => theme.textColorSecondary};
+`
+
+export const BoldText = styled(Text)`
+  font-weight: 500;
+`
 
 export const LabeledData = styled.div`
   min-height: 1.5rem;
@@ -139,8 +134,8 @@ export const SwitchThemeButton = styled.button`
 
 export const PopoutButton = styled('button')`
   .svg-icon {
-    stroke: ${({ theme }) => theme.textColor};
-    fill: ${({ theme }) => theme.textColor};
+    stroke: ${({ theme }) => theme.textColorPrimary};
+    fill: ${({ theme }) => theme.textColorPrimary};
   }
 `
 
@@ -194,8 +189,12 @@ export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
 export const WrapperContent = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  grid-template-rows: auto 1fr 1fr;
-  grid-template-areas: 'Search Search News' 'Main Main News' 'Main Main News';
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'Search Search News'
+    'Main Main News'
+    'Main Main News';
+  overflow: auto;
 `
 
 export const SearchGridArea = styled.div`
@@ -215,22 +214,12 @@ export const NewsGridArea = styled.div`
 export const MainGridArea = styled.div`
   grid-area: Main;
   overflow-y: auto;
-  height: 100vh;
 `
 
 export const MainLayoutWrapper = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-`
-
-export const AppLayoutRoot = styled.div`
-  width: 100%;
   height: 100%;
-  min-height: 100vh;
-  max-height: 100vh;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr auto;
 `
 
 export const ScrollableArea = styled.div`
@@ -239,4 +228,11 @@ export const ScrollableArea = styled.div`
   flex: 1;
   padding: 1rem;
   padding-bottom: 2rem;
+`
+
+export const FooterStatsWrapper = styled.div`
+  display: grid;
+  grid-area: Main;
+  grid-template-rows: 1fr auto;
+  height: 450px;
 `

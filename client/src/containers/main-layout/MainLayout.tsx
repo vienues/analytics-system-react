@@ -2,7 +2,6 @@ import React, { useContext, useMemo } from 'react'
 import { Route } from 'react-router'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import {
-  AppLayoutRoot,
   MainContent,
   MainLayoutWrapper,
   MainSearchContent,
@@ -59,9 +58,7 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
     <MainLayoutWrapper>
       <SearchContextProvider>
         <AppBar />
-        <AppLayoutRoot>
-          <CurrentSymbolLayout {...props} />
-        </AppLayoutRoot>
+        <CurrentSymbolLayout {...props} />
       </SearchContextProvider>
     </MainLayoutWrapper>
   )
