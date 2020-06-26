@@ -24,7 +24,7 @@ const NewsItem: React.FunctionComponent<INewsArticle> = ({ id, url, headline, da
 )
 
 export const NewsCaption = styled.span`
-  color: ${({ theme }) => theme.primary.corePrimary2};
+  color: ${({ theme }) => theme.secondary.coreSecondary5};
   opacity: 0.59;
   display: block;
   line-height: 1rem;

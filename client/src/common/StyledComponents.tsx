@@ -53,7 +53,7 @@ export const VerticalDataContents = styled(DataContents)`
 `
 
 export const Text = styled.span`
-  color: ${({ theme }) => theme.textColorSecondary};
+  color: ${({ theme }) => theme.textColorPrimary};
 `
 
 export const BoldText = styled(Text)`
@@ -84,7 +84,7 @@ export const Subheading = styled.h2`
 `
 
 export const Caption = styled.span`
-  color: ${({ theme, color }) => theme.primary.corePrimary3};
+  color: ${({ theme }) => theme.secondary.coreSecondary5};
   opacity: 0.59;
   display: block;
   line-height: 1rem;
@@ -245,5 +245,4 @@ export const FooterStatsWrapper = styled.div`
   display: grid;
   grid-area: Main;
   grid-template-rows: 1fr auto;
-  height: 450px;
 `
