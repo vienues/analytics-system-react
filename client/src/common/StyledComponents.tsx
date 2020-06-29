@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
 import { pxToRems } from 'utils'
-import { css } from 'styled-components'
+import { css } from 'styled-components/macro'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
