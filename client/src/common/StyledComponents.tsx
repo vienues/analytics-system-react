@@ -3,7 +3,6 @@ import styled from 'styled-components/macro'
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
 import { pxToRems } from 'utils'
-import { css } from 'styled-components/macro'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
@@ -170,9 +169,11 @@ export const MainInnerContent = styled(ContentBase)`
   align-content: start;
 `
 
-export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
-  grid-area: Search;
-  display: block;
+export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
+  grid-area: ${({ hasNoSearch }) => (hasNoSearch ? 'unset' : 'Search')};
+  grid-column: ${({ hasNoSearch }) => (hasNoSearch ? '1/4' : 'Search')};
+  grid-row: ${({ hasNoSearch }) => (hasNoSearch ? '1/3' : 'Search')};
+  align-self: center;
   font-size: 2rem;
   line-height: 2rem;
   grid-template-columns: 1fr;
@@ -187,19 +188,11 @@ export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
   @media (max-width: 500px) {
     grid-auto-flow: row;
   }
-  ${({ hasNoSearch }) =>
-    hasNoSearch &&
-    css`
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100vh;
-    `}
 `
 
 export const WrapperContent = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     'Search Search News'
@@ -217,6 +210,7 @@ export const SearchGridArea = styled.div`
 
 export const NewsGridArea = styled.div`
   grid-area: News;
+  width: ${pxToRems(350)};
   background-color: ${({ theme }) => theme.primary.corePrimary2};
   height: 100vh;
   overflow-y: auto;

@@ -7,7 +7,7 @@ enum Direction {
 }
 
 const MarketStatus = styled.svg`
-  margin-right: -6px;
+  margin-right: -8px;
 `
 
 const Arrow = styled.path<{ direction: Direction }>`
