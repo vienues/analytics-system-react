@@ -23,9 +23,9 @@ const ApolloMarketsListContainer = () => {
 }
 
 const MarketList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-self: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 `
 
 export default ApolloMarketsListContainer

@@ -15,15 +15,19 @@ const Sidebar = styled.div<{ hasNoSearch: boolean }>`
   width: ${pxToRems(129)};
 `
 
+const LogoWrapper = styled.div`
+  margin: ${pxToRems(32)} 0;
+`
+
 const AppBar = () => {
   const { toggleTheme } = useTheme()
   const { currentSymbol } = useContext(SearchContext)
 
   return (
     <Sidebar hasNoSearch={!currentSymbol}>
-      <div onDoubleClick={toggleTheme}>
-        <LogoWithText size={6} />
-      </div>
+      <LogoWrapper onDoubleClick={toggleTheme}>
+        <LogoWithText size={5.5} />
+      </LogoWrapper>
       {ContainerService.agent === 'desktop' && <OpenfinWindowControls />}
     </Sidebar>
   )

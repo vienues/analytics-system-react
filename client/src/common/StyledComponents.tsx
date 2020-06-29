@@ -53,7 +53,7 @@ export const VerticalDataContents = styled(DataContents)`
 `
 
 export const Text = styled.span`
-  color: ${({ theme }) => theme.textColorSecondary};
+  color: ${({ theme }) => theme.textColorPrimary};
 `
 
 export const BoldText = styled(Text)`
@@ -75,7 +75,7 @@ export const Title = styled.h1`
 `
 
 export const Heading = styled(Title)`
-  margin-bottom: 1.5rem;
+  margin-bottom: ${pxToRems(15)};
 `
 
 export const Subheading = styled.h2`
@@ -84,7 +84,7 @@ export const Subheading = styled.h2`
 `
 
 export const Caption = styled.span`
-  color: ${({ theme, color }) => theme.primary.corePrimary3};
+  color: ${({ theme }) => theme.secondary.coreSecondary5};
   opacity: 0.59;
   display: block;
   line-height: 1rem;
@@ -98,6 +98,17 @@ export const Link = styled.a`
   &:hover {
     text-decoration: underline;
   }
+`
+
+export const ButtonLink = styled.a`
+  cursor: pointer;
+  font-size: ${pxToRems(11)};
+  font-weight: 500;
+  border: 2px solid ${({ theme }) => theme.primary.corePrimary4};
+  border-radius: ${pxToRems(43)};
+  padding: ${pxToRems(2)} ${pxToRems(4)};
+  margin: ${pxToRems(2)};
+  text-align: center;
 `
 
 export const StrongLabel = styled(Text)`
@@ -234,5 +245,4 @@ export const FooterStatsWrapper = styled.div`
   display: grid;
   grid-area: Main;
   grid-template-rows: 1fr auto;
-  height: 450px;
 `
