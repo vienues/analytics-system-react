@@ -47,7 +47,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
     return () => {
       didCancel = true
-      contextListener.then(_listener => _listener?.unsubscribe())
+      contextListener.then((_listener) => _listener?.unsubscribe())
     }
   }, [history])
 
@@ -124,7 +124,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
             })
           }
         })
-        .catch(ex => {
+        .catch((ex) => {
           console.error(ex)
           dispatch({
             type: SearchContextActionTypes.UnrecognizedSymbol,
@@ -156,8 +156,10 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       return <AdaptiveLoader size={50} speed={1.4} />
     }
 
-    const stockSymbols = stockSearch ? stockSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.STOCK })) : []
-    const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.FX })) : []
+    const stockSymbols = stockSearch
+      ? stockSearch.symbols.map((s) => ({ ...s, marketSegment: MarketSegment.STOCK }))
+      : []
+    const fxSymbols = fxSearch ? fxSearch.symbols.map((s) => ({ ...s, marketSegment: MarketSegment.FX })) : []
     const symbols = stockSymbols
       .concat(fxSymbols)
       .sort((a, b) => {

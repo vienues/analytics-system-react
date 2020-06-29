@@ -1,6 +1,6 @@
 import Downshift, { GetItemPropsOptions } from 'downshift'
 import React from 'react'
-import { search_symbols as SearchResult } from '../../../__generated__/types'
+import { search_symbols as SearchResult, MarketSegment } from '../../../__generated__/types'
 import { fonts } from 'rt-theme/fonts'
 import styled from 'styled-components/macro'
 interface ISearchBarProps {
@@ -55,7 +55,8 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
             <small>/</small>
           </>
         )}
-        {item.id.toUpperCase()} - {item.name}
+        {item.marketSegment === MarketSegment.FX ? `${item.id.slice(0, 3)}/${item.id.slice(3)}` : item.id.toUpperCase()}{' '}
+        - {item.name}
       </SearchResultItem>
     ))
   }
