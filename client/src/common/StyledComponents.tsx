@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
@@ -169,10 +169,15 @@ export const MainInnerContent = styled(ContentBase)`
   align-content: start;
 `
 
+const SearchBoxLanding = css`
+  grid-area: unset;
+  grid-column: 1/4;
+  grid-row: 1/3;
+  margin: 0 ${pxToRems(22)};
+`
+
 export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
-  grid-area: ${({ hasNoSearch }) => (hasNoSearch ? 'unset' : 'Search')};
-  grid-column: ${({ hasNoSearch }) => (hasNoSearch ? '1/4' : 'Search')};
-  grid-row: ${({ hasNoSearch }) => (hasNoSearch ? '1/3' : 'Search')};
+  grid-area: Search;
   align-self: center;
   font-size: 2rem;
   line-height: 2rem;
@@ -188,6 +193,7 @@ export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
   @media (max-width: 500px) {
     grid-auto-flow: row;
   }
+  ${({ hasNoSearch }) => hasNoSearch && SearchBoxLanding}
 `
 
 export const WrapperContent = styled.div`
