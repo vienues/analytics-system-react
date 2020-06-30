@@ -5,6 +5,7 @@ import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
+import { MarketDisplay } from './components/StockPrice'
 
 const ApolloStockPriceContainer: React.FunctionComponent<IApolloContainerProps> = ({ id, market }) => {
   const [shouldResubscribe, setShouldResubscribe] = useState(true)
@@ -34,7 +35,13 @@ const ApolloStockPriceContainer: React.FunctionComponent<IApolloContainerProps> 
     }
     if (data && data.getQuotes) {
       const stockPrice = data.getQuotes as StockPriceData
-      return <StockPrice stockPrice={stockPrice} hideChange={market === MarketSegment.FX.toLowerCase()} />
+      return (
+        <StockPrice
+          stockPrice={stockPrice}
+          size={MarketDisplay.Large}
+          hideChange={market === MarketSegment.FX.toLowerCase()}
+        />
+      )
     }
     return <></>
   }

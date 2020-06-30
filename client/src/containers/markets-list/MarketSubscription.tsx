@@ -15,7 +15,7 @@ const MarketSubscription = ({ variables }: { variables: onMarketSubscriptionVari
   }
   if (data) {
     const stockPrice = data.getQuotes
-    return <StockPrice fontSize={0.75} stockPrice={stockPrice} symbol={stockPrice.id} />
+    return <StockPrice stockPrice={stockPrice} symbol={stockPrice.id} />
   }
   return <></>
 }
