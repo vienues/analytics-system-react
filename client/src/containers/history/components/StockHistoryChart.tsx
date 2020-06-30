@@ -33,9 +33,12 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
         <DataCard cardType="history" title={id} instrument={id}>
           <ResponsiveContainer width="99%" height="99%" minHeight={300}>
             <LineChart data={chartData} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
-              <ReferenceLine y={previousClose!} strokeDasharray="4 3" strokeWidth={2} />
-
-              <CartesianGrid vertical={true} verticalFill={['#F2F2F2', '#FFFFFF']} />
+              <CartesianGrid verticalFill={['#F2F2F2', '#FFFFFF']} />
+              <ReferenceLine
+                y={previousClose!}
+                strokeDasharray="4 3"
+                stroke={getThemeColor(themes[themeName || 'light'], (a_theme) => a_theme.accents.accentPrimary)}
+              />
 
               <Line
                 type="linear"
