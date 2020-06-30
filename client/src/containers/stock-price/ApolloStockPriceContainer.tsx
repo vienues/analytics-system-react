@@ -8,7 +8,7 @@ import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 import { MarketDisplay } from './components/StockPrice'
 
 const getCurrentId = (id: string, market?: string) => {
-  if (market && market === MarketSegment.FX.toLowerCase()) {
+  if (market && market.toUpperCase() === MarketSegment.FX) {
     return `${id.slice(0, 3)}/${id.slice(3)}`
   }
   return id

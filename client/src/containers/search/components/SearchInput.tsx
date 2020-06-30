@@ -12,37 +12,26 @@ interface ISearchBarProps {
   placeholder: string
 }
 
-class SearchInput extends React.Component<ISearchBarProps, {}> {
-  public searchResultToOptionString = (item: SearchResult | null): string => (item ? `${item.id} - ${item.name}` : '')
-
-  public render() {
-    return (
-      <Downshift
-        selectedItem={this.props.initialItem}
-        onChange={this.props.onChange}
-        itemToString={this.searchResultToOptionString}
-        defaultHighlightedIndex={0}
-      >
-        {({ getInputProps, getItemProps, getMenuProps, getRootProps, isOpen, inputValue }) => {
-          this.props.onTextChange(inputValue || '')
-          return (
-            <SearchWrapper {...getRootProps()}>
-              <input
-                {...getInputProps({ placeholder: this.props.placeholder })}
-                style={{ width: '100%' }}
-                autoFocus={true}
-                spellCheck={false}
-              />
-              {isOpen ? <SearchResults {...getMenuProps()}>{this.renderItems(getItemProps)}</SearchResults> : null}
-            </SearchWrapper>
-          )
-        }}
-      </Downshift>
-    )
+const SearchInput: React.FC<ISearchBarProps> = ({
+  initialItem,
+  placeholder,
+  items,
+  maxItems,
+  onChange,
+  onTextChange,
+}) => {
+  const getItemId = ({ id, marketSegment }: SearchResult) => {
+    if (marketSegment && marketSegment.toUpperCase() === MarketSegment.FX) {
+      return `${id.slice(0, 3)}/${id.slice(3)}`
+    }
+    return id
   }
 
-  private renderItems(getItemProps: (options: GetItemPropsOptions<SearchResult>) => any) {
-    const { items, maxItems } = this.props
+  const searchResultToOptionString = (item: SearchResult | null): string => {
+    return item ? `${getItemId(item)} - ${item.name}` : ''
+  }
+
+  const renderItems = (getItemProps: (options: GetItemPropsOptions<SearchResult>) => any) => {
     if (items.length === 0) {
       return <SearchResultNoItem>No results found...</SearchResultNoItem>
     }
@@ -55,11 +44,34 @@ class SearchInput extends React.Component<ISearchBarProps, {}> {
             <small>/</small>
           </>
         )}
-        {item.marketSegment === MarketSegment.FX ? `${item.id.slice(0, 3)}/${item.id.slice(3)}` : item.id.toUpperCase()}{' '}
-        - {item.name}
+        {getItemId(item)} - {item.name}
       </SearchResultItem>
     ))
   }
+
+  return (
+    <Downshift
+      selectedItem={initialItem}
+      onChange={onChange}
+      itemToString={searchResultToOptionString}
+      defaultHighlightedIndex={0}
+    >
+      {({ getInputProps, getItemProps, getMenuProps, getRootProps, isOpen, selectedItem, inputValue }) => {
+        onTextChange(inputValue || '')
+        return (
+          <SearchWrapper {...getRootProps()}>
+            <input
+              {...getInputProps({ placeholder: placeholder })}
+              style={{ width: '100%' }}
+              autoFocus={true}
+              spellCheck={false}
+            />
+            {isOpen ? <SearchResults {...getMenuProps()}>{renderItems(getItemProps)}</SearchResults> : null}
+          </SearchWrapper>
+        )
+      }}
+    </Downshift>
+  )
 }
 
 const SearchWrapper = styled.div`
