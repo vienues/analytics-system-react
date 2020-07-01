@@ -1,9 +1,8 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
 import { pxToRems } from 'utils'
-import { css } from 'styled-components'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
@@ -53,7 +52,7 @@ export const VerticalDataContents = styled(DataContents)`
 `
 
 export const Text = styled.span`
-  color: ${({ theme }) => theme.textColorSecondary};
+  color: ${({ theme }) => theme.textColorPrimary};
 `
 
 export const BoldText = styled(Text)`
@@ -75,7 +74,7 @@ export const Title = styled.h1`
 `
 
 export const Heading = styled(Title)`
-  margin-bottom: 1.5rem;
+  margin-bottom: ${pxToRems(15)};
 `
 
 export const Subheading = styled.h2`
@@ -84,7 +83,7 @@ export const Subheading = styled.h2`
 `
 
 export const Caption = styled.span`
-  color: ${({ theme, color }) => theme.primary.corePrimary3};
+  color: ${({ theme }) => theme.secondary.coreSecondary5};
   opacity: 0.59;
   display: block;
   line-height: 1rem;
@@ -98,6 +97,17 @@ export const Link = styled.a`
   &:hover {
     text-decoration: underline;
   }
+`
+
+export const ButtonLink = styled.a`
+  cursor: pointer;
+  font-size: ${pxToRems(11)};
+  font-weight: 500;
+  border: 2px solid ${({ theme }) => theme.primary.corePrimary4};
+  border-radius: ${pxToRems(43)};
+  padding: ${pxToRems(2)} ${pxToRems(4)};
+  margin: ${pxToRems(2)};
+  text-align: center;
 `
 
 export const StrongLabel = styled(Text)`
@@ -159,9 +169,16 @@ export const MainInnerContent = styled(ContentBase)`
   align-content: start;
 `
 
-export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
+const SearchBoxLanding = css`
+  grid-area: unset;
+  grid-column: 1/4;
+  grid-row: 1/3;
+  margin: 0 ${pxToRems(22)};
+`
+
+export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
   grid-area: Search;
-  display: block;
+  align-self: center;
   font-size: 2rem;
   line-height: 2rem;
   grid-template-columns: 1fr;
@@ -176,19 +193,12 @@ export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
   @media (max-width: 500px) {
     grid-auto-flow: row;
   }
-  ${({ hasNoSearch }) =>
-    hasNoSearch &&
-    css`
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100vh;
-    `}
+  ${({ hasNoSearch }) => hasNoSearch && SearchBoxLanding}
 `
 
 export const WrapperContent = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     'Search Search News'
@@ -206,6 +216,7 @@ export const SearchGridArea = styled.div`
 
 export const NewsGridArea = styled.div`
   grid-area: News;
+  width: ${pxToRems(350)};
   background-color: ${({ theme }) => theme.primary.corePrimary2};
   height: 100vh;
   overflow-y: auto;
@@ -234,5 +245,4 @@ export const FooterStatsWrapper = styled.div`
   display: grid;
   grid-area: Main;
   grid-template-rows: 1fr auto;
-  height: 450px;
 `

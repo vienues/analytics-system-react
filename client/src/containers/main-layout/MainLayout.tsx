@@ -14,6 +14,7 @@ import { MarketSegment } from '../../__generated__/types'
 import { Search, StockPrice } from '../index'
 import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
+import Footer from './Footer'
 
 const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,
@@ -49,6 +50,7 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
         </SearchGridArea>
       </MainSearchContent>
       {renderedErrorMessage || renderedRoutes}
+      <Footer hasNoSearch={!currentSymbol} />
     </WrapperContent>
   )
 }

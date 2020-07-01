@@ -1,7 +1,8 @@
 import React from 'react'
 import { CompanyQuery_stock_company as CompanyDetails } from '../../../__generated__/types'
-import { Caption, DataCard, Link, OpaqueLabel, Subheading } from '../../../common/StyledComponents'
+import { Caption, DataCard, Link, Subheading } from '../../../common/StyledComponents'
 import { openUrlInBrowser } from 'platformService/openUrlInBrowser'
+import { CompanyDescription } from './Company.styles'
 
 const URL = /(http(s)?:\/\/)?/
 
@@ -15,7 +16,7 @@ const Company: React.FunctionComponent<{ company: CompanyDetails }> = ({
       </Subheading>
       <Caption>{(website || '').replace(URL, '')}</Caption>
     </Link>
-    <OpaqueLabel>{description}</OpaqueLabel>
+    <CompanyDescription>{description}</CompanyDescription>
   </DataCard>
 )
 

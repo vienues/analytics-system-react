@@ -1,7 +1,7 @@
 import { MarketStatusIcon } from 'assets/icons'
 import React from 'react'
 import { Text } from '../../../common/StyledComponents'
-import { StockPriceChangeWrapper, StockPriceWrapper, SymbolText } from './StockPrice.styles'
+import { LatestPrice, StockPriceChangeWrapper, StockPriceWrapper, SymbolText } from './StockPrice.styles'
 
 export interface IStockPriceData {
   change: number | null
@@ -9,14 +9,19 @@ export interface IStockPriceData {
   latestPrice: number | null
 }
 
-interface IStockPriceProps {
+export enum MarketDisplay {
+  Large = 'large',
+  Small = 'small',
+}
+
+export interface IStockPriceProps {
   symbol?: string
-  fontSize?: number
+  size?: MarketDisplay
   stockPrice: IStockPriceData | null
   hideChange?: Boolean
 }
 
-const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSize, stockPrice, hideChange }) => {
+const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, size, stockPrice, hideChange }) => {
   if (stockPrice === null) {
     return <div>N/A</div>
   }
@@ -36,9 +41,9 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, fontSiz
   }
 
   return (
-    <StockPriceWrapper size={fontSize}>
+    <StockPriceWrapper size={size}>
       <SymbolText>{symbol}</SymbolText>
-      <Text>${fixedFormat(latestPrice)}</Text>
+      <LatestPrice>${fixedFormat(latestPrice)}</LatestPrice>
       <StockPriceChangeWrapper isHidden={hideChange} change={change ?? 0}>
         <MarketStatusIcon change={change ?? 0} />
         <Text>{fixedFormat(change)}</Text>
