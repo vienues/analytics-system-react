@@ -7,4 +7,7 @@ export default class SearchResult {
 
   @Field()
   public name!: string
+
+  @Field()
+  public marketSegment!: string
 }

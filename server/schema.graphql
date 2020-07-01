@@ -182,6 +182,7 @@ type Quote {
 type SearchResult {
   id: ID!
   name: String!
+  marketSegment: String!
 }
 
 type Stats {

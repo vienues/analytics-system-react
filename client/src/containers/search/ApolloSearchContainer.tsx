@@ -47,13 +47,13 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
 
     return () => {
       didCancel = true
-      contextListener.then(_listener => _listener?.unsubscribe())
+      contextListener.then((_listener) => _listener?.unsubscribe())
     }
   }, [history])
 
   const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
 
-  const placeholderTest = 'Enter a stock, symbol, or currency pair...'
+  const placeholderText = 'Enter a stock, symbol, or currency pair...'
 
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
@@ -87,23 +87,18 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   useEffect(() => {
     let refetchTimeout: number = 0
     if (searching && dispatch && id) {
-      let foundSymbol: search_symbols | undefined
       apolloClient
         .query<searchQuery, searchQueryVariables>({
           errorPolicy: 'all',
           query: SearchConnection,
           variables: { id: id.toUpperCase(), market: market.toUpperCase() },
         })
-        .then((result: any) => {
+        .then((result) => {
           if (result.data && result.data.symbol) {
-            foundSymbol = {
-              id: result.data.symbol.id,
-              name: result.data.symbol.name,
-            } as search_symbols
-            if (foundSymbol.id === id.toUpperCase()) {
+            if (result.data.symbol.id === id.toUpperCase()) {
               dispatch({
                 type: SearchContextActionTypes.FoundSymbol,
-                payload: { currentSymbol: foundSymbol },
+                payload: { currentSymbol: result.data.symbol },
               })
               return Promise.resolve()
             } else {
@@ -124,14 +119,12 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
             })
           }
         })
-        .catch(ex => {
+        .catch((ex) => {
           console.error(ex)
           dispatch({
             type: SearchContextActionTypes.UnrecognizedSymbol,
             payload: {
-              errorMessage: (
-                <SearchErrorCard id={id} market={market} foundSymbol={foundSymbol} onClick={handleChange} />
-              ),
+              errorMessage: <SearchErrorCard id={id} market={market} foundSymbol={undefined} onClick={handleChange} />,
             },
           })
         })
@@ -156,8 +149,10 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       return <AdaptiveLoader size={50} speed={1.4} />
     }
 
-    const stockSymbols = stockSearch ? stockSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.STOCK })) : []
-    const fxSymbols = fxSearch ? fxSearch.symbols.map(s => ({ ...s, marketSegment: MarketSegment.FX })) : []
+    const stockSymbols = stockSearch
+      ? stockSearch.symbols.map((s) => ({ ...s, marketSegment: MarketSegment.STOCK }))
+      : []
+    const fxSymbols = fxSearch ? fxSearch.symbols.map((s) => ({ ...s, marketSegment: MarketSegment.FX })) : []
     const symbols = stockSymbols
       .concat(fxSymbols)
       .sort((a, b) => {
@@ -181,7 +176,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         maxItems={8}
         onChange={handleChange}
         onTextChange={onTextChange}
-        placeholder={placeholderTest}
+        placeholder={placeholderText}
       />
     )
   }
