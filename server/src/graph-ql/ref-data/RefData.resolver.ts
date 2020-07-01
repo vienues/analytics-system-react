@@ -9,16 +9,16 @@ export interface IAutoResolvedField {
   id: string
 }
 
-@Resolver(of => SearchResultSchema)
+@Resolver((of) => SearchResultSchema)
 export default class RefData {
   constructor(private readonly cryptoService: CryptoService, private readonly fxService: FxService) {}
 
-  @Query(returns => SearchResultSchema)
+  @Query((returns) => SearchResultSchema)
   public async symbol(@Arg('id') id: string, @Arg('market') market: MarketSegments) {
     switch (market.toLowerCase()) {
       case MarketSegments.STOCK: {
         const results = search(id)
-        return results.find(s => s.id == id) || results[0]
+        return results.find((s) => s.id === id) || results[0]
       }
       case MarketSegments.CRYPTO: {
         return this.cryptoService.getSymbol(id)
@@ -32,7 +32,7 @@ export default class RefData {
     }
   }
 
-  @Query(retuns => [SearchResultSchema])
+  @Query((retuns) => [SearchResultSchema])
   public async symbols(@Args() { text, marketSegment }: SearchQueryArgs) {
     switch (marketSegment.toLowerCase()) {
       case MarketSegments.STOCK: {

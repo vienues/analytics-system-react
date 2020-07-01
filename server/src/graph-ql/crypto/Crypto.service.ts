@@ -5,6 +5,7 @@ import { IAdaptiveCtx } from '../../types'
 import { QuoteSchema } from '../quote'
 import SearchResult from '../stock/SearchResult.schema'
 import { CryptoSchema } from './'
+import { MarketSegments } from '../ref-data/SearchQueryArgs'
 
 interface ISymbolData {
   [key: string]: {
@@ -27,14 +28,14 @@ export default class {
 
   public getSymbol(id: string): SearchResult {
     const symbolData = data as ISymbolData
-    return { id, name: symbolData[id].name }
+    return { id, name: symbolData[id].name, marketSegment: MarketSegments.CRYPTO }
   }
 
   public getSymbols(filterText: string): SearchResult[] {
     const symbolData = data as ISymbolData
     return Object.keys(symbolData)
-      .filter(key => key.includes(filterText) || symbolData[key].name.includes(filterText))
-      .map(key => ({ id: key, name: symbolData[key].name }))
+      .filter((key) => key.includes(filterText) || symbolData[key].name.includes(filterText))
+      .map((key) => ({ id: key, name: symbolData[key].name, marketSegment: MarketSegments.CRYPTO }))
 
     // try {
     //   const retVal = (await iex.iexApiRequest(`ref-data/crypto/symbols`)) as Promise<CryptoSchema>

@@ -2,7 +2,6 @@
   "name": "@adaptive-insights/server",
   "version": "1.0.0",
   "description": "",
-  "private": true,
   "scripts": {
     "start": "tsc && babel-node lib/index.js",
     "start:prod": "babel-node lib/index.js",
