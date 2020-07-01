@@ -35,7 +35,7 @@
     "generate-server-schema": "node ./server/src/generateSchema.js",
     "generate-client-schema": "./client/node_modules/.bin/apollo client:download-schema ./client/src/schema.json",
     "generate-client-typings": "./client/node_modules/.bin/apollo client:codegen ./client/src/__generated__/types.ts --outputFlat --includes ./client/src/**/*.graphql --addTypename --localSchemaFile=./client/src/schema.json --target=typescript",
-    "generate-schema-and-typings": "npm generate-server-schema && npm generate-client-schema && npm run generate-client-typings"
+    "generate-schema-and-typings": "npm run generate-server-schema && npm run generate-client-schema && npm run generate-client-typings"
   },
   "author": "",
   "license": "ISC",
