@@ -3,6 +3,7 @@ import * as R from 'ramda'
 import data from '../mock-data/referenceSymbols.json'
 import { IRefSymbol } from '../types'
 import logger from './logger'
+import { MarketSegments } from '../graph-ql/ref-data/SearchQueryArgs'
 
 type SearchResult<T> = { item?: T } & { score: number }
 
@@ -30,7 +31,7 @@ const INDEX = new Fuse<IRefSymbol>(data.slice(0, 1000), {
 })
 
 const SYMBOL_MAP: Map<string, IRefSymbol[]> = data.reduce((acc, symbol) => {
-  R.times(R.add(1), symbol.id.length).forEach(index => {
+  R.times(R.add(1), symbol.id.length).forEach((index) => {
     const id = symbol.id.slice(0, index)
     const target = acc.get(id) || []
     if (target.length <= 5 || id === symbol.id) {
@@ -56,7 +57,9 @@ export function search(term = '') {
     ...(SYMBOL_MAP.get(term.toUpperCase()) || []),
   ]
 
-  return R.uniqBy(s => s.id, results.filter(Boolean)).slice(0, maxReturnLength + 1)
+  return R.uniqBy((s) => s.id, results.filter(Boolean))
+    .map((symbol) => ({ marketSegment: MarketSegments.STOCK, ...symbol }))
+    .slice(0, maxReturnLength + 1)
 }
 
 export default search

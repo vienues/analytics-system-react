@@ -1,4 +1,6 @@
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -28,7 +30,9 @@ export interface CompanyQueryVariables {
   id: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -53,7 +57,9 @@ export interface ABMHistoryQueryVariables {
   to: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -102,7 +108,9 @@ export interface HistoryQueryVariables {
   id: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -128,7 +136,9 @@ export interface IntradayQueryVariables {
   symbol: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -154,7 +164,9 @@ export interface onIntradayPricingSubscriptionVariables {
   symbol: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -194,7 +206,9 @@ export interface StockHistoryQueryVariables {
   id: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -214,7 +228,9 @@ export interface MarketQuery {
   markets: MarketQuery_markets[]
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -237,7 +253,9 @@ export interface onMarketSubscriptionVariables {
   markets: string[]
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -263,7 +281,9 @@ export interface NewsQueryVariables {
   id: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -284,7 +304,41 @@ export interface PeersQueryVariables {
   id: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SeachbarQuery
+// ====================================================
+
+export interface SeachbarQuery_stock_company {
+  __typename: 'Company'
+  id: string
+  symbol: string
+  name: string | null
+  website: string | null
+  description: string | null
+}
+
+export interface SeachbarQuery_stock {
+  __typename: 'Stock'
+  id: string
+  company: SeachbarQuery_stock_company
+}
+
+export interface SeachbarQuery {
+  stock: SeachbarQuery_stock
+}
+
+export interface SeachbarQueryVariables {
+  id: string
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -294,6 +348,8 @@ export interface PeersQueryVariables {
 export interface searchQuery_symbol {
   __typename: 'SearchResult'
   id: string
+  name: string
+  marketSegment: string
 }
 
 export interface searchQuery {
@@ -305,7 +361,9 @@ export interface searchQueryVariables {
   market: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -316,7 +374,7 @@ export interface search_symbols {
   __typename: 'SearchResult'
   id: string
   name: string
-  marketSegment?: MarketSegment
+  marketSegment: string
 }
 
 export interface search {
@@ -328,7 +386,9 @@ export interface searchVariables {
   marketSegment: MarketSegment
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -372,7 +432,9 @@ export interface StatsQueryVariables {
   id: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -395,7 +457,9 @@ export interface onStockPriceSubscriptionVariables {
   markets: string[]
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -416,7 +480,9 @@ export interface Company {
   company: Company_company
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -447,7 +513,9 @@ export interface History {
   quote: History_quote
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -465,7 +533,9 @@ export interface Intraday {
   numberOfTrades: number | null
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -482,7 +552,9 @@ export interface News {
   related: string
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -494,7 +566,9 @@ export interface Peers {
   peers: string[]
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -529,7 +603,9 @@ export interface Stats {
   quote: Stats_quote
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -542,8 +618,8 @@ export interface Stats {
 export enum MarketSegment {
   BOND = 'BOND',
   CRYPTO = 'CRYPTO',
-  FX = 'FX',
   FUTURE = 'FUTURE',
+  FX = 'FX',
   INDEX = 'INDEX',
   STOCK = 'STOCK',
 }

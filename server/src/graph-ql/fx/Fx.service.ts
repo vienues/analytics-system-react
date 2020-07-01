@@ -7,6 +7,7 @@ import logger from '../../services/logger'
 import { IAdaptiveCtx } from '../../types'
 import SearchResult from '../stock/SearchResult.schema'
 import { FxSymbolsSchema } from './'
+import { MarketSegments } from '../ref-data/SearchQueryArgs'
 
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
@@ -62,14 +63,14 @@ export default class {
 
   public getSymbol(id: string): SearchResult {
     const symbolData = data as ISymbolData
-    return { id, ...symbolData[id] }
+    return { id, marketSegment: MarketSegments.FX, ...symbolData[id] }
   }
 
   public getSymbols(filterText: string): SearchResult[] {
     const symbolData = data as ISymbolData
     return Object.keys(symbolData)
-      .filter(key => key.includes(filterText) || symbolData[key].name.includes(filterText))
-      .map(key => ({ id: key, ...symbolData[key] }))
+      .filter((key) => key.includes(filterText) || symbolData[key].name.includes(filterText))
+      .map((key) => ({ id: key, marketSegment: MarketSegments.FX, ...symbolData[key] }))
   }
 
   public async getPriceHistory(from: string, to: string) {
