@@ -32,7 +32,7 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
       {({ themeName }) => (
         <DataCard cardType="history" title={id} instrument={id}>
           <ResponsiveContainer width="99%" height="99%" minHeight={300}>
-            <LineChart data={chartData} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
+            <LineChart data={chartData} margin={{ left: -30, top: 0, right: 0, bottom: 0 }}>
               <CartesianGrid verticalFill={['#F2F2F2', '#FFFFFF']} />
               <ReferenceLine
                 y={previousClose!}
@@ -52,7 +52,7 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
                 axisLine={{ stroke: '#DFDFDF' }}
                 dataKey="label"
                 interval={round(chartData.length / 12)}
-                tick={{ fontSize: 10 }}
+                tick={{ fontSize: 12 }}
                 tickSize={12}
               />
               <YAxis
@@ -61,7 +61,7 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
                 tickLine={{ stroke: '#DFDFDF' }}
                 allowDecimals={true}
                 domain={[lowestPrice!, highestPrice!]}
-                tick={{ fontSize: 10 }}
+                tick={{ fontSize: 12 }}
                 tickFormatter={tickFormatter}
                 orientation="left"
               />

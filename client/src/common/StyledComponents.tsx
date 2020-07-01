@@ -71,6 +71,7 @@ export const Title = styled.h1`
   font-size: ${pxToRems(16)};
   font-weight: 300;
   font-family: ${fonts.secondaryFontFamily};
+  color: ${({ theme }) => theme.textColorSecondary};
 `
 
 export const Heading = styled(Title)`
@@ -78,8 +79,8 @@ export const Heading = styled(Title)`
 `
 
 export const Subheading = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: ${pxToRems(13)};
+  font-weight: 500;
 `
 
 export const Caption = styled.span`
@@ -217,6 +218,7 @@ export const SearchGridArea = styled.div`
 export const NewsGridArea = styled.div`
   grid-area: News;
   width: ${pxToRems(350)};
+  padding: 0 ${pxToRems(16)};
   background-color: ${({ theme }) => theme.primary.corePrimary2};
   height: 100vh;
   overflow-y: auto;

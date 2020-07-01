@@ -15,7 +15,7 @@ declare module 'styled-components/macro' {
       slow: IMotion
     }
 
-    textColorPrimary: Color
-    textColorSecondary: Color
+    textColorPrimary?: Color
+    textColorSecondary?: Color
   }
 }
