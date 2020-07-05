@@ -17,7 +17,7 @@ Reactive Analytics server uses experimental decorators to provide meta-data for 
 
 ### Naming Convention
 
-- All foldres named using kebab case
+- All folders named using kebab case
 - All files containing experimental decorators or GraphQL scalars are title case
 - All other files are camel case
 - Files containing Queries, Subscriptions, Mutations, and Field Resolvers are named {DataType}**.resolver.ts**
