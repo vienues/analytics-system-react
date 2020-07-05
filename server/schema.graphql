@@ -17,9 +17,7 @@ type Crypto {
   quote: Quote!
 }
 
-"""
-Date in ISO 8601 format, i.e. YYYY-MM-DD
-"""
+"""Date in ISO 8601 format, i.e. YYYY-MM-DD"""
 scalar Date
 
 """
@@ -72,14 +70,10 @@ type Intraday {
   numberOfTrades: Int
 }
 
-"""
-Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ
-"""
+"""Date and time in ISO 8601 format, i.e. YYYY-MM-DDTHH:mm:ss.sssZ"""
 scalar ISODateTime
 
-"""
-The type of market
-"""
+"""The type of market"""
 enum MarketSegment {
   FX
   STOCK
@@ -262,7 +256,5 @@ type Tick {
   marketChangeOverTime: Float!
 }
 
-"""
-Hours and minutes in ISO 8601 format HH:mm
-"""
+"""Hours and minutes in ISO 8601 format HH:mm"""
 scalar Time

@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from 'type-graphql'
+import { MarketSegments } from '../ref-data/SearchQueryArgs'
 
 @ObjectType()
 export default class SearchResult {
@@ -9,5 +10,5 @@ export default class SearchResult {
   public name!: string
 
   @Field()
-  public marketSegment!: string
+  public marketSegment!: MarketSegments
 }
