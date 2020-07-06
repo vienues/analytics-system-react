@@ -76,7 +76,7 @@ npm run generate-mock-data bac ge amd
 - [Apollo GraphQL](https://www.apollographql.com/) - GraphQL framework to allow rapid and reliable development of client-server communication
 - [Express](https://expressjs.com/) - Web server for hosting the GraphQL HTTP endpoints
 - [subscriptions-transport-ws](https://github.com/apollographql/subscriptions-transport-ws) - WebSocket communication for GraphQL
-- [TypeGraphQL](https://typegraphql.ml/) - Generate GraphQL schemas from TypeScript classes
+- [TypeGraphQL](https://typegraphql.com/) - Generate GraphQL schemas from TypeScript classes
 - [React](https://reactjs.org/) - Interface framework
 - [Styled-components](https://www.styled-components.com/) - Interface styling framework
 
@@ -88,7 +88,7 @@ When working with the Adaptive Insight repo, there are many add-ons that make de
 
 - **Apollo GraphQL** - Rich editor support for GraphQL client and server development that seamlessly integrates with the Apollo platform
 - **Debugger for Chrome** - Debug your JavaScript code in the Chrome browser, or any other target that supports the Chrome Debugger protocol.
-- **ESLine** - Integrates ESLint JavaScript into VS Code.
+- **ESLint** - Integrates ESLint JavaScript into VS Code.
 - **jshint** - Integrates JSHint into VS Code. JSHint is a linter for JavaScript
 - **JSON to TS** - Convert JSON object to typescript interfaces
 - **markdownlint** - Markdown linting and style checking for Visual Studio Code

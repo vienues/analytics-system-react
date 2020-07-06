@@ -1,5 +1,4 @@
 import { ArgsType, Field, Int, registerEnumType } from 'type-graphql'
-import { IdInputArgs } from '../GenericArgTypes'
 
 export enum MarketSegments {
   FX = 'fx',

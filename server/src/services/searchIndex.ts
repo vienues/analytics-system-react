@@ -2,8 +2,8 @@ import Fuse from 'fuse.js'
 import * as R from 'ramda'
 import data from '../mock-data/referenceSymbols.json'
 import { IRefSymbol } from '../types'
-import logger from './logger'
 import { MarketSegments } from '../graph-ql/ref-data/SearchQueryArgs'
+import SearchResultSchema from '../graph-ql/stock/SearchResult.schema'
 
 type SearchResult<T> = { item?: T } & { score: number }
 
@@ -31,7 +31,7 @@ const INDEX = new Fuse<IRefSymbol>(data.slice(0, 1000), {
 })
 
 const SYMBOL_MAP: Map<string, IRefSymbol[]> = data.reduce((acc, symbol) => {
-  R.times(R.add(1), symbol.id.length).forEach((index) => {
+  R.times(R.add(1), symbol.id.length).forEach(index => {
     const id = symbol.id.slice(0, index)
     const target = acc.get(id) || []
     if (target.length <= 5 || id === symbol.id) {
@@ -41,7 +41,7 @@ const SYMBOL_MAP: Map<string, IRefSymbol[]> = data.reduce((acc, symbol) => {
   return acc
 }, new Map())
 
-export function search(term = '') {
+export function search(term = ''): SearchResultSchema[] {
   const maxReturnLength: number = 8
 
   if (!term) {
@@ -49,7 +49,7 @@ export function search(term = '') {
   }
 
   if (term.length === 1) {
-    return SYMBOL_MAP.get(term.toUpperCase()) || []
+    return SYMBOL_MAP.get(term.toUpperCase())?.map(symbol => ({ marketSegment: MarketSegments.STOCK, ...symbol })) || []
   }
 
   const results = [
@@ -57,8 +57,8 @@ export function search(term = '') {
     ...(SYMBOL_MAP.get(term.toUpperCase()) || []),
   ]
 
-  return R.uniqBy((s) => s.id, results.filter(Boolean))
-    .map((symbol) => ({ marketSegment: MarketSegments.STOCK, ...symbol }))
+  return R.uniqBy(s => s.id, results.filter(Boolean))
+    .map(symbol => ({ marketSegment: MarketSegments.STOCK, ...symbol }))
     .slice(0, maxReturnLength + 1)
 }
 
