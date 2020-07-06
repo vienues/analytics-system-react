@@ -11,13 +11,15 @@ import {
   CartesianGrid,
 } from 'recharts'
 import { StockHistoryQuery } from '../../../__generated__/types'
-import { ThemeConsumer, themes, getThemeColor } from '../../../rt-theme'
+import { themes, getThemeColor, useTheme } from '../../../rt-theme'
 import { DataCard } from 'common/StyledComponents'
 
 export const StockHistoryChart = (props: StockHistoryQuery) => {
   const {
     stock: { id, quote },
   } = props
+  const { themeName } = useTheme()
+
   const previousClose = quote.previousClose
   const chartData = props.stock.chart.filter(
     ({ low, average, high }) => (low && low > 0) || (average && average > 0) || (high && high > 0),
@@ -27,48 +29,40 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
   const { high: highestPrice } = maxBy(chartData, 'high') || { high: undefined }
   const tickFormatter: TickFormatterFunction = (tick: number) => (tick < 100 ? tick.toFixed(2) : tick.toFixed(0))
 
-  return (
-    <ThemeConsumer>
-      {({ themeName }) => (
-        <DataCard cardType="history" title={id} instrument={id}>
-          <ResponsiveContainer width="99%" height="99%" minHeight={300}>
-            <LineChart data={chartData} margin={{ left: -30, top: 0, right: 0, bottom: 0 }}>
-              <CartesianGrid verticalFill={['#F2F2F2', '#FFFFFF']} />
-              <ReferenceLine
-                y={previousClose!}
-                strokeDasharray="4 3"
-                stroke={getThemeColor(themes[themeName || 'light'], (a_theme) => a_theme.accents.accentPrimary)}
-              />
+  const strokeColor = getThemeColor(themes[themeName || 'light'], a_theme => a_theme.accents.accentPrimary) ?? '#FFFFFF'
+  const backgroundPrimary =
+    getThemeColor(themes[themeName || 'light'], a_theme => a_theme.secondary.coreSecondary) ?? '#FFFFFF'
+  const backgroundSecondary =
+    getThemeColor(themes[themeName || 'light'], a_theme => a_theme.secondary.coreSecondary2) ?? '#FFFFFF'
 
-              <Line
-                type="linear"
-                dot={false}
-                strokeWidth={2}
-                dataKey="average"
-                stroke={getThemeColor(themes[themeName || 'light'], (a_theme) => a_theme.accents.accentPrimary)}
-              />
-              <XAxis
-                tickLine={{ stroke: '#DFDFDF' }}
-                axisLine={{ stroke: '#DFDFDF' }}
-                dataKey="label"
-                interval={round(chartData.length / 12)}
-                tick={{ fontSize: 12 }}
-                tickSize={12}
-              />
-              <YAxis
-                type="number"
-                axisLine={{ stroke: '#DFDFDF' }}
-                tickLine={{ stroke: '#DFDFDF' }}
-                allowDecimals={true}
-                domain={[lowestPrice!, highestPrice!]}
-                tick={{ fontSize: 12 }}
-                tickFormatter={tickFormatter}
-                orientation="left"
-              />
-            </LineChart>
-          </ResponsiveContainer>
-        </DataCard>
-      )}
-    </ThemeConsumer>
+  return (
+    <DataCard cardType="history" title={id} instrument={id}>
+      <ResponsiveContainer width="99%" height="99%" minHeight={300}>
+        <LineChart data={chartData} margin={{ left: -30, top: 0, right: 0, bottom: 0 }}>
+          <CartesianGrid verticalFill={[backgroundSecondary, backgroundPrimary]} />
+          <ReferenceLine y={previousClose!} strokeDasharray="4 3" stroke={strokeColor} />
+
+          <Line type="linear" dot={false} strokeWidth={2} dataKey="average" stroke={strokeColor} />
+          <XAxis
+            tickLine={{ stroke: '#DFDFDF' }}
+            axisLine={{ stroke: '#DFDFDF' }}
+            dataKey="label"
+            interval={round(chartData.length / 12)}
+            tick={{ fontSize: 12 }}
+            tickSize={12}
+          />
+          <YAxis
+            type="number"
+            axisLine={{ stroke: '#DFDFDF' }}
+            tickLine={{ stroke: '#DFDFDF' }}
+            allowDecimals={true}
+            domain={[lowestPrice!, highestPrice!]}
+            tick={{ fontSize: 12 }}
+            tickFormatter={tickFormatter}
+            orientation="left"
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </DataCard>
   )
 }

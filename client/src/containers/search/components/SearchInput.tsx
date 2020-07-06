@@ -82,7 +82,7 @@ const SearchWrapper = styled.div`
   position: relative;
   font-family: ${fonts.secondaryFontFamily};
   & svg {
-    color: ${({ theme }) => theme.primary.corePrimary};
+    color: ${({ theme }) => theme.secondary.coreSecondary};
   }
   > input {
     color: ${({ theme }) => theme.textColorPrimary};
@@ -91,9 +91,9 @@ const SearchWrapper = styled.div`
 
 const SearchResults = styled.menu`
   position: absolute;
-  background: ${({ theme }) => theme.primary.corePrimary};
+  background: ${({ theme }) => theme.secondary.coreSecondary};
   z-index: 1000;
-  border: solid 1px ${({ theme }) => theme.secondary.coreSecondary};
+  border: solid 1px ${({ theme }) => theme.primary.corePrimary};
   border-radius: 5px;
   margin-top: 5px;
   top: 2.25rem;
@@ -117,8 +117,8 @@ const SearchResultItem = styled(SearchResultItemBase)`
     padding-right: 5px;
   }
   &[aria-selected='true'] {
-    color: ${({ theme }) => theme.primary.corePrimary};
-    background: ${({ theme }) => theme.secondary.coreSecondary};
+    color: ${({ theme }) => theme.secondary.coreSecondary};
+    background: ${({ theme }) => theme.primary.corePrimary};
   }
 `
 

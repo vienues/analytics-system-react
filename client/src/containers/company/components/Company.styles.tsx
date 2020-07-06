@@ -18,5 +18,5 @@ export const CompanyLink = styled.a`
 `
 
 export const CompanyDataCard = styled(SidebarDataCard)`
-  border-top: ${({ theme }) => `1px solid ${theme.primary.corePrimary4}`};
+  border-top: ${({ theme }) => `1px solid ${theme.secondary.coreSecondary4}`};
 `

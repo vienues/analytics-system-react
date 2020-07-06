@@ -66,7 +66,7 @@ const LeftNavItemFirst = styled(LiStyle)`
 const NavItem = styled(LiStyle)<{ active: boolean }>`
   list-style-type: none;
   opacity: ${({ active }) => (active ? '1' : '0.52')};
-  background: ${({ active, theme }) => (active ? theme.secondary.coreSecondary : 'initial')};
+  background: ${({ active, theme }) => (active ? theme.primary.corePrimary : 'initial')};
   border-radius: 0.25rem;
   padding: 1rem 2.5rem;
   &:hover {

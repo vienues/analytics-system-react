@@ -59,13 +59,6 @@ export const BoldText = styled(Text)`
   font-weight: 500;
 `
 
-export const LabeledData = styled.div`
-  min-height: 1.5rem;
-  border-bottom: 1px #54606d solid;
-  display: grid;
-  grid-template-columns: 1fr auto;
-`
-
 export const Title = styled.h1`
   margin-top: 0rem;
   font-size: ${pxToRems(16)};
@@ -104,7 +97,7 @@ export const ButtonLink = styled.a`
   cursor: pointer;
   font-size: ${pxToRems(11)};
   font-weight: 500;
-  border: 2px solid ${({ theme }) => theme.primary.corePrimary4};
+  border: 2px solid ${({ theme }) => theme.secondary.coreSecondary4};
   border-radius: ${pxToRems(43)};
   padding: ${pxToRems(2)} ${pxToRems(4)};
   margin: ${pxToRems(2)};
@@ -186,7 +179,7 @@ export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
   grid-auto-flow: column;
   margin: ${pxToRems(32)} ${pxToRems(22)} ${pxToRems(12)};
   position: relative;
-  border-bottom: solid 2px ${({ theme }) => theme.primary.corePrimary3};
+  border-bottom: solid 2px ${({ theme }) => theme.secondary.coreSecondary3};
   @media (max-width: 900px) {
     font-size: 1rem;
     line-height: 1rem;
@@ -219,7 +212,7 @@ export const NewsGridArea = styled.div`
   grid-area: News;
   width: ${pxToRems(350)};
   padding: 0 ${pxToRems(16)};
-  background-color: ${({ theme }) => theme.primary.corePrimary2};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary2};
   height: 100vh;
   overflow-y: auto;
 `

@@ -11,7 +11,7 @@ const Sidebar = styled.div<{ hasNoSearch: boolean }>`
   display: flex;
   align-items: ${({ hasNoSearch }) => (hasNoSearch ? 'center' : 'flex-start')};
   justify-content: center;
-  background: ${({ theme }) => theme.primary.corePrimary2};
+  background: ${({ theme }) => theme.secondary.coreSecondary2};
   width: ${pxToRems(129)};
 `
 

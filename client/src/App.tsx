@@ -23,7 +23,7 @@ const App = () => {
           <ParentContainer>
             <BrowserRouter>
               <Switch>
-                {Object.keys(RouterHelpers.RootRouterItems).map((route) => (
+                {Object.keys(RouterHelpers.RootRouterItems).map(route => (
                   <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
                 ))}
               </Switch>
@@ -40,8 +40,8 @@ const ParentContainer = styled.div`
   height: 100%;
   min-height: 100vh;
   max-height: 100vh;
-  background-color: ${({ theme }) => theme.primary.corePrimary1};
-  color: ${({ theme }) => theme.secondary.coreSecondary};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary1};
+  color: ${({ theme }) => theme.primary.corePrimary};
 `
 
 export default App
