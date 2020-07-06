@@ -1,10 +1,10 @@
+import { ContainerService, ContainerServiceSubscribe } from 'platformService/ContainerService'
 import React, { useState } from 'react'
-import OpenfinWindowControls from '../openfin/OpenfinWindowControls'
 import styled from 'styled-components/macro'
+import { pxToRems } from 'utils'
+import OpenfinWindowControls from '../openfin/OpenfinWindowControls'
 import PopoutIcon from './PopoutIcon'
 import { DragHandle, Heading, PopoutButton, Title } from './StyledComponents'
-import { ContainerServiceSubscribe, ContainerService } from 'platformService/ContainerService'
-import { pxToRems } from 'utils'
 
 type stockCard = 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' | 'stock'
 type currenciesCard = 'abm'
@@ -81,8 +81,14 @@ const VanillaDataCard = styled.div`
   grid-template-columns: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding: ${pxToRems(28)} ${pxToRems(32)};
+  padding: ${pxToRems(24)} ${pxToRems(32)};
   align-content: baseline;
+`
+
+export const SidebarDataCard = styled.div`
+  ${VanillaDataCard} {
+    padding: ${pxToRems(24)} ${pxToRems(20)};
+  }
 `
 
 const PopupDataCard = styled.div`

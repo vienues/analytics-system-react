@@ -29,8 +29,9 @@ const createTheme = ({ accents, primary, secondary, motion, button }: DefaultThe
   white: '#FFFFFF',
 
   backgroundColor: primary.corePrimary,
-  textColorPrimary: secondary.coreSecondary2,
-  textColorSecondary: secondary.coreSecondary5,
+
+  textColorPrimary: secondary.coreSecondary1,
+  textColorSecondary: secondary.coreSecondary2,
 
   fontSizeBaseline: baselineFontSize,
 
@@ -86,6 +87,6 @@ const darkTheme = createTheme(colors.dark)
 darkTheme.button.secondary.textColor = darkTheme.primary.corePrimary
 
 export const themes = {
-  dark: darkTheme,
   light: lightTheme,
+  dark: darkTheme,
 }
