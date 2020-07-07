@@ -34,6 +34,6 @@ const Logo: React.FunctionComponent<ILogoProps> = ({ fill = '#000', size = 4, st
 
 export default styled(Logo)`
   [fill] {
-    fill: ${({ theme }) => theme.secondary.coreSecondary};
+    fill: ${({ theme }) => theme.primary.corePrimary};
   }
 `

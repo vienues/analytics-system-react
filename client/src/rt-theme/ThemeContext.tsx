@@ -8,12 +8,13 @@ export enum ThemeName {
 }
 
 interface IContextValue {
-  themeName?: string
+  themeName: ThemeName
   setTheme: (selector: { themeName: ThemeName }) => void
 }
 
 const ThemeContext = React.createContext<IContextValue>({
   setTheme: () => null,
+  themeName: ThemeName.Light,
 })
 
 const STORAGE_KEY = 'themeName'
@@ -23,11 +24,11 @@ const ThemeStorageProvider: React.FunctionComponent<{ storage?: typeof localStor
   children,
 }) => {
   const [initialized, setInitialized] = useState(false)
-  const [themeName, setThemeName] = useState<ThemeName>(ThemeName.Dark)
+  const [themeName, setThemeName] = useState<ThemeName>(ThemeName.Light)
 
   const internalStorage = storage || localStorage
 
-  const setTheme: (selector: { themeName: ThemeName }) => void = (selector) => {
+  const setTheme: (selector: { themeName: ThemeName }) => void = selector => {
     if (selector.themeName !== themeName) {
       setThemeName(selector.themeName)
       internalStorage.setItem(STORAGE_KEY, selector.themeName)
@@ -38,7 +39,7 @@ const ThemeStorageProvider: React.FunctionComponent<{ storage?: typeof localStor
     const setThemeFromStorage = (event: StorageEvent) => {
       if (event.key === STORAGE_KEY) {
         const storedThemeName = internalStorage.getItem(STORAGE_KEY) as ThemeName
-        if (storedThemeName && themes[storedThemeName] != null) {
+        if (storedThemeName && themes[storedThemeName] !== null) {
           setThemeName(storedThemeName)
         }
       }
@@ -46,10 +47,9 @@ const ThemeStorageProvider: React.FunctionComponent<{ storage?: typeof localStor
 
     if (!initialized) {
       setInitialized(true)
-      setThemeName((internalStorage.getItem(STORAGE_KEY) as ThemeName) || ThemeName.Dark)
+      setThemeName((internalStorage.getItem(STORAGE_KEY) as ThemeName) || ThemeName.Light)
       window.addEventListener('storage', setThemeFromStorage)
     }
-    // return () => { window.removeEventListener('storage', setThemeFromStorage) }
   }, [initialized, internalStorage, themeName])
 
   return (

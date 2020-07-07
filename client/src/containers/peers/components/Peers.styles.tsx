@@ -9,10 +9,10 @@ export const PeersWrapper = styled.div`
 `
 
 export const PeersLink = styled(ButtonLink)`
-  color: ${({ theme }) => theme.secondary.coreSecondary4};
+  color: ${({ theme }) => theme.primary.corePrimary4};
   min-width: ${pxToRems(43)};
   &:hover {
-    background-color: ${({ theme }) => theme.primary.corePrimary4};
-    color: ${({ theme }) => theme.secondary.coreSecondary2};
+    color: ${({ theme }) => theme.primary.corePrimary2};
+    background-color: ${({ theme }) => theme.secondary.coreSecondary4};
   }
 `

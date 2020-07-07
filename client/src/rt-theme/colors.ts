@@ -50,7 +50,7 @@ export interface ColorPalettes {
   accents: AccentPalette
 }
 
-export const defaultTheme: DefaultTheme = {
+export const light: DefaultTheme = {
   primary: {
     corePrimary: '#323232',
     corePrimary1: '#383838',
@@ -136,5 +136,5 @@ export const dark: DefaultTheme = {
 
 export const colors = {
   dark,
-  defaultTheme,
+  light,
 }

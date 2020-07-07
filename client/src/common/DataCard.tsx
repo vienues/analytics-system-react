@@ -18,7 +18,7 @@ interface IProps {
   instrument: string
 }
 
-const DataContents: React.FunctionComponent<IProps> = (props) => {
+const DataContents: React.FunctionComponent<IProps> = props => {
   const [poppedOut, setPoppedOut] = useState(false)
 
   const closeHandler = () => {
@@ -38,7 +38,7 @@ const DataContents: React.FunctionComponent<IProps> = (props) => {
 
   return (
     <ContainerServiceSubscribe>
-      {(containerApi) => {
+      {containerApi => {
         const { app, win } = containerApi.state
 
         if (containerApi.agent !== 'desktop' || !app || !win) {
@@ -95,7 +95,7 @@ const PopupDataCard = styled.div`
   display: grid;
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary};
   grid-template-columns: 100%;
 `
 
@@ -112,7 +112,7 @@ const DataCardHeading = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 3.5rem;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary};
   color: ${({ theme }) => theme.textColorPrimary};
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

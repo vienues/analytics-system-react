@@ -35,7 +35,7 @@ const NewsHeadline = styled.div`
 
 export const NewsCaption = styled.span`
   font-size: ${pxToRems(11)};
-  color: ${({ theme }) => theme.secondary.coreSecondary4};
+  color: ${({ theme }) => theme.primary.corePrimary4};
   font-style: italic;
   opacity: 0.59;
   display: block;
@@ -54,7 +54,7 @@ const NewsItemContents = styled.div`
     left: 50%;
     transform: translateX(-50%);
     height: 1px;
-    background-color: ${({ theme }) => theme.primary.corePrimary4};
+    background-color: ${({ theme }) => theme.secondary.coreSecondary4};
     width: calc(100% + 40px);
   }
   &:last-child {

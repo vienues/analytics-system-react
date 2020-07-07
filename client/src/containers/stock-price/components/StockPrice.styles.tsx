@@ -34,7 +34,7 @@ export const StockPriceWrapper = styled(VerticalDataContents)<PriceWrapperProps>
   font-size: ${pxToRems(12)};
   grid-gap: 0.5rem;
   padding: ${pxToRems(4)} 0;
-  border-right: 1px solid ${({ theme }) => theme.primary.corePrimary3};
+  border-right: 1px solid ${({ theme }) => theme.secondary.coreSecondary3};
   &:last-child {
     border-right: none;
   }
