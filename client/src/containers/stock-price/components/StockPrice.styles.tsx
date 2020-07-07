@@ -1,4 +1,4 @@
-import { BoldText, VerticalDataContents } from 'common/StyledComponents'
+import { VerticalDataContents, LightText } from 'common/StyledComponents'
 import styled, { css } from 'styled-components/macro'
 import { pxToRems } from 'utils'
 import { Text } from '../../../common/StyledComponents'
@@ -13,17 +13,14 @@ interface IStockPriceChangeWrapperAttrs {
   isHidden: Boolean | undefined
 }
 
-export const SymbolText = styled(BoldText)`
-  color: ${({ theme }) => theme.textColorPrimary};
-`
-
-export const LatestPrice = styled.div``
+export const LatestPrice = styled(LightText)``
 
 const StockPriceLarge = css`
   font-size: ${pxToRems(16)};
   line-height: ${pxToRems(12)};
   grid-gap: 0;
   ${LatestPrice} {
+    color: ${({ theme }) => theme.primary.corePrimary1};
     font-size: ${pxToRems(32)};
   }
 `

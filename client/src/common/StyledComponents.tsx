@@ -57,6 +57,11 @@ export const Text = styled.span`
 
 export const BoldText = styled(Text)`
   font-weight: 500;
+  color: ${({ theme }) => theme.primary.corePrimary2};
+`
+
+export const LightText = styled(Text)`
+  color: ${({ theme }) => theme.primary.corePrimary5};
 `
 
 export const Title = styled.h1`
@@ -111,8 +116,6 @@ export const StrongLabel = styled(Text)`
 export const OpaqueLabel = styled(Text)`
   opacity: 0.59;
 `
-
-export const FieldLabel = styled(Text)``
 
 export const SwitchThemeButton = styled.button`
   width: 2rem;

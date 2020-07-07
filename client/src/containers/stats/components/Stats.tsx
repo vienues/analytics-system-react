@@ -1,6 +1,6 @@
 import numeral from 'numeral'
 import * as React from 'react'
-import { DataCard, FieldLabel, Text } from '../../../common/StyledComponents'
+import { DataCard, BoldText, LightText } from '../../../common/StyledComponents'
 import { StatsQuery_stock as StatsQueryStock } from '../../../__generated__/types'
 import { FieldsWrapper, LabeledData } from './Stats.styled'
 
@@ -36,16 +36,16 @@ const Stats: React.FunctionComponent<{ stock: StatsQueryStock; id: string }> = (
   const data = { ...quote, ...stats }
 
   return (
-    <DataCard cardType="stats" title="Key Statistics" instrument={id}>
+    <DataCard cardType="stats" title="Key Statistics" instrument={id} headingStyle={{ marginLeft: '7px' }}>
       <FieldsWrapper>
         {Fields.map(Field => {
           return (
             <LabeledData key={Field.key}>
-              <FieldLabel>{Field.label}</FieldLabel>
+              <BoldText>{Field.label}</BoldText>
               {Array.isArray(Field.field) ? (
-                <Text>{Field.field.map(field => format(Field.format)(data[field])).join(' - ')}</Text>
+                <LightText>{Field.field.map(field => format(Field.format)(data[field])).join(' - ')}</LightText>
               ) : (
-                <Text>{format(Field.format)(data[Field.field])}</Text>
+                <LightText>{format(Field.format)(data[Field.field])}</LightText>
               )}
             </LabeledData>
           )
