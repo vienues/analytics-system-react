@@ -13,6 +13,9 @@ interface IProps {
   style?: {
     [key: string]: any
   }
+  headingStyle?: {
+    [key: string]: any
+  }
   cardType: stockCard | currenciesCard
   title: string | JSX.Element
   instrument: string
@@ -43,8 +46,8 @@ const DataContents: React.FunctionComponent<IProps> = props => {
 
         if (containerApi.agent !== 'desktop' || !app || !win) {
           return (
-            <VanillaDataCard {...props.style}>
-              <Heading>{props.title}</Heading>
+            <VanillaDataCard style={props.style}>
+              <Heading style={props.headingStyle}>{props.title}</Heading>
               {props.children}
             </VanillaDataCard>
           )

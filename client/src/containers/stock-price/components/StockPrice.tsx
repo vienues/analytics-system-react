@@ -1,7 +1,7 @@
 import { MarketStatusIcon } from 'assets/icons'
 import React from 'react'
-import { Text } from '../../../common/StyledComponents'
-import { LatestPrice, StockPriceChangeWrapper, StockPriceWrapper, SymbolText } from './StockPrice.styles'
+import { BoldText, Text } from '../../../common/StyledComponents'
+import { LatestPrice, StockPriceChangeWrapper, StockPriceWrapper } from './StockPrice.styles'
 
 export interface IStockPriceData {
   change: number | null
@@ -42,7 +42,7 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, size, s
 
   return (
     <StockPriceWrapper size={size}>
-      <SymbolText>{symbol}</SymbolText>
+      <BoldText>{symbol}</BoldText>
       <LatestPrice>${fixedFormat(latestPrice)}</LatestPrice>
       <StockPriceChangeWrapper isHidden={hideChange} change={change ?? 0}>
         <MarketStatusIcon change={change ?? 0} />

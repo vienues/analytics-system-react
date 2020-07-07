@@ -11,7 +11,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-// import { useTheme } from '../../../rt-theme'
 import { StockHistoryQuery } from '../../../__generated__/types'
 import { getThemeColor, themes, ThemeConsumer } from 'rt-theme'
 
@@ -19,7 +18,6 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
   const {
     stock: { id, quote },
   } = props
-  // const { themeName } = useTheme()
 
   const previousClose = quote.previousClose
   const chartData = props.stock.chart.filter(
@@ -33,9 +31,9 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
   return (
     <ThemeConsumer>
       {({ themeName }) => (
-        <DataCard cardType="history" title={id} instrument={id}>
+        <DataCard cardType="history" title={id} instrument={id} headingStyle={{ display: 'none' }}>
           <ResponsiveContainer width="99%" height="99%" minHeight={300}>
-            <LineChart data={chartData} margin={{ left: -30, top: 0, right: 0, bottom: 0 }}>
+            <LineChart data={chartData} margin={{ left: -25, top: 0, right: 0, bottom: 0 }}>
               <CartesianGrid
                 verticalFill={[
                   getThemeColor(themes[themeName], color => color.secondary.coreSecondary2) ?? '#F1F2F2',
