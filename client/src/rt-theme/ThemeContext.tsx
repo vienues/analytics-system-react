@@ -8,12 +8,13 @@ export enum ThemeName {
 }
 
 interface IContextValue {
-  themeName?: string
+  themeName: ThemeName
   setTheme: (selector: { themeName: ThemeName }) => void
 }
 
 const ThemeContext = React.createContext<IContextValue>({
   setTheme: () => null,
+  themeName: ThemeName.Light,
 })
 
 const STORAGE_KEY = 'themeName'
