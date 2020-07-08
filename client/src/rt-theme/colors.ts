@@ -42,6 +42,7 @@ export interface AccentPalette {
   tradingSell1: Color
   tradingBuy: Color
   tradingBuy1: Color
+  shadow: Color
 }
 
 export interface ColorPalettes {
@@ -87,6 +88,7 @@ export const light: DefaultTheme = {
     tradingSell1: '#FFD3DB',
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
+    shadow: '0 0 20px 0 rgba(0, 0, 0, 0.15)',
   },
   ...buttons,
   ...animations,
@@ -129,6 +131,7 @@ export const dark: DefaultTheme = {
     tradingSell1: '#FFD3DB',
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
+    shadow: '0 0 20px 0 rgba(0, 0, 0, 0.45)',
   },
   ...animations,
   ...buttons,
