@@ -139,12 +139,11 @@ const SearchResultNoItem = styled(SearchResultItemBase)`
 `
 
 const SearchResultItem = styled(SearchResultItemBase)`
-  padding: 2px;
-  padding-left: 12px;
+  padding: 2px 12px;
   margin: 2px 0;
   font-size: 16px;
   line-height: 2.5;
-  font-color: ${({ theme }) => theme.secondary.coreSecondary5};
+  color: ${({ theme }) => theme.primary.corePrimary5};
 
   > small {
     display: inline-block;
@@ -154,7 +153,7 @@ const SearchResultItem = styled(SearchResultItemBase)`
   &[aria-selected='true'] {
     color: ${({ theme }) => theme.primary.corePrimary};
     background: ${({ theme }) => theme.secondary.coreSecondary2};
-    border-radius: 12px;
+    border-radius: 20px;
   }
 `
 
