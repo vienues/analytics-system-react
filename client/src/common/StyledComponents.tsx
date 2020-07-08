@@ -173,7 +173,7 @@ const SearchBoxLanding = css`
   margin: 0 ${pxToRems(22)};
 `
 
-export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
+export const MainSearchContent = styled.div<{ hasPreviousSearch: boolean }>`
   grid-area: Search;
   align-self: center;
   font-size: 2rem;
@@ -190,7 +190,7 @@ export const MainSearchContent = styled.div<{ hasNoSearch: boolean }>`
   @media (max-width: 500px) {
     grid-auto-flow: row;
   }
-  ${({ hasNoSearch }) => hasNoSearch && SearchBoxLanding}
+  ${({ hasPreviousSearch }) => !hasPreviousSearch && SearchBoxLanding}
 `
 
 export const WrapperContent = styled.div`
