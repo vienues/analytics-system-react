@@ -111,7 +111,7 @@ const SearchResults = styled.menu`
   background: ${({ theme }) => theme.secondary.coreSecondary};
   z-index: 1000;
   border-radius: 12px;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: ${({ theme }) => theme.accents.shadow};
   margin-top: 5px;
   top: 2.25rem;
   left: 0;
