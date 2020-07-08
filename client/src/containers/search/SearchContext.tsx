@@ -6,6 +6,7 @@ interface IState {
   errorMessage?: string | JSX.Element
   refetchAttempts?: number
   searching?: Boolean
+  previousSearch?: boolean
 }
 
 export enum SearchContextActionTypes {
@@ -26,7 +27,7 @@ interface IProvide extends IState {
   dispatch?: Dispatch<IAction>
 }
 
-const initialState: IState = { currentSymbol: null, refetchAttempts: 0, searching: false }
+const initialState: IState = { currentSymbol: null, refetchAttempts: 0, searching: false, previousSearch: false }
 
 const reducer: React.Reducer<IState, IAction> = (state, action) => {
   switch (action.type) {
@@ -35,9 +36,10 @@ const reducer: React.Reducer<IState, IAction> = (state, action) => {
     case SearchContextActionTypes.ClearedSymbol:
       return { ...initialState }
     case SearchContextActionTypes.FindSymbol:
-      return { ...initialState, searching: true }
+      return { ...initialState, searching: true, previousSearch: !!state.currentSymbol ?? false }
     case SearchContextActionTypes.FoundSymbol:
     case SearchContextActionTypes.SelectedSymbol:
+      return { ...initialState, ...action.payload, previousSearch: true }
     case SearchContextActionTypes.UnrecognizedSymbol:
       return { ...initialState, ...action.payload }
     default:
