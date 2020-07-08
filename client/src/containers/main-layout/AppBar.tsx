@@ -7,9 +7,9 @@ import OpenfinWindowControls from '../../openfin/OpenfinWindowControls'
 import { useTheme } from '../../rt-theme'
 import { SearchContext } from '../search/SearchContext'
 
-const Sidebar = styled.div<{ hasNoSearch: boolean }>`
+const Sidebar = styled.div<{ hasPreviousSearch: boolean }>`
   display: flex;
-  align-items: ${({ hasNoSearch }) => (hasNoSearch ? 'center' : 'flex-start')};
+  align-items: ${({ hasPreviousSearch }) => (hasPreviousSearch ? 'flex-start' : 'center')};
   justify-content: center;
   background: ${({ theme }) => theme.secondary.coreSecondary2};
   width: ${pxToRems(129)};
@@ -21,10 +21,10 @@ const LogoWrapper = styled.div`
 
 const AppBar = () => {
   const { toggleTheme } = useTheme()
-  const { currentSymbol } = useContext(SearchContext)
+  const { previousSearch } = useContext(SearchContext)
 
   return (
-    <Sidebar hasNoSearch={!currentSymbol}>
+    <Sidebar hasPreviousSearch={previousSearch ?? false}>
       <LogoWrapper onDoubleClick={toggleTheme}>
         <LogoWithText size={5.5} />
       </LogoWrapper>
