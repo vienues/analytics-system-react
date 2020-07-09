@@ -13,9 +13,9 @@ const Stocks: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
         </FooterStatsWrapper>
       </MainGridArea>
       <NewsGridArea>
-        <News id={id} />
         <Company id={id} />
         <Peers id={id} />
+        <News id={id} />
       </NewsGridArea>
     </>
   )

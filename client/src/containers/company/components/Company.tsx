@@ -2,14 +2,14 @@ import { openUrlInBrowser } from 'platformService/openUrlInBrowser'
 import React from 'react'
 import { DataCard, Subheading } from '../../../common/StyledComponents'
 import { CompanyQuery_stock_company as CompanyDetails } from '../../../__generated__/types'
-import { CompanyDataCard, CompanyDescription, CompanyLink } from './Company.styles'
+import { CompanyCard, CompanyDescription, CompanyLink } from './Company.styles'
 
 const URL = /(http(s)?:\/\/)?/
 
 const Company: React.FunctionComponent<{ company: CompanyDetails }> = ({
   company: { description, name, symbol, website },
 }) => (
-  <CompanyDataCard>
+  <CompanyCard>
     <DataCard cardType="company" title="Company Summary" instrument={symbol}>
       <Subheading>
         {name} ({symbol})
@@ -19,7 +19,7 @@ const Company: React.FunctionComponent<{ company: CompanyDetails }> = ({
       </CompanyLink>
       <CompanyDescription>{description}</CompanyDescription>
     </DataCard>
-  </CompanyDataCard>
+  </CompanyCard>
 )
 
 export default Company
