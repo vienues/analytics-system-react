@@ -56,8 +56,10 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
 }
 
 const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = props => {
+  const { currentSymbol } = useContext(SearchContext)
+
   return (
-    <MainLayoutWrapper>
+    <MainLayoutWrapper hasNoSearch={!currentSymbol}>
       <SearchContextProvider>
         <AppBar />
         <CurrentSymbolLayout {...props} />

@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components/macro'
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
 import { pxToRems } from 'utils'
+import { mediaQuery } from 'rt-theme/mediaQueries'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
@@ -158,9 +159,6 @@ const ContentBase = styled.div`
 
 export const MainContent = styled(ContentBase)`
   grid-template-columns: 3fr 1fr;
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
 `
 export const MainInnerContent = styled(ContentBase)`
   align-content: start;
@@ -183,14 +181,14 @@ export const MainSearchContent = styled.div<{ hasPreviousSearch: boolean }>`
   margin: ${pxToRems(32)} ${pxToRems(22)} ${pxToRems(12)};
   position: relative;
   border-bottom: solid 2px ${({ theme }) => theme.secondary.coreSecondary3};
-  @media (max-width: 900px) {
-    font-size: 1rem;
-    line-height: 1rem;
+  ${({ hasPreviousSearch }) => !hasPreviousSearch && SearchBoxLanding};
+  @media ${mediaQuery.tabletL} {
+    margin: ${pxToRems(22)} ${pxToRems(22)} ${pxToRems(12)};
   }
-  @media (max-width: 500px) {
-    grid-auto-flow: row;
+  @media ${mediaQuery.mobile} {
+    font-size: ${pxToRems(16)};
+    margin: ${pxToRems(12)} ${pxToRems(22)};
   }
-  ${({ hasPreviousSearch }) => !hasPreviousSearch && SearchBoxLanding}
 `
 
 export const WrapperContent = styled.div`
@@ -202,6 +200,14 @@ export const WrapperContent = styled.div`
     'Main Main News'
     'Main Main News';
   overflow: auto;
+  @media ${mediaQuery.tabletL} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      'Search'
+      'Main'
+      'News';
+  }
 `
 
 export const SearchGridArea = styled.div`
@@ -209,26 +215,50 @@ export const SearchGridArea = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   margin-bottom: ${pxToRems(10)};
+  @media ${mediaQuery.mobile} {
+    margin-bottom: ${pxToRems(6)};
+  }
 `
 
 export const NewsGridArea = styled.div`
+  display: grid;
+  align-content: baseline;
   grid-area: News;
   width: ${pxToRems(350)};
   padding: 0 ${pxToRems(16)};
   background-color: ${({ theme }) => theme.secondary.coreSecondary2};
   height: 100vh;
   overflow-y: auto;
+  @media ${mediaQuery.tabletL} {
+    height: auto;
+    overflow-y: unset;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+  }
+  @media ${mediaQuery.tabletS} {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media ${mediaQuery.mobile} {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const MainGridArea = styled.div`
   grid-area: Main;
   overflow-y: auto;
+  @media ${mediaQuery.tabletL} {
+    overflow: unset;
+  }
 `
 
-export const MainLayoutWrapper = styled.div`
+export const MainLayoutWrapper = styled.div<{ hasNoSearch?: boolean }>`
   display: grid;
   grid-template-columns: auto 1fr;
   height: 100%;
+  @media ${mediaQuery.tabletL} {
+    grid-template-columns: none;
+    grid-template-rows: ${({ hasNoSearch }) => (hasNoSearch ? '1fr fr' : 'auto 1fr')};
+  }
 `
 
 export const ScrollableArea = styled.div`

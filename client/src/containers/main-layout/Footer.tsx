@@ -9,8 +9,8 @@ const FooterWrapper = styled.div<{ hasNoSearch: boolean }>`
   display: ${({ hasNoSearch }) => (hasNoSearch ? 'none' : 'grid')};
   grid-column: 1 / 3;
   border-top: 1px solid ${({ theme }) => theme.secondary.coreSecondary3};
-  margin: 0 ${pxToRems(22)} ${pxToRems(15)};
-  padding-top: ${pxToRems(5)};
+  margin: 0 ${pxToRems(22)};
+  padding: ${pxToRems(10)} 0;
 `
 
 const Footer: React.FC<{ hasNoSearch: boolean }> = ({ hasNoSearch }) => (

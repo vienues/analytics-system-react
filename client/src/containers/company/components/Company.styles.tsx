@@ -2,6 +2,7 @@ import { SidebarDataCard } from 'common/DataCard'
 import styled from 'styled-components/macro'
 import { pxToRems } from 'utils'
 import { Text } from '../../../common/StyledComponents'
+import { mediaQuery } from 'rt-theme/mediaQueries'
 
 export const CompanyDescription = styled(Text)`
   font-size: ${pxToRems(12)};
@@ -17,6 +18,9 @@ export const CompanyLink = styled.a`
   margin: ${pxToRems(6)} 0;
 `
 
-export const CompanyDataCard = styled(SidebarDataCard)`
-  border-top: ${({ theme }) => `1px solid ${theme.secondary.coreSecondary4}`};
+export const CompanyCard = styled(SidebarDataCard)`
+  padding-top: ${pxToRems(12)};
+  @media ${mediaQuery.tabletL} {
+    padding-top: 0;
+  }
 `

@@ -1,6 +1,6 @@
 import { ContainerService, ContainerServiceSubscribe } from 'platformService/ContainerService'
 import React, { useState } from 'react'
-import styled from 'styled-components/macro'
+import styled, { CSSObject } from 'styled-components/macro'
 import { pxToRems } from 'utils'
 import OpenfinWindowControls from '../openfin/OpenfinWindowControls'
 import PopoutIcon from './PopoutIcon'
@@ -10,12 +10,8 @@ type stockCard = 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' |
 type currenciesCard = 'abm'
 
 interface IProps {
-  style?: {
-    [key: string]: any
-  }
-  headingStyle?: {
-    [key: string]: any
-  }
+  style?: CSSObject
+  headingStyle?: CSSObject
   cardType: stockCard | currenciesCard
   title: string | JSX.Element
   instrument: string
@@ -58,7 +54,7 @@ const DataContents: React.FunctionComponent<IProps> = props => {
 
         return (
           poppedOut || (
-            <Wrapper {...props.style}>
+            <Wrapper>
               <Header>
                 <Title>{props.title}</Title>
                 <DragHandle />

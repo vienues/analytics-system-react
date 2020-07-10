@@ -60,14 +60,6 @@ export default createGlobalStyle`
     text-rendering: geometricPrecision;
     overflow: hidden;
     font-weight: 300;
-
-    @media all and (max-width: 400px) {
-      font-size: 14px;
-    }
-
-    @media all and (max-width: 320px) {
-      font-size: 12px;
-    }
   }
 
   body, #root {
