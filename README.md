@@ -51,7 +51,7 @@ To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.
 
 ## Generate Client Schema and Typings
 
-Open a terminal at the root folder and run `npm run generate-client-schema & npm run generate-client-typings` to generate the graphql client schema and typings.
+Open a terminal at the root folder and run `npm run generate-schema-and-typings` to generate the graphql client schema and typings.
 
 ## Core technologies used
 
