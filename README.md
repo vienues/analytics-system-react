@@ -39,36 +39,19 @@ This will open up a browser window to [http://localhost:3000](http://localhost:3
 
 By default the server will connect to the [IEX trading system](https://iexcloud.io/) to retrieve realtime market information.
 
-To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.example` to `server/.env` and set the value of `IEXCLOUD_PUBLIC_KEY` to a valid IEX key.
+To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.example` to `server/.env` and set the value of `IEXCLOUD_PUBLIC_KEY` to a valid IEX sandbox token.
 
-To simulate this in an offline environment set the `INSIGHT_OFFLINE=true` before starting the server.
+## Access IEX Sandbox token
 
-```cmd
-REM Windows Command Prompt
-set INSIGHTS_OFFLINE=true
-```
+- If you haven't already done so, create a free personal IEX account at https://iexcloud.io/cloud-login#/register/
+- Login to your IEX console https://iexcloud.io/console/
+- Make sure the `Sandbox testing` Toggle on the bottom left hand side of the screen is set to on
+- Navigate to the `API Tokens` tab on the top left handside of the screen
+- Copy the Publishable Token
 
-```ps
-#Windows Powershell
-$env:INSIGHTS_OFFLINE="true"
-```
+## Generate Client Schema and Typings
 
-```sh
-#!/bin/bash
-export INSIGHTS_OFFLINE=true
-```
-
-By default, the server is preloaded with data for Apple(AAPL), Google(GOOG), and Microsoft(MSFT). The data can be updated from the [IEX trading system](https://iexcloud.io/) by running an npm script from the `PROJECT_ROOT/server` directory.
-
-```console
-cd adaptive-insights/server && npm run generate-mock-data
-```
-
-An optional parameter can be used to fetch data for more companies by passing in a space delineated list of symbols.
-
-```console
-npm run generate-mock-data bac ge amd
-```
+Open a terminal at the root folder and run `npm run generate-client-schema & npm run generate-client-typings` to generate the graphql client schema and typings.
 
 ## Core technologies used
 
