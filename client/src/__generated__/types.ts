@@ -1,4 +1,6 @@
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -6,29 +8,31 @@
 // ====================================================
 
 export interface CompanyQuery_stock_company {
-  __typename: 'Company'
-  id: string
-  symbol: string
-  name: string | null
-  website: string | null
-  description: string | null
+  __typename: "Company";
+  id: string;
+  symbol: string;
+  name: string | null;
+  website: string | null;
+  description: string | null;
 }
 
 export interface CompanyQuery_stock {
-  __typename: 'Stock'
-  id: string
-  company: CompanyQuery_stock_company
+  __typename: "Stock";
+  id: string;
+  company: CompanyQuery_stock_company;
 }
 
 export interface CompanyQuery {
-  stock: CompanyQuery_stock
+  stock: CompanyQuery_stock;
 }
 
 export interface CompanyQueryVariables {
-  id: string
+  id: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -36,24 +40,26 @@ export interface CompanyQueryVariables {
 // ====================================================
 
 export interface ABMHistoryQuery_getPriceHistory {
-  __typename: 'FxPricing'
-  ask: number
-  bid: number
-  mid: number
-  valueDate: any
-  creationTimestamp: any | null
+  __typename: "FxPricing";
+  ask: number;
+  bid: number;
+  mid: number;
+  valueDate: any;
+  creationTimestamp: any | null;
 }
 
 export interface ABMHistoryQuery {
-  getPriceHistory: ABMHistoryQuery_getPriceHistory[]
+  getPriceHistory: ABMHistoryQuery_getPriceHistory[];
 }
 
 export interface ABMHistoryQueryVariables {
-  from: string
-  to: string
+  from: string;
+  to: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -61,48 +67,50 @@ export interface ABMHistoryQueryVariables {
 // ====================================================
 
 export interface HistoryQuery_stock_chart {
-  __typename: 'Tick'
-  label: string
-  datetime: any
-  average: number | null
-  open: number | null
-  low: number | null
-  high: number | null
-  close: number | null
-  volume: number
+  __typename: "Tick";
+  label: string;
+  datetime: any;
+  average: number | null;
+  open: number | null;
+  low: number | null;
+  high: number | null;
+  close: number | null;
+  volume: number;
 }
 
 export interface HistoryQuery_stock_quote {
-  __typename: 'Quote'
-  id: string
-  previousClose: number | null
+  __typename: "Quote";
+  id: string;
+  previousClose: number | null;
 }
 
 export interface HistoryQuery_stock {
-  __typename: 'Stock'
-  id: string
-  chart: HistoryQuery_stock_chart[]
-  quote: HistoryQuery_stock_quote
+  __typename: "Stock";
+  id: string;
+  chart: HistoryQuery_stock_chart[];
+  quote: HistoryQuery_stock_quote;
 }
 
 export interface HistoryQuery_OLHC {
-  __typename: 'OLHC'
-  open: number | null
-  close: number | null
-  low: number | null
-  high: number | null
+  __typename: "OLHC";
+  open: number | null;
+  close: number | null;
+  low: number | null;
+  high: number | null;
 }
 
 export interface HistoryQuery {
-  stock: HistoryQuery_stock
-  OLHC: HistoryQuery_OLHC
+  stock: HistoryQuery_stock;
+  OLHC: HistoryQuery_OLHC;
 }
 
 export interface HistoryQueryVariables {
-  id: string
+  id: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -110,25 +118,27 @@ export interface HistoryQueryVariables {
 // ====================================================
 
 export interface IntradayQuery_intradayPrices {
-  __typename: 'Intraday'
-  datetime: any | null
-  open: number | null
-  close: number | null
-  high: number | null
-  low: number | null
-  volume: number | null
-  numberOfTrades: number | null
+  __typename: "Intraday";
+  datetime: any | null;
+  open: number | null;
+  close: number | null;
+  high: number | null;
+  low: number | null;
+  volume: number | null;
+  numberOfTrades: number | null;
 }
 
 export interface IntradayQuery {
-  intradayPrices: IntradayQuery_intradayPrices[]
+  intradayPrices: IntradayQuery_intradayPrices[];
 }
 
 export interface IntradayQueryVariables {
-  symbol: string
+  symbol: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -136,25 +146,27 @@ export interface IntradayQueryVariables {
 // ====================================================
 
 export interface onIntradayPricingSubscription_getIntradayPrices {
-  __typename: 'Intraday'
-  datetime: any | null
-  open: number | null
-  close: number | null
-  high: number | null
-  low: number | null
-  volume: number | null
-  numberOfTrades: number | null
+  __typename: "Intraday";
+  datetime: any | null;
+  open: number | null;
+  close: number | null;
+  high: number | null;
+  low: number | null;
+  volume: number | null;
+  numberOfTrades: number | null;
 }
 
 export interface onIntradayPricingSubscription {
-  getIntradayPrices: onIntradayPricingSubscription_getIntradayPrices[]
+  getIntradayPrices: onIntradayPricingSubscription_getIntradayPrices[];
 }
 
 export interface onIntradayPricingSubscriptionVariables {
-  symbol: string
+  symbol: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -162,39 +174,41 @@ export interface onIntradayPricingSubscriptionVariables {
 // ====================================================
 
 export interface StockHistoryQuery_stock_chart {
-  __typename: 'Tick'
-  label: string
-  datetime: any
-  average: number | null
-  open: number | null
-  low: number | null
-  high: number | null
-  close: number | null
-  volume: number
+  __typename: "Tick";
+  label: string;
+  datetime: any;
+  average: number | null;
+  open: number | null;
+  low: number | null;
+  high: number | null;
+  close: number | null;
+  volume: number;
 }
 
 export interface StockHistoryQuery_stock_quote {
-  __typename: 'Quote'
-  id: string
-  previousClose: number | null
+  __typename: "Quote";
+  id: string;
+  previousClose: number | null;
 }
 
 export interface StockHistoryQuery_stock {
-  __typename: 'Stock'
-  id: string
-  chart: StockHistoryQuery_stock_chart[]
-  quote: StockHistoryQuery_stock_quote
+  __typename: "Stock";
+  id: string;
+  chart: StockHistoryQuery_stock_chart[];
+  quote: StockHistoryQuery_stock_quote;
 }
 
 export interface StockHistoryQuery {
-  stock: StockHistoryQuery_stock
+  stock: StockHistoryQuery_stock;
 }
 
 export interface StockHistoryQueryVariables {
-  id: string
+  id: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -202,19 +216,21 @@ export interface StockHistoryQueryVariables {
 // ====================================================
 
 export interface MarketQuery_markets {
-  __typename: 'Quote'
-  id: string
-  companyName: string | null
-  change: number | null
-  changePercent: number | null
-  latestPrice: number | null
+  __typename: "Quote";
+  id: string;
+  companyName: string | null;
+  change: number | null;
+  changePercent: number | null;
+  latestPrice: number | null;
 }
 
 export interface MarketQuery {
-  markets: MarketQuery_markets[]
+  markets: MarketQuery_markets[];
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -222,22 +238,24 @@ export interface MarketQuery {
 // ====================================================
 
 export interface onMarketSubscription_getQuotes {
-  __typename: 'Quote'
-  id: string
-  change: number | null
-  changePercent: number | null
-  latestPrice: number | null
+  __typename: "Quote";
+  id: string;
+  change: number | null;
+  changePercent: number | null;
+  latestPrice: number | null;
 }
 
 export interface onMarketSubscription {
-  getQuotes: onMarketSubscription_getQuotes
+  getQuotes: onMarketSubscription_getQuotes;
 }
 
 export interface onMarketSubscriptionVariables {
-  markets: string[]
+  markets: string[];
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -245,25 +263,27 @@ export interface onMarketSubscriptionVariables {
 // ====================================================
 
 export interface NewsQuery_news {
-  __typename: 'News'
-  id: string
-  datetime: any
-  headline: string
-  source: string
-  url: string
-  summary: string
-  related: string
+  __typename: "News";
+  id: string;
+  datetime: any;
+  headline: string;
+  source: string;
+  url: string;
+  summary: string;
+  related: string;
 }
 
 export interface NewsQuery {
-  news: NewsQuery_news[]
+  news: NewsQuery_news[];
 }
 
 export interface NewsQueryVariables {
-  id: string
+  id: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -271,20 +291,54 @@ export interface NewsQueryVariables {
 // ====================================================
 
 export interface PeersQuery_stock {
-  __typename: 'Stock'
-  id: string
-  peers: string[]
+  __typename: "Stock";
+  id: string;
+  peers: string[];
 }
 
 export interface PeersQuery {
-  stock: PeersQuery_stock
+  stock: PeersQuery_stock;
 }
 
 export interface PeersQueryVariables {
-  id: string
+  id: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: SeachbarQuery
+// ====================================================
+
+export interface SeachbarQuery_stock_company {
+  __typename: "Company";
+  id: string;
+  symbol: string;
+  name: string | null;
+  website: string | null;
+  description: string | null;
+}
+
+export interface SeachbarQuery_stock {
+  __typename: "Stock";
+  id: string;
+  company: SeachbarQuery_stock_company;
+}
+
+export interface SeachbarQuery {
+  stock: SeachbarQuery_stock;
+}
+
+export interface SeachbarQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -292,20 +346,24 @@ export interface PeersQueryVariables {
 // ====================================================
 
 export interface searchQuery_symbol {
-  __typename: 'SearchResult'
-  id: string
+  __typename: "SearchResult";
+  id: string;
+  name: string;
+  marketSegment: string;
 }
 
 export interface searchQuery {
-  symbol: searchQuery_symbol
+  symbol: searchQuery_symbol;
 }
 
 export interface searchQueryVariables {
-  id: string
-  market: string
+  id: string;
+  market: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -313,22 +371,24 @@ export interface searchQueryVariables {
 // ====================================================
 
 export interface search_symbols {
-  __typename: 'SearchResult'
-  id: string
-  name: string
-  marketSegment?: MarketSegment
+  __typename: "SearchResult";
+  id: string;
+  name: string;
+  marketSegment: string;
 }
 
 export interface search {
-  symbols: search_symbols[]
+  symbols: search_symbols[];
 }
 
 export interface searchVariables {
-  text: string
-  marketSegment: MarketSegment
+  text: string;
+  marketSegment: MarketSegment;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -336,43 +396,45 @@ export interface searchVariables {
 // ====================================================
 
 export interface StatsQuery_stock_stats {
-  __typename: 'Stats'
-  week52high: number | null
-  week52low: number | null
-  ttmEPS: number | null
-  ttmDividendRate: number | null
-  dividendYield: number | null
-  peRatio: number | null
-  marketcap: number | null
+  __typename: "Stats";
+  week52high: number | null;
+  week52low: number | null;
+  ttmEPS: number | null;
+  ttmDividendRate: number | null;
+  dividendYield: number | null;
+  peRatio: number | null;
+  marketcap: number | null;
 }
 
 export interface StatsQuery_stock_quote {
-  __typename: 'Quote'
-  id: string
-  low: number | null
-  high: number | null
-  open: number | null
-  previousClose: number | null
-  latestVolume: number | null
-  avgTotalVolume: number | null
+  __typename: "Quote";
+  id: string;
+  low: number | null;
+  high: number | null;
+  open: number | null;
+  previousClose: number | null;
+  latestVolume: number | null;
+  avgTotalVolume: number | null;
 }
 
 export interface StatsQuery_stock {
-  __typename: 'Stock'
-  id: string
-  stats: StatsQuery_stock_stats
-  quote: StatsQuery_stock_quote
+  __typename: "Stock";
+  id: string;
+  stats: StatsQuery_stock_stats;
+  quote: StatsQuery_stock_quote;
 }
 
 export interface StatsQuery {
-  stock: StatsQuery_stock
+  stock: StatsQuery_stock;
 }
 
 export interface StatsQueryVariables {
-  id: string
+  id: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -380,22 +442,24 @@ export interface StatsQueryVariables {
 // ====================================================
 
 export interface onStockPriceSubscription_getQuotes {
-  __typename: 'Quote'
-  id: string
-  change: number | null
-  changePercent: number | null
-  latestPrice: number | null
+  __typename: "Quote";
+  id: string;
+  change: number | null;
+  changePercent: number | null;
+  latestPrice: number | null;
 }
 
 export interface onStockPriceSubscription {
-  getQuotes: onStockPriceSubscription_getQuotes
+  getQuotes: onStockPriceSubscription_getQuotes;
 }
 
 export interface onStockPriceSubscriptionVariables {
-  markets: string[]
+  markets: string[];
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -403,20 +467,22 @@ export interface onStockPriceSubscriptionVariables {
 // ====================================================
 
 export interface Company_company {
-  __typename: 'Company'
-  id: string
-  symbol: string
-  name: string | null
-  website: string | null
-  description: string | null
+  __typename: "Company";
+  id: string;
+  symbol: string;
+  name: string | null;
+  website: string | null;
+  description: string | null;
 }
 
 export interface Company {
-  __typename: 'Stock'
-  company: Company_company
+  __typename: "Stock";
+  company: Company_company;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -424,30 +490,32 @@ export interface Company {
 // ====================================================
 
 export interface History_chart {
-  __typename: 'Tick'
-  label: string
-  datetime: any
-  average: number | null
-  open: number | null
-  low: number | null
-  high: number | null
-  close: number | null
-  volume: number
+  __typename: "Tick";
+  label: string;
+  datetime: any;
+  average: number | null;
+  open: number | null;
+  low: number | null;
+  high: number | null;
+  close: number | null;
+  volume: number;
 }
 
 export interface History_quote {
-  __typename: 'Quote'
-  id: string
-  previousClose: number | null
+  __typename: "Quote";
+  id: string;
+  previousClose: number | null;
 }
 
 export interface History {
-  __typename: 'Stock'
-  chart: History_chart[]
-  quote: History_quote
+  __typename: "Stock";
+  chart: History_chart[];
+  quote: History_quote;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -455,17 +523,19 @@ export interface History {
 // ====================================================
 
 export interface Intraday {
-  __typename: 'Intraday'
-  datetime: any | null
-  open: number | null
-  close: number | null
-  high: number | null
-  low: number | null
-  volume: number | null
-  numberOfTrades: number | null
+  __typename: "Intraday";
+  datetime: any | null;
+  open: number | null;
+  close: number | null;
+  high: number | null;
+  low: number | null;
+  volume: number | null;
+  numberOfTrades: number | null;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -473,16 +543,18 @@ export interface Intraday {
 // ====================================================
 
 export interface News {
-  __typename: 'News'
-  datetime: any
-  headline: string
-  source: string
-  url: string
-  summary: string
-  related: string
+  __typename: "News";
+  datetime: any;
+  headline: string;
+  source: string;
+  url: string;
+  summary: string;
+  related: string;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -490,11 +562,13 @@ export interface News {
 // ====================================================
 
 export interface Peers {
-  __typename: 'Stock'
-  peers: string[]
+  __typename: "Stock";
+  peers: string[];
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -502,34 +576,36 @@ export interface Peers {
 // ====================================================
 
 export interface Stats_stats {
-  __typename: 'Stats'
-  week52high: number | null
-  week52low: number | null
-  ttmEPS: number | null
-  ttmDividendRate: number | null
-  dividendYield: number | null
-  peRatio: number | null
-  marketcap: number | null
+  __typename: "Stats";
+  week52high: number | null;
+  week52low: number | null;
+  ttmEPS: number | null;
+  ttmDividendRate: number | null;
+  dividendYield: number | null;
+  peRatio: number | null;
+  marketcap: number | null;
 }
 
 export interface Stats_quote {
-  __typename: 'Quote'
-  id: string
-  low: number | null
-  high: number | null
-  open: number | null
-  previousClose: number | null
-  latestVolume: number | null
-  avgTotalVolume: number | null
+  __typename: "Quote";
+  id: string;
+  low: number | null;
+  high: number | null;
+  open: number | null;
+  previousClose: number | null;
+  latestVolume: number | null;
+  avgTotalVolume: number | null;
 }
 
 export interface Stats {
-  __typename: 'Stock'
-  stats: Stats_stats
-  quote: Stats_quote
+  __typename: "Stock";
+  stats: Stats_stats;
+  quote: Stats_quote;
 }
 
+/* tslint:disable */
 /* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 //==============================================================
@@ -540,12 +616,12 @@ export interface Stats {
  * The type of market
  */
 export enum MarketSegment {
-  BOND = 'BOND',
-  CRYPTO = 'CRYPTO',
-  FX = 'FX',
-  FUTURE = 'FUTURE',
-  INDEX = 'INDEX',
-  STOCK = 'STOCK',
+  BOND = "BOND",
+  CRYPTO = "CRYPTO",
+  FUTURE = "FUTURE",
+  FX = "FX",
+  INDEX = "INDEX",
+  STOCK = "STOCK",
 }
 
 //==============================================================

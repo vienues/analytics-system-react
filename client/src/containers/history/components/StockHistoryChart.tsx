@@ -1,13 +1,24 @@
+import { DataCard } from 'common/StyledComponents'
 import { maxBy, minBy, round } from 'lodash'
 import React from 'react'
-import { Area, AreaChart, ReferenceLine, ResponsiveContainer, TickFormatterFunction, XAxis, YAxis } from 'recharts'
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ReferenceLine,
+  ResponsiveContainer,
+  TickFormatterFunction,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import { StockHistoryQuery } from '../../../__generated__/types'
-import { DataCard } from 'common/StyledComponents'
+import { getThemeColor, themes, ThemeConsumer } from 'rt-theme'
 
 export const StockHistoryChart = (props: StockHistoryQuery) => {
   const {
     stock: { id, quote },
   } = props
+
   const previousClose = quote.previousClose
   const chartData = props.stock.chart.filter(
     ({ low, average, high }) => (low && low > 0) || (average && average > 0) || (high && high > 0),
@@ -18,35 +29,52 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
   const tickFormatter: TickFormatterFunction = (tick: number) => (tick < 100 ? tick.toFixed(2) : tick.toFixed(0))
 
   return (
-    <DataCard cardType="history" title={id} instrument={id}>
-      <ResponsiveContainer width="99%" height="99%" minHeight={300}>
-        <AreaChart data={chartData} margin={{ left: 0, top: 0, right: -32, bottom: 0 }}>
-          <ReferenceLine y={previousClose!} strokeDasharray="4 3" />
-          <defs>
-            <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#7fb3ff" stopOpacity={0.9} />
-              <stop offset="95%" stopColor="#7fb3ff00" stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <Area
-            type="basisOpen"
-            dataKey="average"
-            strokeWidth={2}
-            fill="url(#colorUv)"
-            dot={false}
-            isAnimationActive={false}
-          />
-          <XAxis dataKey="label" interval={round(chartData.length / 12)} tick={{ fontSize: 10 }} tickSize={12} />
-          <YAxis
-            type="number"
-            allowDecimals={true}
-            domain={[lowestPrice!, highestPrice!]}
-            tick={{ fontSize: 10 }}
-            tickFormatter={tickFormatter}
-            orientation="right"
-          />
-        </AreaChart>
-      </ResponsiveContainer>
-    </DataCard>
+    <ThemeConsumer>
+      {({ themeName }) => (
+        <DataCard cardType="history" title={id} instrument={id} headingStyle={{ display: 'none' }}>
+          <ResponsiveContainer width="99%" height="99%" minHeight={450}>
+            <LineChart data={chartData} margin={{ left: -25, top: 0, right: 0, bottom: 0 }}>
+              <CartesianGrid
+                verticalFill={[
+                  getThemeColor(themes[themeName], color => color.secondary.coreSecondary2) ?? '#F1F2F2',
+                  getThemeColor(themes[themeName], color => color.secondary.coreSecondary) ?? '#FFFFFF',
+                ]}
+              />
+              <ReferenceLine
+                y={previousClose!}
+                strokeDasharray="4 3"
+                stroke={getThemeColor(themes[themeName], color => color.accents.accentPrimary) ?? '#AAABD1'}
+              />
+
+              <Line
+                type="linear"
+                dot={false}
+                strokeWidth={2}
+                dataKey="average"
+                stroke={getThemeColor(themes[themeName], color => color.accents.accentPrimary) ?? '#AAABD1'}
+              />
+              <XAxis
+                tickLine={{ stroke: '#DFDFDF' }}
+                axisLine={{ stroke: '#DFDFDF' }}
+                dataKey="label"
+                interval={round(chartData.length / 12)}
+                tick={{ fontSize: 12, fill: getThemeColor(themes[themeName], color => color.primary.corePrimary5) }}
+                tickSize={12}
+              />
+              <YAxis
+                type="number"
+                axisLine={{ stroke: '#DFDFDF' }}
+                tickLine={{ stroke: '#DFDFDF' }}
+                allowDecimals={true}
+                domain={[lowestPrice!, highestPrice!]}
+                tick={{ fontSize: 12, fill: getThemeColor(themes[themeName], color => color.primary.corePrimary5) }}
+                tickFormatter={tickFormatter}
+                orientation="left"
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </DataCard>
+      )}
+    </ThemeConsumer>
   )
 }

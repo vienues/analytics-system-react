@@ -1,6 +1,6 @@
 import { darken } from 'polished'
 import { DefaultTheme, keyframes } from 'styled-components/macro'
-import { Color, colors, defaultTheme } from './colors'
+import { Color, colors } from './colors'
 import { baselineFontSize } from './fonts'
 
 export interface IMotion {
@@ -29,13 +29,13 @@ const createTheme = ({ accents, primary, secondary, motion, button }: DefaultThe
   white: '#FFFFFF',
 
   backgroundColor: primary.corePrimary,
-  textColorPrimary: secondary.coreSecondary2,
-  textColorSecondary: secondary.coreSecondary5,
+
+  textColorPrimary: primary.corePrimary1,
+  textColorSecondary: primary.corePrimary2,
 
   fontSizeBaseline: baselineFontSize,
 
   accents,
-  colors,
   primary,
   secondary,
 
@@ -69,23 +69,16 @@ export type Theme = DefaultTheme & GeneratedTheme
 
 export type ThemeSelector = (theme: Theme) => Color
 
-export interface IColorProps {
-  bg?: ThemeSelector
-  fg?: ThemeSelector
-}
-
 function isColor(value: string | ThemeSelector): value is Color {
   return typeof value === 'string' && /^(#|rgb|hsl)/.test(value)
 }
 export const getThemeColor = (theme: Theme, color: Color | ThemeSelector, fallback?: Color) =>
   typeof color === 'function' ? color(theme) || fallback : isColor(color) ? color : fallback
 
-const lightTheme = createTheme(defaultTheme)
-const darkTheme = createTheme(colors.dark)
-// Manual overrides
-darkTheme.button.secondary.textColor = darkTheme.primary.corePrimary
+const light = createTheme(colors.light)
+const dark = createTheme(colors.dark)
 
 export const themes = {
-  dark: darkTheme,
-  light: lightTheme,
+  light,
+  dark,
 }

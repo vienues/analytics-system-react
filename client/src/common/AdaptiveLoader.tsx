@@ -19,7 +19,7 @@ interface IBarProps {
 const Bar = styled('rect')<IBarProps>`
   animation: ${({ bouceKeyframes }: IBarProps) => bouceKeyframes} ${({ speed }) => speed}s infinite;
   animation-delay: ${({ order, speed }) => order * (speed / 1.3 / BAR_NUMBER)}s;
-  fill: ${({ theme }) => theme.secondary.coreSecondary};
+  fill: ${({ theme }) => theme.primary.corePrimary};
   will-change: transform;
 `
 

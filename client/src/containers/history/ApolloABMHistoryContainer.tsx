@@ -14,7 +14,6 @@ import StockPriceSubscription from '../stock-price/graphql/StockPriceSubscriptio
 import ABMHistoryConnection from './graphql/ABMHistoryConnection.graphql'
 
 export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
-
   const { loading, data } = useSubscription<onStockPriceSubscription, onStockPriceSubscriptionVariables>(
     StockPriceSubscription,
     {
@@ -83,7 +82,8 @@ export const ApolloABMHistoryContainer: React.FunctionComponent<IApolloContainer
     )
   }
 
-  const [from, to] = id.split('/')
+  const from = id.slice(0, 3)
+  const to = id.slice(3)
 
   return (
     <>

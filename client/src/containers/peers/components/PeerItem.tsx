@@ -1,14 +1,14 @@
+import { ContainerService } from 'platformService/ContainerService'
 import React, { MouseEventHandler } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { Link } from '../../../common/StyledComponents'
-import { ContainerService } from 'platformService/ContainerService'
+import { PeersLink } from './Peers.styles'
 
 type PeerItemProps = RouteComponentProps & {
   symbol: string
 }
 
 const PeerItem: React.FunctionComponent<PeerItemProps> = ({ symbol, history }) => {
-  const navClickHandler: MouseEventHandler<HTMLAnchorElement> = async event => {
+  const navClickHandler: MouseEventHandler<HTMLAnchorElement> = async (event) => {
     const newSymbol = event.currentTarget.dataset.symbol
     if (ContainerService.agent === 'desktop' && newSymbol) {
       const { win, app } = ContainerService.state
@@ -35,9 +35,9 @@ const PeerItem: React.FunctionComponent<PeerItemProps> = ({ symbol, history }) =
   }
 
   return (
-    <Link onClick={navClickHandler} data-symbol={symbol} key={symbol}>
+    <PeersLink onClick={navClickHandler} data-symbol={symbol} key={symbol}>
       {symbol}
-    </Link>
+    </PeersLink>
   )
 }
 

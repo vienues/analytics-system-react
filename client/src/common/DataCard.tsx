@@ -1,24 +1,23 @@
+import { ContainerService, ContainerServiceSubscribe } from 'platformService/ContainerService'
 import React, { useState } from 'react'
+import styled, { CSSObject } from 'styled-components/macro'
+import { pxToRems } from 'utils'
 import OpenfinWindowControls from '../openfin/OpenfinWindowControls'
-import styled from 'styled-components/macro'
 import PopoutIcon from './PopoutIcon'
 import { DragHandle, Heading, PopoutButton, Title } from './StyledComponents'
-import { ContainerServiceSubscribe, ContainerService } from 'platformService/ContainerService'
-import { pxToRems } from 'utils'
 
 type stockCard = 'company' | 'history' | 'news' | 'peers' | 'search' | 'stats' | 'stock'
 type currenciesCard = 'abm'
 
 interface IProps {
-  style?: {
-    [key: string]: any
-  }
+  style?: CSSObject
+  headingStyle?: CSSObject
   cardType: stockCard | currenciesCard
   title: string | JSX.Element
   instrument: string
 }
 
-const DataContents: React.FunctionComponent<IProps> = (props) => {
+const DataContents: React.FunctionComponent<IProps> = props => {
   const [poppedOut, setPoppedOut] = useState(false)
 
   const closeHandler = () => {
@@ -38,13 +37,13 @@ const DataContents: React.FunctionComponent<IProps> = (props) => {
 
   return (
     <ContainerServiceSubscribe>
-      {(containerApi) => {
+      {containerApi => {
         const { app, win } = containerApi.state
 
         if (containerApi.agent !== 'desktop' || !app || !win) {
           return (
-            <VanillaDataCard {...props.style}>
-              <Heading>{props.title}</Heading>
+            <VanillaDataCard style={props.style}>
+              <Heading style={props.headingStyle}>{props.title}</Heading>
               {props.children}
             </VanillaDataCard>
           )
@@ -55,7 +54,7 @@ const DataContents: React.FunctionComponent<IProps> = (props) => {
 
         return (
           poppedOut || (
-            <Wrapper {...props.style}>
+            <Wrapper>
               <Header>
                 <Title>{props.title}</Title>
                 <DragHandle />
@@ -81,15 +80,21 @@ const VanillaDataCard = styled.div`
   grid-template-columns: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding: ${pxToRems(28)} ${pxToRems(32)};
+  padding: ${pxToRems(24)} ${pxToRems(32)};
   align-content: baseline;
+`
+
+export const SidebarDataCard = styled.div`
+  ${VanillaDataCard} {
+    padding: ${pxToRems(24)} ${pxToRems(20)};
+  }
 `
 
 const PopupDataCard = styled.div`
   display: grid;
   overflow-x: hidden;
   overflow-y: hidden;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary};
   grid-template-columns: 100%;
 `
 
@@ -106,7 +111,7 @@ const DataCardHeading = styled.div`
   align-items: center;
   min-width: 100%;
   min-height: 3.5rem;
-  background-color: ${({ theme }) => theme.primary.corePrimary};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary};
   color: ${({ theme }) => theme.textColorPrimary};
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);

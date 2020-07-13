@@ -42,6 +42,7 @@ export interface AccentPalette {
   tradingSell1: Color
   tradingBuy: Color
   tradingBuy1: Color
+  shadow: Color
 }
 
 export interface ColorPalettes {
@@ -50,22 +51,22 @@ export interface ColorPalettes {
   accents: AccentPalette
 }
 
-export const defaultTheme: DefaultTheme = {
+export const light: DefaultTheme = {
   primary: {
     corePrimary: '#323232',
     corePrimary1: '#383838',
     corePrimary2: '#4D4D4D',
-    corePrimary3: '#555555',
-    corePrimary4: '#6B6B6B',
-    corePrimary5: '#7F7F7F',
+    corePrimary3: '#5F5F5F',
+    corePrimary4: '#707070',
+    corePrimary5: '#828282',
   },
   secondary: {
     coreSecondary: '#FFFFFF',
-    coreSecondary1: '#F9F9F9',
-    coreSecondary2: '#F2F2F2',
-    coreSecondary3: '#E4E4E4',
-    coreSecondary4: '#CFCFCF',
-    coreSecondary5: '#BBBBBB',
+    coreSecondary1: '#F9FAFA',
+    coreSecondary2: '#F1F2F2',
+    coreSecondary3: '#EAEBEB',
+    coreSecondary4: '#D8D9D9',
+    coreSecondary5: '#BFC0C0',
   },
   accents: {
     accentPrimary: '#AAABD1',
@@ -73,7 +74,7 @@ export const defaultTheme: DefaultTheme = {
     accentPrimary2: '#C3C4DE',
     accentPositive: '#01C38D',
     accentPositive1: '#03A077',
-    accentPositive2: '#33CFA3',
+    accentPositive2: '#0C9674',
     accentPositive3: '#99E7D1',
     accentBeAware: '#FF8D00',
     accentBeAware1: '#E57E00',
@@ -81,15 +82,14 @@ export const defaultTheme: DefaultTheme = {
     accentBeAware3: '#FFE8CC',
     accentNegative: '#FF274B',
     accentNegative1: '#E62343',
-    accentNegative2: '#FCA5A5',
+    accentNegative2: '#FF92A4',
     accentNegative3: '#FFD3DB',
     tradingSell: '#FF274B',
     tradingSell1: '#FFD3DB',
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
+    shadow: '0 0 20px 0 rgba(0, 0, 0, 0.15)',
   },
-  textColorPrimary: '#F2F2F2',
-  textColorSecondary: '#BBBBBB',
   ...buttons,
   ...animations,
 }
@@ -97,19 +97,19 @@ export const defaultTheme: DefaultTheme = {
 export const dark: DefaultTheme = {
   primary: {
     corePrimary: '#FFFFFF',
-    corePrimary1: '#F9F9F9',
-    corePrimary2: '#F2F2F2',
-    corePrimary3: '#E4E4E4',
-    corePrimary4: '#CFCFCF',
-    corePrimary5: '#BBBBBB',
+    corePrimary1: '#F9FAFA',
+    corePrimary2: '#F1F2F2',
+    corePrimary3: '#EAEBEB',
+    corePrimary4: '#D8D9D9',
+    corePrimary5: '#BFC0C0',
   },
   secondary: {
     coreSecondary: '#323232',
     coreSecondary1: '#383838',
     coreSecondary2: '#4D4D4D',
-    coreSecondary3: '#555555',
-    coreSecondary4: '#6B6B6B',
-    coreSecondary5: '#7F7F7F',
+    coreSecondary3: '#5F5F5F',
+    coreSecondary4: '#707070',
+    coreSecondary5: '#828282',
   },
   accents: {
     accentPrimary: '#AAABD1',
@@ -131,14 +131,13 @@ export const dark: DefaultTheme = {
     tradingSell1: '#FFD3DB',
     tradingBuy: '#2D95FF',
     tradingBuy1: '#BFDEFF',
+    shadow: '0 0 20px 0 rgba(0, 0, 0, 0.45)',
   },
-  textColorPrimary: '#F2F2F2',
-  textColorSecondary: '#BBBBBB',
   ...animations,
   ...buttons,
 }
 
 export const colors = {
   dark,
-  defaultTheme,
+  light,
 }

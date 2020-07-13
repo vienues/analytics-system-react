@@ -14,12 +14,13 @@ import { MarketSegment } from '../../__generated__/types'
 import { Search, StockPrice } from '../index'
 import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
+import Footer from './Footer'
 
 const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,
   market,
 }) => {
-  const { currentSymbol, errorMessage } = useContext(SearchContext)
+  const { currentSymbol, errorMessage, previousSearch } = useContext(SearchContext)
 
   const renderedErrorMessage: JSX.Element | null = useMemo(() => {
     if (!(currentSymbol && currentSymbol.id) && id) {
@@ -35,27 +36,30 @@ const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { mar
   }, [currentSymbol, errorMessage, id])
 
   const renderedRoutes = useMemo(() => {
-    return Object.keys(RouterHelpers.MainRouterItems).map((route) => (
+    return Object.keys(RouterHelpers.MainRouterItems).map(route => (
       <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
     ))
   }, [])
 
   return (
     <WrapperContent>
-      <MainSearchContent hasNoSearch={!currentSymbol}>
+      <MainSearchContent hasPreviousSearch={previousSearch ?? false}>
         <SearchGridArea>
           <Search id={id} url={market} market={market} />
           <StockPrice id={id} market={market} />
         </SearchGridArea>
       </MainSearchContent>
       {renderedErrorMessage || renderedRoutes}
+      <Footer hasNoSearch={!currentSymbol} />
     </WrapperContent>
   )
 }
 
-const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = (props) => {
+const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = props => {
+  const { currentSymbol } = useContext(SearchContext)
+
   return (
-    <MainLayoutWrapper>
+    <MainLayoutWrapper hasNoSearch={!currentSymbol}>
       <SearchContextProvider>
         <AppBar />
         <CurrentSymbolLayout {...props} />

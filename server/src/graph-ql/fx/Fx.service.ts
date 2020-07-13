@@ -1,14 +1,10 @@
 import autobahn from 'autobahn'
 import { Service } from 'typedi'
-import getDataSource from '../../connectors'
 import data from '../../mock-data/currencySymbols.json'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
-import { IAdaptiveCtx } from '../../types'
 import SearchResult from '../stock/SearchResult.schema'
-import { FxSymbolsSchema } from './'
-
-const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
+import { MarketSegments } from '../ref-data/SearchQueryArgs'
 
 interface ISymbolData {
   [key: string]: {
@@ -62,14 +58,14 @@ export default class {
 
   public getSymbol(id: string): SearchResult {
     const symbolData = data as ISymbolData
-    return { id, ...symbolData[id] }
+    return { id, marketSegment: MarketSegments.FX, ...symbolData[id] }
   }
 
   public getSymbols(filterText: string): SearchResult[] {
     const symbolData = data as ISymbolData
     return Object.keys(symbolData)
       .filter(key => key.includes(filterText) || symbolData[key].name.includes(filterText))
-      .map(key => ({ id: key, ...symbolData[key] }))
+      .map(key => ({ id: key, marketSegment: MarketSegments.FX, ...symbolData[key] }))
   }
 
   public async getPriceHistory(from: string, to: string) {

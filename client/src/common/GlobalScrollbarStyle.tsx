@@ -37,7 +37,7 @@ const GlobalScrollbarStyle: React.FunctionComponent<{ theme: Theme }> = ({ theme
     <style>
       {`
         body ::-webkit-scrollbar-thumb {
-          background-color: ${rgba(theme.secondary.coreSecondary, 0.2)};
+          background-color: ${rgba(theme.primary.corePrimary, 0.2)};
         }
         `}
     </style>

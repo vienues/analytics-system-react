@@ -1,9 +1,9 @@
-import styled from 'styled-components/macro'
+import styled, { css } from 'styled-components/macro'
 
 import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
 import { pxToRems } from 'utils'
-import { css } from 'styled-components'
+import { mediaQuery } from 'rt-theme/mediaQueries'
 export const DataCard = dataCard
 
 export const AnalyticsLineChartStyle = styled.div`
@@ -53,18 +53,16 @@ export const VerticalDataContents = styled(DataContents)`
 `
 
 export const Text = styled.span`
-  color: ${({ theme }) => theme.textColorSecondary};
+  color: ${({ theme }) => theme.textColorPrimary};
 `
 
 export const BoldText = styled(Text)`
   font-weight: 500;
+  color: ${({ theme }) => theme.primary.corePrimary2};
 `
 
-export const LabeledData = styled.div`
-  min-height: 1.5rem;
-  border-bottom: 1px #54606d solid;
-  display: grid;
-  grid-template-columns: 1fr auto;
+export const LightText = styled(Text)`
+  color: ${({ theme }) => theme.primary.corePrimary5};
 `
 
 export const Title = styled.h1`
@@ -72,19 +70,20 @@ export const Title = styled.h1`
   font-size: ${pxToRems(16)};
   font-weight: 300;
   font-family: ${fonts.secondaryFontFamily};
+  color: ${({ theme }) => theme.textColorSecondary};
 `
 
 export const Heading = styled(Title)`
-  margin-bottom: 1.5rem;
+  margin-bottom: ${pxToRems(15)};
 `
 
 export const Subheading = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 300;
+  font-size: ${pxToRems(13)};
+  font-weight: 500;
 `
 
 export const Caption = styled.span`
-  color: ${({ theme, color }) => theme.primary.corePrimary3};
+  color: ${({ theme }) => theme.secondary.coreSecondary5};
   opacity: 0.59;
   display: block;
   line-height: 1rem;
@@ -100,6 +99,17 @@ export const Link = styled.a`
   }
 `
 
+export const ButtonLink = styled.a`
+  cursor: pointer;
+  font-size: ${pxToRems(11)};
+  font-weight: 500;
+  border: 2px solid ${({ theme }) => theme.secondary.coreSecondary4};
+  border-radius: ${pxToRems(43)};
+  padding: ${pxToRems(2)} ${pxToRems(4)};
+  margin: ${pxToRems(2)};
+  text-align: center;
+`
+
 export const StrongLabel = styled(Text)`
   font-weight: 600;
 `
@@ -107,8 +117,6 @@ export const StrongLabel = styled(Text)`
 export const OpaqueLabel = styled(Text)`
   opacity: 0.59;
 `
-
-export const FieldLabel = styled(Text)``
 
 export const SwitchThemeButton = styled.button`
   width: 2rem;
@@ -151,50 +159,55 @@ const ContentBase = styled.div`
 
 export const MainContent = styled(ContentBase)`
   grid-template-columns: 3fr 1fr;
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
 `
 export const MainInnerContent = styled(ContentBase)`
   align-content: start;
 `
 
-export const MainSearchContent = styled(ContentBase)<{ hasNoSearch: boolean }>`
+const SearchBoxLanding = css`
+  grid-area: unset;
+  grid-column: 1/4;
+  grid-row: 1/3;
+  margin: 0 ${pxToRems(22)};
+`
+
+export const MainSearchContent = styled.div<{ hasPreviousSearch: boolean }>`
   grid-area: Search;
-  display: block;
+  align-self: center;
   font-size: 2rem;
   line-height: 2rem;
   grid-template-columns: 1fr;
   grid-auto-flow: column;
   margin: ${pxToRems(32)} ${pxToRems(22)} ${pxToRems(12)};
   position: relative;
-  border-bottom: solid 2px ${({ theme }) => theme.primary.corePrimary3};
-  @media (max-width: 900px) {
-    font-size: 1rem;
-    line-height: 1rem;
+  border-bottom: solid 2px ${({ theme }) => theme.secondary.coreSecondary3};
+  ${({ hasPreviousSearch }) => !hasPreviousSearch && SearchBoxLanding};
+  @media ${mediaQuery.tabletL} {
+    margin: ${pxToRems(22)} ${pxToRems(22)} ${pxToRems(12)};
   }
-  @media (max-width: 500px) {
-    grid-auto-flow: row;
+  @media ${mediaQuery.mobile} {
+    font-size: ${pxToRems(16)};
+    margin: ${pxToRems(12)} ${pxToRems(22)};
   }
-  ${({ hasNoSearch }) =>
-    hasNoSearch &&
-    css`
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100vh;
-    `}
 `
 
 export const WrapperContent = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     'Search Search News'
     'Main Main News'
     'Main Main News';
   overflow: auto;
+  @media ${mediaQuery.tabletL} {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      'Search'
+      'Main'
+      'News';
+  }
 `
 
 export const SearchGridArea = styled.div`
@@ -202,24 +215,50 @@ export const SearchGridArea = styled.div`
   display: grid;
   grid-template-columns: 1fr auto;
   margin-bottom: ${pxToRems(10)};
+  @media ${mediaQuery.mobile} {
+    margin-bottom: ${pxToRems(6)};
+  }
 `
 
 export const NewsGridArea = styled.div`
+  display: grid;
+  align-content: baseline;
   grid-area: News;
-  background-color: ${({ theme }) => theme.primary.corePrimary2};
+  width: ${pxToRems(350)};
+  padding: 0 ${pxToRems(16)};
+  background-color: ${({ theme }) => theme.secondary.coreSecondary2};
   height: 100vh;
   overflow-y: auto;
+  @media ${mediaQuery.tabletL} {
+    height: auto;
+    overflow-y: unset;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+  }
+  @media ${mediaQuery.tabletS} {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media ${mediaQuery.mobile} {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const MainGridArea = styled.div`
   grid-area: Main;
   overflow-y: auto;
+  @media ${mediaQuery.tabletL} {
+    overflow: unset;
+  }
 `
 
-export const MainLayoutWrapper = styled.div`
+export const MainLayoutWrapper = styled.div<{ hasNoSearch?: boolean }>`
   display: grid;
   grid-template-columns: auto 1fr;
   height: 100%;
+  @media ${mediaQuery.tabletL} {
+    grid-template-columns: none;
+    grid-template-rows: ${({ hasNoSearch }) => (hasNoSearch ? '1fr fr' : 'auto 1fr')};
+  }
 `
 
 export const ScrollableArea = styled.div`
@@ -234,5 +273,4 @@ export const FooterStatsWrapper = styled.div`
   display: grid;
   grid-area: Main;
   grid-template-rows: 1fr auto;
-  height: 450px;
 `

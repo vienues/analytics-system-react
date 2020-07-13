@@ -1,28 +1,20 @@
 import React from 'react'
-import { DataCard, DataContents, Text } from '../../../common/StyledComponents'
-import styled from 'styled-components/macro'
+import { DataCard, Text } from '../../../common/StyledComponents'
 import { default as NewsItem, INewsArticle } from './NewsItem'
+import { NewsCard } from './News.styles'
 
 const News: React.FunctionComponent<{ news: INewsArticle[]; id: string }> = ({ news, id }) => (
-  <DataCard cardType="news" title="Latest News" instrument={id}>
-    <NewsDataContents>
-      {news.length > 0 ? (
-        news.map((newsItem) => <NewsItem key={newsItem.id} {...newsItem} />)
-      ) : (
-        <Text>There is no news</Text>
-      )}
-    </NewsDataContents>
-  </DataCard>
+  <NewsCard>
+    <DataCard cardType="news" title="Latest News" instrument={id}>
+      <div>
+        {news.length > 0 ? (
+          news.map(newsItem => <NewsItem key={newsItem.id} {...newsItem} />)
+        ) : (
+          <Text>There is no news</Text>
+        )}
+      </div>
+    </DataCard>
+  </NewsCard>
 )
-
-const NewsDataContents = styled(DataContents)`
-  & a {
-    border-bottom: 1px #54606d solid;
-  }
-
-  & a:last-child {
-    border-bottom: none;
-  }
-`
 
 export default News

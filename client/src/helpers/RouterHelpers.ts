@@ -51,8 +51,8 @@ export default class RouterHelper {
   private static rootRouterItems: IComponentWithProps = {
     '/': { component: MainLayout },
     '/(bond|crypto|fx|future|index|stock)/:id?': { component: MainLayout },
-    '/(fx)/:from/:to': { component: MainLayout },
-    '/abm/:from/:to': { component: ABMHistory },
+    '/(fx)/:from:to': { component: MainLayout },
+    '/abm/:from:to': { component: ABMHistory },
     '/company/:id?': { component: Company },
     '/history/:id?': { component: StockHistoryContainer },
     '/news/:id?': { component: News },
@@ -65,7 +65,7 @@ export default class RouterHelper {
     '/': { component: Stocks },
     '/bond/:id?': { component: News },
     '/crypto/:id?': { component: Cryptocurrencies },
-    '/fx/:from?/:to?': { component: Currencies },
+    '/fx/:from?:to?': { component: Currencies },
     '/future/:id?': { component: News },
     '/index/:id?': { component: News },
     '/stock/:id?': { component: Stocks },
@@ -78,7 +78,7 @@ export default class RouterHelper {
       if (params.id) {
         id = params.id
       } else if (params.from && params.to) {
-        id = `${params.from}/${params.to}`
+        id = `${params.from}${params.to}`
       }
       if (isRoot || id) {
         return React.createElement(element.component, {

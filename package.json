@@ -6,6 +6,9 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "babel-eslint": "^10.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-config-react-app": "^5.2.1",
@@ -14,9 +17,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
-    "babel-eslint": "^10.0.3",
     "husky": "^4.2.3",
-    "lerna": "^3.20.2",
+    "lerna": "^3.22.1",
     "openfin-cli": "^3.0.1",
     "prettier": "^2.0.2",
     "pretty-quick": "^2.0.1",
@@ -33,9 +35,10 @@
     "openfin": "openfin --launch --config ./client/app.json",
     "demo": "lerna run --parallel demo",
     "generate-server-schema": "node ./server/src/generateSchema.js",
+    "pregenerate-server-schema": "lerna run --scope=@adaptive-insights/server build",
     "generate-client-schema": "./client/node_modules/.bin/apollo client:download-schema ./client/src/schema.json",
     "generate-client-typings": "./client/node_modules/.bin/apollo client:codegen ./client/src/__generated__/types.ts --outputFlat --includes ./client/src/**/*.graphql --addTypename --localSchemaFile=./client/src/schema.json --target=typescript",
-    "generate-schema-and-typings": "npm generate-server-schema && npm generate-client-schema && npm run generate-client-typings"
+    "generate-schema-and-typings": "npm run generate-server-schema && npm run generate-client-schema && npm run generate-client-typings"
   },
   "author": "",
   "license": "ISC",
@@ -47,7 +50,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "lerna run --concurrency 1 --stream precommit",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }
