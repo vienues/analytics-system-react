@@ -10,6 +10,7 @@ interface ISearchBarProps {
   onChange: (symbol: SearchResult | null) => void
   onTextChange: (text: string) => void
   placeholder: string
+  currentText: string
 }
 
 interface SearchResultWithIndex extends SearchResult {
@@ -27,6 +28,15 @@ const searchResultToOptionString = (item: SearchResult | null): string => {
   return item ? `${getItemId(item)} - ${item.name}` : ''
 }
 
+const generateHighlightedText = (text: string, searchTerm: string) => {
+  const splitText = text.split(new RegExp(`(${searchTerm})`, 'gi'))
+  return splitText.map((text, i) => (
+    <span key={i}>
+      {text.toLowerCase() === searchTerm.toLowerCase() ? <SearchResultMatch>{text}</SearchResultMatch> : text}
+    </span>
+  ))
+}
+
 const SearchInput: React.FC<ISearchBarProps> = ({
   initialItem,
   placeholder,
@@ -34,6 +44,7 @@ const SearchInput: React.FC<ISearchBarProps> = ({
   maxItems,
   onChange,
   onTextChange,
+  currentText,
 }) => {
   const renderItems = (getItemProps: (options: GetItemPropsOptions<SearchResult>) => any) => {
     if (items.length === 0) {
@@ -55,11 +66,16 @@ const SearchInput: React.FC<ISearchBarProps> = ({
       return (
         <div key={i}>
           <SegmentLabel>{segment === 'FX' ? segment : segment.toLowerCase()}</SegmentLabel>
-          {marketSegments[segment].map((item: SearchResultWithIndex) => (
-            <SearchResultItem key={item.id} {...getItemProps({ index: item.index, item })}>
-              {getItemId(item)} - {item.name}
-            </SearchResultItem>
-          ))}
+          {marketSegments[segment].map((item: SearchResultWithIndex) => {
+            const itemName = generateHighlightedText(item.name, currentText)
+            const itemId = generateHighlightedText(getItemId(item), currentText)
+
+            return (
+              <SearchResultItem key={item.id} {...getItemProps({ index: item.index, item })}>
+                {itemId} - {itemName}
+              </SearchResultItem>
+            )
+          })}
         </div>
       )
     })
@@ -155,6 +171,10 @@ const SearchResultItem = styled(SearchResultItemBase)`
     background: ${({ theme }) => theme.secondary.coreSecondary2};
     border-radius: 20px;
   }
+`
+
+const SearchResultMatch = styled.strong`
+  color: ${({ theme }) => theme.primary.corePrimary};
 `
 
 export default SearchInput
