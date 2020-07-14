@@ -13,9 +13,9 @@ export default class News {
   @Query(returns => [NewsSchema])
   public async news(@Args() { id, last }: NewsQueryArgs, @Ctx() ctx: IAdaptiveCtx): Promise<NewsSchema[]> {
     if (last) {
-      return this.newsService.getLatestNews(id, last, ctx)
+      return this.newsService.getLatestNews(id, last)
     } else {
-      return this.newsService.getNews(id, ctx)
+      return this.newsService.getNews(id)
     }
   }
 }

@@ -26,10 +26,10 @@ export default class Stats {
 
   @Query(returns => StatsSchema)
   public async stats(@Arg('id') id: string, @Ctx() ctx: IAdaptiveCtx): Promise<StatsSchema> {
-    return this.statsService.getStats(id, ctx)
+    return this.statsService.getStats(id)
   }
   @FieldResolver()
   public async company(@Root() stats: StatsSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Company> {
-    return this.companyService.getCompany(stats.id, ctx)
+    return this.companyService.getCompany(stats.id)
   }
 }

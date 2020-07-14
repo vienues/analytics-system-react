@@ -32,7 +32,7 @@ export default class Tick {
     @Args() { symbol, lastN }: IntradayQuoteArgs,
     @Ctx() ctx: IAdaptiveCtx,
   ): Promise<IntradaySchema[]> {
-    return await this.tickService.getIntradayPricing(symbol, lastN, ctx)
+    return await this.tickService.getIntradayPricing(symbol, lastN)
   }
 
   @FieldResolver(() => DateTimeScalar)

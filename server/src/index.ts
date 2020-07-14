@@ -1,10 +1,9 @@
 import 'dotenv/config'
-import { graphiqlExpress, graphqlExpress } from 'apollo-server-express'
+import { ApolloServer,makeExecutableSchema} from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
 import { execute, subscribe } from 'graphql'
-import { makeExecutableSchema } from 'graphql-tools'
 import { createServer } from 'http'
 import path from 'path'
 import 'reflect-metadata'
@@ -39,50 +38,35 @@ async function bootstrap() {
   const PORT = 4000
   const CLIENT_PORT = 3000
 
-  const server = express()
+  const app = express()
 
-  server.use(
+  app.use(
     '*',
     cors({
       origin: [`http://localhost:${PORT}`, `http://localhost:${CLIENT_PORT}`],
     }),
   )
 
-  server.use(
+  app.use(
     '/iexsandbox',
     bodyParser.json(),
     (req, res) => {
       res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
     }
   )
+const apollo_server = new ApolloServer({ schema });
+apollo_server.applyMiddleware({ app });
 
-  server.use(
-    '/graphql',
-    bodyParser.json(),
-    graphqlExpress({
-      context: { iex },
-      schema,
-    }),
-  )
-
-  server.get('/iexsandbox', (req, res) => {
+  app.get('/iexsandbox', (req, res) => {
     res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
   })
 
-  server.get('/healthz', (req, res) => {
+  app.get('/healthz', (req, res) => {
     res.status(200).send('tiptop')
   })
 
-  server.use(
-    '/graphiql',
-    graphiqlExpress({
-      endpointURL: '/graphql',
-      subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`,
-    }),
-  )
-
   // Wrap the Express server
-  const ws = createServer(server)
+  const ws = createServer(app)
 
   interface ISubscriptionOptions extends Object {
     query: string
@@ -114,6 +98,7 @@ async function bootstrap() {
 
   ws.listen(PORT, () => {
     logger.info(`Apollo Server is now running on http://localhost:${PORT}`)
+    logger.info(`Subscriptions ready at ws://localhost:${PORT}${apollo_server.subscriptionsPath}`)
     // Set up the WebSocket for handling GraphQL subscriptions
     // tslint:disable-next-line:no-unused-expression
     new SubscriptionServer(

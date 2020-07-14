@@ -6,6 +6,9 @@ import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
 import { QuoteService, SubscriptionQuoteArgs } from './'
 import { default as QuoteSchema } from './Quote.schema'
+import getDataSource  from '../../connectors'
+
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 export interface IAutoResolvedFields {
   id: string
@@ -27,9 +30,9 @@ export type AutoFields = IAutoResolvedFields & IAutoCastedFields
 export default class Quote {
   constructor(private readonly quoteService: QuoteService, private readonly companyService: CompanyService) {}
   @Query(() => QuoteSchema)
-  public async quote(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema | null> {
+  public async quote(@Args() { id }: IdInputArgs): Promise<QuoteSchema | null> {
     try {
-      return this.quoteService.getQuote(id, ctx)
+      return this.quoteService.getQuote(id)
     } catch (e) {
       logger.error(`Error: ${e.message}`)
       return null
@@ -39,7 +42,7 @@ export default class Quote {
   @Query(() => [QuoteSchema])
   public async markets(@Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema[] | null> {
     try {
-      const response: QuoteAPI = await ctx.iex.iexApiRequest(`/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
+      const response: QuoteAPI = await iex.iexApiRequest(`/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
       return Object.values(response).map(quote => quote.quote as IIexQuoteQuery & AutoFields)
     } catch (e) {
       logger.error(`Error: ${e.message}`)
@@ -53,8 +56,8 @@ export default class Quote {
   }
 
   @FieldResolver()
-  public async company(@Root() quoteData: QuoteSchema, @Ctx() ctx: IAdaptiveCtx): Promise<CompanySchema> {
-    return this.companyService.getCompany(quoteData.symbol, ctx)
+  public async company(@Root() quoteData: QuoteSchema): Promise<CompanySchema> {
+    return this.companyService.getCompany(quoteData.symbol)
   }
 
   @Subscription(returns => QuoteSchema, {

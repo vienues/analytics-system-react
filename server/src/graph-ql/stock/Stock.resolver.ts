@@ -1,6 +1,6 @@
 import { Arg, Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
 import search from '../../services/searchIndex'
-import { IAdaptiveCtx, IIexPreviousQuery } from '../../types'
+import { IAdaptiveCtx, IIexPreviousQuery} from '../../types'
 import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
 import { NewsSchema, NewsService } from '../news'
@@ -11,6 +11,10 @@ import { default as OLHCSchema } from './OLHC.schema'
 import Previous from './Previous.schema'
 import SearchResult from './SearchResult.schema'
 import { default as StockSchema } from './Stock.schema'
+import { ApolloError } from 'apollo-server-express'
+import getDataSource  from '../../connectors'
+
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 interface IStockFields {
   id: string
@@ -60,17 +64,17 @@ export default class Stock {
 
   @FieldResolver()
   public async chart(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<TickSchema[]> {
-    return this.tickService.getChart(stock.id, ctx)
+    return this.tickService.getChart(stock.id)
   }
 
   @FieldResolver()
   public async stats(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<StatsSchema> {
-    return this.statsService.getStats(stock.id, ctx)
+    return this.statsService.getStats(stock.id)
   }
 
   @FieldResolver()
-  public async company(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<CompanySchema> {
-    return this.companyService.getCompany(stock.id, ctx)
+  public async company(@Root() stock: StockSchema): Promise<CompanySchema> {
+    return this.companyService.getCompany(stock.id)
   }
 
   @FieldResolver()
@@ -80,18 +84,18 @@ export default class Stock {
 
   @FieldResolver()
   public async quote(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema> {
-    return this.quoteService.getQuote(stock.id, ctx)
+    return this.quoteService.getQuote(stock.id)
   }
 
   @FieldResolver()
   public async price(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<number> {
-    return ctx.iex.price(stock.id)
+      return iex.price(stock.id);
   }
 
   @FieldResolver()
-  public async previous(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Previous> {
+  public async previous(@Root() stock: StockSchema): Promise<Previous> {
     // @ts-ignore - vwap does not exist in typings
-    return ctx.iex.previousDay(stock.id)
+    return iex.previousDay(stock.id)
   }
 
   @FieldResolver()
@@ -100,6 +104,6 @@ export default class Stock {
     @Ctx() ctx: IAdaptiveCtx,
     @Arg('last') last: number,
   ): Promise<NewsSchema[]> {
-    return this.newsService.getLatestNews(stock.id, last, ctx)
+    return this.newsService.getLatestNews(stock.id, last)
   }
 }
