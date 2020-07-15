@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { ApolloServer,makeExecutableSchema} from 'apollo-server-express'
+import { ApolloServer, makeExecutableSchema} from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
