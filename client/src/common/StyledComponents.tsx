@@ -193,6 +193,7 @@ export const MainSearchContent = styled.div<{ hasPreviousSearch: boolean }>`
 
 export const WrapperContent = styled.div`
   display: grid;
+  grid-row: 2;
   grid-template-columns: 2fr 1fr auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
@@ -201,6 +202,7 @@ export const WrapperContent = styled.div`
     'Main Main News';
   overflow: auto;
   @media ${mediaQuery.tabletL} {
+    grid-row: 3;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     grid-template-areas:
@@ -227,12 +229,13 @@ export const NewsGridArea = styled.div`
   width: ${pxToRems(350)};
   padding: 0 ${pxToRems(16)};
   background-color: ${({ theme }) => theme.secondary.coreSecondary2};
-  height: 100vh;
+  grid-row: 1/5;
   overflow-y: auto;
   @media ${mediaQuery.tabletL} {
     height: auto;
     overflow-y: unset;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-row: 3;
     width: 100%;
   }
   @media ${mediaQuery.tabletS} {
@@ -254,10 +257,11 @@ export const MainGridArea = styled.div`
 export const MainLayoutWrapper = styled.div<{ hasNoSearch?: boolean }>`
   display: grid;
   grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
   height: 100%;
   @media ${mediaQuery.tabletL} {
     grid-template-columns: none;
-    grid-template-rows: ${({ hasNoSearch }) => (hasNoSearch ? '1fr fr' : 'auto 1fr')};
+    grid-template-rows: ${({ hasNoSearch }) => (hasNoSearch ? 'auto auto 1fr' : 'auto 1fr')};
   }
 `
 

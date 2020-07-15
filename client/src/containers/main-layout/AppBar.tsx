@@ -18,6 +18,7 @@ const Sidebar = styled.div<{ hasPreviousSearch: boolean }>`
   justify-content: center;
   background: ${({ theme }) => theme.secondary.coreSecondary2};
   width: ${pxToRems(129)};
+  grid-row: 2;
   @media ${mediaQuery.tabletL} {
     width: 100%;
     ${LogoWrapper} {
