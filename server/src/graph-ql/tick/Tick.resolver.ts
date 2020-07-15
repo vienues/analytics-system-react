@@ -2,7 +2,6 @@ import { IntradayIEXOnly } from 'iexcloud_api_wrapper'
 import { Arg, Args, Ctx, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
 import { TickService } from '.'
 import { pubsub } from '../../pubsub'
-import { IAdaptiveCtx } from '../../types'
 import { DateTime, DateTimeScalar, formatDate } from '../DateScalars'
 import { QuoteService } from '../quote'
 import { default as IntradaySchema } from './Intraday.schema'
@@ -29,8 +28,7 @@ export default class Tick {
 
   @Query(returns => [IntradaySchema])
   public async intradayPrices(
-    @Args() { symbol, lastN }: IntradayQuoteArgs,
-    @Ctx() ctx: IAdaptiveCtx,
+    @Args() { symbol, lastN }: IntradayQuoteArgs
   ): Promise<IntradaySchema[]> {
     return await this.tickService.getIntradayPricing(symbol, lastN)
   }

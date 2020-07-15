@@ -1,7 +1,7 @@
 import { Quote as QuoteAPI } from 'iexcloud_api_wrapper'
 import { Arg, Args, ArgsType, Ctx, Field, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
 import logger from '../../services/logger'
-import { IAdaptiveCtx, IIexBatchQuote, IIexQuoteQuery } from '../../types'
+import { IIexBatchQuote, IIexQuoteQuery } from '../../types'
 import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
 import { QuoteService, SubscriptionQuoteArgs } from './'
@@ -40,7 +40,7 @@ export default class Quote {
   }
 
   @Query(() => [QuoteSchema])
-  public async markets(@Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema[] | null> {
+  public async markets(): Promise<QuoteSchema[] | null> {
     try {
       const response: QuoteAPI = await iex.iexApiRequest(`/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
       return Object.values(response).map(quote => quote.quote as IIexQuoteQuery & AutoFields)

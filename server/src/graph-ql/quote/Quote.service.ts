@@ -4,7 +4,6 @@ import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
-import { IAdaptiveCtx} from '../../types'
 import { AutoFields } from './Quote.resolver'
 import { default as QuoteSchema } from './Quote.schema'
 

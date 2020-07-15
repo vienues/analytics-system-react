@@ -1,6 +1,5 @@
 import { KeyStats } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
-import { IAdaptiveCtx } from '../../types'
 import { IAutoResolvedFields } from './Stats.resolver'
 import { default as StatsSchema } from './Stats.schema'
 import getDataSource  from '../../connectors'

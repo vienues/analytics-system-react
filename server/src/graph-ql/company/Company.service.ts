@@ -1,6 +1,5 @@
 import { IEXCompany } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
-import { IAdaptiveCtx } from '../../types'
 import { IAutoResolvedFields } from './Company.resolver'
 import { default as CompanySchema } from './Company.schema'
 import getDataSource  from '../../connectors'

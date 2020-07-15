@@ -1,6 +1,5 @@
 import { Arg, Args, Ctx, FieldResolver, Query, Resolver, Root, Subscription } from 'type-graphql'
 import { TickService } from '.'
-import { IAdaptiveCtx } from '../../types'
 import { DateTime, DateTimeScalar, formatDate } from '../DateScalars'
 import { default as IntradaySchema } from './Intraday.schema'
 import IntradayQuoteArgs from './IntradayQueryArgs'
@@ -17,8 +16,7 @@ export default class Intraday {
 
   @Query(returns => [IntradaySchema])
   public async intradayPrices(
-    @Args() { symbol, lastN }: IntradayQuoteArgs,
-    @Ctx() ctx: IAdaptiveCtx,
+    @Args() { symbol, lastN }: IntradayQuoteArgs
   ): Promise<IntradaySchema[]> {
     return await this.tickService.getIntradayPricing(symbol, lastN)
   }

@@ -1,6 +1,5 @@
 import { Arg, Args, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
 import search from '../../services/searchIndex'
-import { IAdaptiveCtx, IIexPreviousQuery} from '../../types'
 import { CompanySchema, CompanyService } from '../company'
 import { IdInputArgs } from '../GenericArgTypes'
 import { NewsSchema, NewsService } from '../news'
@@ -11,7 +10,6 @@ import { default as OLHCSchema } from './OLHC.schema'
 import Previous from './Previous.schema'
 import SearchResult from './SearchResult.schema'
 import { default as StockSchema } from './Stock.schema'
-import { ApolloError } from 'apollo-server-express'
 import getDataSource  from '../../connectors'
 
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
@@ -45,7 +43,7 @@ export default class Stock {
   ) {}
 
   @Query(returns => StockSchema)
-  public async stock(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<StockSchema> {
+  public async stock(@Args() { id }: IdInputArgs): Promise<StockSchema> {
     return {
       id: id.toUpperCase(),
       symbol: id,
@@ -53,8 +51,8 @@ export default class Stock {
   }
 
   @Query(returns => OLHCSchema)
-  public async OLHC(@Args() { id }: IdInputArgs, @Ctx() ctx: IAdaptiveCtx): Promise<OLHCSchema> {
-    return ctx.iex.ohlc(id)
+  public async OLHC(@Args() { id }: IdInputArgs): Promise<OLHCSchema> {
+    return iex.ohlc(id)
   }
 
   @Query(retuns => [SearchResult])
@@ -63,12 +61,12 @@ export default class Stock {
   }
 
   @FieldResolver()
-  public async chart(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<TickSchema[]> {
+  public async chart(@Root() stock: StockSchema): Promise<TickSchema[]> {
     return this.tickService.getChart(stock.id)
   }
 
   @FieldResolver()
-  public async stats(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<StatsSchema> {
+  public async stats(@Root() stock: StockSchema): Promise<StatsSchema> {
     return this.statsService.getStats(stock.id)
   }
 
@@ -78,17 +76,17 @@ export default class Stock {
   }
 
   @FieldResolver()
-  public async peers(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<string[]> {
-    return ctx.iex.peers(stock.id)
+  public async peers(@Root() stock: StockSchema): Promise<string[]> {
+    return iex.peers(stock.id)
   }
 
   @FieldResolver()
-  public async quote(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<QuoteSchema> {
+  public async quote(@Root() stock: StockSchema): Promise<QuoteSchema> {
     return this.quoteService.getQuote(stock.id)
   }
 
   @FieldResolver()
-  public async price(@Root() stock: StockSchema, @Ctx() ctx: IAdaptiveCtx): Promise<number> {
+  public async price(@Root() stock: StockSchema): Promise<number> {
       return iex.price(stock.id);
   }
 
@@ -101,7 +99,6 @@ export default class Stock {
   @FieldResolver()
   public async news(
     @Root() stock: StockSchema,
-    @Ctx() ctx: IAdaptiveCtx,
     @Arg('last') last: number,
   ): Promise<NewsSchema[]> {
     return this.newsService.getLatestNews(stock.id, last)

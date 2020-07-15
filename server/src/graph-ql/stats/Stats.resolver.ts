@@ -1,5 +1,4 @@
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
-import { IAdaptiveCtx } from '../../types'
 import Company from '../company/Company.schema'
 import CompanyService from '../company/Company.service'
 import { default as StatsSchema } from './Stats.schema'
@@ -25,11 +24,11 @@ export default class Stats {
   constructor(private readonly statsService: StatsService, private readonly companyService: CompanyService) {}
 
   @Query(returns => StatsSchema)
-  public async stats(@Arg('id') id: string, @Ctx() ctx: IAdaptiveCtx): Promise<StatsSchema> {
+  public async stats(@Arg('id') id: string): Promise<StatsSchema> {
     return this.statsService.getStats(id)
   }
   @FieldResolver()
-  public async company(@Root() stats: StatsSchema, @Ctx() ctx: IAdaptiveCtx): Promise<Company> {
+  public async company(@Root() stats: StatsSchema): Promise<Company> {
     return this.companyService.getCompany(stats.id)
   }
 }

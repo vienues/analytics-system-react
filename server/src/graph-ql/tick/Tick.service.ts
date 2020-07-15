@@ -1,6 +1,5 @@
 import { Intraday, IntradayIEXOnly } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
-import { IAdaptiveCtx } from '../../types'
 import { AutoFields } from './Tick.resolver'
 import { default as Tick } from './Tick.schema'
 import getDataSource from '../../connectors'

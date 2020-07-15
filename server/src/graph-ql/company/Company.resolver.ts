@@ -1,5 +1,5 @@
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
-import { IAdaptiveCtx, IIexCompanyQuery } from '../../types'
+import { IIexCompanyQuery } from '../../types'
 import { default as CompanySchema } from './Company.schema'
 import CompanyService from './Company.service'
 

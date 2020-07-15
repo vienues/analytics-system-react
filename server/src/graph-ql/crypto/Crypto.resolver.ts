@@ -1,7 +1,6 @@
 import { Quote } from 'iexcloud_api_wrapper'
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
 import { CryptoService } from '.'
-import { IAdaptiveCtx, IIexNewsQuery } from '../../types'
 import { QuoteSchema } from '../quote'
 import { AutoFields as QuoteAutoFields } from '../quote/Quote.resolver'
 import SearchResult from '../stock/SearchResult.schema'
@@ -16,7 +15,7 @@ export default class {
   constructor(private readonly cryptoService: CryptoService) {}
 
   @Query(returns => CryptoSchema)
-  public async crypto(@Arg('symbol') symbol: string, @Ctx() ctx: IAdaptiveCtx): Promise<CryptoSchema> {
+  public async crypto(@Arg('symbol') symbol: string): Promise<CryptoSchema> {
     return { symbol } as CryptoSchema
   }
 

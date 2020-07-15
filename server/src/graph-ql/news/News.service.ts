@@ -1,6 +1,5 @@
 import { NewsItem } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
-import { IAdaptiveCtx } from '../../types'
 import { IAutoResolvedField } from './News.resolver'
 import { default as NewsSchema } from './News.schema'
 import getDataSource  from '../../connectors'
