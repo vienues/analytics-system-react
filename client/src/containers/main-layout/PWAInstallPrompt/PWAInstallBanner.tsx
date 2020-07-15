@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react'
-// import { PWAInstallModal } from './PWAInstallModal'
 import { usePWABannerPrompt } from './usePWABannerPrompt'
 import { MainBanner, CrossButton, BannerText, InstallButton } from './PWAPrompt.styles'
 import Environment from 'system/environment'
 import { isiOS, isMobileDevice } from 'utils'
 import { CrossIcon } from 'assets/icons'
+import { AppleInstallModal } from './AppleInstallModal'
 
 export enum PWABanner {
   Shown = 'shown',
@@ -61,8 +61,7 @@ export const PWAInstallBanner: React.FC<InstallBannerProps> = ({
   }
 
   if (isModalOpen) {
-    return null
-    // return <PWAInstallModal closeModal={() => setIsModalOpen(false)} />
+    return <AppleInstallModal closeModal={() => setIsModalOpen(false)} />
   }
 
   return (
