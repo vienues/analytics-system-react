@@ -20,6 +20,7 @@ const Sidebar = styled.div<{ hasPreviousSearch: boolean }>`
   width: ${pxToRems(129)};
   grid-row: 2;
   @media ${mediaQuery.tabletL} {
+    /* align-items: flex-end; */
     width: 100%;
     ${LogoWrapper} {
       margin: 0;

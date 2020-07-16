@@ -184,6 +184,7 @@ export const MainSearchContent = styled.div<{ hasPreviousSearch: boolean }>`
   ${({ hasPreviousSearch }) => !hasPreviousSearch && SearchBoxLanding};
   @media ${mediaQuery.tabletL} {
     margin: ${pxToRems(22)} ${pxToRems(22)} ${pxToRems(12)};
+    align-self: start;
   }
   @media ${mediaQuery.mobile} {
     font-size: ${pxToRems(16)};
@@ -249,6 +250,9 @@ export const NewsGridArea = styled.div`
 export const MainGridArea = styled.div`
   grid-area: Main;
   overflow-y: auto;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
   @media ${mediaQuery.tabletL} {
     overflow: unset;
   }
@@ -273,8 +277,13 @@ export const ScrollableArea = styled.div`
   padding-bottom: 2rem;
 `
 
-export const FooterStatsWrapper = styled.div`
+export const StatisticsWrapper = styled.div`
   display: grid;
   grid-area: Main;
   grid-template-rows: 1fr auto;
+  grid-column: 1/2;
+`
+
+export const HistoryWrapper = styled.div`
+  display: grid;
 `

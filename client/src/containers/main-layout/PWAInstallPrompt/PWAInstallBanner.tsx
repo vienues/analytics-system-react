@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { usePWABannerPrompt } from './usePWABannerPrompt'
-import { MainBanner, CrossButton, BannerText, InstallButton } from './PWAPrompt.styles'
+import { Banner, CrossButton, BannerText, InstallButton } from './PWAPrompt.styles'
 import Environment from 'system/environment'
 import { isiOS, isMobileDevice } from 'utils'
 import { CrossIcon } from 'assets/icons'
@@ -65,12 +65,12 @@ export const PWAInstallBanner: React.FC<InstallBannerProps> = ({
   }
 
   return (
-    <MainBanner isHidden={isHidden}>
+    <Banner isHidden={isHidden}>
       <CrossButton onClick={closeBanner}>{CrossIcon}</CrossButton>
       <BannerText>
-        {isMobileDevice ? 'Experience Reactive Trader as an app!' : 'Experience Reactive Trader on your desktop!'}
+        {isMobileDevice ? 'Experience Reactive Analytics as an app' : 'Experience Reactive Analytics on your desktop'}
       </BannerText>
       <InstallButton onClick={() => installPWA(isiOS)}>Install</InstallButton>
-    </MainBanner>
+    </Banner>
   )
 }

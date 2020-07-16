@@ -5,7 +5,7 @@ import { Theme } from '../rt-theme'
 
 const ScrollbarGlobal = createGlobalStyle`
 body, #root {
-  overflow: hidden;
+  overflow: auto;
 }
 
 body ::-webkit-scrollbar {
