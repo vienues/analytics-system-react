@@ -1,6 +1,6 @@
 import { Args, Ctx, Query, Resolver } from 'type-graphql'
 import { NewsQueryArgs, NewsService } from '.'
-import { IAdaptiveCtx, IIexNewsQuery } from '../../types'
+import { IIexNewsQuery } from '../../types'
 import { default as NewsSchema } from './News.schema'
 
 export interface IAutoResolvedField {
@@ -11,11 +11,11 @@ export interface IAutoResolvedField {
 export default class News {
   constructor(private readonly newsService: NewsService) {}
   @Query(returns => [NewsSchema])
-  public async news(@Args() { id, last }: NewsQueryArgs, @Ctx() ctx: IAdaptiveCtx): Promise<NewsSchema[]> {
+  public async news(@Args() { id, last }: NewsQueryArgs): Promise<NewsSchema[]> {
     if (last) {
-      return this.newsService.getLatestNews(id, last, ctx)
+      return this.newsService.getLatestNews(id, last)
     } else {
-      return this.newsService.getNews(id, ctx)
+      return this.newsService.getNews(id)
     }
   }
 }

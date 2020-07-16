@@ -4,7 +4,6 @@ import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
-import { IAdaptiveCtx } from '../../types'
 import { AutoFields } from './Quote.resolver'
 import { default as QuoteSchema } from './Quote.schema'
 
@@ -20,8 +19,8 @@ interface IIntradaySubscription {
 export default class {
   private timer: NodeJS.Timeout | null = null
   private intradaySubscriptions: IIntradaySubscription = {}
-  public async getQuote(symbol: string, ctx: IAdaptiveCtx): Promise<QuoteSchema> {
-    const retVal = (await ctx.iex.quote(symbol)) as Quote & AutoFields
+  public async getQuote(symbol: string): Promise<QuoteSchema> {
+    const retVal = (await iex.quote(symbol)) as Quote & AutoFields
     return retVal
   }
 

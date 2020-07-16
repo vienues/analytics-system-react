@@ -1,5 +1,5 @@
 import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
-import { IAdaptiveCtx, IIexCompanyQuery } from '../../types'
+import { IIexCompanyQuery } from '../../types'
 import { default as CompanySchema } from './Company.schema'
 import CompanyService from './Company.service'
 
@@ -15,8 +15,8 @@ export default class Company {
   constructor(private readonly companyService: CompanyService) {}
 
   @Query(returns => CompanySchema)
-  public async company(@Arg('id') id: string, @Ctx() ctx: IAdaptiveCtx): Promise<CompanySchema> {
-    return this.companyService.getCompany(id, ctx)
+  public async company(@Arg('id') id: string): Promise<CompanySchema> {
+    return this.companyService.getCompany(id)
   }
 
   @FieldResolver()

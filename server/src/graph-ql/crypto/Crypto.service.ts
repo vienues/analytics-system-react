@@ -1,7 +1,6 @@
 import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 import data from '../../mock-data/cryptoSymbols.json'
-import { IAdaptiveCtx } from '../../types'
 import { QuoteSchema } from '../quote'
 import SearchResult from '../stock/SearchResult.schema'
 import { CryptoSchema } from './'
