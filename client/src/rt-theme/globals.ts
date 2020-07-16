@@ -58,6 +58,7 @@ export default createGlobalStyle`
     font-size: ${baselineFontSize}px;
     line-height: 1rem;
     text-rendering: geometricPrecision;
+    overflow: hidden;
     font-weight: 300;
   }
 
