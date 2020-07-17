@@ -5,11 +5,13 @@ import { mediaQuery } from 'rt-theme/mediaQueries'
 export const NewsCard = styled(SidebarDataCard)`
   border-top: ${({ theme }) => `1px solid ${theme.secondary.coreSecondary4}`};
   @media ${mediaQuery.tabletL} {
-    grid-area: 1/2;
+    grid-column: 2;
+    grid-row: 1;
     border-top: none;
   }
   @media ${mediaQuery.mobile} {
     border-top: ${({ theme }) => `1px solid ${theme.secondary.coreSecondary4}`};
-    grid-area: 2;
+    grid-column: 1;
+    grid-row: 2;
   }
 `

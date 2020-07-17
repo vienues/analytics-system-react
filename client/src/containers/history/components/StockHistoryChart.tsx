@@ -31,8 +31,14 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
   return (
     <ThemeConsumer>
       {({ themeName }) => (
-        <DataCard cardType="history" title={id} instrument={id} headingStyle={{ display: 'none' }}>
-          <ResponsiveContainer width="99%" height="99%" minHeight={450}>
+        <DataCard
+          cardType="history"
+          title={id}
+          instrument={id}
+          style={{ alignContent: 'unset' }}
+          headingStyle={{ display: 'none' }}
+        >
+          <ResponsiveContainer width="99%" height="100%" minHeight={400}>
             <LineChart data={chartData} margin={{ left: -25, top: 0, right: 0, bottom: 0 }}>
               <CartesianGrid
                 verticalFill={[
