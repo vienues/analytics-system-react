@@ -203,6 +203,7 @@ export const WrapperContent = styled.div`
     'Main Main News';
   overflow: auto;
   @media ${mediaQuery.tabletL} {
+    overflow: unset;
     grid-row: 3;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
