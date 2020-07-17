@@ -282,6 +282,7 @@ export const StatisticsWrapper = styled.div`
   grid-area: Main;
   grid-template-rows: 1fr auto;
   grid-column: 1/2;
+  margin-bottom: ${pxToRems(25)};
 `
 
 export const HistoryWrapper = styled.div`
