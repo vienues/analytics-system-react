@@ -2,7 +2,7 @@
   "devtools_port": 9090,
   "splashScreenImage": "https://demo-reactive-analytics.adaptivecluster.com/static/media/splash-screen.jpg",
   "startup_app": {
-    "name": "Reactive Analytics Cloud",
+    "name": "Reactive Analytics",
     "url": "https://demo-reactive-analytics.adaptivecluster.com",
     "uuid": "reactive-analytics-cloud-web-demo",
     "applicationIcon": "https://demo-reactive-analytics.adaptivecluster.com/icon-dark-desktop.ico",
@@ -23,9 +23,9 @@
   },
   "shortcut": {
     "company": "Adaptive Consulting",
-    "description": "Desktop Reactive Analytics Cloud",
+    "description": "Desktop Reactive Analytics",
     "icon": "https://demo-reactive-analytics.adaptivecluster.com/icon-dark-desktop.ico",
-    "name": "Reactive Analytics Cloud"
+    "name": "Reactive Analytics"
   },
   "services": [
     {

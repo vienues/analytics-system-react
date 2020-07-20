@@ -7,10 +7,15 @@ COPY . .
 RUN npm ci --network-concurrency 1
 RUN npm run build
 
-FROM nginx
+FROM openresty/openresty:alpine-fat
 EXPOSE 3000
-COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /build /usr/share/nginx/html
 
-# docker build -t "eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:$build" -f .\client\Dockerfile --build-arg ANALYTICS_SERVER_HOST=$url .
-# docker push "eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:$build"
+# Copy website resourcees
+COPY --from=builder /build /usr/local/openresty/nginx/html
+
+# Install lua template engine
+RUN /usr/local/openresty/luajit/bin/luarocks install lua-resty-template
+
+# Copy nginx config
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
