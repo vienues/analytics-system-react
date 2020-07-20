@@ -17,7 +17,7 @@
     "downshift": "^4.0.7",
     "graphql": "^14.5.8",
     "graphql-tag": "^2.7.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.20.1",
     "numeral": "^2.0.6",
     "openfin-fdc3": "0.2.0",
