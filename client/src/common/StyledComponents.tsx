@@ -203,6 +203,7 @@ export const WrapperContent = styled.div`
     'Main Main News';
   overflow: auto;
   @media ${mediaQuery.tabletL} {
+    overflow: unset;
     grid-row: 3;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -282,6 +283,7 @@ export const StatisticsWrapper = styled.div`
   grid-area: Main;
   grid-template-rows: 1fr auto;
   grid-column: 1/2;
+  margin-bottom: ${pxToRems(25)};
 `
 
 export const HistoryWrapper = styled.div`

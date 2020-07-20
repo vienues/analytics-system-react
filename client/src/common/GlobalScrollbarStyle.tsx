@@ -4,16 +4,12 @@ import { createGlobalStyle, withTheme } from 'styled-components/macro'
 import { Theme } from '../rt-theme'
 
 const ScrollbarGlobal = createGlobalStyle`
-body, #root {
-  overflow: hidden;
-}
-
-body ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 14px;
   height: 14px;
 }
 
-body ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   border-radius: 22px;
   background-color: rgba(212, 221, 232, .4);
   height: 16px;
@@ -21,11 +17,11 @@ body ::-webkit-scrollbar-thumb {
   background-clip: padding-box;
 }
 
-body ::-webkit-scrollbar-corner {
+::-webkit-scrollbar-corner {
   background-color: rgba(0,0,0,0);
 }
 
-body .ag-body ::-webkit-scrollbar {
+.ag-body ::-webkit-scrollbar {
   width: 14px;
   height: 14px;
 }
@@ -36,7 +32,7 @@ const GlobalScrollbarStyle: React.FunctionComponent<{ theme: Theme }> = ({ theme
     <ScrollbarGlobal />
     <style>
       {`
-        body ::-webkit-scrollbar-thumb {
+        ::-webkit-scrollbar-thumb {
           background-color: ${rgba(theme.primary.corePrimary, 0.2)};
         }
 
