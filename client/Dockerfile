@@ -4,7 +4,7 @@ ENV REACT_APP_ANALYTICS_SERVER_HOST=${ANALYTICS_SERVER_HOST}
 
 WORKDIR /
 COPY . .
-RUN npm install
+RUN npm ci --network-concurrency 1
 RUN npm run build
 
 FROM nginx

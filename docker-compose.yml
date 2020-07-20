@@ -2,16 +2,18 @@ version: '3'
 services:
   server:
     build:
-      dockerfile: ./server/Dockerfile
-      context: .
+      dockerfile: Dockerfile
+      context: ./server
+    env_file:
+     - ./server/.env
     image: eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-server:0.8
     container_name: reactive-analytics-server
     ports:
       - '4000:4000'
   client:
     build:
-      dockerfile: ./client/Dockerfile
-      context: .
+      dockerfile: Dockerfile
+      context: ./client
     image: eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:0.8
     container_name: reactive-analytics-client
     ports:
