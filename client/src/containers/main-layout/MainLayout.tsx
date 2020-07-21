@@ -1,65 +1,35 @@
-import React, { useContext, useMemo } from 'react'
-import { Route } from 'react-router'
+import React, { useCallback, useContext, useState } from 'react'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import {
-  MainContent,
-  MainLayoutWrapper,
-  MainSearchContent,
-  ScrollableArea,
-  WrapperContent,
-  SearchGridArea,
-} from '../../common/StyledComponents'
-import { RouterHelpers } from '../../helpers'
+import { MainLayoutWrapper } from '../../common/StyledComponents'
 import { MarketSegment } from '../../__generated__/types'
-import { Search, StockPrice } from '../index'
 import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
-import Footer from './Footer'
+import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
+import { CurrentSymbolLayout } from './CurrentSymbolLayout'
 
-const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
-  id,
-  market,
-}) => {
-  const { currentSymbol, errorMessage, previousSearch } = useContext(SearchContext)
-
-  const renderedErrorMessage: JSX.Element | null = useMemo(() => {
-    if (!(currentSymbol && currentSymbol.id) && id) {
-      return (
-        <ScrollableArea>
-          <MainContent>
-            <span>{errorMessage}</span>
-          </MainContent>
-        </ScrollableArea>
-      )
-    }
-    return null
-  }, [currentSymbol, errorMessage, id])
-
-  const renderedRoutes = useMemo(() => {
-    return Object.keys(RouterHelpers.MainRouterItems).map(route => (
-      <Route key={route} exact={true} path={route} component={RouterHelpers.RenderMainRouterElement} />
-    ))
-  }, [])
-
-  return (
-    <WrapperContent>
-      <MainSearchContent hasPreviousSearch={previousSearch ?? false}>
-        <SearchGridArea>
-          <Search id={id} url={market} market={market} />
-          <StockPrice id={id} market={market} />
-        </SearchGridArea>
-      </MainSearchContent>
-      {renderedErrorMessage || renderedRoutes}
-      <Footer hasNoSearch={!currentSymbol} />
-    </WrapperContent>
-  )
-}
+const SESSION = 'PWABanner'
 
 const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = props => {
+  const [banner, setBanner] = useState<string>(sessionStorage.getItem(SESSION) || PWABanner.NotSet)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const { currentSymbol } = useContext(SearchContext)
+
+  const updateBanner = useCallback(
+    (value: PWABanner) => {
+      setBanner(value)
+      sessionStorage.setItem(SESSION, value)
+    },
+    [setBanner],
+  )
 
   return (
     <MainLayoutWrapper hasNoSearch={!currentSymbol}>
+      <PWAInstallBanner
+        banner={banner}
+        updateBanner={updateBanner}
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
       <SearchContextProvider>
         <AppBar />
         <CurrentSymbolLayout {...props} />

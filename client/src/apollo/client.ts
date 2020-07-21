@@ -4,10 +4,9 @@ import { from, split } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
+import { getWebsocketUri, getUri } from 'helpers/uriHelper'
 
 const cache = new InMemoryCache()
-const address = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
-const { http, ws } = process.env.NODE_ENV === 'development' ? { http: 'http', ws: 'ws' } : { http: 'https', ws: 'wss' }
 
 interface IDefinition {
   kind: string
@@ -25,9 +24,9 @@ const links = [
       options: {
         reconnect: true,
       },
-      uri: `${ws}://${address}/subscriptions`,
+      uri: getWebsocketUri('/subscriptions'),
     }),
-    new HttpLink({ uri: `${http}://${address}/graphql` }),
+    new HttpLink({ uri: getUri('/graphql') }),
   ),
 ]
 

@@ -11,10 +11,12 @@ export const PeersCard = styled(SidebarDataCard)`
   }
   @media ${mediaQuery.tabletS} {
     border-top: ${({ theme }) => `1px solid ${theme.secondary.coreSecondary4}`};
-    grid-column: 1/3;
+    grid-column: 1;
+    grid-row: 2;
   }
   @media ${mediaQuery.mobile} {
-    grid-column: auto;
+    grid-column: 1;
+    grid-row: 3;
   }
 `
 
