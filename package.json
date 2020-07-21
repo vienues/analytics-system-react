@@ -32,7 +32,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier --write '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
-    "openfin": "openfin --launch --config ./client/app.json",
+    "openfin": "openfin --launch --config ./client/public/openfin/app.json",
     "demo": "lerna run --parallel demo",
     "generate-server-schema": "node ./server/src/generateSchema.js",
     "pregenerate-server-schema": "lerna run --scope=@adaptive-insights/server build",
