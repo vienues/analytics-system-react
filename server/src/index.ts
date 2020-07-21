@@ -9,13 +9,13 @@ import path from 'path'
 import 'reflect-metadata'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import MessageTypes from 'subscriptions-transport-ws/dist/message-types'
-import { buildTypeDefsAndResolvers } from 'type-graphql'
 import { Container } from 'typedi'
 import getDataSource from './connectors/index'
 import { pubsub } from './pubsub'
 import logger from './services/logger'
 import pricing from './services/pricing'
-
+import RootSchema from './graph-ql/RootTypedef'
+import RootResolver from './graph-ql/RootResolver'
 pricing(pubsub)
 
 async function bootstrap() {
@@ -27,14 +27,8 @@ async function bootstrap() {
       logger.error('iex-cloud API key must be set')
     }
   }
-
-  const { typeDefs, resolvers } = await buildTypeDefsAndResolvers({
-    container: Container,
-    pubSub: pubsub,
-    resolvers: [path.normalize(`${__dirname}/graph-ql/**/*.resolver.js`)],
-    validate: false,
-  })
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
+  
+  const schema = makeExecutableSchema({ typeDefs:RootSchema, resolvers:RootResolver })
   const PORT = 4000
   const CLIENT_PORT = 3000
 
@@ -54,7 +48,7 @@ async function bootstrap() {
       res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
     }
   )
-const apollo_server = new ApolloServer({ schema });
+const apollo_server = new ApolloServer({ typeDefs:RootSchema, resolvers:RootResolver});
 apollo_server.applyMiddleware({ app });
 
   app.get('/iexsandbox', (req, res) => {

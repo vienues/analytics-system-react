@@ -1,26 +1,24 @@
-import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
-import { IIexCompanyQuery } from '../../types'
-import { default as CompanySchema } from './Company.schema'
-import CompanyService from './Company.service'
+import CompanyService from './Company.service' 
+import { IResolvers } from 'graphql-tools';
+import { Container } from 'typedi'
 
-export interface IAutoResolvedFields {
-  id: string
-  name: string
-  // https://github.com/schardtbc/iexcloud_api_wrapper/issues/3
-  CEO: string
+
+const companyService = Container.get(CompanyService);
+
+const resolvers: IResolvers = {
+    Query:{
+        company: async (parent, args: { id: string }, ctx) => {
+            return companyService.getCompany(args.id);
+        }
+    },
+    Company:{
+        id: (parent) => {
+            return parent.symbol;
+        },
+        name: (parent) => {
+            return parent.companyName;
+        }
+    }
 }
 
-@Resolver(of => CompanySchema)
-export default class Company {
-  constructor(private readonly companyService: CompanyService) {}
-
-  @Query(returns => CompanySchema)
-  public async company(@Arg('id') id: string): Promise<CompanySchema> {
-    return this.companyService.getCompany(id)
-  }
-
-  @FieldResolver()
-  public name(@Root() { companyName }: IIexCompanyQuery) {
-    return companyName
-  }
-}
+export default resolvers;

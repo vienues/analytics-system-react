@@ -1,19 +1,17 @@
-import { Args, Ctx, Query, Resolver, Subscription } from 'type-graphql'
-import { FxService } from '.'
-import { default as FxPairsSchema } from './FxPairs.schema'
-import { default as FxPricingSchema } from './FxPricing.schema'
-import { default as FxSymbolsSchema } from './FxSymbols.schema'
+import { IResolvers } from 'graphql-tools';
+import FxService from './Fx.service'
+import { Container } from 'typedi'
 
-@Resolver(of => FxSymbolsSchema)
-export default class {
-  constructor(private readonly fxService: FxService) {}
+const fxService = Container.get(FxService);
 
-  @Query(returns => [FxPricingSchema])
-  public async getPriceHistory(
-    @Args() { from, to }: FxPairsSchema
-  ): Promise<FxPricingSchema[]> {
-    const retVal = await this.fxService.getPriceHistory(from, to)
-    this.fxService.subscribePriceUpdates(from, to)
-    return retVal as Promise<FxPricingSchema[]>
-  }
+const resolvers: IResolvers = {
+    Query:{
+        getPriceHistory: async (parent, { from, to }, ctx) => {
+            const retVal = await fxService.getPriceHistory(from, to)
+            fxService.subscribePriceUpdates(from, to)
+            return retVal;
+        }
+    },
 }
+
+export default resolvers;
