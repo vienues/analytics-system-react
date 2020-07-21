@@ -1,70 +1,40 @@
-import { Field, Float, ObjectType } from 'type-graphql'
-import { Date, DateScalar, DateTime, DateTimeScalar, Time, TimeScalar } from '../DateScalars'
+import { gql } from 'apollo-server-express'
+ export default gql`
+ type Intraday {
+    date: Date
+    minute: Time
+    datetime: ISODateTime
+    high: Float
+    low: Float
+    average: Float
+    open: Float
+    close: Float
+    volume: Float
+    notional: Float
+    numberOfTrades: Int
+  }
 
-@ObjectType()
-export default class Tick {
-  @Field(type => DateScalar)
-  public date!: Date
-
-  @Field(type => TimeScalar)
-  public minute!: Time
-
-  @Field(type => DateTimeScalar)
-  public datetime!: DateTime
-
-  @Field()
-  public label!: string
-
-  // new from iexcloud
-  @Field(type => Float, { nullable: true })
-  public high!: number
-
-  // new from iexcloud
-  @Field(type => Float, { nullable: true })
-  public low!: number
-
-  // new from iexcloud
-  @Field(type => Float, { nullable: true })
-  public average!: number
-
-  // new from iexcloud
-  @Field(type => Float, { nullable: true })
-  public open!: number
-
-  // new from iexcloud
-  @Field(type => Float, { nullable: true })
-  public close!: number
-
-  @Field(type => Float)
-  public volume!: number
-
-  @Field(type => Float)
-  public notional!: number
-
-  @Field(type => Float)
-  public numberOfTrades!: number
-
-  @Field(type => Float)
-  public changeOverTime!: number
-
-  @Field(type => Float)
-  public marketHigh!: number
-
-  @Field(type => Float)
-  public marketLow!: number
-
-  @Field(type => Float)
-  public marketAverage!: number
-
-  @Field(type => Float)
-  public marketVolume!: number
-
-  @Field(type => Float)
-  public marketNotional!: number
-
-  @Field(type => Float)
-  public marketNumberOfTrades!: number
-
-  @Field(type => Float)
-  public marketChangeOverTime!: number
-}
+  type Tick {
+    date: Date!
+    minute: Time!
+    datetime: ISODateTime!
+    label: String!
+    high: Float
+    low: Float
+    average: Float
+    open: Float
+    close: Float
+    volume: Float!
+    notional: Float!
+    numberOfTrades: Float!
+    changeOverTime: Float!
+    marketHigh: Float!
+    marketLow: Float!
+    marketAverage: Float!
+    marketVolume: Float!
+    marketNotional: Float!
+    marketNumberOfTrades: Float!
+    marketChangeOverTime: Float!
+  }
+  
+ `;

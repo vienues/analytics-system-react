@@ -31,7 +31,6 @@
     "ramda": "^0.25.0",
     "reflect-metadata": "^0.1.13",
     "subscriptions-transport-ws": "^0.9.5",
-    "type-graphql": "0.17.3",
     "typedi": "^0.8.0",
     "winston": "^3.3.3"
   },

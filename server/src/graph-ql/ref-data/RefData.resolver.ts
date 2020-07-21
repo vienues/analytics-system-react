@@ -1,52 +1,49 @@
-import { Arg, Args, Query, Resolver } from 'type-graphql'
+import { IResolvers } from 'graphql-tools';
 import search from '../../services/searchIndex'
-import { CryptoService } from '../crypto'
 import { FxService } from '../fx'
-import SearchResult from '../stock/SearchResult.schema'
-import { default as SearchQueryArgs, MarketSegments } from './SearchQueryArgs'
+import { CryptoService } from '../crypto'
+import { Container } from 'typedi' 
+import { MarketSegments } from './RefData.schema';
 
-export interface IAutoResolvedField {
-  id: string
+const fxService = Container.get( FxService);
+const cryptoService =Container.get(CryptoService);
+
+const resolvers: IResolvers = {
+    Query:{
+        symbol: async (parent, args: { id: string, market: MarketSegments}, ctx) => {
+            switch (args.market.toLowerCase()) {
+                case MarketSegments.STOCK: {
+                  const results = search(args.id)
+                  return results.find(s => s.id === args.id) || results[0]
+                }
+                case MarketSegments.CRYPTO: {
+                  return cryptoService.getSymbol(args.id)
+                }
+                case MarketSegments.FX: {
+                  return fxService.getSymbol(args.id)
+                }
+                default: {
+                  throw new Error(`unsupported`)
+                }
+              }
+        },
+        symbols: async (parent, args: { text: string, marketSegment: MarketSegments}, ctx) => {
+            switch (args.marketSegment.toLowerCase()) {
+                case MarketSegments.STOCK: {
+                  return search(args.text)
+                }
+                case MarketSegments.CRYPTO: {
+                  return cryptoService.getSymbols(args.text)
+                }
+                case MarketSegments.FX: {
+                  return fxService.getSymbols(args.text)
+                }
+                default: {
+                  throw new Error(`unsupported`)
+                }
+              }
+        }
+    }
 }
 
-@Resolver(of => SearchResult)
-export default class RefData {
-  constructor(private readonly cryptoService: CryptoService, private readonly fxService: FxService) {}
-
-  @Query(returns => SearchResult)
-  public async symbol(@Arg('id') id: string, @Arg('market') market: MarketSegments): Promise<SearchResult> {
-    switch (market.toLowerCase()) {
-      case MarketSegments.STOCK: {
-        const results = search(id)
-        return results.find(s => s.id === id) || results[0]
-      }
-      case MarketSegments.CRYPTO: {
-        return this.cryptoService.getSymbol(id)
-      }
-      case MarketSegments.FX: {
-        return this.fxService.getSymbol(id)
-      }
-      default: {
-        throw new Error(`unsupported`)
-      }
-    }
-  }
-
-  @Query(retuns => [SearchResult])
-  public async symbols(@Args() { text, marketSegment }: SearchQueryArgs): Promise<SearchResult[]> {
-    switch (marketSegment.toLowerCase()) {
-      case MarketSegments.STOCK: {
-        return search(text)
-      }
-      case MarketSegments.CRYPTO: {
-        return this.cryptoService.getSymbols(text)
-      }
-      case MarketSegments.FX: {
-        return this.fxService.getSymbols(text)
-      }
-      default: {
-        throw new Error(`unsupported`)
-      }
-    }
-  }
-}
+export default resolvers;

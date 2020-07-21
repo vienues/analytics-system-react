@@ -2,8 +2,8 @@ import Fuse from 'fuse.js'
 import * as R from 'ramda'
 import data from '../mock-data/referenceSymbols.json'
 import { IRefSymbol } from '../types'
-import { MarketSegments } from '../graph-ql/ref-data/SearchQueryArgs'
-import SearchResultSchema from '../graph-ql/stock/SearchResult.schema'
+import { MarketSegments } from '../graph-ql/ref-data/RefData.schema'
+import { SearchResultSchema } from '../graph-ql/stock/Stock.schema'
 
 type SearchResult<T> = { item?: T } & { score: number }
 

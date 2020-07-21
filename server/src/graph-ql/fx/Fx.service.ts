@@ -3,8 +3,8 @@ import { Service } from 'typedi'
 import data from '../../mock-data/currencySymbols.json'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
-import SearchResult from '../stock/SearchResult.schema'
-import { MarketSegments } from '../ref-data/SearchQueryArgs'
+import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
+import { MarketSegments } from '../ref-data/RefData.schema'
 
 interface ISymbolData {
   [key: string]: {

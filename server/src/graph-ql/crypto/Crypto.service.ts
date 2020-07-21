@@ -1,10 +1,9 @@
 import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 import data from '../../mock-data/cryptoSymbols.json'
-import { QuoteSchema } from '../quote'
-import SearchResult from '../stock/SearchResult.schema'
-import { CryptoSchema } from './'
-import { MarketSegments } from '../ref-data/SearchQueryArgs'
+import {SearchResultSchema as SearchResult} from '../stock/Stock.schema'
+import { MarketSegments } from '../ref-data/RefData.schema'
+import { Quote } from 'iexcloud_api_wrapper'
 
 interface ISymbolData {
   [key: string]: {
@@ -16,9 +15,9 @@ const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 @Service()
 export default class {
-  public async getQuote(symbol: string): Promise<QuoteSchema> {
+  public async getQuote(symbol: string): Promise<Quote> {
     try {
-      const retVal = (await iex.iexApiRequest(`/crypto/${symbol}/quote`)) as Promise<QuoteSchema>
+      const retVal = (await iex.iexApiRequest(`/crypto/${symbol}/quote`)) as Promise<Quote>
       return retVal
     } catch (ex) {
       throw new Error(ex)

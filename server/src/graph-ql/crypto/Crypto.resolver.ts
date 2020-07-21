@@ -1,31 +1,23 @@
-import { Quote } from 'iexcloud_api_wrapper'
-import { Arg, Ctx, FieldResolver, Query, Resolver, Root } from 'type-graphql'
-import { CryptoService } from '.'
-import { QuoteSchema } from '../quote'
-import { AutoFields as QuoteAutoFields } from '../quote/Quote.resolver'
-import SearchResult from '../stock/SearchResult.schema'
-import { default as CryptoSchema } from './Crypto.schema'
+import { IResolvers } from 'graphql-tools';
+import CryptoService from './Crypto.service'
+import { Container } from 'typedi'
 
-interface IAutoResolvedFields {
-  quote: QuoteSchema
+const cryptoService = Container.get(CryptoService);
+
+const resolvers: IResolvers = {
+    Query:{
+        crypto: async (parent, args: { symbol: string }, ctx) => {
+          return { symbol: args.symbol };
+        },
+        cryptoSymbols: async (parent, args: { text: string }, ctx) => {
+            return cryptoService.getSymbols(args.text);
+          }
+    },
+    Crypto:{
+        quote: async (parent) => {
+             return cryptoService.getQuote(parent.symbol);
+        }
+    }
 }
 
-@Resolver(of => CryptoSchema)
-export default class {
-  constructor(private readonly cryptoService: CryptoService) {}
-
-  @Query(returns => CryptoSchema)
-  public async crypto(@Arg('symbol') symbol: string): Promise<CryptoSchema> {
-    return { symbol } as CryptoSchema
-  }
-
-  @Query(returns => [SearchResult])
-  public cryptoSymbols(@Arg('text') text: string): SearchResult[] {
-    return this.cryptoService.getSymbols(text)
-  }
-
-  @FieldResolver(() => QuoteSchema)
-  public async quote(@Root() crypto: CryptoSchema): Promise<QuoteSchema> {
-    return this.cryptoService.getQuote(crypto.symbol) as Promise<Quote & QuoteAutoFields>
-  }
-}
+export default resolvers;

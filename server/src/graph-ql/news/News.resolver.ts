@@ -1,21 +1,24 @@
-import { Args, Ctx, Query, Resolver } from 'type-graphql'
-import { NewsQueryArgs, NewsService } from '.'
-import { IIexNewsQuery } from '../../types'
-import { default as NewsSchema } from './News.schema'
+import { IResolvers } from 'graphql-tools';
+import NewsService from './News.service'
+import { Container } from 'typedi'
 
-export interface IAutoResolvedField {
-  id: string
-}
+const newsService = Container.get(NewsService);
 
-@Resolver(of => NewsSchema)
-export default class News {
-  constructor(private readonly newsService: NewsService) {}
-  @Query(returns => [NewsSchema])
-  public async news(@Args() { id, last }: NewsQueryArgs): Promise<NewsSchema[]> {
-    if (last) {
-      return this.newsService.getLatestNews(id, last)
-    } else {
-      return this.newsService.getNews(id)
+const resolvers: IResolvers = {
+    News:{
+        id:(parent) => {
+            return parent.url;
+        }
+    },
+    Query:{
+        news: async (parent, args: { id: string, last: number}, ctx) => {
+            if (args.last) {
+                return newsService.getLatestNews(args.id, args.last);
+              } else {
+                return newsService.getNews(args.id);
+              }
+        }
     }
-  }
 }
+
+export default resolvers;

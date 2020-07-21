@@ -1,11 +1,9 @@
-import { IntradayIEXOnly, Quote } from 'iexcloud_api_wrapper'
+import { Quote } from 'iexcloud_api_wrapper'
 import moment = require('moment')
 import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
-import { AutoFields } from './Quote.resolver'
-import { default as QuoteSchema } from './Quote.schema'
 
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
@@ -19,8 +17,8 @@ interface IIntradaySubscription {
 export default class {
   private timer: NodeJS.Timeout | null = null
   private intradaySubscriptions: IIntradaySubscription = {}
-  public async getQuote(symbol: string): Promise<QuoteSchema> {
-    const retVal = (await iex.quote(symbol)) as Quote & AutoFields
+  public async getQuote(symbol: string): Promise<Quote> {
+    const retVal = (await iex.quote(symbol)) as Quote;
     return retVal
   }
 
