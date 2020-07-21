@@ -17,7 +17,7 @@ const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 export default class {
   public async getQuote(symbol: string): Promise<Quote> {
     try {
-      const retVal = (await iex.iexApiRequest(`/crypto/${symbol}/quote`)) as Promise<Quote>
+      const retVal = (await iex.iexApiRequest(`/crypto/${symbol}/quote`))
       return retVal
     } catch (ex) {
       throw new Error(ex)

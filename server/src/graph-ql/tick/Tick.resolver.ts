@@ -8,7 +8,6 @@ import { Container } from 'typedi'
 const tickService = Container.get(TickService);
 const quoteService = Container.get(QuoteService);
 
-// HACK HACK HACK
 setTimeout(() =>{
     pubsub.subscribe('SUBSCRIBE_TO_INTRADAY_UPDATES', (symbol: string) => {
         quoteService.startIntradayPricingLoop(symbol)
