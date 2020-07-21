@@ -7,6 +7,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { QueryResult } from '@apollo/react-common'
 import { AppQueryDefaultLoadingIndicator } from './AppQuery'
+import { getUri } from 'helpers/uriHelper'
 
 interface IProps {
   pollingIndicator?: JSX.Element
@@ -25,11 +26,11 @@ let forceQuerySettings: ISettings = {
   isSandbox: null,
 }
 
+// TODO - don't expose host here, make this a graphql query
 async function getForceQuerySettings() {
   if (forceQuerySettings.isSandbox === null) {
-    const host = process.env.REACT_APP_ANALYTICS_SERVER_HOST || 'localhost:4000'
     try {
-      const response = await fetch(`//${host}/iexsandbox`, { cache: 'force-cache', method: 'POST' })
+      const response = await fetch(getUri('/iexsandbox'), { cache: 'force-cache', method: 'POST' })
       const json = await response.json()
       forceQuerySettings.isSandbox = !!json.isSandbox
     } catch (ex) {

@@ -39,7 +39,10 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
-    "demo": "serve -s -p=8080 build",
+    "start:https": "cross-env HTTPS=true react-app-rewired start",
+    "start:local-backend": "cross-env REACT_APP_ANALYTICS_SERVER_HOST=localhost:4000 npm run start",
+    "start:dev-backend": "cross-env REACT_APP_ANALYTICS_SERVER_HOST=dev-reactive-analytics.adaptivecluster.com REACT_APP_ANALYTICS_SERVER_HTTPS=true npm run start",
+    "start:demo-backend": "cross-env REACT_APP_ANALYTICS_SERVER_HOST=demo-reactive-analytics.adaptivecluster.com REACT_APP_ANALYTICS_SERVER_HTTPS=true npm run start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject"
@@ -58,6 +61,7 @@
     "@types/styled-components": "^5.1.0",
     "apollo": "^2.21.3",
     "babel-plugin-import-graphql": "^2.7.0",
+    "cross-env": "^7.0.2",
     "customize-cra": "^0.9.1",
     "fuse.js": "^3.4.4",
     "polished": "^3.2.0",
