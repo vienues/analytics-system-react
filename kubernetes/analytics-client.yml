@@ -25,7 +25,12 @@ spec:
           image: ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-client:${NAMESPACE}-${BUILD_NUM}
           ports:
             - containerPort: 3000
-
+          env:
+            - name: ENVIRONMENT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: analytics-client-config
+                  key: environment-name
 ---
 apiVersion: v1
 kind: Service
@@ -41,3 +46,12 @@ spec:
       port: 3000
       targetPort: 3000
   type: LoadBalancer
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: analytics-client-config
+  namespace: dev-reactive-analytics
+data:
+  environment-name: dev
