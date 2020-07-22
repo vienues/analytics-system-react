@@ -1,5 +1,5 @@
 import { Context, ContextListener } from 'openfin-fdc3'
-import { IWindowConfig } from 'openfin/OpenfinService'
+import { IWindowConfig } from 'ra-platforms/openfin/OpenfinService'
 import { Container } from 'unstated'
 
 type WindowIdentity = { name?: string }

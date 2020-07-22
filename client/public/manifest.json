@@ -5,7 +5,7 @@
   "icons": [
     {
       "src": "/static/media/reactive-analytics.ico",
-      "sizes": "256x256 128x128 64x64 32x32 16x16",
+      "sizes": "128x128",
       "type": "image/x-icon"
     },
     {

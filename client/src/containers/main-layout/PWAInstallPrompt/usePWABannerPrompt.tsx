@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
+import { usePlatform } from 'ra-platforms'
 
 export const usePWABannerPrompt = (): [BeforeInstallPromptEvent | null, () => Promise<void> | undefined] => {
   const [prompt, setPrompt] = useState<BeforeInstallPromptEvent | null>(null)
+  const platform = usePlatform()
 
   const promptToInstall = () => {
     if (prompt) {
@@ -12,7 +14,7 @@ export const usePWABannerPrompt = (): [BeforeInstallPromptEvent | null, () => Pr
 
   useEffect(() => {
     const ready = (e: BeforeInstallPromptEvent) => {
-      setPrompt(e)
+      platform.type === 'browser' ? setPrompt(e) : setPrompt(null)
     }
 
     if (typeof window.beforeInstallPromptEvent === 'undefined') {
@@ -24,7 +26,7 @@ export const usePWABannerPrompt = (): [BeforeInstallPromptEvent | null, () => Pr
     return () => {
       window.removeEventListener('beforeinstallprompt', ready)
     }
-  }, [])
+  }, [platform.type])
 
   return [prompt, promptToInstall]
 }

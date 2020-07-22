@@ -2,7 +2,7 @@ import { ContainerService, ContainerServiceSubscribe } from 'platformService/Con
 import React, { useState } from 'react'
 import styled, { CSSObject } from 'styled-components/macro'
 import { pxToRems } from 'utils'
-import OpenfinWindowControls from '../openfin/OpenfinWindowControls'
+import OpenfinWindowControls from '../ra-platforms/openfin/OpenfinWindowControls'
 import PopoutIcon from './PopoutIcon'
 import { DragHandle, Heading, PopoutButton, Title } from './StyledComponents'
 
