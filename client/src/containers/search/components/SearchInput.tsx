@@ -41,7 +41,6 @@ const SearchInput: React.FC<ISearchBarProps> = ({
   initialItem,
   placeholder,
   items,
-  maxItems,
   onChange,
   onTextChange,
   currentText,
