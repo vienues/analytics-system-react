@@ -19,6 +19,7 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "dotenv": "^8.2.0",
+    "eventsource": "^1.0.7",
     "express": "^4.17.1",
     "fuse.js": "^3.2.0",
     "graphql": "^14.2.1",
