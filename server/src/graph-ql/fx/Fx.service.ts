@@ -34,7 +34,7 @@ interface ISymbolData {
 interface IStatusTopic {
   [pair: string]: {
     connection: EventSource
-    listeners:number | 0
+    listeners:number
   }
 }
 
@@ -66,7 +66,6 @@ export default class {
     return raw[0].map((key:any) =>({Pair:{from,to},ask:key.rate,bid:key.rate,creationTimestamp:key.timestamp, mid:key.rate,valueDate:key.date}));
   }
   private createFXRate(rawFXRate:any){
-    console.log("raw event = " + JSON.stringify(rawFXRate))
       const fromCurrency = rawFXRate.symbol.substring(0,4);
       const toCurrency = rawFXRate.symbol.substring(3);
       return {
@@ -130,7 +129,6 @@ export default class {
       }
   };
   public  constructURL = (endpoint:string, isSSE:Boolean) => {
-      const result = this.prefix(isSSE) + apiversion + endpoint + this.chooseToken(endpoint);
-      return result;
+      return this.prefix(isSSE) + apiversion + endpoint + this.chooseToken(endpoint);
   };
 }
