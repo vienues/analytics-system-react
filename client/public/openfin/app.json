@@ -3,8 +3,8 @@
   "startup_app": {
     "name": "Reactive Analytics{{environment_suffix}}",
     "description": "Desktop Reactive Analytics",
-    "url": "http://localhost:3000",
-    "uuid": "OpenfinPOC-f3ylnh9u12q",
+    "url": "{*host_url*}",
+    "uuid": "reactive-analytics-{{environment}}",
     "autoShow": true,
     "defaultWidth": 1280,
     "defaultHeight": 900,
@@ -12,24 +12,25 @@
     "minHeight": 600,
     "resizable": true,
     "maximizable": true,
-    "frame": false,
-    "applicationIcon": "http://localhost:3000//icon-dark-desktop.ico",
-    "icon": "http://localhost:3000//icon.png"
+    "applicationIcon": "{*host_url*}/static/media/reactive-analytics-icon-256x256.png"
   },
   "services": [
     {
       "name": "layouts"
+    },
+    {
+      "name": "fdc3"
     }
   ],
   "runtime": {
-    "version": "14.78.47.23",
-    "futureVersion": "14.78.47.23",
+    "version": "16.83.51.26",
+    "futureVersion": "16.83.53.7",
     "forceLatest": true
   },
   "shortcut": {
     "company": "Adaptive Consulting",
     "description": "Desktop Reactive Analytics",
-    "icon": "http://localhost:3000//icon-dark-desktop.ico",
+    "icon": "{*host_url*}/static/media/reactive-analytics.ico",
     "name": "Reactive Analytics{{environment_suffix}}"
   }
 }
