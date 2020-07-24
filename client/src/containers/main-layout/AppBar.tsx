@@ -1,8 +1,6 @@
-import { ContainerService } from 'platformService/ContainerService'
 import { default as React, useContext, useRef, useLayoutEffect } from 'react'
 import styled from 'styled-components/macro'
 import { pxToRems } from 'utils'
-import OpenfinWindowControls from '../../openfin/OpenfinWindowControls'
 import { SearchContext } from '../search/SearchContext'
 import { mediaQuery, screenSize } from 'rt-theme/mediaQueries'
 import { LogoTextSide, LogoTextBottom } from 'assets/logos'
@@ -55,7 +53,7 @@ const AppBar = () => {
           <LogoTextSide size={9} />
         </div>
       </LogoWrapper>
-      {ContainerService.agent === 'desktop' && <OpenfinWindowControls />}
+      {/* {ContainerService.agent === 'desktop' && <OpenfinWindowControls />} */}
     </Sidebar>
   )
 }

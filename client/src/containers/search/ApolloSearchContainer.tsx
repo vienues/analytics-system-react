@@ -19,7 +19,7 @@ import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
-import { getStockContext } from 'openfin/util'
+import { getStockContext } from 'ra-platforms/openfin/util'
 import { ContainerService } from 'platformService/ContainerService'
 import { Context } from 'openfin-fdc3'
 

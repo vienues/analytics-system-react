@@ -1,4 +1,4 @@
-import { OpenfinContainer } from 'openfin/OpenfinService'
+import { OpenfinContainer } from 'ra-platforms/openfin/OpenfinService'
 import { FDC3OpenfinProvider } from 'containers/fdc3/fdc3-openfinProvider'
 import { IContainerService } from './IContainerServices'
 import { BrowserContainer } from 'browser/BrowserService'

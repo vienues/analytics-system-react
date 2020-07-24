@@ -1,11 +1,13 @@
-import React, { useCallback, useContext, useState } from 'react'
+import { getPlatformAsync, PlatformProvider } from 'ra-platforms'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
+import { AsyncReturnType } from 'utils'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { MainLayoutWrapper } from '../../common/StyledComponents'
 import { MarketSegment } from '../../__generated__/types'
 import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
-import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
 import { CurrentSymbolLayout } from './CurrentSymbolLayout'
+import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
 
 const SESSION = 'PWABanner'
 
@@ -13,6 +15,9 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
   const [banner, setBanner] = useState<string>(sessionStorage.getItem(SESSION) || PWABanner.NotSet)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const { currentSymbol } = useContext(SearchContext)
+
+  type Platform = AsyncReturnType<typeof getPlatformAsync>
+  const [platform, setPlatform] = useState<Platform>()
 
   const updateBanner = useCallback(
     (value: PWABanner) => {
@@ -22,19 +27,33 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
     [setBanner],
   )
 
+  useEffect(() => {
+    const getPlatform = async () => {
+      const runningPlatform = await getPlatformAsync()
+      setPlatform(runningPlatform)
+    }
+    getPlatform()
+  }, [])
+
+  if (!platform) {
+    return <></>
+  }
+
   return (
-    <MainLayoutWrapper hasNoSearch={!currentSymbol}>
-      <PWAInstallBanner
-        banner={banner}
-        updateBanner={updateBanner}
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-      />
-      <SearchContextProvider>
-        <AppBar />
-        <CurrentSymbolLayout {...props} />
-      </SearchContextProvider>
-    </MainLayoutWrapper>
+    <PlatformProvider value={platform}>
+      <MainLayoutWrapper hasNoSearch={!currentSymbol}>
+        <PWAInstallBanner
+          banner={banner}
+          updateBanner={updateBanner}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+        <SearchContextProvider>
+          <AppBar />
+          <CurrentSymbolLayout {...props} />
+        </SearchContextProvider>
+      </MainLayoutWrapper>
+    </PlatformProvider>
   )
 }
 

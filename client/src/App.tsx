@@ -1,16 +1,16 @@
-import React from 'react'
 import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
+import { ContainerServiceProvider } from 'platformService/ContainerService'
+import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import styled from 'styled-components/macro'
 import apolloClient from './apollo/client'
 import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
 import { RouterHelpers } from './helpers'
-import styled from 'styled-components/macro'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
-import { ContainerServiceProvider } from 'platformService/ContainerService'
 library.add(fasLightBulb, farLightBulb)
 
 const App = () => {
