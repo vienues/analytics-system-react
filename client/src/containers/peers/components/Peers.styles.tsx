@@ -11,7 +11,7 @@ export const PeersCard = styled(SidebarDataCard)`
   }
   @media ${mediaQuery.tabletS} {
     border-top: ${({ theme }) => `1px solid ${theme.secondary.coreSecondary4}`};
-    grid-column: 1;
+    grid-column: 1/-1;
     grid-row: 2;
   }
   @media ${mediaQuery.mobile} {

@@ -6,45 +6,13 @@ import { pxToRems } from 'utils'
 import { mediaQuery } from 'rt-theme/mediaQueries'
 export const DataCard = dataCard
 
-export const AnalyticsLineChartStyle = styled.div`
-  width: 100%;
-  height: 100%;
-  min-height: 35px; /* Required to avoid JS errors when resizing the height of the browser small enough such
-                        that the height of the chart is computed as negative values. -D.S. ARTP-394 */
-  overflow-y: hidden;
-  .recharts-cartesian-axis-ticks {
-    color: #ffffff;
-    width: 52px;
-    height: 12px;
-    opacity: 1;
-    font-size: 10px;
-  }
-`
-
-export const ToolTipStyle = styled.div`
-  background-color: #14161c;
-  width: 140px;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-export const ToolTipChildLeft = styled.div`
-  width: 70px;
-  opacity: 0.6;
-  font-size: 10px;
-  color: ${({ theme }) => theme.primary.corePrimary};
-`
-export const ToolTipChildRight = styled.div`
-  width: 30px;
-  font-size: 10px;
-  color: ${({ theme }) => theme.primary.corePrimary};
-`
-
 export const DataContents = styled.div`
   display: grid;
   grid-gap: 1rem;
+`
+
+export const DataCardPadding = styled.div`
+  padding: ${pxToRems(24)} ${pxToRems(32)};
 `
 
 export const VerticalDataContents = styled(DataContents)`
@@ -108,36 +76,6 @@ export const ButtonLink = styled.a`
   padding: ${pxToRems(2)} ${pxToRems(4)};
   margin: ${pxToRems(2)};
   text-align: center;
-`
-
-export const StrongLabel = styled(Text)`
-  font-weight: 600;
-`
-
-export const OpaqueLabel = styled(Text)`
-  opacity: 0.59;
-`
-
-export const SwitchThemeButton = styled.button`
-  width: 2rem;
-  height: 2rem;
-  font-size: 1rem;
-  line-height: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
-
-  cursor: pointer;
-
-  transition: background-color ${({ theme }) => theme.motion.duration}ms ${({ theme }) => theme.motion.easing};
-
-  &:hover {
-    background-color: ${({ theme }) => theme.button.secondary.active.backgroundColor};
-    color: ${({ theme }) => theme.button.secondary.textColor};
-  }
 `
 
 export const PopoutButton = styled('button')`
@@ -233,6 +171,7 @@ export const NewsGridArea = styled.div`
   background-color: ${({ theme }) => theme.secondary.coreSecondary2};
   grid-row: 1/5;
   overflow-y: auto;
+  overflow-x: hidden;
   @media ${mediaQuery.tabletL} {
     height: auto;
     overflow-y: unset;
@@ -286,6 +225,6 @@ export const StatisticsWrapper = styled.div`
   margin-bottom: ${pxToRems(25)};
 `
 
-export const HistoryWrapper = styled.div`
+export const HistoryWrapper = styled(DataCardPadding)`
   display: grid;
 `

@@ -11,8 +11,8 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
+import { getThemeColor, ThemeConsumer, themes } from 'rt-theme'
 import { StockHistoryQuery } from '../../../__generated__/types'
-import { getThemeColor, themes, ThemeConsumer } from 'rt-theme'
 
 export const StockHistoryChart = (props: StockHistoryQuery) => {
   const {
@@ -28,6 +28,10 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
   const { high: highestPrice } = maxBy(chartData, 'high') || { high: undefined }
   const tickFormatter: TickFormatterFunction = (tick: number) => (tick < 100 ? tick.toFixed(2) : tick.toFixed(0))
 
+  if (!chartData.length) {
+    return <>No chart data to display</>
+  }
+
   return (
     <ThemeConsumer>
       {({ themeName }) => (
@@ -35,7 +39,7 @@ export const StockHistoryChart = (props: StockHistoryQuery) => {
           cardType="history"
           title={id}
           instrument={id}
-          style={{ alignContent: 'unset' }}
+          style={{ alignContent: 'unset', padding: 0 }}
           headingStyle={{ display: 'none' }}
         >
           <ResponsiveContainer width="99%" height="100%" minHeight={400}>
