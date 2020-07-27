@@ -6,8 +6,6 @@ import { getThemeColor, ThemeConsumer, themes } from 'rt-theme'
 import { ABMHistoryQuery } from '__generated__/types'
 
 export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) => {
-  console.log(getPriceHistory)
-
   const chartData = getPriceHistory.slice(getPriceHistory.length - 100, getPriceHistory.length)
 
   return (
