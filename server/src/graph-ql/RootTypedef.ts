@@ -35,6 +35,7 @@ import statsSchema from './stats/Stats.schema'
   type Subscription {
     getQuotes(symbols: [String!]!): Quote!
     getIntradayPrices(symbol: String!): [Intraday!]!
+    getIntradayFXRate(from: String!, to: String!): FxRate!
   }
  `;
 
