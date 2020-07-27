@@ -48,7 +48,10 @@ async function bootstrap() {
       res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
     }
   )
-const apollo_server = new ApolloServer({ typeDefs:RootSchema, resolvers:RootResolver});
+const wsGqlURL = `ws://localhost:${PORT}/subscriptions`
+const apollo_server = new ApolloServer({ typeDefs:RootSchema, resolvers:RootResolver, playground:{
+  subscriptionEndpoint:wsGqlURL
+}});
 apollo_server.applyMiddleware({ app });
 
   app.get('/iexsandbox', (req, res) => {
@@ -136,6 +139,10 @@ apollo_server.applyMiddleware({ app });
           // HACK! I know what the client called the operation, this would not work otherwise
           if (params.operationName === 'onIntradayPricingSubscription') {
             pubsub.publish('SUBSCRIBE_TO_INTRADAY_UPDATES', message.payload.variables.symbol)
+          }
+
+          if (params.operationName === 'onIntradayFxPriceSubscription') {
+            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.symbol)
           } else {
             socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
             pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)

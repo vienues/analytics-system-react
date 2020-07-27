@@ -4,7 +4,22 @@ import data from '../../mock-data/currencySymbols.json'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
 import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
+import getDataSource  from '../../connectors'
 import { MarketSegments } from '../ref-data/RefData.schema'
+import EventSource from 'eventsource'
+
+const createTopic = (fxPair: string) => `FX_UPDATE.${fxPair}`
+
+const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
+
+const baseURL = "https://cloud.iexapis.com/";
+const sseBaseURL = "https://cloud-sse.iexapis.com/";
+const sandboxURL = "https://sandbox.iexapis.com/";
+const sseSandboxURL = "https://sandbox-sse.iexapis.com/";
+const pk = process.env.IEXCLOUD_PUBLIC_KEY;
+const apiversion = process.env.IEXCLOUD_API_VERSION;
+const aToken = `&token=${pk}`;
+const qToken = `?token=${pk}`;
 
 interface ISymbolData {
   [key: string]: {
@@ -17,7 +32,10 @@ interface ISymbolData {
 }
 
 interface IStatusTopic {
-  [key: string]: string | null
+  [pair: string]: {
+    connection: EventSource
+    listeners:number
+  }
 }
 
 interface IPreviousMid {
@@ -26,34 +44,9 @@ interface IPreviousMid {
 
 @Service()
 export default class {
-  private connection: autobahn.Connection
-  private session: autobahn.Session | null = null
-  private statusTopics: IStatusTopic = {
-    priceHistory: null,
-    pricing: null,
-  }
-  private context: IPreviousMid = {}
+  private statusTopics: IStatusTopic = {}
   constructor() {
-    this.connection = new autobahn.Connection({
-      realm: 'com.weareadaptive.reactivetrader',
-      url: 'ws://web-demo.adaptivecluster.com:80/ws',
-    })
-    this.connection.onopen = async (session: any) => {
-      this.session = session
-      const topicsNeeded = { ...this.statusTopics }
-      if (this.session) {
-        const statusSubscription = await this.session.subscribe('status', async (args: any) => {
-          if (args[0].Type in topicsNeeded) {
-            delete topicsNeeded[args[0].Type]
-            this.statusTopics[args[0].Type] = args[0].Instance
-          }
-          if (!Object.keys(topicsNeeded).length) {
-            statusSubscription.unsubscribe()
-          }
-        })
-      }
-    }
-    this.connection.open()
+    
   }
 
   public getSymbol(id: string): SearchResult {
@@ -69,30 +62,43 @@ export default class {
   }
 
   public async getPriceHistory(from: string, to: string) {
-    if (this.session && this.statusTopics.priceHistory) {
-      return await this.session.call(`${this.statusTopics.priceHistory}.getPriceHistory`, [
-        { payload: `${from}${to}`, replyTo: '', Username: 'NGA' },
-      ])
-    } else {
-      throw new Error(`connection not ready`)
+    const raw = await iex.iexApiRequest(`/fx/historical?symbols=${from}${to}&last=10`);
+    return raw[0].map((key:any) =>({Pair:{from,to},ask:key.rate,bid:key.rate,creationTimestamp:key.timestamp, mid:key.rate,valueDate:key.date}));
+  }
+  private createFXRate(rawFXRate:any){
+      const fromCurrency = rawFXRate.symbol.substring(0,4);
+      const toCurrency = rawFXRate.symbol.substring(3);
+      return {
+        date: rawFXRate.timestamp,
+        fromCurrency,
+        toCurrency,
+        rate:rawFXRate.rate
+      }
+  }
+  public async subscribeFXUpdates(fxPair: string) {
+    if (this.statusTopics && this.statusTopics[fxPair]) {
+      this.statusTopics[fxPair].listeners++;
+    }else {
+      const url = this.constructURL(`/forex1Minute?symbols=${fxPair}`,true);
+      const eventSource = new EventSource(url);
+      this.statusTopics[fxPair] = {
+        connection:eventSource,
+        listeners:1
+      }
+      const onMessageFunc = (event:any) => {
+        const data = JSON.parse(event.data);
+        if(event.data &&  data.length > 0){
+          pubsub.publish(createTopic(fxPair), this.createFXRate(data[0]))
+        }
+        }
+      eventSource.onmessage = onMessageFunc;
     }
   }
 
-  public async subscribePriceUpdates(from: string, to: string) {
-    if (this.session && this.statusTopics.pricing) {
-      const topic = `topic_pricing_${this.makeid(6)}`
-      await this.session.subscribe(topic, (args: any) => {
-        pubsub.publish(`MARKET_UPDATE.${from}/${to}`, {
-          symbol: `${from}/${to}`,
-          change: 0,
-          changePercent: 0,
-          latestPrice: args[0].Mid,
-        })
-        logger.info(JSON.stringify(args))
-      })
-      await this.session.call(`${this.statusTopics.pricing}.getPriceUpdates`, [
-        { payload: { symbol: `${from}${to}` }, replyTo: topic, Username: 'NGA' },
-      ])
+  public stopFXUpdates(fxPair: string){
+    if (this.statusTopics[fxPair]) {
+      this.statusTopics[fxPair].connection.close();
+      delete this.statusTopics[fxPair];
     }
   }
 
@@ -105,4 +111,24 @@ export default class {
     }
     return result
   }
+  private prefix(isSSE:Boolean) {
+      if (pk && pk[0] === "T") {
+          return isSSE ? sseSandboxURL :sandboxURL;
+      }
+      else {
+          return isSSE ? sseBaseURL :baseURL;
+      }
+  };
+
+  private chooseToken(str:string){
+      if (str.includes("?")) {
+          return aToken;
+      }
+      else {
+          return qToken;
+      }
+  };
+  public  constructURL = (endpoint:string, isSSE:Boolean) => {
+      return this.prefix(isSSE) + apiversion + endpoint + this.chooseToken(endpoint);
+  };
 }
