@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro'
 import { DataContents } from 'common/StyledComponents'
 import { pxToRems } from 'utils'
+import { mediaQuery } from 'rt-theme/mediaQueries'
 
 export const FieldsWrapper = styled(DataContents)`
   margin-top: ${pxToRems(8)};
@@ -11,11 +12,14 @@ export const FieldsWrapper = styled(DataContents)`
   &:before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -2px;
     left: 0;
-    height: ${pxToRems(1)};
+    height: ${pxToRems(4)};
     width: 100%;
     background-color: ${({ theme }) => theme.secondary.coreSecondary1};
+  }
+  @media ${mediaQuery.tabletS} {
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   }
 `
 

@@ -6,10 +6,7 @@ import { Company } from './components'
 import CompanyConnection from './graphql/CompanyConnection.graphql'
 
 const ApolloCompanyContainer: React.FunctionComponent<IApolloContainerProps> = ({ id }) => {
-  const onCompanyQueryResults = (data: CompanyQuery): JSX.Element => {
-    const company = data.stock.company
-    return <Company company={company} />
-  }
+  const onCompanyQueryResults = (data: CompanyQuery): JSX.Element => <Company company={data.stock.company} />
 
   return (
     <AppQuery<CompanyQuery, CompanyQueryVariables>
