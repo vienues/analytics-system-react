@@ -1,4 +1,4 @@
-import { ABMHistory } from 'containers/history'
+import { FXHistory } from 'containers/history'
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { Company, MainLayout, News, Peers, Search, Stats } from '../containers'
@@ -52,7 +52,7 @@ export default class RouterHelper {
     '/': { component: MainLayout },
     '/(bond|crypto|fx|future|index|stock)/:id?': { component: MainLayout },
     '/(fx)/:from:to': { component: MainLayout },
-    '/abm/:from:to': { component: ABMHistory },
+    '/abm/:from:to': { component: FXHistory },
     '/company/:id?': { component: Company },
     '/history/:id?': { component: StockHistoryContainer },
     '/news/:id?': { component: News },
