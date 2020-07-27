@@ -43,6 +43,12 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
         dimension2: platform.name,
         page: '/',
       })
+      ReactGA.event({
+        category: 'RA - Launch',
+        action: 'launch',
+        label: platform.name,
+        transport: 'beacon',
+      })
       ReactGA.pageview('/')
     }
   }, [platform])
