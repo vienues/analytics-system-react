@@ -1,0 +1,170 @@
+<html>
+
+<head>
+    <title>
+        FDC3 Tester
+    </title>
+
+    <script src="https://cdn.openfin.co/services/openfin/fdc3/0.2.1/openfin-fdc3.js"></script>
+    <script language="javascript">
+
+        var listener;
+
+        function fdc3Init(callback) {
+            let fdc3Tries = 10; //lets not check forever...
+            const onFDC3Ready = () => {
+                if (window.fdc3) {
+                    callback.call(this);
+                }
+                else {
+                    if (fdc3Tries > 0) {
+                        fdc3Tries--;
+                        window.setTimeout(onFDC3Ready, 100);
+                    }
+                }
+            };
+            onFDC3Ready();
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fdc3Init(function () {
+                enablePage();
+            });
+        });
+
+        function enablePage() {
+
+            console.log('FDC3 is available');
+
+            document.getElementById('providerDetails').innerHTML = 'Available';
+
+            document.getElementById('btnBroadcast').disabled = false;
+            document.getElementById('txtBroadcastData').disabled = false;
+        }
+
+        function broadcastFDC3Context() {
+            var myContextData = document.getElementById('txtBroadcastData').value;
+            var ctx = JSON.parse(myContextData);
+            console.log('Broadcasting context:', myContextData)
+            fdc3.broadcast(ctx);
+            //document.getElementById('txtBroadcastData').value = '';
+        }
+
+        function subscribeToContext() {
+            console.log('Subscribing to context on "default" channel');
+            listener = fdc3.addContextListener(contextHandler)
+            document.getElementById('btnSubscribeOn').disabled = true;
+            document.getElementById('btnSubscribeOff').disabled = false;
+            document.getElementById('txtContextListener').disabled = false;
+        }
+
+        function unsubscribeFromContext() {
+            console.log('Unsubscribing from context on "default" channel');
+            if (listener) {
+                listener.unsubscribe()
+                listener = undefined
+            }
+
+            document.getElementById('btnSubscribeOn').disabled = false;
+            document.getElementById('btnSubscribeOff').disabled = true;
+            document.getElementById('txtContextListener').innerText = '';
+            document.getElementById('txtContextListener').disabled = true;
+        }
+
+        function contextHandler(context) {
+            console.log('Received context:', context)
+            var contextData = JSON.stringify(context, null, 2)
+            document.getElementById('txtContextListener').innerHTML = contextData
+        }
+    </script>
+
+    <style>
+
+        textarea {
+            width: 400px;
+            height: 150px;
+        }
+
+        select {
+            width: 238px;
+            height: 24px;
+        }
+
+        .ctxInput {
+            width: 241px;
+            height: 24px;
+        }
+
+        .urlInput {
+            width: 400px;
+            height: 24px;
+        }
+
+        .header {
+            width: 170px;
+            height: 40px;
+            font-weight: 700;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <table>
+
+        <tr>
+            <td class="header">FDC3 Provider Service:</td>
+            <td><span id="providerDetails">Not Available</span></td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <hr>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="header" rowspan="2">Broadcast Context:</td>
+            <td>Channel: <select id="selBroadcastChannel" disabled sonChange="changeBroadcastChannel();"><option selected>default</option></select></td>
+
+            <td rowspan="2"><input type="button" value="Send" id="btnBroadcast" disabled onClick="broadcastFDC3Context();"></td>
+        </tr>
+        <tr>
+            <td>
+                <textarea id="txtBroadcastData" disabled>{
+    "type":"fdc3.instrument",
+    "name":"Apple Inc.",
+    "id": {
+        "ISIN":"US0378331005",
+        "SEDOL":"2046251",
+        "ticker":"AAPL"
+    }
+}</textarea>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <hr>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="header" rowspan="3">Context Listener:</td>
+            <td>Channel: <select disabled><option selected>default</option></select></td>
+            <td rowspan="3">
+                <input type="button" id="btnSubscribeOn" value="On" onClick="subscribeToContext();">
+                <input type="button" id="btnSubscribeOff" value="Off" disabled onClick="unsubscribeFromContext();">
+            </td>
+        </tr>
+
+        <tr>
+            <td><textarea id="txtContextListener" readonly disabled style="white-space: pre-wrap;"></textarea></td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>
