@@ -47,7 +47,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "fdc3-tester": "openfin --launch --config ./utils/app.json"
+    "openfin": "openfin -l -c http://localhost:3000/openfin/app.json"
   },
   "devDependencies": {
     "@types/jest": "24.9.0",

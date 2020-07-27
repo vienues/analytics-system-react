@@ -2,7 +2,7 @@
     "devtools_port": 9090,
     "startup_app": {
         "name": "FDC3 Tester",
-        "url": "file:///Users/riko/Dev/Adaptive/ReactiveAnalytics/client/utils/fdc3-tester.html",
+        "url": "http://localhost:5000",
         "uuid": "fdc3-tester",
         "saveWindowState": false,
         "autoShow": true
