@@ -11,6 +11,7 @@ import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
 import { RouterHelpers } from './helpers'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
+
 library.add(fasLightBulb, farLightBulb)
 
 const App = () => {

@@ -1,27 +1,28 @@
+import { Context } from 'openfin-fdc3'
+import { ContainerService } from 'platformService/ContainerService'
+import { getStockContext } from 'ra-platforms/openfin/util'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
+import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
-import {
-  MarketSegment,
-  search as SimpleSearchQuery,
-  search_symbols,
-  searchQuery,
-  searchQueryVariables,
-  searchVariables,
-} from '../../__generated__/types'
 import apolloClient from '../../apollo/client'
+import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { AppQuery } from '../../common/AppQuery'
 import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
+import {
+  MarketSegment,
+  search as SimpleSearchQuery,
+  searchQuery,
+  searchQueryVariables,
+  searchVariables,
+  search_symbols,
+} from '../../__generated__/types'
 import { SearchInput } from './components'
 import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
-import AdaptiveLoader from '../../common/AdaptiveLoader'
-import { getStockContext } from 'ra-platforms/openfin/util'
-import { ContainerService } from 'platformService/ContainerService'
-import { Context } from 'openfin-fdc3'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -58,6 +59,12 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
       if (dispatch) {
+        ReactGA.event({
+          category: 'RA - Search',
+          action: 'search',
+          label: symbol?.id,
+          transport: 'beacon',
+        })
         dispatch({
           type: SearchContextActionTypes.SelectedSymbol,
           payload: { currentSymbol: symbol },
