@@ -36,7 +36,7 @@ const Stats: React.FunctionComponent<{ stock: StatsQueryStock; id: string }> = (
   const data = { ...quote, ...stats }
 
   return (
-    <DataCard cardType="stats" title="Key Statistics" instrument={id} headingStyle={{ marginLeft: '7px' }}>
+    <DataCard title="Key Statistics" instrument={id} headingStyle={{ marginLeft: '7px' }}>
       <FieldsWrapper>
         {Fields.map(Field => {
           return (

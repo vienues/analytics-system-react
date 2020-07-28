@@ -12,7 +12,6 @@ export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) =
     <ThemeConsumer>
       {({ themeName }) => (
         <DataCard
-          cardType="abm"
           title={''}
           instrument={''}
           style={{ alignContent: 'unset', padding: 0 }}

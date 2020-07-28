@@ -10,7 +10,7 @@ const Company: React.FunctionComponent<{ company: CompanyDetails }> = ({
   company: { description, name, symbol, website },
 }) => (
   <CompanyCard>
-    <DataCard cardType="company" title="Company Summary" instrument={symbol}>
+    <DataCard title="Company Summary" instrument={symbol}>
       <Subheading>
         {name} ({symbol})
       </Subheading>

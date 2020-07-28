@@ -32,7 +32,6 @@ export const StockHistoryChart = ({ stock: { id, quote, chart } }: StockHistoryQ
     <ThemeConsumer>
       {({ themeName }) => (
         <DataCard
-          cardType="history"
           title={''}
           instrument={''}
           style={{ alignContent: 'unset', padding: 0 }}
