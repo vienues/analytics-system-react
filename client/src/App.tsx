@@ -10,6 +10,7 @@ import GlobalScrollbarStyle from './common/GlobalScrollbarStyle'
 import { RouterHelpers } from './helpers'
 import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
+import { PWAToolbar } from 'containers/main-layout/PWAInstallPrompt'
 
 library.add(fasLightBulb, farLightBulb)
 
@@ -20,6 +21,7 @@ const App = () => {
       <ThemeProvider>
         <GlobalScrollbarStyle />
         <ParentContainer>
+          <PWAToolbar />
           <BrowserRouter>
             <Switch>
               {Object.keys(RouterHelpers.RootRouterItems).map(route => (
