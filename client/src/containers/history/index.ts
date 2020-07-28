@@ -1,2 +1,2 @@
-export { default as History } from './StockHistoryContainer'
-export { default as ABMHistory } from './ApolloABMHistoryContainer'
+export { default as StockHistory } from './StockHistoryContainer'
+export { default as FXHistory } from './FXHistoryContainer'
