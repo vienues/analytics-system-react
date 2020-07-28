@@ -1,0 +1,12 @@
+{
+  "name": "fdc3-tester",
+  "version": "1.0.0",
+  "description": "This utility allows testing of FDC3 broadcasting.",
+  "scripts": {
+    "start": "serve & openfin --launch --config app.json"
+  },
+  "devDependencies": {
+    "openfin-cli": "^3.0.2",
+    "serve": "^11.3.2"
+  }
+}
