@@ -2,7 +2,7 @@
     "devtools_port": 9090,
     "startup_app": {
         "name": "FDC3 Tester",
-        "url": "http://localhost:5000",
+        "url": "http://localhost:5501",
         "uuid": "fdc3-tester",
         "saveWindowState": false,
         "autoShow": true
