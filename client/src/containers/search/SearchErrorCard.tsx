@@ -22,7 +22,7 @@ export const SearchErrorCard: React.FunctionComponent<IProps> = ({ foundSymbol, 
     return null
   }, [foundSymbol, onClick])
   return (
-    <DataCard cardType={'search'} title={id} instrument={id}>
+    <DataCard title={id} instrument={id}>
       <DataContents>
         <Text>This {market.toLowerCase()} is not recognized.</Text>
         {message}

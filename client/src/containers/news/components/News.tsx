@@ -5,7 +5,7 @@ import { NewsCard } from './News.styles'
 
 const News: React.FunctionComponent<{ news: INewsArticle[]; id: string }> = ({ news, id }) => (
   <NewsCard>
-    <DataCard cardType="news" title="Latest News" instrument={id}>
+    <DataCard title="Latest News" instrument={id}>
       <div>
         {news.length > 0 ? (
           news.map(newsItem => <NewsItem key={newsItem.id} {...newsItem} />)
