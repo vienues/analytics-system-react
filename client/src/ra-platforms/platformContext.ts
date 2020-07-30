@@ -1,9 +1,10 @@
 import React from 'react'
 import { useContext } from 'react'
-import NoopPlatformAdapter from './noopAdapter'
 import { Platform } from './platform'
+import BrowserPlatform from './browser/browserPlatform'
 
-const PlatformContext = React.createContext<Platform>(new NoopPlatformAdapter())
+// default context is browser
+const PlatformContext = React.createContext<Platform>(new BrowserPlatform())
 
 export const { Provider: PlatformProvider } = PlatformContext
 

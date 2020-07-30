@@ -1,1 +1,1 @@
-export { default as PWA } from './pwa'
+export { default as PWA } from './pwaPlatform'

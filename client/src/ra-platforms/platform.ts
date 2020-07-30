@@ -1,35 +1,21 @@
-import { AppConfig, PlatformType } from './types'
-import { Observable } from 'rxjs'
-import { PlatformWindow, PlatformWindowApi } from './platformWindow'
+import { PlatformType } from './types'
+import { search_symbols } from '__generated__/types'
 
-export interface PlatformFeatures {
-  app: AppInterop
-  interop: PubSubInterop
-  share: (object: any) => void
-  allowPopIn?: boolean
-}
-
-interface PubSubInterop {
-  subscribe$: (topic: string) => Observable<any>
-  publish: (topic: string, message: any) => void
-}
-
-interface AppInterop {
-  open: (id: string, config: AppConfig) => Promise<string>
-}
-
-export type Platform = Partial<PlatformFeatures> & {
+export interface Platform {
+  readonly name: string
   readonly type: PlatformType
 
-  readonly allowTearOff?: boolean
+  readonly symbolSelected: (symbol: search_symbols) => void
+  readonly openUrl: (href: string) => void
+}
 
-  readonly name: string
+export abstract class PlatformBase implements Platform {
+  readonly abstract name: string
+  readonly abstract type: PlatformType
 
-  readonly window?: PlatformWindowApi & PlatformWindow
-
-  readonly PlatformHeader?: React.FC<any>
-
-  readonly PlatformControls?: React.FC<any>
-
-  readonly PlatformRoute?: React.FC
+  readonly openUrl = (href: string) =>  { 
+    window.open(href) 
+  }
+  
+  readonly symbolSelected = (symbol: search_symbols) => {}
 }

@@ -2,4 +2,4 @@ export type { WindowConfig, WindowPosition, TilesLayout, PlatformName } from './
 export * from './platformWindow'
 export * from './platform'
 export * from './getPlatformAsync'
-export { PlatformProvider, usePlatform } from './context'
+export { PlatformProvider, usePlatform } from './platformContext'

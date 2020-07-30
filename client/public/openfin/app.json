@@ -12,20 +12,16 @@
     "minHeight": 600,
     "resizable": true,
     "maximizable": true,
-    "applicationIcon": "{*host_url*}/static/media/reactive-analytics-icon-256x256.png"
+    "applicationIcon": "{*host_url*}/static/media/reactive-analytics-icon-256x256.png",
+    "fdc3Api": true
   },
   "services": [
     {
       "name": "layouts"
-    },
-    {
-      "name": "fdc3"
     }
   ],
   "runtime": {
-    "version": "16.83.51.26",
-    "futureVersion": "16.83.53.7",
-    "forceLatest": true
+    "version": "16.83.51.26"
   },
   "shortcut": {
     "company": "Adaptive Consulting",

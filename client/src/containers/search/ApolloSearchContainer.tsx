@@ -1,6 +1,4 @@
-import { Context } from 'openfin-fdc3'
-import { ContainerService } from 'platformService/ContainerService'
-import { getStockContext } from 'ra-platforms/openfin/util'
+import { usePlatform } from 'ra-platforms'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router'
@@ -31,30 +29,15 @@ interface IProps extends IApolloContainerProps {
 
 type Props = RouteComponentProps & IProps
 
-const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }: Props) => {
+const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }) => {
+
   const [currentText, setCurrentText] = useState<string>('')
-
-  useEffect(() => {
-    let didCancel = false
-
-    const contextListener = ContainerService.addContextListener((context: Context) => {
-      if (!didCancel && context.type === 'fdc3.instrument' && context.id) {
-        const defaultMarketSegment = 'fx'
-        const ccyPair = context.id.ticker?.slice(0, 3) + '/' + context.id.ticker?.slice(3)
-        const marketSegment = context.marketSegment || defaultMarketSegment
-        history.push(`/${marketSegment}/${ccyPair}`)
-      }
-    })
-
-    return () => {
-      didCancel = true
-      contextListener.then(_listener => _listener?.unsubscribe())
-    }
-  }, [history])
 
   const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
 
   const placeholderText = 'Enter a stock, symbol, or currency pair...'
+
+  const platform = usePlatform()
 
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
@@ -71,14 +54,13 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         })
       }
       if (symbol) {
+        platform.symbolSelected(symbol)
         history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
-        ContainerService.navigateToStock(symbol.id)
-        ContainerService.broadcast(getStockContext(symbol))
       } else {
         history.push(`/${url}`)
       }
     },
-    [dispatch, history, url],
+    [dispatch, history, url, platform],
   )
 
   useEffect(() => {

@@ -2,7 +2,6 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'
-import { ContainerServiceProvider } from 'platformService/ContainerService'
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import styled from 'styled-components/macro'
@@ -16,23 +15,21 @@ library.add(fasLightBulb, farLightBulb)
 
 const App = () => {
   return (
-    <ContainerServiceProvider>
-      <ApolloProvider client={apolloClient}>
-        <GlobalStyle />
-        <ThemeProvider>
-          <GlobalScrollbarStyle />
-          <ParentContainer>
-            <BrowserRouter>
-              <Switch>
-                {Object.keys(RouterHelpers.RootRouterItems).map(route => (
-                  <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
-                ))}
-              </Switch>
-            </BrowserRouter>
-          </ParentContainer>
-        </ThemeProvider>
-      </ApolloProvider>
-    </ContainerServiceProvider>
+    <ApolloProvider client={apolloClient}>
+      <GlobalStyle />
+      <ThemeProvider>
+        <GlobalScrollbarStyle />
+        <ParentContainer>
+          <BrowserRouter>
+            <Switch>
+              {Object.keys(RouterHelpers.RootRouterItems).map(route => (
+                <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
+              ))}
+            </Switch>
+          </BrowserRouter>
+        </ParentContainer>
+      </ThemeProvider>
+    </ApolloProvider>
   )
 }
 
