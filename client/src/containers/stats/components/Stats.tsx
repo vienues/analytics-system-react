@@ -1,7 +1,7 @@
 import numeral from 'numeral'
 import * as React from 'react'
 import { DataCard, BoldText, LightText } from '../../../common/StyledComponents'
-import { StatsQuery_stock as StatsQueryStock } from '../../../__generated__/types'
+import { StatsQuery_stock as StatsQueryStock } from '../graphql/types/StatsQuery'
 import { FieldsWrapper, LabeledData } from './Stats.styled'
 
 const formats = {

@@ -1,11 +1,12 @@
 import { useSubscription } from '@apollo/react-hooks'
 import React, { useEffect, useState } from 'react'
-import { MarketSegment, onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../../__generated__/types'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { StockPrice, StockPriceData } from './components'
 import StockPriceSubscription from './graphql/StockPriceSubscription.graphql'
 import { MarketDisplay } from './components/StockPrice'
+import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from './graphql/types/onStockPriceSubscription'
+import { MarketSegment } from 'containers/global-types'
 
 const getCurrentId = (id: string, market?: string) => {
   if (market && market.toUpperCase() === MarketSegment.FX) {

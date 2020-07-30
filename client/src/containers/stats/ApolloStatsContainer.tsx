@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StatsQuery, StatsQueryVariables } from '../../__generated__/types'
+import { StatsQuery, StatsQueryVariables } from './graphql/types/StatsQuery'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { Stats } from './components'

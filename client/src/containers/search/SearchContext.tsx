@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useReducer } from 'react'
-import { search_symbols } from '../../__generated__/types'
+import { search_symbols } from './graphql/types/search'
 
 interface IState {
   currentSymbol?: search_symbols | null

@@ -1,6 +1,6 @@
 import { DataCard, Link, Text, DataContents } from '../../common/StyledComponents'
 import React, { useMemo } from 'react'
-import { search_symbols } from '../../__generated__/types'
+import { search_symbols } from './graphql/types/search'
 
 interface IProps {
   foundSymbol?: search_symbols

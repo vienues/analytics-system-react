@@ -1,5 +1,5 @@
 import React from 'react'
-import { PeersQuery, PeersQueryVariables } from '../../__generated__/types'
+import { PeersQuery, PeersQueryVariables } from './graphql/types/PeersQuery'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { Peers } from './components'

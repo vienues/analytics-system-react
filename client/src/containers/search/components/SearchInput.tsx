@@ -1,8 +1,10 @@
 import Downshift, { GetItemPropsOptions } from 'downshift'
 import React from 'react'
-import { search_symbols as SearchResult, MarketSegment } from '../../../__generated__/types'
+import { search_symbols as SearchResult } from '../graphql/types/search'
+
 import { fonts } from 'rt-theme/fonts'
 import styled from 'styled-components/macro'
+import { MarketSegment } from 'containers/global-types'
 interface ISearchBarProps {
   items: SearchResult[]
   initialItem: SearchResult | null

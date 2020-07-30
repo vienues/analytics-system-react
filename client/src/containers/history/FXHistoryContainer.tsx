@@ -2,7 +2,7 @@ import { HistoryWrapper } from 'common/StyledComponents'
 import React from 'react'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import { ABMHistoryQuery, ABMHistoryQueryVariables } from '../../__generated__/types'
+import { ABMHistoryQuery, ABMHistoryQueryVariables } from './graphql/types/ABMHistoryQuery'
 import { FXHistoryChart } from './components/FXHistoryChart'
 import ABMHistoryConnection from './graphql/ABMHistoryConnection.graphql'
 

@@ -9,8 +9,7 @@
     "demo": "npm start",
     "test": "mocha --require @babel/register",
     "build": "tsc",
-    "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm",
-    "generate-graphql-schema": "node ./src/generateSchema.js"
+    "generate-mock-data": "node ./builder.js aapl goog msft f vod spy dia iwm"
   },
   "license": "ISC",
   "dependencies": {

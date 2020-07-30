@@ -1,6 +1,6 @@
 import React, { MouseEvent } from 'react'
 import { DataCard, Subheading } from '../../../common/StyledComponents'
-import { CompanyQuery_stock_company as CompanyDetails } from '../../../__generated__/types'
+import { CompanyQuery_stock_company as CompanyDetails } from '../graphql/types/CompanyQuery'
 import { CompanyCard, CompanyDescription, CompanyLink } from './Company.styles'
 import { usePlatform } from 'ra-platforms'
 

@@ -8,19 +8,14 @@ import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { AppQuery } from '../../common/AppQuery'
 import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
-import {
-  MarketSegment,
-  search as SimpleSearchQuery,
-  searchQuery,
-  searchQueryVariables,
-  searchVariables,
-  search_symbols,
-} from '../../__generated__/types'
+import { search as SimpleSearchQuery, searchVariables, search_symbols } from './graphql/types/search'
+import { searchQuery, searchQueryVariables } from './graphql/types/searchQuery'
 import { SearchInput } from './components'
 import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
+import { MarketSegment } from 'containers/global-types'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -30,7 +25,6 @@ interface IProps extends IApolloContainerProps {
 type Props = RouteComponentProps & IProps
 
 const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }) => {
-
   const [currentText, setCurrentText] = useState<string>('')
 
   const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)

@@ -34,11 +34,8 @@
     "format:check": "prettier --list-different '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
     "openfin": "openfin -c http://localhost:3000/openfin/app.json -l",
     "demo": "lerna run --parallel demo",
-    "generate-server-schema": "node ./server/src/generateSchema.js",
-    "pregenerate-server-schema": "lerna run --scope=@adaptive-insights/server build",
-    "generate-client-schema": "./client/node_modules/.bin/apollo client:download-schema ./client/src/schema.json",
-    "generate-client-typings": "./client/node_modules/.bin/apollo client:codegen ./client/src/__generated__/types.ts --outputFlat --includes ./client/src/**/*.graphql --addTypename --localSchemaFile=./client/src/schema.json --target=typescript",
-    "generate-schema-and-typings": "npm run generate-server-schema && npm run generate-client-schema && npm run generate-client-typings"
+    "generate-server-schema": "./client/node_modules/.bin/apollo schema:download --endpoint=http://localhost:4000/graphql ./server/graphql-schema.json",
+    "generate-client-typings": "./client/node_modules/.bin/apollo codegen:generate --localSchemaFile=./server/graphql-schema.json --target=typescript --includes=./client/src/containers/**/*.graphql --tagName=gql --globalTypesFile=./client/src/containers/global-types/global-types.ts --addTypename types"
   },
   "author": "",
   "license": "ISC",

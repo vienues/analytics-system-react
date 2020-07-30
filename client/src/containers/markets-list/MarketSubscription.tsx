@@ -1,5 +1,5 @@
 import { useSubscription } from '@apollo/react-hooks'
-import { onMarketSubscription, onMarketSubscriptionVariables } from '__generated__/types'
+import { onMarketSubscription, onMarketSubscriptionVariables } from './graphql/types/onMarketSubscription'
 import React from 'react'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { StockPrice } from '../stock-price/components'
