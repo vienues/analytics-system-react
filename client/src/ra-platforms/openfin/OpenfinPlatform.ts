@@ -1,5 +1,5 @@
-import { search_symbols } from '__generated__/types'
 import { PlatformBase } from 'ra-platforms/platform'
+import { search_symbols } from 'containers/search/graphql/types/search'
 
 export default class OpenfinPlatform extends PlatformBase {
   readonly name = 'openfin'

@@ -9,10 +9,10 @@ import {
   WrapperContent,
 } from '../../common/StyledComponents'
 import { RouterHelpers } from '../../helpers'
-import { MarketSegment } from '../../__generated__/types'
 import { Search, StockPrice } from '../index'
 import { SearchContext } from '../search/SearchContext'
 import Footer from './Footer'
+import { MarketSegment } from 'containers/global-types'
 
 export const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,

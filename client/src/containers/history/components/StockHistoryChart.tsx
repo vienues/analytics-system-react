@@ -12,7 +12,7 @@ import {
   YAxis,
 } from 'recharts'
 import { getThemeColor, ThemeConsumer, themes } from 'rt-theme'
-import { StockHistoryQuery } from '../../../__generated__/types'
+import { StockHistoryQuery } from '../graphql/types/StockHistoryQuery'
 
 export const StockHistoryChart = ({ stock: { id, quote, chart } }: StockHistoryQuery) => {
   const previousClose = quote.previousClose

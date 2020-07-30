@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { AppQuery } from '../../common/AppQuery'
-import { MarketQuery } from '../../__generated__/types'
 import MarketsConnection from './graphql/MarketConnection.graphql'
 import MarketSubscription from './MarketSubscription'
 import { mediaQuery } from 'rt-theme/mediaQueries'
+import { MarketQuery } from './graphql/types/MarketQuery'
 
 const ApolloMarketsListContainer = () => {
   const onMarketQueryResults: (data: MarketQuery) => JSX.Element = ({ markets }) => {

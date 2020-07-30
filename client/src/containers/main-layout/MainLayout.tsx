@@ -4,11 +4,11 @@ import ReactGA from 'react-ga'
 import { AsyncReturnType } from 'utils'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { MainLayoutWrapper } from '../../common/StyledComponents'
-import { MarketSegment } from '../../__generated__/types'
 import { SearchContext, SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
 import { CurrentSymbolLayout } from './CurrentSymbolLayout'
 import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
+import { MarketSegment } from 'containers/global-types'
 
 const SESSION = 'PWABanner'
 

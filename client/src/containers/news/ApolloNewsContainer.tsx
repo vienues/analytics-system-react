@@ -1,5 +1,5 @@
 import React from 'react'
-import { NewsQuery, NewsQueryVariables } from '../../__generated__/types'
+import { NewsQuery, NewsQueryVariables } from './graphql/types/NewsQuery'
 import { AppQuery } from '../../common/AppQuery'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { News } from './components'

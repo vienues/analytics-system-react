@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { StockHistoryQuery, StockHistoryQueryVariables } from '__generated__/types'
+import { StockHistoryQuery, StockHistoryQueryVariables } from './graphql/types/StockHistoryQuery'
 import { AppQuery } from 'common/AppQuery'
 import { IApolloContainerProps } from 'common/IApolloContainerProps'
 import { StockHistoryChart } from './components/StockHistoryChart'
