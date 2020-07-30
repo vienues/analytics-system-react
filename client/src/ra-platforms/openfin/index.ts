@@ -1,1 +1,1 @@
-export { default as Openfin } from './Openfin'
+export { default as Openfin } from './OpenfinPlatform'

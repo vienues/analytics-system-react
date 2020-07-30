@@ -5,11 +5,12 @@
   "scripts": {
     "start": "concurrently npm:start:web npm:start:openfin",
     "start:web": "serve -l 5501",
-    "start:openfin": "openfin --launch --config http://localhost:5501/app.json"
+    "start:openfin": "wait-on http://localhost:5501/app.json && openfin --launch --config http://localhost:5501/app.json"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
     "openfin-cli": "^3.0.2",
-    "serve": "^11.3.2"
+    "serve": "^11.3.2",
+    "wait-on": "^5.1.0"
   }
 }

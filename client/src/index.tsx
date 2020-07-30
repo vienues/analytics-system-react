@@ -10,9 +10,7 @@ window.addEventListener('beforeinstallprompt', e => {
   window.beforeInstallPromptEvent = e
 })
 
-ReactGA.initialize('UA-46320965-5', {
-  debug: process.env.NODE_ENV === 'development',
-})
+ReactGA.initialize('UA-46320965-5')
 
 async function init() {
   const env = getEnvironment()
