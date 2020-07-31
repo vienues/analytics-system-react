@@ -1,0 +1,8 @@
+subscription onFXPriceSubscription($from: String!, $to: String!) {
+  getIntradayFXRate(from: $from, to: $to) {
+    date
+    fromCurrency
+    toCurrency
+    rate
+  }
+}

@@ -75,14 +75,15 @@ export default class {
   }
 
   private createFXRate(rawFXRate: any) {
-    const fromCurrency = rawFXRate.symbol.substring(0, 4)
+    const fromCurrency = rawFXRate.symbol.substring(0, 3)
     const toCurrency = rawFXRate.symbol.substring(3)
-    return {
+    const rate = {
       date: rawFXRate.timestamp,
       fromCurrency,
       toCurrency,
       rate: rawFXRate.rate,
     }
+    return rate
   }
   public async subscribeFXUpdates(fxPair: string) {
     if (this.statusTopics && this.statusTopics[fxPair]) {

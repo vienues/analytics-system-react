@@ -8,15 +8,15 @@
 // ====================================================
 
 export interface Company_company {
-  __typename: 'Company'
-  id: string
-  symbol: string
-  name: string | null
-  website: string | null
-  description: string | null
+  __typename: "Company";
+  id: string;
+  symbol: string;
+  name: string | null;
+  website: string | null;
+  description: string | null;
 }
 
 export interface Company {
-  __typename: 'Stock'
-  company: Company_company
+  __typename: "Stock";
+  company: Company_company;
 }

@@ -2,8 +2,8 @@ import { useSubscription } from '@apollo/react-hooks'
 import { onMarketSubscription, onMarketSubscriptionVariables } from './graphql/types/onMarketSubscription'
 import React from 'react'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
-import { StockPrice } from '../stock-price/components'
 import MarketQuery from './graphql/MarketSubscription.graphql'
+import { StockPrice } from 'containers/ticker-price/components'
 
 const MarketSubscription = ({ variables }: { variables: onMarketSubscriptionVariables }) => {
   const { loading, data } = useSubscription<onMarketSubscription, onMarketSubscriptionVariables>(MarketQuery, {

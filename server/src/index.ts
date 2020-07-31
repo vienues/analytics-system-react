@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { ApolloServer, makeExecutableSchema} from 'apollo-server-express'
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import express from 'express'
@@ -27,8 +27,8 @@ async function bootstrap() {
       logger.error('iex-cloud API key must be set')
     }
   }
-  
-  const schema = makeExecutableSchema({ typeDefs:RootSchema, resolvers:RootResolver })
+
+  const schema = makeExecutableSchema({ typeDefs: RootSchema, resolvers: RootResolver })
   const PORT = 4000
   const CLIENT_PORT = 3000
 
@@ -41,21 +41,21 @@ async function bootstrap() {
     }),
   )
 
-  app.use(
-    '/iexsandbox',
-    bodyParser.json(),
-    (req, res) => {
-      res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
-    }
-  )
-const wsGqlURL = `ws://localhost:${PORT}/subscriptions`
-const apollo_server = new ApolloServer({ typeDefs:RootSchema, resolvers:RootResolver, playground:{
-  subscriptionEndpoint:wsGqlURL
-}});
-apollo_server.applyMiddleware({ app });
+  app.use('/iexsandbox', bodyParser.json(), (req, res) => {
+    res.status(200).json({ isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T') })
+  })
+  const wsGqlURL = `ws://localhost:${PORT}/subscriptions`
+  const apollo_server = new ApolloServer({
+    typeDefs: RootSchema,
+    resolvers: RootResolver,
+    playground: {
+      subscriptionEndpoint: wsGqlURL,
+    },
+  })
+  apollo_server.applyMiddleware({ app })
 
   app.get('/iexsandbox', (req, res) => {
-    res.status(200).json({isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T')})
+    res.status(200).json({ isSandbox: (process.env.IEXCLOUD_PUBLIC_KEY || '').toUpperCase().startsWith('T') })
   })
 
   app.get('/healthz', (req, res) => {
@@ -140,9 +140,8 @@ apollo_server.applyMiddleware({ app });
           if (params.operationName === 'onIntradayPricingSubscription') {
             pubsub.publish('SUBSCRIBE_TO_INTRADAY_UPDATES', message.payload.variables.symbol)
           }
-
-          if (params.operationName === 'onIntradayFxPriceSubscription') {
-            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.symbol)
+          if (params.operationName === 'onFXPriceSubscription') {
+            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.from + message.payload.variables.to)
           } else {
             socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
             pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)
