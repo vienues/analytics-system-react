@@ -11,7 +11,7 @@ setTimeout(() => {
   pubsub.subscribe('UNSUBSCRIBE_TO_FX_UPDATES', (fxPair: string) => {
     fxService.stopFXUpdates(fxPair)
   })
-}, 1000)
+}, 500)
 
 const resolvers: IResolvers = {
   Query: {

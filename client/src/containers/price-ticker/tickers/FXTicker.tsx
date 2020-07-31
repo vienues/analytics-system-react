@@ -6,8 +6,8 @@ import { onFXPriceSubscription, onFXPriceSubscriptionVariables } from '../graphq
 import FXPriceSubscription from '../graphql/FXPriceSubscription.graphql'
 
 export const FXTicker: React.FC<IApolloContainerProps> = ({ id }) => {
-  const [shouldResubscribe, setShouldResubscribe] = useState(true)
-  const [currentId, setCurrentId] = useState(id)
+  const [shouldResubscribe, setShouldResubscribe] = useState<boolean>(true)
+  const [currentId, setCurrentId] = useState<string>(id)
 
   useEffect(() => {
     if (currentId && id) {

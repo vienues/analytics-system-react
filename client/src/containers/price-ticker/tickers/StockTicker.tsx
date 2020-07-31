@@ -8,8 +8,8 @@ import { StockPriceData, StockPrice } from '../components'
 import { MarketDisplay } from '../components/StockPrice'
 
 export const StockTicker: React.FC<IApolloContainerProps> = ({ id }) => {
-  const [shouldResubscribe, setShouldResubscribe] = useState(true)
-  const [currentId, setCurrentId] = useState(id)
+  const [shouldResubscribe, setShouldResubscribe] = useState<boolean>(true)
+  const [currentId, setCurrentId] = useState<string>(id)
 
   useEffect(() => {
     if (currentId && id) {
