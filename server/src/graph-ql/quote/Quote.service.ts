@@ -18,7 +18,7 @@ export default class {
   private timer: NodeJS.Timeout | null = null
   private intradaySubscriptions: IIntradaySubscription = {}
   public async getQuote(symbol: string): Promise<Quote> {
-    const retVal = (await iex.quote(symbol)) as Quote;
+    const retVal = (await iex.quote(symbol)) as Quote
     return retVal
   }
 
@@ -69,6 +69,6 @@ export default class {
         return Promise.resolve(false)
       }),
     )
-    this.timer = setTimeout(this.getIntradayPricingLoop.bind(this), 1000)
+    this.timer = setTimeout(this.getIntradayPricingLoop.bind(this), 2000)
   }
 }
