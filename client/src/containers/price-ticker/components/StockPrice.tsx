@@ -18,10 +18,9 @@ export interface IStockPriceProps {
   symbol?: string
   size?: MarketDisplay
   stockPrice: IStockPriceData | null
-  hideChange?: Boolean
 }
 
-const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, size, stockPrice, hideChange }) => {
+const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, size, stockPrice }) => {
   if (stockPrice === null) {
     return <div>N/A</div>
   }
@@ -46,7 +45,7 @@ const StockPrice: React.FunctionComponent<IStockPriceProps> = ({ symbol, size, s
         <BoldText>{symbol}</BoldText>
         <LatestPrice>${fixedFormat(latestPrice)}</LatestPrice>
       </MainPrices>
-      <StockPriceChangeWrapper isHidden={hideChange} change={change ?? 0}>
+      <StockPriceChangeWrapper change={change ?? 0}>
         <MarketStatusIcon change={change ?? 0} />
         <Text>{fixedFormat(change)}</Text>
         <Text>|</Text>

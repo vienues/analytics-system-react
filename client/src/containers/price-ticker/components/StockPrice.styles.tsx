@@ -9,15 +9,10 @@ interface PriceWrapperProps {
   size?: MarketDisplay
 }
 
-interface IStockPriceChangeWrapperAttrs {
-  change: number
-  isHidden: Boolean | undefined
-}
-
 export const LatestPrice = styled(LightText)``
 
-export const StockPriceChangeWrapper = styled.div<IStockPriceChangeWrapperAttrs>`
-  display: ${({ isHidden }) => (isHidden ? 'none' : 'grid')};
+export const StockPriceChangeWrapper = styled.div<{ change: number }>`
+  display: grid;
   font-weight: 500;
   grid-gap: 0.25em;
   grid-auto-flow: column;

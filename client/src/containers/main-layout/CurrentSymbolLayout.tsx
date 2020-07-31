@@ -9,10 +9,11 @@ import {
   WrapperContent,
 } from '../../common/StyledComponents'
 import { RouterHelpers } from '../../helpers'
-import { Search, StockPrice } from '../index'
+import { Search } from '../index'
 import { SearchContext } from '../search/SearchContext'
 import Footer from './Footer'
 import { MarketSegment } from 'containers/global-types'
+import { PriceTicker } from 'containers/price-ticker'
 
 export const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,
@@ -44,7 +45,7 @@ export const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps 
       <MainSearchContent hasPreviousSearch={previousSearch ?? false}>
         <SearchGridArea>
           <Search id={id} url={market} market={market} />
-          {currentSymbol && <StockPrice id={id} market={market} />}
+          {currentSymbol && <PriceTicker id={id} market={market} />}
         </SearchGridArea>
       </MainSearchContent>
       {renderedErrorMessage || renderedRoutes}
