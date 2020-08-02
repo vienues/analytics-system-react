@@ -1,4 +1,9 @@
 FROM node:11.10-alpine as builder
+
+ARG BUILD_VERSION
+
+ENV BUILD_VERSION=${BUILD_VERSION}
+
 WORKDIR /app
 COPY . .
 RUN npm ci --network-concurrency 1

@@ -39,7 +39,7 @@ jobs:
       script:
         - export BUILD_VERSION="$(git describe)"
         - echo "Building server docker image ${BUILD_VERSION}"
-        - docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${BUILD_VERSION} .
+        - docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-server:${BUILD_VERSION} --build-arg BUILD_VERSION=${BUILD_VERSION} .
         # Test if this is a push to develop branch, otherwise exit
         - test $TRAVIS_BRANCH = "develop" -a $TRAVIS_EVENT_TYPE = "push" || travis_terminate 0
         - echo "Pushing docker image to GCR"

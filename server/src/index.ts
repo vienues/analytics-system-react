@@ -19,6 +19,8 @@ import RootResolver from './graph-ql/RootResolver'
 pricing(pubsub)
 
 async function bootstrap() {
+  logger.info(`Reactive Analytics server ${process.env.BUILD_VERSION || 'vUnknown'}`)
+
   const isOffline = process.env.INSIGHTS_OFFLINE
   const iex = getDataSource(isOffline)
   if (isOffline !== 'true') {
