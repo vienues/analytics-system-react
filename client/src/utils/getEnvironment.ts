@@ -3,6 +3,6 @@ export function getEnvironment(): string {
 
   if (serviceUrl.includes('localhost')) return 'local'
 
-  const envMatch = /(?<env>[a-zA-Z]+)\/-reactive-analytics.adaptivecluster\.com/.exec(serviceUrl)
+  const envMatch = /(?<env>[a-zA-Z]+)-reactive-analytics.adaptivecluster\.com/.exec(serviceUrl)
   return envMatch ? envMatch['groups']!.env : 'unknown'
 }
