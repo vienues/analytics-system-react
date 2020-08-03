@@ -1,0 +1,97 @@
+services:
+  - docker
+
+cache:
+  directories:
+    - "$HOME/google-cloud-sdk/"
+
+language: node_js
+node_js: 12
+
+env:
+  global:
+    ENV: dev
+    SKIP_BUILD: false
+
+job_configs:
+  - gcloud_install: &gcloud_install
+    # Install the Google Cloud SDK, if not added from Travis cache (see https://cloud.google.com/sdk/docs/downloads-interactive#silent)
+    # Piping the output to /dev/null is important, as the verbose install script can cause issues on Travis
+    - if [ ! -d $HOME/google-cloud-sdk/bin ]; then rm -rf $HOME/google-cloud-sdk; curl https://sdk.cloud.google.com > install.sh; bash install.sh --disable-prompts > /dev/null; fi
+    # Add the Google Cloud SDK command line tools to $PATH
+    - source $HOME/google-cloud-sdk/path.bash.inc
+    - gcloud --quiet components update kubectl
+    - gcloud version
+
+  - gcloud_auth: &gcloud_auth
+    # The Google Cloud key is JSON, but has to be stored as Base64, so decode it
+    - echo $GCLOUD_SERVICE_KEY | base64 --decode > gcloud.p12
+    - gcloud auth activate-service-account --key-file gcloud.p12
+    - gcloud config set project ${GOOGLE_PROJECT_ID}
+    - gcloud config set compute/zone ${GOOGLE_COMPUTE_ZONE}
+    - gcloud container clusters get-credentials ${GOOGLE_GKE_CLUSTER}
+
+  - build_job: &build_job
+      install: &get_version
+        - export BUILD_VERSION="$(git describe)"
+        - echo "Building ${BUILD_TYPE} docker image ${BUILD_VERSION}"
+      script: &docker_build
+        - cd ${BUILD_TYPE}
+        - docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-${BUILD_TYPE}:${BUILD_VERSION} --build-arg BUILD_VERSION=${BUILD_VERSION} .
+
+  - build_and_push_job: &build_and_push_job
+      before_install:
+        - *gcloud_install
+      install: 
+        - *get_version
+      before_script:
+        - *gcloud_auth
+      script:
+        - *docker_build
+        - gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-${BUILD_TYPE}:${BUILD_VERSION}
+
+  - deploy_job: &deploy_job
+      before_install:
+        - *gcloud_install
+      install:
+        - *get_version
+      before_script:
+        - *gcloud_auth
+      script:
+        - >
+          for f in ./kubernetes/*.yml; do
+            cat $f | /usr/bin/envsubst | kubectl --namespace=${NAMESPACE} apply -f -
+          done
+
+jobs:
+  include:
+    - stage: Build
+      name: Build client
+      env: BUILD_TYPE=client
+      <<: *build_job
+    - name: Build server
+      env: BUILD_TYPE=server
+      <<: *build_job
+
+    - stage: Build and push
+      name: Build and push client image
+      env: BUILD_TYPE=client
+      <<: *build_and_push_job
+    - name: Build and push server image
+      env: BUILD_TYPE=server
+      <<: *build_and_push_job
+
+    - stage: Deploy
+      name: Deploy images to GKE
+      language: shell
+      # use a map of environment variables, not a list, so that a matrix doesn't get created    
+      env: NAMESPACE=${ENV}-reactive-analytics
+      <<: *deploy_job
+    
+stages:
+- name: Build
+  if: env(SKIP_BUILD) != true AND NOT (branch = develop AND type IN (push, api))
+- name: Build and push
+  if: env(SKIP_BUILD) != true AND branch = develop AND type IN (push, api)
+- name: Deploy
+  if: branch = develop AND type IN (push, api)
