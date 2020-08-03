@@ -7,6 +7,10 @@
   - [Requirements](#requirements)
   - [Getting started](#getting-started)
     - [Data connection](#data-connection)
+  - [Access IEX Sandbox token](#access-iex-sandbox-token)
+  - [Generate schema and typings](#generate-schema-and-typings)
+    - [Server schema](#server-schema)
+    - [Client typings](#client-typings)
   - [Core technologies used](#core-technologies-used)
   - [Useful developer add-ons](#useful-developer-add-ons)
     - [Visual Studio Code extensions from the marketplace](#visual-studio-code-extensions-from-the-marketplace)
@@ -49,9 +53,19 @@ To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.
 - Navigate to the `API Tokens` tab on the top left handside of the screen
 - Copy the Publishable Token
 
-## Generate Client Schema and Typings
+## Generate schema and typings
 
-Open a terminal at the root folder and run `npm run generate-schema-and-typings` to generate the graphql client schema and typings.
+### Server schema
+
+- Ensure the backend is running locally and on port 4000
+- Run `npm run generate-server-schema` from root
+- A [`graphql-schema.json`](server/graphql-schema.json) file will be generated in the `server` folder
+
+### Client typings
+
+- Run `npm run generate-client-typings` from root
+- The relevant typings will be generated in their respective folders
+- Global typings are stored in [`global-types`](client/src/containers/global-types)
 
 ## Core technologies used
 
