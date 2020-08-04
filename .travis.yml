@@ -97,8 +97,8 @@ jobs:
     
 stages:
 - name: Build
-  if: env(SKIP_BUILD) != true AND NOT (branch = develop AND type IN (push, api))
+  if: env(SKIP_BUILD) != true AND NOT (branch = master AND type IN (push, api))
 - name: Build and push
-  if: env(SKIP_BUILD) != true AND branch = develop AND type IN (push, api)
+  if: env(SKIP_BUILD) != true AND branch = master AND type IN (push, api)
 - name: Deploy
-  if: branch = develop AND type IN (push, api)
+  if: branch = master AND type IN (push, api)
