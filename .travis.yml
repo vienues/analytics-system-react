@@ -1,10 +1,6 @@
 services:
   - docker
 
-cache:
-  directories:
-    - "$HOME/google-cloud-sdk/"
-
 language: node_js
 node_js: 12
 
@@ -12,8 +8,16 @@ env:
   global:
     ENV: dev
     SKIP_BUILD: false
+    
+notifications:
+  slack:
+    secure: Vb/LrucSYa7kHHiKjnskiI30pAsVZM6fxn+xdKmh7iZfgF9YqtuH/fpOi2qe8exbCxG6EzSGjDGW7PvOnwUy65m//gudMWdHsXhQce+gStxPQxaRyf4GrcXiJM6/z5ZO7nAguEmngq8gSbTzFNeJyJIXqqSMvev8SEPAVtyeUaZ92JIgBa7KnmN9vNruNsFHCDKLyeXQVC14y9xiOvuO14GUGeOYn98LUG9MNjQXdQ15VKKE9SRXOhP4fVbAlZ9vniCsJh6haHXZnTRFMjWmPy4vKP5Py8WRC64wrfIykdOqBE/N3Qnp7He10UdW4+dW6uyBx7ZDKtIk1cBopcML2VYh4XIkh8aWLf3QKUh6+iR2qy1VOvRh9bVXTK5O4kvdQVWbqU1owF+cHef2TtkMtPeCWHmfyIDpXIuR9E3LUdSxE+SQM8AQzVYjgzzVx8Q6fT3YNCmUxrsXtPCCYBC4vQkNPr1aHZWgSU6fPQ7Zl6NHN3A6eELcWkGXUQ3/ZA0uwbVmWxv84MrXntlCGSADqxxcMh8iiPgxfafnQej/HQ1yc7lvLBhVZlDrmGaaVngejjvTBsi5LRiRC79/rwvQ8kbJbZlzkSARIotM4Z/TeQDZlCB3GCgjzUOnWelcBS18YCM3XjbVxEcnQwhQzHJncm4mFlVwqZhrx7rQt2AuoDQ=
 
 job_configs:
+  - gcloud_cache: &gcloud_cache
+      cache:
+        directories:
+          - "$HOME/google-cloud-sdk/"
   - gcloud_install: &gcloud_install
     # Install the Google Cloud SDK, if not added from Travis cache (see https://cloud.google.com/sdk/docs/downloads-interactive#silent)
     # Piping the output to /dev/null is important, as the verbose install script can cause issues on Travis
@@ -35,11 +39,12 @@ job_configs:
       install: &get_version
         - export BUILD_VERSION="$(git describe)"
         - echo "Building ${BUILD_TYPE} docker image ${BUILD_VERSION}"
-      script: &docker_build
+      script:
         - cd ${BUILD_TYPE}
-        - docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-${BUILD_TYPE}:${BUILD_VERSION} --build-arg BUILD_VERSION=${BUILD_VERSION} .
+        - docker build -t reactive-analytics-${BUILD_TYPE}:${BUILD_VERSION} --build-arg BUILD_VERSION=${BUILD_VERSION} .
 
   - build_and_push_job: &build_and_push_job
+      <<: *gcloud_cache
       before_install:
         - *gcloud_install
       install: 
@@ -47,10 +52,12 @@ job_configs:
       before_script:
         - *gcloud_auth
       script:
-        - *docker_build
+        - cd ${BUILD_TYPE}
+        - docker build -t ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-${BUILD_TYPE}:${BUILD_VERSION} --build-arg BUILD_VERSION=${BUILD_VERSION} .
         - gcloud docker -- push ${GOOGLE_GCR_HANDLE}/${GOOGLE_PROJECT_ID}/reactive-analytics-${BUILD_TYPE}:${BUILD_VERSION}
 
   - deploy_job: &deploy_job
+      <<: *gcloud_cache
       before_install:
         - *gcloud_install
       install:

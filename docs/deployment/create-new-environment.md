@@ -25,11 +25,13 @@ Each template creates a specific resource: client, server and ingress.
 The ingress depends on a secret which is stored in Kubernetes secrets. This is used for TLS communication.
 
 ```
-kubectl apply -f .\kubernetes\analytics-client.yml
-kubectl apply -f .\kubernetes\analytics-server.yml
-kubectl apply -f .\kubernetes\analytics-ingress.yml
+kubectl apply -n <namespace> -f ./kubernetes/analytics-client.yml
+kubectl apply -n <namespace> -f ./kubernetes/analytics-server.yml
+kubectl apply -n <namespace> -f ./kubernetes/analytics-ingress.yml
 ```
 
 ### Use Cloud DNS to create a new entry point DNS record
 
 The NGINX ingress controller does domain based routing. For the ingress controller to correctly route to the freshly started deployment and services, it's necessary to create the DNS record targeting the public IP of the ingress controller.
+
+**Note:** The DNS record has to be configured in the `adaptive-trader` Cloud DNS config.
