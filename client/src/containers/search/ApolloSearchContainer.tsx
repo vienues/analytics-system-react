@@ -16,6 +16,8 @@ import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
 import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import { MarketSegment } from 'containers/global-types'
+import { useFDC3Context } from 'ra-platforms/fdc3'
+import { checkIncomingSymbol } from './components'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -32,6 +34,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   const placeholderText = 'Enter a stock, symbol, or currency pair...'
 
   const platform = usePlatform()
+  const { fdc3Symbol } = useFDC3Context()
 
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
@@ -56,6 +59,19 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     },
     [dispatch, history, url, platform],
   )
+
+  useEffect(() => {
+    ;(async function () {
+      if (fdc3Symbol) {
+        const checkedSymbol = await checkIncomingSymbol(fdc3Symbol)
+        if (checkedSymbol) {
+          handleChange(checkedSymbol)
+        } else {
+          console.info(`The FDC3 symbol ${fdc3Symbol} did not match any known symbols`)
+        }
+      }
+    })()
+  }, [fdc3Symbol, handleChange])
 
   useEffect(() => {
     if (dispatch) {
