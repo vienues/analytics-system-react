@@ -1,62 +1,62 @@
 {
   "EURUSD": {
-    "name": "Euro to United States dollar",
+    "name": "Euro to United States Dollar",
     "ratePrecision": 5,
     "pipsPosition": 4,
     "base": "EUR",
     "terms": "USD"
   },
   "USDJPY": {
-    "name": "US dollar to Japanese yen",
+    "name": "US dollar to Japanese Yen",
     "ratePrecision": 3,
     "pipsPosition": 2,
     "base": "USD",
     "terms": "JPY"
   },
   "GBPJPY": {
-    "name": "Pound sterling to Japanese yen",
+    "name": "Pound sterling to Japanese Yen",
     "ratePrecision": 3,
     "pipsPosition": 2,
     "base": "GBP",
     "terms": "JPY"
   },
   "GBPUSD": {
-    "name": "Pound sterling to United States dollar",
+    "name": "Pound Sterling to United States Dollar",
     "ratePrecision": 5,
     "pipsPosition": 4,
     "base": "GBP",
     "terms": "USD"
   },
   "EURJPY": {
-    "name": "Euro to Japanese yen",
+    "name": "Euro to Japanese Yen",
     "ratePrecision": 3,
     "pipsPosition": 2,
     "base": "EUR",
     "terms": "JPY"
   },
   "EURCAD": {
-    "name": "Euro to Canadian dollar",
+    "name": "Euro to Canadian Dollar",
     "ratePrecision": 5,
     "pipsPosition": 4,
     "base": "EUR",
     "terms": "CAD"
   },
   "AUDUSD": {
-    "name": "Australian dollar to United States dollar",
+    "name": "Australian dollar to United States Dollar",
     "ratePrecision": 5,
     "pipsPosition": 4,
     "base": "AUD",
     "terms": "USD"
   },
   "NZDUSD": {
-    "name": "New Zealand dollar to United States dollar",
+    "name": "New Zealand dollar to United States Dollar",
     "ratePrecision": 5,
     "pipsPosition": 4,
     "base": "NZD",
     "terms": "USD"
   },
   "EURAUD": {
-    "name": "Euro to Australian dollar",
+    "name": "Euro to Australian Dollar",
     "ratePrecision": 5,
     "pipsPosition": 4,
     "base": "EUR",
