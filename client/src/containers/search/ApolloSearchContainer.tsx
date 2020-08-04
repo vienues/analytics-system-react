@@ -17,6 +17,7 @@ import { SearchContext, SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import { MarketSegment } from 'containers/global-types'
 import { useFDC3Context } from 'ra-platforms/fdc3'
+import { checkIncomingSymbol } from './components'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -60,15 +61,16 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   )
 
   useEffect(() => {
-    if (fdc3Symbol) {
-      const symbol: search_symbols = {
-        __typename: 'SearchResult',
-        id: fdc3Symbol,
-        marketSegment: 'STOCK',
-        name: 'FX',
+    ;(async function () {
+      if (fdc3Symbol) {
+        const checkedSymbol = await checkIncomingSymbol(fdc3Symbol)
+        if (checkedSymbol) {
+          handleChange(checkedSymbol)
+        } else {
+          console.info(`The FDC3 symbol ${fdc3Symbol} did not match any known symbols`)
+        }
       }
-      handleChange(symbol)
-    }
+    })()
   }, [fdc3Symbol, handleChange])
 
   useEffect(() => {

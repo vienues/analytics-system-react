@@ -8,19 +8,15 @@ export const FDC3Context = React.createContext<{ fdc3Symbol: string | null }>({
 export const FDC3Provider: React.FC = ({ children }) => {
   const [fdc3Symbol, setCurrentSymbol] = useState<string | null>(null)
 
-  const contextCallback = (context: Context) => {
-    console.info('Incomming FDC3 context', context)
+  const setContext = (context: Context) => {
+    console.info('Incoming FDC3 context', context)
     if (context.type === 'fdc3.instrument' && context.id?.ticker) {
       setCurrentSymbol(context.id?.ticker)
     }
   }
 
-  //   setTimeout(() => {
-  //     setCurrentSymbol('AAPL')
-  //   }, 7000)
-
   if (typeof fdc3 !== 'undefined') {
-    fdc3.addContextListener(contextCallback)
+    fdc3.addContextListener(setContext)
   }
 
   return <FDC3Context.Provider value={{ fdc3Symbol }}>{children}</FDC3Context.Provider>
