@@ -1,6 +1,6 @@
 # Reactive Analytics
 
-[![CircleCI](https://circleci.com/gh/AdaptiveConsulting/ReactiveAnalytics.svg?style=svg&circle-token=8dfbb24676c7e9d51bc4668cacec12d31104b0f6)](https://circleci.com/gh/AdaptiveConsulting/ReactiveAnalytics)
+[![TravisCI](https://travis-ci.com/AdaptiveConsulting/ReactiveAnalytics.svg?token=pzX2rmLCXdpByY5gqVfu&branch=develop)](https://travis-ci.com/github/AdaptiveConsulting/ReactiveAnalytics)
 
 - [Reactive Analytics](#reactive-analytics)
   - [Overview](#overview)
