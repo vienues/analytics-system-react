@@ -21,6 +21,5 @@ export interface ABMHistoryQuery {
 }
 
 export interface ABMHistoryQueryVariables {
-  from: string;
-  to: string;
+  id: string;
 }

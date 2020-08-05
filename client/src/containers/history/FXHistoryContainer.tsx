@@ -6,18 +6,13 @@ import { ABMHistoryQuery, ABMHistoryQueryVariables } from './graphql/types/ABMHi
 import { FXHistoryChart } from './components/FXHistoryChart'
 import ABMHistoryConnection from './graphql/ABMHistoryConnection.graphql'
 
-const FXHistory: React.FC<IApolloContainerProps> = ({ id }) => {
-  const from = id.slice(0, 3)
-  const to = id.slice(3)
-
-  return (
-    <>
-      <AppQuery<ABMHistoryQuery, ABMHistoryQueryVariables> query={ABMHistoryConnection} variables={{ from, to }}>
-        {FXHistoryChart}
-      </AppQuery>
-    </>
-  )
-}
+const FXHistory: React.FC<IApolloContainerProps> = ({ id }) => (
+  <>
+    <AppQuery<ABMHistoryQuery, ABMHistoryQueryVariables> query={ABMHistoryConnection} variables={{ id }}>
+      {FXHistoryChart}
+    </AppQuery>
+  </>
+)
 
 const FXHistoryContainer: React.FC<IApolloContainerProps> = ({ id }) => (
   <HistoryWrapper>
