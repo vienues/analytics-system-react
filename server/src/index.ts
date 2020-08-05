@@ -18,6 +18,8 @@ import RootSchema from './graph-ql/RootTypedef'
 import RootResolver from './graph-ql/RootResolver'
 pricing(pubsub)
 
+Object.assign(global, { WebSocket: require('websocket').w3cwebsocket })
+
 async function bootstrap() {
   logger.info(`Reactive Analytics server ${process.env.BUILD_VERSION || 'vUnknown'}`)
 

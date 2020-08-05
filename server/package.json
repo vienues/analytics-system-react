@@ -13,6 +13,8 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@stomp/rx-stomp": "^0.3.5",
+    "@stomp/stompjs": "^5.4.4",
     "apollo-server-express": "^2.15.1",
     "autobahn": "^19.4.1",
     "body-parser": "^1.18.2",
@@ -29,8 +31,10 @@
     "node-fetch": "^2.0.0",
     "ramda": "^0.25.0",
     "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.2",
     "subscriptions-transport-ws": "^0.9.5",
     "typedi": "^0.8.0",
+    "websocket": "^1.0.31",
     "winston": "^3.3.3"
   },
   "devDependencies": {
