@@ -8,7 +8,6 @@ const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 @Service()
 export default class {
   public async getQuote(symbol: string): Promise<Quote> {
-    const retVal = (await iex.quote(symbol)) as Quote
-    return retVal
+    return (await iex.quote(symbol)) as Quote
   }
 }

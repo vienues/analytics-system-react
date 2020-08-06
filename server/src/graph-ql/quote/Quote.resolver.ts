@@ -3,10 +3,7 @@ import logger from '../../services/logger'
 import getDataSource from '../../connectors'
 import { Quote as QuoteAPI } from 'iexcloud_api_wrapper'
 import { pubsub } from '../../pubsub'
-import CompanyService from '../company/Company.service'
-import { Container } from 'typedi'
 
-const companyService = Container.get(CompanyService)
 const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 const resolvers: IResolvers = {
@@ -25,9 +22,6 @@ const resolvers: IResolvers = {
     id: parent => {
       return parent.symbol
     },
-    company: async parent => {
-      return companyService.getCompany(parent.symbol)
-    },
   },
   Subscription: {
     getQuotes: {
@@ -37,7 +31,7 @@ const resolvers: IResolvers = {
           ...payload,
         }
       },
-      subscribe: (src, args: { symbols: [string] }) => {
+      subscribe: (_, args: { symbols: [string] }) => {
         const topics = args.symbols.map((arg: string) => `MARKET_UPDATE.${arg}`)
         return pubsub.asyncIterator(topics)
       },

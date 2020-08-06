@@ -140,10 +140,6 @@ async function bootstrap() {
           if (socket.operation.has(message.id)) {
             throw new Error(`Received same operation twice!`)
           }
-          // HACK! I know what the client called the operation, this would not work otherwise
-          if (params.operationName === 'onIntradayPricingSubscription') {
-            pubsub.publish('SUBSCRIBE_TO_INTRADAY_UPDATES', message.payload.variables.symbol)
-          }
           if (params.operationName === 'onFXPriceSubscription') {
             pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.id)
           } else {

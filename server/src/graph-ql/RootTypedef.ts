@@ -26,9 +26,7 @@ const baseSchema = gql`
     symbol(market: String!, id: String!): SearchResult!
     symbols(text: String!, marketSegment: MarketSegment!): [SearchResult!]!
     stats(id: String!): Stats!
-    intradayPrices(symbol: String!, lastN: Int!): [Intraday!]!
     stock(id: ID = ""): Stock!
-    OLHC(id: ID = ""): OLHC!
     search(text: String!): [SearchResult!]!
   }
 
