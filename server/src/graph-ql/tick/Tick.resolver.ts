@@ -6,16 +6,6 @@ import QuoteService from '../quote/Quote.service'
 import { Container } from 'typedi'
 
 const tickService = Container.get(TickService)
-const quoteService = Container.get(QuoteService)
-
-setTimeout(() => {
-  pubsub.subscribe('SUBSCRIBE_TO_INTRADAY_UPDATES', (symbol: string) => {
-    quoteService.startIntradayPricingLoop(symbol)
-  })
-  pubsub.subscribe('UNSUBSCRIBE_TO_INTRADAY_UPDATES', (symbol: string) => {
-    quoteService.stopIntradayPricingLoop(symbol)
-  })
-}, 500)
 
 const resolvers: IResolvers = {
   Query: {

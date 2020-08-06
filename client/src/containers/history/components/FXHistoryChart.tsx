@@ -8,6 +8,16 @@ import { ABMHistoryQuery } from '../graphql/types/ABMHistoryQuery'
 export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) => {
   const chartData = getPriceHistory.slice(getPriceHistory.length - 100, getPriceHistory.length)
 
+  const format = (number: number) => (number < 10 ? `0${number}` : number)
+
+  const getValueTime = (timestamp: any) => {
+    const date = new Date(timestamp)
+    const hour = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+    return `${hour}:${format(minutes)}.${format(seconds)}`
+  }
+
   return (
     <ThemeConsumer>
       {({ themeName }) => (
@@ -36,7 +46,8 @@ export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) =
                 tickLine={{ stroke: '#DFDFDF' }}
                 axisLine={{ stroke: '#DFDFDF' }}
                 dataKey="valueDate"
-                interval={round(chartData.length / 24)}
+                tickFormatter={getValueTime}
+                interval={round(chartData.length / 12)}
                 tick={{ fontSize: 12, fill: getThemeColor(themes[themeName], color => color.primary.corePrimary5) }}
                 tickSize={12}
               />
@@ -49,7 +60,7 @@ export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) =
                 tick={{ fontSize: 12, fill: getThemeColor(themes[themeName], color => color.primary.corePrimary5) }}
                 orientation="left"
               />
-              <Tooltip />
+              <Tooltip labelFormatter={getValueTime} />
             </LineChart>
           </ResponsiveContainer>
         </DataCard>

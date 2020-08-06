@@ -145,7 +145,7 @@ async function bootstrap() {
             pubsub.publish('SUBSCRIBE_TO_INTRADAY_UPDATES', message.payload.variables.symbol)
           }
           if (params.operationName === 'onFXPriceSubscription') {
-            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.from + message.payload.variables.to)
+            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.id)
           } else {
             socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
             pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)
@@ -156,6 +156,7 @@ async function bootstrap() {
           const param = socket.operation.get(opId)
           if (Array.isArray(param)) {
             pubsub.publish('UNSUBSCRIBE_TO_MARKET_UPDATES', param)
+            pubsub.publish('UNSUBSCRIBE_TO_FX_UPDATES', param)
           } else {
             pubsub.publish('UNSUBSCRIBE_TO_INTRADAY_UPDATES', param)
           }
