@@ -152,7 +152,6 @@ async function bootstrap() {
           const param = socket.operation.get(opId)
           if (Array.isArray(param)) {
             pubsub.publish('UNSUBSCRIBE_TO_MARKET_UPDATES', param)
-            pubsub.publish('UNSUBSCRIBE_TO_FX_UPDATES', param)
           } else {
             pubsub.publish('UNSUBSCRIBE_TO_INTRADAY_UPDATES', param)
           }

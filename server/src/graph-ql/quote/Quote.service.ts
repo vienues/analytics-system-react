@@ -1,5 +1,4 @@
 import { Quote } from 'iexcloud_api_wrapper'
-import moment = require('moment')
 import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 

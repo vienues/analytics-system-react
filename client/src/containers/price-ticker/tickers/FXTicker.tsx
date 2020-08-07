@@ -28,8 +28,6 @@ export const FXTicker: React.FC<IApolloContainerProps> = ({ id }) => {
     },
   )
 
-  console.log('LOADING', loading, 'DATA', data)
-
   if (loading) {
     return <AdaptiveLoader size={50} speed={1.4} />
   } else if (data && data.getFXPriceUpdates) {

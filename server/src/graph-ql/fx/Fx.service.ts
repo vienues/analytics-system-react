@@ -1,12 +1,11 @@
-import autobahn from 'autobahn'
 import { Service } from 'typedi'
 import data from '../../mock-data/currencySymbols.json'
 import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
 import { MarketSegments } from '../ref-data/RefData.schema'
 import { RxStomp, RxStompRPC } from '@stomp/rx-stomp'
 import { map, tap, take, share } from 'rxjs/operators'
-import { Observable } from 'rxjs'
 import { pubsub } from '../../pubsub'
+import logger from '../../services/logger'
 
 interface ISymbolData {
   [key: string]: {
@@ -27,11 +26,22 @@ interface IPriceHistory {
   valueDate: any
 }
 
+interface PriceUpdates {
+  Symbol: string
+  Bid: number
+  Ask: number
+  Mid: number
+  ValueDate: any
+  CreationTimestamp: number
+}
+
 @Service()
 export default class {
   private rxStomp: RxStomp
   private rxStompRPC: RxStompRPC
+  private currentFX: string[]
   constructor() {
+    this.currentFX = []
     this.rxStomp = new RxStomp()
 
     this.rxStompRPC = new RxStompRPC(this.rxStomp)
@@ -68,41 +78,35 @@ export default class {
         map(message => {
           return JSON.parse(message.body)
         }),
-        tap(() => console.info(`Received price history for ${id}`)),
       )
       .toPromise()
   }
 
-  public async subscribePriceUpdates(id: string) {
-    console.log('SUBSCRIBE PRICE HISTORY CALLED')
-    setInterval(() => {
-      pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
-        Symbol: 'FxSymbol',
-        Bid: 12,
-        Ask: 11,
-        Mid: 10,
-        ValueDate: '2019T',
-        CreationTimestamp: 12345678898985,
-      })
-    }, 2000)
-    // return this.rxStompRPC
-    //   .stream({
-    //     destination: '/amq/queue/pricing.getPriceUpdates',
-    //     body: JSON.stringify({ payload: { symbol: `${id}` }, Username: 'HHA' }),
-    //   })
-    //   .pipe(
-    //     map(message => {
-    //       return JSON.parse(message.body)
-    //     }),
-    //     tap(() => console.info(`Received price update for ${id}`)),
-    //   )
-    //   .subscribe(v => {
-    //     console.log('V', v.Mid)
-    //     pubsub.publish(`FX_CURRENT_PRICING.${id}`, v.Mid)
-    //   })
-  }
-
-  public async unsubscribePriceUpdates(id: string) {
-    console.log('UNSUB')
+  public subscribePriceUpdates(id: string) {
+    if (!this.currentFX?.includes(id)) {
+      this.rxStompRPC
+        .stream({
+          destination: '/amq/queue/pricing.getPriceUpdates',
+          body: JSON.stringify({ payload: { symbol: `${id}` }, Username: 'HHA' }),
+        })
+        .pipe(
+          map(message => {
+            return JSON.parse(message.body)
+          }),
+          tap(() => logger.info(`price update FX_CURRENT_PRICING.${id}`)),
+        )
+        .subscribe((value: PriceUpdates) => {
+          pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
+            getFXPriceUpdates: {
+              Bid: value.Bid,
+              Ask: value.Ask,
+              Mid: value.Mid,
+              ValueDate: value.ValueDate,
+              CreationTimestamp: value.CreationTimestamp,
+            },
+          })
+        })
+      this.currentFX?.push(id)
+    }
   }
 }
