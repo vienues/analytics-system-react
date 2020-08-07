@@ -24,14 +24,14 @@ export const FXTicker: React.FC<IApolloContainerProps> = ({ id }) => {
     FXPriceSubscription,
     {
       shouldResubscribe,
-      variables: { from: currentId.slice(0, 3), to: currentId.slice(3) },
+      variables: { id },
     },
   )
 
   if (loading) {
     return <AdaptiveLoader size={50} speed={1.4} />
-  } else if (data && data.getIntradayFXRate) {
-    return <>{data.getIntradayFXRate.rate}</>
+  } else if (data && data.getFXPriceUpdates) {
+    return <>{data.getFXPriceUpdates.Mid}</>
   }
   return <></>
 }

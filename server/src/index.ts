@@ -18,6 +18,8 @@ import RootSchema from './graph-ql/RootTypedef'
 import RootResolver from './graph-ql/RootResolver'
 pricing(pubsub)
 
+Object.assign(global, { WebSocket: require('websocket').w3cwebsocket })
+
 async function bootstrap() {
   logger.info(`Reactive Analytics server ${process.env.BUILD_VERSION || 'vUnknown'}`)
 
@@ -138,12 +140,8 @@ async function bootstrap() {
           if (socket.operation.has(message.id)) {
             throw new Error(`Received same operation twice!`)
           }
-          // HACK! I know what the client called the operation, this would not work otherwise
-          if (params.operationName === 'onIntradayPricingSubscription') {
-            pubsub.publish('SUBSCRIBE_TO_INTRADAY_UPDATES', message.payload.variables.symbol)
-          }
           if (params.operationName === 'onFXPriceSubscription') {
-            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.from + message.payload.variables.to)
+            pubsub.publish('SUBSCRIBE_TO_FX_UPDATES', message.payload.variables.id)
           } else {
             socket.operation.set(message.id as OperationId, message.payload.variables.markets as Symbols)
             pubsub.publish('SUBSCRIBE_TO_MARKET_UPDATES', message.payload.variables.markets)

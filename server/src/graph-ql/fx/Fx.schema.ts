@@ -1,33 +1,34 @@
 import { gql } from 'apollo-server-express'
- export default gql`
-    type FxCurrencies {
-        code: ID!
-        name: String!
-    }
+export default gql`
+  type FxCurrencies {
+    code: ID!
+    name: String!
+  }
 
-    type FxPairs {
-        from: String!
-        to: String!
-    }
-    
-    type FxPricing {
-        Pair: FxPairs!
-        ask: Float!
-        bid: Float!
-        creationTimestamp: ISODateTime
-        mid: Float!
-        valueDate: Date!
-    }
+  type FxSymbol {
+    id: String!
+  }
 
-    type FxRate {
-        date: DateTime!
-        fromCurrency: String!
-        toCurrency: String!
-        rate: Float!
-    }
-    
-    type FxSymbols {
-        currencies: [FxCurrencies!]!
-        pairs: [FxPairs!]!
-    }
- `;
+  type FxPricing {
+    Pair: FxSymbol!
+    ask: Float!
+    bid: Float!
+    creationTimestamp: Float!
+    mid: Float!
+    valueDate: ISODateTime!
+  }
+
+  type FxRate {
+    Symbol: FxSymbol!
+    Bid: Float
+    Ask: Float
+    Mid: Float
+    ValueDate: ISODateTime
+    CreationTimestamp: Float
+  }
+
+  type FxSymbols {
+    currencies: [FxCurrencies!]!
+    pairs: [FxSymbol!]!
+  }
+`

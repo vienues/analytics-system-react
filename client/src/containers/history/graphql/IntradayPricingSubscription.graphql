@@ -1,6 +1,0 @@
-#import "./Intraday.graphql"
-subscription onIntradayPricingSubscription($symbol: String!) {
-  getIntradayPrices(symbol: $symbol) {
-    ...Intraday
-  }
-}

@@ -1,5 +1,5 @@
-query ABMHistoryQuery($from: String!, $to: String!) {
-  getPriceHistory(from: $from, to: $to) {
+query ABMHistoryQuery($id: String!) {
+  getPriceHistory(id: $id) {
     ask
     bid
     mid

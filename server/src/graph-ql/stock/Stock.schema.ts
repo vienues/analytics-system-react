@@ -1,23 +1,13 @@
 import { gql } from 'apollo-server-express'
-import { MarketSegments } from '../ref-data/RefData.schema';
+import { MarketSegments } from '../ref-data/RefData.schema'
 
 export interface SearchResultSchema {
-   id: string
-   name: string
-   marketSegment: MarketSegments
+  id: string
+  name: string
+  marketSegment: MarketSegments
 }
 
- export default gql`
-  type OLHC {
-    symbol: ID!
-    open: Float
-    close: Float
-    openTime: ISODateTime
-    closeTime: ISODateTime
-    high: Float
-    low: Float
-  }
-
+export default gql`
   type Previous {
     symbol: ID!
     date: Date!
@@ -50,4 +40,4 @@ export interface SearchResultSchema {
     news(last: Float!): [News!]!
     previous: Previous!
   }
- `;
+`

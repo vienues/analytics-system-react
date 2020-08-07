@@ -13,7 +13,7 @@ export interface ABMHistoryQuery_getPriceHistory {
   bid: number;
   mid: number;
   valueDate: any;
-  creationTimestamp: any | null;
+  creationTimestamp: number;
 }
 
 export interface ABMHistoryQuery {
@@ -21,6 +21,5 @@ export interface ABMHistoryQuery {
 }
 
 export interface ABMHistoryQueryVariables {
-  from: string;
-  to: string;
+  id: string;
 }

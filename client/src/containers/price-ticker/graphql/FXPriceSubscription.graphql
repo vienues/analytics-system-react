@@ -1,8 +1,9 @@
-subscription onFXPriceSubscription($from: String!, $to: String!) {
-  getIntradayFXRate(from: $from, to: $to) {
-    date
-    fromCurrency
-    toCurrency
-    rate
+subscription onFXPriceSubscription($id: String!) {
+  getFXPriceUpdates(id: $id) {
+    Bid
+    Ask
+    Mid
+    ValueDate
+    CreationTimestamp
   }
 }

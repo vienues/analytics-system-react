@@ -29,8 +29,11 @@
     "node-fetch": "^2.0.0",
     "ramda": "^0.25.0",
     "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.2",
     "subscriptions-transport-ws": "^0.9.5",
     "typedi": "^0.8.0",
+    "websocket": "^1.0.31",
+    "@stomp/rx-stomp": "^0.3.5",
     "winston": "^3.3.3"
   },
   "devDependencies": {
