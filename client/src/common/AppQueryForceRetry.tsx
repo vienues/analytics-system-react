@@ -7,7 +7,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { QueryResult } from '@apollo/client'
 import { AppQueryDefaultLoadingIndicator } from './AppQuery'
-import { getUri } from 'helpers/uriHelper'
+//import { getUri } from 'helpers/uriHelper'
 
 interface IProps {
   pollingIndicator?: JSX.Element
@@ -30,9 +30,9 @@ let forceQuerySettings: ISettings = {
 async function getForceQuerySettings() {
   if (forceQuerySettings.isSandbox === null) {
     try {
-      const response = await fetch(getUri('/iexsandbox'), { cache: 'force-cache', method: 'POST' })
-      const json = await response.json()
-      forceQuerySettings.isSandbox = !!json.isSandbox
+      // const response = await fetch(getUri('/iexsandbox'), { cache: 'force-cache', method: 'POST' })
+      // const json = await response.json()
+      forceQuerySettings.isSandbox = true
     } catch (ex) {
       console.error(ex)
     }

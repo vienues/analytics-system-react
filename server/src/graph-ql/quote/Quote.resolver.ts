@@ -1,27 +1,26 @@
 import { IResolvers } from 'graphql-tools'
 import logger from '../../services/logger'
-import getDataSource from '../../connectors'
-import { Quote as QuoteAPI } from 'iexcloud_api_wrapper'
 import { pubsub } from '../../pubsub'
+import { Container } from 'typedi'
+import QuoteService from './Quote.service'
+import { withCancel } from '../../utils/asyncIteratorUtils'
 
-const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
+const quoteService = Container.get(QuoteService)
 
 const resolvers: IResolvers = {
   Query: {
     markets: async () => {
       try {
-        const response: QuoteAPI = await iex.iexApiRequest(`/stock/market/batch?symbols=spy,dia,iwm&types=quote`)
-        return Object.values(response).map(quote => quote.quote)
+        return quoteService.getQuotes(['SPY', 'DIA', 'IWM'])
       } catch (e) {
+        // TODO: Fix code smell
         logger.error(`Error: ${e.message}`)
         return null
       }
     },
   },
   Quote: {
-    id: parent => {
-      return parent.symbol
-    },
+    id: parent => parent.symbol
   },
   Subscription: {
     getQuotes: {
@@ -32,8 +31,15 @@ const resolvers: IResolvers = {
         }
       },
       subscribe: (_, args: { symbols: [string] }) => {
-        const topics = args.symbols.map((arg: string) => `MARKET_UPDATE.${arg}`)
-        return pubsub.asyncIterator(topics)
+        logger.debug(`Subscribe quote updates for ${args.symbols}`)
+        quoteService.subscribeQuotes(args.symbols)
+        
+        const result = pubsub.asyncIterator(args.symbols.map(symbol => quoteService.getQuoteTopic(symbol)))
+        
+        return withCancel(result, () => {
+          logger.debug(`Unsubscribe quote updates for ${args.symbols}`)
+          quoteService.unsubscribeQuotes(args.symbols)
+        })
       },
     },
   },

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from 'apollo-server'
 import { MarketSegments } from '../ref-data/RefData.schema'
 
 export interface SearchResultSchema {

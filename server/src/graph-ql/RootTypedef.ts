@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express'
+import { gql } from 'apollo-server'
 import companySchema from './company/Company.schema'
 import cryptoSchema from './crypto/Crypto.schema'
 import fxSchema from './fx/Fx.schema'
