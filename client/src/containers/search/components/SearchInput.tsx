@@ -31,7 +31,8 @@ const searchResultToOptionString = (item: SearchResult | null): string => {
 }
 
 const generateHighlightedText = (text: string, searchTerm: string) => {
-  const splitText = text.split(new RegExp(`(${searchTerm})`, 'gi'))
+  const searchInput = searchTerm.replace(/[^a-zA-Z ]/g, '')
+  const splitText = text.split(new RegExp(`(${searchInput})`, 'gi'))
   return splitText.map((text, i) => (
     <span key={i}>
       {text.toLowerCase() === searchTerm.toLowerCase() ? <SearchResultMatch>{text}</SearchResultMatch> : text}

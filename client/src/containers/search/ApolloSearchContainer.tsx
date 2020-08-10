@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom'
 import apolloClient from '../../apollo/client'
 import AdaptiveLoader from '../../common/AdaptiveLoader'
 import { AppQuery } from '../../common/AppQuery'
-import { AppQueryForceRefetcher } from '../../common/AppQueryForceRetry'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { search as SimpleSearchQuery, searchVariables, search_symbols } from './graphql/types/search'
 import { searchQuery, searchQueryVariables } from './graphql/types/searchQuery'
@@ -104,18 +103,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
               throw new Error('Returned symbol does not match requested symbol.')
             }
           } else {
-            return AppQueryForceRefetcher(
-              result,
-              () => dispatch({ type: SearchContextActionTypes.AttemptRefetchSymbol }),
-              true,
-            ).then((refetcher: number) => {
-              refetchTimeout = refetcher
-              if (refetchTimeout) {
-                return Promise.resolve()
-              } else {
-                throw new Error('Symbol not recognized.')
-              }
-            })
+            throw new Error('Symbol not recognized.')
           }
         })
         .catch(ex => {
