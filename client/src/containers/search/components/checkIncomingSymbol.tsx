@@ -11,7 +11,7 @@ const makeQuery = async (symbol: string, market: MarketSegment) => {
       variables: { id: symbol.toUpperCase(), market: market.toUpperCase() },
     })
     .then(result => {
-      return result.data.symbol
+      return result.data?.symbol
     })
     .catch(() => {
       return null

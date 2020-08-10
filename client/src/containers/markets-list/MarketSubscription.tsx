@@ -1,4 +1,4 @@
-import { useSubscription } from '@apollo/react-hooks'
+import { useSubscription } from '@apollo/client'
 import { onMarketSubscription, onMarketSubscriptionVariables } from './graphql/types/onMarketSubscription'
 import React from 'react'
 import AdaptiveLoader from '../../common/AdaptiveLoader'

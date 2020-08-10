@@ -7,7 +7,7 @@ import { mediaQuery } from 'rt-theme/mediaQueries'
 import { MarketQuery } from './graphql/types/MarketQuery'
 
 const ApolloMarketsListContainer = () => {
-  const onMarketQueryResults: (data: MarketQuery) => JSX.Element = ({ markets }) => {
+  const onMarketQueryResults = ({ markets }: MarketQuery) => {
     return (
       <MarketList>
         {markets.map(market => (

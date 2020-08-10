@@ -167,6 +167,7 @@ export const NewsGridArea = styled.div`
   align-content: baseline;
   grid-area: News;
   width: ${pxToRems(350)};
+  max-width: ${pxToRems(350)};
   padding: 0 ${pxToRems(16)};
   background-color: ${({ theme }) => theme.secondary.coreSecondary2};
   grid-row: 1/5;
@@ -178,6 +179,7 @@ export const NewsGridArea = styled.div`
     grid-template-columns: 1fr 1fr 1fr;
     grid-row: 3;
     width: 100%;
+    max-width: 100%;
   }
   @media ${mediaQuery.tabletS} {
     grid-template-columns: 1fr 1fr;
