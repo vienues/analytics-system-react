@@ -26,8 +26,6 @@ import 'ress'
  * benefit between maintainence, functional guarantees, and
  * trade offs in initial load times.
  */
-import 'typeface-lato'
-import 'typeface-montserrat'
 import 'typeface-merriweather'
 import 'typeface-roboto'
 

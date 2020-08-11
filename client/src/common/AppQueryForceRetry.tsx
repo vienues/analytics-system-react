@@ -49,14 +49,6 @@ const checkQueryResultErrors = (result: any) => {
     .includes(APOLLO_QUERY_ERROR_MESSAGE_FOUR_TWO_NINE)
 }
 
-export const AppQueryForceRefetcher = (result: any, handler: Function, override: Boolean) => {
-  return getForceQuerySettings().then(({ isSandbox }) => {
-    if ((override || isSandbox) && checkQueryResultErrors(result))
-      return setTimeout(handler, APOLLO_QUERY_FORCE_RETRY_INTERVAL_DURATION)
-    return 0
-  })
-}
-
 export const AppQueryForcePoller: React.FunctionComponent<IProps> = ({
   children,
   pollingIndicator,

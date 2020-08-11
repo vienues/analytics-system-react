@@ -3,7 +3,7 @@ import data from '../../mock-data/currencySymbols.json'
 import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
 import { MarketSegments } from '../ref-data/RefData.schema'
 import { RxStomp, RxStompRPC } from '@stomp/rx-stomp'
-import { map, tap, take, share } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
 

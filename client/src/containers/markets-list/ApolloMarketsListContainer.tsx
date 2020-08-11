@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 import { AppQuery } from '../../common/AppQuery'
 import MarketsConnection from './graphql/MarketConnection.graphql'
 import MarketSubscription from './MarketSubscription'
 import { mediaQuery } from 'rt-theme/mediaQueries'
 import { MarketQuery } from './graphql/types/MarketQuery'
+import { SearchContext } from 'containers/search/SearchContext'
 
 const ApolloMarketsListContainer = () => {
+  const { currentSymbol } = useContext(SearchContext)
   const onMarketQueryResults = ({ markets }: MarketQuery) => {
+    if (!currentSymbol) {
+      return null
+    }
     return (
       <MarketList>
         {markets.map(market => (
