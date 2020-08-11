@@ -4,6 +4,12 @@ import { default as dataCard } from './DataCard'
 import { fonts } from 'rt-theme/fonts'
 import { pxToRems } from 'utils'
 import { mediaQuery } from 'rt-theme/mediaQueries'
+
+interface MainLayoutProps {
+  hasNoSearch?: boolean
+  hasSearchFocus?: boolean
+}
+
 export const DataCard = dataCard
 
 export const DataContents = styled.div`
@@ -200,7 +206,7 @@ export const MainGridArea = styled.div`
   }
 `
 
-export const MainLayoutWrapper = styled.div<{ hasNoSearch?: boolean }>`
+export const MainLayoutWrapper = styled.div<MainLayoutProps>`
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: auto 1fr;
@@ -208,6 +214,9 @@ export const MainLayoutWrapper = styled.div<{ hasNoSearch?: boolean }>`
   @media ${mediaQuery.tabletL} {
     grid-template-columns: none;
     grid-template-rows: ${({ hasNoSearch }) => (hasNoSearch ? 'auto auto 1fr' : 'auto 1fr')};
+  }
+  @media ${mediaQuery.mobile} {
+    grid-template-rows: ${({ hasSearchFocus }) => (hasSearchFocus ? 'auto auto 1fr' : 'auto 1fr 1fr')};
   }
 `
 

@@ -1,0 +1,1 @@
+export { useSearchFocus } from './useSearchFocus'

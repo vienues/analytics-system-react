@@ -9,6 +9,7 @@ import AppBar from './AppBar'
 import { CurrentSymbolLayout } from './CurrentSymbolLayout'
 import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
 import { MarketSegment } from 'containers/global-types'
+import { useSearchFocus } from 'hooks'
 
 const SESSION = 'PWABanner'
 
@@ -16,6 +17,7 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
   const [banner, setBanner] = useState<string>(sessionStorage.getItem(SESSION) || PWABanner.NotSet)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const { currentSymbol } = useContext(SearchContext)
+  const { isFocused } = useSearchFocus()
 
   type Platform = AsyncReturnType<typeof getPlatformAsync>
   const [platform, setPlatform] = useState<Platform>()
@@ -59,7 +61,7 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
 
   return (
     <PlatformProvider value={platform}>
-      <MainLayoutWrapper hasNoSearch={!currentSymbol}>
+      <MainLayoutWrapper hasNoSearch={!currentSymbol} hasSearchFocus={isFocused}>
         <PWAInstallBanner
           banner={banner}
           updateBanner={updateBanner}

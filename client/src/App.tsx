@@ -12,6 +12,7 @@ import GlobalStyle from './rt-theme/globals'
 import { ThemeProvider } from './rt-theme/ThemeContext'
 import { PWAToolbar } from 'containers/main-layout/PWAInstallPrompt'
 import { FDC3Provider } from 'ra-platforms/fdc3'
+import { FocusProvider } from 'containers/search/FocusContext'
 
 library.add(fasLightBulb, farLightBulb)
 
@@ -20,19 +21,21 @@ const App = () => {
     <ApolloProvider client={apolloClient}>
       <GlobalStyle />
       <ThemeProvider>
-        <FDC3Provider>
-          <GlobalScrollbarStyle />
-          <ParentContainer>
-            <PWAToolbar />
-            <BrowserRouter>
-              <Switch>
-                {Object.keys(RouterHelpers.RootRouterItems).map(route => (
-                  <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
-                ))}
-              </Switch>
-            </BrowserRouter>
-          </ParentContainer>
-        </FDC3Provider>
+        <FocusProvider>
+          <FDC3Provider>
+            <GlobalScrollbarStyle />
+            <ParentContainer>
+              <PWAToolbar />
+              <BrowserRouter>
+                <Switch>
+                  {Object.keys(RouterHelpers.RootRouterItems).map(route => (
+                    <Route key={route} exact={true} path={route} component={RouterHelpers.RenderRootRouterElement} />
+                  ))}
+                </Switch>
+              </BrowserRouter>
+            </ParentContainer>
+          </FDC3Provider>
+        </FocusProvider>
       </ThemeProvider>
     </ApolloProvider>
   )
