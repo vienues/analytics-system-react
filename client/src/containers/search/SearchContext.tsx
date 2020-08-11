@@ -47,14 +47,11 @@ const reducer: React.Reducer<IState, IAction> = (state, action) => {
   }
 }
 
-const SearchContext = createContext<IProvide>(initialState)
-const SearchContextConsumer = SearchContext.Consumer
+export const SearchContext = createContext<IProvide>(initialState)
 
-const SearchContextProvider: React.FunctionComponent = props => {
+export const SearchContextProvider: React.FunctionComponent = props => {
   const [state, dispatch] = useReducer<React.Reducer<IState, IAction>>(reducer, initialState)
   const value: IProvide = { ...state, dispatch }
 
   return <SearchContext.Provider value={value}>{props.children}</SearchContext.Provider>
 }
-
-export { SearchContext, SearchContextConsumer, SearchContextProvider }

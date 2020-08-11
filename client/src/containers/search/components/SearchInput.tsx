@@ -1,10 +1,11 @@
 import Downshift, { GetItemPropsOptions } from 'downshift'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { search_symbols as SearchResult } from '../graphql/types/search'
 
 import { fonts } from 'rt-theme/fonts'
 import styled from 'styled-components/macro'
 import { MarketSegment } from 'containers/global-types'
+import { useSearchFocus } from 'hooks'
 interface ISearchBarProps {
   items: SearchResult[]
   initialItem: SearchResult | null
@@ -48,6 +49,7 @@ const SearchInput: React.FC<ISearchBarProps> = ({
   onTextChange,
   currentText,
 }) => {
+  const { setFocus } = useSearchFocus()
   const renderItems = (getItemProps: (options: GetItemPropsOptions<SearchResult>) => any) => {
     if (items.length === 0) {
       return <SearchResultNoItem>No results found...</SearchResultNoItem>
@@ -83,6 +85,14 @@ const SearchInput: React.FC<ISearchBarProps> = ({
     })
   }
 
+  const onInputFocus = useCallback(() => {
+    setFocus(true)
+  }, [setFocus])
+
+  const onInputBlur = useCallback(() => {
+    setFocus(false)
+  }, [setFocus])
+
   return (
     <Downshift
       selectedItem={initialItem}
@@ -95,9 +105,9 @@ const SearchInput: React.FC<ISearchBarProps> = ({
         return (
           <SearchWrapper {...getRootProps()}>
             <input
-              {...getInputProps({ placeholder: placeholder })}
+              {...getInputProps({ placeholder: placeholder, onFocus: onInputFocus, onBlur: onInputBlur })}
               style={{ width: '100%' }}
-              autoFocus={true}
+              autoFocus={false}
               spellCheck={false}
             />
             {isOpen ? <SearchResults {...getMenuProps()}>{renderItems(getItemProps)}</SearchResults> : null}

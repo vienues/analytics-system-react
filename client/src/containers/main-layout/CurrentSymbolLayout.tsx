@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Route } from 'react-router'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import {
@@ -10,16 +10,16 @@ import {
 } from '../../common/StyledComponents'
 import { RouterHelpers } from '../../helpers'
 import { Search } from '../index'
-import { SearchContext } from '../search/SearchContext'
 import Footer from './Footer'
 import { MarketSegment } from 'containers/global-types'
 import { PriceTicker } from 'containers/price-ticker'
+import { useSearch } from 'hooks'
 
 export const CurrentSymbolLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = ({
   id,
   market,
 }) => {
-  const { currentSymbol, errorMessage, previousSearch } = useContext(SearchContext)
+  const { currentSymbol, errorMessage, previousSearch } = useSearch()
 
   const renderedErrorMessage: JSX.Element | null = useMemo(() => {
     if (!(currentSymbol && currentSymbol.id) && id) {
