@@ -1,22 +1,22 @@
 import { getPlatformAsync, PlatformProvider } from 'ra-platforms'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import { AsyncReturnType } from 'utils'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { MainLayoutWrapper } from '../../common/StyledComponents'
-import { SearchContext, SearchContextProvider } from '../search/SearchContext'
+import { SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
 import { CurrentSymbolLayout } from './CurrentSymbolLayout'
 import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
 import { MarketSegment } from 'containers/global-types'
-import { useSearchFocus } from 'hooks'
+import { useSearchFocus, useSearch } from 'hooks'
 
 const SESSION = 'PWABanner'
 
 const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: MarketSegment }> = props => {
   const [banner, setBanner] = useState<string>(sessionStorage.getItem(SESSION) || PWABanner.NotSet)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const { currentSymbol } = useContext(SearchContext)
+  const { currentSymbol } = useSearch()
   const { isFocused } = useSearchFocus()
 
   type Platform = AsyncReturnType<typeof getPlatformAsync>

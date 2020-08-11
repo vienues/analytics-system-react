@@ -1,9 +1,9 @@
-import { default as React, useContext, useRef, useLayoutEffect } from 'react'
+import { default as React, useRef, useLayoutEffect } from 'react'
 import styled from 'styled-components/macro'
 import { pxToRems } from 'utils'
-import { SearchContext } from '../search/SearchContext'
 import { mediaQuery, screenSize } from 'rt-theme/mediaQueries'
 import { LogoTextSide, LogoTextBottom } from 'assets/logos'
+import { useSearch } from 'hooks'
 
 const LogoWrapper = styled.div`
   margin: ${pxToRems(32)} 0;
@@ -25,7 +25,7 @@ const Sidebar = styled.div<{ hasPreviousSearch: boolean }>`
 `
 
 const AppBar = () => {
-  const { previousSearch } = useContext(SearchContext)
+  const { previousSearch } = useSearch()
   const logoBottomRef = useRef<HTMLDivElement>(null)
   const logoSideRef = useRef<HTMLDivElement>(null)
 

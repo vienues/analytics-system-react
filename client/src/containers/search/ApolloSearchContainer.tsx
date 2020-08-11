@@ -1,5 +1,5 @@
 import { usePlatform } from 'ra-platforms'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router'
 import { withRouter } from 'react-router-dom'
@@ -12,11 +12,11 @@ import { searchQuery, searchQueryVariables } from './graphql/types/searchQuery'
 import { SearchInput } from './components'
 import SearchConnection from './graphql/SearchConnection.graphql'
 import SimpleSearchConnection from './graphql/SimpleSearchConnection.graphql'
-import { SearchContext, SearchContextActionTypes } from './SearchContext'
+import { SearchContextActionTypes } from './SearchContext'
 import { SearchErrorCard } from './SearchErrorCard'
 import { MarketSegment } from 'containers/global-types'
-import { useFDC3Context } from 'ra-platforms/fdc3'
 import { checkIncomingSymbol } from './components'
+import { useSearch, useFDC3Context } from 'hooks'
 
 interface IProps extends IApolloContainerProps {
   url?: string
@@ -28,7 +28,7 @@ type Props = RouteComponentProps & IProps
 const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, url, market }) => {
   const [currentText, setCurrentText] = useState<string>('')
 
-  const { currentSymbol, refetchAttempts, searching, dispatch } = useContext(SearchContext)
+  const { currentSymbol, refetchAttempts, searching, dispatch } = useSearch()
 
   const placeholderText = 'Enter a stock, symbol, or currency pair...'
 
