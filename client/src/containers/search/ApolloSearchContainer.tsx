@@ -83,7 +83,6 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   }, [dispatch, id])
 
   useEffect(() => {
-    let refetchTimeout: number = 0
     if (searching && dispatch && id) {
       apolloClient
         .query<searchQuery, searchQueryVariables>({
@@ -111,16 +110,10 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
           dispatch({
             type: SearchContextActionTypes.UnrecognizedSymbol,
             payload: {
-              errorMessage: <SearchErrorCard id={id} market={market} foundSymbol={undefined} onClick={handleChange} />,
+              errorMessage: <SearchErrorCard id={id} market={market} onClick={handleChange} />,
             },
           })
         })
-    }
-    return () => {
-      if (!searching && refetchTimeout) {
-        clearTimeout(refetchTimeout)
-        refetchTimeout = 0
-      }
     }
   }, [dispatch, history, id, market, refetchAttempts, searching, url, handleChange])
 

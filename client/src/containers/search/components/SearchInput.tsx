@@ -31,7 +31,7 @@ const searchResultToOptionString = (item: SearchResult | null): string => {
 }
 
 const generateHighlightedText = (text: string, searchTerm: string) => {
-  const searchInput = searchTerm.replace(/[^a-zA-Z ]/g, '')
+  const searchInput = searchTerm.replace(/[^a-zA-Z0-9]/g, '')
   const splitText = text.split(new RegExp(`(${searchInput})`, 'gi'))
   return splitText.map((text, i) => (
     <span key={i}>
