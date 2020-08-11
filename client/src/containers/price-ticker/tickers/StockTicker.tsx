@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { IApolloContainerProps } from 'common/IApolloContainerProps'
-import { useSubscription } from '@apollo/react-hooks'
+import { useSubscription } from '@apollo/client'
 import { onStockPriceSubscription, onStockPriceSubscriptionVariables } from '../graphql/types/onStockPriceSubscription'
 import StockPriceSubscription from '../graphql/StockPriceSubscription.graphql'
 import AdaptiveLoader from 'common/AdaptiveLoader'

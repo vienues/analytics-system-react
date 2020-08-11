@@ -5,7 +5,7 @@
   development environment.
  */
 import React, { useEffect, useMemo, useState } from 'react'
-import { QueryResult } from '@apollo/react-common'
+import { QueryResult } from '@apollo/client'
 import { AppQueryDefaultLoadingIndicator } from './AppQuery'
 import { getUri } from 'helpers/uriHelper'
 

@@ -18,10 +18,11 @@ export const FDC3Provider: React.FC = ({ children }) => {
 
     if (typeof fdc3 !== 'undefined') {
       fdc3.addContextListener(setContext)
+      return () => {
+        fdc3.addContextListener(setContext).unsubscribe()
+      }
     }
-    return () => {
-      fdc3.addContextListener(setContext).unsubscribe()
-    }
+    return () => null
   }, [])
 
   return <FDC3Context.Provider value={{ fdc3Symbol }}>{children}</FDC3Context.Provider>

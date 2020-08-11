@@ -183,6 +183,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
     <AppQuery<SimpleSearchQuery, searchVariables>
       query={SimpleSearchConnection}
       variables={{ text: currentText.toUpperCase(), marketSegment: MarketSegment.STOCK }}
+      renderNoData={() => null}
     >
       {(stockSearch: SimpleSearchQuery) => {
         return (

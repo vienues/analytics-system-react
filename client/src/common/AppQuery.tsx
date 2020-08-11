@@ -1,6 +1,4 @@
-import { QueryResult } from '@apollo/react-common'
-import { useQuery } from '@apollo/react-hooks'
-import { NetworkStatus } from 'apollo-client'
+import { QueryResult, useQuery, NetworkStatus } from '@apollo/client'
 import { DocumentNode } from 'graphql'
 import React, { ReactNode } from 'react'
 import styled from 'styled-components/macro'

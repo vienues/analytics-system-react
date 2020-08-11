@@ -1,4 +1,4 @@
-import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/client'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faLightbulb as farLightBulb } from '@fortawesome/free-regular-svg-icons'
 import { faLightbulb as fasLightBulb } from '@fortawesome/free-solid-svg-icons'

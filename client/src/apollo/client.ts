@@ -1,45 +1,34 @@
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { from, split } from 'apollo-link'
-import { HttpLink } from 'apollo-link-http'
-import { WebSocketLink } from 'apollo-link-ws'
+import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from 'apollo-utilities'
 import { getWebsocketUri, getUri } from 'helpers/uriHelper'
+import { ApolloClient, from, split, HttpLink, InMemoryCache } from '@apollo/client'
 
 const cache = new InMemoryCache()
 
-interface IDefinition {
-  kind: string
-  operation?: string
-}
+const wsLink = new WebSocketLink({
+  uri: getWebsocketUri('/subscriptions'),
+  options: {
+    reconnect: true,
+  },
+})
 
-const links = [
-  split(
-    // split based on operation type
-    ({ query }) => {
-      const { kind, operation }: IDefinition = getMainDefinition(query)
-      return kind === 'OperationDefinition' && operation === 'subscription'
-    },
-    new WebSocketLink({
-      options: {
-        reconnect: true,
-      },
-      uri: getWebsocketUri('/subscriptions'),
-    }),
-    new HttpLink({ uri: getUri('/graphql') }),
-  ),
-]
+const httpLink = new HttpLink({
+  uri: getUri('/graphql'),
+})
+
+const links = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query)
+    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription'
+  },
+  wsLink,
+  httpLink,
+)
 
 const client = new ApolloClient({
   cache,
   connectToDevTools: true,
-  link: from(links),
-})
-
-cache.writeData({
-  data: {
-    symbol: '',
-  },
+  link: from([links]),
 })
 
 export default client
