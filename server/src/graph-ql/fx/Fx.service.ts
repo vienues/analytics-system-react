@@ -92,7 +92,8 @@ export default class {
         .pipe(
           map(message => {
             return JSON.parse(message.body)
-          })
+          }),
+          tap(() => logger.info(`price update FX_CURRENT_PRICING.${id}`)),
         )
         .subscribe((value: PriceUpdates) => {
           pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
