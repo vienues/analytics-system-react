@@ -10,7 +10,7 @@ export default class OpenfinPlatform extends PlatformBase {
   }
 
   readonly symbolSelected = (symbol: search_symbols) => {
-    fdc3.broadcast({
+    fdc3?.broadcast({
       type: 'fdc3.instrument',
       name: symbol.name,
       id: {
