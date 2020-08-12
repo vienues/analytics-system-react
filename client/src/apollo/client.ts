@@ -6,7 +6,7 @@ import { ApolloClient, from, split, HttpLink, InMemoryCache } from '@apollo/clie
 const cache = new InMemoryCache()
 
 const wsLink = new WebSocketLink({
-  uri: getWebsocketUri('/subscriptions'),
+  uri: getWebsocketUri('/graphql'),
   options: {
     reconnect: true,
   },

@@ -21,22 +21,12 @@ spec:
               serviceName: analytics-client
               servicePort: 3000
 
-          - path: /subscriptions
-            backend:
-              serviceName: analytics-server
-              servicePort: 4000
-
           - path: /graphql
             backend:
               serviceName: analytics-server
               servicePort: 4000
 
-          - path: /healthz
-            backend:
-              serviceName: analytics-server
-              servicePort: 4000
-
-          - path: /iexsandbox
+          - path: /.well-known/apollo/server-health
             backend:
               serviceName: analytics-server
               servicePort: 4000
