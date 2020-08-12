@@ -8,6 +8,7 @@ import refSchema from './ref-data/RefData.schema'
 import tickSchema from './tick/Tick.schema'
 import stockSchema from './stock/Stock.schema'
 import statsSchema from './stats/Stats.schema'
+import configSchema from './config/Config.schema'
 
 const baseSchema = gql`
   scalar Time
@@ -27,7 +28,8 @@ const baseSchema = gql`
     symbols(text: String!, marketSegment: MarketSegment!): [SearchResult!]!
     stats(id: String!): Stats!
     stock(id: ID = ""): Stock!
-    search(text: String!): [SearchResult!]!
+    search(text: String!): [SearchResult!]!,
+    config: Config!
   }
 
   type Subscription {
@@ -48,4 +50,5 @@ export default [
   tickSchema,
   stockSchema,
   statsSchema,
+  configSchema
 ]

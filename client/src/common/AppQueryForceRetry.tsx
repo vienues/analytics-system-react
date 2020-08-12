@@ -7,7 +7,9 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { QueryResult } from '@apollo/client'
 import { AppQueryDefaultLoadingIndicator } from './AppQuery'
-//import { getUri } from 'helpers/uriHelper'
+import apolloClient from '../apollo/client'
+import ConfigQuery from 'containers/config/Config.graphql'
+import { Config } from 'containers/config/types/Config'
 
 interface IProps {
   pollingIndicator?: JSX.Element
@@ -30,9 +32,14 @@ let forceQuerySettings: ISettings = {
 async function getForceQuerySettings() {
   if (forceQuerySettings.isSandbox === null) {
     try {
-      // const response = await fetch(getUri('/iexsandbox'), { cache: 'force-cache', method: 'POST' })
-      // const json = await response.json()
-      forceQuerySettings.isSandbox = true
+      const result = await apolloClient.query<Config>({
+        errorPolicy: 'all',
+        query: ConfigQuery
+      })
+      forceQuerySettings.isSandbox = result.data?.config.isSandbox ?? null
+      if (forceQuerySettings.isSandbox) {
+        console.info('Server is running in sandbox mode, will retry requests')
+      }
     } catch (ex) {
       console.error(ex)
     }
