@@ -9,7 +9,7 @@ import refResolver from './ref-data/RefData.resolver'
 import stockResolver from './stock/Stock.resolver'
 import tickResolver from './tick/Tick.resolver'
 import statsResolver from './stats/Stats.resolver'
-import configResolver from './config/config.resolver'
+import configResolver from './config/Config.resolver'
 import mergeResolvers from './mergeResolvers'
 
 const rootResolver: IResolvers = {
