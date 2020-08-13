@@ -37,7 +37,7 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
-    "openfin": "wait-on -l http://localhost:3000/openfin/app.json && openfin -l -c http://localhost:3000/openfin/app.json"
+    "openfin": "wait-on -l http://localhost:3005/openfin/app.json && openfin -l -c http://localhost:3005/openfin/app.json"
   },
   "devDependencies": {
     "@types/jest": "24.9.0",

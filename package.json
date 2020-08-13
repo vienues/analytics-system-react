@@ -25,7 +25,7 @@
     "typescript": "^3.9.5"
   },
   "scripts": {
-    "start": "npm run bootstrap && lerna run --parallel start -- --port 8080",
+    "start": "npm run bootstrap && lerna run --parallel start",
     "offline-start": "set INSIGHTS_OFFLINE=true && npm run start",
     "bootstrap": "lerna bootstrap",
     "clean": "npm install && lerna clean --yes",
