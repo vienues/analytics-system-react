@@ -37,7 +37,7 @@ Once the dependencies are install start the client and server using the start co
 
         [ReactiveAnalytics] $ npm start
 
-This will open up a browser window to [http://localhost:3000](http://localhost:3000) for the client interface, and a GraphQL server on port 4000.
+This will open up a browser window to [http://localhost:3005](http://localhost:3005) for the client interface, and a GraphQL server on port 4000.
 
 ### Data connection
 
@@ -71,11 +71,8 @@ To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.
 
 - [Lerna](https://github.com/lerna/lerna) - Multi-package manager to simplify the codebase in a single repository
 - [Apollo GraphQL](https://www.apollographql.com/) - GraphQL framework to allow rapid and reliable development of client-server communication
-- [Express](https://expressjs.com/) - Web server for hosting the GraphQL HTTP endpoints
-- [subscriptions-transport-ws](https://github.com/apollographql/subscriptions-transport-ws) - WebSocket communication for GraphQL
-- [TypeGraphQL](https://typegraphql.com/) - Generate GraphQL schemas from TypeScript classes
 - [React](https://reactjs.org/) - Interface framework
-- [Styled-components](https://www.styled-components.com/) - Interface styling framework
+- [Styled Components](https://www.styled-components.com/) - Interface styling framework
 
 ## Useful developer add-ons
 
@@ -86,7 +83,6 @@ When working with the Adaptive Insight repo, there are many add-ons that make de
 - **Apollo GraphQL** - Rich editor support for GraphQL client and server development that seamlessly integrates with the Apollo platform
 - **Debugger for Chrome** - Debug your JavaScript code in the Chrome browser, or any other target that supports the Chrome Debugger protocol.
 - **ESLint** - Integrates ESLint JavaScript into VS Code.
-- **jshint** - Integrates JSHint into VS Code. JSHint is a linter for JavaScript
 - **JSON to TS** - Convert JSON object to typescript interfaces
 - **markdownlint** - Markdown linting and style checking for Visual Studio Code
 - **vscode-styled-components** - Syntax highlighting for styled-components

@@ -1,13 +1,11 @@
 import { Quote } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
-import getDataSource from '../../connectors'
+import * as iex from 'iexcloud_api_wrapper'
 import { IIexBatchQuote } from '../../types'
 import { Subject, NEVER, timer } from 'rxjs'
 import { switchMap, flatMap, tap } from 'rxjs/operators'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
-
-const iex = getDataSource(process.env.INSIGHTS_OFFLINE)
 
 interface IMarketSubscription {
   [symbol: string]: {
@@ -17,23 +15,26 @@ interface IMarketSubscription {
 
 @Service()
 export default class {
-
   private currentSymbols: IMarketSubscription = {}
-  private subject = new Subject<string[]>();
+  private subject = new Subject<string[]>()
 
   constructor() {
-    this.subject.pipe(
-      switchMap(symbols => symbols.length > 0 ? timer(500, 3000) : NEVER, (symbols, _) => symbols),
-      tap(symbols => logger.debug(`Get quotes from IEX Cloud for ${symbols}`)),
-      flatMap(symbols => this.getQuotes(symbols)),
-      flatMap(quotes => quotes)
-    )
+    this.subject
+      .pipe(
+        switchMap(
+          symbols => (symbols.length > 0 ? timer(500, 3000) : NEVER),
+          (symbols, _) => symbols,
+        ),
+        tap(symbols => logger.debug(`Get quotes from IEX Cloud for ${symbols}`)),
+        flatMap(symbols => this.getQuotes(symbols)),
+        flatMap(quotes => quotes),
+      )
       .subscribe({
         next: quote => {
           logger.debug(`Publishing quote for ${this.getQuoteTopic(quote.symbol)}: ${quote.latestPrice}`)
           pubsub.publish(this.getQuoteTopic(quote.symbol), quote)
         },
-        error: err => logger.error(`Get quotes error: ${err}`)
+        error: err => logger.error(`Get quotes error: ${err}`),
       })
   }
 
@@ -42,7 +43,9 @@ export default class {
   }
 
   public async getQuotes(symbols: string[]): Promise<Quote[]> {
-    const batchQuotes: IIexBatchQuote = await iex.iexApiRequest(`/stock/market/batch?symbols=${symbols.join(',')}&types=quote`)
+    const batchQuotes: IIexBatchQuote = await iex.iexApiRequest(
+      `/stock/market/batch?symbols=${symbols.join(',')}&types=quote`,
+    )
     return symbols.map(symbol => batchQuotes[symbol].quote)
   }
 
@@ -61,7 +64,6 @@ export default class {
     this.subject.next(Object.keys(this.currentSymbols))
   }
 
-
   public subscribeQuotes(symbols: string[]) {
     symbols.forEach(symbol => {
       if (this.currentSymbols[symbol]) {
@@ -72,7 +74,6 @@ export default class {
         }
       }
     })
-
 
     this.subject.next(Object.keys(this.currentSymbols))
   }

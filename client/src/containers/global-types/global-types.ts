@@ -9,7 +9,6 @@
 
 export enum MarketSegment {
   BOND = "BOND",
-  CRYPTO = "CRYPTO",
   FUTURE = "FUTURE",
   FX = "FX",
   INDEX = "INDEX",

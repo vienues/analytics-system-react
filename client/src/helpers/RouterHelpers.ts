@@ -3,7 +3,7 @@ import React from 'react'
 import { RouteComponentProps } from 'react-router'
 import { Company, MainLayout, News, Peers, Search, Stats } from '../containers'
 import { StockHistoryContainer } from '../containers/history/StockHistoryContainer'
-import { Cryptocurrencies, Currencies, Stocks } from '../containers/main-layout/Markets'
+import { Currencies, Stocks } from '../containers/main-layout/Markets'
 
 interface IComponentElement {
   component: React.ElementType
@@ -64,7 +64,6 @@ export default class RouterHelper {
   private static mainRouterItems: IComponentWithProps = {
     '/': { component: Stocks },
     '/bond/:id?': { component: News },
-    '/crypto/:id?': { component: Cryptocurrencies },
     '/fx/:from?:to?': { component: Currencies },
     '/future/:id?': { component: News },
     '/index/:id?': { component: News },
