@@ -1,6 +1,5 @@
 import { gql } from 'apollo-server'
 import companySchema from './company/Company.schema'
-import cryptoSchema from './crypto/Crypto.schema'
 import fxSchema from './fx/Fx.schema'
 import newsSchema from './news/News.schema'
 import quoteSchema from './quote/Quote.schema'
@@ -8,7 +7,6 @@ import refSchema from './ref-data/RefData.schema'
 import tickSchema from './tick/Tick.schema'
 import stockSchema from './stock/Stock.schema'
 import statsSchema from './stats/Stats.schema'
-import configSchema from './config/Config.schema'
 
 const baseSchema = gql`
   scalar Time
@@ -20,16 +18,13 @@ const baseSchema = gql`
     company(id: String!): Company!
     quote(id: ID = ""): Quote!
     markets: [Quote!]!
-    crypto(symbol: String!): Crypto!
-    cryptoSymbols(text: String!): [SearchResult!]!
     getPriceHistory(id: String!): [FxPricing!]!
     news(id: ID = "", last: Int = 0): [News!]!
     symbol(market: String!, id: String!): SearchResult!
     symbols(text: String!, marketSegment: MarketSegment!): [SearchResult!]!
     stats(id: String!): Stats!
     stock(id: ID = ""): Stock!
-    search(text: String!): [SearchResult!]!,
-    config: Config!
+    search(text: String!): [SearchResult!]!
   }
 
   type Subscription {
@@ -42,7 +37,6 @@ const baseSchema = gql`
 export default [
   baseSchema,
   companySchema,
-  cryptoSchema,
   fxSchema,
   newsSchema,
   quoteSchema,
@@ -50,5 +44,4 @@ export default [
   tickSchema,
   stockSchema,
   statsSchema,
-  configSchema
 ]
