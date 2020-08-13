@@ -3,6 +3,7 @@ import logger from '../services/logger'
 const ERROR_MESSAGE = 'Max retries hit for query to IEX cloud'
 const MIN_INTERVAL = 500
 const MAX_INTERVAL = 1200
+const MAX_RETRIES = 5
 
 const randomInterval = (min: number, max: number) => {
   return Math.floor(Math.random() * max) + min
@@ -10,7 +11,7 @@ const randomInterval = (min: number, max: number) => {
 
 export async function queryResolver<T>(
   fn: () => Promise<T>,
-  retries: number = 5,
+  retries: number = MAX_RETRIES,
   interval: number = randomInterval(MIN_INTERVAL, MAX_INTERVAL),
 ): Promise<T> {
   try {

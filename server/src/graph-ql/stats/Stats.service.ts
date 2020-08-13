@@ -1,4 +1,3 @@
-import { KeyStats } from 'iexcloud_api_wrapper'
 import { Service } from 'typedi'
 import getDataSource from '../../connectors'
 import { queryResolver } from '../../utils/queryResolver'

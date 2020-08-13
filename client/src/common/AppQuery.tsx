@@ -40,8 +40,6 @@ interface IAppQueryProps<Data, Variables> {
 export const AppQuery = <Data, Variables>({ query, variables, ...props }: IAppQueryProps<Data, Variables>) => {
   const result = useQuery(query, { variables })
 
-  console.log(result)
-
   const errorMessage = (
     <span>
       Something went wrong
