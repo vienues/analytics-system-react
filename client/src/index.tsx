@@ -10,10 +10,13 @@ window.addEventListener('beforeinstallprompt', e => {
   window.beforeInstallPromptEvent = e
 })
 
-ReactGA.initialize('UA-46320965-5')
+ReactGA.initialize('UA-46320965-8')
 
 async function init() {
   const env = getEnvironment()
+  const envSuffix = env === 'demo' ? '' : ` (${env.toUpperCase()})`
+
+  document.title = `Reactive Analytics${envSuffix}`
 
   ReactGA.set({
     dimension3: env,
