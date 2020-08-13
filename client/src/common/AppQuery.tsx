@@ -1,9 +1,8 @@
-import { QueryResult, useQuery, NetworkStatus } from '@apollo/client'
+import { NetworkStatus, QueryResult, useQuery } from '@apollo/client'
 import { DocumentNode } from 'graphql'
 import React, { ReactNode } from 'react'
 import styled from 'styled-components/macro'
 import AdaptiveLoader from '../common/AdaptiveLoader'
-import { AppQueryForcePoller } from './AppQueryForceRetry'
 
 const LoadableStyle = styled.div<{ minWidth?: string; minHeight?: string }>`
   width: 100%;
@@ -41,21 +40,18 @@ interface IAppQueryProps<Data, Variables> {
 export const AppQuery = <Data, Variables>({ query, variables, ...props }: IAppQueryProps<Data, Variables>) => {
   const result = useQuery(query, { variables })
 
+  const errorMessage = (
+    <span>
+      Something went wrong
+      <span />
+    </span>
+  )
+
   const defaultRenderNetworkStatus = (networkStatus: NetworkStatus, _: QueryResult<Data, Variables>) => {
     if (networkStatus === NetworkStatus.loading) {
       return <AppQueryDefaultLoadingIndicator renderLoadingHeight={props.renderLoadingHeight} />
-    }
-    return null
-  }
-
-  const defaultRenderError = (_: Error, queryResult: QueryResult<Data, Variables>) => {
-    if (!queryResult.data || Object.entries(queryResult.data).length === 0) {
-      return (
-        <span>
-          Something went wrong
-          <span />
-        </span>
-      )
+    } else if (networkStatus === NetworkStatus.error) {
+      return errorMessage
     }
     return null
   }
@@ -65,7 +61,7 @@ export const AppQuery = <Data, Variables>({ query, variables, ...props }: IAppQu
   }
 
   const onQueryResults = (queryResult: QueryResult<Data, Variables>) => {
-    const { children, renderNetworkStatus, renderError, renderNoData } = props
+    const { children, renderNetworkStatus, renderNoData } = props
 
     const networkStatusNode = (renderNetworkStatus || defaultRenderNetworkStatus)(
       queryResult!.networkStatus,
@@ -74,12 +70,7 @@ export const AppQuery = <Data, Variables>({ query, variables, ...props }: IAppQu
     if (networkStatusNode) {
       return networkStatusNode
     }
-    const errorNode = queryResult.error
-      ? (renderError || defaultRenderError)(queryResult!.error!, queryResult)
-      : undefined
-    if (errorNode) {
-      return errorNode
-    }
+
     const noDataNode =
       !queryResult.data || Object.entries(queryResult.data).length === 0
         ? (renderNoData || defaultRenderNoData)(queryResult)
@@ -91,9 +82,5 @@ export const AppQuery = <Data, Variables>({ query, variables, ...props }: IAppQu
     return children(queryResult.data!, queryResult)
   }
 
-  return (
-    <AppQueryForcePoller result={result} renderLoadingHeight={props.renderLoadingHeight}>
-      {onQueryResults(result)}
-    </AppQueryForcePoller>
-  )
+  return <>{onQueryResults(result)}</>
 }
