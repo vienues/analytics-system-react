@@ -1,15 +1,14 @@
+import { MarketSegment } from 'containers/global-types'
+import { useSearch, useSearchFocus } from 'hooks'
 import { getPlatformAsync, PlatformProvider } from 'ra-platforms'
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactGA from 'react-ga'
 import { AsyncReturnType } from 'utils'
 import { IApolloContainerProps } from '../../common/IApolloContainerProps'
 import { MainLayoutWrapper } from '../../common/StyledComponents'
-import { SearchContextProvider } from '../search/SearchContext'
 import AppBar from './AppBar'
 import { CurrentSymbolLayout } from './CurrentSymbolLayout'
 import { PWABanner, PWAInstallBanner } from './PWAInstallPrompt'
-import { MarketSegment } from 'containers/global-types'
-import { useSearchFocus, useSearch } from 'hooks'
 
 const SESSION = 'PWABanner'
 
@@ -61,17 +60,15 @@ const MainLayout: React.FunctionComponent<IApolloContainerProps & { market: Mark
 
   return (
     <PlatformProvider value={platform}>
-      <MainLayoutWrapper hasNoSearch={!currentSymbol} hasSearchFocus={isFocused}>
+      <MainLayoutWrapper hasCurrentSymbol={!!currentSymbol} hasSearchFocus={isFocused}>
         <PWAInstallBanner
           banner={banner}
           updateBanner={updateBanner}
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
         />
-        <SearchContextProvider>
-          <AppBar />
-          <CurrentSymbolLayout {...props} />
-        </SearchContextProvider>
+        <AppBar />
+        <CurrentSymbolLayout {...props} />
       </MainLayoutWrapper>
     </PlatformProvider>
   )

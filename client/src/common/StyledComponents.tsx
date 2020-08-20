@@ -6,7 +6,7 @@ import { pxToRems } from 'utils'
 import { mediaQuery } from 'rt-theme/mediaQueries'
 
 interface MainLayoutProps {
-  hasNoSearch?: boolean
+  hasCurrentSymbol?: boolean
   hasSearchFocus?: boolean
 }
 
@@ -213,10 +213,10 @@ export const MainLayoutWrapper = styled.div<MainLayoutProps>`
   height: 100%;
   @media ${mediaQuery.tabletL} {
     grid-template-columns: none;
-    grid-template-rows: ${({ hasNoSearch }) => (hasNoSearch ? 'auto auto 1fr' : 'auto 1fr')};
+    grid-template-rows: ${({ hasSearchFocus, hasCurrentSymbol }) =>
+      hasSearchFocus || hasCurrentSymbol ? 'auto auto 1fr' : 'auto 1fr 1fr'};
   }
   @media ${mediaQuery.mobile} {
-    grid-template-rows: ${({ hasSearchFocus }) => (hasSearchFocus ? 'auto auto 1fr' : 'auto 1fr 1fr')};
   }
 `
 
