@@ -6,6 +6,7 @@ import { Subject, NEVER, timer } from 'rxjs'
 import { switchMap, flatMap, tap } from 'rxjs/operators'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
+import { queryResolver } from '../../utils/queryResolver'
 
 interface IMarketSubscription {
   [symbol: string]: {
@@ -43,9 +44,10 @@ export default class {
   }
 
   public async getQuotes(symbols: string[]): Promise<Quote[]> {
-    const batchQuotes: IIexBatchQuote = await iex.iexApiRequest(
-      `/stock/market/batch?symbols=${symbols.join(',')}&types=quote`,
+    const batchQuotes: IIexBatchQuote = await queryResolver(() =>
+      iex.iexApiRequest(`/stock/market/batch?symbols=${symbols.join(',')}&types=quote`),
     )
+
     return symbols.map(symbol => batchQuotes[symbol].quote)
   }
 

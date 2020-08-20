@@ -37,7 +37,7 @@ export const StockHistoryChart = ({ stock: { id, quote, chart } }: StockHistoryQ
           style={{ alignContent: 'unset', padding: 0 }}
           headingStyle={{ display: 'none' }}
         >
-          <ResponsiveContainer width="99%" height="99%" minHeight={400}>
+          <ResponsiveContainer width="99%" height="99%" minWidth={650} minHeight={400}>
             <LineChart data={chartData} margin={{ left: -25, top: 0, right: 0, bottom: 0 }}>
               <CartesianGrid
                 verticalFill={[
