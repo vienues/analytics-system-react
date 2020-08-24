@@ -27,7 +27,7 @@ export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) =
           style={{ alignContent: 'unset', padding: 0 }}
           headingStyle={{ display: 'none' }}
         >
-          <ResponsiveContainer width="99%" height="99%" minHeight={400}>
+          <ResponsiveContainer width="99%" height="99%" minWidth={650} minHeight={400}>
             <LineChart data={chartData} margin={{ left: 0, top: 0, right: 40, bottom: 0 }}>
               <CartesianGrid
                 verticalFill={[

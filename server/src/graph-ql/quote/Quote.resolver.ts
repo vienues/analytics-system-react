@@ -4,23 +4,18 @@ import { pubsub } from '../../pubsub'
 import { Container } from 'typedi'
 import QuoteService from './Quote.service'
 import { withCancel } from '../../utils/asyncIteratorUtils'
+import { queryResolver } from '../../utils/queryResolver'
 
 const quoteService = Container.get(QuoteService)
 
 const resolvers: IResolvers = {
   Query: {
     markets: async () => {
-      try {
-        return quoteService.getQuotes(['SPY', 'DIA', 'IWM'])
-      } catch (e) {
-        // TODO: Fix code smell
-        logger.error(`Error: ${e.message}`)
-        return null
-      }
+      return queryResolver(() => quoteService.getQuotes(['SPY', 'DIA', 'IWM']))
     },
   },
   Quote: {
-    id: parent => parent.symbol
+    id: parent => parent.symbol,
   },
   Subscription: {
     getQuotes: {
@@ -33,9 +28,9 @@ const resolvers: IResolvers = {
       subscribe: (_, args: { symbols: [string] }) => {
         logger.debug(`Subscribe quote updates for ${args.symbols}`)
         quoteService.subscribeQuotes(args.symbols)
-        
+
         const result = pubsub.asyncIterator(args.symbols.map(symbol => quoteService.getQuoteTopic(symbol)))
-        
+
         return withCancel(result, () => {
           logger.debug(`Unsubscribe quote updates for ${args.symbols}`)
           quoteService.unsubscribeQuotes(args.symbols)
