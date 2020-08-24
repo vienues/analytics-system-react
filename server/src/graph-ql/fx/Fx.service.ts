@@ -1,11 +1,12 @@
+import { RxStomp, RxStompRPC } from '@stomp/rx-stomp'
+import { Subscription } from 'rxjs'
+import { map, tap } from 'rxjs/operators'
 import { Service } from 'typedi'
 import data from '../../mock-data/currencySymbols.json'
-import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
-import { MarketSegments } from '../ref-data/RefData.schema'
-import { RxStomp, RxStompRPC } from '@stomp/rx-stomp'
-import { map, tap } from 'rxjs/operators'
 import { pubsub } from '../../pubsub'
 import logger from '../../services/logger'
+import { MarketSegments } from '../ref-data/RefData.schema'
+import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
 
 interface ISymbolData {
   [key: string]: {
@@ -39,10 +40,11 @@ interface PriceUpdates {
 export default class {
   private rxStomp: RxStomp
   private rxStompRPC: RxStompRPC
-  private currentFX: string[]
+  private fxSubscription: Subscription | null
   constructor() {
-    this.currentFX = []
     this.rxStomp = new RxStomp()
+
+    this.fxSubscription = null
 
     this.rxStompRPC = new RxStompRPC(this.rxStomp)
 
@@ -83,30 +85,31 @@ export default class {
   }
 
   public subscribePriceUpdates(id: string) {
-    if (!this.currentFX?.includes(id)) {
-      this.rxStompRPC
-        .stream({
-          destination: '/amq/queue/pricing.getPriceUpdates',
-          body: JSON.stringify({ payload: { symbol: `${id}` }, Username: 'HHA' }),
+    this.fxSubscription = this.rxStompRPC
+      .stream({
+        destination: '/amq/queue/pricing.getPriceUpdates',
+        body: JSON.stringify({ payload: { symbol: `${id}` }, Username: 'HHA' }),
+      })
+      .pipe(
+        map(message => {
+          return JSON.parse(message.body)
+        }),
+        tap(() => logger.info(`price update FX_CURRENT_PRICING.${id}`)),
+      )
+      .subscribe((value: PriceUpdates) => {
+        pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
+          getFXPriceUpdates: {
+            Bid: value.Bid,
+            Ask: value.Ask,
+            Mid: value.Mid,
+            ValueDate: value.ValueDate,
+            CreationTimestamp: value.CreationTimestamp,
+          },
         })
-        .pipe(
-          map(message => {
-            return JSON.parse(message.body)
-          }),
-          tap(() => logger.info(`price update FX_CURRENT_PRICING.${id}`)),
-        )
-        .subscribe((value: PriceUpdates) => {
-          pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
-            getFXPriceUpdates: {
-              Bid: value.Bid,
-              Ask: value.Ask,
-              Mid: value.Mid,
-              ValueDate: value.ValueDate,
-              CreationTimestamp: value.CreationTimestamp,
-            },
-          })
-        })
-      this.currentFX?.push(id)
-    }
+      })
+  }
+
+  public unsubscribePriceUpdates() {
+    this.fxSubscription?.unsubscribe()
   }
 }
