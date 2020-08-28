@@ -13,7 +13,9 @@ services:
   client:
     build:
       dockerfile: Dockerfile
-      context: ./client
+      context: ./client      
+      args:
+        - ANALYTICS_SERVER_HOST=${ANALYTICS_SERVER_HOST}
     image: eu.gcr.io/adaptive-reactive-analytics/reactive-analytics-client:0.8
     container_name: reactive-analytics-client
     ports:

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from '../../styleguide/index'
 import numeral from 'numeral'
-import { colors } from '@adaptive-insights/common'
+import { colors } from '@reactive-analytics/common'
 
 const StockPrice = props => {
   return !props.data ? (

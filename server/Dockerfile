@@ -6,8 +6,8 @@ ENV BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR /app
 COPY . .
-RUN npm ci --network-concurrency 1
-RUN npm run build
+RUN yarn install --frozen-lockfile --non-interactive
+RUN yarn run build
 
 FROM node:11.10-alpine
 WORKDIR /app

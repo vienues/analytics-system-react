@@ -4,11 +4,10 @@ Reactive Analytics client is a GraphQL driven React application that showcases h
 
 ## Installation
 
-Reactive Analytics client has package dependencies on the parent repository that gets injected using Lerna. From the root directory run `npm install && npm run bootstrap` to install all dependencies.
+Reactive Analytics client has package dependencies on the parent repository that gets injected using yarn workspaces. From the root directory run `yarn install` to install all dependencies.
 
 ```sh
-  [ReactiveAnalytics] $ npm install
-  [ReactiveAnalytics] $ npm run bootstrap
+  [ReactiveAnalytics] $ yarn install
 ```
 
 ## Working with the Client

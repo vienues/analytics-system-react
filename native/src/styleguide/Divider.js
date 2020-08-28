@@ -1,6 +1,6 @@
 import { View } from './View'
 import styled from 'styled-components'
-import { colors } from '@adaptive-insights/common'
+import { colors } from '@reactive-analytics/common'
 
 export const Divider = styled(View)`
   border: solid 1px #7fb3ff;

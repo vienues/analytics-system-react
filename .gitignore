@@ -19,9 +19,6 @@ server/lib
 *.log*
 *.iml
 .vscode
-server/yarn.lock
-cient/yarn.lock
-yarn.lock
 
 .DS_Store
 

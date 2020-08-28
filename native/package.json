@@ -1,6 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
-  "name": "@adaptive-insights/native",
+  "name": "@reactive-analytics/native",
   "private": true,
   "scripts": {
     "bootstrap": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp install:ios",
@@ -10,7 +10,7 @@
     "restart": "../node_modules/.bin/lerna bootstrap && ./node_modules/.bin/exp start --clear --tunnel"
   },
   "dependencies": {
-    "@adaptive-insights/common": "*",
+    "@reactive-analytics/common": "*",
     "add": "^2.0.6",
     "apollo-cache-inmemory": "^1.1.9",
     "apollo-client": "^2.2.5",

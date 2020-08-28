@@ -18,7 +18,7 @@
 
 ## Overview
 
-Reactive Analytics is a monorepo, powered by [Lerna](https://github.com/lerna/lerna), to demonstrate how NodeJS, Apollo GraphQL, React, and Typescript can be used to develop robust data-driven web apps.
+Reactive Analytics is a monorepo that demonstrate how NodeJS, Apollo GraphQL, React, and Typescript can be used to develop robust data-driven web apps.
 
 Both the server-side and client-side code use strong types which are used to generate the GraphQL schema. This allows developers to detect data and schema errors at design-time and compile-time.
 
@@ -29,13 +29,13 @@ Both the server-side and client-side code use strong types which are used to gen
 
 ## Getting started
 
-After downloading or cloning repos open a terminal to the root folder and run `npm install` to install dependencies.
+After downloading or cloning repos open a terminal to the root folder and run `yarn install` to install dependencies.
 
-        [ReactiveAnalytics] $ npm install
+        [ReactiveAnalytics] $ yarn install
 
 Once the dependencies are install start the client and server using the start command.
 
-        [ReactiveAnalytics] $ npm start
+        [ReactiveAnalytics] $ yarn start
 
 This will open up a browser window to [http://localhost:3005](http://localhost:3005) for the client interface, and a GraphQL server on port 4000.
 
@@ -69,14 +69,14 @@ To connect to [IEX](https://iexcloud.io/) during development, copy `server/.env.
 
 ## Core technologies used
 
-- [Lerna](https://github.com/lerna/lerna) - Multi-package manager to simplify the codebase in a single repository
+- [Yarn workspaces](https://classic.yarnpkg.com/en/docs/workspaces/) - Multi-package manager to simplify the codebase in a single repository
 - [Apollo GraphQL](https://www.apollographql.com/) - GraphQL framework to allow rapid and reliable development of client-server communication
 - [React](https://reactjs.org/) - Interface framework
 - [Styled Components](https://www.styled-components.com/) - Interface styling framework
 
 ## Useful developer add-ons
 
-When working with the Adaptive Insight repo, there are many add-ons that make development and debugging painless. When using [Visual Studio Code](https://code.visualstudio.com/) and [Google Chrome](https://www.google.com/chrome/) as a developer environment consider trying out some of the following tools.
+When working with the Reactive Analytics repo, there are many add-ons that make development and debugging painless. When using [Visual Studio Code](https://code.visualstudio.com/) and [Google Chrome](https://www.google.com/chrome/) as a developer environment consider trying out some of the following tools.
 
 ### Visual Studio Code extensions from the marketplace
 
