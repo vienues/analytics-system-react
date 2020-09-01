@@ -1,8 +1,17 @@
 {
-  "name": "adaptive-insights",
+  "name": "reactive-analytics",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "openfin-fdc3": "^0.2.0"
+  },
+  "workspaces": {
+    "packages": ["common", "server", "client"],
+    "_comment": "styled-components includes react-native causing type conflicts, see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33311",
+    "nohoist": ["**/react-native", "**/react-native/**"]
+  },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
     "@commitlint/config-conventional": "^8.2.0",
@@ -22,32 +31,27 @@
     "openfin-cli": "^3.0.2",
     "prettier": "^2.0.2",
     "pretty-quick": "^2.0.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.5",
+    "wsrun": "^5.2.1"
   },
   "scripts": {
-    "start": "npm run bootstrap && lerna run --parallel start",
-    "offline-start": "set INSIGHTS_OFFLINE=true && npm run start",
-    "bootstrap": "lerna bootstrap",
-    "clean": "npm install && lerna clean --yes",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wsrun -m start",
+    "test": "wsrun -m test",
     "format": "prettier --write '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
     "format:check": "prettier --list-different '{client,server}/**/*.{ts,tsx,json,gql,graphql}'",
-    "openfin": "openfin -c http://localhost:3000/openfin/app.json -l",
-    "demo": "lerna run --parallel demo",
+    "openfin": "openfin -c http://localhost:3005/openfin/app.json -l",
     "generate-server-schema": "./client/node_modules/.bin/apollo schema:download --endpoint=http://localhost:4000/graphql ./server/graphql-schema.json",
     "generate-client-typings": "./client/node_modules/.bin/apollo codegen:generate --localSchemaFile=./server/graphql-schema.json --target=typescript --includes=./client/src/containers/**/*.graphql --tagName=gql --globalTypesFile=./client/src/containers/global-types/global-types.ts --addTypename types"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "openfin-fdc3": "^0.2.0"
-  },
   "resolutions": {
-    "graphql": "^14.5.8"
+    "minimist": "^1.2.3",
+    "dot-prop": "^5.1.1"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lerna run --concurrency 1 --stream precommit",
+      "pre-commit": "wsrun -m --concurrency 1 precommit",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }

@@ -1,12 +1,11 @@
 {
-  "name": "@adaptive-insights/server",
+  "name": "@reactive-analytics/server",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "start": "tsc && babel-node lib/index.js",
     "start:prod": "babel-node lib/index.js",
     "start:dev": "nodemon --watch src -e js,json,ts,graphql,gql --exec \"npm run start\"",
-    "demo": "npm start",
     "test": "mocha --require @babel/register",
     "build": "tsc"
   },
@@ -15,7 +14,7 @@
     "@stomp/rx-stomp": "^0.3.5",
     "apollo-server": "^2.16.1",
     "dotenv": "^8.2.0",
-    "fuse.js": "^3.2.0",
+    "fuse.js": "3.4.4",
     "graphql": "^14.2.1",
     "graphql-subscriptions": "^1.1.0",
     "graphql-tools": "^4.0.4",
@@ -39,7 +38,7 @@
     "@types/ramda": "^0.26.6",
     "@types/ws": "^6.0.1",
     "babel-plugin-inline-import": "^2.0.6",
-    "mocha": "^8.0.1",
+    "mocha": "^8.1.2",
     "nodemon": "^2.0.4",
     "tslint": "^5.15.0",
     "tslint-config-prettier": "^1.18.0",

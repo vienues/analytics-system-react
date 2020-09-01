@@ -1,5 +1,0 @@
-{
-  "packages": ["common", "server", "client"],
-  "// Note on packages": "packages excludes native for simplicity. Add it back if needed",
-  "version": "0.0.0"
-}

@@ -1,5 +1,5 @@
 {
-  "name": "@adaptive-insights/common",
+  "name": "@reactive-analytics/common",
   "version": "1.0.0",
   "description": "common",
   "main": "src/index.js",
@@ -11,7 +11,9 @@
   "dependencies": {
     "lodash": "^4.17.19",
     "palx": "^1.0.3",
-    "styled-components": "^3.2.0",
     "warning": "^3.0.0"
+  },
+  "resolutions": {
+    "minimist": "1.2.3"
   }
 }

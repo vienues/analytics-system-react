@@ -8,8 +8,8 @@ ENV REACT_APP_BUILD_VERSION=${BUILD_VERSION}
 
 WORKDIR /
 COPY . .
-RUN npm ci --network-concurrency 1
-RUN npm run build
+RUN yarn install --frozen-lockfile --non-interactive
+RUN yarn run build
 
 FROM openresty/openresty:alpine-fat
 EXPOSE 3000

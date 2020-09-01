@@ -18,4 +18,3 @@ docker-compose.yaml
 # Logs/Locks
 *.log
 *.md
-yarn.lock
