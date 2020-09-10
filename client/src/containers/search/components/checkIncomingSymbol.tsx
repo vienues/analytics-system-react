@@ -22,11 +22,11 @@ export const checkIncomingSymbol = async (symbol: string) => {
   const stockQuery = await makeQuery(symbol, MarketSegment.STOCK)
   const fxQuery = await makeQuery(symbol, MarketSegment.FX)
 
-  if (stockQuery) {
-    return stockQuery
-  }
   if (fxQuery) {
     return fxQuery
+  }
+  if (stockQuery) {
+    return stockQuery
   }
   return null
 }
