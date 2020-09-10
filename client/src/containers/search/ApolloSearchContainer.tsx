@@ -33,7 +33,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
   const placeholderText = 'Enter a stock, symbol, or currency pair...'
 
   const platform = usePlatform()
-  const { fdc3Symbol } = useFDC3Context()
+  const { fdc3Symbol, clearSymbol } = useFDC3Context()
 
   const handleChange = useCallback(
     (symbol: search_symbols | null) => {
@@ -50,6 +50,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
         })
       }
       if (symbol) {
+        clearSymbol()
         platform.symbolSelected(symbol)
         history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
       } else {
