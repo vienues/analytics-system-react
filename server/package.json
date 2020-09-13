@@ -20,7 +20,7 @@
     "graphql-tools": "^4.0.4",
     "iexcloud_api_wrapper": "^1.1.5",
     "moment": "^2.20.1",
-    "node-fetch": "^2.0.0",
+    "node-fetch": "^2.6.1",
     "ramda": "^0.25.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.2",
