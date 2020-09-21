@@ -8,9 +8,16 @@
     "openfin-fdc3": "^0.2.0"
   },
   "workspaces": {
-    "packages": ["common", "server", "client"],
+    "packages": [
+      "common",
+      "server",
+      "client"
+    ],
     "_comment": "styled-components includes react-native causing type conflicts, see https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33311",
-    "nohoist": ["**/react-native", "**/react-native/**"]
+    "nohoist": [
+      "**/react-native",
+      "**/react-native/**"
+    ]
   },
   "devDependencies": {
     "@commitlint/cli": "^9.1.2",
@@ -27,7 +34,6 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.3",
-    "lerna": "^3.22.1",
     "openfin-cli": "^3.0.2",
     "prettier": "^2.0.2",
     "pretty-quick": "^2.0.1",
@@ -47,7 +53,8 @@
   "license": "ISC",
   "resolutions": {
     "minimist": "^1.2.3",
-    "dot-prop": "^5.1.1"
+    "dot-prop": "^5.1.1",
+    "node-fetch": "^2.6.1"
   },
   "husky": {
     "hooks": {
