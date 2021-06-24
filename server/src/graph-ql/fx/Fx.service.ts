@@ -49,7 +49,7 @@ export default class {
     this.rxStompRPC = new RxStompRPC(this.rxStomp)
 
     this.rxStomp.configure({
-      brokerURL: `ws://web-demo.adaptivecluster.com:80/ws`,
+      brokerURL: 'wss://classic.reactivetrader.com/ws',
       reconnectDelay: 5000,
       heartbeatIncoming: 4000,
       heartbeatOutgoing: 4000,
