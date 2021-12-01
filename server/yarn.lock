@@ -2,6 +2,21 @@
 # yarn lockfile v1
 
 
+"@adaptive/hydra-codecs@3.40.0":
+  version "3.40.0"
+  resolved "https://weareadaptive.jfrog.io/artifactory/api/npm/hydra-web/@adaptive/hydra-codecs/-/@adaptive/hydra-codecs-3.40.0.tgz#bf4cea815579717e4d0efa05fb8f10228b7fa522"
+  integrity sha1-v0zqgVV5cX5NDvoF+48QIot/pSI=
+  dependencies:
+    commander "^7.1.0"
+    ts-morph "^10.0.1"
+
+"@adaptive/hydra-platform@^3.40.0":
+  version "3.40.0"
+  resolved "https://weareadaptive.jfrog.io/artifactory/api/npm/hydra-web/@adaptive/hydra-platform/-/@adaptive/hydra-platform-3.40.0.tgz#549c8b91427dd9f65782553b4d8bec777f9c510f"
+  integrity sha1-VJyLkUJ92fZXglU7TYvsd3+cUQ8=
+  dependencies:
+    "@adaptive/hydra-codecs" "3.40.0"
+
 "@apollo/protobufjs@^1.0.3":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@apollo/protobufjs/-/protobufjs-1.0.5.tgz#a78b726147efc0795e74c8cb8a11aafc6e02f773"
