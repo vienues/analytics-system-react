@@ -7,10 +7,13 @@
     "start:prod": "babel-node lib/index.js",
     "start:dev": "nodemon --watch src -e js,json,ts,graphql,gql --exec \"npm run start\"",
     "test": "mocha --require @babel/register",
-    "build": "tsc"
+    "build": "tsc",
+    "generateCod": "hydra-web-codegen -i trading-gateway.hyer -o src/generated"
   },
   "license": "ISC",
   "dependencies": {
+    "@adaptive/hydra-platform": "^3.40.0",
+    "@peculiar/webcrypto": "^1.2.3",
     "@stomp/rx-stomp": "^0.3.5",
     "apollo-server": "^2.16.1",
     "dotenv": "^8.2.0",

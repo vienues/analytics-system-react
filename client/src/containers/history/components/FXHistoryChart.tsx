@@ -45,7 +45,7 @@ export const FXHistoryChart: React.FC<ABMHistoryQuery> = ({ getPriceHistory }) =
               <XAxis
                 tickLine={{ stroke: '#DFDFDF' }}
                 axisLine={{ stroke: '#DFDFDF' }}
-                dataKey="valueDate"
+                dataKey="creationTimestamp"
                 tickFormatter={getValueTime}
                 interval={round(chartData.length / 12)}
                 tick={{ fontSize: 12, fill: getThemeColor(themes[themeName], color => color.primary.corePrimary5) }}
