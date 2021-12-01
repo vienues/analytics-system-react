@@ -29,6 +29,7 @@ interface IPriceHistory {
 
 const { Crypto } = require('@peculiar/webcrypto')
 
+// Global packages required by @adaptive/hydra-platform that aren't available in node by default
 Object.assign(global, {
   WebSocket: require('ws'),
   crypto: new Crypto(),
