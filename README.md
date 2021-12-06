@@ -92,3 +92,18 @@ When working with the Reactive Analytics repo, there are many add-ons that make 
 - [**GraphQL Network**](https://github.com/Ghirro/graphql-network) - Chrome Devtool that provides a "network"-style tab for GraphQL requests to allow developers to debug more easily.
 - [**Apollo Client Developer Tools**](https://github.com/apollographql/apollo-client-devtools) - GraphQL debugging tools for Apollo Client in the Chrome developer console.
 - [**React Developer Tools**](https://github.com/facebook/react-devtools) - Adds React debugging tools to the Chrome Developer Tools.
+
+### Deployment
+
+Deployment is through [Travis CI](https://app.travis-ci.com/github/AdaptiveConsulting/ReactiveAnalytics)
+
+Merging to master will build and deploy to dev.
+
+Manually trigger a build with custom config to deploy to uat/prod.
+
+```
+env:
+  global:
+    ENV: uat
+    SKIP_BUILD: true
+```
