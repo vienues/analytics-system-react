@@ -1,12 +1,12 @@
-import { RxStomp, RxStompRPC } from '@stomp/rx-stomp'
-import { Subscription } from 'rxjs'
-import { map, tap } from 'rxjs/operators'
+import { noop, Subscription } from 'rxjs'
+import { connectToGateway } from '@adaptive/hydra-platform'
+import { map } from 'rxjs/operators'
 import { Service } from 'typedi'
 import data from '../../mock-data/currencySymbols.json'
 import { pubsub } from '../../pubsub'
-import logger from '../../services/logger'
 import { MarketSegments } from '../ref-data/RefData.schema'
 import { SearchResultSchema as SearchResult } from '../stock/Stock.schema'
+import { PricingService } from '../../generated/TradingGateway'
 
 interface ISymbolData {
   [key: string]: {
@@ -27,35 +27,26 @@ interface IPriceHistory {
   valueDate: any
 }
 
-interface PriceUpdates {
-  Symbol: string
-  Bid: number
-  Ask: number
-  Mid: number
-  ValueDate: any
-  CreationTimestamp: number
-}
+const { Crypto } = require('@peculiar/webcrypto')
+
+// Global packages required by @adaptive/hydra-platform that aren't available in node by default
+Object.assign(global, {
+  WebSocket: require('ws'),
+  crypto: new Crypto(),
+})
 
 @Service()
 export default class {
-  private rxStomp: RxStomp
-  private rxStompRPC: RxStompRPC
   private fxSubscription: Subscription | null
-  constructor() {
-    this.rxStomp = new RxStomp()
 
+  constructor() {
     this.fxSubscription = null
 
-    this.rxStompRPC = new RxStompRPC(this.rxStomp)
-
-    this.rxStomp.configure({
-      brokerURL: 'wss://classic.reactivetrader.com/ws',
-      reconnectDelay: 5000,
-      heartbeatIncoming: 4000,
-      heartbeatOutgoing: 4000,
+    connectToGateway({
+      url: `https://reactivetrader.com/ws`,
+      interceptor: noop,
+      autoReconnect: true,
     })
-
-    this.rxStomp.activate()
   }
 
   public getSymbol(id: string): SearchResult {
@@ -71,42 +62,34 @@ export default class {
   }
 
   public async getPriceHistory(id: string): Promise<IPriceHistory[]> {
-    return this.rxStompRPC
-      .rpc({
-        destination: '/amq/queue/priceHistory.getPriceHistory',
-        body: JSON.stringify({ payload: `${id}`, Username: 'HHA' }),
-      })
+    return PricingService.getPriceHistory({ symbol: id })
       .pipe(
-        map(message => {
-          return JSON.parse(message.body)
-        }),
+        map(({ prices }) =>
+          prices.map(price => ({
+            ask: price.ask,
+            bid: price.bid,
+            mid: price.mid,
+            creationTimestamp: Number(price.creationTimestamp),
+            symbol: price.symbol,
+            valueDate: price.valueDate,
+          })),
+        ),
       )
       .toPromise()
   }
 
   public subscribePriceUpdates(id: string) {
-    this.fxSubscription = this.rxStompRPC
-      .stream({
-        destination: '/amq/queue/pricing.getPriceUpdates',
-        body: JSON.stringify({ payload: { symbol: `${id}` }, Username: 'HHA' }),
+    this.fxSubscription = PricingService.getPriceUpdates({ symbol: id }).subscribe(value => {
+      pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
+        getFXPriceUpdates: {
+          Bid: value.bid,
+          Ask: value.ask,
+          Mid: value.mid,
+          ValueDate: value.valueDate,
+          CreationTimestamp: Number(value.creationTimestamp),
+        },
       })
-      .pipe(
-        map(message => {
-          return JSON.parse(message.body)
-        }),
-        tap(() => logger.info(`price update FX_CURRENT_PRICING.${id}`)),
-      )
-      .subscribe((value: PriceUpdates) => {
-        pubsub.publish(`FX_CURRENT_PRICING.${id}`, {
-          getFXPriceUpdates: {
-            Bid: value.Bid,
-            Ask: value.Ask,
-            Mid: value.Mid,
-            ValueDate: value.ValueDate,
-            CreationTimestamp: value.CreationTimestamp,
-          },
-        })
-      })
+    })
   }
 
   public unsubscribePriceUpdates() {

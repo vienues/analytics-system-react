@@ -9,7 +9,7 @@ import ABMHistoryConnection from './graphql/ABMHistoryConnection.graphql'
 const FXHistory: React.FC<IApolloContainerProps> = ({ id }) => (
   <>
     <AppQuery<ABMHistoryQuery, ABMHistoryQueryVariables> query={ABMHistoryConnection} variables={{ id }}>
-      {FXHistoryChart}
+      {(data: ABMHistoryQuery) => <FXHistoryChart getPriceHistory={data.getPriceHistory} />}
     </AppQuery>
   </>
 )
