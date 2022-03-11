@@ -10,7 +10,7 @@
     commander "^7.1.0"
     ts-morph "^10.0.1"
 
-"@adaptive/hydra-platform@^3.40.0":
+"@adaptive/hydra-platform@3.40.0":
   version "3.40.0"
   resolved "https://weareadaptive.jfrog.io/artifactory/api/npm/hydra-web/@adaptive/hydra-platform/-/@adaptive/hydra-platform-3.40.0.tgz#549c8b91427dd9f65782553b4d8bec777f9c510f"
   integrity sha1-VJyLkUJ92fZXglU7TYvsd3+cUQ8=
