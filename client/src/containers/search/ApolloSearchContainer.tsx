@@ -51,7 +51,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       }
       if (symbol) {
         clearSymbol()
-        platform.symbolSelected(symbol)
+        // platform.symbolSelected(symbol)
         history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
       } else {
         history.push(`/${url}`)
