@@ -51,6 +51,7 @@ const ApolloSearchContainer: React.FunctionComponent<Props> = ({ id, history, ur
       }
       if (symbol) {
         clearSymbol()
+        // This causes a loop with itself which will need addressing if this funtionality is one day required.
         // platform.symbolSelected(symbol)
         history.push(`/${(symbol.marketSegment || url || '').toLowerCase()}/${symbol.id}`)
       } else {
